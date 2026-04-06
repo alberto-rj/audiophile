@@ -16,17 +16,18 @@ const buttonVariants = cva(
     'border-none',
     'focus:ring-2',
     'focus-visible:ring-2',
+    'focus:ring-gray-900',
+    'focus-visible:ring-gray-900',
+    'disabled:bg-black',
+    'disabled:text-gray-200',
+    'disabled:opacity-25',
+    'disabled:cursor-not-allowed',
+    'disabled:pointer-events-none',
   ),
   {
     variants: {
       variant: {
-        primary: cn(
-          'bg-primary-400',
-          'text-white',
-          'hover:bg-primary-200',
-          'focus:ring-gray-200',
-          'focus-visible:ring-gray-200',
-        ),
+        primary: cn('bg-primary-400', 'text-white', 'hover:bg-primary-200'),
         outline: cn(
           'bg-white',
           'text-black',
@@ -40,8 +41,6 @@ const buttonVariants = cva(
           '[&_svg]:fill-primary-400',
           'text-gray-900',
           'hover:text-primary-400',
-          'focus:ring-primary-400',
-          'focus-visible:ring-primary-400',
         ),
       },
 
@@ -49,16 +48,11 @@ const buttonVariants = cva(
         sm: cn('min-inline-20', 'px-4', 'py-2', 'text-xs'),
         md: cn('min-inline-40', 'px-8', 'py-4', 'text-xs'),
       },
-
-      disabled: {
-        true: cn('bg-gray-200', 'text-gray-400', 'cursor-not-allowed'),
-      },
     },
 
     defaultVariants: {
       variant: 'primary',
       size: 'md',
-      disabled: false,
     },
   },
 );
@@ -66,20 +60,17 @@ const buttonVariants = cva(
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 type ButtonProps = ButtonVariants &
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled' | 'size'>;
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'>;
 
 const Button = ({
   variant,
   size,
-  disabled,
+  disabled = false,
   className,
   children,
   ...props
 }: ButtonProps) => {
-  const buttonClasses = cn(
-    buttonVariants({ variant, size, disabled }),
-    className,
-  );
+  const buttonClasses = cn(buttonVariants({ variant, size }), className);
 
   return (
     <button
