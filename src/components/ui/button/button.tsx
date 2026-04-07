@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { ButtonHTMLAttributes } from 'react';
 
@@ -59,25 +60,31 @@ const buttonVariants = cva(
 
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
-type ButtonProps = ButtonVariants &
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'>;
+interface ButtonProps
+  extends
+    ButtonVariants,
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
+  asChild?: boolean;
+}
 
 const Button = ({
+  asChild = false,
   variant,
   size,
   className,
   children,
   ...props
 }: ButtonProps) => {
+  const Comp = asChild ? Slot : 'button';
   const buttonClasses = cn(buttonVariants({ variant, size }), className);
 
   return (
-    <button
-      {...props}
+    <Comp
       className={buttonClasses}
+      {...props}
     >
       {children}
-    </button>
+    </Comp>
   );
 };
 
