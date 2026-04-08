@@ -2,8 +2,10 @@
 
 @font-face {
   font-family: 'Manrope';
-  src: url(./assets/fonts/Manrope/Manrope-Variable.woff2);
+  font-style: normal;
+  font-weight: 400 500 700;
   font-display: swap;
+  src: url(./assets/fonts/Manrope/Manrope-Variable.woff2);
 }
 
 @theme {
@@ -62,16 +64,21 @@
   --breakpoint-lg: 90em;
   /* breakpoints (end) */
 
-  /* colors */
+  /* colors (start) */
   --color-primary-400: #d87d4a;
   --color-primary-200: #fbaf85;
 
   --color-black: #000000;
+  --color-black-o-50: rgba(0, 0, 0, 0.5);
+  --color-black-o-40: rgba(0, 0, 0, 0.4);
+
   --color-white: #ffffff;
 
   --color-gray-900: #101010;
+  --color-gray-600: #cfcfcf;
   --color-gray-400: #f1f1f1;
   --color-gray-200: #fafafa;
 
   --color-danger-400: #cd2c2c;
+  /* colors (end) */
 }
