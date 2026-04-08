@@ -40,7 +40,7 @@ const buttonVariants = cva(
         ),
         ghost: cn(
           '[&_svg]:fill-primary-400',
-          'text-gray-900',
+          'text-black-o-50',
           'hover:text-primary-400',
         ),
       },
