@@ -17,6 +17,11 @@
   --text-xs--letter-spacing: 1px;
   --text-xs--font-weight: 700;
 
+  --text-form: 14px;
+  --text-form--line-height: 1;
+  --text-form--letter-spacing: -0.25px;
+  --text-form--font-weight: 700;
+
   --text-sm: 14px;
   --text-sm--line-height: 19px;
   --text-sm--letter-spacing: 10px;
@@ -81,4 +86,8 @@
 
   --color-danger-400: #cd2c2c;
   /* colors (end) */
+
+  /* tailwind (start) */
+  --tw-border-style: solid;
+  /* tailwind (end) */
 }
