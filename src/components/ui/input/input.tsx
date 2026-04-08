@@ -12,9 +12,7 @@ const inputVariants = cva(
     'border-solid',
     'rounded-lg',
     'font-display',
-    'font-bold',
-    'text-[0.875rem]',
-    '-tracking-[0.015625em]',
+    'text-form',
     'text-black',
     'placeholder:text-black-o-40',
 

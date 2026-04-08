@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { userEvent, within } from 'storybook/test';
 
 import { Input } from '@/components/ui';
+import { cn } from '@/libs/cn';
 
 type StoryProps = React.ComponentProps<typeof Input>;
 
@@ -14,6 +15,15 @@ const meta = {
   },
   parameters: {
     layout: 'centered',
+  },
+  render: (inputProps) => {
+    return (
+      <div className=''>
+        <div className={cn('min-w-80')}>
+          <Input {...inputProps} />
+        </div>
+      </div>
+    );
   },
 } satisfies Meta<StoryProps>;
 
