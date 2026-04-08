@@ -28,6 +28,8 @@
 
 - [x] Componente criado com variantes `primary`, `ghost`, `outline`
 - [x] Estado `hover` implementado
+- [x] Estado `focus` implementado
+- [x] Estado `disabled` implementado
 - [x] Story no Storybook com todos os estados
 
 ### Input
@@ -35,7 +37,7 @@
 - [x] Componente criado
 - [x] Estado `focus` implementado
 - [x] Estado `disabled` implementado
-- [x] Estado de erro
+- [x] Estado `invalid` implementado
 - [x] Story no Storybook com todos os estados
 
 ### Radio
@@ -47,7 +49,7 @@
 
 ### QuantitySelector
 
-- [ ] Botões `–` e `+` funcionais
+- [ ] Botões `-` e `+` funcionais
 - [ ] Não permite valores abaixo de 1
 - [ ] Story no Storybook
 
