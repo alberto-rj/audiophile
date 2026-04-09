@@ -1,61 +1,132 @@
-import { useState } from 'react';
+import { useId } from 'react';
 
 import { cn } from '@/libs/cn';
 
 interface QuantitySelectorProps {
-  initialValue: number;
+  value: number;
   onChange: (value: number) => void;
+  disabled?: boolean;
+  min?: number;
+  max?: number;
 }
 
 const QuantitySelector = ({
-  initialValue,
+  value,
+  disabled,
+  min = 1,
+  max,
   onChange,
 }: QuantitySelectorProps) => {
-  const [value, setValue] = useState<number>(() => {
-    if (initialValue < 1) {
-      return 1;
-    }
-
-    return initialValue;
-  });
+  const inputId = useId();
 
   const handleIncrement = () => {
-    const newValue = value + 1;
-    setValue(newValue);
-    onChange(newValue);
+    if (typeof max === 'number' && value >= max) return;
+    onChange(value + 1);
   };
 
   const handleDecrement = () => {
-    let newValue = 1;
-
-    if (value > 1) {
-      newValue = value - 1;
-    }
-
-    setValue(newValue);
-    onChange(newValue);
+    if (value <= min) return;
+    onChange(value - 1);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const parsed = parseInt(e.currentTarget.value, 10);
+
+    if (isNaN(parsed)) return;
+
+    const clamped = Math.max(
+      min,
+      typeof max === 'number' ? Math.min(parsed, max) : parsed,
+    );
+
+    onChange(clamped);
+  };
+
+  const buttonStyles = cn(
+    'p-4',
+    'cursor-pointer',
+    'text-black-o-50',
+
+    'hover:text-primary-400',
+
+    'focus:text-primary-400',
+    'focus:outline-2',
+    'focus:outline-primary-400',
+    'focus-visible:text-primary-400',
+    'focus-visible:outline-2',
+    'focus-visible:outline-primary-400',
+  );
+
   return (
-    <div className={cn('inline-flex')}>
-      <button onClick={handleIncrement}>
-        <span className={cn('sr-only')}>Increment quantity</span>
-        <span>+</span>
+    <div
+      className={cn(
+        'inline-flex',
+        'items-center',
+        'text-xs',
+        'text-black',
+        'bg-gray-400',
+        'border-2',
+        'border-gray-600',
+
+        'has-disabled:cursor-not-allowed',
+        'has-disabled:select-none',
+        'has-disabled:pointer-events-none',
+        'has-disabled:opacity-50',
+        'has-disabled:border-gray-400',
+        'has-disabled:text-black-o-50',
+      )}
+    >
+      <button
+        disabled={disabled}
+        type='button'
+        onClick={handleDecrement}
+        className={buttonStyles}
+      >
+        <span className={cn('sr-only')}>Decrease quantity</span>
+        <span aria-hidden={true}>-</span>
       </button>
+
       <label
-        htmlFor='quantity'
+        htmlFor={inputId}
         className={cn('sr-only')}
       >
         Quantity
       </label>
       <input
-        id='quantity'
+        disabled={disabled}
+        id={inputId}
         type='number'
+        inputMode='numeric'
+        min={min}
+        max={max}
+        onChange={handleChange}
         value={value}
+        className={cn(
+          'p-4',
+          'text-center',
+          '[-moz-appearance:textfield]',
+          '[appearance:textfield]',
+          '[&::-webkit-outer-spin-button]:appearance-none',
+          '[&::-webkit-outer-spin-button]:m-0',
+          '[&::-webkit-inner-spin-button]:appearance-none',
+          '[&::-webkit-inner-spin-button]:m-0',
+
+          'focus:outline-2',
+          'focus:outline-primary-400',
+          'focus:caret-primary-400',
+          'focus-visible:outline-primary-400',
+          'focus-visible:outline-primary-400',
+          'focus-visible:caret-primary-400',
+        )}
       />
-      <button onClick={handleDecrement}>
-        <span className={cn('sr-only')}>Decrement quantity</span>
-        <span>-</span>
+      <button
+        disabled={disabled}
+        type='button'
+        onClick={handleIncrement}
+        className={buttonStyles}
+      >
+        <span className={cn('sr-only')}>Increase quantity</span>
+        <span aria-hidden={true}>+</span>
       </button>
     </div>
   );
