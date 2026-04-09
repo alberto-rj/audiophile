@@ -30,21 +30,21 @@
 - [x] Estado `hover` implementado
 - [x] Estado `focus` implementado
 - [x] Estado `disabled` implementado
-- [x] Story no Storybook com todos os estados
+- [x] Stories no Storybook com todos os estados
 
 ### Input
 
 - [x] Estado `focus` implementado
 - [x] Estado `disabled` implementado
 - [x] Estado `invalid` implementado
-- [x] Story no Storybook com todos os estados
+- [x] Stories no Storybook com todos os estados
 
 ### Radio
 
 - [x] Estado `checked` implementado
 - [x] Estado `focus` implementado
 - [x] Estado `disabled` implementado
-- [x] Story no Storybook com todos os estados
+- [x] Stories no Storybook com todos os estados
 
 ### QuantitySelector
 
@@ -53,19 +53,19 @@
 - [x] Estado `disabled` implementado
 - [x] Não permite valores abaixo do mínimo (1, por padrão)
 - [x] Não permite valores acima do máximo (se fornecido)
-- [x] Story no Storybook
+- [x] Stories no Storybook
 
 ### ProductCard
 
 - [ ] Imagem, badge "NEW PRODUCT" (opcional), nome, descrição, preço
 - [ ] Botão de ação incluído
-- [ ] Story no Storybook
+- [ ] Stories no Storybook
 
 ### CategoryCard
 
 - [ ] Card com imagem, nome da categoria e link
 - [ ] Funciona para as três categorias (Headphones, Speakers, Earphones)
-- [ ] Story no Storybook
+- [ ] Stories no Storybook
 
 ---
 
@@ -258,15 +258,15 @@
 
 ## Progresso geral
 
-| Fase                         | Estado             |
-| ---------------------------- | ------------------ |
-| Fase 1 — Fundação            | ✅ Concluída       |
-| Fase 2 — Componentes         | ⬜ 🟡 Em progresso |
-| Fase 3 — Páginas             | ⬜ Não iniciada    |
-| Fase 4 — Carrinho e checkout | ⬜ Não iniciada    |
-| Fase 5 — API                 | ⬜ Não iniciada    |
-| Fase 6 — Integração          | ⬜ Não iniciada    |
-| Fase 7 — Polimento e deploy  | ⬜ Não iniciada    |
+| Fase                         | Estado          |
+| ---------------------------- | --------------- |
+| Fase 1 — Fundação            | ✅ Concluída    |
+| Fase 2 — Componentes         | 🟡 Em progresso |
+| Fase 3 — Páginas             | ⬜ Não iniciada |
+| Fase 4 — Carrinho e checkout | ⬜ Não iniciada |
+| Fase 5 — API                 | ⬜ Não iniciada |
+| Fase 6 — Integração          | ⬜ Não iniciada |
+| Fase 7 — Polimento e deploy  | ⬜ Não iniciada |
 
 > Actualiza esta tabela manualmente à medida que concluíres cada fase:
 > ⬜ Não iniciada → 🟡 Em progresso → ✅ Concluída
