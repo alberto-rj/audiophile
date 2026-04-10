@@ -8,6 +8,7 @@ interface QuantitySelectorProps {
   disabled?: boolean;
   min?: number;
   max?: number;
+  name?: string;
 }
 
 const QuantitySelector = ({
@@ -15,6 +16,7 @@ const QuantitySelector = ({
   disabled,
   min = 1,
   max,
+  name,
   onChange,
 }: QuantitySelectorProps) => {
   const inputId = useId();
@@ -99,6 +101,7 @@ const QuantitySelector = ({
         inputMode='numeric'
         min={min}
         max={max}
+        name={name}
         onChange={handleChange}
         value={value}
         className={cn(
