@@ -8,16 +8,17 @@ import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.
 
 type StoryProps = React.ComponentProps<typeof CategoryListing>;
 
+const categoryProps: StoryProps = {
+  items: [
+    { category: 'Headphones', image: headphones, slug: '#' },
+    { category: 'Speakers', image: speakers, slug: '#' },
+    { category: 'Earphones', image: earphones, slug: '#' },
+  ],
+};
+
 const meta = {
   title: 'widgets/CategoryListing',
   component: CategoryListing,
-  args: {
-    items: [
-      { category: 'Headphones', image: headphones, slug: '#' },
-      { category: 'Speakers', image: speakers, slug: '#' },
-      { category: 'Earphones', image: earphones, slug: '#' },
-    ],
-  },
   parameters: {
     layout: 'centered',
   },
@@ -27,4 +28,18 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    items: [...categoryProps.items],
+  },
+};
+
+export const Multiple: Story = {
+  args: {
+    items: [
+      ...categoryProps.items,
+      ...categoryProps.items,
+      ...categoryProps.items,
+    ],
+  },
+};
