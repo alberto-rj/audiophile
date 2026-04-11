@@ -52,28 +52,8 @@ const Navbar = () => {
     setIsOpen((isCurrentlyOpen) => !isCurrentlyOpen);
   };
 
-  const navLinkStyles = cn(
-    'text-xs',
-    'uppercase',
-    'text-white',
-
-    'hover:text-primary-400',
-  );
-
   return (
-    <nav
-      className={cn(
-        'relative',
-        'w-full',
-        'py-8',
-        'bg-gray-900',
-
-        '**:focus:outline',
-        '**:focus:outline-primary-400',
-        '**:focus-visible:outline',
-        '**:focus-visible:outline-primary-400',
-      )}
-    >
+    <nav className={cn('relative', 'w-full', 'py-8', 'bg-gray-900')}>
       <div
         className={cn(
           'wrapper',
@@ -115,7 +95,11 @@ const Navbar = () => {
             )}
           </button>
 
-          <a href='#'>
+          {/* Logo */}
+          <a
+            href='#'
+            className={cn('link')}
+          >
             <span className={cn('sr-only')}>Audiophile - home</span>
             <Logo
               aria-hidden={true}
@@ -150,7 +134,7 @@ const Navbar = () => {
               <a
                 ref={i === 0 ? firstMenuItemRef : undefined}
                 href={url}
-                className={navLinkStyles}
+                className={cn('nav-link', 'link')}
               >
                 {text}
               </a>
@@ -168,7 +152,7 @@ const Navbar = () => {
             <li key={text}>
               <a
                 href={url}
-                className={navLinkStyles}
+                className={cn('nav-link', 'link')}
               >
                 {text}
               </a>
@@ -176,7 +160,11 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <a href='#'>
+        {/* Cart */}
+        <a
+          href='#'
+          className={cn('link')}
+        >
           <span className={cn('sr-only')}>Cart</span>
           <Cart
             aria-hidden={true}

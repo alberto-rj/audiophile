@@ -81,9 +81,9 @@
 
 ### Navbar
 
-- [ ] Logo + links de navegação
-- [ ] Ícone do carrinho (apenas visual por agora)
-- [ ] Responsiva (hambúrguer no mobile)
+- [x] Logo + links de navegação
+- [x] Ícone do carrinho (apenas visual por agora)
+- [x] Responsiva (hambúrguer no mobile)
 
 ### Footer
 

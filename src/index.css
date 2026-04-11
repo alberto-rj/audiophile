@@ -10,7 +10,7 @@
 
 @theme {
   /* typography (start) */
-  --font-display: 'Manrope', 'sans-serif';
+  --font-display: 'Manrope' 'sans-serif';
 
   /* xs */
   --text-xs: 0.8125rem; /* 13px */
@@ -74,9 +74,9 @@
   /* typography (end) */
 
   /* breakpoints (start) */
-  --breakpoint-sm: 23.4375em;
+  --breakpoint-sm: 40em;
   --breakpoint-md: 48em;
-  --breakpoint-lg: 90em;
+  --breakpoint-lg: 64em;
   /* breakpoints (end) */
 
   /* colors (start) */
@@ -111,6 +111,14 @@
 
 @layer utilities {
   .wrapper {
-    @apply w-full max-w-277.5 mx-auto px-5;
+    @apply w-full mx-auto px-5 md:max-w-172 md:px-10 lg:max-w-277.5;
+  }
+
+  .link {
+    @apply focus:outline focus:outline-primary-400 focus-visible:outline focus-visible:outline-primary-400;
+  }
+
+  .nav-link {
+    @apply text-xs uppercase text-white hover:text-primary-400;
   }
 }
