@@ -14,6 +14,7 @@ interface CategoryCardProps {
 const CategoryListing = ({ items }: CategoryCardProps) => {
   return (
     <ul
+      role='list'
       className={cn(
         'w-full',
         'grid',

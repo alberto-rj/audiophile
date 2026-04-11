@@ -63,9 +63,9 @@
 
 ### CategoryCard
 
-- [ ] Card com imagem, nome da categoria e link
-- [ ] Funciona para as três categorias (Headphones, Speakers, Earphones)
-- [ ] Stories no Storybook
+- [x] Card com imagem, nome da categoria e link
+- [x] Funciona para as três categorias (Headphones, Speakers, Earphones)
+- [x] Stories no Storybook
 
 ---
 
