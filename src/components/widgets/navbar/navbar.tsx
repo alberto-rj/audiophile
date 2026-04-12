@@ -129,7 +129,7 @@ const Navbar = () => {
             'absolute',
             'top-22.25',
             'left-0',
-            'z-10',
+            'z-100',
             'w-full',
             'flex',
             'flex-col',
