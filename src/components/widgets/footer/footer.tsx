@@ -2,22 +2,10 @@ import { Logo, Facebook, Twitter, Instagram } from '@/assets/icons';
 import { cn } from '@/libs/cn';
 
 const navLinks = [
-  {
-    url: '#',
-    text: 'Home',
-  },
-  {
-    url: '#',
-    text: 'Headphones',
-  },
-  {
-    url: '#',
-    text: 'Speakers',
-  },
-  {
-    url: '#',
-    text: 'Earphones',
-  },
+  { url: '#', text: 'Home' },
+  { url: '#', text: 'Headphones' },
+  { url: '#', text: 'Speakers' },
+  { url: '#', text: 'Earphones' },
 ];
 
 const socialLinks = [
@@ -30,10 +18,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={cn('py-9 bg-gray-900')}>
-      <div className={''}></div>
-
-      <div className={cn('relative wrapper grid gap-12')}>
+    <footer className={cn('py-9', 'bg-gray-900')}>
+      <div className={cn('relative', 'wrapper', 'grid', 'gap-12')}>
+        {/* Decorator */}
         <div
           className={cn(
             'absolute',
@@ -46,9 +33,12 @@ const Footer = () => {
             'sm:left-5',
             'sm:translate-x-0',
 
+            'md:left-10',
+
             'bg-primary-400',
           )}
         ></div>
+
         <div
           className={cn(
             'flex',
@@ -67,7 +57,7 @@ const Footer = () => {
           {/* Logo */}
           <a
             href='#'
-            className={cn('link')}
+            className={cn('link-focusable')}
           >
             <span className={cn('sr-only')}>Audiophile - home</span>
             <Logo
@@ -93,7 +83,7 @@ const Footer = () => {
               <li key={text}>
                 <a
                   href={url}
-                  className={cn('nav-link', 'link')}
+                  className={cn('nav-link', 'link-focusable')}
                 >
                   {text}
                 </a>
@@ -104,9 +94,6 @@ const Footer = () => {
 
         <p
           className={cn(
-            'text-white',
-            'opacity-50',
-
             'max-w-172',
             'text-base',
             'text-center',
@@ -114,6 +101,9 @@ const Footer = () => {
             'sm:text-start',
 
             'md:max-w-135',
+
+            'text-white',
+            'opacity-50',
           )}
         >
           Audiophile is an all in one stop to fulfill your audio needs. We're a
@@ -140,13 +130,13 @@ const Footer = () => {
           {/* Social Links */}
           <ul
             role='list'
-            className={cn('flex gap-4 items-center')}
+            className={cn('flex', 'items-center', 'gap-4')}
           >
             {socialLinks.map(({ url, Icon, text }) => (
               <li key={text}>
                 <a
                   href={url}
-                  className={cn('link')}
+                  className={cn('link-focusable')}
                 >
                   <span className={cn('sr-only')}>{text}</span>
                   {
