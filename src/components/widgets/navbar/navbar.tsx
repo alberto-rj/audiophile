@@ -60,9 +60,9 @@ const Navbar = () => {
         className={cn(
           'wrapper',
           'flex',
-          'gap-16',
           'justify-between',
           'items-center',
+          'gap-16',
         )}
       >
         <span
@@ -78,7 +78,11 @@ const Navbar = () => {
             type='button'
             aria-expanded={isOpen}
             aria-controls={menuId}
-            className={cn('lg:hidden', '[&_svg]:stroke-white')}
+            className={cn(
+              '[&_svg]:stroke-white',
+
+              'lg:hidden',
+            )}
             onClick={toggleIsOpen}
           >
             <span className={cn('sr-only')}>
@@ -120,15 +124,16 @@ const Navbar = () => {
             'top-22.25',
             'left-0',
             'z-10',
-            'w-screen',
+            'w-full',
             'flex',
-            'lg:hidden',
             'flex-col',
             'gap-8',
             'items-center',
             'py-8',
             'bg-gray-900',
             !isOpen && 'hidden',
+
+            'lg:hidden',
           )}
         >
           {items.map(({ url, text }, i) => (
@@ -181,7 +186,7 @@ const Navbar = () => {
         </a>
       </div>
 
-      {/* Mobile Separator */}
+      {/* Mobile Decorator */}
       <div
         className={cn(
           'w-full',
@@ -197,7 +202,7 @@ const Navbar = () => {
         )}
       ></div>
 
-      {/* Desktop separator */}
+      {/* Desktop Decorator */}
       <div
         className={cn(
           'wrapper',
