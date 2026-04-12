@@ -7,6 +7,9 @@ type StoryProps = React.ComponentProps<typeof Footer>;
 const meta = {
   title: 'widgets/Footer',
   component: Footer,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } satisfies Meta<StoryProps>;
 
 export default meta;
