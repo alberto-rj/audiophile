@@ -12,18 +12,29 @@ const Hero = ({
 }: HeroProps) => {
   return (
     <header
-      role='banner'
       className={cn(
         'flex',
         'items-center',
         'relative',
 
-        'min-h-[calc(75vh+25%+2.5em)]',
+        'min-h-150',
+        'md:min-h-182',
 
         'bg-gray-900',
         'text-white',
       )}
     >
+      <ResponsiveImage
+        image={image}
+        alt=''
+        className={cn(
+          'absolute',
+          'inset-0',
+          'w-full',
+          'h-full',
+          'object-cover',
+        )}
+      />
       <div
         className={cn(
           'wrapper',
@@ -36,6 +47,10 @@ const Hero = ({
 
           'lg:flex-row',
           'lg:justify-between',
+
+          'py-28',
+          'md:py-40',
+          'lg:py-48',
         )}
       >
         <div
@@ -71,7 +86,7 @@ const Hero = ({
               'lg:items-start',
             )}
           >
-            <h1
+            <div
               className={cn(
                 'flex',
                 'flex-col',
@@ -95,8 +110,8 @@ const Hero = ({
                   New product
                 </span>
               )}
-              <span className={cn('text-2xl', 'md:text-4xl')}>{name}</span>
-            </h1>
+              <h1 className={cn('text-2xl', 'md:text-4xl')}>{name}</h1>
+            </div>
             <p
               className={cn(
                 'text-base',
@@ -114,19 +129,6 @@ const Hero = ({
             <a href={slug}>See product</a>
           </Button>
         </div>
-        <ResponsiveImage
-          image={image}
-          alt=''
-          className={cn(
-            'absolute',
-            'top-0',
-            'left-0',
-            'w-full',
-            'h-full',
-            'object-cover',
-            'bg-gray-700',
-          )}
-        />
       </div>
     </header>
   );

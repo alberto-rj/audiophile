@@ -8,6 +8,9 @@ type StoryProps = React.ComponentProps<typeof Hero>;
 const meta = {
   title: 'widgets/Hero',
   component: Hero,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } satisfies Meta<StoryProps>;
 
 export default meta;
