@@ -84,12 +84,14 @@
 - [x] Logo + links de navegação
 - [x] Ícone do carrinho (apenas visual por agora)
 - [x] Responsiva (hambúrguer no mobile)
+- [x] Stories no Storybook
 
 ### Footer
 
-- [ ] Links de navegação
-- [ ] Texto de copyright
-- [ ] Responsivo
+- [x] Links de navegação
+- [x] Texto de copyright
+- [x] Responsivo
+- [x] Stories no Storybook
 
 ### Página Home
 
