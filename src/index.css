@@ -115,6 +115,10 @@
     @apply w-full mx-auto px-5 md:max-w-172 md:px-10 lg:max-w-277.5;
   }
 
+  .region {
+    @apply py-8 md:py-24 lg:py-30;
+  }
+
   .link-focusable {
     @apply focus:outline focus:outline-primary-400 focus-visible:outline focus-visible:outline-primary-400;
   }

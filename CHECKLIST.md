@@ -95,7 +95,7 @@
 
 ### Página Home
 
-- [ ] Secção Hero com CTA
+- [x] Secção Hero com CTA
 - [ ] Grid das três categorias
 - [ ] Featured product (XX99 Mark II)
 - [ ] Dois produtos secundários em destaque

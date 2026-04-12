@@ -5,3 +5,4 @@ export { default as ResponsiveImage } from './responsive-image/responsive-image'
 export { default as Navbar } from './navbar/navbar';
 export { default as Footer } from './footer/footer';
 export { default as Hero } from './hero/hero';
+export { default as BestGear } from './best-gear/best-gear';
