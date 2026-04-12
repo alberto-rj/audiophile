@@ -99,7 +99,7 @@
 - [ ] Grid das três categorias
 - [ ] Featured product (XX99 Mark II)
 - [ ] Dois produtos secundários em destaque
-- [ ] Secção "Best Gear"
+- [x] Secção "Best Gear"
 - [ ] Responsiva (mobile / tablet / desktop)
 
 ### Página Category
