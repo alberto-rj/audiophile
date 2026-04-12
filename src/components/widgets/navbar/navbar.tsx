@@ -42,7 +42,9 @@ const Navbar = () => {
 
     document.addEventListener('keydown', handleKeyDown);
 
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isOpen]);
 
   const menuLabelId = useId();
@@ -98,7 +100,7 @@ const Navbar = () => {
           {/* Logo */}
           <a
             href='#'
-            className={cn('link')}
+            className={cn('link-focusable')}
           >
             <span className={cn('sr-only')}>Audiophile - home</span>
             <Logo
@@ -146,13 +148,19 @@ const Navbar = () => {
         <ul
           role='list'
           aria-labelledby={menuLabelId}
-          className={cn('hidden', 'lg:flex', 'gap-8', 'items-center')}
+          className={cn(
+            'hidden',
+
+            'lg:flex',
+            'items-center',
+            'gap-8',
+          )}
         >
           {items.map(({ url, text }) => (
             <li key={text}>
               <a
                 href={url}
-                className={cn('nav-link', 'link')}
+                className={cn('nav-link', 'link-focusable')}
               >
                 {text}
               </a>
@@ -163,7 +171,7 @@ const Navbar = () => {
         {/* Cart */}
         <a
           href='#'
-          className={cn('link')}
+          className={cn('link-focusable')}
         >
           <span className={cn('sr-only')}>Cart</span>
           <Cart
@@ -176,25 +184,37 @@ const Navbar = () => {
       {/* Mobile Separator */}
       <div
         className={cn(
-          'lg:hidden',
+          'w-full',
+          'h-px',
           'absolute',
           'bottom-0',
           'left-0',
-          'w-full',
-          'h-px',
+
+          'lg:hidden',
+
           'bg-white',
           'opacity-20',
         )}
       ></div>
 
       {/* Desktop separator */}
-      <div className={cn('wrapper', 'relative', 'hidden', 'lg:block')}>
+      <div
+        className={cn(
+          'wrapper',
+          'relative',
+          'hidden',
+
+          'lg:block',
+        )}
+      >
         <div
           className={cn(
-            'absolute',
-            'w-full',
-            '-bottom-8',
+            'w-[calc(100%-5rem)]',
             'h-px',
+            'absolute',
+            'left-10',
+            '-bottom-8',
+
             'bg-white',
             'opacity-20',
           )}

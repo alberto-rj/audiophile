@@ -114,7 +114,7 @@
     @apply w-full mx-auto px-5 md:max-w-172 md:px-10 lg:max-w-277.5;
   }
 
-  .link {
+  .link-focusable {
     @apply focus:outline focus:outline-primary-400 focus-visible:outline focus-visible:outline-primary-400;
   }
 
