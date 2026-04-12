@@ -8,7 +8,7 @@ interface HeroProps {
 }
 
 const Hero = ({
-  product: { isNew, name, description, slug, image },
+  product: { name, description, slug, image, isNew },
 }: HeroProps) => {
   return (
     <header
@@ -45,7 +45,7 @@ const Hero = ({
             'top-1/2',
             'left-1/2',
             '-translate-1/2',
-            'z-10',
+            'z-2',
 
             'flex',
             'flex-col',
@@ -57,7 +57,6 @@ const Hero = ({
             'lg:items-start',
             'lg:static',
             'lg:translate-none',
-            'lg:z-10',
           )}
         >
           <div
