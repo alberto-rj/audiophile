@@ -7,6 +7,9 @@ type StoryProps = React.ComponentProps<typeof Navbar>;
 const meta = {
   title: 'widgets/Navbar',
   component: Navbar,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } satisfies Meta<StoryProps>;
 
 export default meta;
