@@ -4,11 +4,11 @@ import mobile from '@/assets/shared/mobile/image-best-gear.jpg';
 import tablet from '@/assets/shared/tablet/image-best-gear.jpg';
 import desktop from '@/assets/shared/desktop/image-best-gear.jpg';
 
-import type { ProductImage } from '@/libs/types';
+import type { ResponsiveImageType } from '@/libs/types';
 import { ResponsiveImage } from '@/components/widgets';
 import { useId } from 'react';
 
-const bestGear: ProductImage = {
+const bestGear: ResponsiveImageType = {
   mobile,
   tablet,
   desktop,
@@ -58,6 +58,7 @@ const BestGear = () => {
           <h2
             id={headingId}
             className={cn(
+              'uppercase',
               'text-xl',
 
               'md:text-3xl',

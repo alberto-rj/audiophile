@@ -1,7 +1,7 @@
-import type { ProductImage } from '@/libs/types';
+import type { ResponsiveImageType } from '@/libs/types';
 
 interface ResponsiveImageProps {
-  image: ProductImage;
+  image: ResponsiveImageType;
   alt: string;
   className?: string;
   width?: number;

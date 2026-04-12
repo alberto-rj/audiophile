@@ -1,4 +1,4 @@
-export interface ProductImage {
+export interface ResponsiveImageType {
   mobile: string;
   tablet: string;
   desktop: string;
@@ -10,21 +10,21 @@ export interface ProductInclude {
 }
 
 export interface ProductGallery {
-  first: ProductImage;
-  second: ProductImage;
-  third: ProductImage;
+  first: ResponsiveImageType;
+  second: ResponsiveImageType;
+  third: ResponsiveImageType;
 }
 
 export interface BasicProduct {
   slug: string;
   name: string;
-  image: ProductImage;
+  image: ResponsiveImageType;
 }
 
 export interface Product extends BasicProduct {
   id: number;
   category: string;
-  categoryImage: ProductImage;
+  categoryImage: ResponsiveImageType;
   isNew: boolean;
   price: number;
   description: string;

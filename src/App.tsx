@@ -12,33 +12,41 @@ import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.
 import { cn } from '@/libs/cn';
 import { newProduct } from '@/libs/mocks';
 
+const items = [
+  { category: 'Headphones', image: headphones, slug: '#' },
+  { category: 'Speakers', image: speakers, slug: '#' },
+  { category: 'Earphones', image: earphones, slug: '#' },
+  { category: 'Headphones', image: headphones, slug: '#' },
+  { category: 'Speakers', image: speakers, slug: '#' },
+  { category: 'Earphones', image: earphones, slug: '#' },
+  { category: 'Headphones', image: headphones, slug: '#' },
+  { category: 'Speakers', image: speakers, slug: '#' },
+  { category: 'Earphones', image: earphones, slug: '#' },
+  { category: 'Earphones', image: earphones, slug: '#' },
+  { category: 'Headphones', image: headphones, slug: '#' },
+  { category: 'Speakers', image: speakers, slug: '#' },
+  { category: 'Earphones', image: earphones, slug: '#' },
+  { category: 'Headphones', image: headphones, slug: '#' },
+  { category: 'Speakers', image: speakers, slug: '#' },
+];
+
 function App() {
   return (
     <>
-      <div className={cn('w-full min-h-screen flex flex-col justify-between')}>
+      <div
+        className={cn(
+          'w-full',
+          'min-h-screen',
+          'flex',
+          'flex-col',
+          'justify-between',
+        )}
+      >
         <Navbar />
         <Hero product={newProduct} />
         <main className={cn('bg-gray-900')}>
-          <div className={cn('wrapper hidden')}>
-            <CategoryListing
-              items={[
-                { category: 'Headphones', image: headphones, slug: '#' },
-                { category: 'Speakers', image: speakers, slug: '#' },
-                { category: 'Earphones', image: earphones, slug: '#' },
-                { category: 'Headphones', image: headphones, slug: '#' },
-                { category: 'Speakers', image: speakers, slug: '#' },
-                { category: 'Earphones', image: earphones, slug: '#' },
-                { category: 'Headphones', image: headphones, slug: '#' },
-                { category: 'Speakers', image: speakers, slug: '#' },
-                { category: 'Earphones', image: earphones, slug: '#' },
-                { category: 'Earphones', image: earphones, slug: '#' },
-                { category: 'Headphones', image: headphones, slug: '#' },
-                { category: 'Speakers', image: speakers, slug: '#' },
-                { category: 'Earphones', image: earphones, slug: '#' },
-                { category: 'Headphones', image: headphones, slug: '#' },
-                { category: 'Speakers', image: speakers, slug: '#' },
-              ]}
-            />
+          <div className={cn('wrapper', 'hidden')}>
+            <CategoryListing items={items} />
           </div>
           <BestGear />
         </main>
