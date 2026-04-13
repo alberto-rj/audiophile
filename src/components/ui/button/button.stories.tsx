@@ -17,7 +17,13 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'outline', 'link'],
+      options: ['primary', 'secondary', 'outline', 'link'],
+    },
+    disabled: {
+      control: 'boolean',
+    },
+    asChild: {
+      control: false,
     },
   },
   render: ({ buttonText, ...props }) => {
@@ -40,6 +46,14 @@ export const Primary: Story = {
   args: {
     variant: 'primary',
     buttonText: 'Primary',
+  },
+};
+
+export const Secondary: Story = {
+  name: 'Variant / Secondary',
+  args: {
+    variant: 'secondary',
+    buttonText: 'Secondary',
   },
 };
 

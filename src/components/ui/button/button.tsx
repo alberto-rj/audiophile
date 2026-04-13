@@ -40,15 +40,24 @@ const buttonVariants = cva(
 
           'hover:bg-primary-200',
         ),
+        secondary: cn(
+          'min-inline-40',
+          'px-8',
+          'py-4',
+
+          'bg-black',
+          'text-white',
+
+          'hover:bg-gray-800',
+        ),
         outline: cn(
           'min-inline-40',
           'px-8',
           'py-4',
 
-          'bg-white',
+          'bg-transparent',
           'text-black',
           'border',
-          'border-solid',
           'border-black',
 
           'hover:bg-black',
