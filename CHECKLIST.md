@@ -57,9 +57,9 @@
 
 ### ProductCard
 
-- [ ] Imagem, badge "NEW PRODUCT" (opcional), nome, descrição, preço
-- [ ] Botão de ação incluído
-- [ ] Stories no Storybook
+- [x] Imagem, badge "NEW PRODUCT" (opcional), nome, descrição, preço
+- [x] Botão de ação incluído
+- [x] Stories no Storybook
 
 ### CategoryCard
 
