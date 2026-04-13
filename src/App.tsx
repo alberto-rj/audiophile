@@ -1,6 +1,7 @@
 import {
   BestGear,
   CategoryListing,
+  FeatureHighLighted,
   Footer,
   Hero,
   Navbar,
@@ -11,6 +12,7 @@ import earphones from '@/assets/shared/desktop/image-category-thumbnail-earphone
 import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.png';
 import { cn } from '@/libs/cn';
 import { newProduct } from '@/libs/mocks';
+import { featureHighLightedContent } from '@/libs/constants';
 
 const items = [
   { category: 'Headphones', image: headphones, slug: '#' },
@@ -44,11 +46,14 @@ function App() {
       >
         <Navbar />
         <Hero product={newProduct} />
-        <main className={cn('bg-gray-900')}>
+        <main className={cn('bg-white')}>
           <div className={cn('wrapper', 'hidden')}>
             <CategoryListing items={items} />
           </div>
           <BestGear />
+          <div className={cn('region', 'wrapper')}>
+            <FeatureHighLighted content={featureHighLightedContent} />
+          </div>
         </main>
         <Footer />
       </div>

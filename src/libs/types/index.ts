@@ -33,3 +33,11 @@ export interface Product extends BasicProduct {
   gallery: ProductGallery;
   others: BasicProduct[];
 }
+
+export interface FeatureHighLightedContent {
+  title: string;
+  description: string;
+  slug: string;
+  action: string;
+  image: ResponsiveImageType;
+}

@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { FeatureHighLighted } from '@/components/widgets';
-import { speakerZX9 } from '@/libs/mocks';
+
 import { cn } from '@/libs/cn';
+import { featureHighLightedContent } from '@/libs/constants';
 
 type StoryProps = React.ComponentProps<typeof FeatureHighLighted>;
 
@@ -13,7 +14,7 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    product: speakerZX9,
+    content: featureHighLightedContent,
   },
   render: (props) => {
     return (
