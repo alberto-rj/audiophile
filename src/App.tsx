@@ -8,35 +8,14 @@ import {
   Hero,
   Navbar,
 } from '@/components/widgets';
-
-import headphones from '@/assets/shared/desktop/image-category-thumbnail-headphones.png';
-import earphones from '@/assets/shared/desktop/image-category-thumbnail-earphones.png';
-import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.png';
 import { cn } from '@/libs/cn';
 import { newProduct } from '@/libs/mocks';
 import {
+  categoriesContent,
   featureHighLightedContent,
   featureLandscapeContent,
   featurePortraitContent,
 } from '@/libs/constants';
-
-const items = [
-  { category: 'Headphones', image: headphones, slug: '#' },
-  { category: 'Speakers', image: speakers, slug: '#' },
-  { category: 'Earphones', image: earphones, slug: '#' },
-  { category: 'Headphones', image: headphones, slug: '#' },
-  { category: 'Speakers', image: speakers, slug: '#' },
-  { category: 'Earphones', image: earphones, slug: '#' },
-  { category: 'Headphones', image: headphones, slug: '#' },
-  { category: 'Speakers', image: speakers, slug: '#' },
-  { category: 'Earphones', image: earphones, slug: '#' },
-  { category: 'Earphones', image: earphones, slug: '#' },
-  { category: 'Headphones', image: headphones, slug: '#' },
-  { category: 'Speakers', image: speakers, slug: '#' },
-  { category: 'Earphones', image: earphones, slug: '#' },
-  { category: 'Headphones', image: headphones, slug: '#' },
-  { category: 'Speakers', image: speakers, slug: '#' },
-];
 
 function App() {
   return (
@@ -53,8 +32,8 @@ function App() {
         <Navbar />
         <Hero product={newProduct} />
         <main className={cn('bg-white')}>
-          <div className={cn('wrapper', 'hidden')}>
-            <CategoryListing items={items} />
+          <div className={cn('region', 'wrapper')}>
+            <CategoryListing items={categoriesContent} />
           </div>
           <div
             className={cn(

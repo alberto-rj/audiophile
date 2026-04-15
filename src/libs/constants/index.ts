@@ -1,9 +1,21 @@
+/* Categories (start) */
+import headphones from '@/assets/shared/desktop/image-category-thumbnail-headphones.png';
+import earphones from '@/assets/shared/desktop/image-category-thumbnail-earphones.png';
+import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.png';
+
+export const categoriesContent: CategoryContent[] = [
+  { category: 'Headphones', image: headphones, slug: '#' },
+  { category: 'Speakers', image: speakers, slug: '#' },
+  { category: 'Earphones', image: earphones, slug: '#' },
+];
+/* Categories (end) */
+
 /* Feature Highlighted (start) */
 import featureHighLightedContentMobile from '@/assets/home/mobile/image-speaker-zx9.png';
 import featureHighLightedContentTablet from '@/assets/home/tablet/image-speaker-zx9.png';
 import featureHighLightedContentDesktop from '@/assets/home/desktop/image-speaker-zx9.png';
 
-import type { FeatureHighLightedContent } from '@/libs/types';
+import type { CategoryContent, FeatureHighLightedContent } from '@/libs/types';
 
 export const featureHighLightedContent: FeatureHighLightedContent = {
   title: 'Zx9 Speaker',

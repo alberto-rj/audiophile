@@ -34,6 +34,12 @@ export interface Product extends BasicProduct {
   others: BasicProduct[];
 }
 
+export interface CategoryContent {
+  image: string;
+  category: string;
+  slug: string;
+}
+
 export interface FeatureHighLightedContent {
   title: string;
   description: string;

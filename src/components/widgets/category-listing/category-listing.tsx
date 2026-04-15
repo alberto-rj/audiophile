@@ -1,14 +1,9 @@
 import { CategoryCard } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-
-interface Category {
-  image: string;
-  category: string;
-  slug: string;
-}
+import type { CategoryContent } from '@/libs/types';
 
 interface CategoryCardProps {
-  items: Category[];
+  items: CategoryContent[];
 }
 
 const CategoryListing = ({ items }: CategoryCardProps) => {
@@ -18,12 +13,16 @@ const CategoryListing = ({ items }: CategoryCardProps) => {
       className={cn(
         'w-full',
         'grid',
-        'sm:grid-cols-[repeat(1,minmax(21.875em,1fr))]',
-        'md:grid-cols-[repeat(2,minmax(21.875em,1fr))]',
-        'lg:grid-cols-[repeat(3,minmax(21.875em,1fr))]',
+        'grid-cols-[repeat(1,minmax(100%,327px))]',
+        'md:grid-cols-[repeat(3,minmax(100%,223px))]',
+        'lg:grid-cols-[repeat(3,minmax(0,350px))]',
         'gap-x-8',
         'gap-y-41',
         'pbs-25',
+
+        'md:gap-x-2.5',
+
+        'lg:gap-x-7.5',
       )}
     >
       {items.map(({ image, category, slug }) => (
