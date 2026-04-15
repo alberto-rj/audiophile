@@ -56,7 +56,6 @@ function App() {
           <div className={cn('wrapper', 'hidden')}>
             <CategoryListing items={items} />
           </div>
-          <BestGear />
           <div
             className={cn(
               'region',
@@ -73,6 +72,7 @@ function App() {
             <FeatureLandscape content={featureLandscapeContent} />
             <FeaturePortrait content={featurePortraitContent} />
           </div>
+          <BestGear />
         </main>
         <Footer />
       </div>
