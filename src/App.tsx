@@ -3,6 +3,7 @@ import {
   CategoryListing,
   FeatureHighLighted,
   FeatureLandscape,
+  FeaturePortrait,
   Footer,
   Hero,
   Navbar,
@@ -16,6 +17,7 @@ import { newProduct } from '@/libs/mocks';
 import {
   featureHighLightedContent,
   featureLandscapeContent,
+  featurePortraitContent,
 } from '@/libs/constants';
 
 const items = [
@@ -69,6 +71,7 @@ function App() {
           >
             <FeatureHighLighted content={featureHighLightedContent} />
             <FeatureLandscape content={featureLandscapeContent} />
+            <FeaturePortrait content={featurePortraitContent} />
           </div>
         </main>
         <Footer />
