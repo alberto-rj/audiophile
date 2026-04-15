@@ -18,52 +18,55 @@ const FeaturePortrait = ({
     <section
       aria-describedby={headingId}
       className={cn(
-        'w-full',
-        'flex',
-        'flex-col',
-        'items-start',
+        'grid',
+        'grid-cols-[repeat(1,minmax(100%,20.4375em))]',
+        'grid-rows-[12.5em_12.5em]',
         'gap-6',
 
-        'md:flex-row',
-        'md:gap-[11px]',
+        'md:grid-cols-[repeat(2,minmax(0,21.1875em))]',
+        'md:grid-rows-[20em]',
+        'md:gap-2.75',
 
-        'bg-white',
+        'lg:grid-cols-[repeat(2,minmax(0,33.75em))]',
+        'lg:gap-7.5',
       )}
     >
       <div className={cn('relative', 'rounded-lg', 'overflow-hidden')}>
         <ResponsiveImage
           alt=''
           image={image}
-          className={cn('absolute', 'inset-0', 'z-10', 'size-full')}
+          className={cn('absolute', 'inset-0', 'size-full', 'object-cover')}
         />
       </div>
 
       <div
         className={cn(
-          'w-1/2',
-          'pl-[24px]',
-          'py-[101px]',
           'rounded-lg',
           'overflow-hidden',
-
-          'md:pl-[46px]',
-          'lg:pl-[95px]',
 
           'bg-gray-400',
         )}
       >
         <div
           className={cn(
-            'max-w-[247px]',
+            'size-full',
             'flex',
             'flex-col',
+            'justify-center',
             'items-start',
             'gap-8',
+            'px-6',
+
+            'md:gap-8',
+            'md:text-xl',
+            'md:ps-10.25',
+
+            'lg:ps-23.75',
           )}
         >
           <h2
             id={headingId}
-            className={cn('text-xl', 'text-black', 'uppercase')}
+            className={cn('text-md', 'xs:text-xl', 'uppercase')}
           >
             {title}
           </h2>
