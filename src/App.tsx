@@ -1,9 +1,7 @@
 import {
   BestGear,
   CategoryListing,
-  FeatureHighLighted,
-  FeatureLandscape,
-  FeaturePortrait,
+  FeatureProducts,
   Footer,
   Hero,
   Navbar,
@@ -31,28 +29,20 @@ function App() {
       >
         <Navbar />
         <Hero product={newProduct} />
-        <main className={cn('bg-white')}>
-          <div className={cn('wrapper', 'pbs-10')}>
-            <CategoryListing items={categoriesContent} />
-          </div>
-          <div
-            className={cn(
-              'wrapper',
-              'grid',
-              'gap-6',
-
-              'md:gap-8',
-
-              'md:gap-12',
-            )}
-          >
-            <FeatureHighLighted content={featureHighLightedContent} />
-            <FeatureLandscape content={featureLandscapeContent} />
-            <FeaturePortrait content={featurePortraitContent} />
-          </div>
-          <BestGear />
-        </main>
-        <Footer />
+        <div className={cn('flow')}>
+          <main className={cn('flow', 'bg-white')}>
+            <div className={cn('wrapper', 'flow-spacing')}>
+              <CategoryListing items={categoriesContent} />
+            </div>
+            <FeatureProducts
+              highLightedContent={featureHighLightedContent}
+              portraitContent={featurePortraitContent}
+              landscapeContent={featureLandscapeContent}
+            />
+            <BestGear />
+          </main>
+          <Footer />
+        </div>
       </div>
     </>
   );

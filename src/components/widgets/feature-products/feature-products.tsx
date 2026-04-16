@@ -14,12 +14,14 @@ interface FeatureProductsProps {
   highLightedContent: FeatureHighLightedContent;
   landscapeContent: FeatureLandscapeContent;
   portraitContent: FeaturePortraitContent;
+  className?: string;
 }
 
 const FeatureProducts = ({
   highLightedContent,
   landscapeContent,
   portraitContent,
+  className,
 }: FeatureProductsProps) => {
   return (
     <div
@@ -31,6 +33,8 @@ const FeatureProducts = ({
         'md:gap-8',
 
         'md:gap-12',
+
+        className,
       )}
     >
       <FeatureHighLighted content={highLightedContent} />

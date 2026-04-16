@@ -14,7 +14,6 @@ const CategoryListing = ({ items }: CategoryCardProps) => {
         'w-full',
         'grid',
         'grid-cols-[repeat(1,minmax(0,20.4375em))]',
-        'grid-rows-[repeat(2,13.5625em)]',
         'gap-x-8',
         'gap-y-41',
         'pbs-25',

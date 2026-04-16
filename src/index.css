@@ -117,7 +117,15 @@
   }
 
   .region {
-    @apply py-8 md:py-24 lg:py-30;
+    @apply py-6 md:py-24 lg:py-30;
+  }
+
+  .flow {
+    @apply flex flex-col gap-6 md:gap-24 lg:gap-30;
+  }
+
+  .flow-spacing {
+    @apply pbs-6 md:pbs-24 lg:pbs-30;
   }
 
   .link-focusable {
