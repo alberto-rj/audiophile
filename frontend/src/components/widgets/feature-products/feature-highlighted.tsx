@@ -46,6 +46,7 @@ const FeatureHighLighted = ({
       >
         <ResponsiveImage
           alt=''
+          loading='lazy'
           image={image}
           className={cn(
             'w-full',

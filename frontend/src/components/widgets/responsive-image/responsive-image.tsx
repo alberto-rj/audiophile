@@ -1,19 +1,16 @@
+import type { ImgHTMLAttributes } from 'react';
+
 import type { ResponsiveImageType } from '@/libs/types';
 
-interface ResponsiveImageProps {
+interface ResponsiveImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   image: ResponsiveImageType;
-  alt: string;
-  className?: string;
-  width?: number;
-  height?: number;
 }
 
 const ResponsiveImage = ({
   image,
   alt,
   className,
-  width,
-  height,
+  ...props
 }: ResponsiveImageProps) => {
   return (
     <picture>
@@ -29,8 +26,7 @@ const ResponsiveImage = ({
         src={image.mobile}
         alt={alt}
         className={className}
-        width={width}
-        height={height}
+        {...props}
       />
     </picture>
   );
