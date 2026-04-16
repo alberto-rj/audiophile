@@ -97,7 +97,7 @@ const FeatureHighLighted = ({
             </p>
           </div>
           <Button
-            variant={'outline'}
+            variant={'secondary'}
             asChild
           >
             <a href={slug}>{action}</a>
