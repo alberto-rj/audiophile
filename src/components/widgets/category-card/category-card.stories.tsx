@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { CategoryCard } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-
-import image from '@/assets/shared/desktop/image-category-thumbnail-headphones.png';
+import { headphonesContent } from '@/libs/constants';
 
 type StoryProps = React.ComponentProps<typeof CategoryCard>;
 
@@ -11,9 +10,7 @@ const meta = {
   title: 'widgets/CategoryCard',
   component: CategoryCard,
   args: {
-    category: 'Headphones',
-    image,
-    slug: '#',
+    content: headphonesContent,
   },
   parameters: {
     layout: 'centered',
@@ -22,7 +19,7 @@ const meta = {
     return (
       <div
         className={cn(
-          'grid grid-cols-[repeat(auto-fill,minmax(37.5rem,1fr))] justify-items-center',
+          'grid grid-cols-[repeat(1,minmax(0,37.5rem))] justify-items-center',
         )}
       >
         <CategoryCard {...categoryCardProps} />

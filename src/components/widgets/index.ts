@@ -8,8 +8,9 @@ export { default as Hero } from './hero/hero';
 export { default as Header } from './header/header';
 export { default as BestGear } from './best-gear/best-gear';
 
-export { default as FeatureHighLighted } from './feature-product/feature-highlighted';
-export { default as FeatureLandscape } from './feature-product/feature-landscape';
-export { default as FeaturePortrait } from './feature-product/feature-portrait';
+export { default as FeatureHighLighted } from './feature-products/feature-highlighted';
+export { default as FeatureLandscape } from './feature-products/feature-landscape';
+export { default as FeaturePortrait } from './feature-products/feature-portrait';
+export { default as FeatureProducts } from './feature-products/feature-products';
 
 export { default as ProductCard } from './product-card/product-card';

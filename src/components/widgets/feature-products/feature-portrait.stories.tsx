@@ -1,25 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { FeatureHighLighted } from '@/components/widgets';
+import { FeaturePortrait } from '@/components/widgets';
 
 import { cn } from '@/libs/cn';
-import { featureHighLightedContent } from '@/libs/constants';
+import { featurePortraitContent } from '@/libs/constants';
 
-type StoryProps = React.ComponentProps<typeof FeatureHighLighted>;
+type StoryProps = React.ComponentProps<typeof FeaturePortrait>;
 
 const meta = {
-  title: 'widgets/FeatureHighLighted',
-  component: FeatureHighLighted,
+  title: 'widgets/FeatureProducts/FeaturePortrait',
+  component: FeaturePortrait,
   parameters: {
     layout: 'fullscreen',
   },
   args: {
-    content: featureHighLightedContent,
+    content: featurePortraitContent,
   },
   render: (props) => {
     return (
       <div className={cn('region', 'wrapper')}>
-        <FeatureHighLighted {...props} />
+        <FeaturePortrait {...props} />
       </div>
     );
   },

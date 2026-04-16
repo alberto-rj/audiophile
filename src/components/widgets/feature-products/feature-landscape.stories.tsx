@@ -1,25 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { FeaturePortrait } from '@/components/widgets';
+import { FeatureLandscape } from '@/components/widgets';
 
 import { cn } from '@/libs/cn';
-import { featurePortraitContent } from '@/libs/constants';
+import { featureLandscapeContent } from '@/libs/constants';
 
-type StoryProps = React.ComponentProps<typeof FeaturePortrait>;
+type StoryProps = React.ComponentProps<typeof FeatureLandscape>;
 
 const meta = {
-  title: 'widgets/FeaturePortrait',
-  component: FeaturePortrait,
+  title: 'widgets/FeatureProducts/FeatureLandscape',
+  component: FeatureLandscape,
   parameters: {
     layout: 'fullscreen',
   },
   args: {
-    content: featurePortraitContent,
+    content: featureLandscapeContent,
   },
   render: (props) => {
     return (
       <div className={cn('region', 'wrapper')}>
-        <FeaturePortrait {...props} />
+        <FeatureLandscape {...props} />
       </div>
     );
   },

@@ -1,14 +1,15 @@
 import { ArrowRight } from '@/assets/icons';
 import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
+import type { CategoryContent } from '@/libs/types';
 
 interface CategoryCardProps {
-  image: string;
-  category: string;
-  slug: string;
+  content: CategoryContent;
 }
 
-const CategoryCard = ({ category, slug, image }: CategoryCardProps) => {
+const CategoryCard = ({
+  content: { category, image, slug },
+}: CategoryCardProps) => {
   return (
     <a
       href={slug}

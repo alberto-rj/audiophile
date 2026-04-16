@@ -3,10 +3,28 @@ import headphones from '@/assets/shared/desktop/image-category-thumbnail-headpho
 import earphones from '@/assets/shared/desktop/image-category-thumbnail-earphones.png';
 import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.png';
 
+export const headphonesContent: CategoryContent = {
+  category: 'Headphones',
+  image: headphones,
+  slug: '#',
+};
+
+export const speakersContent: CategoryContent = {
+  category: 'Speakers',
+  image: speakers,
+  slug: '#',
+};
+
+export const earphonesContent: CategoryContent = {
+  category: 'Earphones',
+  image: earphones,
+  slug: '#',
+};
+
 export const categoriesContent: CategoryContent[] = [
-  { category: 'Headphones', image: headphones, slug: '#' },
-  { category: 'Speakers', image: speakers, slug: '#' },
-  { category: 'Earphones', image: earphones, slug: '#' },
+  headphonesContent,
+  speakersContent,
+  earphonesContent,
 ];
 /* Categories (end) */
 

@@ -26,13 +26,9 @@ const CategoryListing = ({ items }: CategoryCardProps) => {
         'lg:gap-x-7.5',
       )}
     >
-      {items.map(({ image, category, slug }) => (
-        <li key={category}>
-          <CategoryCard
-            category={category}
-            image={image}
-            slug={slug}
-          />
+      {items.map((content) => (
+        <li key={content.slug}>
+          <CategoryCard content={content} />
         </li>
       ))}
     </ul>

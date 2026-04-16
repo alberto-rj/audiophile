@@ -32,12 +32,11 @@ function App() {
         <Navbar />
         <Hero product={newProduct} />
         <main className={cn('bg-white')}>
-          <div className={cn('region', 'wrapper')}>
+          <div className={cn('wrapper', 'pbs-10')}>
             <CategoryListing items={categoriesContent} />
           </div>
           <div
             className={cn(
-              'region',
               'wrapper',
               'grid',
               'gap-6',
