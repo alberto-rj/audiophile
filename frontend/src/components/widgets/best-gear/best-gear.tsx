@@ -37,6 +37,7 @@ const BestGear = () => {
       >
         <ResponsiveImage
           alt='Person enjoying music with premium headphones'
+          loading='lazy'
           image={bestGear}
           className={cn('max-w-full', 'h-auto', 'object-cover', 'rounded-lg')}
         />

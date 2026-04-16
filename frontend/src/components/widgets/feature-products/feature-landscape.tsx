@@ -57,6 +57,7 @@ const FeatureLandscape = ({
       </div>
       <ResponsiveImage
         alt=''
+        loading='lazy'
         image={image}
         className={cn('absolute', 'inset-0', 'size-full', 'object-cover')}
       />
