@@ -16,7 +16,7 @@
 - [x] Extrair tokens do design no Figma e definir em `src/index.css`
 - [x] Instalar e inicializar o Storybook
 - [x] Configurar ESLint + Prettier
-- [x] Primeiro commit com o projeto base a funcionar
+- [x] Primeiro commit com o projecto base a funcionar
 
 ---
 
@@ -96,11 +96,11 @@
 ### Página Home
 
 - [x] Secção Hero com CTA
-- [ ] Grid das três categorias
-- [ ] Featured product (XX99 Mark II)
-- [ ] Dois produtos secundários em destaque
+- [x] Grid das três categorias
+- [x] Featured product (XX99 Mark II)
+- [x] Dois produtos secundários em destaque
 - [x] Secção "Best Gear"
-- [ ] Responsiva (mobile / tablet / desktop)
+- [x] Responsiva (mobile / tablet / desktop)
 
 ### Página Category
 
@@ -177,7 +177,7 @@
 
 ### Setup do servidor
 
-- [ ] Inicializar projeto Node na pasta `/server`
+- [ ] Inicializar projecto Node na pasta `/server`
 - [ ] Instalar Express + TypeScript + ts-node-dev
 - [ ] Instalar Drizzle ORM + `pg`
 - [ ] Ficheiro `.env` com a string de ligação à base de dados
@@ -218,7 +218,7 @@
 
 ## Fase 7 — Polimento e deploy
 
-> Objectivo: projeto finalizado, deployed e pronto para portfólio.
+> Objectivo: projecto finalizado, deployed e pronto para portfólio.
 
 ### Revisão visual
 
@@ -249,7 +249,7 @@
 
 ### README final
 
-- [ ] Screenshot ou GIF do projeto
+- [ ] Screenshot ou GIF do projecto
 - [ ] Link para o deploy
 - [ ] Link para o Storybook
 - [ ] Stack tecnológica listada com justificação das escolhas
@@ -263,8 +263,8 @@
 | Fase                         | Estado          |
 | ---------------------------- | --------------- |
 | Fase 1 — Fundação            | ✅ Concluída    |
-| Fase 2 — Componentes         | 🟡 Em progresso |
-| Fase 3 — Páginas             | ⬜ Não iniciada |
+| Fase 2 — Componentes         | ✅ Concluída    |
+| Fase 3 — Páginas             | 🟡 Em progresso |
 | Fase 4 — Carrinho e checkout | ⬜ Não iniciada |
 | Fase 5 — API                 | ⬜ Não iniciada |
 | Fase 6 — Integração          | ⬜ Não iniciada |
