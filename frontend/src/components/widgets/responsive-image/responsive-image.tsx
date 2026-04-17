@@ -4,16 +4,18 @@ import type { ResponsiveImageType } from '@/libs/types';
 
 interface ResponsiveImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   image: ResponsiveImageType;
+  pictureClassName?: string;
 }
 
 const ResponsiveImage = ({
   image,
   alt,
   className,
+  pictureClassName,
   ...props
 }: ResponsiveImageProps) => {
   return (
-    <picture>
+    <picture className={pictureClassName}>
       <source
         media='(min-width: 64em)'
         srcSet={image.desktop}

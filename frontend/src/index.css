@@ -81,15 +81,19 @@
   /* breakpoints (end) */
 
   /* colors (start) */
+  /* primary */
   --color-primary-400: #d87d4a;
   --color-primary-200: #fbaf85;
 
+  /* black */
   --color-black: #000000;
   --color-black-o-50: rgba(0, 0, 0, 0.5);
   --color-black-o-40: rgba(0, 0, 0, 0.4);
 
+  /* white */
   --color-white: #ffffff;
 
+  /* gray */
   --color-gray-900: #101010;
   --color-gray-800: #4c4c4c;
   --color-gray-700: #979797;
@@ -97,6 +101,7 @@
   --color-gray-400: #f1f1f1;
   --color-gray-200: #fafafa;
 
+  /* dander */
   --color-danger-400: #cd2c2c;
   /* colors (end) */
 
@@ -139,5 +144,44 @@
 
   .nav-link {
     @apply text-xs uppercase text-white hover:text-primary-400;
+  }
+}
+
+.grid-item-1 {
+  grid-area: item-1;
+}
+
+.grid-item-2 {
+  grid-area: item-2;
+}
+
+.grid-item-3 {
+  grid-area: item-3;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'item-1'
+    'item-2'
+    'item-2';
+  gap: 1rem;
+}
+
+/* md */
+@media (min-width: 48em) {
+  .grid-container {
+    grid-template-areas:
+      'item-1 item-3 item-3'
+      'item-2 item-3 item-3';
+  }
+}
+
+/* lg */
+@media (min-width: 64em) {
+  .grid-container {
+    grid-template-areas:
+      'item-1 item-3 item-3'
+      'item-2 item-3 item-3';
   }
 }

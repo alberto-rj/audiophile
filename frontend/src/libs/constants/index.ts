@@ -33,7 +33,11 @@ import featureHighLightedContentMobile from '@/assets/home/mobile/image-speaker-
 import featureHighLightedContentTablet from '@/assets/home/tablet/image-speaker-zx9.png';
 import featureHighLightedContentDesktop from '@/assets/home/desktop/image-speaker-zx9.png';
 
-import type { CategoryContent, FeatureHighLightedContent } from '@/libs/types';
+import type {
+  CategoryContent,
+  FeatureHighLightedContent,
+  GalleryContent,
+} from '@/libs/types';
 
 export const featureHighLightedContent: FeatureHighLightedContent = {
   title: 'Zx9 Speaker',
@@ -108,6 +112,41 @@ export const productCardContent: ProductCardContent = {
   },
 };
 /* Feature Portrait (end) */
+
+/* Gallery (start) */
+import galleryItem1Mobile from '@/assets/product-xx59-headphones/mobile/image-gallery-1.jpg';
+import galleryItem1Tablet from '@/assets/product-xx59-headphones/tablet/image-gallery-1.jpg';
+import galleryItem1Desktop from '@/assets/product-xx59-headphones/desktop/image-gallery-1.jpg';
+
+import galleryItem2Mobile from '@/assets/product-xx59-headphones/mobile/image-gallery-2.jpg';
+import galleryItem2Tablet from '@/assets/product-xx59-headphones/tablet/image-gallery-2.jpg';
+import galleryItem2Desktop from '@/assets/product-xx59-headphones/desktop/image-gallery-2.jpg';
+
+import galleryItem3Mobile from '@/assets/product-xx59-headphones/mobile/image-gallery-3.jpg';
+import galleryItem3Tablet from '@/assets/product-xx59-headphones/tablet/image-gallery-3.jpg';
+import galleryItem3Desktop from '@/assets/product-xx59-headphones/desktop/image-gallery-3.jpg';
+
+export const galleryContent: GalleryContent = {
+  title: 'XX59 Headphones',
+  images: {
+    first: {
+      mobile: galleryItem1Mobile,
+      tablet: galleryItem1Tablet,
+      desktop: galleryItem1Desktop,
+    },
+    second: {
+      mobile: galleryItem2Mobile,
+      tablet: galleryItem2Tablet,
+      desktop: galleryItem2Desktop,
+    },
+    third: {
+      mobile: galleryItem3Mobile,
+      tablet: galleryItem3Tablet,
+      desktop: galleryItem3Desktop,
+    },
+  },
+};
+/* Gallery (end) */
 
 /* Suggestion Card (start) */
 import suggestionXX99Mobile from '@/assets/product-xx99-mark-one-headphones/mobile/image-product.jpg';

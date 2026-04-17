@@ -9,7 +9,7 @@ export interface ProductInclude {
   item: string;
 }
 
-export interface ProductGallery {
+export interface GalleryImages {
   first: ResponsiveImageType;
   second: ResponsiveImageType;
   third: ResponsiveImageType;
@@ -30,7 +30,7 @@ export interface Product extends BasicProduct {
   description: string;
   features: string;
   includes: ProductInclude[];
-  gallery: ProductGallery;
+  gallery: GalleryImages;
   others: BasicProduct[];
 }
 
@@ -77,4 +77,9 @@ export interface SuggestionCardContent {
   title: string;
   action: string;
   slug: string;
+}
+
+export interface GalleryContent {
+  title: string;
+  images: GalleryImages;
 }
