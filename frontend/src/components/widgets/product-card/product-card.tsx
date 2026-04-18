@@ -24,14 +24,14 @@ const ProductCard = ({
         'items-center',
         'gap-8',
 
-        'md:gap-[52px]',
+        'md:gap-13',
 
         {
           'lg:flex-row': !isReversed,
           'lg:flex-row-reverse': isReversed,
         },
         'lg:justify-center',
-        'lg:gap-[125px]',
+        'lg:gap-31.25',
       )}
     >
       <ResponsiveImage
@@ -47,9 +47,9 @@ const ProductCard = ({
           'gap-6',
           'text-center',
 
-          'md:max-w-[572px]',
+          'md:max-w-143',
 
-          'lg:max-w-[445px]',
+          'lg:max-w-111.25',
           'lg:items-start',
           'lg:gap-10',
           'lg:text-start',

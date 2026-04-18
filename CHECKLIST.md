@@ -113,8 +113,8 @@
 ### Página Product Detail
 
 - [ ] Botão "Go Back"
-- [ ] Imagem principal + nome, descrição, preço
-- [ ] QuantitySelector + botão "Add to Cart"
+- [x] Imagem principal + nome, descrição, preço
+- [x] QuantitySelector + botão "Add to Cart"
 - [ ] Secção Features
 - [ ] Secção "In the Box"
 - [x] Galeria de três imagens
