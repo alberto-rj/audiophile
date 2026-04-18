@@ -115,8 +115,8 @@
 - [ ] Botão "Go Back"
 - [x] Imagem principal + nome, descrição, preço
 - [x] QuantitySelector + botão "Add to Cart"
-- [ ] Secção Features
-- [ ] Secção "In the Box"
+- [x] Secção Features
+- [x] Secção "In the Box"
 - [x] Galeria de três imagens
 - [x] Secção "You May Also Like"
 - [x] Responsiva (mobile / tablet / desktop)
