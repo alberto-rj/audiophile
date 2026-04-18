@@ -7,10 +7,12 @@ import type { ProductCardContent } from '@/libs/types';
 
 interface ProductCardProps {
   content: ProductCardContent;
+  className?: string;
 }
 
 const ProductCard = ({
   content: { image, title, description, action, slug, isNew, isReversed },
+  className,
 }: ProductCardProps) => {
   const headingId = useId();
 
@@ -32,6 +34,7 @@ const ProductCard = ({
         },
         'lg:justify-center',
         'lg:gap-31.25',
+        className,
       )}
     >
       <ResponsiveImage

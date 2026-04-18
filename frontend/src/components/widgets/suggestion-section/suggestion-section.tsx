@@ -8,9 +8,14 @@ import { cn } from '@/libs/cn';
 interface SuggestionSectionProps {
   title: string;
   items: SuggestionCardContent[];
+  className?: string;
 }
 
-const SuggestionSection = ({ title, items }: SuggestionSectionProps) => {
+const SuggestionSection = ({
+  title,
+  items,
+  className,
+}: SuggestionSectionProps) => {
   const headingId = useId();
 
   return (
@@ -26,6 +31,7 @@ const SuggestionSection = ({ title, items }: SuggestionSectionProps) => {
         'md:gap-14',
 
         'lg:gap-16',
+        className,
       )}
     >
       <h2

@@ -8,10 +8,12 @@ import { Button } from '@/components/ui';
 
 interface ProductDetailedCardProps {
   content: ProductDetailedCardContent;
+  className?: string;
 }
 
 const ProductDetailedCard = ({
   content: { image, title, description, price, action, isNew },
+  className,
 }: ProductDetailedCardProps) => {
   const [quantity, setQuantity] = useState<number>(1);
   const headingId = useId();
@@ -35,6 +37,7 @@ const ProductDetailedCard = ({
         'md:gap-17.25',
 
         'lg:gap-31.25',
+        className,
       )}
     >
       <ResponsiveImage

@@ -15,7 +15,7 @@ import {
   featurePortraitContent,
 } from '@/libs/constants';
 
-function App() {
+function Home() {
   return (
     <>
       <div
@@ -48,4 +48,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

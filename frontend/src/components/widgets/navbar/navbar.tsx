@@ -1,26 +1,9 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 import { Cart, Logo, Close, Menu } from '@/assets/icons';
 import { cn } from '@/libs/cn';
-
-const items = [
-  {
-    url: '#',
-    text: 'Home',
-  },
-  {
-    url: '#',
-    text: 'Headphones',
-  },
-  {
-    url: '#',
-    text: 'Speakers',
-  },
-  {
-    url: '#',
-    text: 'Earphones',
-  },
-];
+import { navLinks } from '@/libs/constants';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -102,8 +85,8 @@ const Navbar = () => {
           </button>
 
           {/* Logo */}
-          <a
-            href='#'
+          <Link
+            to='/'
             className={cn(
               'hidden',
 
@@ -117,7 +100,7 @@ const Navbar = () => {
               aria-hidden={true}
               focusable={false}
             />
-          </a>
+          </Link>
         </div>
 
         {/* Mobile menu */}
@@ -142,15 +125,15 @@ const Navbar = () => {
             'lg:hidden',
           )}
         >
-          {items.map(({ url, text }, i) => (
+          {navLinks.map(({ url, text }, i) => (
             <li key={text}>
-              <a
+              <NavLink
                 ref={i === 0 ? firstMenuItemRef : undefined}
-                href={url}
+                to={url}
                 className={cn('nav-link', 'link')}
               >
                 {text}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -167,14 +150,14 @@ const Navbar = () => {
             'gap-8',
           )}
         >
-          {items.map(({ url, text }) => (
+          {navLinks.map(({ url, text }) => (
             <li key={text}>
-              <a
-                href={url}
+              <NavLink
+                to={url}
                 className={cn('nav-link', 'link-focusable')}
               >
                 {text}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>

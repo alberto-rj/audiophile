@@ -1,18 +1,8 @@
-import { Logo, Facebook, Twitter, Instagram } from '@/assets/icons';
+import { Link } from 'react-router-dom';
+
+import { Logo } from '@/assets/icons';
 import { cn } from '@/libs/cn';
-
-const navLinks = [
-  { url: '#', text: 'Home' },
-  { url: '#', text: 'Headphones' },
-  { url: '#', text: 'Speakers' },
-  { url: '#', text: 'Earphones' },
-];
-
-const socialLinks = [
-  { url: '#', Icon: Facebook, text: 'Facebook' },
-  { url: '#', Icon: Twitter, text: 'Twitter' },
-  { url: '#', Icon: Instagram, text: 'Instagram' },
-];
+import { navLinks, socialLinks } from '@/libs/constants';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -55,8 +45,8 @@ const Footer = () => {
           )}
         >
           {/* Logo */}
-          <a
-            href='#'
+          <Link
+            to='/'
             className={cn('link-focusable')}
           >
             <span className={cn('sr-only')}>Audiophile - home</span>
@@ -64,7 +54,7 @@ const Footer = () => {
               aria-hidden={true}
               focusable={false}
             />
-          </a>
+          </Link>
 
           {/* Nav Links */}
           <ul

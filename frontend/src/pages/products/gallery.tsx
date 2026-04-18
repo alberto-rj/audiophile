@@ -6,6 +6,7 @@ import { cn } from '@/libs/cn';
 
 interface GalleryProps {
   content: GalleryContent;
+  className?: string;
 }
 
 const Gallery = ({
@@ -13,6 +14,7 @@ const Gallery = ({
     title,
     images: { first, second, third },
   },
+  className,
 }: GalleryProps) => {
   const headingId = useId();
 
@@ -35,6 +37,7 @@ const Gallery = ({
         'md:gap-4.5',
 
         'lg:gap-7.5',
+        className,
       )}
     >
       <h2

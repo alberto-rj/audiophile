@@ -1,3 +1,28 @@
+/* links (start) */
+import { Facebook, Twitter, Instagram } from '@/assets/icons';
+
+export const navLinks = [
+  {
+    url: '/categories/headphones',
+    text: 'Headphones',
+  },
+  {
+    url: '/categories/speakers',
+    text: 'Speakers',
+  },
+  {
+    url: '/categories/earphones',
+    text: 'Earphones',
+  },
+];
+
+export const socialLinks = [
+  { url: '#', Icon: Facebook, text: 'Facebook' },
+  { url: '#', Icon: Twitter, text: 'Twitter' },
+  { url: '#', Icon: Instagram, text: 'Instagram' },
+];
+/* links (end) */
+
 /* Categories (start) */
 import headphones from '@/assets/shared/desktop/image-category-thumbnail-headphones.png';
 import earphones from '@/assets/shared/desktop/image-category-thumbnail-earphones.png';
@@ -6,19 +31,19 @@ import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.
 export const headphonesContent: CategoryContent = {
   category: 'Headphones',
   image: headphones,
-  slug: '#',
+  slug: '/categories/headphones',
 };
 
 export const speakersContent: CategoryContent = {
   category: 'Speakers',
   image: speakers,
-  slug: '#',
+  slug: '/categories/speakers',
 };
 
 export const earphonesContent: CategoryContent = {
   category: 'Earphones',
   image: earphones,
-  slug: '#',
+  slug: '/categories/earphones',
 };
 
 export const categoriesContent: CategoryContent[] = [
@@ -176,7 +201,7 @@ import type { SuggestionCardContent } from '@/libs/types';
 
 export const suggestionXX99: SuggestionCardContent = {
   title: 'XX99 MARK I',
-  slug: '#',
+  slug: '/products/xx99-mark-one',
   action: 'See product',
   image: {
     mobile: suggestionXX99Mobile,
@@ -191,7 +216,7 @@ import suggestionXX59Desktop from '@/assets/product-xx59-headphones/desktop/imag
 
 export const suggestionXX59: SuggestionCardContent = {
   title: 'XX59',
-  slug: '#',
+  slug: '/products/xx59',
   action: 'See product',
   image: {
     mobile: suggestionXX59Mobile,
@@ -207,7 +232,7 @@ import { newProduct } from '../mocks';
 
 export const suggestionZX9: SuggestionCardContent = {
   title: 'ZX9 SPEAKER',
-  slug: '#',
+  slug: '/products/zx9-speaker',
   action: 'See product',
   image: {
     mobile: suggestionZX9Mobile,
