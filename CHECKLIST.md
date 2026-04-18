@@ -106,9 +106,9 @@
 
 - [ ] Título da categoria no topo
 - [ ] Lista de produtos filtrada por categoria
-- [ ] Alternância de imagem à esquerda/direita
-- [ ] Links para as outras categorias no fundo
-- [ ] Responsiva (mobile / tablet / desktop)
+- [x] Alternância de imagem à esquerda/direita
+- [x] Links para as outras categorias no fundo
+- [x] Responsiva (mobile / tablet / desktop)
 
 ### Página Product Detail
 
@@ -117,9 +117,9 @@
 - [ ] QuantitySelector + botão "Add to Cart"
 - [ ] Secção Features
 - [ ] Secção "In the Box"
-- [ ] Galeria de três imagens
-- [ ] Secção "You May Also Like"
-- [ ] Responsiva (mobile / tablet / desktop)
+- [x] Galeria de três imagens
+- [x] Secção "You May Also Like"
+- [x] Responsiva (mobile / tablet / desktop)
 
 ---
 
