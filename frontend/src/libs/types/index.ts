@@ -72,6 +72,15 @@ export interface ProductCardContent {
   isReversed?: boolean;
 }
 
+export interface ProductDetailedCardContent {
+  title: string;
+  description: string;
+  price: number;
+  action: string;
+  image: ResponsiveImageType;
+  isNew: boolean;
+}
+
 export interface SuggestionCardContent {
   image: ResponsiveImageType;
   title: string;

@@ -9,6 +9,7 @@ interface QuantitySelectorProps {
   min?: number;
   max?: number;
   name?: string;
+  className?: string;
 }
 
 const QuantitySelector = ({
@@ -17,6 +18,7 @@ const QuantitySelector = ({
   min = 1,
   max,
   name,
+  className,
   onChange,
 }: QuantitySelectorProps) => {
   const inputId = useId();
@@ -76,6 +78,7 @@ const QuantitySelector = ({
         'has-disabled:opacity-50',
         'has-disabled:border-gray-400',
         'has-disabled:text-black-o-50',
+        className,
       )}
     >
       <button
@@ -105,6 +108,8 @@ const QuantitySelector = ({
         onChange={handleChange}
         value={value}
         className={cn(
+          'd-block',
+          'w-full',
           'p-4',
           'text-center',
           '[-moz-appearance:textfield]',

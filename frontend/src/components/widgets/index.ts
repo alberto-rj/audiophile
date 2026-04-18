@@ -15,5 +15,5 @@ export { default as FeatureProducts } from './feature-products/feature-products'
 
 export { default as ProductCard } from './product-card/product-card';
 export { default as SuggestionSection } from './suggestion-section/suggestion-section';
-
+export { default as ProductDetailedCard } from './product-detailed-card/product-detailed-card';
 export { default as Gallery } from './gallery/gallery';

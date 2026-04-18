@@ -37,6 +37,7 @@ import type {
   CategoryContent,
   FeatureHighLightedContent,
   GalleryContent,
+  ProductDetailedCardContent,
 } from '@/libs/types';
 
 export const featureHighLightedContent: FeatureHighLightedContent = {
@@ -91,7 +92,7 @@ export const featurePortraitContent: FeaturePortraitContent = {
 };
 /* Feature Portrait (end) */
 
-/* Feature Portrait (start) */
+/* Product Card (start) */
 import productCardContentMobile from '@/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg';
 import productCardContentTablet from '@/assets/product-xx99-mark-two-headphones/tablet/image-product.jpg';
 import productCardContentDesktop from '@/assets/product-xx99-mark-two-headphones/desktop/image-product.jpg';
@@ -111,7 +112,23 @@ export const productCardContent: ProductCardContent = {
     desktop: productCardContentDesktop,
   },
 };
-/* Feature Portrait (end) */
+/* Product Card (end) */
+
+/* Product Detailed Card (start) */
+export const productDetailedCardContent: ProductDetailedCardContent = {
+  title: 'XX99 Mark II Headphones',
+  description:
+    'The new XX99 Mark II headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.',
+  price: 2.99,
+  action: 'Add to cart',
+  isNew: true,
+  image: {
+    mobile: productCardContentMobile,
+    tablet: productCardContentTablet,
+    desktop: productCardContentDesktop,
+  },
+};
+/* Product Detailed Card (end) */
 
 /* Gallery (start) */
 import galleryItem1Mobile from '@/assets/product-xx59-headphones/mobile/image-gallery-1.jpg';
