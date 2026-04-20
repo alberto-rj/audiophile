@@ -75,9 +75,9 @@
 
 ### Setup
 
-- [ ] Instalar React Router (`npm install react-router-dom`)
-- [ ] Definir as quatro rotas (`/`, `/category/:name`, `/product/:slug`, `/checkout`)
-- [ ] Importar e tipar o `data.json`
+- [x] Instalar React Router (`npm install react-router-dom`)
+- [x] Definir as quatro rotas (`/`, `/category/:name`, `/product/:slug`, `/checkout`)
+- [x] Importar e tipar o `data.json`
 
 ### Navbar
 
