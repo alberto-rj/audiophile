@@ -1,6 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { CategoryPage, Home, NotFoundPage, ProductPage } from '@/pages';
+import {
+  CategoryPage,
+  CheckoutPage,
+  HomePage,
+  NotFoundPage,
+  ProductPage,
+} from '@/pages';
+import { MainLayout } from './layouts';
 
 const App = () => {
   return (
@@ -8,16 +15,26 @@ const App = () => {
       <Routes>
         <Route
           path='/'
-          element={<Home />}
-        />
-        <Route
-          path='/categories/:slug'
-          element={<CategoryPage />}
-        />
-        <Route
-          path='/products/:slug'
-          element={<ProductPage />}
-        />
+          element={<MainLayout />}
+        >
+          <Route
+            index
+            element={<HomePage />}
+          />
+          <Route
+            path='/categories/:slug'
+            element={<CategoryPage />}
+          />
+          <Route
+            path='/products/:slug'
+            element={<ProductPage />}
+          />
+          <Route
+            path='/checkout'
+            element={<CheckoutPage />}
+          />
+        </Route>
+
         <Route
           path='*'
           element={<NotFoundPage />}
