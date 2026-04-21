@@ -8,7 +8,7 @@ import ProductDetailedCard from './product-detailed-card';
 type StoryProps = React.ComponentProps<typeof ProductDetailedCard>;
 
 const meta = {
-  title: 'pages/Product Detail/ProductDetailedCard',
+  title: 'pages/ProductPage/ProductDetailedCard',
   component: ProductDetailedCard,
   parameters: {
     layout: 'fullscreen',
