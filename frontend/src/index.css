@@ -109,16 +109,21 @@
   /* tailwind (start) */
   --tw-border-style: solid;
   /* tailwind (end) */
+
+  /* custom properties (start) */
+  --form-group-gap-y: 2rem;
+  --form-group-gap-y-md: 2rem;
+  --form-group-gap-y-lg: 3rem;
+  /* custom properties (end) */
 }
 
 @layer base {
   body {
-    font: var(--font-base);
+    @apply text-base;
   }
 
   picture {
-    display: block;
-    width: 100%;
+    @apply block w-full;
   }
 }
 
@@ -148,41 +153,48 @@
   }
 }
 
-.grid-item-1 {
-  grid-area: item-1;
-}
-
-.grid-item-2 {
-  grid-area: item-2;
-}
-
-.grid-item-3 {
-  grid-area: item-3;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'item-1'
-    'item-2'
-    'item-2';
-  gap: 1rem;
-}
-
-/* md */
-@media (min-width: 48em) {
-  .grid-container {
-    grid-template-areas:
-      'item-1 item-3 item-3'
-      'item-2 item-3 item-3';
+@layer components {
+  .form {
   }
-}
 
-/* lg */
-@media (min-width: 64em) {
-  .grid-container {
-    grid-template-areas:
-      'item-1 item-3 item-3'
-      'item-2 item-3 item-3';
+  .form__flow {
+    @apply flex flex-col gap-[var(--form-group-gap-y)]  lg:gap-[var(--form-group-gap-y-lg)];
+  }
+
+  .form__group {
+    @apply pbs-4 first:mbs-[var(--form-group-gap-y)] first:lg:mbs-[var(--form-group-gap-y-lg)];
+  }
+
+  .form__group-name {
+    @apply block uppercase text-xs text-primary-400;
+  }
+
+  .form__field {
+    @apply w-full flex flex-col gap-2;
+  }
+
+  .form__grid {
+    @apply w-full grid gap-x-4 gap-y-4 md:grid-cols-2 lg:gap-y-6;
+  }
+
+  .form__grid-item {
+  }
+
+  .form__grid--full {
+  }
+
+  .form__subgroup {
+    @apply pbs-4;
+  }
+
+  .form__subgroup .form__grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .form__subgroup .form__grid-item {
+  }
+
+  .form__subgroup-name {
+    @apply text-xs;
   }
 }

@@ -5,6 +5,8 @@ import { cn } from '@/libs/cn';
 
 const inputVariants = cva(
   cn(
+    'inline-block',
+    'w-full',
     'px-6',
     'py-4.5',
     'bg-white',
@@ -23,7 +25,7 @@ const inputVariants = cva(
     'disabled:pointer-events-none',
     'disabled:select-none',
 
-    'focus:outline-1',
+    'focus:outline',
   ),
   {
     variants: {

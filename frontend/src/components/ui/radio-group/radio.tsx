@@ -7,6 +7,7 @@ interface RadioProps {
   checked?: boolean;
   onChange: (value: string) => void;
   disabled?: boolean;
+  className?: string;
 }
 
 const Radio = ({
@@ -16,6 +17,7 @@ const Radio = ({
   checked = false,
   disabled,
   onChange,
+  className,
 }: RadioProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.currentTarget.value);
@@ -54,6 +56,7 @@ const Radio = ({
         'has-disabled:opacity-50',
         'has-disabled:border-gray-400',
         'has-disabled:text-black-o-50',
+        className,
       )}
     >
       <input
