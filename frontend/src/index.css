@@ -118,6 +118,10 @@
 }
 
 @layer base {
+  html[data-current-page='checkout'] {
+    @apply bg-gray-300;
+  }
+
   body {
     @apply text-base;
   }
@@ -155,47 +159,44 @@
 
 @layer components {
   /* form (start) */
-  .form {
-  }
-
-  .form__flow {
+  .form-flow {
     @apply flex flex-col gap-[var(--form-group-gap-y)]  lg:gap-[var(--form-group-gap-y-lg)];
   }
 
-  .form__group {
+  .form-group {
     @apply pbs-4 first:mbs-[var(--form-group-gap-y)] first:lg:mbs-[var(--form-group-gap-y-lg)];
   }
 
-  .form__group-name {
+  .form-group-name {
     @apply block uppercase text-xs text-primary-400;
   }
 
-  .form__field {
+  .form-field {
     @apply w-full flex flex-col gap-2;
   }
 
-  .form__grid {
+  .form-grid {
     @apply w-full grid gap-x-4 gap-y-4 md:grid-cols-2 lg:gap-y-6;
   }
 
-  .form__grid-item {
+  .form-grid-item {
   }
 
-  .form__grid--full {
+  .form-grid--full {
   }
 
-  .form__subgroup {
+  .form-subgroup {
     @apply pbs-4;
   }
 
-  .form__subgroup .form__grid {
+  .form-subgroup .form-grid {
     @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
   }
 
-  .form__subgroup .form__grid-item {
+  .form-subgroup .form-grid-item {
   }
 
-  .form__subgroup-name {
+  .form-subgroup-name {
     @apply text-xs;
   }
   /* form (end) */
