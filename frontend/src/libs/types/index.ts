@@ -102,3 +102,5 @@ export interface InTheBoxSectionContent {
   title: string;
   items: ItemInclude[];
 }
+
+export type PaymentMethod = 'e-money' | 'cash-on-delivery';
