@@ -129,10 +129,10 @@
 
 ### Redux Store
 
-- [ ] Instalar Redux Toolkit e React Redux
-- [ ] Criar a `store.ts`
-- [ ] Criar o `cartSlice` com as actions: `addItem`, `removeItem`, `updateQuantity`, `clearCart`
-- [ ] Criar selectors: `selectSubtotal`, `selectShipping`, `selectVAT`, `selectGrandTotal`
+- [x] Instalar Redux Toolkit e React Redux
+- [x] Criar a `store.ts`
+- [x] Criar o `cartSlice` com as actions: `addItem`, `removeItem`, `updateQuantity`, `clearCart`
+- [x] Criar selectors: `selectSubtotal`, `selectShipping`, `selectVAT`, `selectGrandTotal`
 - [ ] Envolver a app com o `<Provider>`
 
 ### Cart
@@ -154,13 +154,13 @@
 
 - [ ] Instalar `react-hook-form`, `zod` e `@hookform/resolvers`
 - [ ] Schema Zod com todos os campos validados
-- [ ] Campos de billing details (nome, email, telefone)
-- [ ] Campos de shipping info (endereço, CEP, cidade, país)
-- [ ] Opção de pagamento: e-money ou cash
-- [ ] Campos de e-money (número + PIN) visíveis apenas quando selecionado
+- [x] Campos de billing details (nome, email, telefone)
+- [x] Campos de shipping info (endereço, CEP, cidade, país)
+- [x] Opção de pagamento: e-money ou cash
+- [x] Campos de e-money (número + PIN) visíveis apenas quando selecionado
 - [ ] Mensagens de erro por campo
-- [ ] Resumo do pedido visível na sidebar
-- [ ] Totais corretos no resumo (subtotal, envio, IVA, grand total)
+- [x] Resumo do pedido visível na sidebar
+- [x] Totais corretos no resumo (subtotal, envio, IVA, grand total)
 
 ### Modal de confirmação
 

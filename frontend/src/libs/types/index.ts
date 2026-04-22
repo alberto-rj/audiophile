@@ -104,3 +104,13 @@ export interface InTheBoxSectionContent {
 }
 
 export type PaymentMethod = 'e-money' | 'cash-on-delivery';
+
+/* Cart */
+export interface CartItem {
+  id: number;
+  slug: string;
+  name: string;
+  price: number;
+  image: ResponsiveImageType;
+  quantity: number;
+}
