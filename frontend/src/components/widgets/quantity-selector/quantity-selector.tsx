@@ -2,6 +2,32 @@ import { useId } from 'react';
 
 import { cn } from '@/libs/cn';
 
+type QuantityButtonProps = React.ComponentProps<'button'>;
+
+const QuantityButton = ({ className, ...props }: QuantityButtonProps) => {
+  return (
+    <button
+      {...props}
+      className={cn(
+        'px-4',
+        'py-2',
+        'cursor-pointer',
+        'text-black-o-50',
+
+        'hover:text-primary-400',
+
+        'focus:text-primary-400',
+        'focus:outline',
+        'focus:outline-primary-400',
+        'focus-visible:text-primary-400',
+        'focus-visible:outline',
+        'focus-visible:outline-primary-400',
+        className,
+      )}
+    />
+  );
+};
+
 interface QuantitySelectorProps {
   value: number;
   onChange: (value: number) => void;
@@ -46,21 +72,6 @@ const QuantitySelector = ({
     onChange(clamped);
   };
 
-  const buttonStyles = cn(
-    'p-4',
-    'cursor-pointer',
-    'text-black-o-50',
-
-    'hover:text-primary-400',
-
-    'focus:text-primary-400',
-    'focus:outline',
-    'focus:outline-primary-400',
-    'focus-visible:text-primary-400',
-    'focus-visible:outline',
-    'focus-visible:outline-primary-400',
-  );
-
   return (
     <div
       className={cn(
@@ -81,15 +92,14 @@ const QuantitySelector = ({
         className,
       )}
     >
-      <button
+      <QuantityButton
         disabled={disabled}
         type='button'
         onClick={handleDecrement}
-        className={buttonStyles}
       >
         <span className={cn('sr-only')}>Decrease quantity</span>
         <span aria-hidden={true}>-</span>
-      </button>
+      </QuantityButton>
 
       <label
         htmlFor={inputId}
@@ -110,7 +120,7 @@ const QuantitySelector = ({
         className={cn(
           'd-block',
           'w-full',
-          'p-4',
+          'p-2',
           'text-center',
           '[-moz-appearance:textfield]',
           '[appearance:textfield]',
@@ -127,15 +137,14 @@ const QuantitySelector = ({
           'focus-visible:caret-primary-400',
         )}
       />
-      <button
+      <QuantityButton
         disabled={disabled}
         type='button'
         onClick={handleIncrement}
-        className={buttonStyles}
       >
         <span className={cn('sr-only')}>Increase quantity</span>
         <span aria-hidden={true}>+</span>
-      </button>
+      </QuantityButton>
     </div>
   );
 };
