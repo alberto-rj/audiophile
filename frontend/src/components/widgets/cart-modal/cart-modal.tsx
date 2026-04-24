@@ -25,16 +25,12 @@ const CartModal = ({
   items,
 }: CartModalProps) => {
   const headingId = useId();
+
   const totalItems = items.length;
-  const total = 5396;
-
-  const handleClearCart = () => {
-    onClearCart();
-  };
-
-  const handleQuantityChange = (id: number, newValue: number) => {
-    onQuantityChange({ id, value: newValue });
-  };
+  const totalPrice = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
 
   return (
     <Modal
@@ -48,9 +44,9 @@ const CartModal = ({
           aria-labelledby={headingId}
           className={cn(
             'inline-[96vw]',
-            'max-inline-[600px]',
-            'top-1/2',
-            'left-1/2',
+            'max-inline-120',
+            'inset-bs-1/2',
+            'inset-s-1/2',
             '-translate-1/2',
             'px-5',
             'py-5',
@@ -59,111 +55,192 @@ const CartModal = ({
             'xs:py-8',
           )}
         >
-          <div className={cn('flex', 'justify-between', 'items-center')}>
-            <Modal.Title asChild>
-              <h3
-                id={headingId}
-                className={cn('uppercase', 'text-md')}
-              >
-                Cart ({totalItems})
-              </h3>
-            </Modal.Title>
-
-            <Button
-              variant='link'
-              onClick={handleClearCart}
-            >
-              Remove all
-            </Button>
-          </div>
-
-          <ul
-            role='list'
-            className={cn(
-              'inline-full',
-              'max-block-90',
-              'overflow-y-auto',
-              'my-8',
-              'flex',
-              'flex-col',
-              'gap-6',
-            )}
-          >
-            {items.map(({ id, image, name, price, quantity }) => (
-              <li
-                key={id}
+          {totalItems === 0 ? (
+            <>
+              <Modal.Title asChild>
+                <h3
+                  id={headingId}
+                  className={cn('uppercase', 'text-md')}
+                >
+                  Cart
+                </h3>
+              </Modal.Title>
+              <Modal.Description asChild>
+                <p
+                  className={cn(
+                    'text-base',
+                    'text-center',
+                    'my-8',
+                    'text-black/50',
+                  )}
+                >
+                  Your cart is empty.
+                </p>
+              </Modal.Description>
+            </>
+          ) : (
+            <>
+              <div
                 className={cn(
                   'flex',
                   'justify-between',
                   'items-center',
-                  'gap-6',
+                  'gap-8',
                 )}
               >
-                <div className={cn('flex', 'items-center', 'gap-4')}>
-                  <ResponsiveImage
-                    image={image}
-                    alt=''
-                    width={64}
-                    height={64}
-                    className={cn('aspect-64/64', 'rounded-lg')}
-                  />
+                <Modal.Title asChild>
+                  <h3
+                    id={headingId}
+                    className={cn(
+                      'max-inline-50',
+                      'truncate',
+                      'uppercase',
+                      'text-md',
+                    )}
+                  >
+                    Cart ({totalItems})
+                  </h3>
+                </Modal.Title>
 
-                  <div className={cn('flex', 'flex-col')}>
-                    <span
+                <Button
+                  variant='link'
+                  onClick={() => onClearCart()}
+                >
+                  Remove all
+                </Button>
+              </div>
+              <ul
+                role='list'
+                className={cn(
+                  'inline-full',
+                  'max-block-70',
+                  'overflow-auto',
+                  'flex',
+                  'flex-col',
+                  'gap-6',
+                  'my-8',
+                )}
+              >
+                {items.map(({ id, image, name, price, quantity }) => (
+                  <li
+                    key={id}
+                    className={cn(
+                      'flex',
+                      'justify-between',
+                      'items-center',
+                      'gap-6',
+                    )}
+                  >
+                    <div
                       className={cn(
-                        'uppercase',
-                        'text-base',
-
-                        'text-black',
+                        'flex',
+                        'justify-start',
+                        'items-center',
+                        'gap-4',
                       )}
                     >
-                      {name}
-                    </span>
-                    <span
-                      className={cn(
-                        'text-xs',
+                      <ResponsiveImage
+                        className={cn('aspect-64/64', 'rounded-lg')}
+                        image={image}
+                        alt={name}
+                        width={64}
+                        height={64}
+                      />
 
-                        'text-black/50',
-                      )}
-                    >
-                      {toMoney(price)}
-                    </span>
-                  </div>
-                </div>
+                      <div
+                        className={cn(
+                          'max-inline-10',
+                          'flex',
+                          'flex-col',
 
-                <QuantitySelector
-                  value={quantity}
-                  onChange={(value) => handleQuantityChange(id, value)}
-                  className={cn('max-inline-30', 'max-block-[96px]')}
-                />
-              </li>
-            ))}
-          </ul>
+                          'xs:max-inline-15',
 
-          <p
-            className={cn(
-              'inline-full',
-              'flex',
-              'justify-between',
-              'items-center',
-              'mbe-6',
-            )}
-          >
-            <strong className={cn('uppercase', 'text-base', 'text-black/50')}>
-              Total
-            </strong>
-            <span className={cn('text-md', 'text-black')}>
-              {toMoney(total)}
-            </span>
-          </p>
+                          'sm:max-inline-30',
 
-          <Button
-            variant='primary'
-            className={cn('inline-full')}
-            asChild
-          >
-            <Link to='/checkout'>Checkout</Link>
-          </Button>
+                          'md:max-inline-40',
+                        )}
+                      >
+                        <span
+                          className={cn(
+                            'uppercase',
+                            'text-base',
+                            'truncate',
+
+                            'text-black',
+                          )}
+                        >
+                          {name}
+                        </span>
+                        <span
+                          className={cn(
+                            'text-xs',
+                            'truncate',
+
+                            'text-black/50',
+                          )}
+                        >
+                          {toMoney(price)}
+                        </span>
+                      </div>
+                    </div>
+
+                    <QuantitySelector
+                      value={quantity}
+                      label={`Quantity for ${name}`}
+                      onChange={(value) => onQuantityChange({ id, value })}
+                      className={cn('max-inline-30')}
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <dl
+                className={cn(
+                  'inline-full',
+                  'flex',
+                  'justify-between',
+                  'items-center',
+                  'gap-8',
+                  'mbe-6',
+                )}
+              >
+                <dt
+                  className={cn(
+                    'uppercase',
+                    'text-base',
+
+                    'text-black/50',
+                  )}
+                >
+                  Total
+                </dt>
+                <dd
+                  className={cn(
+                    'max-inline-50',
+                    'truncate',
+                    'text-md',
+
+                    'text-black',
+                  )}
+                >
+                  {toMoney(totalPrice)}
+                </dd>
+              </dl>
+
+              <Button
+                variant='primary'
+                asChild
+              >
+                <Link
+                  to='/checkout'
+                  className={cn('inline-full')}
+                  onClick={() => onOpenChange?.(false)}
+                >
+                  Checkout
+                </Link>
+              </Button>
+            </>
+          )}
         </Modal.Content>
       </Modal.Portal>
     </Modal>

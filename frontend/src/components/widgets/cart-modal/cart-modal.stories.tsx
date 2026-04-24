@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { fn } from 'storybook/test';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { CartModal } from '@/components/widgets';
 import { Button } from '@/components/ui';
-import { fn } from 'storybook/test';
 import { cartItems } from '@/libs/constants';
+import { cn } from '@/libs/cn';
 
 type StoryProps = React.ComponentProps<typeof CartModal>;
 
@@ -18,6 +19,32 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
+  render: ({ open, ...cartModalProps }) => {
+    const [openModal, setOpenModal] = useState<boolean>(open === true);
+
+    const handleOpenChange = (open: boolean) => {
+      setOpenModal(open);
+    };
+
+    return (
+      <div
+        className={cn(
+          'min-block-screen',
+          'flex',
+          'justify-center',
+          'items-center',
+        )}
+      >
+        <Button onClick={() => setOpenModal(true)}>Show cart</Button>
+
+        <CartModal
+          {...cartModalProps}
+          open={openModal}
+          onOpenChange={handleOpenChange}
+        />
+      </div>
+    );
+  },
 } satisfies Meta<StoryProps>;
 
 export default meta;
@@ -26,50 +53,24 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    items: cartItems.slice(0, 3),
-  },
-  render: (cartModalProps) => {
-    const [open, setOpen] = useState(false);
-
-    const handleOpenChange = (open: boolean) => {
-      setOpen(open);
-    };
-
-    return (
-      <div>
-        <Button onClick={() => setOpen(true)}>Open cart</Button>
-
-        <CartModal
-          {...cartModalProps}
-          open={open}
-          onOpenChange={handleOpenChange}
-        />
-      </div>
-    );
+    items: [...cartItems].splice(0, 3),
   },
 };
 
-export const Multiple: Story = {
+export const WithMultipleItems: Story = {
   args: {
-    items: cartItems,
+    items: [...cartItems],
   },
-  render: (cartModalProps) => {
-    const [open, setOpen] = useState(false);
+};
 
-    const handleOpenChange = (open: boolean) => {
-      setOpen(open);
-    };
+export const WithSingleItem: Story = {
+  args: {
+    items: [...cartItems].splice(0, 1),
+  },
+};
 
-    return (
-      <div>
-        <Button onClick={() => setOpen(true)}>Open cart</Button>
-
-        <CartModal
-          {...cartModalProps}
-          open={open}
-          onOpenChange={handleOpenChange}
-        />
-      </div>
-    );
+export const WithNoItem: Story = {
+  args: {
+    items: [],
   },
 };

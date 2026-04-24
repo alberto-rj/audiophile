@@ -2,7 +2,34 @@ import { useId } from 'react';
 
 import { cn } from '@/libs/cn';
 
+type QuantityButtonProps = React.ComponentProps<'button'>;
+
+const QuantityButton = ({ className, ...props }: QuantityButtonProps) => {
+  return (
+    <button
+      {...props}
+      className={cn(
+        'px-4',
+        'py-2',
+        'cursor-pointer',
+        'text-black/50',
+
+        'hover:text-primary-400',
+
+        'focus:text-primary-400',
+        'focus:outline',
+        'focus:outline-primary-400',
+        'focus-visible:text-primary-400',
+        'focus-visible:outline',
+        'focus-visible:outline-primary-400',
+        className,
+      )}
+    />
+  );
+};
+
 interface QuantitySelectorProps {
+  label?: string;
   value: number;
   onChange: (value: number) => void;
   disabled?: boolean;
@@ -13,6 +40,7 @@ interface QuantitySelectorProps {
 }
 
 const QuantitySelector = ({
+  label = 'Quantity',
   value,
   disabled,
   min = 1,
@@ -46,21 +74,6 @@ const QuantitySelector = ({
     onChange(clamped);
   };
 
-  const buttonStyles = cn(
-    'p-4',
-    'cursor-pointer',
-    'text-black-o-50',
-
-    'hover:text-primary-400',
-
-    'focus:text-primary-400',
-    'focus:outline',
-    'focus:outline-primary-400',
-    'focus-visible:text-primary-400',
-    'focus-visible:outline',
-    'focus-visible:outline-primary-400',
-  );
-
   return (
     <div
       className={cn(
@@ -77,29 +90,28 @@ const QuantitySelector = ({
         'has-disabled:pointer-events-none',
         'has-disabled:opacity-50',
         'has-disabled:border-gray-400',
-        'has-disabled:text-black-o-50',
+        'has-disabled:text-black/50',
         className,
       )}
     >
-      <button
+      <QuantityButton
         disabled={disabled}
         type='button'
         onClick={handleDecrement}
-        className={buttonStyles}
       >
-        <span className={cn('sr-only')}>Decrease quantity</span>
+        <span className={cn('sr-only')}>{`Decrease ${label}`}</span>
         <span aria-hidden={true}>-</span>
-      </button>
+      </QuantityButton>
 
       <label
         htmlFor={inputId}
         className={cn('sr-only')}
       >
-        Quantity
+        {label}
       </label>
       <input
-        disabled={disabled}
         id={inputId}
+        disabled={disabled}
         type='number'
         inputMode='numeric'
         min={min}
@@ -110,7 +122,7 @@ const QuantitySelector = ({
         className={cn(
           'd-block',
           'w-full',
-          'p-4',
+          'p-2',
           'text-center',
           '[-moz-appearance:textfield]',
           '[appearance:textfield]',
@@ -127,15 +139,14 @@ const QuantitySelector = ({
           'focus-visible:caret-primary-400',
         )}
       />
-      <button
+      <QuantityButton
         disabled={disabled}
         type='button'
         onClick={handleIncrement}
-        className={buttonStyles}
       >
-        <span className={cn('sr-only')}>Increase quantity</span>
+        <span className={cn('sr-only')}>{`Increase ${label}`}</span>
         <span aria-hidden={true}>+</span>
-      </button>
+      </QuantityButton>
     </div>
   );
 };

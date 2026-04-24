@@ -25,10 +25,10 @@ const ResponsiveImage = ({
         srcSet={image.tablet}
       />
       <img
+        {...props}
         src={image.mobile}
         alt={alt}
         className={className}
-        {...props}
       />
     </picture>
   );

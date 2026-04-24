@@ -274,8 +274,8 @@ export const cartItems: CartItem[] = [
       tablet: 'https://tempimg.cc/64x64',
       desktop: 'https://tempimg.cc/64x64',
     },
-    name: 'xx99 Mark II',
-    price: 2999,
+    name: 'An item with a very long name and price',
+    price: 299999999999999,
     quantity: 2,
   },
   {
@@ -292,7 +292,7 @@ export const cartItems: CartItem[] = [
   },
   {
     id: 3,
-    slug: 'x99',
+    slug: 'yx1 Mark II',
     image: {
       mobile: 'https://tempimg.cc/64x64',
       tablet: 'https://tempimg.cc/64x64',
