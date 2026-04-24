@@ -12,7 +12,7 @@ const QuantityButton = ({ className, ...props }: QuantityButtonProps) => {
         'px-4',
         'py-2',
         'cursor-pointer',
-        'text-black-o-50',
+        'text-black/50',
 
         'hover:text-primary-400',
 
@@ -90,7 +90,7 @@ const QuantitySelector = ({
         'has-disabled:pointer-events-none',
         'has-disabled:opacity-50',
         'has-disabled:border-gray-400',
-        'has-disabled:text-black-o-50',
+        'has-disabled:text-black/50',
         className,
       )}
     >
