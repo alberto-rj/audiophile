@@ -1,13 +1,12 @@
 import { useId, type ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Modal } from '@/components/ui';
-import { cn } from '@/libs/cn';
-import type { CartItem } from '@/libs/types';
-
 import { OrderConfirmation } from '@/assets/icons';
+import { Button, Modal } from '@/components/ui';
 import { ResponsiveImage } from '@/components/widgets';
+import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
+import type { CartItem } from '@/libs/types';
 
 interface CartItemListingProps extends ComponentProps<'ul'> {
   items: CartItem[];
@@ -155,19 +154,19 @@ const CartItemCard = ({ items }: CartItemCardProps) => {
   );
 };
 
-interface CheckoutModalProps {
+interface OrderConfirmationModalProps {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   items: CartItem[];
 }
 
-const CheckoutModal = ({
+const OrderConfirmationModal = ({
   open,
   defaultOpen,
   items,
   onOpenChange,
-}: CheckoutModalProps) => {
+}: OrderConfirmationModalProps) => {
   const headingId = useId();
 
   return (
@@ -258,4 +257,4 @@ const CheckoutModal = ({
   );
 };
 
-export default CheckoutModal;
+export default OrderConfirmationModal;

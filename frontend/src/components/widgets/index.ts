@@ -18,4 +18,4 @@ export { default as SuggestionSection } from './suggestion-section/suggestion-se
 
 export { default as CartModal } from './cart-modal/cart-modal';
 
-export { default as CheckoutModal } from './checkout-modal/checkout-modal';
+export { default as OrderConfirmationModal } from './order-confirmation-modal/order-confirmation-modal';

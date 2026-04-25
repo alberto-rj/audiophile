@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { fn } from 'storybook/test';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { CheckoutModal } from '@/components/widgets';
+import { OrderConfirmationModal } from '@/components/widgets';
 import { Button } from '@/components/ui';
 import { cartItems } from '@/libs/constants';
 import { cn } from '@/libs/cn';
 
-type StoryProps = React.ComponentProps<typeof CheckoutModal>;
+type StoryProps = React.ComponentProps<typeof OrderConfirmationModal>;
 
 const meta = {
-  title: 'widgets/CheckoutModal',
-  component: CheckoutModal,
+  title: 'widgets/OrderConfirmationModal',
+  component: OrderConfirmationModal,
   args: {
     open: true,
     onOpenChange: fn(),
@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: ({ open, ...checkoutModalProps }) => {
+  render: ({ open, ...orderConfirmationModalProps }) => {
     const [openModal, setOpenModal] = useState<boolean>(open === true);
 
     const handleOpenChange = (open: boolean) => {
@@ -37,8 +37,8 @@ const meta = {
       >
         <Button onClick={() => setOpenModal(true)}>Show modal</Button>
 
-        <CheckoutModal
-          {...checkoutModalProps}
+        <OrderConfirmationModal
+          {...orderConfirmationModalProps}
           open={openModal}
           onOpenChange={handleOpenChange}
         />
