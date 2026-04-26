@@ -23,36 +23,6 @@ export const socialLinks = [
 ];
 /* links (end) */
 
-/* Categories (start) */
-import headphones from '@/assets/shared/desktop/image-category-thumbnail-headphones.png';
-import earphones from '@/assets/shared/desktop/image-category-thumbnail-earphones.png';
-import speakers from '@/assets/shared/desktop/image-category-thumbnail-speakers.png';
-
-export const headphonesContent: CategoryContent = {
-  category: 'Headphones',
-  image: headphones,
-  slug: '/categories/headphones',
-};
-
-export const speakersContent: CategoryContent = {
-  category: 'Speakers',
-  image: speakers,
-  slug: '/categories/speakers',
-};
-
-export const earphonesContent: CategoryContent = {
-  category: 'Earphones',
-  image: earphones,
-  slug: '/categories/earphones',
-};
-
-export const categoriesContent: CategoryContent[] = [
-  headphonesContent,
-  speakersContent,
-  earphonesContent,
-];
-/* Categories (end) */
-
 /* Feature Highlighted (start) */
 import featureHighLightedContentMobile from '@/assets/home/mobile/image-speaker-zx9.png';
 import featureHighLightedContentTablet from '@/assets/home/tablet/image-speaker-zx9.png';
@@ -131,7 +101,6 @@ export const productCardContent: ProductCardContent = {
   description:
     'The new XX99 Mark II headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.',
   slug: '#',
-  action: 'See product',
   isNew: true,
   image: {
     mobile: productCardContentMobile,

@@ -1,12 +1,18 @@
+import { useGetCategoriesQuery } from '@/app/services/categories';
 import { CategoryCard } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import type { CategoryContent } from '@/libs/types';
 
-interface CategoryCardProps {
-  items: CategoryContent[];
-}
+const CategoryListing = () => {
+  const { isLoading, isError, data: categories } = useGetCategoriesQuery();
 
-const CategoryListing = ({ items }: CategoryCardProps) => {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error</p>;
+  }
+
   return (
     <ul
       role='list'
@@ -25,9 +31,9 @@ const CategoryListing = ({ items }: CategoryCardProps) => {
         'lg:gap-x-7.5',
       )}
     >
-      {items.map((content) => (
-        <li key={content.slug}>
-          <CategoryCard content={content} />
+      {categories?.map((category) => (
+        <li key={category.slug}>
+          <CategoryCard category={category} />
         </li>
       ))}
     </ul>

@@ -1,16 +1,17 @@
 import { useId } from 'react';
+import { Link } from 'react-router-dom';
 
-import type { SuggestionCardContent } from '@/libs/types';
+import type { BasicProduct } from '@/libs/types';
 import { cn } from '@/libs/cn';
 import { ResponsiveImage } from '@/components/widgets';
 import { Button } from '@/components/ui';
 
 interface SuggestionCardProps {
-  content: SuggestionCardContent;
+  product: BasicProduct;
 }
 
 const SuggestionCard = ({
-  content: { image, title, action, slug },
+  product: { image, name, slug },
 }: SuggestionCardProps) => {
   const headingId = useId();
 
@@ -53,15 +54,16 @@ const SuggestionCard = ({
             'text-black',
           )}
         >
-          {title}
+          {name}
         </h3>
         <Button
           variant={'primary'}
           asChild
         >
-          <a href={slug}>
-            <span aria-hidden={true}>{action}</span>
-          </a>
+          <Link to={`/products/${slug}`}>
+            <span className={cn('sr-only')}>See product: {name}</span>
+            <span aria-hidden={true}>See product</span>
+          </Link>
         </Button>
       </div>
     </article>

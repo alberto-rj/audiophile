@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { CategoryCard } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import { headphonesContent } from '@/libs/constants';
+import { categories } from '@/libs/mocks/categories';
 
 type StoryProps = React.ComponentProps<typeof CategoryCard>;
 
@@ -10,7 +10,7 @@ const meta = {
   title: 'widgets/CategoryCard',
   component: CategoryCard,
   args: {
-    content: headphonesContent,
+    category: categories.find((c) => c.id === 1),
   },
   parameters: {
     layout: 'centered',

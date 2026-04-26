@@ -1,18 +1,20 @@
+import { Link } from 'react-router-dom';
+
 import { ArrowRight } from '@/assets/icons';
 import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
-import type { CategoryContent } from '@/libs/types';
+import type { Category } from '@/libs/types';
 
 interface CategoryCardProps {
-  content: CategoryContent;
+  category: Category;
 }
 
 const CategoryCard = ({
-  content: { category, image, slug },
+  category: { slug, image, name },
 }: CategoryCardProps) => {
   return (
-    <a
-      href={slug}
+    <Link
+      to={`/categories/${slug}`}
       className={cn(
         'relative',
         'inline-grid',
@@ -26,7 +28,7 @@ const CategoryCard = ({
         'bg-gray-400',
       )}
     >
-      <span className={cn('sr-only')}>Shop {category}</span>
+      <span className={cn('sr-only')}>Shop {name}</span>
       <img
         alt=''
         src={image}
@@ -47,7 +49,7 @@ const CategoryCard = ({
         aria-hidden={true}
         className={cn('grid', 'gap-4')}
       >
-        <span className={cn('text-md', 'uppercase')}>{category}</span>
+        <span className={cn('text-md', 'uppercase')}>{name}</span>
         <Button
           variant='link'
           asChild
@@ -57,7 +59,7 @@ const CategoryCard = ({
           </span>
         </Button>
       </div>
-    </a>
+    </Link>
   );
 };
 

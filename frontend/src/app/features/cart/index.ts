@@ -69,6 +69,10 @@ export const { addItem, removeItem, updateQuantity, clearCart } =
 
 export const cartReducer = cartSlice.reducer;
 
+export const selectItemsCount = (state: RootState) => {
+  return state.cart.items.length;
+};
+
 export const selectSubtotal = (state: RootState) => {
   return state.cart.items.reduce(
     (sum, item) => sum + item.price * item.quantity,

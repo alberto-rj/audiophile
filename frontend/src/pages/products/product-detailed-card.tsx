@@ -1,26 +1,46 @@
-import { useId, useState } from 'react';
+import { useId } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import type { ProductDetailedCardContent } from '@/libs/types';
+import type { Product } from '@/libs/types';
 import { cn } from '@/libs/cn';
-import { formatPrice } from '@/libs/helpers';
+import { toMoney } from '@/libs/helpers';
 import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
 import { Button } from '@/components/ui';
+import type { AppDispatch, RootState } from '@/app/store';
+import { addItem, updateQuantity } from '@/app/features/cart';
 
 interface ProductDetailedCardProps {
-  content: ProductDetailedCardContent;
+  product: Product;
   className?: string;
 }
 
 const ProductDetailedCard = ({
-  content: { image, title, description, price, action, isNew },
+  product: { id, slug, image, name, description, price, isNew },
   className,
 }: ProductDetailedCardProps) => {
-  const [quantity, setQuantity] = useState<number>(1);
+  const quantity = useSelector<RootState, number>((state) => {
+    const foundItem = state.cart.items.find((item) => item.id === id);
+
+    if (!foundItem) {
+      return 1;
+    }
+
+    return foundItem.quantity;
+  });
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const headingId = useId();
 
-  const formattedPrice = formatPrice(price);
+  const formattedPrice = toMoney(price);
 
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    dispatch(addItem({ id, image, name, price, slug, quantity: 1 }));
+  };
+
+  const handleQuantityChange = (value: number) => {
+    dispatch(updateQuantity({ id, quantity: value }));
+  };
 
   return (
     <section
@@ -41,7 +61,7 @@ const ProductDetailedCard = ({
       )}
     >
       <ResponsiveImage
-        alt={title}
+        alt={name}
         loading='lazy'
         image={image}
         className={cn(
@@ -100,7 +120,7 @@ const ProductDetailedCard = ({
                 'lg:text-3xl',
               )}
             >
-              {title}
+              {name}
             </h1>
           </div>
           <p
@@ -112,29 +132,31 @@ const ProductDetailedCard = ({
           >
             {description}
           </p>
-          <p
+          <dl
             className={cn(
               'text-md',
 
               'text-black',
             )}
           >
-            <span className={cn('sr-only')}>Price: </span>
-            <span>{formattedPrice}</span>
-          </p>
+            <dt className={cn('sr-only')}>Price: </dt>
+            <dd>{formattedPrice}</dd>
+          </dl>
         </div>
 
         <div className={cn('flex', 'flex-wrap', 'items-center', 'gap-4')}>
           <QuantitySelector
+            label={`Quantity for ${name}`}
             value={quantity}
-            onChange={(value) => setQuantity(value)}
+            onChange={handleQuantityChange}
             className={cn('max-inline-30')}
           />
           <Button
             variant={'primary'}
             onClick={handleAddToCart}
           >
-            {action}
+            <span className={cn('sr-only')}>Add {name} to cart</span>
+            <span>Add to cart</span>
           </Button>
         </div>
       </div>

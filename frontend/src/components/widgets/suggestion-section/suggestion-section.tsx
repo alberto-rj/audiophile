@@ -1,13 +1,12 @@
 import { useId } from 'react';
 
-import type { SuggestionCardContent } from '@/libs/types';
-
 import SuggestionListing from './suggestion-listing';
+import type { BasicProduct } from '@/libs/types';
 import { cn } from '@/libs/cn';
 
 interface SuggestionSectionProps {
   title: string;
-  items: SuggestionCardContent[];
+  items: BasicProduct[];
   className?: string;
 }
 

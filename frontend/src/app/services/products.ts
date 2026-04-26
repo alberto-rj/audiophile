@@ -4,24 +4,16 @@ import type { Product } from '@/libs/types';
 
 export const productApi = createApi({
   reducerPath: 'productsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: '/api/products' }),
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], void>({
-      query: () => '/products',
+      query: () => '/',
     }),
 
     getProductBySlug: builder.query<Product, string>({
-      query: (slug) => `/products/${slug}`,
-    }),
-
-    getProductsByCategory: builder.query<Product[], string>({
-      query: (category) => `/categories/${category}`,
+      query: (slug) => `/${slug}`,
     }),
   }),
 });
 
-export const {
-  useGetProductsQuery,
-  useGetProductBySlugQuery,
-  useGetProductsByCategoryQuery,
-} = productApi;
+export const { useGetProductsQuery, useGetProductBySlugQuery } = productApi;

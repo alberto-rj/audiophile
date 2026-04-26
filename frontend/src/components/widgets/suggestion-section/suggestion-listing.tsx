@@ -1,10 +1,9 @@
 import SuggestionCard from './suggestion-card';
-
-import type { SuggestionCardContent } from '@/libs/types';
+import type { BasicProduct } from '@/libs/types';
 import { cn } from '@/libs/cn';
 
 interface SuggestionListingProps {
-  items: SuggestionCardContent[];
+  items: BasicProduct[];
 }
 
 const SuggestionListing = ({ items }: SuggestionListingProps) => {
@@ -25,7 +24,7 @@ const SuggestionListing = ({ items }: SuggestionListingProps) => {
     >
       {items.map((item) => (
         <li key={item.slug}>
-          <SuggestionCard content={item} />
+          <SuggestionCard product={item} />
         </li>
       ))}
     </ul>

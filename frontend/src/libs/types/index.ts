@@ -15,6 +15,18 @@ export interface GalleryImages {
   third: ResponsiveImageType;
 }
 
+export interface Category {
+  id: number;
+  slug: string;
+  image: string;
+  name: string;
+  description: string;
+}
+
+export interface CategoryList extends Category {
+  items: Product[];
+}
+
 export interface BasicProduct {
   slug: string;
   name: string;
@@ -66,7 +78,6 @@ export interface ProductCardContent {
   title: string;
   description: string;
   slug: string;
-  action: string;
   image: ResponsiveImageType;
   isNew: boolean;
   isReversed?: boolean;

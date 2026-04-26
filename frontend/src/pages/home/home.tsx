@@ -7,7 +7,6 @@ import {
 import { cn } from '@/libs/cn';
 import { newProduct } from '@/libs/mocks';
 import {
-  categoriesContent,
   featureHighLightedContent,
   featureLandscapeContent,
   featurePortraitContent,
@@ -19,7 +18,7 @@ function Home() {
       <Hero product={newProduct} />
       <div className={cn('flow', 'bg-white')}>
         <div className={cn('wrapper', 'flow-spacing')}>
-          <CategoryListing items={categoriesContent} />
+          <CategoryListing />
         </div>
         <FeatureProducts
           highLightedContent={featureHighLightedContent}

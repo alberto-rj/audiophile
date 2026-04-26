@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
 import type { Product } from '@/libs/types';
@@ -124,7 +126,7 @@ const Hero = ({
             variant={'primary'}
             asChild
           >
-            <a href={slug}>See product</a>
+            <Link to={`/products/${slug}`}>See product</Link>
           </Button>
         </div>
       </div>
