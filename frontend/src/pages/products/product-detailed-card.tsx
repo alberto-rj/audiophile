@@ -7,7 +7,7 @@ import { toMoney } from '@/libs/helpers';
 import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
 import { Button } from '@/components/ui';
 import type { AppDispatch, RootState } from '@/app/store';
-import { addItem, updateQuantity } from '@/app/features/cart';
+import { addItem, selectItemById, updateQuantity } from '@/app/features/cart';
 
 interface ProductDetailedCardProps {
   product: Product;
@@ -19,7 +19,7 @@ const ProductDetailedCard = ({
   className,
 }: ProductDetailedCardProps) => {
   const quantity = useSelector<RootState, number>((state) => {
-    const foundItem = state.cart.items.find((item) => item.id === id);
+    const foundItem = selectItemById(id)(state);
 
     if (!foundItem) {
       return 1;

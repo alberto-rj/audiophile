@@ -8,7 +8,7 @@ export const handlers = [
     return HttpResponse.json(categories);
   }),
 
-  http.get('/api/categories/:slug', ({ params }) => {
+  http.get<{ slug: string }>('/api/categories/:slug', ({ params }) => {
     const foundCategory = categories.find(
       (category) => category.slug === params.slug,
     );
@@ -20,7 +20,7 @@ export const handlers = [
     return HttpResponse.json(foundCategory);
   }),
 
-  http.get('/api/categories/:slug/products', ({ params }) => {
+  http.get<{ slug: string }>('/api/categories/:slug/products', ({ params }) => {
     const foundCategory = categories.find(
       (category) => category.slug === params.slug,
     );
@@ -41,7 +41,7 @@ export const handlers = [
     return HttpResponse.json(products);
   }),
 
-  http.get('/api/products/:slug', ({ params }) => {
+  http.get<{ slug: string }>('/api/products/:slug', ({ params }) => {
     const product = products.find((p) => p.slug === params.slug);
 
     if (!product) {

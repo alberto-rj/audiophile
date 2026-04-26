@@ -49,7 +49,7 @@ export const CartSummary = () => {
         {cartItems.map(({ image, name, price, quantity }) => (
           <li
             key={name}
-            className={cn('flex', 'justify-between', 'items-center', 'gap-8')}
+            className={cn('flex', 'justify-between', 'items-start', 'gap-8')}
           >
             <div className={cn('flex', 'items-center', 'gap-4')}>
               <img
@@ -67,10 +67,10 @@ export const CartSummary = () => {
               <div className={cn('flex', 'flex-col')}>
                 <span
                   className={cn(
-                    'uppercase',
                     'text-base',
 
                     'text-black',
+                    'uppercase',
                     'font-bold',
                   )}
                 >
