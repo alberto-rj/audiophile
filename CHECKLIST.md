@@ -133,18 +133,18 @@
 - [x] Criar a `store.ts`
 - [x] Criar o `cartSlice` com as actions: `addItem`, `removeItem`, `updateQuantity`, `clearCart`
 - [x] Criar selectors: `selectSubtotal`, `selectShipping`, `selectVAT`, `selectGrandTotal`
-- [ ] Envolver a app com o `<Provider>`
+- [x] Envolver a app com o `<Provider>`
 
 ### Cart
 
-- [ ] Botão "Add to Cart" na página de produto liga ao Redux
+- [x] Botão "Add to Cart" na página de produto liga ao Redux
 - [ ] Cart drawer/modal abre ao clicar no ícone do carrinho na Navbar
 - [ ] Lista de items no carrinho com quantidade editável
 - [ ] Botão para remover item
 - [ ] Totais calculados corretamente (subtotal, envio $50, IVA 20%)
 - [ ] Botão "Remove all" limpa o carrinho
-- [ ] Ícone do carrinho mostra o número de items
-- [ ] Carrinho fecha ao clicar fora
+- [x] Ícone do carrinho mostra o número de items
+- [x] Carrinho fecha ao clicar fora
 
 ### Persistência
 

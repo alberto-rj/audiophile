@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { SuggestionSection } from '@/components/widgets';
-
-import { suggestionItems } from '@/libs/constants';
 import { cn } from '@/libs/cn';
+import { products } from '@/libs/mocks';
 
 type StoryProps = React.ComponentProps<typeof SuggestionSection>;
 
@@ -29,13 +28,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: 'You may also like',
-    items: suggestionItems,
+    items: [...products].splice(0, 3),
   },
 };
 
 export const Multiple: Story = {
   args: {
     title: 'You may also like',
-    items: [...suggestionItems, ...suggestionItems, ...suggestionItems],
+    items: [...products].splice(0, 12),
   },
 };

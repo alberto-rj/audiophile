@@ -59,16 +59,7 @@ const ProductCard = ({
           'lg:text-start',
         )}
       >
-        <div
-          className={cn(
-            'flex',
-            'flex-col',
-            'gap-8',
-
-            'lg:gap-8',
-            'lg:items-center',
-          )}
-        >
+        <div className={cn('flex', 'flex-col', 'gap-8')}>
           <div className={cn('flex', 'flex-col', 'gap-4')}>
             {isNew && (
               <span className={cn('text-sm', 'text-primary-400', 'uppercase')}>
@@ -82,13 +73,22 @@ const ProductCard = ({
 
                 'xs:text-3xl',
 
+                'text-black',
                 'uppercase',
               )}
             >
               {title}
             </h2>
           </div>
-          <p className={cn('text-base')}>{description}</p>
+          <p
+            className={cn(
+              'text-base',
+
+              'text-black/50',
+            )}
+          >
+            {description}
+          </p>
         </div>
         <Button
           variant={'primary'}

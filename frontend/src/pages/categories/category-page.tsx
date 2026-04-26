@@ -18,22 +18,18 @@ function ProductList({ products }: ProductListProps) {
   return (
     <ul
       role='list'
-      className={cn('flex', 'flex-col', 'gap-8')}
+      className={cn('wrapper', 'flow')}
     >
       {products.map(({ id, image, name, description, isNew, slug }, i) => (
-        <li
-          key={id}
-          className={cn('my-16')}
-        >
+        <li key={id}>
           <ProductCard
-            key={id}
             content={{
               image,
               title: name,
               description,
               isNew,
               slug: slug,
-              isReversed: i % 2 === 0,
+              isReversed: i % 2 !== 0,
             }}
           />
         </li>
@@ -43,7 +39,7 @@ function ProductList({ products }: ProductListProps) {
 }
 
 const CategoryPage = () => {
-  const params = useParams<string>();
+  const params = useParams();
 
   const { isLoading, isError, data } = useGetProductsByCategorySlugQuery(
     params.slug,
@@ -62,8 +58,8 @@ const CategoryPage = () => {
         <div className={cn('flow', 'bg-white')}>
           <div className={cn('wrapper', 'flow-spacing')}>
             <CategoryListing />
-            <ProductList products={category.items} />
           </div>
+          <ProductList products={category.items} />
           <BestGear />
         </div>
       </>

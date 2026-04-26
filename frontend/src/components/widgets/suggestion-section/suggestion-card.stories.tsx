@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { cn } from '@/libs/cn';
-import { suggestionXX99 } from '@/libs/constants';
-
 import SuggestionCard from './suggestion-card';
+
+import { cn } from '@/libs/cn';
+import { products } from '@/libs/mocks';
 
 type StoryProps = React.ComponentProps<typeof SuggestionCard>;
 
@@ -14,7 +14,7 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    content: suggestionXX99,
+    product: products.find((p) => p.id === 6),
   },
   render: (props) => {
     return (

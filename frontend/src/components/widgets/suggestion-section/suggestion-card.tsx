@@ -49,9 +49,10 @@ const SuggestionCard = ({
           id={headingId}
           className={cn(
             'text-lg',
-            'uppercase',
+            'text-center',
 
             'text-black',
+            'uppercase',
           )}
         >
           {name}
