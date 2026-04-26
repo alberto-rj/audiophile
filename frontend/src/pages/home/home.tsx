@@ -16,17 +16,18 @@ function Home() {
   return (
     <>
       <Hero product={newProduct} />
-      <div className={cn('flow', 'bg-white')}>
-        <div className={cn('wrapper', 'flow-spacing')}>
+
+      <div className={cn('bg-white')}>
+        <div className={cn('wrapper', 'flow', 'flow-spacing')}>
           <CategoryListing />
+          <FeatureProducts
+            highLightedContent={featureHighLightedContent}
+            portraitContent={featurePortraitContent}
+            landscapeContent={featureLandscapeContent}
+          />
+          <BestGear />
         </div>
-        <FeatureProducts
-          highLightedContent={featureHighLightedContent}
-          portraitContent={featurePortraitContent}
-          landscapeContent={featureLandscapeContent}
-        />
       </div>
-      <BestGear />
     </>
   );
 }

@@ -114,6 +114,17 @@
   --form-group-gap-y: 2rem;
   --form-group-gap-y-md: 2rem;
   --form-group-gap-y-lg: 3rem;
+
+  /* flow spacing */
+  --flow-spacing: 7.5rem;
+  --flow-spacing-xs: 7.5rem;
+  --flow-spacing-sm: 7.5rem;
+  --flow-spacing-md: 7.5rem;
+  --flow-spacing-lg: 10rem;
+
+  /* wrapper padding */
+  --wrapper-padding: 1.25rem;
+  --wrapper-padding-md: 2.5rem;
   /* custom properties (end) */
 }
 
@@ -133,19 +144,19 @@
 
 @layer utilities {
   .wrapper {
-    @apply w-full mx-auto px-5 md:max-w-172 md:px-10 lg:max-w-277.5;
+    @apply w-full mx-auto px-(--wrapper-padding) md:max-w-172 md:px-(--wrapper-padding-md) lg:max-w-277.5;
   }
 
   .region {
-    @apply py-6 md:py-24 lg:py-30;
+    @apply py-(--flow-spacing) xs:py-(--flow-spacing-xs) sm:py-(--flow-spacing-sm) md:py-(--flow-spacing-md) lg:py-(--flow-spacing-lg);
   }
 
   .flow {
-    @apply flex flex-col gap-6 md:gap-24 lg:gap-30;
+    @apply flex flex-col gap-(--flow-spacing) xs:gap-(--flow-spacing-xs) sm:gap-(--flow-spacing-sm) md:gap-(--flow-spacing-md) lg:gap-(--flow-spacing-lg);
   }
 
   .flow-spacing {
-    @apply pbs-6 md:pbs-24 lg:pbs-30;
+    @apply pbs-(--flow-spacing) xs:pbs-(--flow-spacing-xs) md:pbs-(--flow-spacing-md) lg:pbs-(--flow-spacing-lg);
   }
 
   .link-focusable {
@@ -160,11 +171,11 @@
 @layer components {
   /* form (start) */
   .form-flow {
-    @apply flex flex-col gap-[var(--form-group-gap-y)]  lg:gap-[var(--form-group-gap-y-lg)];
+    @apply flex flex-col gap-(--form-group-gap-y) lg:gap-(--form-group-gap-y-lg);
   }
 
   .form-group {
-    @apply pbs-4 first:mbs-[var(--form-group-gap-y)] first:lg:mbs-[var(--form-group-gap-y-lg)];
+    @apply pbs-4 first:mbs-(--form-group-gap-y) first:lg:mbs-(--form-group-gap-y-lg);
   }
 
   .form-group-name {

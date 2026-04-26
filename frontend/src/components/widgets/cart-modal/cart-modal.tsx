@@ -61,7 +61,7 @@ const CartModal = ({ onOpenChange }: CartModalProps) => {
                 'size-7',
                 'absolute',
                 '-inset-bs-5',
-                '-inset-e-5',
+                '-inset-e-3',
                 'flex',
                 'items-center',
                 'justify-center',

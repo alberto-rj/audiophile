@@ -39,7 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={cn('relative', 'w-full', 'py-8', 'bg-gray-900')}>
+    <nav className={cn('relative', 'inline-full', 'py-8', 'bg-gray-900')}>
       <div
         className={cn(
           'wrapper',
@@ -121,7 +121,8 @@ const Navbar = () => {
             'items-center',
             'py-8',
             'bg-gray-900',
-            !isOpen && 'hidden',
+
+            { hidden: !isOpen },
 
             'lg:hidden',
           )}

@@ -41,7 +41,15 @@ const ProductCard = ({
       <ResponsiveImage
         alt=''
         image={image}
-        className={cn('w-full', 'h-auto', 'object-cover')}
+        className={cn(
+          'rounded-lg',
+          'object-cover',
+          'aspect-327/352',
+
+          'md:aspect-689/352',
+
+          'lg:aspect-540/560',
+        )}
       />
       <div
         className={cn(

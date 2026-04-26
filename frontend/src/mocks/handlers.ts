@@ -2,6 +2,21 @@ import { http, HttpResponse } from 'msw';
 
 import { products } from '@/libs/mocks/products';
 import { categories } from '@/libs/mocks/categories';
+import type { Product } from '@/libs/types';
+
+function sortProductsByNewFirst(products: Product[]) {
+  return [...products].sort((a, b) => {
+    if (a.isNew && b.isNew) {
+      return 0;
+    }
+
+    if (a.isNew && !b.isNew) {
+      return -1;
+    }
+
+    return 1;
+  });
+}
 
 export const handlers = [
   http.get('/api/categories', () => {
@@ -29,7 +44,9 @@ export const handlers = [
       return new HttpResponse(null, { status: 404 });
     }
 
-    const filteredProducts = products.filter((p) => p.category === params.slug);
+    const filteredProducts = sortProductsByNewFirst(
+      products.filter((p) => p.category === params.slug),
+    );
 
     return HttpResponse.json({
       ...foundCategory,
@@ -38,7 +55,7 @@ export const handlers = [
   }),
 
   http.get('/api/products', () => {
-    return HttpResponse.json(products);
+    return HttpResponse.json(sortProductsByNewFirst(products));
   }),
 
   http.get<{ slug: string }>('/api/products/:slug', ({ params }) => {

@@ -18,7 +18,7 @@ function ProductList({ products }: ProductListProps) {
   return (
     <ul
       role='list'
-      className={cn('wrapper', 'flow')}
+      className={cn('flow')}
     >
       {products.map(({ id, image, name, description, isNew, slug }, i) => (
         <li key={id}>
@@ -42,7 +42,7 @@ const CategoryPage = () => {
   const params = useParams();
 
   const { isLoading, isError, data } = useGetProductsByCategorySlugQuery(
-    params.slug,
+    params.slug!,
   );
 
   if (isLoading) {
@@ -55,12 +55,12 @@ const CategoryPage = () => {
     return (
       <>
         <Header title={category.name} />
-        <div className={cn('flow', 'bg-white')}>
-          <div className={cn('wrapper', 'flow-spacing')}>
+        <div className={cn('bg-white')}>
+          <div className={cn('wrapper', 'flow', 'flow-spacing')}>
             <CategoryListing />
+            <ProductList products={category.items} />
+            <BestGear />
           </div>
-          <ProductList products={category.items} />
-          <BestGear />
         </div>
       </>
     );

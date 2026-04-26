@@ -1,11 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { cn } from '@/libs/cn';
-import { productDetailedCardContent } from '@/libs/constants';
-
 import ProductDetailedCard from './product-detailed-card';
 
-type StoryProps = React.ComponentProps<typeof ProductDetailedCard>;
+import { cn } from '@/libs/cn';
+import type { Product } from '@/libs/types';
+import { products } from '@/libs/mocks';
+
+type StoryProps = React.ComponentProps<typeof ProductDetailedCard> & {
+  product: Product;
+};
 
 const meta = {
   title: 'pages/ProductPage/ProductDetailedCard',
@@ -13,9 +16,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-  args: {
-    content: productDetailedCardContent,
-  },
+  args: {},
   render: (props) => {
     return (
       <div className={cn('region', 'wrapper')}>
@@ -29,13 +30,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    product: products.find((p) => p.isNew)!,
+  },
+};
 
 export const Old: Story = {
   args: {
-    content: {
-      ...productDetailedCardContent,
-      isNew: false,
-    },
+    product: products.find((p) => !p.isNew)!,
   },
 };

@@ -26,7 +26,6 @@ const FeatureProducts = ({
   return (
     <div
       className={cn(
-        'wrapper',
         'grid',
         'gap-6',
 

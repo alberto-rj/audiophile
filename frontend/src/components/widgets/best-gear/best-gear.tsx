@@ -1,12 +1,12 @@
-import { cn } from '@/libs/cn';
+import { useId } from 'react';
 
 import mobile from '@/assets/shared/mobile/image-best-gear.jpg';
 import tablet from '@/assets/shared/tablet/image-best-gear.jpg';
 import desktop from '@/assets/shared/desktop/image-best-gear.jpg';
 
 import type { ResponsiveImageType } from '@/libs/types';
+import { cn } from '@/libs/cn';
 import { ResponsiveImage } from '@/components/widgets';
-import { useId } from 'react';
 
 const bestGear: ResponsiveImageType = {
   mobile,
@@ -14,17 +14,20 @@ const bestGear: ResponsiveImageType = {
   desktop,
 };
 
-const BestGear = () => {
+interface BestGearProps {
+  className?: string;
+}
+
+const BestGear = ({ className }: BestGearProps) => {
   const headingId = useId();
 
   return (
     <section
       aria-labelledby={headingId}
-      className={cn('region', 'bg-white', 'text-black')}
+      className={cn('bg-white', 'text-black')}
     >
       <div
         className={cn(
-          'wrapper',
           'flex',
           'flex-col',
           'gap-10',
@@ -33,6 +36,7 @@ const BestGear = () => {
           'lg:justify-between',
           'lg:items-center',
           'lg:gap-31.25',
+          className,
         )}
       >
         <ResponsiveImage

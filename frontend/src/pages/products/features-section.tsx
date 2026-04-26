@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { Fragment, useId } from 'react';
 
 import type { FeaturesSectionContent } from '@/libs/types';
 import { cn } from '@/libs/cn';
@@ -32,9 +32,20 @@ const FeaturesSection = ({
       >
         {title}
       </h2>
-      <p className={cn('text-base', 'text-black-o-50')}>{description}</p>
+      <p className={cn('text-base', 'text-black-o-50')}>
+        {renderTextWithNewlines(description)}
+      </p>
     </section>
   );
 };
+
+function renderTextWithNewlines(text: string) {
+  return text.split('\n').map((item, index) => (
+    <Fragment key={index}>
+      {item}
+      <br />
+    </Fragment>
+  ));
+}
 
 export default FeaturesSection;

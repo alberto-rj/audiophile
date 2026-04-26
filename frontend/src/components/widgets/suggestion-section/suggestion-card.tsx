@@ -34,13 +34,14 @@ const SuggestionCard = ({
         loading='lazy'
         image={image}
         className={cn(
-          'w-full',
-          'h-30',
           'object-cover',
           'overflow-hidden',
           'rounded-lg',
+          'aspect-327/120',
 
-          'md:h-79.5',
+          'md:aspect-223/318',
+
+          'lg:aspect-350/318',
         )}
       />
 

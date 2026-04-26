@@ -80,6 +80,7 @@ const ProductDetailedCard = ({
 
       <div
         className={cn(
+          'inline-full',
           'flex',
           'flex-col',
           'gap-8',

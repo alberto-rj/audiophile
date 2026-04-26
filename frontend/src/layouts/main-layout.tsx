@@ -8,8 +8,8 @@ const MainLayout = () => {
     <>
       <div
         className={cn(
-          'w-full',
-          'min-h-screen',
+          'inline-full',
+          'min-block-screen',
           'flex',
           'flex-col',
           'justify-between',
