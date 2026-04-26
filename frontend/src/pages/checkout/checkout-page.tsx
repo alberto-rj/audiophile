@@ -78,6 +78,7 @@ const CheckoutPage = () => {
               type='submit'
               form={formId}
               variant='primary'
+              disabled={true}
               className={cn('w-full')}
             >
               Continue & pay
