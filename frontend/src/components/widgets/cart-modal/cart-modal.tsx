@@ -1,12 +1,7 @@
 import { useId } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Button, Modal } from '@/components/ui';
-import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
-import { cn } from '@/libs/cn';
-import { toMoney } from '@/libs/helpers';
-import type { CartItem } from '@/libs/types';
-import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '@/app/store';
 import {
   clearCart,
@@ -15,6 +10,11 @@ import {
   selectItemsCount,
   updateQuantity,
 } from '@/app/features/cart';
+import { Button, Modal } from '@/components/ui';
+import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
+import { cn } from '@/libs/cn';
+import { toMoney } from '@/libs/helpers';
+import type { CartItem } from '@/libs/types';
 
 interface CartModalProps {
   open?: boolean;
@@ -115,7 +115,10 @@ const CartModal = ({
                       'text-md',
                     )}
                   >
-                    Cart ({itemsCount})
+                    <span className={cn('sr-only')}>
+                      Cart - {itemsCount} item(s)
+                    </span>
+                    <span aria-hidden={true}>Cart ({itemsCount})</span>
                   </h3>
                 </Modal.Title>
 
@@ -123,7 +126,7 @@ const CartModal = ({
                   variant='link'
                   onClick={handleClearCart}
                 >
-                  <span className={cn('sr-only')}>Remove all items</span>
+                  <span className={cn('sr-only')}>Remove all cart items</span>
                   <span aria-hidden={true}>Remove all</span>
                 </Button>
               </div>
