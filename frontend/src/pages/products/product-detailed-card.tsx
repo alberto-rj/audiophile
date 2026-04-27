@@ -6,7 +6,7 @@ import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
 import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
 import { Button } from '@/components/ui';
-import type { AppDispatch, RootState } from '@/app/store';
+import type { AppDispatch } from '@/app/store';
 import { addItem, selectItemById, updateQuantity } from '@/app/features/cart';
 
 interface ProductDetailedCardProps {
@@ -18,15 +18,8 @@ const ProductDetailedCard = ({
   product: { id, slug, image, name, description, price, isNew },
   className,
 }: ProductDetailedCardProps) => {
-  const quantity = useSelector<RootState, number>((state) => {
-    const foundItem = selectItemById(id)(state);
-
-    if (!foundItem) {
-      return 1;
-    }
-
-    return foundItem.quantity;
-  });
+  const selectedItem = useSelector(selectItemById(id));
+  const quantity = selectedItem?.quantity || 0;
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -39,7 +32,11 @@ const ProductDetailedCard = ({
   };
 
   const handleQuantityChange = (value: number) => {
-    dispatch(updateQuantity({ id, quantity: value }));
+    if (quantity === 0) {
+      dispatch(addItem({ id, image, name, price, slug, quantity: value }));
+    } else {
+      dispatch(updateQuantity({ id, quantity: value }));
+    }
   };
 
   return (
