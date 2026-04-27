@@ -1,10 +1,10 @@
 import type { Preview } from '@storybook/react-vite';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 
-import { handlers } from '../src/mocks/handlers';
-import { RouterDecorator, StoreDecorator } from '../src/config/storybook';
+import { handlers } from '@/mocks/handlers';
+import { RouterDecorator, StoreDecorator } from '@/config/storybook';
 
-import '../src/index.css';
+import '@/index.css';
 
 initialize();
 
