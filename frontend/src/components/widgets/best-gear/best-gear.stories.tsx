@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { BestGear } from '@/components/widgets';
+import { cn } from '@/libs/cn';
 
 type StoryProps = React.ComponentProps<typeof BestGear>;
 
@@ -9,6 +10,13 @@ const meta = {
   component: BestGear,
   parameters: {
     layout: 'fullscreen',
+  },
+  decorators: (Story, context) => {
+    return (
+      <div className={cn('wrapper', 'region')}>
+        <Story {...context} />
+      </div>
+    );
   },
 } satisfies Meta<StoryProps>;
 

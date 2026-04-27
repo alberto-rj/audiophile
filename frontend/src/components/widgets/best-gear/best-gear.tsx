@@ -43,7 +43,15 @@ const BestGear = ({ className }: BestGearProps) => {
           alt='Person enjoying music with premium headphones'
           loading='lazy'
           image={bestGear}
-          className={cn('max-w-full', 'h-auto', 'object-cover', 'rounded-lg')}
+          className={cn(
+            'object-cover',
+            'rounded-lg',
+            'aspect-327/300',
+
+            'md:aspect-689/300',
+
+            'lg:aspect-540/588',
+          )}
         />
         <div
           className={cn(
