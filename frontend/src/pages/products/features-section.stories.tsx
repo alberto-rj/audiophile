@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { featuresSectionContent } from '@/libs/constants';
 import { cn } from '@/libs/cn';
+
 import FeaturesSection from './features-section';
 
 type StoryProps = React.ComponentProps<typeof FeaturesSection>;

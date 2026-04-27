@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { inTheBoxSectionContent } from '@/libs/constants';
 import { cn } from '@/libs/cn';
+
 import InTheBoxSection from './in-the-box-section';
 
 type StoryProps = React.ComponentProps<typeof InTheBoxSection>;

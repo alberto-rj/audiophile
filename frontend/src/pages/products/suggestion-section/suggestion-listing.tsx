@@ -1,6 +1,7 @@
-import SuggestionCard from './suggestion-card';
 import type { BasicProduct } from '@/libs/types';
 import { cn } from '@/libs/cn';
+
+import SuggestionCard from './suggestion-card';
 
 interface SuggestionListingProps {
   items: BasicProduct[];

@@ -1,17 +1,14 @@
 import { useParams } from 'react-router-dom';
 
+import { BestGear, CategoryListing } from '@/components/widgets';
+import { cn } from '@/libs/cn';
+import { useGetProductBySlugQuery } from '@/app/services/products';
+
 import ProductDetailedCard from './product-detailed-card';
 import FeaturesSection from './features-section';
 import InTheBoxSection from './in-the-box-section';
 import Gallery from './gallery';
-
-import {
-  BestGear,
-  CategoryListing,
-  SuggestionSection,
-} from '@/components/widgets';
-import { cn } from '@/libs/cn';
-import { useGetProductBySlugQuery } from '@/app/services/products';
+import SuggestionSection from './suggestion-section/suggestion-section';
 
 const ProductPage = () => {
   const params = useParams();

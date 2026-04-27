@@ -1,8 +1,9 @@
 import { useId } from 'react';
 
-import SuggestionListing from './suggestion-listing';
 import type { BasicProduct } from '@/libs/types';
 import { cn } from '@/libs/cn';
+
+import SuggestionListing from './suggestion-listing';
 
 interface SuggestionSectionProps {
   title: string;

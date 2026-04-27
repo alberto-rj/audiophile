@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import SuggestionCard from './suggestion-card';
-
 import { cn } from '@/libs/cn';
 import { products } from '@/libs/mocks';
+
+import SuggestionCard from './suggestion-card';
 
 type StoryProps = React.ComponentProps<typeof SuggestionCard>;
 
 const meta = {
-  title: 'widgets/SuggestionSection/SuggestionCard',
+  title: 'pages/ProductPage/SuggestionSection/SuggestionCard',
   component: SuggestionCard,
   parameters: {
     layout: 'fullscreen',

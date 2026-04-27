@@ -158,63 +158,8 @@ export const galleryContent: GalleryContent = {
 };
 /* Gallery (end) */
 
-/* Suggestion Card (start) */
-import suggestionXX99Mobile from '@/assets/product-xx99-mark-one-headphones/mobile/image-product.jpg';
-import suggestionXX99Tablet from '@/assets/product-xx99-mark-one-headphones/tablet/image-product.jpg';
-import suggestionXX99Desktop from '@/assets/product-xx99-mark-one-headphones/desktop/image-product.jpg';
-
-import type { SuggestionCardContent } from '@/libs/types';
-
-export const suggestionXX99: SuggestionCardContent = {
-  title: 'XX99 MARK I',
-  slug: '/products/xx99-mark-one',
-  action: 'See product',
-  image: {
-    mobile: suggestionXX99Mobile,
-    tablet: suggestionXX99Tablet,
-    desktop: suggestionXX99Desktop,
-  },
-};
-
-import suggestionXX59Mobile from '@/assets/product-xx59-headphones/mobile/image-product.jpg';
-import suggestionXX59Tablet from '@/assets/product-xx59-headphones/tablet/image-product.jpg';
-import suggestionXX59Desktop from '@/assets/product-xx59-headphones/desktop/image-product.jpg';
-
-export const suggestionXX59: SuggestionCardContent = {
-  title: 'XX59',
-  slug: '/products/xx59',
-  action: 'See product',
-  image: {
-    mobile: suggestionXX59Mobile,
-    tablet: suggestionXX59Tablet,
-    desktop: suggestionXX59Desktop,
-  },
-};
-
-import suggestionZX9Mobile from '@/assets/product-zx9-speaker/mobile/image-product.jpg';
-import suggestionZX9Tablet from '@/assets/product-zx9-speaker/tablet/image-product.jpg';
-import suggestionZX9Desktop from '@/assets/product-zx9-speaker/desktop/image-product.jpg';
-import { newProduct } from '../mocks';
-
-export const suggestionZX9: SuggestionCardContent = {
-  title: 'ZX9 SPEAKER',
-  slug: '/products/zx9-speaker',
-  action: 'See product',
-  image: {
-    mobile: suggestionZX9Mobile,
-    tablet: suggestionZX9Tablet,
-    desktop: suggestionZX9Desktop,
-  },
-};
-
-export const suggestionItems: SuggestionCardContent[] = [
-  suggestionXX99,
-  suggestionXX59,
-  suggestionZX9,
-];
-/* Suggestion Card (end) */
-
 /* "Features" Section (start) */
+import { newProduct } from '@/libs/mocks';
 export const featuresSectionContent: FeaturesSectionContent = {
   title: 'Features',
   description: newProduct.features,

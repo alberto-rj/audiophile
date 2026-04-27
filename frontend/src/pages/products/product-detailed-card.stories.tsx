@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import ProductDetailedCard from './product-detailed-card';
-
 import { cn } from '@/libs/cn';
 import type { Product } from '@/libs/types';
 import { products } from '@/libs/mocks';
+
+import ProductDetailedCard from './product-detailed-card';
 
 type StoryProps = React.ComponentProps<typeof ProductDetailedCard> & {
   product: Product;
