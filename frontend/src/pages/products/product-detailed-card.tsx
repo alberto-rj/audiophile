@@ -1,13 +1,13 @@
 import { useId } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type { Product } from '@/libs/types';
+import { addItem, selectItemById, updateQuantity } from '@/app/features/cart';
+import type { AppDispatch } from '@/app/store';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
-import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
+import type { Product } from '@/libs/types';
 import { Button } from '@/components/ui';
-import type { AppDispatch } from '@/app/store';
-import { addItem, selectItemById, updateQuantity } from '@/app/features/cart';
+import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
 
 interface ProductDetailedCardProps {
   product: Product;
@@ -19,12 +19,12 @@ const ProductDetailedCard = ({
   className,
 }: ProductDetailedCardProps) => {
   const selectedItem = useSelector(selectItemById(id));
-  const quantity = selectedItem?.quantity || 0;
 
   const dispatch = useDispatch<AppDispatch>();
 
   const headingId = useId();
 
+  const quantity = selectedItem?.quantity || 0;
   const formattedPrice = toMoney(price);
 
   const handleAddToCart = () => {
