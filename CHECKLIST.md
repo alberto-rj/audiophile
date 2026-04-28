@@ -112,7 +112,7 @@
 
 ### Página Product Detail
 
-- [ ] Botão "Go Back"
+- [x] Botão "Go Back"
 - [x] Imagem principal + nome, descrição, preço
 - [x] QuantitySelector + botão "Add to Cart"
 - [x] Secção Features
