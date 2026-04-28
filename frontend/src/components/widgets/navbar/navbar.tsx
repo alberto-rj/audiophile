@@ -93,7 +93,7 @@ const Navbar = () => {
 
               'xs:block',
 
-              'link-focusable',
+              'link',
             )}
           >
             <span className={cn('sr-only')}>Audiophile - home</span>
@@ -132,7 +132,7 @@ const Navbar = () => {
               <NavLink
                 ref={i === 0 ? firstMenuItemRef : undefined}
                 to={url}
-                className={cn('nav-link', 'link')}
+                className={cn('link', 'nav-link')}
               >
                 {text}
               </NavLink>
@@ -156,7 +156,7 @@ const Navbar = () => {
             <li key={text}>
               <NavLink
                 to={url}
-                className={cn('nav-link', 'link-focusable')}
+                className={cn('link', 'nav-link')}
               >
                 {text}
               </NavLink>

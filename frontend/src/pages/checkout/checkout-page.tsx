@@ -1,6 +1,7 @@
 import { useEffect, useId } from 'react';
 
 import { Button, Card } from '@/components/ui';
+import { GoBack } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 
 import { CheckoutForm } from './checkout-form';
@@ -18,7 +19,10 @@ const CheckoutPage = () => {
   }, []);
 
   return (
-    <div className={cn('region')}>
+    <>
+      <GoBack>
+        <GoBack.Control />
+      </GoBack>
       <div
         className={cn(
           'wrapper',
@@ -86,7 +90,7 @@ const CheckoutPage = () => {
           </div>
         </Card>
       </div>
-    </div>
+    </>
   );
 };
 

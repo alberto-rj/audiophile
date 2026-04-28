@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { BestGear, CategoryListing } from '@/components/widgets';
+import { BestGear, CategoryListing, GoBack } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { useGetProductBySlugQuery } from '@/app/services/products';
 
@@ -28,11 +28,11 @@ const ProductPage = () => {
 
   return (
     <div className={cn('bg-white')}>
+      <GoBack>
+        <GoBack.Control />
+      </GoBack>
       <div className={cn('wrapper', 'flow')}>
-        <ProductDetailedCard
-          product={product}
-          className={cn('flow-spacing')}
-        />
+        <ProductDetailedCard product={product} />
         <div
           className={cn(
             'flex',
