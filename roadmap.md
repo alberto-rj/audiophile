@@ -1,6 +1,6 @@
 # Audiophile E-Commerce — Guia de Desenvolvimento
 
-Guia prático para construir o desafio **Audiophile e-commerce website** do Frontend Mentor como projeto fullstack de portfólio.
+Guia prático para construir o desafio **Audiophile e-commerce website** do Frontend Mentor como projecto fullstack de portfólio.
 
 **Stack:** React · TypeScript · Redux Toolkit · Storybook · Tailwind CSS · Express · Drizzle ORM · PostgreSQL
 
@@ -8,9 +8,9 @@ Guia prático para construir o desafio **Audiophile e-commerce website** do Fron
 
 ## Índice
 
-1. [Visão geral do projeto](#1-visão-geral-do-projeto)
+1. [Visão geral do projecto](#1-visão-geral-do-projecto)
 2. [Decisões de arquitetura](#2-decisões-de-arquitetura)
-3. [Fase 1 — Fundação do projeto](#fase-1--fundação-do-projeto)
+3. [Fase 1 — Fundação do projecto](#fase-1--fundação-do-projecto)
 4. [Fase 2 — Sistema de componentes base](#fase-2--sistema-de-componentes-base)
 5. [Fase 3 — Layout e páginas](#fase-3--layout-e-páginas)
 6. [Fase 4 — Carrinho e checkout com Redux](#fase-4--carrinho-e-checkout-com-redux)
@@ -21,7 +21,7 @@ Guia prático para construir o desafio **Audiophile e-commerce website** do Fron
 
 ---
 
-## 1. Visão geral do projeto
+## 1. Visão geral do projecto
 
 ### O desafio (Frontend Mentor)
 
@@ -76,7 +76,7 @@ Construir do zero demonstra mais para portfólio: prova que sabes criar um siste
 
 ### Ordem das fases
 
-O backend é introduzido apenas na Fase 5, quando o frontend visual já está completo. O `data.json` fornecido pelo Frontend Mentor serve perfeitamente durante o desenvolvimento visual. Introduzir o backend cedo é a principal causa de abandono em projetos pessoais.
+O backend é introduzido apenas na Fase 5, quando o frontend visual já está completo. O `data.json` fornecido pelo Frontend Mentor serve perfeitamente durante o desenvolvimento visual. Introduzir o backend cedo é a principal causa de abandono em projectos pessoais.
 
 ### Redux Toolkit
 
@@ -84,13 +84,13 @@ O Redux é introduzido apenas na Fase 4, quando o carrinho é implementado. Nas 
 
 ---
 
-## Fase 1 — Fundação do projeto
+## Fase 1 — Fundação do projecto
 
 **Duração estimada: ~1 dia**
 
-### Objetivo
+### Objectivo
 
-Ter o projeto a correr no browser com as cores e fonte corretas do design, antes de escrever qualquer componente.
+Ter o projecto a correr no browser com as cores e fonte corretas do design, antes de escrever qualquer componente.
 
 ### Passos
 
@@ -184,7 +184,7 @@ npm install -D eslint prettier eslint-config-prettier
 
 **Duração estimada: ~2–3 dias**
 
-### Objetivo
+### Objectivo
 
 Construir os componentes atómicos reutilizáveis, cada um com uma story no Storybook cobrindo todos os estados visuais.
 
@@ -260,7 +260,7 @@ Card de navegação das três categorias: Headphones, Speakers, Earphones. Com i
 
 **Duração estimada: ~3–4 dias**
 
-### Objetivo
+### Objectivo
 
 Construir todas as páginas do site usando dados estáticos do `data.json`. Sem Redux, sem API — apenas layout e responsividade.
 
@@ -362,7 +362,7 @@ Após construir cada página para desktop, adaptar para tablet (768px) e mobile 
 
 **Duração estimada: ~2–3 dias**
 
-### Objetivo
+### Objectivo
 
 Implementar toda a lógica do carrinho e do formulário de checkout.
 
@@ -508,7 +508,7 @@ export const checkoutSchema = z.object({
 
 **Duração estimada: ~3–4 dias**
 
-### Objetivo
+### Objectivo
 
 Construir a API REST que vai servir produtos e persistir pedidos.
 
@@ -571,7 +571,7 @@ export const orderItems = pgTable('order_items', {
 
 ### Rotas
 
-```
+```http
 GET  /api/products                → lista todos os produtos
 GET  /api/products/:slug          → produto por slug
 GET  /api/categories/:name        → produtos por categoria
@@ -592,7 +592,7 @@ Criar um script `server/src/db/seed.ts` que lê o `data.json` do Frontend Mentor
 
 **Duração estimada: ~1–2 dias**
 
-### Objetivo
+### Objectivo
 
 Substituir o `data.json` por chamadas reais à API.
 
@@ -656,20 +656,20 @@ Comparar cada página lado a lado com o Figma. Pontos de atenção frequentes:
 
 ### Animações e transições
 
-Adicionar com moderação — o objetivo é polimento, não distração:
+Adicionar com moderação — o objectivo é polimento, não distração:
 
 - Abertura/fecho do cart drawer (`transition-transform`)
 - Fade in do modal de confirmação
 - Hover states nos botões e links (já definidos no Tailwind)
 
-### README do projeto
+### README do projecto
 
 O README final deve incluir:
 
-- Screenshot do projeto
+- Screenshot do projecto
 - Link para o deploy e para o Storybook
 - Stack tecnológica com justificação das escolhas
-- Como correr o projeto localmente
+- Como correr o projecto localmente
 - Decisões técnicas relevantes (ex: por que construir componentes do zero)
 
 ### Deploy
@@ -683,13 +683,13 @@ O README final deve incluir:
 
 ## Regras para não desistir
 
-Estas regras existem porque a maioria dos projetos de portfólio morre de over-engineering, não de falta de capacidade.
+Estas regras existem porque a maioria dos projectos de portfólio morre de over-engineering, não de falta de capacidade.
 
 **Uma fase de cada vez, sem saltar à frente.**
 O backend começa apenas quando o frontend visual estiver completo. Ver o site funcionar visualmente é motivador e confirma que as decisões de design estão corretas antes de investir no backend.
 
 **Sem over-engineering.**
-Não há autenticação, testes E2E, CI/CD, Docker, ou microserviços neste projeto — nenhuma dessas coisas faz parte do desafio. Se surgir a tentação de os adicionar, adia para depois do deploy.
+Não há autenticação, testes E2E, CI/CD, Docker, ou microserviços neste projecto — nenhuma dessas coisas faz parte do desafio. Se surgir a tentação de os adicionar, adia para depois do deploy.
 
 **Commit diário, mesmo que pequeno.**
 Um commit com uma só alteração ainda é progresso. Ver o histórico a crescer é um motivador real.
@@ -698,8 +698,8 @@ Um commit com uma só alteração ainda é progresso. Ver o histórico a crescer
 Melhor uma página pixel-perfect do que seis incompletas. O Frontend Mentor avalia a qualidade, não a quantidade.
 
 **O Storybook é obrigatório.**
-Para portfólio, ter um Storybook a correr com os componentes documentados distingue o projeto de um simples clone. Mostra processo e disciplina.
+Para portfólio, ter um Storybook a correr com os componentes documentados distingue o projecto de um simples clone. Mostra processo e disciplina.
 
 ---
 
-_Guia gerado como referência de desenvolvimento — atualizar conforme o projeto avança._
+_Guia gerado como referência de desenvolvimento — atualizar conforme o projecto avança._
