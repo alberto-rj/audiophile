@@ -32,7 +32,7 @@ const ProductDetailedCard = ({
   };
 
   const handleQuantityChange = (value: number) => {
-    if (quantity === 0) {
+    if (!selectedItem) {
       dispatch(addItem({ id, image, name, price, slug, quantity: value }));
     } else {
       dispatch(updateQuantity({ id, quantity: value }));

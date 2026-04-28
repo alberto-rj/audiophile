@@ -265,7 +265,7 @@
 | Fase 1 — Fundação            | ✅ Concluída    |
 | Fase 2 — Componentes         | ✅ Concluída    |
 | Fase 3 — Páginas             | 🟡 Em progresso |
-| Fase 4 — Carrinho e checkout | ⬜ Não iniciada |
+| Fase 4 — Carrinho e checkout | 🟡 Em progresso |
 | Fase 5 — API                 | ⬜ Não iniciada |
 | Fase 6 — Integração          | ⬜ Não iniciada |
 | Fase 7 — Polimento e deploy  | ⬜ Não iniciada |

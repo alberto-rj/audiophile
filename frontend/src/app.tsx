@@ -7,7 +7,7 @@ import {
   NotFoundPage,
   ProductPage,
 } from '@/pages';
-import { MainLayout } from './layouts';
+import { MainLayout } from '@/layouts';
 
 const App = () => {
   return (
