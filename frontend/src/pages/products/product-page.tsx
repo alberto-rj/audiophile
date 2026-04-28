@@ -11,9 +11,10 @@ import Gallery from './gallery';
 import SuggestionSection from './suggestion-section/suggestion-section';
 
 const ProductPage = () => {
-  const params = useParams();
-
-  const { isLoading, isError, data } = useGetProductBySlugQuery(params.slug!);
+  const slug = useParams()?.slug;
+  const { isLoading, isError, data } = useGetProductBySlugQuery(slug!, {
+    skip: !slug,
+  });
 
   if (isLoading) {
     return <p>Loading...</p>;

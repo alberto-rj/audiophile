@@ -39,10 +39,11 @@ function ProductList({ products }: ProductListProps) {
 }
 
 const CategoryPage = () => {
-  const params = useParams();
+  const slug = useParams()?.slug;
 
   const { isLoading, isError, data } = useGetProductsByCategorySlugQuery(
-    params.slug!,
+    slug!,
+    { skip: !slug },
   );
 
   if (isLoading) {

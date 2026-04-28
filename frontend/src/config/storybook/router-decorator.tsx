@@ -6,8 +6,8 @@ export const RouterDecorator: Decorator = (Story, context) => {
     route?: string;
     routePath?: string;
   };
-  const route = parameters.route || '/';
-  const path = parameters.routePath || '*';
+  const route = parameters?.route || '/';
+  const path = parameters?.routePath || '*';
 
   return (
     <MemoryRouter initialEntries={[route]}>
