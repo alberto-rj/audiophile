@@ -17,9 +17,9 @@ export const navLinks = [
 ];
 
 export const socialLinks = [
-  { url: '#', Icon: Facebook, text: 'Facebook' },
-  { url: '#', Icon: Twitter, text: 'Twitter' },
-  { url: '#', Icon: Instagram, text: 'Instagram' },
+  { url: 'https://facebook.com', Icon: Facebook, text: 'Facebook' },
+  { url: 'https://twitter.com', Icon: Twitter, text: 'Twitter' },
+  { url: 'https://instagram.com', Icon: Instagram, text: 'Instagram' },
 ];
 /* links (end) */
 
