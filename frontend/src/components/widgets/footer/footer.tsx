@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { Logo } from '@/assets/icons';
 import { cn } from '@/libs/cn';
 import { navLinks, socialLinks } from '@/libs/constants';
+import { useId } from 'react';
 
 const Footer = () => {
+  const socialLinksHeadingId = useId();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -47,7 +49,7 @@ const Footer = () => {
           {/* Logo */}
           <Link
             to='/'
-            className={cn('link-focusable')}
+            className={cn('link')}
           >
             <span className={cn('sr-only')}>Audiophile - home</span>
             <Logo
@@ -71,12 +73,12 @@ const Footer = () => {
           >
             {navLinks.map(({ url, text }) => (
               <li key={text}>
-                <a
-                  href={url}
-                  className={cn('nav-link', 'link-focusable')}
+                <Link
+                  to={url}
+                  className={cn('link', 'nav-link')}
                 >
                   {text}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -126,27 +128,37 @@ const Footer = () => {
           </p>
 
           {/* Social Links */}
-          <ul
-            role='list'
-            className={cn('flex', 'items-center', 'gap-4')}
-          >
-            {socialLinks.map(({ url, Icon, text }) => (
-              <li key={text}>
-                <a
-                  href={url}
-                  className={cn('link-focusable')}
-                >
-                  <span className={cn('sr-only')}>{text}</span>
-                  {
-                    <Icon
-                      aria-hidden={true}
-                      focusable={false}
-                    />
-                  }
-                </a>
-              </li>
-            ))}
-          </ul>
+          <section aria-labelledby={socialLinksHeadingId}>
+            <h3
+              id={socialLinksHeadingId}
+              className={cn('sr-only')}
+            >
+              Our social networks
+            </h3>
+            <ul
+              role='list'
+              className={cn('flex', 'items-center', 'gap-4')}
+            >
+              {socialLinks.map(({ url, Icon, text }) => (
+                <li key={text}>
+                  <a
+                    href={url}
+                    rel='noopener noreferrer'
+                    target='_blank'
+                    className={cn('link')}
+                  >
+                    <span className={cn('sr-only')}>{text}</span>
+                    {
+                      <Icon
+                        aria-hidden={true}
+                        focusable={false}
+                      />
+                    }
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
       </div>
     </footer>

@@ -108,6 +108,7 @@
 
   /* tailwind (start) */
   --tw-border-style: solid;
+  --tw-outline-style: dashed;
   /* tailwind (end) */
 
   /* custom properties (start) */
@@ -151,6 +152,14 @@
     @apply py-(--flow-spacing) xs:py-(--flow-spacing-xs) sm:py-(--flow-spacing-sm) md:py-(--flow-spacing-md) lg:py-(--flow-spacing-lg);
   }
 
+  .region-start {
+    @apply pbs-(--flow-spacing) xs:pbs-(--flow-spacing-xs) md:pbs-(--flow-spacing-md) lg:pbs-(--flow-spacing-lg);
+  }
+
+  .region-end {
+    @apply pbe-(--flow-spacing) xs:pbe-(--flow-spacing-xs) md:pbe-(--flow-spacing-md) lg:pbe-(--flow-spacing-lg);
+  }
+
   .flow {
     @apply flex flex-col gap-(--flow-spacing) xs:gap-(--flow-spacing-xs) sm:gap-(--flow-spacing-sm) md:gap-(--flow-spacing-md) lg:gap-(--flow-spacing-lg);
   }
@@ -159,12 +168,29 @@
     @apply pbs-(--flow-spacing) xs:pbs-(--flow-spacing-xs) md:pbs-(--flow-spacing-md) lg:pbs-(--flow-spacing-lg);
   }
 
-  .link-focusable {
-    @apply focus:outline focus:outline-primary-400 focus-visible:outline focus-visible:outline-primary-400;
+  .link {
+    @apply not-disabled:cursor-pointer
+    
+    hover:text-primary-400 
+    hover:[&_svg]:fill-primary-400
+    
+    focus:text-primary-400 
+    focus:outline-2
+    focus:outline-dashed 
+    focus:outline-offset-2 
+    focus:outline-primary-400 
+    focus:[&_svg]:fill-primary-400
+    
+    focus-visible:text-primary-400 
+    focus-visible:outline-2 
+    focus-visible:outline-dashed 
+    focus-visible:outline-offset-2 
+    focus-visible:outline-primary-400
+    focus-visible:[&_svg]:fill-primary-400;
   }
 
   .nav-link {
-    @apply text-xs uppercase text-white hover:text-primary-400;
+    @apply text-xs uppercase text-white;
   }
 }
 
