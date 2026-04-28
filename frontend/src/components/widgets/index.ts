@@ -18,3 +18,5 @@ export { default as ProductCard } from './product-card/product-card';
 export { default as CartModal } from './cart-modal/cart-modal';
 
 export { default as OrderConfirmationModal } from './order-confirmation-modal/order-confirmation-modal';
+
+export { default as GoBack } from './go-back/go-back';
