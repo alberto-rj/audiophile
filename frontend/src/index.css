@@ -12,17 +12,29 @@
   /* typography (start) */
   --font-display: 'Manrope' 'sans-serif';
 
-  /* xs */
-  --text-xs: 0.8125rem; /* 13px */
-  --text-xs--line-height: 1.923; /* 25 / 13 */
-  --text-xs--letter-spacing: 0.0625em; /* 1px */
-  --text-xs--font-weight: 700;
-
   /* form */
   --text-form: 0.875rem; /* 14px */
   --text-form--line-height: 1; /* 14 / 14 */
   --text-form--letter-spacing: -0.015625em; /* -0.25px */
   --text-form--font-weight: 700;
+
+  /* 3xs */
+  --text-3xs: 0.75rem; /* 12px */
+  --text-3xs--line-height: 1; /* 12 / 12 */
+  --text-3xs--letter-spacing: -0.013125em; /* -0.21px */
+  --text-3xs--font-weight: 700;
+
+  /* 2xs */
+  --text-2xs: 0.8125rem; /* 13px */
+  --text-2xs--line-height: 1.923; /* 25 / 13 */
+  --text-2xs--letter-spacing: 0.0625em; /* 1px */
+  --text-2xs--font-weight: 700;
+
+  /* xs */
+  --text-xs: 0.875rem; /* 14px */
+  --text-xs--line-height: 1; /* 14 / 14 */
+  --text-xs--letter-spacing: -0.015625em; /* -0.25px */
+  --text-xs--font-weight: 700;
 
   /* sm */
   --text-sm: 0.875rem; /* 14px */
@@ -112,9 +124,9 @@
   /* tailwind (end) */
 
   /* custom properties (start) */
-  --form-group-gap-y: 2rem;
-  --form-group-gap-y-md: 2rem;
-  --form-group-gap-y-lg: 3rem;
+  --form-flow-spacing: 2rem;
+  --form-flow-spacing-md: 2rem;
+  --form-flow-spacing-lg: 3rem;
 
   /* flow spacing */
   --flow-spacing: 7.5rem;
@@ -135,7 +147,7 @@
   }
 
   body {
-    @apply text-base;
+    @apply text-base text-black/50 font-display;
   }
 
   picture {
@@ -190,51 +202,6 @@
   }
 
   .nav-link {
-    @apply text-xs uppercase text-white;
+    @apply text-xs text-white uppercase;
   }
-}
-
-@layer components {
-  /* form (start) */
-  .form-flow {
-    @apply flex flex-col gap-(--form-group-gap-y) lg:gap-(--form-group-gap-y-lg);
-  }
-
-  .form-group {
-    @apply pbs-4 first:mbs-(--form-group-gap-y) first:lg:mbs-(--form-group-gap-y-lg);
-  }
-
-  .form-group-name {
-    @apply block uppercase text-xs text-primary-400;
-  }
-
-  .form-field {
-    @apply w-full flex flex-col gap-2;
-  }
-
-  .form-grid {
-    @apply w-full grid gap-x-4 gap-y-4 md:grid-cols-2 lg:gap-y-6;
-  }
-
-  .form-grid-item {
-  }
-
-  .form-grid--full {
-  }
-
-  .form-subgroup {
-    @apply pbs-4;
-  }
-
-  .form-subgroup .form-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
-  }
-
-  .form-subgroup .form-grid-item {
-  }
-
-  .form-subgroup-name {
-    @apply text-xs;
-  }
-  /* form (end) */
 }

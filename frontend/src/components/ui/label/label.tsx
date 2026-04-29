@@ -6,17 +6,19 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   isInvalid?: boolean;
 }
 
-const Label = ({ isInvalid = false, children, ...props }: LabelProps) => {
+const Label = ({ isInvalid = false, className, ...props }: LabelProps) => {
   return (
     <label
-      className={cn('text-xs', {
-        'text-danger-400': isInvalid,
-        'text-black': !isInvalid,
-      })}
       {...props}
-    >
-      {children}
-    </label>
+      className={cn(
+        'text-3xs',
+        {
+          'text-danger-400': isInvalid,
+          'text-black': !isInvalid,
+        },
+        className,
+      )}
+    />
   );
 };
 

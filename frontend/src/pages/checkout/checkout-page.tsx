@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 import { Button, Card } from '@/components/ui';
 import { GoBack } from '@/components/widgets';
@@ -8,6 +8,8 @@ import { CheckoutForm } from './checkout-form';
 import { CartSummary } from './cart-summary';
 
 const CheckoutPage = () => {
+  const [isValid, setIsValid] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const formId = useId();
 
   useEffect(() => {
@@ -56,8 +58,12 @@ const CheckoutPage = () => {
             )}
           >
             Checkout
-            <CheckoutForm id={formId} />
           </h1>
+          <CheckoutForm
+            id={formId}
+            onSubmittingChange={setIsSubmitting}
+            onValidChange={setIsValid}
+          />
         </Card>
         <Card
           className={cn(
@@ -82,7 +88,7 @@ const CheckoutPage = () => {
               type='submit'
               form={formId}
               variant='primary'
-              disabled={true}
+              disabled={!isValid || isSubmitting}
               className={cn('inline-full')}
             >
               Continue & pay

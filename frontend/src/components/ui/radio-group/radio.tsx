@@ -4,6 +4,7 @@ interface RadioProps {
   label: string;
   value: string;
   name: string;
+  ariaDescribedby?: string;
   checked?: boolean;
   onChange: (value: string) => void;
   disabled?: boolean;
@@ -11,6 +12,7 @@ interface RadioProps {
 }
 
 const Radio = ({
+  ariaDescribedby,
   label,
   value,
   name,
@@ -67,6 +69,7 @@ const Radio = ({
         disabled={disabled}
         onChange={handleChange}
         className='sr-only peer'
+        aria-describedby={ariaDescribedby}
       />
       <span
         className={cn(
