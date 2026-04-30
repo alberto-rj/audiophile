@@ -2,7 +2,13 @@ import { http, HttpResponse } from 'msw';
 
 import { products } from '@/libs/mocks/products';
 import { categories } from '@/libs/mocks/categories';
-import type { Product } from '@/libs/types';
+import type {
+  Category,
+  CreateOrderPayload,
+  CreateOrderResponse,
+  Product,
+} from '@/libs/types';
+import { orders } from '@/libs/mocks/orders';
 
 function sortProductsByNewFirst(products: Product[]) {
   return [...products].sort((a, b) => {
@@ -19,52 +25,77 @@ function sortProductsByNewFirst(products: Product[]) {
 }
 
 export const handlers = [
-  http.get('/api/categories', () => {
+  http.get<never, never, Category[]>('/api/categories', () => {
     return HttpResponse.json(categories);
   }),
 
-  http.get<{ slug: string }>('/api/categories/:slug', ({ params }) => {
-    const foundCategory = categories.find(
-      (category) => category.slug === params.slug,
-    );
+  http.get<{ slug: string }, never, Category>(
+    '/api/categories/:slug',
+    ({ params }) => {
+      const foundCategory = categories.find(
+        (category) => category.slug === params.slug,
+      );
 
-    if (!foundCategory) {
-      return new HttpResponse(null, { status: 404 });
-    }
+      if (!foundCategory) {
+        return new HttpResponse(null, { status: 404 });
+      }
 
-    return HttpResponse.json(foundCategory);
-  }),
+      return HttpResponse.json(foundCategory);
+    },
+  ),
 
-  http.get<{ slug: string }>('/api/categories/:slug/products', ({ params }) => {
-    const foundCategory = categories.find(
-      (category) => category.slug === params.slug,
-    );
+  http.get<{ slug: string }, Product[]>(
+    '/api/categories/:slug/products',
+    ({ params }) => {
+      const foundCategory = categories.find(
+        (category) => category.slug === params.slug,
+      );
 
-    if (!foundCategory) {
-      return new HttpResponse(null, { status: 404 });
-    }
+      if (!foundCategory) {
+        return new HttpResponse(null, { status: 404 });
+      }
 
-    const filteredProducts = sortProductsByNewFirst(
-      products.filter((p) => p.category === params.slug),
-    );
+      const filteredProducts = sortProductsByNewFirst(
+        products.filter((p) => p.category === params.slug),
+      );
 
-    return HttpResponse.json({
-      ...foundCategory,
-      items: filteredProducts,
-    });
-  }),
+      return HttpResponse.json({
+        ...foundCategory,
+        items: filteredProducts,
+      });
+    },
+  ),
 
-  http.get('/api/products', () => {
+  http.get<never, never, Product[]>('/api/products', () => {
     return HttpResponse.json(sortProductsByNewFirst(products));
   }),
 
-  http.get<{ slug: string }>('/api/products/:slug', ({ params }) => {
-    const product = products.find((p) => p.slug === params.slug);
+  http.get<{ slug: string }, never, Product>(
+    '/api/products/:slug',
+    ({ params }) => {
+      const product = products.find((p) => p.slug === params.slug);
 
-    if (!product) {
-      return new HttpResponse(null, { status: 404 });
-    }
+      if (!product) {
+        return new HttpResponse(null, { status: 404 });
+      }
 
-    return HttpResponse.json(product);
-  }),
+      return HttpResponse.json(product);
+    },
+  ),
+
+  http.post<never, CreateOrderPayload, CreateOrderResponse>(
+    '/api/orders',
+    async ({ request }) => {
+      const payload = await request.json();
+
+      const createdOrder = {
+        ...payload,
+        id: orders.length + 1,
+        number: `ORDER-${orders.length + 1}`,
+        createdAt: new Date().toISOString(),
+      };
+
+      return HttpResponse.json(createdOrder, { status: 201 });
+    },
+  ),
 ];
