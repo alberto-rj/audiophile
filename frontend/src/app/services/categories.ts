@@ -1,10 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { env } from '@/config/env';
 import type { Category, CategoryList } from '@/libs/types';
+
+const { VITE_API_BASE_URL } = env;
 
 export const categoryApi = createApi({
   reducerPath: 'categoriesApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/categories' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${VITE_API_BASE_URL}/categories` }),
   endpoints: (builder) => ({
     getCategories: builder.query<Category[], void>({
       query: () => '/',
