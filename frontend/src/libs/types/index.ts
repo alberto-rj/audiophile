@@ -1,3 +1,5 @@
+import type { CheckoutFormData } from '@/libs/schemas';
+
 export interface ResponsiveImageType {
   mobile: string;
   tablet: string;
@@ -113,7 +115,6 @@ export interface InTheBoxSectionContent {
 
 export type PaymentMethod = 'e-money' | 'cash-on-delivery';
 
-/* Cart */
 export interface CartItem {
   id: number;
   slug: string;
@@ -122,3 +123,20 @@ export interface CartItem {
   image: ResponsiveImageType;
   quantity: number;
 }
+
+export interface Order extends CheckoutFormData {
+  id: number;
+  number: string;
+  items: CartItem[];
+  total: number;
+  createdAt: string;
+  deliveredAt?: string;
+  cancelledAt?: string;
+}
+
+export interface CreateOrderPayload extends CheckoutFormData {
+  items: CartItem[];
+  total: number;
+}
+
+export type CreateOrderResponse = Order;

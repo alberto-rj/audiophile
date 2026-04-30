@@ -9,6 +9,7 @@ import { useCheckoutForm } from '@/hooks';
 import { cn } from '@/libs/cn';
 import type { CheckoutFormData } from '@/libs/schemas';
 import { CashOnDelivery } from '@/assets/icons';
+import { useCreateOrderMutation } from '@/app/services/orders';
 
 type FormFieldAlertProps = React.ComponentProps<'p'>;
 
@@ -157,18 +158,24 @@ export const CheckoutForm = ({
   const cartItems = useSelector(selectItems);
   const grandTotal = useSelector(selectGrandTotal);
 
+  const [createOrder, { isLoading }] = useCreateOrderMutation();
+
   const {
     register,
     control,
     handleSubmit,
     watch,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid },
+    reset,
   } = useCheckoutForm();
 
   useEffect(() => {
+    onSubmittingChange(isLoading);
+  }, [isLoading, onSubmittingChange]);
+
+  useEffect(() => {
     onValidChange(isValid);
-    onSubmittingChange(isSubmitting);
-  }, [isValid, onValidChange, isSubmitting, onSubmittingChange]);
+  }, [isValid, onValidChange]);
 
   const paymentMethod = watch('paymentMethod');
 
@@ -176,20 +183,19 @@ export const CheckoutForm = ({
     try {
       await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
 
-      const response = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, items: cartItems, total: grandTotal }),
-      });
+      const response = await createOrder({
+        ...data,
+        items: cartItems,
+        total: grandTotal,
+      }).unwrap();
 
-      const responseBody = await response.json();
-
-      console.log(responseBody);
+      console.log(response);
       dispatch(clearCart());
+      reset();
 
       // open order conformation modal
     } catch (error) {
-      console.error(error);
+      console.error('Order failed:', error);
     }
   };
 
