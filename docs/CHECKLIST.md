@@ -76,7 +76,7 @@
 ### Setup
 
 - [x] Instalar React Router (`npm install react-router-dom`)
-- [x] Definir as quatro rotas (`/`, `/category/:name`, `/product/:slug`, `/checkout`)
+- [x] Definir as quatro rotas (`/`, `/category/:slug`, `/product/:slug`, `/checkout`)
 - [x] Importar e tipar o `data.json`
 
 ### Navbar
@@ -152,13 +152,13 @@
 
 ### Página Checkout
 
-- [ ] Instalar `react-hook-form`, `zod` e `@hookform/resolvers`
-- [ ] Schema Zod com todos os campos validados
+- [x] Instalar `react-hook-form`, `zod` e `@hookform/resolvers`
+- [x] Schema Zod com todos os campos validados
 - [x] Campos de billing details (nome, email, telefone)
 - [x] Campos de shipping info (endereço, CEP, cidade, país)
 - [x] Opção de pagamento: e-money ou cash
 - [x] Campos de e-money (número + PIN) visíveis apenas quando selecionado
-- [ ] Mensagens de erro por campo
+- [x] Mensagens de erro por campo
 - [x] Resumo do pedido visível na sidebar
 - [x] Totais corretos no resumo (subtotal, envio, IVA, grand total)
 
@@ -194,7 +194,7 @@
 
 - [ ] `GET /api/products` — lista todos os produtos
 - [ ] `GET /api/products/:slug` — produto por slug
-- [ ] `GET /api/categories/:name` — produtos por categoria
+- [ ] `GET /api/categories/:slug` — produtos por categoria
 - [ ] `POST /api/orders` — cria novo pedido e salva os items
 - [ ] Tratamento de erros (404, 500) com respostas JSON
 
