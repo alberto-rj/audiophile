@@ -66,7 +66,7 @@ const Radio = ({
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
-        className='sr-only peer'
+        className={cn('sr-only', 'peer')}
         aria-describedby={ariaDescribedby}
       />
       <span
