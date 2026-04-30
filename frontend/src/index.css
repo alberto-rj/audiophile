@@ -12,12 +12,6 @@
   /* typography (start) */
   --font-display: 'Manrope' 'sans-serif';
 
-  /* form */
-  --text-form: 0.875rem; /* 14px */
-  --text-form--line-height: 1; /* 14 / 14 */
-  --text-form--letter-spacing: -0.015625em; /* -0.25px */
-  --text-form--font-weight: 700;
-
   /* 3xs */
   --text-3xs: 0.75rem; /* 12px */
   --text-3xs--line-height: 1; /* 12 / 12 */
