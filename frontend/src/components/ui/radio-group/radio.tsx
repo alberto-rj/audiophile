@@ -28,7 +28,7 @@ const Radio = ({
   return (
     <label
       className={cn(
-        'w-full',
+        'inline-full',
         'flex',
         'items-center',
         'gap-4',
@@ -38,7 +38,7 @@ const Radio = ({
         'border-gray-600',
         'rounded-lg',
         'cursor-pointer',
-        'text-form',
+        'text-xs',
         'text-black',
 
         'hover:border-primary-400',
@@ -46,18 +46,16 @@ const Radio = ({
         'has-checked:border-primary-400',
 
         'has-focus:border-primary-400',
-        'has-focus:outline',
-        'has-focus:outline-primary-400',
-        'has-focus-visible:outline',
-        'has-focus-visible:outline-primary-400',
         'has-focus-visible:border-primary-400',
+
+        'focus-within',
 
         'has-disabled:cursor-not-allowed',
         'has-disabled:select-none',
         'has-disabled:pointer-events-none',
         'has-disabled:opacity-50',
         'has-disabled:border-gray-400',
-        'has-disabled:text-black-o-50',
+        'has-disabled:text-black/50',
         className,
       )}
     >

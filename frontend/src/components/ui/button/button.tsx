@@ -12,13 +12,8 @@ const buttonVariants = cva(
     'items-center',
     'cursor-pointer',
     'font-display',
-    'text-xs',
+    'text-2xs',
     'uppercase',
-
-    'focus:outline',
-    'focus:outline-gray-900',
-    'focus-visible:outline',
-    'focus-visible:outline-gray-900',
 
     'disabled:bg-black',
     'disabled:text-gray-200',
@@ -40,6 +35,7 @@ const buttonVariants = cva(
 
           'hover:bg-primary-200',
         ),
+
         secondary: cn(
           'min-inline-40',
           'px-8',
@@ -50,6 +46,7 @@ const buttonVariants = cva(
 
           'hover:bg-gray-800',
         ),
+
         outline: cn(
           'min-inline-40',
           'px-8',
@@ -63,6 +60,7 @@ const buttonVariants = cva(
           'hover:bg-black',
           'hover:text-white',
         ),
+
         link: cn(
           '[&_svg]:fill-primary-400',
           'text-black-o-50',

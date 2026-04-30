@@ -124,6 +124,13 @@
   /* tailwind (end) */
 
   /* custom properties (start) */
+  /* outline */
+  --outline-width: 3px;
+  --outline-offset: 2px;
+  --outline-style: dotted;
+  --outline-color: var(--color-primary-200);
+
+  /* flow spacing */
   --form-flow-spacing: 2rem;
   --form-flow-spacing-md: 2rem;
   --form-flow-spacing-lg: 3rem;
@@ -153,11 +160,18 @@
   picture {
     @apply block w-full;
   }
+
+  *:focus,
+  *:focus-visible,
+  .focus-within:focus-within {
+    outline: var(--outline-width) var(--outline-style) var(--outline-color);
+    outline-offset: var(--outline-offset);
+  }
 }
 
 @layer utilities {
   .wrapper {
-    @apply w-full mx-auto px-(--wrapper-padding) md:max-w-172 md:px-(--wrapper-padding-md) lg:max-w-277.5;
+    @apply inline-full mx-auto px-(--wrapper-padding) md:max-inline-172 md:px-(--wrapper-padding-md) lg:max-inline-277.5;
   }
 
   .region {
@@ -187,17 +201,9 @@
     hover:[&_svg]:fill-primary-400
     
     focus:text-primary-400 
-    focus:outline-2
-    focus:outline-dashed 
-    focus:outline-offset-2 
-    focus:outline-primary-400 
     focus:[&_svg]:fill-primary-400
     
     focus-visible:text-primary-400 
-    focus-visible:outline-2 
-    focus-visible:outline-dashed 
-    focus-visible:outline-offset-2 
-    focus-visible:outline-primary-400
     focus-visible:[&_svg]:fill-primary-400;
   }
 

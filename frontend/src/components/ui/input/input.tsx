@@ -1,12 +1,12 @@
-import { cva } from 'class-variance-authority';
 import type { InputHTMLAttributes } from 'react';
+import { cva } from 'class-variance-authority';
 
 import { cn } from '@/libs/cn';
 
 const inputVariants = cva(
   cn(
     'inline-block',
-    'w-full',
+    'inline-full',
     'px-6',
     'py-4.5',
     'bg-white',
@@ -24,25 +24,20 @@ const inputVariants = cva(
     'disabled:pointer-events-none',
     'disabled:cursor-not-allowed',
     'disabled:select-none',
-
-    'focus:outline',
   ),
   {
     variants: {
       isInvalid: {
         false: cn(
           'border-gray-600',
-          'focus:outline-primary-400',
+          'focus:border-primary-400',
           'focus:caret-primary-400',
-          'focus-visible:outline-primary-400',
           'focus-visible:caret-primary-400',
         ),
 
         true: cn(
           'border-danger-400',
-          'focus:outline-danger-400',
           'focus:caret-danger-400',
-          'focus-visible:outline-danger-400',
           'focus-visible:caret-danger-400',
         ),
       },

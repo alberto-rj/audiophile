@@ -17,11 +17,7 @@ const QuantityButton = ({ className, ...props }: QuantityButtonProps) => {
         'hover:text-primary-400',
 
         'focus:text-primary-400',
-        'focus:outline',
-        'focus:outline-primary-400',
         'focus-visible:text-primary-400',
-        'focus-visible:outline',
-        'focus-visible:outline-primary-400',
         className,
       )}
     />
@@ -114,7 +110,7 @@ const QuantitySelector = ({
         value={value}
         className={cn(
           'd-block',
-          'w-full',
+          'inline-full',
           'p-2',
           'text-center',
           '[-moz-appearance:textfield]',
@@ -124,11 +120,8 @@ const QuantitySelector = ({
           '[&::-webkit-inner-spin-button]:appearance-none',
           '[&::-webkit-inner-spin-button]:m-0',
 
-          'focus:outline',
-          'focus:outline-primary-400',
           'focus:caret-primary-400',
-          'focus-visible:outline-primary-400',
-          'focus-visible:outline-primary-400',
+
           'focus-visible:caret-primary-400',
         )}
       />
