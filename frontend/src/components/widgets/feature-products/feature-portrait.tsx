@@ -75,7 +75,13 @@ const FeaturePortrait = ({
         >
           <h2
             id={headingId}
-            className={cn('text-md', 'xs:text-xl', 'uppercase')}
+            className={cn(
+              'text-md',
+              'xs:text-xl',
+
+              'text-black',
+              'uppercase',
+            )}
           >
             {title}
           </h2>
