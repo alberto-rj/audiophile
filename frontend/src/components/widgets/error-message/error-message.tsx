@@ -19,7 +19,7 @@ const ErrorMessageDescription = ({
 
 type ErrorMessageProps = ComponentProps<'div'>;
 
-const ErrorMessage = ({ ...props }: ErrorMessageProps) => {
+const ErrorMessage = ({ className, ...props }: ErrorMessageProps) => {
   return (
     <div
       {...props}
@@ -34,6 +34,8 @@ const ErrorMessage = ({ ...props }: ErrorMessageProps) => {
         'text-center',
 
         'md:gap-10',
+
+        className,
       )}
     />
   );
