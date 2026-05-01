@@ -7,4 +7,4 @@ export {
   speakerZX7,
 } from './products';
 
-export { bestGear, hero } from './images';
+export { hero } from './images';

@@ -12,10 +12,6 @@ import earphonesYX1Mobile from '@/assets/home/mobile/image-earphones-yx1.jpg';
 import earphonesYX1Tablet from '@/assets/home/tablet/image-earphones-yx1.jpg';
 import earphonesYX1Desktop from '@/assets/home/desktop/image-earphones-yx1.jpg';
 
-import bestGearMobile from '@/assets/shared/mobile/image-best-gear.jpg';
-import bestGearTablet from '@/assets/shared/tablet/image-best-gear.jpg';
-import bestGearDesktop from '@/assets/shared/desktop/image-best-gear.jpg';
-
 export const earphonesYX1: ResponsiveImageType = {
   mobile: earphonesYX1Mobile,
   tablet: earphonesYX1Tablet,
@@ -32,10 +28,4 @@ export const hero: ResponsiveImageType = {
   mobile: heroMobile,
   tablet: heroTablet,
   desktop: heroDesktop,
-};
-
-export const bestGear: ResponsiveImageType = {
-  mobile: bestGearMobile,
-  tablet: bestGearTablet,
-  desktop: bestGearDesktop,
 };
