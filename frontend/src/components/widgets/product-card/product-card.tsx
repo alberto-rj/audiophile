@@ -88,15 +88,7 @@ const ProductCard = ({
               {title}
             </h2>
           </div>
-          <p
-            className={cn(
-              'text-base',
-
-              'text-black/50',
-            )}
-          >
-            {description}
-          </p>
+          <p>{description}</p>
         </div>
         <Button
           variant={'primary'}
