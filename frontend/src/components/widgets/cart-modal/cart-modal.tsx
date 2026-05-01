@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import type { AppDispatch } from '@/app/store';
 import {
   clearCart,
-  selectGrandTotal,
   selectItems,
   selectItemsCount,
+  selectSubtotal,
   updateQuantity,
 } from '@/app/features/cart';
 import { Button, Modal } from '@/components/ui';
@@ -21,7 +21,7 @@ const CartModal = () => {
 
   const items = useSelector(selectItems);
   const itemsCount = useSelector(selectItemsCount);
-  const grandTotal = useSelector(selectGrandTotal);
+  const grandTotal = useSelector(selectSubtotal);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -125,12 +125,7 @@ const CartModal = () => {
                 <Modal.Title asChild>
                   <h3
                     id={headingId}
-                    className={cn(
-                      'max-inline-50',
-                      'truncate',
-                      'uppercase',
-                      'text-md',
-                    )}
+                    className={cn('max-inline-50', 'truncate', 'h6')}
                   >
                     <span className={cn('sr-only')}>
                       Cart - {itemsCount} item(s)
