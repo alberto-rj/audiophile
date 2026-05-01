@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui';
+import { ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import type { Product } from '@/libs/types';
-import { ResponsiveImage } from '@/components/widgets';
 import { createProductRoute } from '@/libs/app-routes';
 
 interface HeroProps {
@@ -56,7 +56,7 @@ const Hero = ({
       >
         <div
           className={cn(
-            'max-inline-95',
+            'max-inline-116',
             'absolute',
             'inset-bs-1/2',
             'inset-s-1/2',
@@ -111,17 +111,19 @@ const Hero = ({
                   New product
                 </span>
               )}
-              <h1 className={cn('text-2xl', 'md:text-4xl')}>{name}</h1>
-            </div>
-            <p
-              className={cn(
-                'text-base',
+              <h1
+                className={cn(
+                  'text-2xl',
 
-                'text-white/75',
-              )}
-            >
-              {description}
-            </p>
+                  'md:text-4xl',
+
+                  'uppercase',
+                )}
+              >
+                {name}
+              </h1>
+            </div>
+            <p className={cn('text-white/75')}>{description}</p>
           </div>
           <Button
             variant={'primary'}

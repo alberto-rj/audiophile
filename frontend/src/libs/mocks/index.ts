@@ -6,5 +6,3 @@ export {
   earphonesYX1,
   speakerZX7,
 } from './products';
-
-export { bestGear, hero } from './images';

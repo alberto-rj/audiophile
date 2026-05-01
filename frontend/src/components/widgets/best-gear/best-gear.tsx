@@ -1,8 +1,8 @@
 import { useId } from 'react';
 
-import mobile from '@/assets/shared/mobile/image-best-gear.jpg';
-import tablet from '@/assets/shared/tablet/image-best-gear.jpg';
-import desktop from '@/assets/shared/desktop/image-best-gear.jpg';
+import mobile from '@/assets/images/image-best-gear-mobile.jpg';
+import tablet from '@/assets/images/image-best-gear-tablet.jpg';
+import desktop from '@/assets/images/image-best-gear-desktop.jpg';
 
 import type { ResponsiveImageType } from '@/libs/types';
 import { cn } from '@/libs/cn';
@@ -22,10 +22,7 @@ const BestGear = ({ className }: BestGearProps) => {
   const headingId = useId();
 
   return (
-    <section
-      aria-labelledby={headingId}
-      className={cn('bg-white', 'text-black')}
-    >
+    <section aria-labelledby={headingId}>
       <div
         className={cn(
           'flex',
@@ -55,7 +52,7 @@ const BestGear = ({ className }: BestGearProps) => {
         />
         <div
           className={cn(
-            'max-w-143.25',
+            'max-inline-143.25',
             'justify-self-center',
             'flex',
             'flex-col',
@@ -75,12 +72,14 @@ const BestGear = ({ className }: BestGearProps) => {
               'text-xl',
 
               'md:text-3xl',
+
+              'text-black',
             )}
           >
             Bringing you the <span className={'text-primary-400'}>best</span>{' '}
             audio gear
           </h2>
-          <p className='text-base text-black-o-50'>
+          <p>
             Located at the heart of New York City, Audiophile is the premier
             store for high end headphones, earphones, speakers, and audio
             accessories. We have a large showroom and luxury demonstration rooms

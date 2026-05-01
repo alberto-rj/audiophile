@@ -1,7 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fn } from 'storybook/test';
-import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { addItem } from '@/app/features/cart';
 import type { AppDispatch } from '@/app/store';
@@ -25,12 +25,12 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: ({ open, ...orderConfirmationModalProps }) => {
+  render: ({ items, open, ...orderConfirmationModalProps }) => {
     const [openModal, setOpenModal] = useState<boolean>(open === true);
 
     const dispatch = useDispatch<AppDispatch>();
 
-    cartItems.forEach((item) => dispatch(addItem(item)));
+    items.forEach((item) => dispatch(addItem(item)));
 
     const handleOpenChange = (open: boolean) => {
       setOpenModal(open);
