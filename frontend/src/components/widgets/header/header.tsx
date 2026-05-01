@@ -8,7 +8,7 @@ const Header = ({ title }: HeaderProps) => {
   return (
     <header
       className={cn(
-        'w-full',
+        'inline-full',
         'flex',
         'justify-center',
         'items-center',
