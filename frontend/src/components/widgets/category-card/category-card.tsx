@@ -4,28 +4,35 @@ import { ArrowRight } from '@/assets/icons';
 import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
 import type { Category } from '@/libs/types';
+import { createCategoryRoute } from '@/libs/app-routes';
 
 interface CategoryCardProps {
   category: Category;
+  className?: string;
 }
 
 const CategoryCard = ({
   category: { slug, image, name },
+  className,
 }: CategoryCardProps) => {
   return (
     <Link
-      to={`/categories/${slug}`}
+      to={createCategoryRoute(slug)}
       className={cn(
-        'relative',
-        'inline-grid',
-        'items-end',
-        'justify-center',
-        'w-full',
-        'min-h-51',
-        'px-8',
-        'pb-7.5',
-        'rounded-lg',
+        'inline-full',
+        'flex',
+        'flex-col',
+        'justify-end',
+        'p-6',
+        'mbs-(--category-card-margin)',
+
+        'lg:p-8',
+        'lg:mbs-(--category-card-margin-lg)',
+
         'bg-gray-400',
+        'rounded-lg',
+
+        className,
       )}
     >
       <span className={cn('sr-only')}>Shop {name}</span>
@@ -33,29 +40,30 @@ const CategoryCard = ({
         alt=''
         src={image}
         className={cn(
-          'absolute',
-          'top-0',
-          'left-1/2',
-          '-translate-x-1/2',
-          '-translate-y-1/2',
-          'size-50',
+          'aspect-90/103',
           'object-cover',
+          '-mbs-(--category-card-margin)',
+
+          'lg:aspect-125/126',
+          'lg:-mbs-(--category-card-margin-lg)',
         )}
-        width={200}
-        height={200}
         loading='lazy'
       />
       <div
         aria-hidden={true}
-        className={cn('grid', 'gap-4')}
+        className={cn('flex', 'flex-col', 'items-center', 'gap-4')}
       >
-        <span className={cn('text-md', 'uppercase')}>{name}</span>
+        <span className={cn('h6')}>{name}</span>
         <Button
           variant='link'
           asChild
         >
           <span>
-            Shop <ArrowRight />
+            Shop{' '}
+            <ArrowRight
+              focusable={false}
+              aria-hidden={true}
+            />
           </span>
         </Button>
       </div>

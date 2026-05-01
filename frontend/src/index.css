@@ -136,6 +136,10 @@
   --flow-spacing-md: 7.5rem;
   --flow-spacing-lg: 10rem;
 
+  /* category card */
+  --category-card-margin: 7.1875rem;
+  --category-card-margin-lg: 8.875rem;
+
   /* wrapper padding */
   --wrapper-padding: 1.25rem;
   --wrapper-padding-md: 2.5rem;

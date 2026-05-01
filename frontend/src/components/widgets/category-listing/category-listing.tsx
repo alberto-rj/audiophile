@@ -17,18 +17,16 @@ const CategoryListing = () => {
     <ul
       role='list'
       className={cn(
-        'w-full',
+        'inline-full',
         'grid',
         'grid-cols-[repeat(1,minmax(0,20.4375em))]',
-        'gap-x-8',
-        'gap-y-41',
-        'pbs-25',
+        'gap-4',
 
         'sm:grid-cols-[repeat(2,minmax(0,20.4375em))]',
-        'sm:gap-x-2.5',
+        'sm:gap-2.5',
 
         'lg:grid-cols-[repeat(3,minmax(0,21.875em))]',
-        'lg:gap-x-7.5',
+        'lg:gap-7.5',
       )}
     >
       {categories?.map((category) => (
