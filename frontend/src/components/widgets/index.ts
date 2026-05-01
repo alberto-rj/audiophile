@@ -22,3 +22,5 @@ export { default as OrderConfirmationModal } from './order-confirmation-modal/or
 export { default as GoBack } from './go-back/go-back';
 
 export { default as PageError } from './page-error/page-error';
+
+export { default as ErrorMessage } from './error-message/error-message';
