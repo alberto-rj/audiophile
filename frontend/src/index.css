@@ -205,3 +205,29 @@
     @apply text-xs text-white uppercase;
   }
 }
+
+@layer components {
+  .h1 {
+    @apply text-4xl text-black uppercase;
+  }
+
+  .h2 {
+    @apply text-3xl text-black uppercase;
+  }
+
+  .h3 {
+    @apply text-2xl text-black uppercase;
+  }
+
+  .h4 {
+    @apply text-xl text-black uppercase;
+  }
+
+  .h5 {
+    @apply text-lg text-black uppercase;
+  }
+
+  .h6 {
+    @apply text-md text-black uppercase;
+  }
+}
