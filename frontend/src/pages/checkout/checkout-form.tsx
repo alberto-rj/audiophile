@@ -1,4 +1,4 @@
-import { useEffect, type ComponentProps } from 'react';
+import { useEffect, useState, type ComponentProps } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller } from 'react-hook-form';
 
@@ -159,8 +159,9 @@ export const CheckoutForm = ({
   const cartItems = useSelector(selectItems);
   const grandTotal = useSelector(selectGrandTotal);
 
-  const [createOrder, { isLoading, isError, isSuccess }] =
-    useCreateOrderMutation();
+  const [createOrder, { isLoading }] = useCreateOrderMutation();
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const {
     register,
@@ -179,35 +180,37 @@ export const CheckoutForm = ({
     onValidChange(isValid);
   }, [isValid, onValidChange]);
 
-  useEffect(() => {
-    alert('Failed to create order');
-  }, [isError]);
-
   const paymentMethod = watch('paymentMethod');
 
   const onSubmit = async (data: CheckoutFormData) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 5 * 1000));
-
-      const response = await createOrder({
+      await createOrder({
         ...data,
         items: cartItems,
         total: grandTotal,
       }).unwrap();
 
-      console.log(response);
-      dispatch(clearCart());
       reset();
-
-      // open order conformation modal
+      setIsModalOpen(true);
     } catch (error) {
       console.error('Order failed:', error);
     }
   };
 
+  const handleOpenChange = (open: boolean) => {
+    setIsModalOpen(open);
+
+    if (!open) {
+      dispatch(clearCart());
+    }
+  };
+
   return (
     <>
-      <OrderConfirmationModal open={isSuccess} />
+      <OrderConfirmationModal
+        open={isModalOpen}
+        onOpenChange={handleOpenChange}
+      />
       <form
         {...formProps}
         id={id}
