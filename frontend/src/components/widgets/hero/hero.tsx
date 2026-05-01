@@ -4,6 +4,7 @@ import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
 import type { Product } from '@/libs/types';
 import { ResponsiveImage } from '@/components/widgets';
+import { createProductRoute } from '@/libs/app-routes';
 
 interface HeroProps {
   product: Product;
@@ -55,10 +56,10 @@ const Hero = ({
       >
         <div
           className={cn(
-            'max-w-95',
+            'max-inline-95',
             'absolute',
-            'top-1/2',
-            'left-1/2',
+            'inset-bs-1/2',
+            'inset-s-1/2',
             '-translate-1/2',
             'z-2',
 
@@ -104,7 +105,7 @@ const Hero = ({
                     'uppercase',
                     'text-sm',
 
-                    'opacity-50',
+                    'text-white/50',
                   )}
                 >
                   New product
@@ -116,7 +117,7 @@ const Hero = ({
               className={cn(
                 'text-base',
 
-                'opacity-75',
+                'text-white/75',
               )}
             >
               {description}
@@ -126,7 +127,7 @@ const Hero = ({
             variant={'primary'}
             asChild
           >
-            <Link to={`/products/${slug}`}>See product</Link>
+            <Link to={createProductRoute(slug)}>See product</Link>
           </Button>
         </div>
       </div>
