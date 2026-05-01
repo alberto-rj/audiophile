@@ -205,14 +205,7 @@ const OrderConfirmationModal = ({ ...props }: OrderConfirmationModalProps) => {
             >
               <h3>Thank you for your order</h3>
             </Modal.Title>
-            <Modal.Description
-              className={cn(
-                'text-base',
-
-                'text-black/50',
-              )}
-              asChild
-            >
+            <Modal.Description asChild>
               <p>You will receive an email confirmation shortly.</p>
             </Modal.Description>
           </div>
@@ -222,7 +215,7 @@ const OrderConfirmationModal = ({ ...props }: OrderConfirmationModalProps) => {
           <Modal.Close asChild>
             <Button
               className={cn(
-                'w-full',
+                'inline-full',
                 'mbs-6',
 
                 'md:mbs-12',
