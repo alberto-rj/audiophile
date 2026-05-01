@@ -34,7 +34,7 @@ const InTheBoxSection = ({
     >
       <h2
         id={headingId}
-        className={cn('uppercase', 'text-2xl')}
+        className={cn('h3')}
       >
         {title}
       </h2>
@@ -49,14 +49,14 @@ const InTheBoxSection = ({
               'flex',
               'items-center',
               'gap-5.25',
-              'text-base',
 
               'md:gap-6',
-
-              'text-black-o-50',
             )}
           >
-            <span className={cn('sr-only')}>{quantity} times</span>
+            <dl className={cn('sr-only')}>
+              <dt>Times</dt>
+              <dd>{quantity}</dd>
+            </dl>
             <span
               className={cn('uppercase', 'text-primary-400')}
               aria-hidden={true}

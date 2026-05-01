@@ -31,17 +31,20 @@ const SuggestionSection = ({
         'md:gap-14',
 
         'lg:gap-16',
+
         className,
       )}
     >
       <h2
         id={headingId}
         className={cn(
-          'uppercase',
           'text-lg',
           'text-center',
 
           'md:text-2xl',
+
+          'text-black',
+          'uppercase',
         )}
       >
         {title}

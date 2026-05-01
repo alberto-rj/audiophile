@@ -23,18 +23,17 @@ const FeaturesSection = ({
         'gap-6',
 
         'md:gap-8',
+
         className,
       )}
     >
       <h2
         id={headingId}
-        className={cn('uppercase', 'text-2xl')}
+        className={cn('h3')}
       >
         {title}
       </h2>
-      <p className={cn('text-base', 'text-black-o-50')}>
-        {renderTextWithNewlines(description)}
-      </p>
+      <p>{renderTextWithNewlines(description)}</p>
     </section>
   );
 };
