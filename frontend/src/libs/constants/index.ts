@@ -50,9 +50,9 @@ export const heroOldProduct: Product = {
 /* hero (end) */
 
 /* Feature Highlighted (start) */
-import featureHighLightedContentMobile from '@/assets/home/mobile/image-speaker-zx9.png';
-import featureHighLightedContentTablet from '@/assets/home/tablet/image-speaker-zx9.png';
-import featureHighLightedContentDesktop from '@/assets/home/desktop/image-speaker-zx9.png';
+import featureHighLightedContentMobile from '@/assets/images/image-speaker-zx9-desktop.png';
+import featureHighLightedContentTablet from '@/assets/images/image-speaker-zx9-tablet.png';
+import featureHighLightedContentDesktop from '@/assets/images/image-speaker-zx9-desktop.png';
 
 import type {
   FeatureHighLightedContent,
@@ -78,9 +78,9 @@ export const featureHighLightedContent: FeatureHighLightedContent = {
 /* Feature Highlighted (end) */
 
 /* Feature Landscape (start) */
-import featureLandscapeContentMobile from '@/assets/home/mobile/image-speaker-zx7.jpg';
-import featureLandscapeContentTablet from '@/assets/home/tablet/image-speaker-zx7.jpg';
-import featureLandscapeContentDesktop from '@/assets/home/desktop/image-speaker-zx7.jpg';
+import featureLandscapeContentMobile from '@/assets/images/image-speaker-zx7-mobile.jpg';
+import featureLandscapeContentTablet from '@/assets/images/image-speaker-zx7-tablet.jpg';
+import featureLandscapeContentDesktop from '@/assets/images/image-speaker-zx7-desktop.jpg';
 
 import type { FeatureLandscapeContent } from '@/libs/types';
 
@@ -96,9 +96,9 @@ export const featureLandscapeContent: FeatureLandscapeContent = {
 /* Feature Landscape (end) */
 
 /* Feature Portrait (start) */
-import featurePortraitContentMobile from '@/assets/home/mobile/image-earphones-yx1.jpg';
-import featurePortraitContentTablet from '@/assets/home/tablet/image-earphones-yx1.jpg';
-import featurePortraitContentDesktop from '@/assets/home/desktop/image-earphones-yx1.jpg';
+import featurePortraitContentMobile from '@/assets/images/image-earphones-yx1-mobile.jpg';
+import featurePortraitContentTablet from '@/assets/images/image-earphones-yx1-tablet.jpg';
+import featurePortraitContentDesktop from '@/assets/images/image-earphones-yx1-desktop.jpg';
 
 import type { FeaturePortraitContent } from '@/libs/types';
 
