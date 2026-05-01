@@ -103,22 +103,13 @@ const CartModal = () => {
               <Modal.Title asChild>
                 <h3
                   id={headingId}
-                  className={cn('uppercase', 'text-md')}
+                  className={cn('h6')}
                 >
                   Cart
                 </h3>
               </Modal.Title>
               <Modal.Description asChild>
-                <p
-                  className={cn(
-                    'text-base',
-                    'text-center',
-                    'my-8',
-                    'text-black/50',
-                  )}
-                >
-                  Your cart is empty.
-                </p>
+                <p className={cn('text-center', 'my-8')}>Your cart is empty.</p>
               </Modal.Description>
             </>
           ) : (
