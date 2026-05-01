@@ -1,31 +1,38 @@
+import { useId } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Logo } from '@/assets/icons';
 import { cn } from '@/libs/cn';
 import { navLinks, socialLinks } from '@/libs/constants';
-import { useId } from 'react';
 
 const Footer = () => {
   const socialLinksHeadingId = useId();
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={cn('py-9', 'bg-gray-900')}>
+    <footer
+      className={cn(
+        'py-9',
+
+        'bg-gray-900',
+        'text-white/50',
+      )}
+    >
       <div className={cn('relative', 'wrapper', 'grid', 'gap-12')}>
         {/* Decorator */}
         <div
           className={cn(
             'absolute',
-            'w-25',
-            'h-1',
-            '-top-9',
-            'left-1/2',
+            'inline-25',
+            'block-1',
+            '-inset-bs-9',
+            'inset-s-1/2',
             '-translate-x-1/2',
 
-            'sm:left-5',
+            'sm:inset-s-5',
             'sm:translate-x-0',
 
-            'md:left-10',
+            'md:inset-s-10',
 
             'bg-primary-400',
           )}
@@ -86,16 +93,12 @@ const Footer = () => {
 
         <p
           className={cn(
-            'max-w-172',
-            'text-base',
+            'max-inline-172',
             'text-center',
 
             'sm:text-start',
 
-            'md:max-w-135',
-
-            'text-white',
-            'opacity-50',
+            'md:max-inline-135',
           )}
         >
           Audiophile is an all in one stop to fulfill your audio needs. We're a
@@ -115,15 +118,7 @@ const Footer = () => {
             'sm:flex-row',
           )}
         >
-          <p
-            className={cn(
-              'text-base',
-              'text-center',
-              'text-white',
-              'sm:text-start',
-              'opacity-50',
-            )}
-          >
+          <p className={cn('text-center', 'sm:text-start')}>
             Copyright {currentYear}. All Rights Reserved
           </p>
 
