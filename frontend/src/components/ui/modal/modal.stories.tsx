@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useId, useState } from 'react';
 import { fn } from 'storybook/test';
 
 import { Button, Modal } from '@/components/ui';
-import { useId, useState } from 'react';
 import { cn } from '@/libs/cn';
 
 type StoryProps = React.ComponentProps<typeof Modal>;
@@ -24,8 +24,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const modalContentBaseClasses = cn(
-  'left-1/2',
-  'top-1/2',
+  'inset-bs-1/2',
+  'inset-s-1/2',
   '-translate-x-1/2',
   '-translate-y-1/2',
   'p-4',
