@@ -63,7 +63,7 @@ const buttonVariants = cva(
 
         link: cn(
           '[&_svg]:fill-primary-400',
-          'text-black-o-50',
+          'text-black/50',
           'p-0',
 
           'hover:text-primary-400',
@@ -92,12 +92,11 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const Comp = asChild ? Slot : 'button';
-  const buttonClasses = cn(buttonVariants({ variant }), className);
 
   return (
     <Comp
-      className={buttonClasses}
       {...props}
+      className={cn(buttonVariants({ variant }), className)}
     >
       {children}
     </Comp>
