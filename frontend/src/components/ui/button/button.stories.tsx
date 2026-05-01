@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Button } from '@/components/ui';
-import { ArrowRight } from '@/assets/icons';
 
 type StoryProps = React.ComponentProps<typeof Button> & {
   buttonText: string;
@@ -72,12 +71,7 @@ export const Link: Story = {
     buttonText: 'Link',
   },
   render: ({ buttonText, ...props }) => {
-    return (
-      <Button {...props}>
-        {buttonText}
-        <ArrowRight />
-      </Button>
-    );
+    return <Button {...props}>{buttonText}</Button>;
   },
 };
 

@@ -112,24 +112,18 @@ const ProductDetailedCard = ({
             <h1
               id={headingId}
               className={cn(
-                'uppercase',
                 'text-xl',
 
                 'lg:text-3xl',
+
+                'text-black',
+                'uppercase',
               )}
             >
               {name}
             </h1>
           </div>
-          <p
-            className={cn(
-              'text-base',
-
-              'text-black-o-50',
-            )}
-          >
-            {description}
-          </p>
+          <p>{description}</p>
           <dl
             className={cn(
               'text-md',
