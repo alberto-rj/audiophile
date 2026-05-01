@@ -1,9 +1,5 @@
 import type { ResponsiveImageType } from '@/libs/types';
 
-import heroMobile from '@/assets/home/mobile/image-header.jpg';
-import heroTablet from '@/assets/home/tablet/image-header.jpg';
-import heroDesktop from '@/assets/home/desktop/image-hero.jpg';
-
 import speakerZX7Mobile from '@/assets/home/mobile/image-speaker-zx7.jpg';
 import speakerZX7Tablet from '@/assets/home/tablet/image-speaker-zx7.jpg';
 import speakerZX7Desktop from '@/assets/home/desktop/image-speaker-zx7.jpg';
@@ -22,10 +18,4 @@ export const speakerZX7: ResponsiveImageType = {
   mobile: speakerZX7Mobile,
   tablet: speakerZX7Tablet,
   desktop: speakerZX7Desktop,
-};
-
-export const hero: ResponsiveImageType = {
-  mobile: heroMobile,
-  tablet: heroTablet,
-  desktop: heroDesktop,
 };

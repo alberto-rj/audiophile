@@ -23,6 +23,32 @@ export const socialLinks = [
 ];
 /* links (end) */
 
+/* hero (start) */
+import heroMobile from '@/assets/images/image-hero-mobile.jpg';
+import heroTablet from '@/assets/images/image-hero-tablet.jpg';
+import heroDesktop from '@/assets/images/image-hero-desktop.jpg';
+
+export const heroNewProduct: Product = {
+  ...products.find((product) => product.slug === 'xx99-mark-two-headphones')!,
+  isNew: true,
+  image: {
+    mobile: heroMobile,
+    tablet: heroTablet,
+    desktop: heroDesktop,
+  },
+};
+
+export const heroOldProduct: Product = {
+  ...products.find((product) => product.slug === 'xx99-mark-two-headphones')!,
+  isNew: false,
+  image: {
+    mobile: heroMobile,
+    tablet: heroTablet,
+    desktop: heroDesktop,
+  },
+};
+/* hero (end) */
+
 /* Feature Highlighted (start) */
 import featureHighLightedContentMobile from '@/assets/home/mobile/image-speaker-zx9.png';
 import featureHighLightedContentTablet from '@/assets/home/tablet/image-speaker-zx9.png';
@@ -33,6 +59,7 @@ import type {
   FeaturesSectionContent,
   GalleryContent,
   InTheBoxSectionContent,
+  Product,
   ProductDetailedCardContent,
 } from '@/libs/types';
 import { createCategoryRoute, createProductRoute } from '@/libs/app-routes';
@@ -159,7 +186,7 @@ export const galleryContent: GalleryContent = {
 /* Gallery (end) */
 
 /* "Features" Section (start) */
-import { newProduct } from '@/libs/mocks';
+import { newProduct, products } from '@/libs/mocks';
 export const featuresSectionContent: FeaturesSectionContent = {
   title: 'Features',
   description: newProduct.features,

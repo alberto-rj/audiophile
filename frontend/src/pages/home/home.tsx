@@ -5,17 +5,17 @@ import {
   Hero,
 } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import { newProduct } from '@/libs/mocks';
 import {
   featureHighLightedContent,
   featureLandscapeContent,
   featurePortraitContent,
+  heroNewProduct,
 } from '@/libs/constants';
 
 function Home() {
   return (
     <>
-      <Hero product={newProduct} />
+      <Hero product={heroNewProduct} />
 
       <div className={cn('bg-white')}>
         <div className={cn('wrapper', 'flow', 'flow-spacing')}>

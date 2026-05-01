@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Hero } from '@/components/widgets';
-import { newProduct, oldProduct } from '@/libs/mocks';
+import { heroNewProduct, heroOldProduct } from '@/libs/constants';
 
 type StoryProps = React.ComponentProps<typeof Hero>;
 
@@ -19,12 +19,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    product: newProduct,
+    product: heroNewProduct,
   },
 };
 
 export const WithOldProduct: Story = {
   args: {
-    product: oldProduct,
+    product: heroOldProduct,
   },
 };
