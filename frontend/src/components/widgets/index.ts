@@ -20,3 +20,5 @@ export { default as CartModal } from './cart-modal/cart-modal';
 export { default as OrderConfirmationModal } from './order-confirmation-modal/order-confirmation-modal';
 
 export { default as GoBack } from './go-back/go-back';
+
+export { default as PageError } from './page-error/page-error';

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
 
-const NotFoundPage = () => {
+const PageError = () => {
   return (
     <main
       className={cn(
@@ -50,18 +50,19 @@ const NotFoundPage = () => {
                 'uppercase',
               )}
             >
-              Oops! We can’t seem to find that page
+              Oops! Something went wrong
             </h1>
             <p className={cn('max-inline-116')}>
-              It looks like the link you followed might be broken or the page
-              has been moved. Don't worry, it happens to the best of us!
+              It looks like there was a small hiccup on our end. Don't worry,
+              our team is already looking into it. In the meantime, try
+              refreshing the page.
             </p>
           </div>
           <Button
             variant={'primary'}
             asChild
           >
-            <Link to='/'>Back to Homepage</Link>
+            <Link to='/'>Try Again</Link>
           </Button>
         </div>
       </div>
@@ -69,4 +70,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default NotFoundPage;
+export default PageError;
