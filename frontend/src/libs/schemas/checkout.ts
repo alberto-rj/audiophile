@@ -61,7 +61,7 @@ export const checkoutSchema = z
       return true;
     },
     {
-      error: 'e-Money PIN is required',
+      error: 'e-Money PIN is required.',
       path: ['eMoneyPin'],
     },
   );
