@@ -19,7 +19,7 @@ const FeatureHighLighted = ({
     <section
       aria-describedby={headingId}
       className={cn(
-        'w-full',
+        'inline-full',
         'px-6',
         'py-14',
 
@@ -87,26 +87,17 @@ const FeatureHighLighted = ({
             <h2
               id={headingId}
               className={cn(
-                'uppercase',
                 'text-2xl',
 
                 'md:text-4xl',
 
                 'text-white',
+                'uppercase',
               )}
             >
               {title}
             </h2>
-            <p
-              className={cn(
-                'text-base',
-
-                'text-white',
-                'opacity-75',
-              )}
-            >
-              {description}
-            </p>
+            <p className={cn('text-white/75')}>{description}</p>
           </div>
           <Button
             variant={'secondary'}
