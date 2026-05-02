@@ -11,7 +11,7 @@ interface CategoryCardProps {
   className?: string;
 }
 
-const CategoryCard = ({
+export const CategoryCard = ({
   category: { slug, image, name },
   className,
 }: CategoryCardProps) => {
@@ -70,5 +70,3 @@ const CategoryCard = ({
     </Link>
   );
 };
-
-export default CategoryCard;

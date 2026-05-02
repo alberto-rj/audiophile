@@ -1,7 +1,8 @@
 import { useGetCategoriesQuery } from '@/app/services/categories';
-import { Spinner } from '@/components/ui';
-import { CategoryCard, ErrorMessage } from '@/components/widgets';
-import { cn } from '@/libs/cn';
+import { ErrorMessage } from '@/components/widgets';
+
+import { CategoryList } from './category-list';
+import { CategoryListSkeleton } from './category-list-skeleton';
 
 const CategoryListing = () => {
   const {
@@ -13,10 +14,12 @@ const CategoryListing = () => {
 
   if (isLoading) {
     return (
-      <Spinner
+      <div
+        role='status'
         aria-label='Loading categories...'
-        className={cn('mx-auto')}
-      />
+      >
+        <CategoryListSkeleton />
+      </div>
     );
   }
 
@@ -36,29 +39,9 @@ const CategoryListing = () => {
     );
   }
 
-  return (
-    <ul
-      role='list'
-      className={cn(
-        'inline-full',
-        'grid',
-        'grid-cols-[repeat(1,minmax(0,20.4375em))]',
-        'gap-4',
+  const items = categories!;
 
-        'sm:grid-cols-[repeat(2,minmax(0,20.4375em))]',
-        'sm:gap-2.5',
-
-        'lg:grid-cols-[repeat(3,minmax(0,21.875em))]',
-        'lg:gap-7.5',
-      )}
-    >
-      {categories?.map((category) => (
-        <li key={category.slug}>
-          <CategoryCard category={category} />
-        </li>
-      ))}
-    </ul>
-  );
+  return <CategoryList items={items} />;
 };
 
 export default CategoryListing;
