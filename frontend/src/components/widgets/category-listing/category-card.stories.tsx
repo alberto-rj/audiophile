@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { CategoryCard } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { categories } from '@/libs/mocks/categories';
+
+import { CategoryCard } from './category-card';
 
 type StoryProps = React.ComponentProps<typeof CategoryCard>;
 
 const meta = {
-  title: 'widgets/CategoryCard',
+  title: 'widgets/CategoryListing/CategoryCard',
   component: CategoryCard,
   args: {
     category: categories.find((c) => c.id === 1),

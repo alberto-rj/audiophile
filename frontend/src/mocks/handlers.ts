@@ -25,13 +25,15 @@ function sortProductsByNewFirst(products: Product[]) {
 }
 
 export const handlers = [
-  http.get<never, never, Category[]>('/api/categories', () => {
+  http.get<never, never, Category[]>('/api/categories', async () => {
+    await new Promise((r) => setTimeout(r, 1000 * categories.length));
+
     return HttpResponse.json(categories);
   }),
 
   http.get<{ slug: string }, never, Category>(
     '/api/categories/:slug',
-    ({ params }) => {
+    async ({ params }) => {
       const foundCategory = categories.find(
         (category) => category.slug === params.slug,
       );
@@ -46,7 +48,7 @@ export const handlers = [
 
   http.get<{ slug: string }, Product[]>(
     '/api/categories/:slug/products',
-    ({ params }) => {
+    async ({ params }) => {
       const foundCategory = categories.find(
         (category) => category.slug === params.slug,
       );
@@ -66,7 +68,7 @@ export const handlers = [
     },
   ),
 
-  http.get<never, never, Product[]>('/api/products', () => {
+  http.get<never, never, Product[]>('/api/products', async () => {
     return HttpResponse.json(sortProductsByNewFirst(products));
   }),
 
