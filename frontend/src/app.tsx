@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { Suspense } from 'react';
 
 import {
   CategoryPage,
@@ -8,13 +9,18 @@ import {
   ProductPage,
 } from '@/pages';
 import { MainLayout } from '@/layouts';
+import { PageLoader } from '@/components/widgets';
 
 const App = () => {
   return (
     <Routes>
       <Route
         path='/'
-        element={<MainLayout />}
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <MainLayout />
+          </Suspense>
+        }
       >
         <Route
           index

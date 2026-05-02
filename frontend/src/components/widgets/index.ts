@@ -30,4 +30,6 @@ export { default as GoBack } from './go-back/go-back';
 
 export { default as PageError } from './page-error/page-error';
 
+export { default as PageLoader } from './page-loader/page-loader';
+
 export { default as ErrorMessage } from './error-message/error-message';
