@@ -67,9 +67,8 @@ const PageError = ({ resetErrorBoundary }: FallbackProps) => {
           <Button
             variant={'secondary'}
             onClick={handleRetry}
-            asChild
           >
-            <Link to='/'>Try Again</Link>
+            Try Again
           </Button>
           <Button
             variant={'primary'}
