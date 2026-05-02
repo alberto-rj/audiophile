@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import { useGetProductsByCategorySlugQuery } from '@/app/services/categories';
+import { Spinner } from '@/components/ui';
 import {
   BestGear,
   CategoryListing,
@@ -46,14 +47,19 @@ const CategoryPage = () => {
     useGetProductsByCategorySlugQuery(slug!, { skip: !slug });
 
   if (isLoading) {
-    return <p>Loading products...</p>;
+    return (
+      <Spinner
+        aria-label='Loading products...'
+        className={cn('mx-auto')}
+      />
+    );
   }
 
   if (isError) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
-          Failed to load products.
+          Failed to load products from category {`"${slug}"`}.
         </ErrorMessage.Description>
         <ErrorMessage.Retry
           onClick={refetch}

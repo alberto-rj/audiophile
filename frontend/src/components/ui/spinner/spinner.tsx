@@ -1,6 +1,7 @@
-import { cn } from '@/libs/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { ComponentProps } from 'react';
+
+import { cn } from '@/libs/cn';
 
 const spinnerVariants = cva(
   cn(

@@ -1,6 +1,12 @@
 import { useParams } from 'react-router-dom';
 
-import { BestGear, CategoryListing, GoBack } from '@/components/widgets';
+import { Spinner } from '@/components/ui';
+import {
+  BestGear,
+  CategoryListing,
+  ErrorMessage,
+  GoBack,
+} from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { useGetProductBySlugQuery } from '@/app/services/products';
 
@@ -12,16 +18,36 @@ import SuggestionSection from './suggestion-section/suggestion-section';
 
 const ProductPage = () => {
   const slug = useParams()?.slug;
-  const { isLoading, isError, data } = useGetProductBySlugQuery(slug!, {
-    skip: !slug,
-  });
+  const { isLoading, isError, refetch, data } = useGetProductBySlugQuery(
+    slug!,
+    {
+      skip: !slug,
+    },
+  );
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Spinner
+        aria-label='Loading product...'
+        className={cn('mx-auto')}
+      />
+    );
   }
 
   if (isError) {
-    return <p>Error...</p>;
+    return (
+      <ErrorMessage>
+        <ErrorMessage.Description>
+          Failed to load product {`"${slug}"`}.
+        </ErrorMessage.Description>
+        <ErrorMessage.Retry
+          onClick={refetch}
+          aria-label='Try again - reload product'
+        >
+          Try again
+        </ErrorMessage.Retry>
+      </ErrorMessage>
+    );
   }
 
   const product = data!;
