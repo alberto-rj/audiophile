@@ -3,11 +3,11 @@ import { cn } from '@/libs/cn';
 
 import SuggestionCard from './suggestion-card';
 
-interface SuggestionListingProps {
+interface SuggestionListProps {
   items: BasicProduct[];
 }
 
-const SuggestionListing = ({ items }: SuggestionListingProps) => {
+const SuggestionList = ({ items }: SuggestionListProps) => {
   return (
     <ul
       role='list'
@@ -32,4 +32,4 @@ const SuggestionListing = ({ items }: SuggestionListingProps) => {
   );
 };
 
-export default SuggestionListing;
+export default SuggestionList;

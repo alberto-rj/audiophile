@@ -3,20 +3,20 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { cn } from '@/libs/cn';
 import { products } from '@/libs/mocks';
 
-import SuggestionListing from './suggestion-listing';
+import SuggestionList from './suggestion-list';
 
-type StoryProps = React.ComponentProps<typeof SuggestionListing>;
+type StoryProps = React.ComponentProps<typeof SuggestionList>;
 
 const meta = {
-  title: 'pages/ProductPage/SuggestionSection/SuggestionListing',
-  component: SuggestionListing,
+  title: 'pages/ProductPage/SuggestionSection/SuggestionList',
+  component: SuggestionList,
   parameters: {
     layout: 'fullscreen',
   },
-  render: (suggestionListingProps) => {
+  render: (suggestionListProps) => {
     return (
       <div className={cn('region', 'wrapper')}>
-        <SuggestionListing {...suggestionListingProps} />
+        <SuggestionList {...suggestionListProps} />
       </div>
     );
   },

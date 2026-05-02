@@ -23,6 +23,7 @@ const CategoryPage = () => {
     return (
       <div
         role='status'
+        aria-live='polite'
         aria-label='Loading products...'
       >
         <HeaderSkeleton />
