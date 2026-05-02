@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 
 import { useGetProductsByCategorySlugQuery } from '@/app/services/categories';
+import { Spinner } from '@/components/ui';
 import {
   BestGear,
   CategoryListing,
+  ErrorMessage,
   Header,
   ProductCard,
 } from '@/components/widgets';
@@ -41,31 +43,48 @@ function ProductList({ products }: ProductListProps) {
 const CategoryPage = () => {
   const slug = useParams()?.slug;
 
-  const { isLoading, isError, data } = useGetProductsByCategorySlugQuery(
-    slug!,
-    { skip: !slug },
-  );
+  const { isLoading, isError, refetch, data } =
+    useGetProductsByCategorySlugQuery(slug!, { skip: !slug });
 
   if (isLoading) {
-    return <p>Loading...</p>;
-  } else if (isError) {
-    return <p>Something went wrong</p>;
-  } else {
-    const category = data!;
-
     return (
-      <>
-        <Header title={category.name} />
-        <div className={cn('bg-white')}>
-          <div className={cn('wrapper', 'flow', 'flow-spacing')}>
-            <CategoryListing />
-            <ProductList products={category.items} />
-            <BestGear />
-          </div>
-        </div>
-      </>
+      <Spinner
+        aria-label='Loading products...'
+        className={cn('mx-auto')}
+      />
     );
   }
+
+  if (isError) {
+    return (
+      <ErrorMessage>
+        <ErrorMessage.Description>
+          Failed to load products from category {`"${slug}"`}.
+        </ErrorMessage.Description>
+        <ErrorMessage.Retry
+          onClick={refetch}
+          aria-label='Try again - reload products'
+        >
+          Try again
+        </ErrorMessage.Retry>
+      </ErrorMessage>
+    );
+  }
+
+  const category = data!;
+
+  return (
+    <>
+      <Header title={category.name} />
+      <div className={cn('bg-white')}>
+        <div className={cn('wrapper', 'flow', 'flow-spacing')}>
+          <CategoryListing />
+          <ProductList products={category.items} />
+          <BestGear />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default CategoryPage;

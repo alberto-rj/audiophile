@@ -1,16 +1,39 @@
 import { useGetCategoriesQuery } from '@/app/services/categories';
-import { CategoryCard } from '@/components/widgets';
+import { Spinner } from '@/components/ui';
+import { CategoryCard, ErrorMessage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 
 const CategoryListing = () => {
-  const { isLoading, isError, data: categories } = useGetCategoriesQuery();
+  const {
+    isLoading,
+    isError,
+    refetch,
+    data: categories,
+  } = useGetCategoriesQuery();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Spinner
+        aria-label='Loading categories...'
+        className={cn('mx-auto')}
+      />
+    );
   }
 
   if (isError) {
-    return <p>Error</p>;
+    return (
+      <ErrorMessage>
+        <ErrorMessage.Description>
+          Failed to load categories.
+        </ErrorMessage.Description>
+        <ErrorMessage.Retry
+          onClick={refetch}
+          aria-label='Try again - reload categories'
+        >
+          Try again
+        </ErrorMessage.Retry>
+      </ErrorMessage>
+    );
   }
 
   return (
