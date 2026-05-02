@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { ErrorBoundary } from 'react-error-boundary';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from '@/app';
 import { store } from '@/app/store';
@@ -28,11 +29,13 @@ if (!root) {
 enableMocking().then(() => {
   createRoot(root).render(
     <StrictMode>
-      <ErrorBoundary FallbackComponent={PageError}>
+      <BrowserRouter>
         <Provider store={store}>
-          <App />
+          <ErrorBoundary FallbackComponent={PageError}>
+            <App />
+          </ErrorBoundary>
         </Provider>
-      </ErrorBoundary>
+      </BrowserRouter>
     </StrictMode>,
   );
 });
