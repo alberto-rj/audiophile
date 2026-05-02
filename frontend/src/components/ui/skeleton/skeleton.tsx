@@ -10,7 +10,7 @@ const Skeleton = ({ className, ...props }: SkeletonProps) => {
       {...props}
       aria-hidden={true}
       className={cn(
-        'bg-gray-300',
+        'bg-gray-600',
         'rounded-lg',
 
         'animate-pulse',
