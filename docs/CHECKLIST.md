@@ -164,10 +164,10 @@
 
 ### Modal de confirmação
 
-- [ ] Modal abre após submissão bem-sucedida
-- [ ] Mostra resumo do pedido (primeiro item + "and X other items")
-- [ ] Mostra o grand total
-- [ ] Botão "Back to Home" redireciona e limpa o carrinho
+- [x] Modal abre após submissão bem-sucedida
+- [x] Mostra resumo do pedido (primeiro item + "and X other items")
+- [x] Mostra o grand total
+- [x] Botão "Back to Home" redireciona e limpa o carrinho
 
 ---
 
