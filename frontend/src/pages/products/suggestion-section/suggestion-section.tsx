@@ -3,7 +3,7 @@ import { useId } from 'react';
 import type { BasicProduct } from '@/libs/types';
 import { cn } from '@/libs/cn';
 
-import SuggestionListing from './suggestion-listing';
+import SuggestionList from './suggestion-list';
 
 interface SuggestionSectionProps {
   title: string;
@@ -22,7 +22,6 @@ const SuggestionSection = ({
     <section
       aria-labelledby={headingId}
       className={cn(
-        'wrapper',
         'flex',
         'flex-col',
         'items-center',
@@ -49,7 +48,7 @@ const SuggestionSection = ({
       >
         {title}
       </h2>
-      <SuggestionListing items={items} />
+      <SuggestionList items={items} />
     </section>
   );
 };

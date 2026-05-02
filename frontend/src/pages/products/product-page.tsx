@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 
-import { Spinner } from '@/components/ui';
 import {
   BestGear,
   CategoryListing,
+  CategoryListSkeleton,
   ErrorMessage,
   GoBack,
 } from '@/components/widgets';
@@ -15,6 +15,46 @@ import FeaturesSection from './features-section';
 import InTheBoxSection from './in-the-box-section';
 import Gallery from './gallery';
 import SuggestionSection from './suggestion-section/suggestion-section';
+import ProductDetailedCardSkeleton from './product-detailed-card-skeleton';
+import FeaturesSectionSkeleton from './features-section-skeleton';
+import InTheBoxSectionSkeleton from './in-the-box-section.-skeleton';
+import GallerySkeleton from './gallery-skeleton';
+import { SuggestionSectionSkeleton } from './suggestion-section/suggestion-section-skeleton';
+
+const ProductPageSkeleton = () => {
+  return (
+    <div className={cn('bg-white')}>
+      <GoBack>
+        <GoBack.Control />
+      </GoBack>
+      <div className={cn('wrapper', 'flow')}>
+        <ProductDetailedCardSkeleton />
+        <div
+          className={cn(
+            'flex',
+            'flex-col',
+            'gap-22',
+
+            'lg:flex-row',
+            'lg:justify-between',
+            'lg:items-start',
+            'lg:gap-8',
+          )}
+        >
+          <FeaturesSectionSkeleton
+            lines={10}
+            className={cn('lg:max-inline-158.75')}
+          />
+          <InTheBoxSectionSkeleton />
+        </div>
+        <GallerySkeleton />
+        <SuggestionSectionSkeleton />
+        <CategoryListSkeleton />
+        <BestGear />
+      </div>
+    </div>
+  );
+};
 
 const ProductPage = () => {
   const slug = useParams()?.slug;
@@ -27,10 +67,13 @@ const ProductPage = () => {
 
   if (isLoading) {
     return (
-      <Spinner
+      <div
+        role='status'
+        aria-live='polite'
         aria-label='Loading product...'
-        className={cn('mx-auto')}
-      />
+      >
+        <ProductPageSkeleton />
+      </div>
     );
   }
 
