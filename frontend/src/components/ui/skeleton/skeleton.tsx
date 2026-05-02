@@ -13,7 +13,7 @@ const Skeleton = ({ className, ...props }: SkeletonProps) => {
         'bg-gray-600',
         'rounded-lg',
 
-        'animate-pulse',
+        'motion-safe:animate-pulse',
 
         className,
       )}

@@ -43,6 +43,7 @@ const Spinner = ({ className, variant, size, ...props }: SpinnerProps) => {
     <div
       {...props}
       role='status'
+      aria-live='polite'
       className={cn(
         spinnerVariants({
           variant,

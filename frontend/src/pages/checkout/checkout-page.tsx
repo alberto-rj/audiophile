@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react';
 
-import { Button, Card } from '@/components/ui';
+import { Button, Card, Spinner } from '@/components/ui';
 import { GoBack } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 
@@ -91,7 +91,17 @@ const CheckoutPage = () => {
               disabled={!isValid || isSubmitting}
               className={cn('inline-full')}
             >
-              Continue & pay
+              {isSubmitting ? (
+                <>
+                  <Spinner
+                    variant='secondary'
+                    size='sm'
+                  />{' '}
+                  Submitting...
+                </>
+              ) : (
+                <>Continue & pay</>
+              )}
             </Button>
           </div>
         </Card>
