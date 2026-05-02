@@ -1,44 +1,17 @@
 import { useParams } from 'react-router-dom';
 
 import { useGetProductsByCategorySlugQuery } from '@/app/services/categories';
-import { Spinner } from '@/components/ui';
 import {
   BestGear,
   CategoryListing,
+  CategoryListSkeleton,
   ErrorMessage,
   Header,
-  ProductCard,
+  HeaderSkeleton,
+  ProductList,
+  ProductListSkeleton,
 } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import type { Product } from '@/libs/types';
-
-interface ProductListProps {
-  products: Product[];
-}
-
-function ProductList({ products }: ProductListProps) {
-  return (
-    <ul
-      role='list'
-      className={cn('flow')}
-    >
-      {products.map(({ id, image, name, description, isNew, slug }, i) => (
-        <li key={id}>
-          <ProductCard
-            content={{
-              image,
-              title: name,
-              description,
-              isNew,
-              slug: slug,
-              isReversed: i % 2 !== 0,
-            }}
-          />
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 const CategoryPage = () => {
   const slug = useParams()?.slug;
@@ -48,10 +21,19 @@ const CategoryPage = () => {
 
   if (isLoading) {
     return (
-      <Spinner
+      <div
+        role='status'
         aria-label='Loading products...'
-        className={cn('mx-auto')}
-      />
+      >
+        <HeaderSkeleton />
+        <div className={cn('bg-white')}>
+          <div className={cn('wrapper', 'flow', 'flow-spacing')}>
+            <CategoryListSkeleton />
+            <ProductListSkeleton />
+            <BestGear />
+          </div>
+        </div>
+      </div>
     );
   }
 

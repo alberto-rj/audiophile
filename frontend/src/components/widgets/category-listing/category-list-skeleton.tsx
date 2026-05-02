@@ -29,7 +29,7 @@ export const CategoryListSkeleton = ({
         className,
       )}
     >
-      {Array.from({ length: count }).map((_, index) => (
+      {[...Array(count)].map((_, index) => (
         <li key={index}>
           <CategoryCardSkeleton />
         </li>

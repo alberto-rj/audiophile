@@ -11,7 +11,7 @@ interface ProductCardProps {
   className?: string;
 }
 
-const ProductCard = ({
+export const ProductCard = ({
   content: { image, title, description, slug, isNew, isReversed },
   className,
 }: ProductCardProps) => {
@@ -21,7 +21,7 @@ const ProductCard = ({
     <section
       aria-labelledby={headingId}
       className={cn(
-        'w-full',
+        'inline-full',
         'flex',
         'flex-col',
         'items-center',
@@ -33,7 +33,7 @@ const ProductCard = ({
           'lg:flex-row': !isReversed,
           'lg:flex-row-reverse': isReversed,
         },
-        'lg:justify-center',
+        'lg:justify-between',
         'lg:gap-31.25',
         className,
       )}
@@ -59,9 +59,9 @@ const ProductCard = ({
           'gap-6',
           'text-center',
 
-          'md:max-w-143',
+          'md:max-inline-143',
 
-          'lg:max-w-111.25',
+          'lg:max-inline-111.25',
           'lg:items-start',
           'lg:gap-10',
           'lg:text-start',
@@ -103,5 +103,3 @@ const ProductCard = ({
     </section>
   );
 };
-
-export default ProductCard;
