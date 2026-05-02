@@ -9,7 +9,7 @@ export const CategoryCardSkeleton = ({
   className,
 }: CategoryCardSkeletonProps) => {
   return (
-    <Skeleton
+    <div
       className={cn(
         'inline-full',
         'flex',
@@ -36,19 +36,17 @@ export const CategoryCardSkeleton = ({
 
           'lg:aspect-125/126',
           'lg:-mbs-(--category-card-margin-lg)',
-
-          'bg-gray-700',
         )}
       />
 
       {/* Content */}
       <div className={cn('flex', 'flex-col', 'items-center', 'gap-4')}>
         {/* Title */}
-        <Skeleton className={cn('h-5', 'w-24', 'bg-gray-700')} />
+        <Skeleton className={cn('h-5', 'w-24')} />
 
         {/* Button */}
-        <Skeleton className={cn('h-4', 'w-20', 'bg-gray-700')} />
+        <Skeleton className={cn('h-4', 'w-20')} />
       </div>
-    </Skeleton>
+    </div>
   );
 };
