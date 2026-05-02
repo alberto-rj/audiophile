@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 
 import { products } from '@/libs/mocks/products';
 import { categories } from '@/libs/mocks/categories';
@@ -26,8 +26,6 @@ function sortProductsByNewFirst(products: Product[]) {
 
 export const handlers = [
   http.get<never, never, Category[]>('/api/categories', async () => {
-    await new Promise((r) => setTimeout(r, 1000 * categories.length));
-
     return HttpResponse.json(categories);
   }),
 
@@ -49,6 +47,8 @@ export const handlers = [
   http.get<{ slug: string }, Product[]>(
     '/api/categories/:slug/products',
     async ({ params }) => {
+      await delay(3 * 1000);
+
       const foundCategory = categories.find(
         (category) => category.slug === params.slug,
       );
