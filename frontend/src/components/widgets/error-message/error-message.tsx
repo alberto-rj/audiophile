@@ -30,7 +30,6 @@ const ErrorMessage = ({ className, ...props }: ErrorMessageProps) => {
         'flex-col',
         'items-center',
         'gap-7',
-        'py-20',
         'text-center',
 
         'md:gap-10',
