@@ -1,13 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter } from 'react-router-dom';
 
-import App from '@/app';
+import AppErrorBoundary from '@/app-error-boundary';
 import { store } from '@/app/store';
 import '@/index.css';
-import { PageError } from '@/components/widgets';
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -31,9 +29,7 @@ enableMocking().then(() => {
     <StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <ErrorBoundary FallbackComponent={PageError}>
-            <App />
-          </ErrorBoundary>
+          <AppErrorBoundary />
         </Provider>
       </BrowserRouter>
     </StrictMode>,

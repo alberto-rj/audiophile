@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-import type { FallbackProps } from 'react-error-boundary';
 
 import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
 
-const PageError = ({ resetErrorBoundary }: FallbackProps) => {
+const PageError = () => {
   const handleRetry = () => {
-    resetErrorBoundary();
+    window.location.reload();
   };
 
   return (
@@ -65,16 +64,17 @@ const PageError = ({ resetErrorBoundary }: FallbackProps) => {
         </div>
         <div className={cn('flex', 'flex-wrap', 'justify-center', 'gap-4')}>
           <Button
-            variant={'secondary'}
+            variant='secondary'
             onClick={handleRetry}
+            aria-label='Try again - reload this page'
           >
-            Try Again
+            Try again
           </Button>
           <Button
-            variant={'primary'}
+            variant='primary'
             asChild
           >
-            <Link to='/'>Back to Home</Link>
+            <Link to='/'>Back to home</Link>
           </Button>
         </div>
       </div>
