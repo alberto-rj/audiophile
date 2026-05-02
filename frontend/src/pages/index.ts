@@ -1,5 +1,17 @@
-export { default as CategoryPage } from './categories/category-page';
-export { default as CheckoutPage } from './checkout/checkout-page';
-export { default as HomePage } from './home/home';
-export { default as ProductPage } from './products/product-page';
-export { default as NotFoundPage } from './not-found/not-found-page';
+import { lazy } from 'react';
+
+export const HomePage = lazy(() => import('@/pages/home/home'));
+
+export const CategoryPage = lazy(
+  () => import('@/pages/categories/category-page'),
+);
+
+export const ProductPage = lazy(() => import('@/pages/products/product-page'));
+
+export const CheckoutPage = lazy(
+  () => import('@/pages/checkout/checkout-page'),
+);
+
+export const NotFoundPage = lazy(
+  () => import('@/pages/not-found/not-found-page'),
+);
