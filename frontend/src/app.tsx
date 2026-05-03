@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 
 import {
@@ -10,7 +10,7 @@ import {
   ProductPage,
   RegisterPage,
 } from '@/pages';
-import { AuthLayout, MainLayout } from '@/layouts';
+import { LayoutCenteredOnScreen, LayoutLanding } from '@/layouts';
 import { PageLoader, RequireCart } from '@/components/widgets';
 
 const App = () => {
@@ -21,7 +21,9 @@ const App = () => {
         path='/'
         element={
           <Suspense fallback={<PageLoader />}>
-            <AuthLayout />
+            <LayoutCenteredOnScreen>
+              <Outlet />
+            </LayoutCenteredOnScreen>
           </Suspense>
         }
       >
@@ -39,7 +41,9 @@ const App = () => {
         path='/'
         element={
           <Suspense fallback={<PageLoader />}>
-            <MainLayout />
+            <LayoutLanding>
+              <Outlet />
+            </LayoutLanding>
           </Suspense>
         }
       >
