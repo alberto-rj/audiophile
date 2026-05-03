@@ -31,7 +31,6 @@ const CategoryPage = () => {
           <div className={cn('wrapper', 'flow', 'flow-spacing')}>
             <CategoryListSkeleton />
             <ProductListSkeleton />
-            <BestGear />
           </div>
         </div>
       </div>
@@ -42,7 +41,7 @@ const CategoryPage = () => {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
-          Failed to load products from category {`"${slug}"`}.
+          Failed to load products for {`"${slug}"`}.
         </ErrorMessage.Description>
         <ErrorMessage.Retry
           onClick={refetch}
