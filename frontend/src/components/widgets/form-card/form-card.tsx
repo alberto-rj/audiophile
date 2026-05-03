@@ -11,7 +11,7 @@ const FormCard = ({ className, ...props }: FormCardProps) => {
     <Card
       {...props}
       className={cn(
-        'max-inline-100',
+        'max-inline-110',
         'flex',
         'flex-col',
         'gap-8',
