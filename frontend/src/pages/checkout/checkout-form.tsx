@@ -1,147 +1,26 @@
 import { useEffect, useState, type ComponentProps } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Controller } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { clearCart, selectGrandTotal, selectItems } from '@/app/features/cart';
 import type { AppDispatch } from '@/app/store';
+import { useCreateOrderMutation } from '@/app/services/orders';
+import { CashOnDelivery } from '@/assets/icons';
 import { Input, Label, Radio } from '@/components/ui';
+import {
+  FormField,
+  FormFieldAlert,
+  FormFlow,
+  FormGroup,
+  FormGroupContent,
+  FormGroupTitle,
+  FormSubgroup,
+  FormSubgroupTitle,
+  OrderConfirmationModal,
+} from '@/components/widgets';
 import { useCheckoutForm } from '@/hooks';
 import { cn } from '@/libs/cn';
 import type { CheckoutFormData } from '@/libs/schemas';
-import { CashOnDelivery } from '@/assets/icons';
-import { useCreateOrderMutation } from '@/app/services/orders';
-import { OrderConfirmationModal } from '@/components/widgets';
-
-type FormFieldAlertProps = React.ComponentProps<'p'>;
-
-const FormFieldAlert = ({ ...props }: FormFieldAlertProps) => {
-  return (
-    <p
-      {...props}
-      role='alert'
-      aria-live='polite'
-      className={cn('text-3xs', 'text-danger-400')}
-    />
-  );
-};
-
-type FormGroupProps = ComponentProps<'fieldset'>;
-
-const FormGroup = ({ className, ...props }: FormGroupProps) => {
-  return (
-    <fieldset
-      {...props}
-      className={cn(
-        'pbs-4',
-        'first:mbs-(--form-flow-spacing)',
-
-        'first:lg:mbs-(--form-flow-spacing)',
-
-        className,
-      )}
-    />
-  );
-};
-
-type FormGroupTitleProps = ComponentProps<'legend'>;
-
-const FormGroupTitle = ({ className, ...props }: FormGroupTitleProps) => {
-  return (
-    <legend
-      {...props}
-      className={cn(
-        'block',
-        'text-2xs',
-
-        'text-primary-400',
-        'uppercase',
-
-        className,
-      )}
-    />
-  );
-};
-
-type FormGroupContentProps = ComponentProps<'div'>;
-
-const FormGroupContent = ({ className, ...props }: FormGroupContentProps) => {
-  return (
-    <div
-      {...props}
-      className={cn(
-        'inline-full',
-        'grid',
-        'gap-x-4',
-        'gap-y-4',
-
-        'md:grid-cols-2',
-
-        'lg:gap-y-6',
-
-        className,
-      )}
-    />
-  );
-};
-
-type FormFieldProps = ComponentProps<'div'>;
-
-const FormField = ({ className, ...props }: FormFieldProps) => {
-  return (
-    <div
-      {...props}
-      className={cn(
-        'inline-full',
-        'flex',
-        'flex-col',
-        'gap-2',
-
-        className,
-      )}
-    />
-  );
-};
-
-type FormFlowProps = ComponentProps<'div'>;
-
-const FormFlow = ({ className, ...props }: FormFlowProps) => {
-  return (
-    <div
-      {...props}
-      className={cn(
-        'flex',
-        'flex-col',
-        'gap-(--form-flow-spacing)',
-
-        'lg:gap-(--form-flow-spacing-lg)',
-
-        className,
-      )}
-    />
-  );
-};
-
-type FormSubgroupProps = ComponentProps<'fieldset'>;
-
-const FormSubgroup = ({ className, ...props }: FormSubgroupProps) => {
-  return (
-    <fieldset
-      {...props}
-      className={cn('pbs-4', className)}
-    />
-  );
-};
-
-type FormSubgroupTitleProps = ComponentProps<'legend'>;
-
-const FormSubgroupTitle = ({ className, ...props }: FormSubgroupTitleProps) => {
-  return (
-    <legend
-      {...props}
-      className={cn('text-2xs', className)}
-    />
-  );
-};
 
 interface CheckoutFormProps extends ComponentProps<'form'> {
   id: string;
