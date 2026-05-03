@@ -9,7 +9,7 @@ import {
   ProductPage,
 } from '@/pages';
 import { MainLayout } from '@/layouts';
-import { PageLoader } from '@/components/widgets';
+import { PageLoader, RequireCart } from '@/components/widgets';
 
 const App = () => {
   return (
@@ -36,7 +36,11 @@ const App = () => {
         />
         <Route
           path='/checkout'
-          element={<CheckoutPage />}
+          element={
+            <RequireCart>
+              <CheckoutPage />
+            </RequireCart>
+          }
         />
       </Route>
 

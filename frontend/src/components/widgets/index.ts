@@ -33,3 +33,5 @@ export { default as PageError } from './page-error/page-error';
 export { default as PageLoader } from './page-loader/page-loader';
 
 export { default as ErrorMessage } from './error-message/error-message';
+
+export { default as RequireCart } from './require-cart/require-cart';
