@@ -18,6 +18,7 @@ import { Cart } from '@/assets/icons';
 
 const CartModal = () => {
   const headingId = useId();
+  const descriptionId = useId();
 
   const items = useSelector(selectItems);
   const itemsCount = useSelector(selectItemsCount);
@@ -41,50 +42,46 @@ const CartModal = () => {
 
   return (
     <Modal>
-      <Modal.Trigger asChild>
-        <button
-          type='button'
-          className={cn('relative', 'link-focusable')}
-        >
-          <span className={cn('sr-only')}>
-            View cart - {itemsCount} item(s)
-          </span>
-          {itemsCount > 0 && (
-            <span
-              aria-hidden={true}
-              className={cn(
-                'size-7',
-                'absolute',
-                '-inset-bs-5',
-                '-inset-e-3',
-                'flex',
-                'items-center',
-                'justify-center',
-                'text-xs',
-                'text-center',
-                'leading-none',
-                'truncate',
-
-                'text-white',
-                'bg-primary-400',
-                'rounded-full',
-              )}
-            >
-              {itemsCount}
-            </span>
-          )}
-          <Cart
+      <Modal.Trigger
+        type='button'
+        className={cn('relative')}
+      >
+        <span className={cn('sr-only')}>View cart - {itemsCount} item(s)</span>
+        {itemsCount > 0 && (
+          <span
             aria-hidden={true}
-            focusable={false}
-          />
-        </button>
+            className={cn(
+              'size-7',
+              'absolute',
+              '-inset-bs-5',
+              '-inset-e-3',
+              'flex',
+              'items-center',
+              'justify-center',
+              'text-xs',
+              'text-center',
+              'leading-none',
+              'truncate',
+
+              'text-white',
+              'bg-primary-400',
+              'rounded-full',
+            )}
+          >
+            {itemsCount}
+          </span>
+        )}
+        <Cart
+          aria-hidden={true}
+          focusable={false}
+        />
       </Modal.Trigger>
 
       <Modal.Portal>
         <Modal.Overlay />
 
         <Modal.Content
-          aria-labelledby={headingId}
+          aria-describedby={headingId}
           className={cn(
             'inline-[96vw]',
             'max-inline-120',
@@ -100,16 +97,18 @@ const CartModal = () => {
         >
           {itemsCount === 0 ? (
             <>
-              <Modal.Title asChild>
-                <h3
-                  id={headingId}
-                  className={cn('h6')}
-                >
-                  Cart
-                </h3>
+              <Modal.Title
+                id={headingId}
+                className={cn('h6')}
+                asChild
+              >
+                <h3>Cart</h3>
               </Modal.Title>
-              <Modal.Description asChild>
-                <p className={cn('text-center', 'my-8')}>Your cart is empty.</p>
+              <Modal.Description
+                id={descriptionId}
+                className={cn('text-center', 'my-8')}
+              >
+                Your cart is empty.
               </Modal.Description>
             </>
           ) : (
@@ -122,17 +121,23 @@ const CartModal = () => {
                   'gap-8',
                 )}
               >
-                <Modal.Title asChild>
-                  <h3
-                    id={headingId}
-                    className={cn('max-inline-50', 'truncate', 'h6')}
-                  >
-                    <span className={cn('sr-only')}>
-                      Cart - {itemsCount} item(s)
-                    </span>
+                <Modal.Title
+                  id={headingId}
+                  className={cn('max-inline-50', 'truncate', 'h6')}
+                  asChild
+                >
+                  <h3>
+                    <span className={cn('sr-only')}>Cart</span>
                     <span aria-hidden={true}>Cart ({itemsCount})</span>
                   </h3>
                 </Modal.Title>
+
+                <Modal.Description
+                  id={descriptionId}
+                  className={cn('sr-only')}
+                >
+                  Your cart currently contains {itemsCount} item(s).
+                </Modal.Description>
 
                 <Button
                   variant='link'
