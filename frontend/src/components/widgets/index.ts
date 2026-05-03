@@ -47,3 +47,5 @@ export {
   FormSubgroup,
   FormSubgroupTitle,
 } from './form/form';
+
+export { default as FormCard } from './form-card/form-card';
