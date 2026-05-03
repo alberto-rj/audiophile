@@ -16,7 +16,7 @@ function Home() {
   return (
     <>
       <Hero product={heroNewProduct} />
-      <div className={cn('bg-white')}>
+      <div>
         <div className={cn('wrapper', 'flow', 'flow-spacing')}>
           <CategoryListing />
           <FeatureProducts

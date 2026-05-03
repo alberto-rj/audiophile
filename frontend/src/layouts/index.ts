@@ -1,1 +1,1 @@
-export { default as MainLayout } from './main-layout';
+export { LayoutCenteredOnScreen, LayoutLanding } from './layout';

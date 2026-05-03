@@ -1,24 +1,49 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 
 import {
   CategoryPage,
   CheckoutPage,
   HomePage,
+  LoginPage,
   NotFoundPage,
   ProductPage,
+  RegisterPage,
 } from '@/pages';
-import { MainLayout } from '@/layouts';
+import { LayoutCenteredOnScreen, LayoutLanding } from '@/layouts';
 import { PageLoader, RequireCart } from '@/components/widgets';
 
 const App = () => {
   return (
     <Routes>
+      {/* Auth */}
       <Route
         path='/'
         element={
           <Suspense fallback={<PageLoader />}>
-            <MainLayout />
+            <LayoutCenteredOnScreen>
+              <Outlet />
+            </LayoutCenteredOnScreen>
+          </Suspense>
+        }
+      >
+        <Route
+          path='/login'
+          element={<LoginPage />}
+        />
+        <Route
+          path='/register'
+          element={<RegisterPage />}
+        />
+      </Route>
+
+      <Route
+        path='/'
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <LayoutLanding>
+              <Outlet />
+            </LayoutLanding>
           </Suspense>
         }
       >

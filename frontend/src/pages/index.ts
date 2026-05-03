@@ -12,6 +12,13 @@ export const CheckoutPage = lazy(
   () => import('@/pages/checkout/checkout-page'),
 );
 
+/* Auth */
+export const LoginPage = lazy(() => import('@/pages/login/login-page'));
+
+export const RegisterPage = lazy(
+  () => import('@/pages/register/register-page'),
+);
+
 export const NotFoundPage = lazy(
   () => import('@/pages/not-found/not-found-page'),
 );
