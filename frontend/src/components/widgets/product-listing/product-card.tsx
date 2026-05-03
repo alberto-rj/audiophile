@@ -5,6 +5,7 @@ import { Button } from '@/components/ui';
 import { ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import type { ProductCardContent } from '@/libs/types';
+import { createProductRoute } from '@/libs/app-routes';
 
 interface ProductCardProps {
   content: ProductCardContent;
@@ -94,9 +95,11 @@ export const ProductCard = ({
           variant={'primary'}
           asChild
         >
-          <Link to={`/products/${slug}`}>
-            <span className={cn('sr-only')}>See product: {title}</span>
-            <span aria-hidden={true}>See product</span>
+          <Link
+            aria-label={`See product - ${title}`}
+            to={createProductRoute(slug)}
+          >
+            See product
           </Link>
         </Button>
       </div>
