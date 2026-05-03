@@ -5,15 +5,36 @@ import {
   CategoryPage,
   CheckoutPage,
   HomePage,
+  LoginPage,
   NotFoundPage,
   ProductPage,
+  RegisterPage,
 } from '@/pages';
-import { MainLayout } from '@/layouts';
+import { AuthLayout, MainLayout } from '@/layouts';
 import { PageLoader, RequireCart } from '@/components/widgets';
 
 const App = () => {
   return (
     <Routes>
+      {/* Auth */}
+      <Route
+        path='/'
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <AuthLayout />
+          </Suspense>
+        }
+      >
+        <Route
+          path='/login'
+          element={<LoginPage />}
+        />
+        <Route
+          path='/register'
+          element={<RegisterPage />}
+        />
+      </Route>
+
       <Route
         path='/'
         element={
