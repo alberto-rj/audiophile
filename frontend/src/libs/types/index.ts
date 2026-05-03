@@ -140,3 +140,6 @@ export interface CreateOrderPayload extends CheckoutFormData {
 }
 
 export type CreateOrderResponse = Order;
+
+/* user */
+export type { BaseUser, AuthResponse } from './auth';
