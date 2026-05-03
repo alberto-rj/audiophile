@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { LoginPage } from '@/pages';
-import { cn } from '@/libs/cn';
+import { LayoutCenteredOnScreen } from '@/layouts';
+
 type StoryProps = React.ComponentProps<typeof LoginPage>;
 
 const meta = {
@@ -12,18 +13,9 @@ const meta = {
   },
   decorators: (Story, context) => {
     return (
-      <div
-        className={cn(
-          'min-block-screen',
-          'flex',
-          'justify-center',
-          'items-center',
-
-          'bg-gray-300',
-        )}
-      >
+      <LayoutCenteredOnScreen>
         <Story {...context} />
-      </div>
+      </LayoutCenteredOnScreen>
     );
   },
 } satisfies Meta<StoryProps>;
