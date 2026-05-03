@@ -3,8 +3,12 @@ import { ErrorMessage } from '@/components/widgets';
 
 import { CategoryList } from './category-list';
 import { CategoryListSkeleton } from './category-list-skeleton';
+import { useId } from 'react';
+import { cn } from '@/libs/cn';
 
 const CategoryListing = () => {
+  const headingId = useId();
+
   const {
     isLoading,
     isError,
@@ -41,7 +45,17 @@ const CategoryListing = () => {
 
   const items = categories!;
 
-  return <CategoryList items={items} />;
+  return (
+    <section aria-labelledby={headingId}>
+      <h2
+        id={headingId}
+        className={cn('sr-only')}
+      >
+        Our categories
+      </h2>
+      <CategoryList items={items} />
+    </section>
+  );
 };
 
 export default CategoryListing;

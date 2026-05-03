@@ -54,16 +54,18 @@ const Footer = () => {
           )}
         >
           {/* Logo */}
-          <Link
-            to='/'
-            className={cn('link')}
-          >
-            <span className={cn('sr-only')}>Audiophile - home</span>
-            <Logo
-              aria-hidden={true}
-              focusable={false}
-            />
-          </Link>
+          <h2>
+            <Link
+              to='/'
+              className={cn('link')}
+            >
+              <span className={cn('sr-only')}>Audiophile - home</span>
+              <Logo
+                aria-hidden={true}
+                focusable={false}
+              />
+            </Link>
+          </h2>
 
           {/* Nav Links */}
           <ul
@@ -124,12 +126,12 @@ const Footer = () => {
 
           {/* Social Links */}
           <section aria-labelledby={socialLinksHeadingId}>
-            <h3
+            <h2
               id={socialLinksHeadingId}
               className={cn('sr-only')}
             >
               Our social networks
-            </h3>
+            </h2>
             <ul
               role='list'
               className={cn('flex', 'items-center', 'gap-4')}
