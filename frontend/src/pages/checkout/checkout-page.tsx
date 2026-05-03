@@ -1,24 +1,19 @@
-import { useEffect, useId, useState } from 'react';
+import { useId, useState } from 'react';
 
 import { Button, Card, Spinner } from '@/components/ui';
 import { GoBack } from '@/components/widgets';
 import { cn } from '@/libs/cn';
+import { useSecondaryPage } from '@/hooks';
 
 import { CheckoutForm } from './checkout-form';
 import { CartSummary } from './cart-summary';
 
 const CheckoutPage = () => {
+  useSecondaryPage();
+
   const [isValid, setIsValid] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formId = useId();
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-current-page', 'checkout');
-
-    return () => {
-      document.documentElement.removeAttribute('data-current-page');
-    };
-  }, []);
 
   return (
     <>
@@ -50,11 +45,12 @@ const CheckoutPage = () => {
         >
           <h1
             className={cn(
-              'uppercase',
               'text-xl',
 
               'lg:text-2xl',
+
               'text-black',
+              'uppercase',
             )}
           >
             Checkout

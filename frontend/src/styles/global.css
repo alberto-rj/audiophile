@@ -147,7 +147,11 @@
 }
 
 @layer base {
-  html[data-current-page='checkout'] {
+  html {
+    @apply bg-white motion-safe:scroll-smooth;
+  }
+
+  html[data-is-secondary-page] {
     @apply bg-gray-300;
   }
 

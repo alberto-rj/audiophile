@@ -27,7 +27,7 @@ const CategoryPage = () => {
         aria-label='Loading products...'
       >
         <HeaderSkeleton />
-        <div className={cn('bg-white')}>
+        <div>
           <div className={cn('wrapper', 'flow', 'flow-spacing')}>
             <CategoryListSkeleton />
             <ProductListSkeleton />
@@ -58,7 +58,7 @@ const CategoryPage = () => {
   return (
     <>
       <Header title={category.name} />
-      <div className={cn('bg-white')}>
+      <div>
         <div className={cn('wrapper', 'flow', 'flow-spacing')}>
           <CategoryListing />
           <ProductList products={category.items} />

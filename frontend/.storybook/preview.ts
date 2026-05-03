@@ -4,7 +4,7 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { handlers } from '@/mocks/handlers';
 import { RouterDecorator, StoreDecorator } from '@/config/storybook';
 
-import '@/index.css';
+import '@/styles/global.css';
 
 initialize();
 

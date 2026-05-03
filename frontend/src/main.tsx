@@ -5,7 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import AppErrorBoundary from '@/app-error-boundary';
 import { store } from '@/app/store';
-import '@/index.css';
+
+import '@/styles/global.css';
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
