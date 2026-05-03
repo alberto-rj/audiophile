@@ -89,9 +89,11 @@ const FeaturePortrait = ({
             variant={'outline'}
             asChild
           >
-            <Link to={slug}>
-              <span className={cn('sr-only')}>See product: {title}</span>
-              <span aria-hidden={true}>See product</span>
+            <Link
+              aria-label={`See product - ${title}`}
+              to={slug}
+            >
+              See product
             </Link>
           </Button>
         </div>
