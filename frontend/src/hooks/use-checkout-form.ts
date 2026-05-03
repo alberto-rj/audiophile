@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { checkoutSchema, type CheckoutFormData } from '@/libs/schemas/checkout';
+import { checkoutSchema, type CheckoutFormData } from '@/libs/schemas';
 
 export const useCheckoutForm = () => {
   const form = useForm<CheckoutFormData>({
