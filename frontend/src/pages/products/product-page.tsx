@@ -1,79 +1,114 @@
 import { useParams } from 'react-router-dom';
 
+import { useGetProductBySlugQuery } from '@/app/services/products';
 import {
   BestGear,
   CategoryListing,
-  CategoryListSkeleton,
   ErrorMessage,
   GoBack,
 } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import { useGetProductBySlugQuery } from '@/app/services/products';
+import type { Product } from '@/libs/types';
 
-import ProductDetailedCard from './product-detailed-card';
-import FeaturesSection from './features-section';
-import InTheBoxSection from './in-the-box-section';
-import Gallery from './gallery';
+import ProductDetailsCard from './product-details-card/product-details-card';
+import FeaturesSection from './features-section/features-section';
+import InTheBoxSection from './in-the-box-section/in-the-box-section';
+import Gallery from './gallery/gallery';
 import SuggestionSection from './suggestion-section/suggestion-section';
-import ProductDetailedCardSkeleton from './product-detailed-card-skeleton';
-import FeaturesSectionSkeleton from './features-section-skeleton';
-import InTheBoxSectionSkeleton from './in-the-box-section.-skeleton';
-import GallerySkeleton from './gallery-skeleton';
+import ProductDetailsCardSkeleton from './product-details-card/product-details-card-skeleton';
+import FeaturesSectionSkeleton from './features-section/features-section-skeleton';
+import InTheBoxSectionSkeleton from './in-the-box-section/in-the-box-section.-skeleton';
+import GallerySkeleton from './gallery/gallery-skeleton';
 import { SuggestionSectionSkeleton } from './suggestion-section/suggestion-section-skeleton';
 
-const ProductPageSkeleton = () => {
+const ProductDetailsSkeleton = () => {
   return (
-    <div className={cn('bg-white')}>
-      <GoBack>
-        <GoBack.Control />
-      </GoBack>
-      <div className={cn('wrapper', 'flow')}>
-        <ProductDetailedCardSkeleton />
-        <div
-          className={cn(
-            'flex',
-            'flex-col',
-            'gap-22',
+    <>
+      <ProductDetailsCardSkeleton />
+      <div
+        className={cn(
+          'flex',
+          'flex-col',
+          'gap-22',
 
-            'lg:flex-row',
-            'lg:justify-between',
-            'lg:items-start',
-            'lg:gap-8',
-          )}
-        >
-          <FeaturesSectionSkeleton
-            lines={10}
-            className={cn('lg:max-inline-158.75')}
-          />
-          <InTheBoxSectionSkeleton />
-        </div>
-        <GallerySkeleton />
-        <SuggestionSectionSkeleton />
-        <CategoryListSkeleton />
-        <BestGear />
+          'lg:flex-row',
+          'lg:justify-between',
+          'lg:items-start',
+          'lg:gap-8',
+        )}
+      >
+        <FeaturesSectionSkeleton
+          lines={10}
+          className={cn('lg:max-inline-158.75')}
+        />
+        <InTheBoxSectionSkeleton itemsCount={10} />
       </div>
-    </div>
+      <GallerySkeleton />
+      <SuggestionSectionSkeleton />
+    </>
   );
 };
 
-const ProductPage = () => {
-  const slug = useParams()?.slug;
-  const { isLoading, isError, refetch, data } = useGetProductBySlugQuery(
-    slug!,
-    {
-      skip: !slug,
-    },
+interface ProductDetailsProps {
+  product: Product;
+}
+
+const ProductDetails = ({ product }: ProductDetailsProps) => {
+  return (
+    <>
+      <ProductDetailsCard product={product} />
+      <div
+        className={cn(
+          'flex',
+          'flex-col',
+          'gap-22',
+
+          'lg:flex-row',
+          'lg:justify-between',
+          'lg:items-start',
+          'lg:gap-8',
+        )}
+      >
+        <FeaturesSection
+          content={{ title: 'Features', description: product.features }}
+          className={cn('lg:max-inline-158.75')}
+        />
+        <InTheBoxSection
+          content={{ title: 'In the box', items: product.includes }}
+        />
+      </div>
+      <Gallery content={{ title: product.category, images: product.gallery }} />
+      <SuggestionSection
+        title='You may also like'
+        items={product.others}
+      />
+    </>
   );
+};
+
+const ProductDetailsFetching = () => {
+  const slug = useParams()?.slug;
+  const {
+    isLoading,
+    isError,
+    refetch,
+    data: product,
+  } = useGetProductBySlugQuery(slug!, {
+    skip: !slug,
+  });
 
   if (isLoading) {
     return (
-      <div
-        role='status'
-        aria-live='polite'
-        aria-label='Loading product...'
-      >
-        <ProductPageSkeleton />
-      </div>
+      <>
+        <p
+          role='status'
+          aria-live='polite'
+          className={cn('sr-only')}
+        >
+          Loading product details...
+        </p>
+        <ProductDetailsSkeleton />
+      </>
     );
   }
 
@@ -81,11 +116,11 @@ const ProductPage = () => {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
-          Failed to load product {`"${slug}"`}.
+          Failed to load product details for {`"${slug}"`}.
         </ErrorMessage.Description>
         <ErrorMessage.Retry
           onClick={refetch}
-          aria-label='Try again - reload product'
+          aria-label='Try again - reload product details'
         >
           Try again
         </ErrorMessage.Retry>
@@ -93,44 +128,18 @@ const ProductPage = () => {
     );
   }
 
-  const product = data!;
+  return <ProductDetails product={product!} />;
+};
 
+const ProductPage = () => {
   return (
-    <div className={cn('bg-white')}>
+    <div>
       <GoBack>
         <GoBack.Control />
       </GoBack>
       <div className={cn('wrapper', 'flow')}>
-        <ProductDetailedCard product={product} />
-        <div
-          className={cn(
-            'flex',
-            'flex-col',
-            'gap-22',
-
-            'lg:flex-row',
-            'lg:justify-between',
-            'lg:items-start',
-            'lg:gap-8',
-          )}
-        >
-          <FeaturesSection
-            content={{ title: 'Features', description: product.features }}
-            className={cn('lg:max-inline-158.75')}
-          />
-          <InTheBoxSection
-            content={{ title: 'In the box', items: product.includes }}
-          />
-        </div>
-        <Gallery
-          content={{ title: product.category, images: product.gallery }}
-        />
-        <SuggestionSection
-          title='You may also like'
-          items={product.others}
-        />
+        <ProductDetailsFetching />
         <CategoryListing />
-
         <BestGear />
       </div>
     </div>

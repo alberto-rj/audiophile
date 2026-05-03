@@ -7,7 +7,8 @@ import { SuggestionListSkeleton } from './suggestion-list-skeleton';
 type StoryProps = React.ComponentProps<typeof SuggestionListSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/SuggestionSection/SuggestionListSkeleton',
+  title:
+    'pages/ProductPage/SuggestionSection/SuggestionList/SuggestionListSkeleton',
   component: SuggestionListSkeleton,
   parameters: {
     layout: 'fullscreen',

@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { cn } from '@/libs/cn';
 
-import ProductDetailedCardSkeleton from './product-detailed-card-skeleton';
+import ProductDetailsCardSkeleton from './product-details-card-skeleton';
 
-type StoryProps = React.ComponentProps<typeof ProductDetailedCardSkeleton>;
+type StoryProps = React.ComponentProps<typeof ProductDetailsCardSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/ProductDetailedCardSkeleton',
-  component: ProductDetailedCardSkeleton,
+  title: 'pages/ProductPage/ProductDetailsCard/ProductDetailsCardSkeleton',
+  component: ProductDetailsCardSkeleton,
   parameters: {
     layout: 'fullscreen',
   },
@@ -16,7 +16,7 @@ const meta = {
   render: (props) => {
     return (
       <div className={cn('region', 'wrapper')}>
-        <ProductDetailedCardSkeleton {...props} />
+        <ProductDetailsCardSkeleton {...props} />
       </div>
     );
   },

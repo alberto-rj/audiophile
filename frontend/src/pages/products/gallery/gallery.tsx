@@ -1,8 +1,8 @@
 import { useId } from 'react';
 
-import type { GalleryContent } from '@/libs/types';
 import { ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
+import type { GalleryContent } from '@/libs/types';
 
 interface GalleryProps {
   content: GalleryContent;
