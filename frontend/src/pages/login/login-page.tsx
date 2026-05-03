@@ -30,7 +30,7 @@ const LoginPage = () => {
             'font-medium',
           )}
         >
-          Do not have an account?{' '}
+          Don't have an account?{' '}
           <Button
             variant='link'
             asChild
