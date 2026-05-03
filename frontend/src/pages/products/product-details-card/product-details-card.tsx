@@ -9,15 +9,15 @@ import type { Product } from '@/libs/types';
 import { Button } from '@/components/ui';
 import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
 
-interface ProductDetailedCardProps {
+interface ProductDetailsCardProps {
   product: Product;
   className?: string;
 }
 
-const ProductDetailedCard = ({
+const ProductDetailsCard = ({
   product: { id, slug, image, name, description, price, isNew },
   className,
-}: ProductDetailedCardProps) => {
+}: ProductDetailsCardProps) => {
   const selectedItem = useSelector(selectItemById(id));
 
   const dispatch = useDispatch<AppDispatch>();
@@ -156,4 +156,4 @@ const ProductDetailedCard = ({
   );
 };
 
-export default ProductDetailedCard;
+export default ProductDetailsCard;

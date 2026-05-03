@@ -1,13 +1,13 @@
 import { Skeleton } from '@/components/ui';
 import { cn } from '@/libs/cn';
 
-interface ProductDetailedCardSkeletonProps {
+interface ProductDetailsCardSkeletonProps {
   className?: string;
 }
 
-const ProductDetailedCardSkeleton = ({
+const ProductDetailsCardSkeleton = ({
   className,
-}: ProductDetailedCardSkeletonProps) => {
+}: ProductDetailsCardSkeletonProps) => {
   return (
     <div
       aria-hidden={true}
@@ -110,4 +110,4 @@ const ProductDetailedCardSkeleton = ({
   );
 };
 
-export default ProductDetailedCardSkeleton;
+export default ProductDetailsCardSkeleton;

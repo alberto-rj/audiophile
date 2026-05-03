@@ -7,7 +7,8 @@ import SuggestionCardSkeleton from './suggestion-card-skeleton';
 type StoryProps = React.ComponentProps<typeof SuggestionCardSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/SuggestionSection/SuggestionCardSkeleton',
+  title:
+    'pages/ProductPage/SuggestionSection/SuggestionCard/SuggestionCardSkeleton',
   component: SuggestionCardSkeleton,
   parameters: {
     layout: 'fullscreen',

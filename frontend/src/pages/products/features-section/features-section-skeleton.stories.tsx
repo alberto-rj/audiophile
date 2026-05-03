@@ -7,7 +7,7 @@ import FeaturesSectionSkeleton from './features-section-skeleton';
 type StoryProps = React.ComponentProps<typeof FeaturesSectionSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/FeaturesSectionSkeleton',
+  title: 'pages/ProductPage/FeaturesSection/FeaturesSectionSkeleton',
   component: FeaturesSectionSkeleton,
   parameters: {
     layout: 'fullscreen',

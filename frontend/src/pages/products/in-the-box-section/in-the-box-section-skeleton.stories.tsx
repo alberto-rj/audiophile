@@ -7,7 +7,7 @@ import InTheBoxSectionSkeleton from './in-the-box-section.-skeleton';
 type StoryProps = React.ComponentProps<typeof InTheBoxSectionSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/InTheBoxSectionSkeleton',
+  title: 'pages/ProductPage/InTheBoxSection/InTheBoxSectionSkeleton',
   component: InTheBoxSectionSkeleton,
   parameters: {
     layout: 'fullscreen',

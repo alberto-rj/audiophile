@@ -5,10 +5,12 @@ import { SuggestionListSkeleton } from './suggestion-list-skeleton';
 
 interface SuggestionSectionSkeletonProps {
   className?: string;
+  itemsCount?: number;
 }
 
 export const SuggestionSectionSkeleton = ({
   className,
+  itemsCount,
 }: SuggestionSectionSkeletonProps) => {
   return (
     <div
@@ -38,7 +40,7 @@ export const SuggestionSectionSkeleton = ({
       />
 
       {/* List skeleton */}
-      <SuggestionListSkeleton />
+      <SuggestionListSkeleton itemsCount={itemsCount} />
     </div>
   );
 };

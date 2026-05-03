@@ -4,15 +4,15 @@ import { cn } from '@/libs/cn';
 import type { Product } from '@/libs/types';
 import { products } from '@/libs/mocks';
 
-import ProductDetailedCard from './product-detailed-card';
+import ProductDetailsCard from './product-details-card';
 
-type StoryProps = React.ComponentProps<typeof ProductDetailedCard> & {
+type StoryProps = React.ComponentProps<typeof ProductDetailsCard> & {
   product: Product;
 };
 
 const meta = {
-  title: 'pages/ProductPage/ProductDetailedCard',
-  component: ProductDetailedCard,
+  title: 'pages/ProductPage/ProductDetailsCard',
+  component: ProductDetailsCard,
   parameters: {
     layout: 'fullscreen',
   },
@@ -20,7 +20,7 @@ const meta = {
   render: (props) => {
     return (
       <div className={cn('region', 'wrapper')}>
-        <ProductDetailedCard {...props} />
+        <ProductDetailsCard {...props} />
       </div>
     );
   },

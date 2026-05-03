@@ -7,7 +7,7 @@ import { SuggestionSectionSkeleton } from './suggestion-section-skeleton';
 type StoryProps = React.ComponentProps<typeof SuggestionSectionSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/SuggestionSectionSkeleton',
+  title: 'pages/ProductPage/SuggestionSection/SuggestionSectionSkeleton',
   component: SuggestionSectionSkeleton,
   parameters: {
     layout: 'fullscreen',
@@ -27,4 +27,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {},
+};
+
+export const Multiple: Story = {
+  args: {
+    itemsCount: 9,
+  },
 };

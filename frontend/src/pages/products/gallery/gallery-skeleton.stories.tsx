@@ -7,7 +7,7 @@ import GallerySkeleton from './gallery-skeleton';
 type StoryProps = React.ComponentProps<typeof GallerySkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/GallerySkeleton',
+  title: 'pages/ProductPage/Gallery/GallerySkeleton',
   component: GallerySkeleton,
   parameters: {
     layout: 'fullscreen',
