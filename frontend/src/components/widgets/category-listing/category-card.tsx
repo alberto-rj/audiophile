@@ -17,6 +17,7 @@ export const CategoryCard = ({
 }: CategoryCardProps) => {
   return (
     <Link
+      aria-label={`Shop - ${name}`}
       to={createCategoryRoute(slug)}
       className={cn(
         'inline-full',
@@ -35,7 +36,6 @@ export const CategoryCard = ({
         className,
       )}
     >
-      <span className={cn('sr-only')}>Shop {name}</span>
       <img
         alt=''
         src={image}
