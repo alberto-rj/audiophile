@@ -129,7 +129,12 @@ const Hero = ({
             variant={'primary'}
             asChild
           >
-            <Link to={createProductRoute(slug)}>See product</Link>
+            <Link
+              to={createProductRoute(slug)}
+              aria-label={`See product - ${name}`}
+            >
+              See product
+            </Link>
           </Button>
         </div>
       </div>
