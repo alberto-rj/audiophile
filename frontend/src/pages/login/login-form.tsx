@@ -24,7 +24,7 @@ export const LoginForm = () => {
     handleSubmit,
     setError,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useLoginForm();
 
   const from =
@@ -110,16 +110,16 @@ export const LoginForm = () => {
         <Button
           type='submit'
           variant='primary'
-          disabled={!isValid || isLoading}
+          disabled={isLoading}
         >
           {isLoading ? (
             <>
               <Spinner
                 variant='primary'
                 size='sm'
-                aria-label='Entering to your account'
+                aria-labelledby='actionAlert'
               />{' '}
-              <span aria-hidden={true}>Signing in...</span>
+              <span id='actionAlert'>Signing in...</span>
             </>
           ) : (
             'Sign in'
