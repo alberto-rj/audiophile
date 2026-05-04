@@ -1,24 +1,54 @@
-import { useLoginForm } from '@/hooks';
-import type { LoginFormData } from '@/libs/schemas';
+import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
+import type { AppDispatch } from '@/app/store';
+import { useLoginMutation } from '@/app/services/auth-api';
+import { setCredentials } from '@/app/features/auth';
 import { Button, Input, Label, Spinner } from '@/components/ui';
 import { FormField, FormFieldAlert, FormFieldFlow } from '@/components/widgets';
+import { APP_ROUTES } from '@/config/app-routes';
+import { useLoginForm } from '@/hooks';
+import type { LoginFormData } from '@/libs/schemas';
+import type { ApiError } from '@/libs/types';
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [login, { isLoading }] = useLoginMutation();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    setError,
     reset,
+    formState: { errors, isValid },
   } = useLoginForm();
+
+  const from =
+    (location.state as { from?: { pathname: string } })?.from?.pathname ??
+    APP_ROUTES.home;
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Login:', data);
+      const { user, accessToken } = await login(data).unwrap();
+
+      dispatch(setCredentials({ user, accessToken }));
+      navigate(from, { replace: true });
+
       reset();
     } catch (error) {
-      console.error('Login failed:', error);
+      const apiError = error as ApiError;
+
+      if (apiError?.status == 401) {
+        setError('password', { message: 'Invalid email or password.' });
+      } else {
+        setError('password', { message: 'Failed to sign in.' });
+      }
+
+      console.error('Failed to sign in:', error);
     }
   };
 
@@ -80,19 +110,19 @@ export const LoginForm = () => {
         <Button
           type='submit'
           variant='primary'
-          disabled={!isValid || isSubmitting}
+          disabled={!isValid || isLoading}
         >
-          {isSubmitting ? (
+          {isLoading ? (
             <>
               <Spinner
                 variant='primary'
                 size='sm'
                 aria-label='Entering to your account'
               />{' '}
-              <span aria-hidden={true}>Entering...</span>
+              <span aria-hidden={true}>Signing in...</span>
             </>
           ) : (
-            'Login'
+            'Sign in'
           )}
         </Button>
       </FormFieldFlow>

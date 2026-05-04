@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { clearCart, selectGrandTotal, selectItems } from '@/app/features/cart';
 import type { AppDispatch } from '@/app/store';
-import { useCreateOrderMutation } from '@/app/services/orders';
+import { useCreateOrderMutation } from '@/app/services/orders-api';
 import { CashOnDelivery } from '@/assets/icons';
 import { Input, Label, Radio } from '@/components/ui';
 import {

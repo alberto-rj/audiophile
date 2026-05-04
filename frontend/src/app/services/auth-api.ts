@@ -1,23 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { clearCredentials, setCredentials } from '@/app/features/auth';
-import { env } from '@/config/env';
-import type { LoginFormData, RegisterFormData } from '@/libs/schemas';
-import type { AuthResponse } from '@/libs/types';
+import type { AuthResponse, LoginPayload, RegisterPayload } from '@/libs/types';
 
-const { VITE_API_BASE_URL } = env;
+import { baseQueryWithAuth } from './base-query';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${VITE_API_BASE_URL}/auth`,
-  }),
+  baseQuery: baseQueryWithAuth,
   endpoints: (builder) => ({
-    register: builder.mutation<AuthResponse, RegisterFormData>({
-      query: (data) => ({
-        url: '/register',
+    register: builder.mutation<AuthResponse, RegisterPayload>({
+      query: (payload) => ({
+        url: '/auth/register',
         method: 'POST',
-        body: data,
+        body: payload,
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         const {
@@ -28,11 +24,11 @@ export const authApi = createApi({
       },
     }),
 
-    login: builder.mutation<AuthResponse, LoginFormData>({
-      query: (data) => ({
-        url: '/login',
+    login: builder.mutation<AuthResponse, LoginPayload>({
+      query: (payload) => ({
+        url: '/auth/login',
         method: 'POST',
-        body: data,
+        body: payload,
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         const {
@@ -45,7 +41,7 @@ export const authApi = createApi({
 
     logout: builder.mutation<void, void>({
       query: () => ({
-        url: '/logout',
+        url: '/auth/logout',
         method: 'POST',
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
@@ -57,7 +53,7 @@ export const authApi = createApi({
 
     refresh: builder.mutation<AuthResponse, void>({
       query: () => ({
-        url: '/refresh',
+        url: '/auth/refresh',
         method: 'POST',
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {

@@ -1,16 +1,26 @@
-export interface AuthState {
-  user: BaseUser | null;
-  accessToken: string | null;
-  isAuthenticated: boolean;
-}
-
-export interface BaseUser {
-  id: string;
+export interface AuthUser {
+  id: number;
   name: string;
   email: string;
 }
 
+export interface AuthState {
+  user: AuthUser | null;
+  accessToken: string | null;
+}
+
 export interface AuthResponse {
-  user: BaseUser;
+  user: AuthUser;
   accessToken: string;
+}
+
+export interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export interface RegisterPayload {
+  name: string;
+  email: string;
+  password: string;
 }

@@ -1,19 +1,25 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/app/store';
-import type { BaseUser } from '@/libs/types';
+import type { AuthState, AuthUser } from '@/libs/types';
 
-export interface AuthState {
-  user: BaseUser | null;
-  accessToken: string | null;
-  isAuthenticated: boolean;
+const TOKEN_KEY = 'auth_token';
+
+export function storeAccessToken(token: string) {
+  localStorage.setItem(TOKEN_KEY, token);
 }
 
-const initialState: AuthState = {
-  user: null,
-  accessToken: null,
-  isAuthenticated: false,
-};
+export function getInitialAuthState(): AuthState {
+  const rawToken = localStorage.getItem(TOKEN_KEY);
+
+  if (rawToken === null) {
+    return { user: null, accessToken: null };
+  }
+
+  return { user: null, accessToken: rawToken };
+}
+
+const initialState = getInitialAuthState();
 
 const authSlice = createSlice({
   name: 'auth',
@@ -23,7 +29,7 @@ const authSlice = createSlice({
       state,
       {
         payload: { user, accessToken },
-      }: PayloadAction<{ user: BaseUser; accessToken: string }>,
+      }: PayloadAction<{ user: AuthUser; accessToken: string }>,
     ) => {
       state.user = user;
       state.accessToken = accessToken;
@@ -32,7 +38,6 @@ const authSlice = createSlice({
     clearCredentials: (state) => {
       state.user = null;
       state.accessToken = null;
-      state.isAuthenticated = false;
     },
   },
 });
@@ -49,6 +54,6 @@ export const selectAccessToken = (state: RootState) => {
   return state.auth.accessToken;
 };
 
-export const selectAuthenticated = (state: RootState) => {
-  return state.auth.isAuthenticated;
+export const selectIsAuthenticated = (state: RootState) => {
+  return state.auth.user !== null && state.auth.accessToken !== null;
 };

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { useGetProductBySlugQuery } from '@/app/services/products';
+import { useGetProductBySlugQuery } from '@/app/services/products-api';
 import {
   BestGear,
   CategoryListing,
