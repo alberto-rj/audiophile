@@ -1,22 +1,51 @@
-import { useRegisterForm } from '@/hooks';
-import type { RegisterFormData } from '@/libs/schemas';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import type { AppDispatch } from '@/app/store';
+import { useRegisterMutation } from '@/app/services/auth-api';
+import { setCredentials } from '@/app/features/auth';
 import { Button, Input, Label, Spinner } from '@/components/ui';
 import { FormField, FormFieldAlert, FormFieldFlow } from '@/components/widgets';
+import { APP_ROUTES } from '@/config/app-routes';
+import { useRegisterForm } from '@/hooks';
+import type { RegisterFormData } from '@/libs/schemas';
+import type { ApiError } from '@/libs/types';
 
 export const RegisterForm = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const [registerUser, { isLoading }] = useRegisterMutation();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    setError,
     reset,
+    formState: { errors },
   } = useRegisterForm();
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Registration ok:', data);
+      const { name, email, password } = data;
+      const { user, accessToken } = await registerUser({
+        name,
+        email,
+        password,
+      }).unwrap();
+
       reset();
+
+      dispatch(setCredentials({ user, accessToken }));
+
+      navigate(APP_ROUTES.home, { replace: true });
     } catch (error) {
+      const apiError = error as ApiError;
+
+      if (apiError.status === 409) {
+        setError('email', { message: 'This email is already in use.' });
+      }
+
       console.error('Registration failed:', error);
     }
   };
@@ -35,9 +64,10 @@ export const RegisterForm = () => {
             Name
           </Label>
           <Input
+            type='text'
             id='name'
             autoComplete='name'
-            placeholder='Your full name'
+            placeholder='John Doe'
             required
             aria-required
             aria-describedby='nameAlert'
@@ -62,7 +92,7 @@ export const RegisterForm = () => {
             inputMode='email'
             id='email'
             autoComplete='email'
-            placeholder='Your email'
+            placeholder='johndoe@example.com'
             required
             aria-required
             aria-describedby='emailAlert'
@@ -86,7 +116,7 @@ export const RegisterForm = () => {
             type='password'
             id='password'
             autoComplete='new-password'
-            placeholder='Your password'
+            placeholder='Min. 8 characters'
             required
             aria-required
             aria-describedby='passwordAlert'
@@ -126,19 +156,19 @@ export const RegisterForm = () => {
         <Button
           type='submit'
           variant='primary'
-          disabled={!isValid || isSubmitting}
+          disabled={isLoading}
         >
-          {isSubmitting ? (
+          {isLoading ? (
             <>
               <Spinner
                 variant='primary'
                 size='sm'
-                aria-label='Creating your account'
+                aria-labelledby='actionAlert'
               />{' '}
-              <span aria-hidden={true}>Sign Up...</span>
+              <span id='actionAlert'>Creating account...</span>
             </>
           ) : (
-            'Login'
+            'Create account'
           )}
         </Button>
       </FormFieldFlow>

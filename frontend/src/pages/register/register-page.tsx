@@ -6,6 +6,7 @@ import { cn } from '@/libs/cn';
 import { useSecondaryPage } from '@/hooks';
 
 import { RegisterForm } from './register-form';
+import { APP_ROUTES } from '@/config/app-routes';
 
 const RegisterPage = () => {
   useSecondaryPage();
@@ -35,7 +36,7 @@ const RegisterPage = () => {
             variant='link'
             asChild
           >
-            <Link to='/login'>Login</Link>
+            <Link to={APP_ROUTES.login}>Sign in</Link>
           </Button>
         </p>
       </FormCard.Footer>
