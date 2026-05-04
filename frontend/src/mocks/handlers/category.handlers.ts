@@ -2,13 +2,7 @@ import { delay, http, HttpResponse } from 'msw';
 
 import { products } from '@/libs/mocks/products';
 import { categories } from '@/libs/mocks/categories';
-import { orders } from '@/libs/mocks/orders';
-import type {
-  Category,
-  CreateOrderPayload,
-  CreateOrderResponse,
-  Product,
-} from '@/libs/types';
+import type { Category, Product } from '@/libs/types';
 
 function sortProductsByNewFirst(products: Product[]) {
   return [...products].sort((a, b) => {
@@ -24,7 +18,7 @@ function sortProductsByNewFirst(products: Product[]) {
   });
 }
 
-export const handlers = [
+export const categoryHandlers = [
   http.get<never, never, Category[]>('/api/categories', async () => {
     await delay(3 * 1000);
 
@@ -69,45 +63,6 @@ export const handlers = [
         ...foundCategory,
         items: filteredProducts,
       });
-    },
-  ),
-
-  http.get<never, never, Product[]>('/api/products', async () => {
-    await delay(3 * 1000);
-
-    return HttpResponse.json(sortProductsByNewFirst(products));
-  }),
-
-  http.get<{ slug: string }, never, Product>(
-    '/api/products/:slug',
-    async ({ params }) => {
-      await delay(3 * 1000);
-
-      const product = products.find((p) => p.slug === params.slug);
-
-      if (!product) {
-        return new HttpResponse(null, { status: 404 });
-      }
-
-      return HttpResponse.json(product);
-    },
-  ),
-
-  http.post<never, CreateOrderPayload, CreateOrderResponse>(
-    '/api/orders',
-    async ({ request }) => {
-      await delay(3 * 1000);
-
-      const payload = await request.json();
-
-      const createdOrder = {
-        ...payload,
-        id: orders.length + 1,
-        number: `ORDER-${orders.length + 1}`,
-        createdAt: new Date().toISOString(),
-      };
-
-      return HttpResponse.json(createdOrder, { status: 201 });
     },
   ),
 ];

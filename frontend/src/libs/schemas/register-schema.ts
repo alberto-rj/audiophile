@@ -21,14 +21,9 @@ export const registerSchema = z
       .string({ error: 'Confirm Password must be a string.' })
       .min(1, { error: 'Confirm Password is required.' }),
   })
-  .refine(
-    ({ password, confirmPassword }) => {
-      return password === confirmPassword;
-    },
-    {
-      error: 'Password do not match.',
-      path: ['confirmPassword'],
-    },
-  );
+  .refine(({ password, confirmPassword }) => password === confirmPassword, {
+    error: 'Password do not match.',
+    path: ['confirmPassword'],
+  });
 
 export type RegisterFormData = z.infer<typeof registerSchema>;

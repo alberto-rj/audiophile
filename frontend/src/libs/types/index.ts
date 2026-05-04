@@ -141,5 +141,16 @@ export interface CreateOrderPayload extends CheckoutFormData {
 
 export type CreateOrderResponse = Order;
 
+/* auth */
+export type {
+  AuthUser,
+  AuthResponse,
+  AuthState,
+  LoginPayload,
+  RegisterPayload,
+} from './auth';
+
 /* user */
-export type { BaseUser, AuthResponse } from './auth';
+export type { GetMeResponse } from './user';
+
+export type ApiError = { status?: number };

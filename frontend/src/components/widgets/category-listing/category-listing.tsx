@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery } from '@/app/services/categories';
+import { useGetCategoriesQuery } from '@/app/services/categories-api';
 import { ErrorMessage } from '@/components/widgets';
 
 import { CategoryList } from './category-list';

@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import AppErrorBoundary from '@/app-error-boundary';
 import { store } from '@/app/store';
+import { AppInitializer } from '@/app/app-initializer';
 
 import '@/styles/global.css';
 
@@ -30,7 +31,9 @@ enableMocking().then(() => {
     <StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <AppErrorBoundary />
+          <AppInitializer>
+            <AppErrorBoundary />
+          </AppInitializer>
         </Provider>
       </BrowserRouter>
     </StrictMode>,

@@ -13,7 +13,7 @@ const LoginPage = () => {
   return (
     <FormCard>
       <FormCard.Header>
-        <FormCard.Title>Your account</FormCard.Title>
+        <FormCard.Title>Sign in</FormCard.Title>
         <FormCard.Description>
           Please fill the fields below to have access to your account.
         </FormCard.Description>
@@ -35,7 +35,7 @@ const LoginPage = () => {
             variant='link'
             asChild
           >
-            <Link to='/register'>Create account</Link>
+            <Link to='/register'>Create one</Link>
           </Button>
         </p>
       </FormCard.Footer>
