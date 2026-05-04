@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { APP_ROUTES } from '@/config/app-routes';
 import { LoginPage } from '@/pages';
 import { LayoutCenteredOnScreen } from '@/layouts';
 
@@ -10,6 +11,8 @@ const meta = {
   component: LoginPage,
   parameters: {
     layout: 'fullscreen',
+    route: APP_ROUTES.login,
+    routePath: APP_ROUTES.login,
   },
   decorators: (Story, context) => {
     return (
