@@ -11,7 +11,6 @@ import { CartSummary } from './cart-summary';
 const CheckoutPage = () => {
   useSecondaryPage();
 
-  const [isValid, setIsValid] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formId = useId();
 
@@ -58,7 +57,6 @@ const CheckoutPage = () => {
           <CheckoutForm
             id={formId}
             onSubmittingChange={setIsSubmitting}
-            onValidChange={setIsValid}
           />
         </Card>
         <Card
@@ -84,7 +82,7 @@ const CheckoutPage = () => {
               type='submit'
               form={formId}
               variant='primary'
-              disabled={!isValid || isSubmitting}
+              disabled={isSubmitting}
               className={cn('inline-full')}
             >
               {isSubmitting ? (

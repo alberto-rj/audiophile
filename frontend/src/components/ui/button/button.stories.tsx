@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { userEvent, within } from 'storybook/test';
 
 import { Button } from '@/components/ui';
 
@@ -72,6 +73,17 @@ export const Link: Story = {
   },
   render: ({ buttonText, ...props }) => {
     return <Button {...props}>{buttonText}</Button>;
+  },
+};
+
+export const Focused: Story = {
+  name: 'State / Focused',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: /Focused/i }));
+  },
+  args: {
+    buttonText: 'Focused',
   },
 };
 
