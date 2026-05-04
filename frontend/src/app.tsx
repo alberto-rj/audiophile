@@ -1,6 +1,7 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';
 
+import { APP_ROUTES } from '@/config/app-routes';
 import {
   CategoryPage,
   CheckoutPage,
@@ -28,11 +29,11 @@ const App = () => {
         }
       >
         <Route
-          path='/login'
+          path={APP_ROUTES.login}
           element={<LoginPage />}
         />
         <Route
-          path='/register'
+          path={APP_ROUTES.register}
           element={<RegisterPage />}
         />
       </Route>
@@ -52,15 +53,15 @@ const App = () => {
           element={<HomePage />}
         />
         <Route
-          path='/categories/:slug'
+          path={`${APP_ROUTES.categories}/:slug`}
           element={<CategoryPage />}
         />
         <Route
-          path='/products/:slug'
+          path={`${APP_ROUTES.products}/:slug`}
           element={<ProductPage />}
         />
         <Route
-          path='/checkout'
+          path={APP_ROUTES.checkout}
           element={
             <RequireCart>
               <CheckoutPage />
@@ -70,7 +71,7 @@ const App = () => {
       </Route>
 
       <Route
-        path='*'
+        path={APP_ROUTES.notFound}
         element={<NotFoundPage />}
       />
     </Routes>

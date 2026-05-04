@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { APP_ROUTES } from '@/config/app-routes';
 import { RegisterPage } from '@/pages';
 import { LayoutCenteredOnScreen } from '@/layouts';
+
 type StoryProps = React.ComponentProps<typeof RegisterPage>;
 
 const meta = {
@@ -9,6 +11,8 @@ const meta = {
   component: RegisterPage,
   parameters: {
     layout: 'fullscreen',
+    route: APP_ROUTES.register,
+    routePath: APP_ROUTES.register,
   },
   decorators: (Story, context) => {
     return (
