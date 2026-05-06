@@ -12,6 +12,8 @@ export { default as Modal } from './modal/modal';
 
 export { default as Radio } from './radio-group/radio';
 
+export { default as Select } from './select/select';
+
 export { default as Spinner } from './spinner/spinner';
 
 export { default as Skeleton } from './skeleton/skeleton';
