@@ -49,3 +49,5 @@ export {
 } from './form/form';
 
 export { default as FormCard } from './form-card/form-card';
+
+export { default as UserProfileMenu } from './user-profile-menu/user-profile-menu';

@@ -163,6 +163,10 @@
     @apply block w-full;
   }
 
+  a {
+    @apply hover:text-primary-400;
+  }
+
   *:focus,
   *:focus-visible,
   .focus-within:focus-within {
