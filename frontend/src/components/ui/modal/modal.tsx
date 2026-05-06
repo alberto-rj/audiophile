@@ -18,7 +18,15 @@ const ModalOverlay = ({ className, ...props }: ModalOverlayProps) => {
   return (
     <Dialog.Overlay
       {...props}
-      className={cn('fixed', 'z-200', 'inset-0', 'bg-black/40', className)}
+      className={cn(
+        'fixed',
+        'z-200',
+        'inset-0',
+
+        'bg-black/40',
+
+        className,
+      )}
     />
   );
 };
@@ -63,7 +71,16 @@ const ModalContent = ({ className, ...props }: ModalContentProps) => {
   return (
     <Dialog.Content
       {...props}
-      className={cn('fixed', 'z-300', 'rounded-lg', 'bg-white', className)}
+      className={cn(
+        'fixed',
+        'z-300',
+
+        'shadow-md',
+        'rounded-lg',
+        'bg-white',
+
+        className,
+      )}
     />
   );
 };
