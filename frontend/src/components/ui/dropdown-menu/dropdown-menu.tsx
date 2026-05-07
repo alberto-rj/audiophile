@@ -36,7 +36,7 @@ const DropdownMenuContent = ({
       {...props}
       sideOffset={sideOffset}
       className={cn(
-        'min-inline-55',
+        'inline-(--radix-dropdown-menu-trigger-width)',
         'p-1',
 
         'bg-white',
