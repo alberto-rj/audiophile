@@ -11,6 +11,22 @@ const SelectTrigger = ({ ...props }: SelectTriggerProps) => {
 };
 /* Trigger (end) */
 
+/* Value (start) */
+type SelectValueProps = ComponentProps<typeof RadixSelect.Value>;
+
+const SelectValue = ({ ...props }: SelectValueProps) => {
+  return <RadixSelect.Value {...props} />;
+};
+/* Value (end) */
+
+/* Icon (start) */
+type SelectIconProps = ComponentProps<typeof RadixSelect.Icon>;
+
+const SelectIcon = ({ ...props }: SelectIconProps) => {
+  return <RadixSelect.Icon {...props} />;
+};
+/* Icon (end) */
+
 /* Portal (start) */
 type SelectPortalProps = ComponentProps<typeof RadixSelect.Portal>;
 
@@ -23,17 +39,21 @@ const SelectPortal = ({ ...props }: SelectPortalProps) => {
 type SelectContentProps = ComponentProps<typeof RadixSelect.Content>;
 
 const SelectContent = ({
-  sideOffset = 8,
   className,
+  position = 'popper',
+  sideOffset = 8,
   ...props
 }: SelectContentProps) => {
   return (
     <RadixSelect.Content
       {...props}
+      position={position}
       sideOffset={sideOffset}
       className={cn(
         'overflow-hidden',
         'p-1',
+        'inline-(--radix-select-trigger-width)',
+        'max-block-(--radix-select-content-available-height)',
 
         'bg-white',
         'shadow-md',
@@ -95,7 +115,11 @@ const SelectItem = ({ className, ...props }: SelectItemProps) => {
     <RadixSelect.Item
       {...props}
       className={cn(
+        'relative',
+        'flex',
+        'items-center',
         'ps-6',
+        'pe-9',
         'py-3',
         'text-xs',
 
@@ -103,14 +127,10 @@ const SelectItem = ({ className, ...props }: SelectItemProps) => {
         'cursor-pointer',
         'select-none',
         'rounded-lg',
+        'outline-none',
 
-        'focus:outline-none',
-        'focus:bg-primary-400',
-        'focus:text-white',
-
-        'focus-visible:outline-none',
-        'focus-visible:bg-primary-400',
-        'focus-visible:text-white',
+        'data-highlighted:bg-primary-400',
+        'data-highlighted:text-white',
 
         'data-disabled:text-black/50',
         'data-disabled:cursor-not-allowed',
@@ -123,6 +143,41 @@ const SelectItem = ({ className, ...props }: SelectItemProps) => {
 };
 /* Item (end) */
 
+/* ItemText (start) */
+type SelectItemTextProps = ComponentPropsWithRef<typeof RadixSelect.ItemText>;
+
+const SelectItemText = ({ ...props }: SelectItemTextProps) => {
+  return <RadixSelect.ItemText {...props} />;
+};
+/* ItemText (end) */
+
+/* ItemIndicator (start) */
+type SelectItemIndicatorProps = ComponentPropsWithRef<
+  typeof RadixSelect.ItemIndicator
+>;
+
+const SelectItemIndicator = ({
+  className,
+  ...props
+}: SelectItemIndicatorProps) => {
+  return (
+    <RadixSelect.ItemIndicator
+      {...props}
+      className={cn(
+        'absolute',
+        'inset-s-0',
+        'inline-6',
+        'inline-flex',
+        'justify-center',
+        'items-center',
+
+        className,
+      )}
+    />
+  );
+};
+/* ItemText (end) */
+
 /* Label (start) */
 type SelectLabelProps = ComponentProps<typeof RadixSelect.Label>;
 
@@ -131,7 +186,7 @@ const SelectLabel = ({ className, ...props }: SelectLabelProps) => {
     <RadixSelect.Label
       {...props}
       className={cn(
-        'ps-6',
+        'px-6',
         'py-3',
         'text-xs',
 
@@ -171,6 +226,8 @@ const Select = ({ ...props }: SelectProps) => {
 /* Root (end) */
 
 Select.Trigger = SelectTrigger;
+Select.Value = SelectValue;
+Select.Icon = SelectIcon;
 Select.Portal = SelectPortal;
 Select.ScrollUpButton = SelectScrollUpButton;
 Select.ScrollDownButton = SelectScrollDownButton;
@@ -178,6 +235,8 @@ Select.Content = SelectContent;
 Select.Viewport = SelectViewport;
 Select.Group = SelectGroup;
 Select.Item = SelectItem;
+Select.ItemText = SelectItemText;
+Select.ItemIndicator = SelectItemIndicator;
 Select.Label = SelectLabel;
 Select.Separator = SelectSeparator;
 

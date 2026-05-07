@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useState, type ComponentProps } from 'react';
 import { fn } from 'storybook/test';
 
 import { Button, Select } from '@/components/ui';
-import { ChevronDown, ChevronUp } from '@/assets/icons';
+import { Check, ChevronDown, ChevronUp } from '@/assets/icons';
 
 type StoryProps = React.ComponentProps<typeof Select>;
 
@@ -37,71 +37,20 @@ export const Default: Story = {
           </Button>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content>
-            <Select.ScrollUpButton>
-              <ChevronUp
-                aria-hidden={true}
-                focusable={false}
-              />
-            </Select.ScrollUpButton>
-            <Select.Viewport>
-              <Select.Group>
-                <Select.Label>Fruits</Select.Label>
-                <Select.Item value='apple'>Apple</Select.Item>
-                <Select.Item value='banana'>Banana</Select.Item>
-                <Select.Item value='blueberry'>Blueberry</Select.Item>
-                <Select.Item value='grapes'>Grapes</Select.Item>
-                <Select.Item value='pineapple'>Pineapple</Select.Item>
-              </Select.Group>
-
-              <Select.Separator />
-
-              <Select.Group>
-                <Select.Label>Vegetables</Select.Label>
-                <Select.Item value='aubergine'>Aubergine</Select.Item>
-                <Select.Item value='broccoli'>Broccoli</Select.Item>
-                <Select.Item
-                  value='carrot'
-                  disabled
-                >
-                  Carrot
-                </Select.Item>
-                <Select.Item value='courgette'>Courgette</Select.Item>
-                <Select.Item value='leek'>Leek</Select.Item>
-              </Select.Group>
-
-              <Select.Separator />
-
-              <Select.Group>
-                <Select.Label>Meat</Select.Label>
-                <Select.Item value='beef'>Beef</Select.Item>
-                <Select.Item value='chicken'>Chicken</Select.Item>
-                <Select.Item value='lamb'>Lamb</Select.Item>
-                <Select.Item value='pork'>Pork</Select.Item>
-              </Select.Group>
-            </Select.Viewport>
-            <Select.ScrollDownButton>
-              <ChevronDown
-                aria-hidden={true}
-                focusable={false}
-              />
-            </Select.ScrollDownButton>
-          </Select.Content>
+          <SelectContent />
         </Select.Portal>
       </Select>
     );
   },
 };
 
-export const Controlled = {
-  render: () => {
-    const [open, setOpen] = useState<boolean>(false);
-
+export const WithDefaultValue: Story = {
+  args: {
+    defaultValue: 'banana',
+  },
+  render: ({ ...selectProps }) => {
     return (
-      <Select
-        open={open}
-        onOpenChange={setOpen}
-      >
+      <Select {...selectProps}>
         <Select.Trigger asChild>
           <Button type='button'>
             Select
@@ -111,60 +60,112 @@ export const Controlled = {
             />
           </Button>
         </Select.Trigger>
-
         <Select.Portal>
-          <Select.Content>
-            <Select.ScrollUpButton>
-              <ChevronUp
-                aria-hidden={true}
-                focusable={false}
-              />
-            </Select.ScrollUpButton>
-            <Select.Viewport>
-              <Select.Group>
-                <Select.Label>Fruits</Select.Label>
-                <Select.Item value='apple'>Apple</Select.Item>
-                <Select.Item value='banana'>Banana</Select.Item>
-                <Select.Item value='blueberry'>Blueberry</Select.Item>
-                <Select.Item value='grapes'>Grapes</Select.Item>
-                <Select.Item value='pineapple'>Pineapple</Select.Item>
-              </Select.Group>
-
-              <Select.Separator />
-
-              <Select.Group>
-                <Select.Label>Vegetables</Select.Label>
-                <Select.Item value='aubergine'>Aubergine</Select.Item>
-                <Select.Item value='broccoli'>Broccoli</Select.Item>
-                <Select.Item
-                  value='carrot'
-                  disabled
-                >
-                  Carrot
-                </Select.Item>
-                <Select.Item value='courgette'>Courgette</Select.Item>
-                <Select.Item value='leek'>Leek</Select.Item>
-              </Select.Group>
-
-              <Select.Separator />
-
-              <Select.Group>
-                <Select.Label>Meat</Select.Label>
-                <Select.Item value='beef'>Beef</Select.Item>
-                <Select.Item value='chicken'>Chicken</Select.Item>
-                <Select.Item value='lamb'>Lamb</Select.Item>
-                <Select.Item value='pork'>Pork</Select.Item>
-              </Select.Group>
-            </Select.Viewport>
-            <Select.ScrollDownButton>
-              <ChevronDown
-                aria-hidden={true}
-                focusable={false}
-              />
-            </Select.ScrollDownButton>
-          </Select.Content>
+          <SelectContent />
         </Select.Portal>
       </Select>
     );
   },
+};
+
+export const Controlled: Story = {
+  render: () => {
+    const [value, setValue] = useState<string>('banana');
+    const [open, setOpen] = useState<boolean>(false);
+
+    return (
+      <Select
+        open={open}
+        value={value}
+        onOpenChange={setOpen}
+        onValueChange={setValue}
+      >
+        <Select.Trigger asChild>
+          <Button type='button'>
+            {value}
+            <ChevronDown
+              focusable={false}
+              aria-hidden={true}
+            />
+          </Button>
+        </Select.Trigger>
+
+        <Select.Portal>
+          <SelectContent />
+        </Select.Portal>
+      </Select>
+    );
+  },
+};
+
+const SelectItem = ({
+  children,
+  ...props
+}: ComponentProps<typeof Select.Item>) => {
+  return (
+    <Select.Item {...props}>
+      <Select.ItemText>{children}</Select.ItemText>
+      <Select.ItemIndicator>
+        <Check
+          focusable={false}
+          aria-hidden={true}
+        />
+      </Select.ItemIndicator>
+    </Select.Item>
+  );
+};
+
+const SelectContent = () => {
+  return (
+    <Select.Content>
+      <Select.ScrollUpButton>
+        <ChevronUp
+          aria-hidden={true}
+          focusable={false}
+        />
+      </Select.ScrollUpButton>
+      <Select.Viewport>
+        <Select.Group>
+          <Select.Label>Fruits</Select.Label>
+          <SelectItem value='apple'>Apple</SelectItem>
+          <SelectItem value='banana'>Banana</SelectItem>
+          <SelectItem value='blueberry'>Blueberry</SelectItem>
+          <SelectItem value='grapes'>Grapes</SelectItem>
+          <SelectItem value='pineapple'>Pineapple</SelectItem>
+        </Select.Group>
+
+        <Select.Separator />
+
+        <Select.Group>
+          <Select.Label>Vegetables</Select.Label>
+          <SelectItem value='aubergine'>Aubergine</SelectItem>
+          <SelectItem value='broccoli'>Broccoli</SelectItem>
+          <SelectItem
+            value='carrot'
+            disabled
+          >
+            Carrot
+          </SelectItem>
+          <SelectItem value='courgette'>Courgette</SelectItem>
+          <SelectItem value='leek'>Leek</SelectItem>
+        </Select.Group>
+
+        <Select.Separator />
+
+        <Select.Group>
+          <Select.Label>Meat</Select.Label>
+          <SelectItem value='beef'>Beef</SelectItem>
+          <SelectItem value='chicken'>Chicken</SelectItem>
+          <SelectItem value='lamb'>Lamb</SelectItem>
+          <SelectItem value='pork'>Pork</SelectItem>
+        </Select.Group>
+      </Select.Viewport>
+      <Select.ScrollDownButton>
+        <ChevronDown
+          focusable={false}
+          aria-hidden={true}
+        />
+      </Select.ScrollDownButton>
+    </Select.Content>
+  );
 };
