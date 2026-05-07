@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { selectItems } from '@/app/features/cart';
+import { APP_ROUTES } from '@/config/app-routes';
 
 interface RequireCartProps {
   children: ReactNode;
@@ -14,7 +15,7 @@ const RequireCart = ({ children }: RequireCartProps) => {
   if (items.length === 0) {
     return (
       <Navigate
-        to='/'
+        to={APP_ROUTES.home}
         replace
       />
     );
