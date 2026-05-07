@@ -1,6 +1,7 @@
 export { default as ArrowRight } from './icon-arrow-right.svg?react';
 export { default as Cart } from './icon-cart.svg?react';
 export { default as CashOnDelivery } from './icon-cash-on-delivery.svg?react';
+export { default as Check } from './icon-check.svg?react';
 export { default as ChevronDown } from './icon-chevron-down.svg?react';
 export { default as ChevronUp } from './icon-chevron-up.svg?react';
 export { default as Close } from './icon-close.svg?react';
