@@ -13,12 +13,13 @@ export const LayoutCenteredOnScreen = ({
   return (
     <main
       className={cn(
+        'region',
+        'wrapper',
         'inline-full',
         'min-block-screen',
         'flex',
         'justify-center',
         'items-center',
-        'region',
       )}
     >
       {children}
