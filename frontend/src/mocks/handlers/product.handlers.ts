@@ -19,7 +19,7 @@ function sortProductsByNewFirst(products: Product[]) {
 
 export const productHandlers = [
   http.get<never, never, Product[]>('/api/products', async () => {
-    await delay(3 * 1000);
+    await delay(6 * 1000);
 
     return HttpResponse.json(sortProductsByNewFirst(products));
   }),
@@ -27,7 +27,7 @@ export const productHandlers = [
   http.get<{ slug: string }, never, Product>(
     '/api/products/:slug',
     async ({ params }) => {
-      await delay(3 * 1000);
+      await delay(6 * 1000);
 
       const product = products.find((p) => p.slug === params.slug);
 
