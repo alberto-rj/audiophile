@@ -1,16 +1,12 @@
-export interface AuthUser {
-  id: number;
-  name: string;
-  email: string;
-}
+import type { BaseUser } from '@/libs/types';
 
 export interface AuthState {
-  user: AuthUser | null;
+  user: BaseUser | null;
   accessToken: string | null;
 }
 
 export interface AuthResponse {
-  user: AuthUser;
+  user: BaseUser;
   accessToken: string;
 }
 

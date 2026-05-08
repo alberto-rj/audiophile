@@ -1,8 +1,4 @@
-import type { AuthUser } from '@/libs/types';
-
-interface MockUser extends AuthUser {
-  password: string;
-}
+import type { MockUser } from './types';
 
 const defaultUser: MockUser = {
   id: 1,
@@ -18,6 +14,7 @@ export const mockSessions = new Map<string, number>();
 export function generateMockToken(userId: number): string {
   const unique = Math.floor(Date.now() * Math.random());
   const token = `mock-token-${userId}-${unique}`;
+  mockSessions.set(token, userId);
 
   return token;
 }
@@ -36,4 +33,16 @@ export function generateUserFromToken(token: string): MockUser | null {
   }
 
   return foundUser;
+}
+
+export function extractTokenFromHeader(
+  authHeader: string | null,
+): string | null {
+  if (!authHeader) {
+    return null;
+  }
+
+  const [, token] = authHeader.split(' ');
+
+  return token || null;
 }

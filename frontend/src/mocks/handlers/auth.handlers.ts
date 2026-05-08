@@ -1,7 +1,13 @@
-import type { AuthResponse, LoginPayload, RegisterPayload } from '@/libs/types';
 import { http, HttpResponse } from 'msw';
 
-import { generateMockToken, mockSessions, mockUsers } from '../auth-store';
+import type { AuthResponse, LoginPayload, RegisterPayload } from '@/libs/types';
+
+import {
+  extractTokenFromHeader,
+  generateMockToken,
+  mockSessions,
+  mockUsers,
+} from '../auth-store';
 
 export const authHandlers = [
   http.post<never, RegisterPayload>(
@@ -48,17 +54,11 @@ export const authHandlers = [
     const foundUser = mockUsers.find((user) => user.email === email);
 
     if (typeof foundUser === 'undefined') {
-      return HttpResponse.json(
-        { error: 'Invalid credentials.' },
-        { status: 401 },
-      );
+      return HttpResponse.json(undefined, { status: 401 });
     }
 
     if (foundUser.password !== password) {
-      return HttpResponse.json(
-        { error: 'Invalid credentials.' },
-        { status: 401 },
-      );
+      return HttpResponse.json(undefined, { status: 401 });
     }
 
     const accessToken = generateMockToken(foundUser.id);
@@ -77,12 +77,12 @@ export const authHandlers = [
 
   http.post('/api/auth/logout', async ({ request }) => {
     const authHeader = request.headers.get('Authorization');
-    const accessToken = authHeader?.replace('Bearer', '');
+    const accessToken = extractTokenFromHeader(authHeader);
 
     if (typeof accessToken === 'string') {
       mockSessions.delete(accessToken);
     }
 
-    return HttpResponse.json(null, { status: 204 });
+    return HttpResponse.json(undefined, { status: 204 });
   }),
 ];

@@ -113,8 +113,6 @@ export interface InTheBoxSectionContent {
   items: ItemInclude[];
 }
 
-export type PaymentMethod = 'e-money' | 'cash-on-delivery';
-
 export interface CartItem {
   id: number;
   slug: string;
@@ -124,26 +122,20 @@ export interface CartItem {
   quantity: number;
 }
 
-export interface Order extends CheckoutFormData {
-  id: number;
-  number: string;
-  items: CartItem[];
-  total: number;
-  createdAt: string;
-  deliveredAt?: string;
-  cancelledAt?: string;
-}
+/* order */
+export type { Order, OrderItem, OrderStatus, PaymentMethod } from './order';
 
 export interface CreateOrderPayload extends CheckoutFormData {
   items: CartItem[];
   total: number;
 }
 
-export type CreateOrderResponse = Order;
+export type CreateOrderResponse = unknown;
+
+export type ApiError = { status?: number };
 
 /* auth */
 export type {
-  AuthUser,
   AuthResponse,
   AuthState,
   LoginPayload,
@@ -151,6 +143,4 @@ export type {
 } from './auth';
 
 /* user */
-export type { GetMeResponse } from './user';
-
-export type ApiError = { status?: number };
+export type { BaseUser, ProfileResponse, UpdateProfilePayload } from './user';
