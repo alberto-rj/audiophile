@@ -16,6 +16,7 @@ const AuthCTA = () => {
         to={APP_ROUTES.register}
         className={cn(
           'p-2',
+
           'link',
           'nav-link',
           'border',
