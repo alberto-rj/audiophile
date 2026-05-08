@@ -14,6 +14,8 @@ export { default as Radio } from './radio-group/radio';
 
 export { default as Select } from './select/select';
 
+export { default as Separator } from './separator/separator';
+
 export { default as Spinner } from './spinner/spinner';
 
 export { default as Skeleton } from './skeleton/skeleton';
