@@ -1,1 +1,1 @@
-export { LayoutCenteredOnScreen, LayoutLanding } from './layout';
+export { LayoutBasic, LayoutCenteredOnScreen, LayoutLanding } from './layout';

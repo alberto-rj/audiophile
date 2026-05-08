@@ -27,6 +27,28 @@ export const LayoutCenteredOnScreen = ({
   );
 };
 
+interface LayoutBasicPropsProps {
+  children: ReactNode;
+}
+
+export const LayoutBasic = ({ children }: LayoutBasicPropsProps) => {
+  return (
+    <div
+      className={cn(
+        'inline-full',
+        'min-block-screen',
+        'flex',
+        'flex-col',
+        'justify-between',
+      )}
+    >
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </div>
+  );
+};
+
 interface LayoutLandingProps {
   children: ReactNode;
 }
