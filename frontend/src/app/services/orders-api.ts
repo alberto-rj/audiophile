@@ -1,17 +1,30 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { env } from '@/config/env';
-import type { CreateOrderPayload, CreateOrderResponse } from '@/libs/types';
+import type {
+  CreateOrderPayload,
+  OrderListResponse,
+  OrderResponse,
+} from '@/libs/types';
 
-const { VITE_API_BASE_URL } = env;
+import { baseQueryWithAuth } from './base-query';
 
 export const ordersApi = createApi({
   reducerPath: 'ordersApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${VITE_API_BASE_URL}/orders` }),
+
+  baseQuery: baseQueryWithAuth,
+
   endpoints: (builder) => ({
-    createOrder: builder.mutation<CreateOrderResponse, CreateOrderPayload>({
+    getOrders: builder.query<OrderListResponse, void>({
+      query: () => '/orders/',
+    }),
+
+    getOrderById: builder.query<OrderResponse, number>({
+      query: (id) => `/orders/${id}`,
+    }),
+
+    createOrder: builder.mutation<OrderResponse, CreateOrderPayload>({
       query: (payload) => ({
-        url: '/',
+        url: '/orders',
         method: 'POST',
         body: payload,
       }),
@@ -19,4 +32,8 @@ export const ordersApi = createApi({
   }),
 });
 
-export const { useCreateOrderMutation } = ordersApi;
+export const {
+  useCreateOrderMutation,
+  useGetOrderByIdQuery,
+  useGetOrdersQuery,
+} = ordersApi;
