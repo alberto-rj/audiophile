@@ -1,6 +1,6 @@
-import rawProducts from './products.mock.json' with { type: 'json' };
-
 import type { Product } from '@/libs/types';
+
+import rawProducts from './products.mock.json' with { type: 'json' };
 
 export const products = rawProducts as Product[];
 
