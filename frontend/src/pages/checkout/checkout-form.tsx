@@ -2,6 +2,7 @@ import { useEffect, useState, type ComponentProps } from 'react';
 import { Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectUser } from '@/app/features/auth';
 import {
   clearCart,
   selectGrandTotal,
@@ -29,7 +30,6 @@ import { useCheckoutForm } from '@/hooks';
 import { cn } from '@/libs/cn';
 import type { CheckoutFormData } from '@/libs/schemas';
 import type { OrderItem } from '@/libs/types';
-import { selectUser } from '@/app/features/auth';
 
 interface CheckoutFormProps extends ComponentProps<'form'> {
   id: string;
