@@ -136,6 +136,13 @@
   --flow-spacing-md: 7.5rem;
   --flow-spacing-lg: 10rem;
 
+  /* order status */
+  --order-cancelled: var(--color-danger-400);
+  --order-pending: var(--color-blue-400);
+  --order-shipped: var(--color-gray-900);
+  --order-processing: var(--color-orange-600);
+  --order-delivered: var(--color-green-400);
+
   /* category card */
   --category-card-margin: 7.1875rem;
   --category-card-margin-lg: 8.875rem;
