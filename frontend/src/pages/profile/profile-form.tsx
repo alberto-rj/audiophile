@@ -1,6 +1,3 @@
-import { useSelector } from 'react-redux';
-
-import { selectUser } from '@/app/features/auth';
 import { useUpdateProfileMutation } from '@/app/services/users-api';
 import { Button, Input, Label, Spinner } from '@/components/ui';
 import { FormField, FormFieldAlert, FormFieldFlow } from '@/components/widgets';
@@ -11,26 +8,24 @@ import { cn } from '@/libs/cn';
 const ProfileForm = () => {
   useSecondaryPage();
 
-  const authUser = useSelector(selectUser);
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   const {
     register,
     handleSubmit,
     reset,
-    setValues,
     formState: { errors },
   } = useProfileForm();
 
   const onSubmit = async (data: ProfileFormData) => {
     try {
-      console.log('Updating your profile...', data);
       const {
         user: { name, email },
       } = await updateProfile(data).unwrap();
-      reset();
-      setValues({ name, email });
+
+      reset({ name, email });
     } catch (error) {
+      alert('Failed to upload your profile.');
       console.error(error);
     }
   };
@@ -53,7 +48,6 @@ const ProfileForm = () => {
             id='name'
             autoComplete='name'
             placeholder='John Doe'
-            defaultValue={authUser?.name}
             required
             aria-required
             aria-describedby='nameAlert'
@@ -79,7 +73,6 @@ const ProfileForm = () => {
             id='email'
             autoComplete='email'
             placeholder='johndoe@example.com'
-            defaultValue={authUser?.email}
             required
             aria-required
             aria-describedby='emailAlert'

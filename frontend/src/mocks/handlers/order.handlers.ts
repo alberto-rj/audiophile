@@ -1,57 +1,51 @@
-import { delay, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import { orders } from '@/libs/mocks/orders';
 import type { CreateOrderPayload, Order } from '@/libs/types';
 
 import { withAuth } from '../middlewares/with-auth';
 
-export const orderHandlers = [
-  http.post(
-    '/api/orders',
+export const getOrders = http.get(
+  '/api/orders',
 
-    withAuth(async ({ request }) => {
-      await delay(3 * 1000);
+  withAuth(async () => {
+    return HttpResponse.json({ orders });
+  }),
+);
 
-      const payload = (await request.json()) as CreateOrderPayload;
+export const getOrderById = http.get(
+  '/api/orders/:slug',
 
-      const createdOrder: Order = {
-        ...payload,
-        status: 'pending',
-        id: orders.length + 1,
-        createdAt: new Date().toISOString(),
-      };
+  withAuth(async ({ params }) => {
+    const { slug } = params as { slug?: string };
 
-      orders.push(createdOrder);
+    const foundOrder = orders.find((order) => order.id === Number(slug));
 
-      return HttpResponse.json({ order: createdOrder }, { status: 201 });
-    }),
-  ),
+    if (typeof foundOrder === 'undefined') {
+      HttpResponse.json(undefined, { status: 404 });
+    }
 
-  http.get(
-    '/api/orders',
+    return HttpResponse.json(foundOrder);
+  }),
+);
 
-    withAuth(async () => {
-      await delay(3 * 1000);
+export const createOrder = http.post(
+  '/api/orders',
 
-      return HttpResponse.json({ orders });
-    }),
-  ),
+  withAuth(async ({ request }) => {
+    const payload = (await request.json()) as CreateOrderPayload;
 
-  http.get(
-    '/api/orders/:slug',
+    const createdOrder: Order = {
+      ...payload,
+      status: 'pending',
+      id: orders.length + 1,
+      createdAt: new Date().toISOString(),
+    };
 
-    withAuth(async ({ params }) => {
-      await delay(3 * 1000);
+    orders.push(createdOrder);
 
-      const { slug } = params as { slug?: string };
+    return HttpResponse.json({ order: createdOrder }, { status: 201 });
+  }),
+);
 
-      const foundOrder = orders.find((order) => order.id === Number(slug));
-
-      if (typeof foundOrder === 'undefined') {
-        HttpResponse.json(undefined, { status: 404 });
-      }
-
-      return HttpResponse.json(foundOrder);
-    }),
-  ),
-];
+export const orderHandlers = [getOrders, getOrderById, createOrder];
