@@ -107,12 +107,18 @@ const OrderCard = ({
                       'gap-2',
                       'text-md',
 
-                      isHighlighted && {
-                        'text-(--order-delivered)': status === 'delivered',
-                        'text-(--order-cancelled)': status === 'cancelled',
-                        'text-(--order-processing)': status === 'processing',
-                        'text-(--order-pending)': status === 'pending',
-                        'text-(--order-shipped)': status === 'shipped',
+                      {
+                        'text-(--order-delivered)':
+                          isHighlighted && status === 'delivered',
+                        'text-(--order-cancelled)':
+                          isHighlighted && status === 'cancelled',
+                        'text-(--order-processing)':
+                          isHighlighted && status === 'processing',
+                        'text-(--order-pending)':
+                          isHighlighted && status === 'pending',
+                        'text-(--order-shipped)':
+                          isHighlighted && status === 'shipped',
+                        'text-black': !isHighlighted,
                       },
                     )}
                   >
