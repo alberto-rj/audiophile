@@ -1,17 +1,44 @@
-import { delay, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import { orders } from '@/libs/mocks/orders';
 import type { CreateOrderPayload, Order } from '@/libs/types';
 
 import { withAuth } from '../middlewares/with-auth';
+import { withDelay } from '../middlewares/with-delay';
 
-export const orderHandlers = [
-  http.post(
-    '/api/orders',
+export const getOrders = http.get(
+  '/api/orders',
 
+  withDelay(
+    withAuth(async () => {
+      return HttpResponse.json({ orders });
+    }),
+  ),
+);
+
+export const getOrderById = http.get(
+  '/api/orders/:slug',
+
+  withDelay(
+    withAuth(async ({ params }) => {
+      const { slug } = params as { slug?: string };
+
+      const foundOrder = orders.find((order) => order.id === Number(slug));
+
+      if (typeof foundOrder === 'undefined') {
+        HttpResponse.json(undefined, { status: 404 });
+      }
+
+      return HttpResponse.json(foundOrder);
+    }),
+  ),
+);
+
+export const createOrder = http.post(
+  '/api/orders',
+
+  withDelay(
     withAuth(async ({ request }) => {
-      await delay(3 * 1000);
-
       const payload = (await request.json()) as CreateOrderPayload;
 
       const createdOrder: Order = {
@@ -26,32 +53,6 @@ export const orderHandlers = [
       return HttpResponse.json({ order: createdOrder }, { status: 201 });
     }),
   ),
+);
 
-  http.get(
-    '/api/orders',
-
-    withAuth(async () => {
-      await delay(3 * 1000);
-
-      return HttpResponse.json({ orders });
-    }),
-  ),
-
-  http.get(
-    '/api/orders/:slug',
-
-    withAuth(async ({ params }) => {
-      await delay(3 * 1000);
-
-      const { slug } = params as { slug?: string };
-
-      const foundOrder = orders.find((order) => order.id === Number(slug));
-
-      if (typeof foundOrder === 'undefined') {
-        HttpResponse.json(undefined, { status: 404 });
-      }
-
-      return HttpResponse.json(foundOrder);
-    }),
-  ),
-];
+export const orderHandlers = [getOrders, getOrderById, createOrder];
