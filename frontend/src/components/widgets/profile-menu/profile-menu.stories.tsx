@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { UserProfileMenu } from '@/components/widgets';
-type StoryProps = React.ComponentProps<typeof UserProfileMenu>;
+import { ProfileMenu } from '@/components/widgets';
+type StoryProps = React.ComponentProps<typeof ProfileMenu>;
 
 const meta = {
-  title: 'widgets/UserProfileMenu',
-  component: UserProfileMenu,
+  title: 'widgets/ProfileMenu',
+  component: ProfileMenu,
   parameters: {
     layout: 'centered',
   },
