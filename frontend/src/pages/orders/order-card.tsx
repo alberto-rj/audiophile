@@ -100,48 +100,24 @@ const OrderCard = ({
                   )}
                 >
                   <dt>{name}</dt>
-                  {isHighlighted ? (
-                    <dd
-                      className={cn(
-                        'flex',
-                        'items-center',
-                        'gap-2',
-                        'text-md',
+                  <dd
+                    className={cn(
+                      'flex',
+                      'items-center',
+                      'gap-2',
+                      'text-md',
 
-                        {
-                          'text-(--order-delivered)': status === 'delivered',
-                          'text-(--order-cancelled)': status === 'cancelled',
-                          'text-(--order-processing)': status === 'processing',
-                          'text-(--order-pending)': status === 'pending',
-                          'text-(--order-shipped)': status === 'shipped',
-                        },
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          'inline-6',
-                          'block-6',
-                          'rounded-full',
-                          'bg-current',
-                        )}
-                      />
-
-                      {value}
-                    </dd>
-                  ) : (
-                    <dd
-                      className={cn(
-                        'flex',
-                        'items-center',
-                        'gap-2',
-                        'text-md',
-
-                        'text-black',
-                      )}
-                    >
-                      {value}
-                    </dd>
-                  )}
+                      isHighlighted && {
+                        'text-(--order-delivered)': status === 'delivered',
+                        'text-(--order-cancelled)': status === 'cancelled',
+                        'text-(--order-processing)': status === 'processing',
+                        'text-(--order-pending)': status === 'pending',
+                        'text-(--order-shipped)': status === 'shipped',
+                      },
+                    )}
+                  >
+                    {value}
+                  </dd>
                 </dl>
               </li>
             ))}
