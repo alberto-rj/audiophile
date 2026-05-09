@@ -1,36 +1,46 @@
-import { Link } from 'react-router-dom';
+import { GoBack } from '@/components/widgets';
+import { useSecondaryPage } from '@/hooks';
+import { cn } from '@/libs/cn';
+import { orders } from '@/libs/mocks/orders';
 
-import { toMoney } from '@/libs/helpers';
-import type { Order } from '@/libs/types';
-import { APP_ROUTES } from '@/config/app-routes';
-
-const orders: Order[] = [];
+import OrderList from './order-list';
 
 const OrdersPage = () => {
-  return (
-    <main>
-      <h1>My Orders</h1>
+  useSecondaryPage();
 
-      {orders.length === 0 ? (
-        <p>You have no orders yet.</p>
-      ) : (
-        <ul role='list'>
-          {orders.map((order) => (
-            <li key={order.id}>
-              <article>
-                <h2>Order #{order.id}</h2>
-                <p>{new Date(order.createdAt).toLocaleDateString()}</p>
-                <p>{order.status}</p>
-                <p>{toMoney(order.total)}</p>
-                <Link to={`${APP_ROUTES.orders}/${order.id}`}>
-                  View details
-                </Link>
-              </article>
-            </li>
-          ))}
-        </ul>
-      )}
-    </main>
+  return (
+    <>
+      <GoBack>
+        <GoBack.Control />
+      </GoBack>
+      <div
+        className={cn(
+          'region-end',
+          'wrapper',
+          'flex',
+          'flex-col',
+          'items-center',
+          'gap-8',
+
+          'md:gap-24',
+        )}
+      >
+        <h1
+          className={cn(
+            'text-center',
+            'text-xl',
+
+            'lg:text-2xl',
+
+            'text-black',
+            'uppercase',
+          )}
+        >
+          My Orders
+        </h1>
+        <OrderList orders={orders} />
+      </div>
+    </>
   );
 };
 
