@@ -7,5 +7,8 @@ export const APP_ROUTES = {
   login: '/login',
   register: '/register',
 
+  profile: '/profile',
+  orders: '/orders',
+
   notFound: '*',
 } as const;
