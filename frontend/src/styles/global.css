@@ -156,7 +156,7 @@
   }
 
   body {
-    @apply text-base text-black/50 font-display;
+    @apply text-base text-black/65 font-display;
   }
 
   picture {

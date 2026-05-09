@@ -60,7 +60,7 @@ const DropdownMenuItem = ({ className, ...props }: DropdownMenuItemProps) => {
     <RadixDropdownMenu.Item
       {...props}
       className={cn(
-        'ps-6',
+        'px-6',
         'py-3',
         'text-xs',
 
@@ -68,6 +68,7 @@ const DropdownMenuItem = ({ className, ...props }: DropdownMenuItemProps) => {
         'cursor-pointer',
         'select-none',
         'rounded-lg',
+        'uppercase',
 
         'focus:outline-none',
         'focus:bg-primary-400',
@@ -96,7 +97,7 @@ const DropdownMenuLabel = ({ className, ...props }: DropdownMenuLabelProps) => {
     <RadixDropdownMenu.Label
       {...props}
       className={cn(
-        'ps-6',
+        'px-6',
         'py-3',
         'text-xs',
 

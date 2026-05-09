@@ -52,6 +52,6 @@ export {
 
 export { default as FormCard } from './form-card/form-card';
 
-export { default as UserProfileMenu } from './user-profile-menu/user-profile-menu';
+export { default as ProfileMenu } from './profile-menu/profile-menu';
 
 export { default as AuthCTA } from './auth-cta/auth-cta';
