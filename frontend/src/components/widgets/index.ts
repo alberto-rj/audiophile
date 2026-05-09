@@ -36,6 +36,8 @@ export { default as ErrorMessage } from './error-message/error-message';
 
 export { default as RequireCart } from './require-cart/require-cart';
 
+export { default as RequireAuth } from './require-auth/require-auth';
+
 export {
   FormField,
   FormFieldAlert,
@@ -51,3 +53,5 @@ export {
 export { default as FormCard } from './form-card/form-card';
 
 export { default as UserProfileMenu } from './user-profile-menu/user-profile-menu';
+
+export { default as AuthCTA } from './auth-cta/auth-cta';

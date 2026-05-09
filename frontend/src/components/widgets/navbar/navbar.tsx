@@ -4,7 +4,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { Logo, Close, Menu } from '@/assets/icons';
 import { cn } from '@/libs/cn';
 import { navLinks } from '@/libs/constants';
-import { CartModal } from '@/components/widgets';
+import { AuthCTA, CartModal } from '@/components/widgets';
+import { Separator } from '@/components/ui';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -39,7 +40,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={cn('relative', 'inline-full', 'py-8', 'bg-gray-900')}>
+    <nav
+      className={cn(
+        'relative',
+        'inline-full',
+        'py-8',
+
+        'bg-gray-900',
+      )}
+    >
       <div
         className={cn(
           'wrapper',
@@ -105,64 +114,82 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu */}
-        <ul
-          role='list'
+        <div
           aria-labelledby={menuLabelId}
           id={menuId}
           className={cn(
+            'inline-full',
             'absolute',
-            'top-22.25',
-            'left-0',
+            'inset-bs-22.25',
+            'inset-s-0',
             'z-100',
-            'w-full',
-            'flex',
-            'flex-col',
-            'gap-8',
-            'items-center',
             'py-8',
-            'bg-gray-900',
-
             { hidden: !isOpen },
 
             'lg:hidden',
+
+            'bg-gray-900',
           )}
         >
-          {navLinks.map(({ url, text }, i) => (
-            <li key={text}>
-              <NavLink
-                ref={i === 0 ? firstMenuItemRef : undefined}
-                to={url}
-                className={cn('link', 'nav-link')}
-              >
-                {text}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+          <ul
+            role='list'
+            className={cn('flex', 'flex-col', 'gap-8', 'items-center')}
+          >
+            {navLinks.map(({ url, text }, i) => (
+              <li key={text}>
+                <Link
+                  ref={i === 0 ? firstMenuItemRef : undefined}
+                  to={url}
+                  className={cn('link', 'nav-link')}
+                >
+                  {text}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <Separator
+            className={cn(
+              'my-8',
+
+              'bg-white/20',
+            )}
+          />
+
+          <AuthCTA
+            className={cn('flex', 'flex-col', 'items-center', 'gap-8')}
+          />
+        </div>
 
         {/* Desktop menu */}
-        <ul
-          role='list'
+        <div
           aria-labelledby={menuLabelId}
           className={cn(
             'hidden',
 
             'lg:flex',
-            'items-center',
-            'gap-8',
+            'lg:items-center',
+            'lg:gap-24',
           )}
         >
-          {navLinks.map(({ url, text }) => (
-            <li key={text}>
-              <NavLink
-                to={url}
-                className={cn('link', 'nav-link')}
-              >
-                {text}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+          <ul
+            role='list'
+            className={cn('flex', 'items-center', 'gap-8')}
+          >
+            {navLinks.map(({ url, text }) => (
+              <li key={text}>
+                <NavLink
+                  to={url}
+                  className={cn('link', 'nav-link')}
+                >
+                  {text}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <AuthCTA className={cn('flex', 'items-center', 'gap-8')} />
+        </div>
 
         {/* Cart */}
         <CartModal />
@@ -177,10 +204,9 @@ const Navbar = () => {
           'bottom-0',
           'left-0',
 
-          'lg:hidden',
+          'bg-white/20',
 
-          'bg-white',
-          'opacity-20',
+          'lg:hidden',
         )}
       ></div>
 
@@ -202,8 +228,7 @@ const Navbar = () => {
             'left-10',
             '-bottom-8',
 
-            'bg-white',
-            'opacity-20',
+            'bg-white/20',
           )}
         ></div>
       </div>

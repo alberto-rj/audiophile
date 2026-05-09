@@ -11,6 +11,9 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
+  args: {
+    className: cn('flex', 'items-center', 'gap-8'),
+  },
   decorators: (Story, ctx) => {
     return (
       <div
