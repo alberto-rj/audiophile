@@ -8,6 +8,7 @@ import { DropdownMenu } from '@/components/ui';
 import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import type { BaseUser } from '@/libs/types';
+import { getNameInitials } from '@/libs/helpers';
 
 const fallbackUser: BaseUser = {
   id: 1,
@@ -60,11 +61,7 @@ const ProfileMenu = () => {
               'uppercase',
             )}
           >
-            {user.name
-              .split(' ')
-              .map((word) => word[0])
-              .slice(0, 2)
-              .join('')}
+            {getNameInitials(user.name)}
           </div>
           <ChevronDown
             focusable={false}
@@ -74,7 +71,9 @@ const ProfileMenu = () => {
         </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content>
+        <DropdownMenu.Content
+          className={cn('absolute', 'inset-s-1/2', '-translate-x-1/2', 'z-100')}
+        >
           <DropdownMenu.Label
             className={cn('flex', 'flex-col', 'items-center')}
           >
