@@ -49,7 +49,6 @@ const App = () => {
         </Route>
         {/* Auth (end) */}
 
-        {/* Profile (start) */}
         <Route
           path='/'
           element={
@@ -58,6 +57,7 @@ const App = () => {
             </LayoutBasic>
           }
         >
+          {/* Profile (start) */}
           <Route
             path={`${APP_ROUTES.profile}`}
             element={
@@ -66,28 +66,27 @@ const App = () => {
               </RequireAuth>
             }
           />
+          {/* Profile (end) */}
+
+          {/* Orders (start) */}
+          <Route
+            path={`${APP_ROUTES.orders}`}
+            element={
+              <RequireAuth>
+                <OrdersPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path={`${APP_ROUTES.orders}/:slug`}
+            element={
+              <RequireAuth>
+                <OrderDetailsPage />
+              </RequireAuth>
+            }
+          />
+          {/* Orders (end) */}
         </Route>
-
-        {/* Profile (end) */}
-
-        {/* Orders (start) */}
-        <Route
-          path={`${APP_ROUTES.orders}`}
-          element={
-            <RequireAuth>
-              <OrdersPage />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path={`${APP_ROUTES.orders}/:slug`}
-          element={
-            <RequireAuth>
-              <OrderDetailsPage />
-            </RequireAuth>
-          }
-        />
-        {/* Orders (end) */}
 
         {/* Landing (start) */}
         <Route
