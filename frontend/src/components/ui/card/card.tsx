@@ -1,15 +1,19 @@
 import type { ReactNode } from 'react';
 
 import { cn } from '@/libs/cn';
+import { Slot } from '@radix-ui/react-slot';
 
 interface CardProps {
   className?: string;
   children?: ReactNode;
+  asChild?: boolean;
 }
 
-const Card = ({ className, children }: CardProps) => {
+const Card = ({ asChild, className, children }: CardProps) => {
+  const Comp = asChild ? Slot : 'div';
+
   return (
-    <div
+    <Comp
       className={cn(
         'inline-full',
         'rounded-lg',
@@ -22,7 +26,7 @@ const Card = ({ className, children }: CardProps) => {
       )}
     >
       {children}
-    </div>
+    </Comp>
   );
 };
 
