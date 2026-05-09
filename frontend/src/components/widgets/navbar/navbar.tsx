@@ -1,13 +1,17 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
+import { selectIsAuthenticated } from '@/app/features/auth';
 import { Logo, Close, Menu } from '@/assets/icons';
+import { Separator } from '@/components/ui';
+import { AuthCTA, CartModal, ProfileMenu } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { navLinks } from '@/libs/constants';
-import { AuthCTA, CartModal } from '@/components/widgets';
-import { Separator } from '@/components/ui';
 
 const Navbar = () => {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const firstMenuItemRef = useRef<HTMLAnchorElement>(null);
@@ -156,9 +160,13 @@ const Navbar = () => {
             )}
           />
 
-          <AuthCTA
-            className={cn('flex', 'flex-col', 'items-center', 'gap-8')}
-          />
+          {isAuthenticated ? (
+            <ProfileMenu />
+          ) : (
+            <AuthCTA
+              className={cn('flex', 'flex-col', 'items-center', 'gap-8')}
+            />
+          )}
         </div>
 
         {/* Desktop menu */}
@@ -188,7 +196,11 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <AuthCTA className={cn('flex', 'items-center', 'gap-8')} />
+          {isAuthenticated ? (
+            <ProfileMenu />
+          ) : (
+            <AuthCTA className={cn('flex', 'items-center', 'gap-8')} />
+          )}
         </div>
 
         {/* Cart */}
