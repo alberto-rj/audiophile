@@ -10,16 +10,18 @@ import { baseQueryWithAuth } from './base-query';
 
 export const ordersApi = createApi({
   reducerPath: 'ordersApi',
-
   baseQuery: baseQueryWithAuth,
+  tagTypes: ['Order'],
 
   endpoints: (builder) => ({
     getOrders: builder.query<OrderListResponse, void>({
-      query: () => '/orders/',
+      query: () => '/orders',
+      providesTags: ['Order'],
     }),
 
     getOrderById: builder.query<OrderResponse, number>({
       query: (id) => `/orders/${id}`,
+      providesTags: (_, __, id) => [{ type: 'Order', id }],
     }),
 
     createOrder: builder.mutation<OrderResponse, CreateOrderPayload>({
@@ -28,6 +30,7 @@ export const ordersApi = createApi({
         method: 'POST',
         body: payload,
       }),
+      invalidatesTags: ['Order'],
     }),
   }),
 });
