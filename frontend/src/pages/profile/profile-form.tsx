@@ -6,6 +6,7 @@ import { Button, Input, Label, Spinner } from '@/components/ui';
 import { FormField, FormFieldAlert, FormFieldFlow } from '@/components/widgets';
 import { useProfileForm, useSecondaryPage } from '@/hooks';
 import type { ProfileFormData } from '@/libs/schemas';
+import { cn } from '@/libs/cn';
 
 const ProfileForm = () => {
   useSecondaryPage();
@@ -95,6 +96,7 @@ const ProfileForm = () => {
           type='submit'
           variant='primary'
           disabled={isLoading}
+          className={cn('self-end')}
         >
           {isLoading ? (
             <>
