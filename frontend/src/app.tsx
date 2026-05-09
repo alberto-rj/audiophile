@@ -15,8 +15,7 @@ import {
   RegisterPage,
 } from '@/pages';
 import { LayoutBasic, LayoutCenteredOnScreen, LayoutLanding } from '@/layouts';
-import { PageLoader, RequireCart } from '@/components/widgets';
-import RequireAuth from './components/widgets/require-auth/require-auth';
+import { PageLoader, RequireAuth, RequireCart } from '@/components/widgets';
 
 const App = () => {
   return (
@@ -53,37 +52,27 @@ const App = () => {
           path='/'
           element={
             <LayoutBasic>
-              <Outlet />
+              <RequireAuth>
+                <Outlet />
+              </RequireAuth>
             </LayoutBasic>
           }
         >
           {/* Profile (start) */}
           <Route
             path={`${APP_ROUTES.profile}`}
-            element={
-              <RequireAuth>
-                <ProfilePage />
-              </RequireAuth>
-            }
+            element={<ProfilePage />}
           />
           {/* Profile (end) */}
 
           {/* Orders (start) */}
           <Route
             path={`${APP_ROUTES.orders}`}
-            element={
-              <RequireAuth>
-                <OrdersPage />
-              </RequireAuth>
-            }
+            element={<OrdersPage />}
           />
           <Route
             path={`${APP_ROUTES.orders}/:slug`}
-            element={
-              <RequireAuth>
-                <OrderDetailsPage />
-              </RequireAuth>
-            }
+            element={<OrderDetailsPage />}
           />
           {/* Orders (end) */}
         </Route>
@@ -112,9 +101,11 @@ const App = () => {
           <Route
             path={APP_ROUTES.checkout}
             element={
-              <RequireCart>
-                <CheckoutPage />
-              </RequireCart>
+              <RequireAuth>
+                <RequireCart>
+                  <CheckoutPage />
+                </RequireCart>
+              </RequireAuth>
             }
           />
         </Route>
