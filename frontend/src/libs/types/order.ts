@@ -33,6 +33,6 @@ export interface Order {
   shipping: number;
   vat: number;
   total: number;
-  createdAt: Date;
+  createdAt: string;
   items?: OrderItem[];
 }
