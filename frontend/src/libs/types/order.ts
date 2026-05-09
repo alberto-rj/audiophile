@@ -32,7 +32,32 @@ export interface Order {
   subtotal: number;
   shipping: number;
   vat: number;
-  total: number;
+  grandTotal: number;
   createdAt: string;
   items?: OrderItem[];
+}
+
+export interface CreateOrderPayload {
+  userId: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  zip: string;
+  city: string;
+  country: string;
+  paymentMethod: PaymentMethod;
+  subtotal: number;
+  shipping: number;
+  vat: number;
+  grandTotal: number;
+  items: OrderItem[];
+}
+
+export interface OrderResponse {
+  order: Order;
+}
+
+export interface OrderListResponse {
+  orders: Order[];
 }

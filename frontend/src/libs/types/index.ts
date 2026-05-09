@@ -1,5 +1,3 @@
-import type { CheckoutFormData } from '@/libs/schemas';
-
 export interface ResponsiveImageType {
   mobile: string;
   tablet: string;
@@ -123,14 +121,15 @@ export interface CartItem {
 }
 
 /* order */
-export type { Order, OrderItem, OrderStatus, PaymentMethod } from './order';
-
-export interface CreateOrderPayload extends CheckoutFormData {
-  items: CartItem[];
-  total: number;
-}
-
-export type CreateOrderResponse = unknown;
+export type {
+  Order,
+  OrderItem,
+  OrderStatus,
+  PaymentMethod,
+  CreateOrderPayload,
+  OrderResponse,
+  OrderListResponse,
+} from './order';
 
 export type ApiError = { status?: number };
 
