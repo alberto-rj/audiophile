@@ -2,7 +2,14 @@ import { useEffect, useState, type ComponentProps } from 'react';
 import { Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { clearCart, selectGrandTotal, selectItems } from '@/app/features/cart';
+import {
+  clearCart,
+  selectGrandTotal,
+  selectItems,
+  selectShipping,
+  selectSubtotal,
+  selectVAT,
+} from '@/app/features/cart';
 import type { AppDispatch } from '@/app/store';
 import { useCreateOrderMutation } from '@/app/services/orders-api';
 import { CashOnDelivery } from '@/assets/icons';
@@ -21,6 +28,8 @@ import {
 import { useCheckoutForm } from '@/hooks';
 import { cn } from '@/libs/cn';
 import type { CheckoutFormData } from '@/libs/schemas';
+import type { OrderItem } from '@/libs/types';
+import { selectUser } from '@/app/features/auth';
 
 interface CheckoutFormProps extends ComponentProps<'form'> {
   id: string;
@@ -37,6 +46,10 @@ export const CheckoutForm = ({
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector(selectItems);
   const grandTotal = useSelector(selectGrandTotal);
+  const subtotal = useSelector(selectSubtotal);
+  const shipping = useSelector(selectShipping);
+  const vat = useSelector(selectVAT);
+  const user = useSelector(selectUser);
 
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
@@ -63,10 +76,25 @@ export const CheckoutForm = ({
 
   const onSubmit = async (data: CheckoutFormData) => {
     try {
+      const userId = user?.id || -1;
+      const orderItems: OrderItem[] = cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        image: item.image.desktop,
+        orderId: -1,
+        productId: -1,
+      }));
+
       await createOrder({
         ...data,
-        items: cartItems,
-        total: grandTotal,
+        userId,
+        items: orderItems,
+        vat,
+        shipping,
+        subtotal,
+        grandTotal,
       }).unwrap();
 
       reset();
