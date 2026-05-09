@@ -1,3 +1,5 @@
 import type { Order } from '@/libs/types';
 
-export const orders: Order[] = [];
+import rawOrders from './orders.data.json' with { type: 'json' };
+
+export const orders = rawOrders as Order[];

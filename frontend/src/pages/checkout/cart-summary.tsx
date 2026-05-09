@@ -126,16 +126,7 @@ export const CartSummary = () => {
               'mbs-4': isHighlighted,
             })}
           >
-            <dt
-              className={cn(
-                'uppercase',
-                'text-base',
-
-                'text-black/50',
-              )}
-            >
-              {name}
-            </dt>
+            <dt className={cn('uppercase')}>{name}</dt>
             <dd
               className={cn(
                 'uppercase',

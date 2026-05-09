@@ -1,0 +1,192 @@
+[
+  {
+    "id": 1,
+    "userId": 101,
+    "status": "pending",
+    "name": "Alice Santos",
+    "email": "alice.santos@example.com",
+    "phone": "+1 555-123-4567",
+    "address": "123 Flower Street",
+    "zip": "01001-000",
+    "city": "São Paulo",
+    "country": "Brazil",
+    "paymentMethod": "e-money",
+    "subtotal": 350.0,
+    "shipping": 20.0,
+    "vat": 35.0,
+    "total": 405.0,
+    "createdAt": "2026-05-09T10:30:00Z",
+    "items": [
+      {
+        "id": 1,
+        "orderId": 1,
+        "productId": 201,
+        "name": "XYZ Headphones",
+        "price": 150.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      },
+      {
+        "id": 2,
+        "orderId": 1,
+        "productId": 202,
+        "name": "ABC Bluetooth Speaker",
+        "price": 200.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "userId": 102,
+    "status": "shipped",
+    "name": "Bruno Lima",
+    "email": "bruno.lima@example.com",
+    "phone": "+1 555-987-6543",
+    "address": "456 Atlantic Avenue",
+    "zip": "22010-000",
+    "city": "Rio de Janeiro",
+    "country": "Brazil",
+    "paymentMethod": "cash-on-delivery",
+    "subtotal": 120.0,
+    "shipping": 15.0,
+    "vat": 12.0,
+    "total": 147.0,
+    "createdAt": "2026-05-07T15:45:00Z",
+    "items": [
+      {
+        "id": 3,
+        "orderId": 2,
+        "productId": 203,
+        "name": "Wireless Mouse",
+        "price": 50.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      },
+      {
+        "id": 4,
+        "orderId": 2,
+        "productId": 204,
+        "name": "Mechanical Keyboard",
+        "price": 70.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "userId": 103,
+    "status": "delivered",
+    "name": "Carla Mendes",
+    "email": "carla.mendes@example.com",
+    "phone": "+1 555-876-5432",
+    "address": "789 Lily Street",
+    "zip": "30120-000",
+    "city": "Belo Horizonte",
+    "country": "Brazil",
+    "paymentMethod": "e-money",
+    "subtotal": 500.0,
+    "shipping": 25.0,
+    "vat": 50.0,
+    "total": 575.0,
+    "createdAt": "2026-05-05T09:20:00Z",
+    "items": [
+      {
+        "id": 5,
+        "orderId": 3,
+        "productId": 205,
+        "name": "Pro Smartwatch",
+        "price": 250.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      },
+      {
+        "id": 6,
+        "orderId": 3,
+        "productId": 206,
+        "name": "Fitness Tracker",
+        "price": 250.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "userId": 103,
+    "status": "cancelled",
+    "name": "Carla Mendes",
+    "email": "carla.mendes@example.com",
+    "phone": "+1 555-876-5432",
+    "address": "789 Lily Street",
+    "zip": "30120-000",
+    "city": "Belo Horizonte",
+    "country": "Brazil",
+    "paymentMethod": "e-money",
+    "subtotal": 500.0,
+    "shipping": 25.0,
+    "vat": 50.0,
+    "total": 575.0,
+    "createdAt": "2026-05-05T09:20:00Z",
+    "items": [
+      {
+        "id": 5,
+        "orderId": 3,
+        "productId": 205,
+        "name": "Pro Smartwatch",
+        "price": 250.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      },
+      {
+        "id": 6,
+        "orderId": 3,
+        "productId": 206,
+        "name": "Fitness Tracker",
+        "price": 250.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "userId": 103,
+    "status": "processing",
+    "name": "Carla Mendes",
+    "email": "carla.mendes@example.com",
+    "phone": "+1 555-876-5432",
+    "address": "789 Lily Street",
+    "zip": "30120-000",
+    "city": "Belo Horizonte",
+    "country": "Brazil",
+    "paymentMethod": "e-money",
+    "subtotal": 500.0,
+    "shipping": 25.0,
+    "vat": 50.0,
+    "total": 575.0,
+    "createdAt": "2026-05-05T09:20:00Z",
+    "items": [
+      {
+        "id": 5,
+        "orderId": 3,
+        "productId": 205,
+        "name": "Pro Smartwatch",
+        "price": 250.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      },
+      {
+        "id": 6,
+        "orderId": 3,
+        "productId": 206,
+        "name": "Fitness Tracker",
+        "price": 250.0,
+        "quantity": 1,
+        "image": "https://tempimg.cc/64x64"
+      }
+    ]
+  }
+]
