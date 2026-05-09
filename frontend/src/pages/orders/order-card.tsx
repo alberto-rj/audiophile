@@ -129,7 +129,7 @@ const OrderCard = ({
                       {value}
                     </dd>
                   ) : (
-                    <td
+                    <dd
                       className={cn(
                         'flex',
                         'items-center',
@@ -140,7 +140,7 @@ const OrderCard = ({
                       )}
                     >
                       {value}
-                    </td>
+                    </dd>
                   )}
                 </dl>
               </li>
