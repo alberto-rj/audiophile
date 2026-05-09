@@ -1,23 +1,64 @@
-import { FormCard } from '@/components/widgets';
+import { FormCard, GoBack } from '@/components/widgets';
 import { cn } from '@/libs/cn';
+import { useSecondaryPage } from '@/hooks';
 
 import ProfileForm from './profile-form';
 
 const ProfilePage = () => {
+  useSecondaryPage();
+
   return (
-    <div className={cn('region', 'wrapper', 'flex', 'justify-center')}>
-      <FormCard>
-        <FormCard.Header>
-          <FormCard.Title>Personal</FormCard.Title>
-          <FormCard.Description>
-            Please fill the fields below to update your personal data.
-          </FormCard.Description>
-        </FormCard.Header>
-        <FormCard.Body>
-          <ProfileForm />
-        </FormCard.Body>
-      </FormCard>
-    </div>
+    <>
+      <GoBack>
+        <GoBack.Control />
+      </GoBack>
+      <div
+        className={cn(
+          'region-end',
+          'wrapper',
+          'flex',
+          'flex-col',
+          'items-center',
+          'gap-8',
+
+          'md:gap-24',
+        )}
+      >
+        <h1
+          className={cn(
+            'text-center',
+            'text-xl',
+
+            'lg:text-2xl',
+
+            'text-black',
+            'uppercase',
+          )}
+        >
+          My profile
+        </h1>
+        <div
+          className={cn(
+            'inline-full',
+            'flex',
+            'flex-col',
+            'items-center',
+            'gap-8',
+
+            'md:gap-16',
+          )}
+        >
+          <FormCard>
+            <FormCard.Header>
+              <h2 className={cn('h6')}>Personal Info</h2>
+            </FormCard.Header>
+            <FormCard.Body>
+              <ProfileForm />
+            </FormCard.Body>
+          </FormCard>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -66,17 +66,13 @@ const DropdownMenuItem = ({ className, ...props }: DropdownMenuItemProps) => {
 
         'text-black',
         'cursor-pointer',
-        'select-none',
         'rounded-lg',
         'uppercase',
+        'select-none',
+        'outline-none',
 
-        'focus:outline-none',
-        'focus:bg-primary-400',
-        'focus:text-white',
-
-        'focus-visible:outline-none',
-        'focus-visible:bg-primary-400',
-        'focus-visible:text-white',
+        'data-highlighted:bg-primary-400',
+        'data-highlighted:text-white',
 
         'data-disabled:text-black/50',
         'data-disabled:cursor-not-allowed',

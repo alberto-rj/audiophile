@@ -15,3 +15,12 @@ export function toMoney(value: number) {
 
   return formattedValue;
 }
+
+export function getNameInitials(name: string) {
+  return name
+    .trim()
+    .split(/\s+/)
+    .map((word) => word[0]?.toUpperCase())
+    .slice(0, 2)
+    .join('');
+}

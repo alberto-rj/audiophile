@@ -161,7 +161,9 @@ const Navbar = () => {
           />
 
           {isAuthenticated ? (
-            <ProfileMenu />
+            <div className={cn('flex', 'justify-center', 'items-center')}>
+              <ProfileMenu />
+            </div>
           ) : (
             <AuthCTA
               className={cn('flex', 'flex-col', 'items-center', 'gap-8')}
