@@ -14,7 +14,7 @@
     "subtotal": 350.0,
     "shipping": 20.0,
     "vat": 35.0,
-    "total": 405.0,
+    "grandTotal": 405.0,
     "createdAt": "2026-05-09T10:30:00Z",
     "items": [
       {
@@ -52,7 +52,7 @@
     "subtotal": 120.0,
     "shipping": 15.0,
     "vat": 12.0,
-    "total": 147.0,
+    "grandTotal": 147.0,
     "createdAt": "2026-05-07T15:45:00Z",
     "items": [
       {
@@ -90,7 +90,7 @@
     "subtotal": 500.0,
     "shipping": 25.0,
     "vat": 50.0,
-    "total": 575.0,
+    "grandTotal": 575.0,
     "createdAt": "2026-05-05T09:20:00Z",
     "items": [
       {
@@ -128,7 +128,7 @@
     "subtotal": 500.0,
     "shipping": 25.0,
     "vat": 50.0,
-    "total": 575.0,
+    "grandTotal": 575.0,
     "createdAt": "2026-05-05T09:20:00Z",
     "items": [
       {
@@ -166,7 +166,7 @@
     "subtotal": 500.0,
     "shipping": 25.0,
     "vat": 50.0,
-    "total": 575.0,
+    "grandTotal": 575.0,
     "createdAt": "2026-05-05T09:20:00Z",
     "items": [
       {
