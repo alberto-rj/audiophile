@@ -142,7 +142,7 @@ export const CheckoutForm = ({
                   placeholder='John Doe'
                   required
                   aria-required
-                  aria-describedby='nameAlert'
+                  aria-describedby={errors.name ? 'nameAlert' : undefined}
                   isInvalid={!!errors.name}
                   {...register('name')}
                 />
@@ -167,7 +167,7 @@ export const CheckoutForm = ({
                   placeholder='johndoe@example.com'
                   required
                   aria-required
-                  aria-describedby='emailAlert'
+                  aria-describedby={errors.email ? 'emailAlert' : undefined}
                   isInvalid={!!errors.email}
                   {...register('email')}
                 />
@@ -191,7 +191,7 @@ export const CheckoutForm = ({
                   placeholder='+1 202-55-0136'
                   required
                   aria-required
-                  aria-describedby='phoneAlert'
+                  aria-describedby={errors.phone ? 'phoneAlert' : undefined}
                   isInvalid={!!errors.phone}
                   {...register('phone')}
                 />
@@ -220,7 +220,7 @@ export const CheckoutForm = ({
                   placeholder='1137 Williams Avenue'
                   required
                   aria-required
-                  aria-describedby='addressAlert'
+                  aria-describedby={errors.address ? 'addressAlert' : undefined}
                   isInvalid={!!errors.address}
                   {...register('address')}
                 />
@@ -244,7 +244,7 @@ export const CheckoutForm = ({
                   placeholder='10001'
                   required
                   aria-required
-                  aria-describedby='zipAlert'
+                  aria-describedby={errors.zip ? 'zipAlert' : undefined}
                   isInvalid={!!errors.zip}
                   {...register('zip')}
                 />
@@ -268,7 +268,7 @@ export const CheckoutForm = ({
                   autoComplete='address-level2'
                   required
                   aria-required
-                  aria-describedby='cityAlert'
+                  aria-describedby={errors.city ? 'cityAlert' : undefined}
                   isInvalid={!!errors.city}
                   {...register('city')}
                 />
@@ -292,7 +292,7 @@ export const CheckoutForm = ({
                   autoComplete='country-name'
                   required
                   aria-required
-                  aria-describedby='countryAlert'
+                  aria-describedby={errors.country ? 'countryAlert' : undefined}
                   isInvalid={!!errors.country}
                   {...register('country')}
                 />
@@ -396,7 +396,9 @@ export const CheckoutForm = ({
                       placeholder='238521993'
                       required
                       aria-required
-                      aria-describedby='eMoneyNumberAlert'
+                      aria-describedby={
+                        errors.eMoneyNumber ? 'eMoneyNumberAlert' : undefined
+                      }
                       isInvalid={!!errors.eMoneyNumber}
                       {...register('eMoneyNumber')}
                     />
@@ -420,7 +422,9 @@ export const CheckoutForm = ({
                       placeholder='6891'
                       required
                       aria-required
-                      aria-describedby='eMoneyPinAlert'
+                      aria-describedby={
+                        errors.eMoneyPin ? 'eMoneyPinAlert' : undefined
+                      }
                       isInvalid={!!errors.eMoneyPin}
                       {...register('eMoneyPin')}
                     />

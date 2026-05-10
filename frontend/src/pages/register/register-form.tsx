@@ -70,7 +70,7 @@ export const RegisterForm = () => {
             placeholder='John Doe'
             required
             aria-required
-            aria-describedby='nameAlert'
+            aria-describedby={errors.name ? 'nameAlert' : undefined}
             isInvalid={!!errors.name}
             {...register('name')}
           />
@@ -95,7 +95,7 @@ export const RegisterForm = () => {
             placeholder='johndoe@example.com'
             required
             aria-required
-            aria-describedby='emailAlert'
+            aria-describedby={errors.email ? 'emailAlert' : undefined}
             isInvalid={!!errors.email}
             {...register('email')}
           />
@@ -119,7 +119,7 @@ export const RegisterForm = () => {
             placeholder='Min. 8 characters'
             required
             aria-required
-            aria-describedby='passwordAlert'
+            aria-describedby={errors.password ? 'passwordAlert' : undefined}
             isInvalid={!!errors.password}
             {...register('password')}
           />
@@ -143,7 +143,9 @@ export const RegisterForm = () => {
             placeholder='Your password'
             required
             aria-required
-            aria-describedby='confirmPasswordAlert'
+            aria-describedby={
+              errors.confirmPassword ? 'confirmPasswordAlert' : undefined
+            }
             isInvalid={!!errors.confirmPassword}
             {...register('confirmPassword')}
           />

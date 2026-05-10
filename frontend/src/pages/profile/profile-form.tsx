@@ -50,7 +50,7 @@ const ProfileForm = () => {
             placeholder='John Doe'
             required
             aria-required
-            aria-describedby='nameAlert'
+            aria-describedby={errors.name ? 'nameAlert' : undefined}
             isInvalid={!!errors.name}
             {...register('name')}
           />
@@ -75,7 +75,7 @@ const ProfileForm = () => {
             placeholder='johndoe@example.com'
             required
             aria-required
-            aria-describedby='emailAlert'
+            aria-describedby={errors.email ? 'emailAlert' : undefined}
             isInvalid={!!errors.email}
             {...register('email')}
           />
