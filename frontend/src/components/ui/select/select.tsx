@@ -129,7 +129,7 @@ const SelectItem = ({ className, ...props }: SelectItemProps) => {
         'rounded-lg',
         'outline-none',
 
-        'data-highlighted:bg-primary-400',
+        'data-highlighted:bg-primary-700',
         'data-highlighted:text-white',
 
         'data-disabled:text-black/50',
