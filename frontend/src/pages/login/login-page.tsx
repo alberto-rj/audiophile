@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 
+import { Logo } from '@/assets/icons';
 import { Button } from '@/components/ui';
 import { FormCard } from '@/components/widgets';
+import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import { useSecondaryPage } from '@/hooks';
 
 import { LoginForm } from './login-form';
-import { Logo } from '@/assets/icons';
-import { APP_ROUTES } from '@/config/app-routes';
 
 const LoginPage = () => {
   useSecondaryPage();
