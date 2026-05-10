@@ -58,7 +58,7 @@ const InTheBoxSection = ({
               <dd>{quantity}</dd>
             </dl>
             <span
-              className={cn('uppercase', 'text-primary-800')}
+              className={cn('uppercase', 'text-primary-700')}
               aria-hidden={true}
             >
               {quantity}x
