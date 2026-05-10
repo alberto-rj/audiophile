@@ -26,7 +26,7 @@ const FeatureHighLighted = ({
         'lg:px-23.75',
         'lg:py-31',
 
-        'bg-primary-400',
+        'bg-primary-700',
         'rounded-lg',
         'overflow-hidden',
       )}
