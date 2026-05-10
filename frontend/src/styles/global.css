@@ -144,9 +144,9 @@
 
   /* custom properties (start) */
   /* outline */
-  --outline-width: 3px;
+  --outline-width: 2px;
   --outline-offset: 2px;
-  --outline-style: dotted;
+  --outline-style: solid;
   --outline-color: var(--color-primary-200);
 
   /* flow spacing */
@@ -195,8 +195,9 @@
     @apply block w-full;
   }
 
+  .link,
   a {
-    @apply hover:text-primary-400;
+    @apply not-disabled:cursor-pointer hover:text-primary-800;
   }
 
   *:focus,
@@ -232,8 +233,12 @@
     @apply pbs-(--flow-spacing) xs:pbs-(--flow-spacing-xs) md:pbs-(--flow-spacing-md) lg:pbs-(--flow-spacing-lg);
   }
 
-  .link {
-    @apply not-disabled:cursor-pointer
+  .nav-link {
+    @apply text-xs 
+    
+    not-disabled:cursor-pointer
+    text-white 
+    uppercase 
     
     hover:text-primary-400 
     hover:[&_svg]:fill-primary-400
@@ -243,10 +248,6 @@
     
     focus-visible:text-primary-400 
     focus-visible:[&_svg]:fill-primary-400;
-  }
-
-  .nav-link {
-    @apply text-xs text-white uppercase;
   }
 }
 

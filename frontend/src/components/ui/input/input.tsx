@@ -30,9 +30,9 @@ const inputVariants = cva(
       isInvalid: {
         false: cn(
           'border-gray-600',
-          'focus:border-primary-400',
-          'focus:caret-primary-400',
-          'focus-visible:caret-primary-400',
+          'focus:border-primary-800',
+          'focus:caret-primary-800',
+          'focus-visible:caret-primary-800',
         ),
 
         true: cn(

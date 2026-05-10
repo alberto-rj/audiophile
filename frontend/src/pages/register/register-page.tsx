@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 
+import { Logo } from '@/assets/icons';
 import { Button } from '@/components/ui';
 import { FormCard } from '@/components/widgets';
-import { cn } from '@/libs/cn';
+import { APP_ROUTES } from '@/config/app-routes';
 import { useSecondaryPage } from '@/hooks';
+import { cn } from '@/libs/cn';
 
 import { RegisterForm } from './register-form';
-import { APP_ROUTES } from '@/config/app-routes';
-import { Logo } from '@/assets/icons';
 
 const RegisterPage = () => {
   useSecondaryPage();
@@ -15,7 +15,6 @@ const RegisterPage = () => {
   return (
     <FormCard>
       <Link
-        aria-label='Audiophile - home'
         to={APP_ROUTES.home}
         className={cn(
           'self-center',
@@ -24,6 +23,7 @@ const RegisterPage = () => {
           'cursor-pointer',
         )}
       >
+        <span className={cn('sr-only')}>Audiophile - home</span>
         <Logo
           aria-hidden={true}
           focusable={false}
