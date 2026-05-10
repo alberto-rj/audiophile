@@ -64,7 +64,7 @@ const CartModal = () => {
               'truncate',
 
               'text-white',
-              'bg-primary-400',
+              'bg-primary-700',
               'rounded-full',
             )}
           >
