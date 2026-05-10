@@ -61,6 +61,7 @@ export const CategoryCard = ({
           <span>
             Shop{' '}
             <ArrowRight
+              className={cn('text-primary-700')}
               focusable={false}
               aria-hidden={true}
             />
