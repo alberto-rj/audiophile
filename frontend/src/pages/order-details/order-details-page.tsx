@@ -55,7 +55,7 @@ const BasicInfoCard = ({ order }: BaseCardProps) => {
   const basicInfo = [
     {
       name: 'Number',
-      value: order.id,
+      value: toOrderNumber(order.id),
       isHighlighted: false,
     },
     {

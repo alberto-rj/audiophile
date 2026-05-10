@@ -7,12 +7,28 @@ import { useSecondaryPage } from '@/hooks';
 
 import { RegisterForm } from './register-form';
 import { APP_ROUTES } from '@/config/app-routes';
+import { Logo } from '@/assets/icons';
 
 const RegisterPage = () => {
   useSecondaryPage();
 
   return (
-    <FormCard className={cn('max-inline-110')}>
+    <FormCard>
+      <Link
+        aria-label='Audiophile - home'
+        to={APP_ROUTES.home}
+        className={cn(
+          'self-center',
+
+          'text-black',
+          'cursor-pointer',
+        )}
+      >
+        <Logo
+          aria-hidden={true}
+          focusable={false}
+        />
+      </Link>
       <FormCard.Header>
         <FormCard.Title>Create account</FormCard.Title>
         <FormCard.Description>
