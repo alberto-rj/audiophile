@@ -71,7 +71,7 @@ const DropdownMenuItem = ({ className, ...props }: DropdownMenuItemProps) => {
         'select-none',
         'outline-none',
 
-        'data-highlighted:bg-primary-400',
+        'data-highlighted:bg-primary-700',
         'data-highlighted:text-white',
 
         'data-disabled:text-black/50',
