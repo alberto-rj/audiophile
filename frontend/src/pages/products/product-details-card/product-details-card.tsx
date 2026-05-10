@@ -45,11 +45,12 @@ const ProductDetailsCard = ({
         'md:gap-17.25',
 
         'lg:gap-31.25',
+
         className,
       )}
     >
       <ResponsiveImage
-        alt={name}
+        alt=''
         loading='lazy'
         image={image}
         className={cn(
@@ -94,7 +95,7 @@ const ProductDetailsCard = ({
                   'uppercase',
                   'text-sm',
 
-                  'text-primary-400',
+                  'text-primary-800',
                 )}
               >
                 New product
