@@ -76,7 +76,7 @@ const BestGear = ({ className }: BestGearProps) => {
               'text-black',
             )}
           >
-            Bringing you the <span className={'text-primary-400'}>best</span>{' '}
+            Bringing you the <span className={'text-primary-700'}>best</span>{' '}
             audio gear
           </h2>
           <p>
