@@ -57,10 +57,10 @@ const Footer = () => {
           {/* Logo */}
           <h2>
             <Link
-              aria-label='Audiophile - home'
               to={APP_ROUTES.home}
-              className={cn('link', 'nav-link')}
+              className={cn('nav-link')}
             >
+              <span className={cn('sr-only')}>Audiophile - home</span>
               <Logo
                 aria-hidden={true}
                 focusable={false}
@@ -85,7 +85,7 @@ const Footer = () => {
               <li key={text}>
                 <Link
                   to={url}
-                  className={cn('link', 'nav-link')}
+                  className={cn('nav-link')}
                 >
                   {text}
                 </Link>
@@ -143,15 +143,13 @@ const Footer = () => {
                     href={url}
                     rel='noopener noreferrer'
                     target='_blank'
-                    className={cn('link')}
+                    className={cn('nav-link')}
                   >
                     <span className={cn('sr-only')}>{text}</span>
-                    {
-                      <Icon
-                        aria-hidden={true}
-                        focusable={false}
-                      />
-                    }
+                    <Icon
+                      aria-hidden={true}
+                      focusable={false}
+                    />
                   </a>
                 </li>
               ))}

@@ -101,18 +101,16 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link
-            aria-label='Audiophile - home'
             to={APP_ROUTES.home}
             className={cn(
               'hidden',
 
               'xs:block',
 
-              'link',
               'nav-link',
             )}
           >
-            <span className={cn('sr-only')}></span>
+            <span className={cn('sr-only')}>Audiophile - home</span>
             <Logo
               aria-hidden={true}
               focusable={false}
@@ -147,7 +145,7 @@ const Navbar = () => {
                 <Link
                   ref={i === 0 ? firstMenuItemRef : undefined}
                   to={url}
-                  className={cn('link', 'nav-link')}
+                  className={cn('nav-link')}
                 >
                   {text}
                 </Link>
@@ -193,7 +191,7 @@ const Navbar = () => {
               <li key={text}>
                 <NavLink
                   to={url}
-                  className={cn('link', 'nav-link')}
+                  className={cn('nav-link')}
                 >
                   {text}
                 </NavLink>
