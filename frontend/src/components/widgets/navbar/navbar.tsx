@@ -6,6 +6,7 @@ import { selectIsAuthenticated } from '@/app/features/auth';
 import { Logo, Close, Menu } from '@/assets/icons';
 import { Separator } from '@/components/ui';
 import { AuthCTA, CartModal, ProfileMenu } from '@/components/widgets';
+import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import { navLinks } from '@/libs/constants';
 
@@ -100,16 +101,18 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link
-            to='/'
+            aria-label='Audiophile - home'
+            to={APP_ROUTES.home}
             className={cn(
               'hidden',
 
               'xs:block',
 
               'link',
+              'nav-link',
             )}
           >
-            <span className={cn('sr-only')}>Audiophile - home</span>
+            <span className={cn('sr-only')}></span>
             <Logo
               aria-hidden={true}
               focusable={false}

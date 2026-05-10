@@ -2,6 +2,7 @@ import { useId } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Logo } from '@/assets/icons';
+import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import { navLinks, socialLinks } from '@/libs/constants';
 
@@ -56,10 +57,10 @@ const Footer = () => {
           {/* Logo */}
           <h2>
             <Link
-              to='/'
-              className={cn('link')}
+              aria-label='Audiophile - home'
+              to={APP_ROUTES.home}
+              className={cn('link', 'nav-link')}
             >
-              <span className={cn('sr-only')}>Audiophile - home</span>
               <Logo
                 aria-hidden={true}
                 focusable={false}
