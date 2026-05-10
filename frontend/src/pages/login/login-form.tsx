@@ -73,7 +73,7 @@ export const LoginForm = () => {
             placeholder='Your email'
             required
             aria-required
-            aria-describedby='emailAlert'
+            aria-describedby={errors.email ? 'emailAlert' : undefined}
             isInvalid={!!errors.email}
             {...register('email')}
           />
@@ -97,8 +97,8 @@ export const LoginForm = () => {
             placeholder='Your password'
             required
             aria-required
-            aria-describedby='passwordAlert'
-            isInvalid={!!errors.email}
+            aria-describedby={errors.password ? 'passwordAlert' : undefined}
+            isInvalid={!!errors.password}
             {...register('password')}
           />
           {errors.password && (
