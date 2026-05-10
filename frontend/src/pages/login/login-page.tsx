@@ -6,40 +6,59 @@ import { cn } from '@/libs/cn';
 import { useSecondaryPage } from '@/hooks';
 
 import { LoginForm } from './login-form';
+import { Logo } from '@/assets/icons';
+import { APP_ROUTES } from '@/config/app-routes';
 
 const LoginPage = () => {
   useSecondaryPage();
 
   return (
-    <FormCard>
-      <FormCard.Header>
-        <FormCard.Title>Sign in</FormCard.Title>
-        <FormCard.Description>
-          Please fill the fields below to have access to your account.
-        </FormCard.Description>
-      </FormCard.Header>
-      <FormCard.Body>
-        <LoginForm />
-      </FormCard.Body>
-      <FormCard.Footer>
-        <p
+    <div>
+      <FormCard>
+        <Link
+          aria-label='Audiophile - home'
+          to={APP_ROUTES.home}
           className={cn(
-            'text-xs',
+            'self-center',
 
-            'text-center',
-            'font-medium',
+            'text-black',
+            'cursor-pointer',
           )}
         >
-          Don't have an account?{' '}
-          <Button
-            variant='link'
-            asChild
+          <Logo
+            aria-hidden={true}
+            focusable={false}
+          />
+        </Link>
+        <FormCard.Header>
+          <FormCard.Title>Sign in</FormCard.Title>
+          <FormCard.Description>
+            Please fill the fields below to have access to your account.
+          </FormCard.Description>
+        </FormCard.Header>
+        <FormCard.Body>
+          <LoginForm />
+        </FormCard.Body>
+        <FormCard.Footer>
+          <p
+            className={cn(
+              'text-xs',
+
+              'text-center',
+              'font-medium',
+            )}
           >
-            <Link to='/register'>Create one</Link>
-          </Button>
-        </p>
-      </FormCard.Footer>
-    </FormCard>
+            Don't have an account?{' '}
+            <Button
+              variant='link'
+              asChild
+            >
+              <Link to='/register'>Create one</Link>
+            </Button>
+          </p>
+        </FormCard.Footer>
+      </FormCard>
+    </div>
   );
 };
 
