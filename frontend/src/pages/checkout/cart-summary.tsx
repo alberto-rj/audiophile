@@ -16,13 +16,13 @@ export const CartSummary = () => {
   const summaryHeadingId = useId();
 
   const cartItems = useSelector(selectItems);
-  const total = useSelector(selectSubtotal);
+  const subtotal = useSelector(selectSubtotal);
   const shipping = useSelector(selectShipping);
   const VAT = useSelector(selectVAT);
   const grandTotal = useSelector(selectGrandTotal);
 
   const cartSummary = [
-    { name: 'Total', value: total, isHighlighted: false },
+    { name: 'Subtotal', value: subtotal, isHighlighted: false },
     { name: 'Shipping', value: shipping, isHighlighted: false },
     { name: 'VAT (Included)', value: VAT, isHighlighted: false },
     { name: 'Grand Total', value: grandTotal, isHighlighted: true },
@@ -32,7 +32,12 @@ export const CartSummary = () => {
     <section aria-labelledby={summaryHeadingId}>
       <h2
         id={summaryHeadingId}
-        className={cn('uppercase', 'text-md', 'text-black')}
+        className={cn(
+          'text-md',
+
+          'text-black',
+          'uppercase',
+        )}
       >
         Summary
       </h2>
@@ -49,23 +54,24 @@ export const CartSummary = () => {
           'overflow-auto',
         )}
       >
-        {cartItems.map(({ image, name, price, quantity }) => (
+        {cartItems.map(({ id, image, name, price, quantity }) => (
           <li
-            key={name}
+            key={id}
             className={cn('flex', 'justify-between', 'items-start', 'gap-8')}
           >
             <div className={cn('flex', 'items-center', 'gap-4')}>
               <ResponsiveImage
                 alt=''
+                width={64}
+                height={64}
+                loading='lazy'
                 image={image}
                 className={cn(
                   'aspect-64/64',
-                  'object-cover',
+
                   'rounded-lg',
-                  'overflow-hidden',
+                  'object-cover',
                 )}
-                width={64}
-                height={64}
               />
               <div
                 className={cn(
@@ -77,7 +83,6 @@ export const CartSummary = () => {
               >
                 <span
                   className={cn(
-                    'text-base',
                     'truncate',
 
                     'text-black',
@@ -94,7 +99,6 @@ export const CartSummary = () => {
                     'truncate',
 
                     'font-bold',
-                    'text-black-o-50',
                   )}
                 >
                   {toMoney(price)}
@@ -105,12 +109,7 @@ export const CartSummary = () => {
               <span className={cn('sr-only')}>Times: {quantity}</span>
               <span
                 aria-hidden={true}
-                className={cn(
-                  'text-base',
-
-                  'font-bold',
-                  'text-black/50',
-                )}
+                className={cn('font-bold')}
               >
                 x{quantity}
               </span>
@@ -129,7 +128,6 @@ export const CartSummary = () => {
             <dt className={cn('uppercase')}>{name}</dt>
             <dd
               className={cn(
-                'uppercase',
                 'text-md',
                 'truncate',
                 'max-inline-20',
@@ -142,6 +140,7 @@ export const CartSummary = () => {
                   'text-primary-400': isHighlighted,
                   'text-black': !isHighlighted,
                 },
+                'uppercase',
               )}
             >
               {toMoney(value)}
