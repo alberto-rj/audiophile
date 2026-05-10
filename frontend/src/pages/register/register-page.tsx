@@ -15,7 +15,6 @@ const RegisterPage = () => {
   return (
     <FormCard>
       <Link
-        aria-label='Audiophile - home'
         to={APP_ROUTES.home}
         className={cn(
           'self-center',
@@ -24,6 +23,7 @@ const RegisterPage = () => {
           'cursor-pointer',
         )}
       >
+        <span className={cn('sr-only')}>Audiophile - home</span>
         <Logo
           aria-hidden={true}
           focusable={false}
