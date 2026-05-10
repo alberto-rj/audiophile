@@ -25,7 +25,7 @@ export const getOrderById = http.get(
       HttpResponse.json(undefined, { status: 404 });
     }
 
-    return HttpResponse.json(foundOrder);
+    return HttpResponse.json({ order: foundOrder });
   }),
 );
 
