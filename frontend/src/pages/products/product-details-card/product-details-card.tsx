@@ -1,8 +1,8 @@
-import { useId } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useId, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { addItem, selectItemById, updateQuantity } from '@/app/features/cart';
 import type { AppDispatch } from '@/app/store';
+import { addItem } from '@/app/features/cart';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
 import type { Product } from '@/libs/types';
@@ -18,25 +18,16 @@ const ProductDetailsCard = ({
   product: { id, slug, image, name, description, price, isNew },
   className,
 }: ProductDetailsCardProps) => {
-  const selectedItem = useSelector(selectItemById(id));
+  const [quantity, setQuantity] = useState<number>(1);
 
   const dispatch = useDispatch<AppDispatch>();
 
   const headingId = useId();
 
-  const quantity = selectedItem?.quantity || 0;
   const formattedPrice = toMoney(price);
 
   const handleAddToCart = () => {
-    dispatch(addItem({ id, image, name, price, slug, quantity: 1 }));
-  };
-
-  const handleQuantityChange = (value: number) => {
-    if (!selectedItem) {
-      dispatch(addItem({ id, image, name, price, slug, quantity: value }));
-    } else {
-      dispatch(updateQuantity({ id, quantity: value }));
-    }
+    dispatch(addItem({ id, image, name, price, slug, quantity }));
   };
 
   return (
@@ -140,15 +131,16 @@ const ProductDetailsCard = ({
           <QuantitySelector
             label={`Quantity for ${name}`}
             value={quantity}
-            onChange={handleQuantityChange}
+            min={1}
+            onChange={setQuantity}
             className={cn('max-inline-30')}
           />
           <Button
-            variant={'primary'}
+            variant='primary'
             onClick={handleAddToCart}
+            aria-label={`Add to cart - ${name}`}
           >
-            <span className={cn('sr-only')}>Add {name} to cart</span>
-            <span>Add to cart</span>
+            Add to cart
           </Button>
         </div>
       </div>
