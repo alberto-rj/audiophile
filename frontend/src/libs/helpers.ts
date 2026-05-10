@@ -28,7 +28,7 @@ export function getNameInitials(name: string) {
 }
 
 export function toStatusText(status: OrderStatus) {
-  const statusList: Record<OrderStatus, string> = {
+  const statusTextMap: Record<OrderStatus, string> = {
     cancelled: 'Cancelled',
     delivered: 'Delivered',
     pending: 'Pending',
@@ -36,11 +36,27 @@ export function toStatusText(status: OrderStatus) {
     shipped: 'Shipped',
   };
 
-  return statusList[status];
+  return statusTextMap[status];
+}
+
+export function toStatusColor(status: OrderStatus): string {
+  const statusColorMap: Record<OrderStatus, string> = {
+    delivered: 'var(--order-delivered)',
+    pending: 'var(--order-pending)',
+    shipped: 'var(--order-shipped)',
+    cancelled: 'var(--order-cancelled)',
+    processing: 'var(--order-processing)',
+  };
+
+  return statusColorMap[status];
 }
 
 export function toTimeAgo(time: string) {
   return new Intl.DateTimeFormat('en-US', {
     dateStyle: 'short',
   }).format(new Date(time));
+}
+
+export function toOrderNumber(number: number) {
+  return `#${number}`;
 }
