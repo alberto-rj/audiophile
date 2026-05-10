@@ -10,9 +10,10 @@ const buttonVariants = cva(
     'gap-3',
     'justify-center',
     'items-center',
+    'text-2xs',
+
     'cursor-pointer',
     'font-display',
-    'text-2xs',
     'uppercase',
 
     'disabled:bg-black',
@@ -30,10 +31,10 @@ const buttonVariants = cva(
           'px-8',
           'py-4',
 
-          'bg-primary-400',
+          'bg-primary-700',
           'text-white',
 
-          'hover:bg-primary-200',
+          'hover:bg-primary-800',
         ),
 
         secondary: cn(
@@ -41,10 +42,10 @@ const buttonVariants = cva(
           'px-8',
           'py-4',
 
-          'bg-black',
+          'bg-secondary-700',
           'text-white',
 
-          'hover:bg-gray-800',
+          'hover:bg-secondary-800',
         ),
 
         outline: cn(
@@ -62,11 +63,9 @@ const buttonVariants = cva(
         ),
 
         link: cn(
-          '[&_svg]:fill-primary-400',
-          'text-black/50',
-          'p-0',
+          '[&_svg]:fill-primary-700',
 
-          'hover:text-primary-400',
+          'hover:text-primary-700',
         ),
       },
     },
