@@ -6,7 +6,12 @@ import { Card, Spinner } from '@/components/ui';
 import { ErrorMessage, GoBack } from '@/components/widgets';
 import { useSecondaryPage } from '@/hooks';
 import { cn } from '@/libs/cn';
-import { toMoney, toStatusText, toTimeAgo } from '@/libs/helpers';
+import {
+  toMoney,
+  toOrderNumber,
+  toStatusText,
+  toTimeAgo,
+} from '@/libs/helpers';
 import type { Order } from '@/libs/types';
 
 interface OrderCardProps {
@@ -67,7 +72,7 @@ const BasicInfoCard = ({ order }: BaseCardProps) => {
 
   return (
     <OrderCard order={order}>
-      <h2 className={cn('h6')}>Basic info</h2>
+      <h2 className={cn('h6')}>Order {toOrderNumber(order.id)}</h2>
       <dl className={cn('flex', 'flex-col', 'gap-2')}>
         {basicInfo.map(({ name, value, isHighlighted }) => (
           <div
@@ -108,7 +113,7 @@ const BasicInfoCard = ({ order }: BaseCardProps) => {
 const ItemsOrderedCard = ({ order }: BaseCardProps) => {
   return (
     <OrderCard order={order}>
-      <h2 className={cn('h6')}>Items ordered</h2>
+      <h2 className={cn('h6')}>Items</h2>
       <ul
         role='list'
         className={cn('flex', 'flex-col', 'gap-6')}
@@ -131,13 +136,9 @@ const ItemsOrderedCard = ({ order }: BaseCardProps) => {
                   'rounded-lg',
                 )}
               />
-              <div>
-                <dl className={cn('flex', 'flex-col', 'gap-1')}>
-                  <dt className={cn('sr-only')}>Name</dt>
-                  <dd className={cn('text-black', 'font-bold')}>{item.name}</dd>
-                  <dt className={cn('sr-only')}>Price</dt>
-                  <dd className={cn('text-xs')}>{toMoney(item.price)}</dd>
-                </dl>
+              <div className={cn('flex', 'flex-col', 'gap-1')}>
+                <p className={cn('text-black', 'font-bold')}>{item.name}</p>
+                <p className={cn('text-xs')}>{toMoney(item.price)}</p>
               </div>
             </div>
             <dl>
@@ -187,7 +188,7 @@ const SummaryCard = ({ order }: BaseCardProps) => {
 
   return (
     <OrderCard order={order}>
-      <h2 className={cn('h6')}>Summary</h2>
+      <h2 className={cn('h6')}>Order summary</h2>
       <dl className={cn('flex', 'flex-col', 'gap-2')}>
         {orderSummary.map(({ name, value, isHighlighted }) => (
           <div
@@ -258,7 +259,7 @@ const ShippingAddressCard = ({ order }: BaseCardProps) => {
 
   return (
     <OrderCard order={order}>
-      <h2 className={cn('h6')}>Shipping address</h2>
+      <h2 className={cn('h6')}>Delivery details</h2>
       <dl className={cn('flex', 'flex-col', 'gap-2')}>
         {shippingInfo.map(({ name, value }) => (
           <div
@@ -291,7 +292,7 @@ const OrderDetailsPage = () => {
   useSecondaryPage();
 
   const slug = useParams()?.slug;
-  const orderId = parseInt(slug!);
+  const orderId = slug ? parseInt(slug, 10) : undefined;
 
   const { isLoading, isError, refetch, data } = useGetOrderByIdQuery(orderId!, {
     skip: typeof orderId === 'undefined',
@@ -362,7 +363,8 @@ const OrderDetailsPage = () => {
 
             'md:grid-cols-2',
             'md:items-start',
-            'md:justify-between',
+            'md:justify-center',
+            'md:justify-items-center',
           )}
         >
           <BasicInfoCard order={order} />
