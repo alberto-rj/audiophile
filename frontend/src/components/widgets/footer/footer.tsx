@@ -35,7 +35,7 @@ const Footer = () => {
 
             'md:inset-s-10',
 
-            'bg-primary-400',
+            'bg-primary-700',
           )}
         ></div>
 
