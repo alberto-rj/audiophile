@@ -95,7 +95,7 @@ const ProductDetailsCard = ({
                   'uppercase',
                   'text-sm',
 
-                  'text-primary-800',
+                  'text-primary-700',
                 )}
               >
                 New product
