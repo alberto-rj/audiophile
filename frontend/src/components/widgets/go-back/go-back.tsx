@@ -22,11 +22,11 @@ const GoBackControl = ({ label = 'Go back' }: GoBackControlProps) => {
   return (
     <button
       type='button'
+      aria-label={`${label} - return to previous page`}
       onClick={handleClick}
-      className={cn('link', 'text-base', 'capitalize', 'text-black/50')}
+      className={cn('link', 'capitalize')}
     >
-      <span className={cn('sr-only')}>{label} - return to previous page</span>
-      <span aria-hidden={true}>{label}</span>
+      {label}
     </button>
   );
 };
