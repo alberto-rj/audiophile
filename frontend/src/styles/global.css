@@ -88,8 +88,20 @@
 
   /* colors (start) */
   /* primary */
-  --color-primary-400: #d87d4a;
-  --color-primary-200: #fbaf85;
+  --color-primary-50: #fcf6f0;
+  --color-primary-100: #f8ebdc;
+  --color-primary-200: #f1d3b7;
+  --color-primary-300: #e7b58a;
+  --color-primary-400: #dc8f5b;
+  --color-primary-500: #d87d4a;
+  --color-primary-600: #c65c30;
+  --color-primary-700: #a54729;
+  --color-primary-800: #843a28;
+  --color-primary-900: #6b3223;
+  --color-primary-950: #391811;
+
+  /*  --color-primary-400: #d87d4a;
+  --color-primary-200: #fbaf85; */
 
   /* black */
   --color-black: #000000;
