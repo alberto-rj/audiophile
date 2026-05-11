@@ -131,16 +131,7 @@ const CartItemCard = () => {
         )}
       >
         <dl className={cn('flex', 'flex-col', 'gap-2')}>
-          <dt
-            className={cn(
-              'text-base',
-
-              'text-white/50',
-              'uppercase',
-            )}
-          >
-            Grand Total
-          </dt>
+          <dt className={cn('text-white/50', 'uppercase')}>Grand Total</dt>
           <dd
             className={cn(
               'text-md',

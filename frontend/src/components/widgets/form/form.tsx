@@ -33,7 +33,7 @@ export const FormGroupTitle = ({
         'block',
         'text-2xs',
 
-        'text-primary-400',
+        'text-primary-700',
         'uppercase',
 
         className,

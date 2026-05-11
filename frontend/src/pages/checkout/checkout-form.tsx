@@ -358,7 +358,11 @@ export const CheckoutForm = ({
                   <CashOnDelivery
                     aria-hidden={true}
                     focusable={false}
-                    className={cn('shrink-0')}
+                    className={cn(
+                      'shrink-0',
+
+                      'text-primary-700',
+                    )}
                   />
                   <p
                     id='cashOnDeliveryAlert'
