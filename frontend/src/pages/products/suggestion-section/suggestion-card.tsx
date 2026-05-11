@@ -1,10 +1,11 @@
 import { useId } from 'react';
 import { Link } from 'react-router-dom';
 
-import type { BasicProduct } from '@/libs/types';
-import { cn } from '@/libs/cn';
 import { ResponsiveImage } from '@/components/widgets';
 import { Button } from '@/components/ui';
+import { APP_ROUTES } from '@/config/app-routes';
+import { cn } from '@/libs/cn';
+import type { BasicProduct } from '@/libs/types';
 
 interface SuggestionCardProps {
   product: BasicProduct;
@@ -19,7 +20,7 @@ const SuggestionCard = ({
     <article
       aria-labelledby={headingId}
       className={cn(
-        'w-full',
+        'inline-full',
         'flex',
         'flex-col',
         'items-center',
@@ -62,9 +63,11 @@ const SuggestionCard = ({
           variant={'primary'}
           asChild
         >
-          <Link to={`/products/${slug}`}>
-            <span className={cn('sr-only')}>See product: {name}</span>
-            <span aria-hidden={true}>See product</span>
+          <Link
+            aria-label={`See product - ${name}`}
+            to={`${APP_ROUTES.products}/${slug}`}
+          >
+            See product
           </Link>
         </Button>
       </div>
