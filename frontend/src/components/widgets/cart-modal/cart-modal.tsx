@@ -10,11 +10,12 @@ import {
   selectSubtotal,
   updateQuantity,
 } from '@/app/features/cart';
+import { Cart } from '@/assets/icons';
 import { Button, Modal } from '@/components/ui';
 import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
+import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
-import { Cart } from '@/assets/icons';
 
 const CartModal = () => {
   const headingId = useId();
@@ -178,11 +179,16 @@ const CartModal = () => {
                       )}
                     >
                       <ResponsiveImage
-                        className={cn('aspect-64/64', 'rounded-lg')}
                         image={image}
                         alt={name}
                         width={64}
                         height={64}
+                        loading='lazy'
+                        className={cn(
+                          'aspect-64/64',
+
+                          'rounded-lg',
+                        )}
                       />
 
                       <div
@@ -209,14 +215,7 @@ const CartModal = () => {
                         >
                           {name}
                         </span>
-                        <span
-                          className={cn(
-                            'text-xs',
-                            'truncate',
-
-                            'text-black/50',
-                          )}
-                        >
+                        <span className={cn('text-xs', 'truncate')}>
                           {toMoney(price)}
                         </span>
                       </div>
@@ -244,16 +243,7 @@ const CartModal = () => {
                   'mbe-6',
                 )}
               >
-                <dt
-                  className={cn(
-                    'uppercase',
-                    'text-base',
-
-                    'text-black/50',
-                  )}
-                >
-                  Total
-                </dt>
+                <dt className={cn('uppercase')}>Subtotal</dt>
                 <dd
                   className={cn(
                     'max-inline-50',
@@ -273,7 +263,7 @@ const CartModal = () => {
                   asChild
                 >
                   <Link
-                    to='/checkout'
+                    to={APP_ROUTES.checkout}
                     className={cn('inline-full')}
                   >
                     Checkout
