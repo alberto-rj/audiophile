@@ -1,21 +1,22 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { setUser } from '@/app/features/auth';
+import { API_ENDPOINTS } from '@/config/api-endpoints';
 import type { ProfileResponse, UpdateProfilePayload } from '@/libs/types';
 
-import { baseQueryWithAuth } from './base-query';
+import { baseQueryWithReauth } from './base-query';
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
-  baseQuery: baseQueryWithAuth,
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     getMe: builder.query<ProfileResponse, void>({
-      query: () => '/users/me',
+      query: () => API_ENDPOINTS.userProfile,
     }),
 
     updateProfile: builder.mutation<ProfileResponse, UpdateProfilePayload>({
       query: (payload) => ({
-        url: '/users/me',
+        url: API_ENDPOINTS.userProfile,
         method: 'PUT',
         body: payload,
       }),
@@ -30,4 +31,5 @@ export const usersApi = createApi({
   }),
 });
 
-export const { useGetMeQuery, useUpdateProfileMutation } = usersApi;
+export const { useGetMeQuery, useUpdateProfileMutation, useLazyGetMeQuery } =
+  usersApi;

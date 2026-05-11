@@ -1,22 +1,27 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { env } from '@/config/env';
+import { API_ENDPOINTS } from '@/config/api-endpoints';
 import type { Product } from '@/libs/types';
 
-const { VITE_API_BASE_URL } = env;
+import { baseQuery } from './base-query';
 
 export const productApi = createApi({
   reducerPath: 'productsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${VITE_API_BASE_URL}/products` }),
+  baseQuery: baseQuery,
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], void>({
-      query: () => '/',
+      query: () => API_ENDPOINTS.products,
     }),
 
     getProductBySlug: builder.query<Product, string>({
-      query: (slug) => `/${slug}`,
+      query: (slug) => `${API_ENDPOINTS.products}/${slug}`,
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductBySlugQuery } = productApi;
+export const {
+  useGetProductsQuery,
+  useGetProductBySlugQuery,
+  useLazyGetProductBySlugQuery,
+  useLazyGetProductsQuery,
+} = productApi;

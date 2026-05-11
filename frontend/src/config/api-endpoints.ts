@@ -6,6 +6,10 @@ export const API_ENDPOINTS = {
   logout: '/auth/logout',
   refresh: '/auth/refresh',
 
+  /* users */
+  users: '/users',
+  userProfile: '/users/me',
+
   /* cart */
   cart: '/cart',
   cartItems: '/cart/items',
