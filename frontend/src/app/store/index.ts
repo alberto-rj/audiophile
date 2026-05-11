@@ -7,9 +7,10 @@ import {
 } from '@/app/features/auth';
 import { cartReducer } from '@/app/features/cart';
 import { authApi } from '@/app/services/auth-api';
-import { productApi } from '@/app/services/products-api';
+import { cartApi } from '@/app/services/cart-api';
 import { categoryApi } from '@/app/services/categories-api';
 import { ordersApi } from '@/app/services/orders-api';
+import { productApi } from '@/app/services/products-api';
 import { usersApi } from '@/app/services/users-api';
 
 export const store = configureStore({
@@ -18,6 +19,7 @@ export const store = configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
+    [cartApi.reducerPath]: cartApi.reducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
     cart: cartReducer,
     auth: authReducer,
@@ -28,6 +30,7 @@ export const store = configureStore({
       .concat(usersApi.middleware)
       .concat(categoryApi.middleware)
       .concat(productApi.middleware)
+      .concat(cartApi.middleware)
       .concat(ordersApi.middleware);
   },
 });
