@@ -137,7 +137,7 @@ export const CartSummary = () => {
                 'lg:max-inline-35',
 
                 {
-                  'text-primary-400': isHighlighted,
+                  'text-primary-700': isHighlighted,
                   'text-black': !isHighlighted,
                 },
                 'uppercase',
