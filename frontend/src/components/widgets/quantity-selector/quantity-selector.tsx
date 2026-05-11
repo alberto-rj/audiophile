@@ -11,13 +11,13 @@ const QuantityButton = ({ className, ...props }: QuantityButtonProps) => {
       className={cn(
         'px-4',
         'py-2',
+
         'cursor-pointer',
-        'text-black/50',
 
-        'hover:text-primary-400',
+        'hover:text-primary-700',
 
-        'focus:text-primary-400',
-        'focus-visible:text-primary-400',
+        'focus:text-primary-700',
+        'focus-visible:text-primary-700',
         className,
       )}
     />
@@ -70,6 +70,7 @@ const QuantitySelector = ({
         'inline-flex',
         'items-center',
         'text-xs',
+
         'text-black',
         'bg-gray-400',
         'border',
@@ -81,6 +82,7 @@ const QuantitySelector = ({
         'has-disabled:opacity-50',
         'has-disabled:border-gray-400',
         'has-disabled:text-black/50',
+
         className,
       )}
     >
@@ -120,9 +122,9 @@ const QuantitySelector = ({
           '[&::-webkit-inner-spin-button]:appearance-none',
           '[&::-webkit-inner-spin-button]:m-0',
 
-          'focus:caret-primary-400',
+          'focus:caret-primary-700',
 
-          'focus-visible:caret-primary-400',
+          'focus-visible:caret-primary-700',
         )}
       />
       <QuantityButton
