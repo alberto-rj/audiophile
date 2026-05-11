@@ -34,19 +34,20 @@ const Radio = ({
         'gap-4',
         'px-4',
         'py-4.5',
+        'text-xs',
+
         'border',
         'border-gray-600',
-        'rounded-lg',
         'cursor-pointer',
-        'text-xs',
+        'rounded-lg',
         'text-black',
 
-        'hover:border-primary-400',
+        'hover:border-primary-700',
 
-        'has-checked:border-primary-400',
+        'has-checked:border-primary-700',
 
-        'has-focus:border-primary-400',
-        'has-focus-visible:border-primary-400',
+        'has-focus:border-primary-700',
+        'has-focus-visible:border-primary-700',
 
         'focus-within',
 
@@ -76,17 +77,24 @@ const Radio = ({
           'flex',
           'justify-center ',
           'items-center',
-          'rounded-full',
+
           'border',
           'border-gray-600',
+          'rounded-full',
 
-          'peer-checked:[&_span]:bg-primary-400',
+          'peer-checked:[&_span]:bg-primary-700',
 
-          'peer-focus:[&_span]:bg-primary-400',
-          'peer-focus-visible:[&_span]:bg-primary-400',
+          'peer-focus:[&_span]:bg-primary-700',
+          'peer-focus-visible:[&_span]:bg-primary-700',
         )}
       >
-        <span className={cn('size-2.5', 'rounded-full')} />
+        <span
+          className={cn(
+            'size-2.5',
+
+            'rounded-full',
+          )}
+        />
       </span>
       <span>{label}</span>
     </label>
