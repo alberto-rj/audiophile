@@ -1,9 +1,11 @@
+import { user } from '@/libs/mocks';
+
 import type { MockUser } from './types';
 
 const defaultUser: MockUser = {
-  id: 1,
-  name: 'John Doe',
-  email: 'john@example.com',
+  id: user.id,
+  name: user.name,
+  email: user.email,
   password: 'password123',
 };
 

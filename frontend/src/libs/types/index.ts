@@ -111,14 +111,15 @@ export interface InTheBoxSectionContent {
   items: ItemInclude[];
 }
 
-export interface CartItem {
-  id: number;
-  slug: string;
-  name: string;
-  price: number;
-  image: ResponsiveImageType;
-  quantity: number;
-}
+/* cart */
+export type {
+  AddCartItemPayload,
+  Cart,
+  CartItem,
+  CartResponse,
+  RemoveCartItemPayload,
+  UpdateCartItemQuantityPayload,
+} from './cart';
 
 /* order */
 export type {
