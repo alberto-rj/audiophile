@@ -33,7 +33,7 @@ const ProfileMenu = () => {
       <DropdownMenu.Trigger asChild>
         <button
           type='button'
-          aria-label={`Account menu for ${user}`}
+          aria-label={`Account menu for ${user.name}`}
           className={cn(
             'flex',
             'items-center',
