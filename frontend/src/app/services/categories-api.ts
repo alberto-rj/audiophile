@@ -1,24 +1,25 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { env } from '@/config/env';
 import type { Category, CategoryList } from '@/libs/types';
+import { API_ENDPOINTS } from '@/config/api-endpoints';
 
-const { VITE_API_BASE_URL } = env;
+import { baseQuery } from './base-query';
 
 export const categoryApi = createApi({
   reducerPath: 'categoriesApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${VITE_API_BASE_URL}/categories` }),
+  baseQuery: baseQuery,
   endpoints: (builder) => ({
     getCategories: builder.query<Category[], void>({
-      query: () => '/',
+      query: () => `${API_ENDPOINTS.categories}`,
     }),
 
     getCategoryBySlug: builder.query<Category, string>({
-      query: (slug) => `/${slug}`,
+      query: (slug) => `${API_ENDPOINTS.categories}/${slug}`,
     }),
 
     getProductsByCategorySlug: builder.query<CategoryList, string>({
-      query: (slug) => `/${slug}/products`,
+      query: (slug) =>
+        `${API_ENDPOINTS.categories}/${slug}${API_ENDPOINTS.products}`,
     }),
   }),
 });

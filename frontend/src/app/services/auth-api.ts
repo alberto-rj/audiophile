@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { clearCredentials, setCredentials } from '@/app/features/auth';
+import { API_ENDPOINTS } from '@/config/api-endpoints';
 import type { AuthResponse, LoginPayload, RegisterPayload } from '@/libs/types';
 
 import { baseQueryWithAuth } from './base-query';
@@ -11,7 +12,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     register: builder.mutation<AuthResponse, RegisterPayload>({
       query: (payload) => ({
-        url: '/auth/register',
+        url: API_ENDPOINTS.register,
         method: 'POST',
         body: payload,
       }),
@@ -26,7 +27,7 @@ export const authApi = createApi({
 
     login: builder.mutation<AuthResponse, LoginPayload>({
       query: (payload) => ({
-        url: '/auth/login',
+        url: API_ENDPOINTS.login,
         method: 'POST',
         body: payload,
       }),
@@ -41,7 +42,7 @@ export const authApi = createApi({
 
     logout: builder.mutation<void, void>({
       query: () => ({
-        url: '/auth/logout',
+        url: API_ENDPOINTS.logout,
         method: 'POST',
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
@@ -53,7 +54,7 @@ export const authApi = createApi({
 
     refresh: builder.mutation<AuthResponse, void>({
       query: () => ({
-        url: '/auth/refresh',
+        url: API_ENDPOINTS.refresh,
         method: 'POST',
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {

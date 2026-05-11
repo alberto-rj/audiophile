@@ -6,27 +6,29 @@ import type {
   OrderResponse,
 } from '@/libs/types';
 
-import { baseQueryWithAuth } from './base-query';
+import { API_ENDPOINTS } from '@/config/api-endpoints';
+
+import { baseQueryWithReauth } from './base-query';
 
 export const ordersApi = createApi({
   reducerPath: 'ordersApi',
-  baseQuery: baseQueryWithAuth,
+  baseQuery: baseQueryWithReauth,
   tagTypes: ['Order'],
 
   endpoints: (builder) => ({
     getOrders: builder.query<OrderListResponse, void>({
-      query: () => '/orders',
+      query: () => API_ENDPOINTS.orders,
       providesTags: ['Order'],
     }),
 
     getOrderById: builder.query<OrderResponse, number>({
-      query: (id) => `/orders/${id}`,
+      query: (id) => `${API_ENDPOINTS.orders}/${id}`,
       providesTags: (_, __, id) => [{ type: 'Order', id }],
     }),
 
     createOrder: builder.mutation<OrderResponse, CreateOrderPayload>({
       query: (payload) => ({
-        url: '/orders',
+        url: API_ENDPOINTS.orders,
         method: 'POST',
         body: payload,
       }),
@@ -39,4 +41,6 @@ export const {
   useCreateOrderMutation,
   useGetOrderByIdQuery,
   useGetOrdersQuery,
+  useLazyGetOrderByIdQuery,
+  useLazyGetOrdersQuery,
 } = ordersApi;
