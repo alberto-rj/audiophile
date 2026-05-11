@@ -15,108 +15,115 @@ import {
   RegisterPage,
 } from '@/pages';
 import { LayoutBasic, LayoutCenteredOnScreen, LayoutLanding } from '@/layouts';
-import { PageLoader, RequireAuth, RequireCart } from '@/components/widgets';
+import {
+  PageLoader,
+  RequireAuth,
+  RequireCart,
+  ScrollToTop,
+} from '@/components/widgets';
 
 const App = () => {
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={
-          <Suspense fallback={<PageLoader />}>
-            <Outlet />
-          </Suspense>
-        }
-      >
-        {/* Auth (start) */}
+    <ScrollToTop>
+      <Routes>
         <Route
           path='/'
           element={
-            <LayoutCenteredOnScreen>
+            <Suspense fallback={<PageLoader />}>
               <Outlet />
-            </LayoutCenteredOnScreen>
+            </Suspense>
           }
         >
+          {/* Auth (start) */}
           <Route
-            path={APP_ROUTES.login}
-            element={<LoginPage />}
-          />
-          <Route
-            path={APP_ROUTES.register}
-            element={<RegisterPage />}
-          />
-        </Route>
-        {/* Auth (end) */}
-
-        <Route
-          path='/'
-          element={
-            <LayoutBasic>
-              <RequireAuth>
-                <Outlet />
-              </RequireAuth>
-            </LayoutBasic>
-          }
-        >
-          {/* Profile (start) */}
-          <Route
-            path={`${APP_ROUTES.profile}`}
-            element={<ProfilePage />}
-          />
-          {/* Profile (end) */}
-
-          {/* Orders (start) */}
-          <Route
-            path={`${APP_ROUTES.orders}`}
-            element={<OrdersPage />}
-          />
-          <Route
-            path={`${APP_ROUTES.orders}/:slug`}
-            element={<OrderDetailsPage />}
-          />
-          {/* Orders (end) */}
-        </Route>
-
-        {/* Landing (start) */}
-        <Route
-          path='/'
-          element={
-            <LayoutLanding>
-              <Outlet />
-            </LayoutLanding>
-          }
-        >
-          <Route
-            index
-            element={<HomePage />}
-          />
-          <Route
-            path={`${APP_ROUTES.categories}/:slug`}
-            element={<CategoryPage />}
-          />
-          <Route
-            path={`${APP_ROUTES.products}/:slug`}
-            element={<ProductPage />}
-          />
-          <Route
-            path={APP_ROUTES.checkout}
+            path='/'
             element={
-              <RequireAuth>
-                <RequireCart>
-                  <CheckoutPage />
-                </RequireCart>
-              </RequireAuth>
+              <LayoutCenteredOnScreen>
+                <Outlet />
+              </LayoutCenteredOnScreen>
             }
+          >
+            <Route
+              path={APP_ROUTES.login}
+              element={<LoginPage />}
+            />
+            <Route
+              path={APP_ROUTES.register}
+              element={<RegisterPage />}
+            />
+          </Route>
+          {/* Auth (end) */}
+
+          <Route
+            path='/'
+            element={
+              <LayoutBasic>
+                <RequireAuth>
+                  <Outlet />
+                </RequireAuth>
+              </LayoutBasic>
+            }
+          >
+            {/* Profile (start) */}
+            <Route
+              path={`${APP_ROUTES.profile}`}
+              element={<ProfilePage />}
+            />
+            {/* Profile (end) */}
+
+            {/* Orders (start) */}
+            <Route
+              path={`${APP_ROUTES.orders}`}
+              element={<OrdersPage />}
+            />
+            <Route
+              path={`${APP_ROUTES.orders}/:slug`}
+              element={<OrderDetailsPage />}
+            />
+            {/* Orders (end) */}
+          </Route>
+
+          {/* Landing (start) */}
+          <Route
+            path='/'
+            element={
+              <LayoutLanding>
+                <Outlet />
+              </LayoutLanding>
+            }
+          >
+            <Route
+              index
+              element={<HomePage />}
+            />
+            <Route
+              path={`${APP_ROUTES.categories}/:slug`}
+              element={<CategoryPage />}
+            />
+            <Route
+              path={`${APP_ROUTES.products}/:slug`}
+              element={<ProductPage />}
+            />
+            <Route
+              path={APP_ROUTES.checkout}
+              element={
+                <RequireAuth>
+                  <RequireCart>
+                    <CheckoutPage />
+                  </RequireCart>
+                </RequireAuth>
+              }
+            />
+          </Route>
+          {/* Landing (end) */}
+
+          <Route
+            path={APP_ROUTES.notFound}
+            element={<NotFoundPage />}
           />
         </Route>
-        {/* Landing (end) */}
-
-        <Route
-          path={APP_ROUTES.notFound}
-          element={<NotFoundPage />}
-        />
-      </Route>
-    </Routes>
+      </Routes>
+    </ScrollToTop>
   );
 };
 
