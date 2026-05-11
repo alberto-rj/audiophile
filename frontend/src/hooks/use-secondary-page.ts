@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 export const useSecondaryPage = () => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.setAttribute('data-is-secondary-page', 'true');
 
     return () => {

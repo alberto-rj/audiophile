@@ -34,6 +34,8 @@ export { default as PageLoader } from './page-loader/page-loader';
 
 export { default as ErrorMessage } from './error-message/error-message';
 
+export { default as ScrollToTop } from './scroll-to-top/scroll-to-top';
+
 export { default as RequireCart } from './require-cart/require-cart';
 
 export { default as RequireAuth } from './require-auth/require-auth';

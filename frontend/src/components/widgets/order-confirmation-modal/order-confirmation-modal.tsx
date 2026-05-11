@@ -32,11 +32,17 @@ const CartItemListing = () => {
         >
           <div className={cn('flex', 'items-center', 'gap-4')}>
             <ResponsiveImage
-              className={cn('aspect-50/50', 'object-cover', 'rounded-lg')}
               alt={name}
               image={image}
               width={50}
               height={50}
+              loading='lazy'
+              className={cn(
+                'aspect-50/50',
+
+                'object-cover',
+                'rounded-lg',
+              )}
             />
 
             <div
@@ -79,12 +85,7 @@ const CartItemListing = () => {
           </dl>
           <span
             aria-hidden={true}
-            className={cn(
-              'text-base',
-
-              'text-black/50',
-              'font-bold',
-            )}
+            className={cn('font-bold')}
           >
             x{quantity}
           </span>
@@ -130,7 +131,14 @@ const CartItemCard = () => {
         )}
       >
         <dl className={cn('flex', 'flex-col', 'gap-2')}>
-          <dt className={cn('uppercase', 'text-base', 'text-white/50')}>
+          <dt
+            className={cn(
+              'text-base',
+
+              'text-white/50',
+              'uppercase',
+            )}
+          >
             Grand Total
           </dt>
           <dd
@@ -175,8 +183,9 @@ const OrderConfirmationModal = ({ ...props }: OrderConfirmationModalProps) => {
           )}
         >
           <OrderConfirmation
-            focusable={false}
             aria-hidden={true}
+            focusable={false}
+            className={cn('text-primary-700')}
           />
 
           <div
@@ -194,12 +203,12 @@ const OrderConfirmationModal = ({ ...props }: OrderConfirmationModalProps) => {
             <Modal.Title
               id={headingId}
               className={cn(
-                'uppercase',
                 'text-lg',
 
                 'md:text-2xl',
 
                 'text-black',
+                'uppercase',
               )}
               asChild
             >
