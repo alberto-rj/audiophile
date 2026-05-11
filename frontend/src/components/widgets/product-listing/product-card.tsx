@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui';
 import { ResponsiveImage } from '@/components/widgets';
+import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import type { ProductCardContent } from '@/libs/types';
-import { createProductRoute } from '@/libs/app-routes';
 
 interface ProductCardProps {
   content: ProductCardContent;
@@ -36,6 +36,7 @@ export const ProductCard = ({
         },
         'lg:justify-between',
         'lg:gap-31.25',
+
         className,
       )}
     >
@@ -43,13 +44,14 @@ export const ProductCard = ({
         alt=''
         image={image}
         className={cn(
-          'rounded-lg',
-          'object-cover',
           'aspect-327/352',
 
           'md:aspect-689/352',
 
           'lg:aspect-540/560',
+
+          'rounded-lg',
+          'object-cover',
         )}
       />
       <div
@@ -71,7 +73,14 @@ export const ProductCard = ({
         <div className={cn('flex', 'flex-col', 'gap-8')}>
           <div className={cn('flex', 'flex-col', 'gap-4')}>
             {isNew && (
-              <span className={cn('text-sm', 'text-primary-400', 'uppercase')}>
+              <span
+                className={cn(
+                  'text-sm',
+
+                  'text-primary-700',
+                  'uppercase',
+                )}
+              >
                 New product
               </span>
             )}
@@ -97,7 +106,7 @@ export const ProductCard = ({
         >
           <Link
             aria-label={`See product - ${title}`}
-            to={createProductRoute(slug)}
+            to={`${APP_ROUTES.products}/${slug}`}
           >
             See product
           </Link>
