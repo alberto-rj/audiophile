@@ -8,7 +8,9 @@ interface ProductListProps {
 }
 
 export function ProductList({ products }: ProductListProps) {
-  return (
+  return products.length === 0 ? (
+    <p>We have no products yet.</p>
+  ) : (
     <ul
       role='list'
       className={cn('flow')}
