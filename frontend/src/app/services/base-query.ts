@@ -13,8 +13,21 @@ import {
 } from '@/app/features/auth';
 import { env } from '@/config/env';
 import type { AuthResponse } from '@/libs/types';
+import { API_ENDPOINTS } from '@/config/api-endpoints';
 
 const { VITE_API_BASE_URL } = env;
+
+export const baseQuery: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  const baseQuery = fetchBaseQuery({
+    baseUrl: `${VITE_API_BASE_URL}`,
+  });
+
+  return baseQuery(args, api, extraOptions);
+};
 
 export const baseQueryWithAuth: BaseQueryFn<
   string | FetchArgs,
@@ -50,7 +63,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 
   const refreshResult = await baseQueryWithAuth(
     {
-      url: '/auth/refresh',
+      url: API_ENDPOINTS.refresh,
       method: 'POST',
     },
     api,

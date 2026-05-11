@@ -9,20 +9,18 @@ import type {
   UpdateCartItemQuantityPayload,
 } from '@/libs/types';
 
-import { withAuth } from '../middlewares/with-auth';
-
 export const getCart = http.get(
   `/api${API_ENDPOINTS.cart}`,
 
-  withAuth(async () => {
+  async () => {
     return HttpResponse.json({ cart });
-  }),
+  },
 );
 
 export const addCartItem = http.post(
   `/api${API_ENDPOINTS.cartItems}`,
 
-  withAuth(async ({ request }) => {
+  async ({ request }) => {
     const { productId, quantity } =
       (await request.json()) as AddCartItemPayload;
 
@@ -45,13 +43,13 @@ export const addCartItem = http.post(
     cart.items.push(createdCartItem);
 
     return HttpResponse.json({ cart }, { status: 201 });
-  }),
+  },
 );
 
 export const updateCartItemQuantity = http.patch(
   `/api${API_ENDPOINTS.cartItems}/:slug`,
 
-  withAuth(async ({ params, request }) => {
+  async ({ params, request }) => {
     const { slug } = params as { slug?: string };
 
     if (typeof slug === 'undefined') {
@@ -81,13 +79,13 @@ export const updateCartItemQuantity = http.patch(
     cart.items.push(updatedItem);
 
     return HttpResponse.json({ cart }, { status: 200 });
-  }),
+  },
 );
 
 export const deleteCartItem = http.patch(
   `/api${API_ENDPOINTS.cartItems}/:slug`,
 
-  withAuth(async ({ params }) => {
+  async ({ params }) => {
     const { slug } = params as { slug?: string };
 
     if (typeof slug === 'undefined') {
@@ -107,17 +105,17 @@ export const deleteCartItem = http.patch(
     cart.items.splice(foundItemIndex, 1);
 
     return HttpResponse.json({ cart }, { status: 200 });
-  }),
+  },
 );
 
 export const clearCart = http.patch(
   `/api${API_ENDPOINTS.cart}`,
 
-  withAuth(async () => {
+  async () => {
     cart.items = [];
 
     return HttpResponse.json({ cart }, { status: 200 });
-  }),
+  },
 );
 
 export const cartHandlers = [

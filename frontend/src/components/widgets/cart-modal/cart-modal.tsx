@@ -10,6 +10,7 @@ import {
   selectSubtotal,
   updateQuantity,
 } from '@/app/features/cart';
+import { useLazyGetCartQuery } from '@/app/services/cart-api';
 import { Cart } from '@/assets/icons';
 import { Button, Modal } from '@/components/ui';
 import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
@@ -27,6 +28,8 @@ const CartModal = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const [getCart] = useLazyGetCartQuery();
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
@@ -41,10 +44,21 @@ const CartModal = () => {
     dispatch(updateQuantity({ id, quantity }));
   };
 
+  const handleViewCart = async () => {
+    try {
+      const data = await getCart().unwrap();
+      console.log(data.cart);
+    } catch (error) {
+      alert('Failed to get cart.');
+      console.error(error);
+    }
+  };
+
   return (
     <Modal>
       <Modal.Trigger
         type='button'
+        onClick={handleViewCart}
         className={cn('relative')}
       >
         <span className={cn('sr-only')}>View cart - {itemsCount} item(s)</span>
