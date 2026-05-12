@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'outline', 'link'],
+      options: ['primary', 'secondary', 'danger', 'outline', 'link'],
     },
     disabled: {
       control: 'boolean',
@@ -54,6 +54,14 @@ export const Secondary: Story = {
   args: {
     variant: 'secondary',
     buttonText: 'Secondary',
+  },
+};
+
+export const Danger: Story = {
+  name: 'Variant / Danger',
+  args: {
+    variant: 'danger',
+    buttonText: 'Danger',
   },
 };
 
