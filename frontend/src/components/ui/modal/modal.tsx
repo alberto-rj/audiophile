@@ -79,6 +79,8 @@ const ModalContent = ({ className, ...props }: ModalContentProps) => {
         'rounded-lg',
         'bg-white',
 
+        'focus:outline-none',
+
         className,
       )}
     />
