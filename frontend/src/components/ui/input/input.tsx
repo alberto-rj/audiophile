@@ -36,9 +36,9 @@ const inputVariants = cva(
         ),
 
         true: cn(
-          'border-danger-400',
-          'focus:caret-danger-400',
-          'focus-visible:caret-danger-400',
+          'border-danger-950',
+          'focus:caret-danger-950',
+          'focus-visible:caret-danger-950',
         ),
       },
     },
