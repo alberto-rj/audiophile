@@ -13,7 +13,7 @@ const Label = ({ isInvalid = false, className, ...props }: LabelProps) => {
       className={cn(
         'text-3xs',
         {
-          'text-danger-400': isInvalid,
+          'text-danger-950': isInvalid,
           'text-black': !isInvalid,
         },
         className,
