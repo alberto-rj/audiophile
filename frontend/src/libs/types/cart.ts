@@ -13,6 +13,10 @@ export interface CartItem {
 export interface Cart {
   id: number;
   userId: number;
+  vat: number;
+  shipping: number;
+  subtotal: number;
+  grandTotal: number;
   items: CartItem[];
 }
 
