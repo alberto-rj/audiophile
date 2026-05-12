@@ -36,6 +36,7 @@ const Radio = ({
         'py-4.5',
         'text-xs',
 
+        'bg-white',
         'border',
         'border-gray-600',
         'cursor-pointer',
@@ -57,6 +58,7 @@ const Radio = ({
         'has-disabled:opacity-50',
         'has-disabled:border-gray-400',
         'has-disabled:text-black/50',
+
         className,
       )}
     >
