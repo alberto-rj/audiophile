@@ -33,6 +33,7 @@ const buttonVariants = cva(
 
           'bg-primary-700',
           'text-white',
+          'outline-primary-400',
 
           'hover:bg-primary-800',
         ),
@@ -44,6 +45,7 @@ const buttonVariants = cva(
 
           'bg-secondary-700',
           'text-white',
+          'outline-secondary-400',
 
           'hover:bg-secondary-800',
         ),
@@ -55,6 +57,7 @@ const buttonVariants = cva(
 
           'bg-danger-300',
           'text-danger-950',
+          'outline-danger-600',
 
           'hover:bg-danger-400',
         ),
