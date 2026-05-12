@@ -133,8 +133,20 @@
   --color-gray-300: #f2f2f2;
   --color-gray-200: #fafafa;
 
-  /* dander */
-  --color-danger-400: #cd2c2c;
+  /* danger */
+  --color-danger-50: #fffcfc;
+  --color-danger-100: #fff7f7;
+  --color-danger-200: #fff7f7;
+  --color-danger-300: #ffdbdc;
+  --color-danger-400: #ffcdce;
+  --color-danger-500: #fdbdbe;
+  --color-danger-600: #f4a9aa;
+  --color-danger-700: #eb8e90;
+  --color-danger-800: #e5484d;
+  --color-danger-900: #dc3e42;
+  --color-danger-950: #ce2c31;
+
+  /*   --color-danger-400: #cd2c2c; */
   /* colors (end) */
 
   /* tailwind (start) */

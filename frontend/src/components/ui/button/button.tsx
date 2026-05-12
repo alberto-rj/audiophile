@@ -48,6 +48,17 @@ const buttonVariants = cva(
           'hover:bg-secondary-800',
         ),
 
+        danger: cn(
+          'min-inline-40',
+          'px-8',
+          'py-4',
+
+          'bg-danger-300',
+          'text-danger-950',
+
+          'hover:bg-danger-400',
+        ),
+
         outline: cn(
           'min-inline-40',
           'px-8',
