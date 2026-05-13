@@ -62,4 +62,6 @@ export { default as RequireAuth } from './require-auth/require-auth';
 
 export { default as ScrollToTop } from './scroll-to-top/scroll-to-top';
 
+export { default as StatusVisuallyHidden } from './status-visually-hidden/status-visually-hidden';
+
 export { default as SignInRequiredAlert } from './sign-in-required-alert/sign-in-required-alert';
