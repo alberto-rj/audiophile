@@ -10,11 +10,7 @@ import {
 } from '@/components/widgets';
 import { Button, Spinner } from '@/components/ui';
 import { cn } from '@/libs/cn';
-import {
-  removePendingCartItem,
-  setPendingCartItem,
-  toMoney,
-} from '@/libs/helpers';
+import { setPendingCartItem, toMoney } from '@/libs/helpers';
 import type { Product } from '@/libs/types';
 
 interface ProductDetailsCardProps {
@@ -60,17 +56,12 @@ const ProductDetailsCard = ({
     setPendingCartItem({ productId: id, quantity });
   };
 
-  const handleCancel = () => {
-    removePendingCartItem();
-  };
-
   return (
     <>
       <SignInRequiredAlert
         open={open}
         onOpenChange={setOpen}
         onSignIn={handleSignIn}
-        onCancel={handleCancel}
       />
       <section
         aria-labelledby={headingId}

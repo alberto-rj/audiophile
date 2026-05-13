@@ -17,7 +17,6 @@ const meta = {
   args: {
     open: true,
     onSignIn: fn(),
-    onCancel: fn(),
   },
   render: ({ open: isInitiallyOpen, ...props }) => {
     const [open, setOpen] = useState(isInitiallyOpen);

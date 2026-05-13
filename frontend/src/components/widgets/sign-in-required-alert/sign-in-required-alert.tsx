@@ -10,12 +10,10 @@ interface SignInRequiredAlertProps extends Omit<
   'children'
 > {
   onSignIn?: () => void;
-  onCancel?: () => void;
 }
 
 const SignInRequiredAlert = ({
   onSignIn,
-  onCancel,
   ...props
 }: SignInRequiredAlertProps) => {
   const location = useLocation();
@@ -56,12 +54,7 @@ const SignInRequiredAlert = ({
               </Button>
             </Alert.Action>
             <Alert.Cancel asChild>
-              <Button
-                variant='link'
-                onClick={onCancel}
-              >
-                Cancel
-              </Button>
+              <Button variant='link'>Cancel</Button>
             </Alert.Cancel>
           </div>
         </Alert.Content>
