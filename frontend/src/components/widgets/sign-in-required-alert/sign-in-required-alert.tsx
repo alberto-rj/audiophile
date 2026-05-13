@@ -19,7 +19,7 @@ interface SignInRequiredAlertProps extends Omit<
 const SignInRequiredAlert = ({
   onSignIn,
   title = 'Sign in required',
-  description = 'Please you need to sign in.',
+  description = 'Please sign in.',
   action = 'Sign in',
   cancel = 'Cancel',
   ...props
