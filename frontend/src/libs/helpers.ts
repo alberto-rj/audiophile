@@ -60,3 +60,9 @@ export function toTimeAgo(time: string) {
 export function toOrderNumber(number: number) {
   return `#${number}`;
 }
+
+export {
+  getPendingCartItem,
+  removePendingCartItem,
+  setPendingCartItem,
+} from './pending-cart-item-storage';

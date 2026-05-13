@@ -1,19 +1,15 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type { AppDispatch } from '@/app/store';
 import {
   clearCredentials,
   selectAccessToken,
   setCredentials,
 } from '@/app/features/auth';
+import type { AppDispatch } from '@/app/store';
 import { useGetMeQuery } from '@/app/services/users-api';
 
-interface AppInitializerProps {
-  children: ReactNode;
-}
-
-export const AppInitializer = ({ children }: AppInitializerProps) => {
+export const useCredentials = () => {
   const dispatch = useDispatch<AppDispatch>();
   const accessToken = useSelector(selectAccessToken);
 
@@ -35,6 +31,4 @@ export const AppInitializer = ({ children }: AppInitializerProps) => {
       dispatch(clearCredentials());
     }
   }, [isSuccess, isError, data, accessToken, dispatch]);
-
-  return <>{children}</>;
 };

@@ -53,24 +53,24 @@ export const Default: Story = {
                 'items-center',
                 'gap-6',
 
-                'sm:flex-row',
-                'sm:justify-end',
+                'sm:flex-row-reverse',
+                'sm:justify-start',
               )}
             >
+              <Alert.Action asChild>
+                <Button
+                  type='button'
+                  variant='danger'
+                >
+                  Yes, delete account
+                </Button>
+              </Alert.Action>
               <Alert.Cancel asChild>
                 <Button
                   type='button'
                   variant='link'
                 >
                   Cancel
-                </Button>
-              </Alert.Cancel>
-              <Alert.Cancel asChild>
-                <Button
-                  type='button'
-                  variant='danger'
-                >
-                  Yes, delete account
                 </Button>
               </Alert.Cancel>
             </div>

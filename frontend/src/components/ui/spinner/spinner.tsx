@@ -42,8 +42,7 @@ const Spinner = ({ className, variant, size, ...props }: SpinnerProps) => {
   return (
     <div
       {...props}
-      role='status'
-      aria-live='polite'
+      aria-hidden={true}
       className={cn(
         spinnerVariants({
           variant,
