@@ -5,7 +5,12 @@ import type { AppDispatch } from '@/app/store';
 import { useLoginMutation } from '@/app/services/auth-api';
 import { setCredentials } from '@/app/features/auth';
 import { Button, Input, Label, Spinner } from '@/components/ui';
-import { FormField, FormFieldAlert, FormFieldFlow } from '@/components/widgets';
+import {
+  FormField,
+  FormFieldAlert,
+  FormFieldFlow,
+  StatusVisuallyHidden,
+} from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
 import { useLoginForm } from '@/hooks';
 import type { LoginFormData } from '@/libs/schemas';
@@ -53,79 +58,83 @@ export const LoginForm = () => {
   };
 
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <FormFieldFlow>
-        <FormField>
-          <Label
-            htmlFor='email'
-            isInvalid={!!errors.email}
+    <>
+      <StatusVisuallyHidden>
+        {isLoading ? 'Signing in' : ''}
+      </StatusVisuallyHidden>
+      <form
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FormFieldFlow>
+          <FormField>
+            <Label
+              htmlFor='email'
+              isInvalid={!!errors.email}
+            >
+              Email
+            </Label>
+            <Input
+              type='email'
+              inputMode='email'
+              id='email'
+              autoComplete='email'
+              placeholder='Your email'
+              required
+              aria-required
+              aria-describedby={errors.email ? 'emailAlert' : undefined}
+              isInvalid={!!errors.email}
+              {...register('email')}
+            />
+            {errors.email && (
+              <FormFieldAlert id='emailAlert'>
+                {errors.email.message}
+              </FormFieldAlert>
+            )}
+          </FormField>
+          <FormField>
+            <Label
+              htmlFor='password'
+              isInvalid={!!errors.password}
+            >
+              Password
+            </Label>
+            <Input
+              type='password'
+              id='password'
+              autoComplete='current-password'
+              placeholder='Your password'
+              required
+              aria-required
+              aria-describedby={errors.password ? 'passwordAlert' : undefined}
+              isInvalid={!!errors.password}
+              {...register('password')}
+            />
+            {errors.password && (
+              <FormFieldAlert id='passwordAlert'>
+                {errors.password.message}
+              </FormFieldAlert>
+            )}
+          </FormField>
+          <Button
+            type='submit'
+            variant='primary'
+            disabled={isLoading}
           >
-            Email
-          </Label>
-          <Input
-            type='email'
-            inputMode='email'
-            id='email'
-            autoComplete='email'
-            placeholder='Your email'
-            required
-            aria-required
-            aria-describedby={errors.email ? 'emailAlert' : undefined}
-            isInvalid={!!errors.email}
-            {...register('email')}
-          />
-          {errors.email && (
-            <FormFieldAlert id='emailAlert'>
-              {errors.email.message}
-            </FormFieldAlert>
-          )}
-        </FormField>
-        <FormField>
-          <Label
-            htmlFor='password'
-            isInvalid={!!errors.password}
-          >
-            Password
-          </Label>
-          <Input
-            type='password'
-            id='password'
-            autoComplete='current-password'
-            placeholder='Your password'
-            required
-            aria-required
-            aria-describedby={errors.password ? 'passwordAlert' : undefined}
-            isInvalid={!!errors.password}
-            {...register('password')}
-          />
-          {errors.password && (
-            <FormFieldAlert id='passwordAlert'>
-              {errors.password.message}
-            </FormFieldAlert>
-          )}
-        </FormField>
-        <Button
-          type='submit'
-          variant='primary'
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <Spinner
-                variant='primary'
-                size='sm'
-                aria-labelledby='actionAlert'
-              />{' '}
-              <span id='actionAlert'>Signing in...</span>
-            </>
-          ) : (
-            'Sign in'
-          )}
-        </Button>
-      </FormFieldFlow>
-    </form>
+            {isLoading ? (
+              <>
+                <Spinner
+                  variant='primary'
+                  size='sm'
+                />
+                Signing in...
+              </>
+            ) : (
+              <>Sign in</>
+            )}
+          </Button>
+        </FormFieldFlow>
+      </form>
+    </>
   );
 };
