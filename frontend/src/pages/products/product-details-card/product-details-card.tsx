@@ -7,6 +7,7 @@ import {
   QuantitySelector,
   ResponsiveImage,
   SignInRequiredAlert,
+  StatusVisuallyHidden,
 } from '@/components/widgets';
 import { Button, Spinner } from '@/components/ui';
 import { cn } from '@/libs/cn';
@@ -63,6 +64,9 @@ const ProductDetailsCard = ({
         onOpenChange={setOpen}
         onSignIn={handleSignIn}
       />
+      <StatusVisuallyHidden>
+        {isLoading ? `Adding ${name} to cart` : ''}
+      </StatusVisuallyHidden>
       <section
         aria-labelledby={headingId}
         className={cn(
@@ -179,7 +183,6 @@ const ProductDetailsCard = ({
               {isLoading ? (
                 <>
                   <Spinner
-                    aria-label={`Adding ${name} to cart`}
                     variant='primary'
                     size='sm'
                   />
