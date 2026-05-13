@@ -35,10 +35,10 @@ export const LoginForm = () => {
     try {
       const { user, accessToken } = await login(data).unwrap();
 
+      reset();
+
       dispatch(setCredentials({ user, accessToken }));
       navigate(from, { replace: true });
-
-      reset();
     } catch (error) {
       const apiError = error as ApiError;
 
