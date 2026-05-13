@@ -25,7 +25,7 @@ const ProductDetailsCard = ({
 }: ProductDetailsCardProps) => {
   const headingId = useId();
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [isSignAlertOpen, setIsSignAlertOpen] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
 
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -46,7 +46,7 @@ const ProductDetailsCard = ({
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
-      setOpen(true);
+      setIsSignAlertOpen(true);
       return;
     }
 
@@ -60,8 +60,10 @@ const ProductDetailsCard = ({
   return (
     <>
       <SignInRequiredAlert
-        open={open}
-        onOpenChange={setOpen}
+        open={isSignAlertOpen}
+        onOpenChange={setIsSignAlertOpen}
+        title='Sign in required'
+        description='Sign in to add items to your cart.'
         onSignIn={handleSignIn}
       />
       <StatusVisuallyHidden>

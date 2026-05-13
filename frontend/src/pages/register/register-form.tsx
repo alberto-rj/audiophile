@@ -5,7 +5,12 @@ import type { AppDispatch } from '@/app/store';
 import { useRegisterMutation } from '@/app/services/auth-api';
 import { setCredentials } from '@/app/features/auth';
 import { Button, Input, Label, Spinner } from '@/components/ui';
-import { FormField, FormFieldAlert, FormFieldFlow } from '@/components/widgets';
+import {
+  FormField,
+  FormFieldAlert,
+  FormFieldFlow,
+  StatusVisuallyHidden,
+} from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
 import { useRegisterForm } from '@/hooks';
 import type { RegisterFormData } from '@/libs/schemas';
@@ -51,129 +56,133 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <FormFieldFlow>
-        <FormField>
-          <Label
-            htmlFor='name'
-            isInvalid={!!errors.name}
+    <>
+      <StatusVisuallyHidden>
+        {isLoading ? 'Creating account' : ''}
+      </StatusVisuallyHidden>
+      <form
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FormFieldFlow>
+          <FormField>
+            <Label
+              htmlFor='name'
+              isInvalid={!!errors.name}
+            >
+              Name
+            </Label>
+            <Input
+              type='text'
+              id='name'
+              autoComplete='name'
+              placeholder='John Doe'
+              required
+              aria-required
+              aria-describedby={errors.name ? 'nameAlert' : undefined}
+              isInvalid={!!errors.name}
+              {...register('name')}
+            />
+            {errors.name && (
+              <FormFieldAlert id='nameAlert'>
+                {errors.name.message}
+              </FormFieldAlert>
+            )}
+          </FormField>
+          <FormField>
+            <Label
+              htmlFor='email'
+              isInvalid={!!errors.email}
+            >
+              Email
+            </Label>
+            <Input
+              type='email'
+              inputMode='email'
+              id='email'
+              autoComplete='email'
+              placeholder='johndoe@example.com'
+              required
+              aria-required
+              aria-describedby={errors.email ? 'emailAlert' : undefined}
+              isInvalid={!!errors.email}
+              {...register('email')}
+            />
+            {errors.email && (
+              <FormFieldAlert id='emailAlert'>
+                {errors.email.message}
+              </FormFieldAlert>
+            )}
+          </FormField>
+          <FormField>
+            <Label
+              htmlFor='password'
+              isInvalid={!!errors.password}
+            >
+              Password
+            </Label>
+            <Input
+              type='password'
+              id='password'
+              autoComplete='new-password'
+              placeholder='Min. 8 characters'
+              required
+              aria-required
+              aria-describedby={errors.password ? 'passwordAlert' : undefined}
+              isInvalid={!!errors.password}
+              {...register('password')}
+            />
+            {errors.password && (
+              <FormFieldAlert id='passwordAlert'>
+                {errors.password.message}
+              </FormFieldAlert>
+            )}
+          </FormField>
+          <FormField>
+            <Label
+              htmlFor='confirmPassword'
+              isInvalid={!!errors.confirmPassword}
+            >
+              Confirm password
+            </Label>
+            <Input
+              type='password'
+              id='confirmPassword'
+              autoComplete='new-password'
+              placeholder='Your password'
+              required
+              aria-required
+              aria-describedby={
+                errors.confirmPassword ? 'confirmPasswordAlert' : undefined
+              }
+              isInvalid={!!errors.confirmPassword}
+              {...register('confirmPassword')}
+            />
+            {errors.confirmPassword && (
+              <FormFieldAlert id='confirmPasswordAlert'>
+                {errors.confirmPassword.message}
+              </FormFieldAlert>
+            )}
+          </FormField>
+          <Button
+            type='submit'
+            variant='primary'
+            disabled={isLoading}
           >
-            Name
-          </Label>
-          <Input
-            type='text'
-            id='name'
-            autoComplete='name'
-            placeholder='John Doe'
-            required
-            aria-required
-            aria-describedby={errors.name ? 'nameAlert' : undefined}
-            isInvalid={!!errors.name}
-            {...register('name')}
-          />
-          {errors.name && (
-            <FormFieldAlert id='nameAlert'>
-              {errors.name.message}
-            </FormFieldAlert>
-          )}
-        </FormField>
-        <FormField>
-          <Label
-            htmlFor='email'
-            isInvalid={!!errors.email}
-          >
-            Email
-          </Label>
-          <Input
-            type='email'
-            inputMode='email'
-            id='email'
-            autoComplete='email'
-            placeholder='johndoe@example.com'
-            required
-            aria-required
-            aria-describedby={errors.email ? 'emailAlert' : undefined}
-            isInvalid={!!errors.email}
-            {...register('email')}
-          />
-          {errors.email && (
-            <FormFieldAlert id='emailAlert'>
-              {errors.email.message}
-            </FormFieldAlert>
-          )}
-        </FormField>
-        <FormField>
-          <Label
-            htmlFor='password'
-            isInvalid={!!errors.password}
-          >
-            Password
-          </Label>
-          <Input
-            type='password'
-            id='password'
-            autoComplete='new-password'
-            placeholder='Min. 8 characters'
-            required
-            aria-required
-            aria-describedby={errors.password ? 'passwordAlert' : undefined}
-            isInvalid={!!errors.password}
-            {...register('password')}
-          />
-          {errors.password && (
-            <FormFieldAlert id='passwordAlert'>
-              {errors.password.message}
-            </FormFieldAlert>
-          )}
-        </FormField>
-        <FormField>
-          <Label
-            htmlFor='confirmPassword'
-            isInvalid={!!errors.confirmPassword}
-          >
-            Confirm password
-          </Label>
-          <Input
-            type='password'
-            id='confirmPassword'
-            autoComplete='new-password'
-            placeholder='Your password'
-            required
-            aria-required
-            aria-describedby={
-              errors.confirmPassword ? 'confirmPasswordAlert' : undefined
-            }
-            isInvalid={!!errors.confirmPassword}
-            {...register('confirmPassword')}
-          />
-          {errors.confirmPassword && (
-            <FormFieldAlert id='confirmPasswordAlert'>
-              {errors.confirmPassword.message}
-            </FormFieldAlert>
-          )}
-        </FormField>
-        <Button
-          type='submit'
-          variant='primary'
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <Spinner
-                variant='primary'
-                size='sm'
-                aria-labelledby='actionAlert'
-              />{' '}
-              <span id='actionAlert'>Creating account...</span>
-            </>
-          ) : (
-            'Create account'
-          )}
-        </Button>
-      </FormFieldFlow>
-    </form>
+            {isLoading ? (
+              <>
+                <Spinner
+                  variant='primary'
+                  size='sm'
+                />
+                Creating account...
+              </>
+            ) : (
+              <>Create account</>
+            )}
+          </Button>
+        </FormFieldFlow>
+      </form>
+    </>
   );
 };
