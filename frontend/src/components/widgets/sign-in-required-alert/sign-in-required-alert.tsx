@@ -10,10 +10,18 @@ interface SignInRequiredAlertProps extends Omit<
   'children'
 > {
   onSignIn?: () => void;
+  title?: string;
+  description?: string;
+  action?: string;
+  cancel?: string;
 }
 
 const SignInRequiredAlert = ({
   onSignIn,
+  title = 'Sign in required',
+  description = 'Please you need to sign in.',
+  action = 'Sign in',
+  cancel = 'Cancel',
   ...props
 }: SignInRequiredAlertProps) => {
   const location = useLocation();
@@ -23,9 +31,9 @@ const SignInRequiredAlert = ({
       <Alert.Portal>
         <Alert.Overlay />
         <Alert.Content>
-          <Alert.Title className={cn('h6')}>Sign in required</Alert.Title>
+          <Alert.Title className={cn('h6')}>{title}</Alert.Title>
           <Alert.Description className={cn('mbs-3', 'mbe-6')}>
-            You need an account to add items to your cart.
+            {description}
           </Alert.Description>
 
           <div
@@ -49,12 +57,12 @@ const SignInRequiredAlert = ({
                   state={{ from: location }}
                   onClick={onSignIn}
                 >
-                  Sign in
+                  {action}
                 </Link>
               </Button>
             </Alert.Action>
             <Alert.Cancel asChild>
-              <Button variant='link'>Cancel</Button>
+              <Button variant='link'>{cancel}</Button>
             </Alert.Cancel>
           </div>
         </Alert.Content>
