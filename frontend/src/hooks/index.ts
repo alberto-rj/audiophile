@@ -1,5 +1,7 @@
 export { useCheckoutForm } from './use-checkout-form';
 
+export { useCredentials } from './use-credentials';
+
 export { useLoginForm } from './use-login-form';
 
 export { usePendingCartItem } from './use-pending-cart-item';
