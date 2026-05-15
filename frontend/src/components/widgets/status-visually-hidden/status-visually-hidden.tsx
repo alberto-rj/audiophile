@@ -1,13 +1,13 @@
 import { cn } from '@/libs/cn';
 
-type StatusVisuallyHiddenProps = React.ComponentProps<'span'>;
+type StatusVisuallyHiddenProps = React.ComponentProps<'div'>;
 
 const StatusVisuallyHidden = ({
   className,
   ...props
 }: StatusVisuallyHiddenProps) => {
   return (
-    <span
+    <div
       {...props}
       role='status'
       aria-live='polite'
