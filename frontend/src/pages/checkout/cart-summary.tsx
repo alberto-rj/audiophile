@@ -1,25 +1,17 @@
 import { useId } from 'react';
-import { useSelector } from 'react-redux';
-
-import {
-  selectGrandTotal,
-  selectItems,
-  selectShipping,
-  selectSubtotal,
-  selectVAT,
-} from '@/app/features/cart';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
 import { ResponsiveImage } from '@/components/widgets';
+import { cart } from '@/libs/mocks/cart';
 
 export const CartSummary = () => {
   const summaryHeadingId = useId();
 
-  const cartItems = useSelector(selectItems);
-  const subtotal = useSelector(selectSubtotal);
-  const shipping = useSelector(selectShipping);
-  const VAT = useSelector(selectVAT);
-  const grandTotal = useSelector(selectGrandTotal);
+  const cartItems = cart.items;
+  const subtotal = cart.subtotal;
+  const shipping = cart.shipping;
+  const VAT = cart.vat;
+  const grandTotal = cart.grandTotal;
 
   const cartSummary = [
     { name: 'Subtotal', value: subtotal, isHighlighted: false },

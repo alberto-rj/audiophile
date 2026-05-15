@@ -87,6 +87,7 @@ export const updateCartItemQuantity = http.patch(
 
       cart.items.splice(foundItemIndex, 1);
       cart.items.push(updatedItem);
+      cart.items = cart.items.filter((item) => item.quantity > 0);
       cart.items.sort((a, b) => a.name.localeCompare(b.name));
 
       return HttpResponse.json({ cart }, { status: 200 });
