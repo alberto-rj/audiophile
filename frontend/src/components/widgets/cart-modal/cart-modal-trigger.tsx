@@ -31,11 +31,13 @@ const CartModalTrigger = () => {
 
   return (
     <>
-      <SignInRequiredAlert
-        open={isSignInAlertOpen}
-        onOpenChange={setIsSignInAlertOpen}
-        description='Sign in to view your cart.'
-      />
+      {!isAuthenticated && (
+        <SignInRequiredAlert
+          open={isSignInAlertOpen}
+          onOpenChange={setIsSignInAlertOpen}
+          description='Sign in to view your cart.'
+        />
+      )}
       {isAuthenticated && <CartModal />}
       <button
         type='button'
