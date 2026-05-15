@@ -11,3 +11,4 @@ export { categories } from './categories';
 export { orders } from './orders';
 export { products } from './products';
 export { user } from './user';
+export { cart } from './cart';
