@@ -16,12 +16,13 @@ const buttonVariants = cva(
     'font-display',
     'uppercase',
 
+    'select-none',
+
     'disabled:bg-black',
     'disabled:text-gray-200',
     'disabled:opacity-25',
     'disabled:cursor-not-allowed',
     'disabled:pointer-events-none',
-    'disabled:select-none',
   ),
   {
     variants: {
