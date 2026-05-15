@@ -8,11 +8,11 @@ import type {
   UpdateCartItemQuantityPayload,
 } from '@/libs/types';
 
-import { baseQuery } from './base-query';
+import { baseQueryWithAuth } from './base-query';
 
 export const cartApi = createApi({
   reducerPath: 'cartApi',
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithAuth,
   tagTypes: ['Cart'],
   endpoints: (builder) => ({
     getCart: builder.query<CartResponse, void>({

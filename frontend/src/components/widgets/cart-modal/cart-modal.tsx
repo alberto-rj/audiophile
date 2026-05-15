@@ -1,102 +1,47 @@
-import { useId } from 'react';
+import { type ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useDebouncedCallback } from 'use-debounce';
 
-import type { AppDispatch } from '@/app/store';
+import { selectIsCartModalOpen, setIsCartModalOpen } from '@/app/features/cart';
 import {
-  clearCart,
-  selectItems,
-  selectItemsCount,
-  selectSubtotal,
-  updateQuantity,
-} from '@/app/features/cart';
-import { useLazyGetCartQuery } from '@/app/services/cart-api';
-import { Cart } from '@/assets/icons';
-import { Button, Modal } from '@/components/ui';
-import { QuantitySelector, ResponsiveImage } from '@/components/widgets';
+  useClearCartMutation,
+  useGetCartQuery,
+  useUpdateCartItemQuantityMutation,
+} from '@/app/services/cart-api';
+import type { AppDispatch } from '@/app/store';
+import { Button, Modal, Spinner } from '@/components/ui';
+import {
+  QuantitySelector,
+  ResponsiveImage,
+  StatusVisuallyHidden,
+} from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
-import { toMoney } from '@/libs/helpers';
+import { getCartItemsCount, toMoney } from '@/libs/helpers';
+import type { Cart, CartItem } from '@/libs/types';
 
-const CartModal = () => {
-  const headingId = useId();
-  const descriptionId = useId();
+interface BaseCartModalProps {
+  children?: ReactNode;
+  itemsCount?: number;
+}
 
-  const items = useSelector(selectItems);
-  const itemsCount = useSelector(selectItemsCount);
-  const grandTotal = useSelector(selectSubtotal);
-
+const BaseCartModal = ({ children }: BaseCartModalProps) => {
+  const open = useSelector(selectIsCartModalOpen);
   const dispatch = useDispatch<AppDispatch>();
 
-  const [getCart] = useLazyGetCartQuery();
-
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
-
-  const handleQuantityChange = ({
-    id,
-    quantity,
-  }: {
-    id: number;
-    quantity: number;
-  }) => {
-    dispatch(updateQuantity({ id, quantity }));
-  };
-
-  const handleViewCart = async () => {
-    try {
-      const data = await getCart().unwrap();
-      console.log(data.cart);
-    } catch (error) {
-      alert('Failed to get cart.');
-      console.error(error);
-    }
+  const handleOpenChange = (open: boolean) => {
+    dispatch(setIsCartModalOpen(open));
   };
 
   return (
-    <Modal>
-      <Modal.Trigger
-        type='button'
-        onClick={handleViewCart}
-        className={cn('relative')}
-      >
-        <span className={cn('sr-only')}>View cart - {itemsCount} item(s)</span>
-        {itemsCount > 0 && (
-          <span
-            aria-hidden={true}
-            className={cn(
-              'size-7',
-              'absolute',
-              '-inset-bs-5',
-              '-inset-e-3',
-              'flex',
-              'items-center',
-              'justify-center',
-              'text-xs',
-              'text-center',
-              'leading-none',
-              'truncate',
-
-              'text-white',
-              'bg-primary-700',
-              'rounded-full',
-            )}
-          >
-            {itemsCount}
-          </span>
-        )}
-        <Cart
-          aria-hidden={true}
-          focusable={false}
-        />
-      </Modal.Trigger>
-
+    <Modal
+      open={open}
+      onOpenChange={handleOpenChange}
+    >
       <Modal.Portal>
         <Modal.Overlay />
-
         <Modal.Content
-          aria-describedby={headingId}
           className={cn(
             'inline-[96vw]',
             'max-inline-120',
@@ -110,186 +55,277 @@ const CartModal = () => {
             'xs:py-8',
           )}
         >
-          {itemsCount === 0 ? (
-            <>
-              <Modal.Title
-                id={headingId}
-                className={cn('h6')}
-                asChild
-              >
-                <h3>Cart</h3>
-              </Modal.Title>
-              <Modal.Description
-                id={descriptionId}
-                className={cn('text-center', 'my-8')}
-              >
-                Your cart is empty.
-              </Modal.Description>
-            </>
-          ) : (
-            <>
-              <div
-                className={cn(
-                  'flex',
-                  'justify-between',
-                  'items-center',
-                  'gap-8',
-                )}
-              >
-                <Modal.Title
-                  id={headingId}
-                  className={cn('max-inline-50', 'truncate', 'h6')}
-                  asChild
-                >
-                  <h3>
-                    <span className={cn('sr-only')}>Cart</span>
-                    <span aria-hidden={true}>Cart ({itemsCount})</span>
-                  </h3>
-                </Modal.Title>
-
-                <Modal.Description
-                  id={descriptionId}
-                  className={cn('sr-only')}
-                >
-                  Your cart currently contains {itemsCount} item(s).
-                </Modal.Description>
-
-                <Button
-                  variant='link'
-                  onClick={handleClearCart}
-                >
-                  <span className={cn('sr-only')}>Remove all cart items</span>
-                  <span aria-hidden={true}>Remove all</span>
-                </Button>
-              </div>
-              <ul
-                role='list'
-                className={cn(
-                  'inline-full',
-                  'max-block-70',
-                  'overflow-auto',
-                  'flex',
-                  'flex-col',
-                  'gap-6',
-                  'my-8',
-                )}
-              >
-                {items.map(({ id, image, name, price, quantity }) => (
-                  <li
-                    key={id}
-                    className={cn(
-                      'flex',
-                      'justify-between',
-                      'items-center',
-                      'gap-6',
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        'flex',
-                        'justify-start',
-                        'items-center',
-                        'gap-4',
-                      )}
-                    >
-                      <ResponsiveImage
-                        image={image}
-                        alt={name}
-                        width={64}
-                        height={64}
-                        loading='lazy'
-                        className={cn(
-                          'aspect-64/64',
-
-                          'rounded-lg',
-                        )}
-                      />
-
-                      <div
-                        className={cn(
-                          'max-inline-10',
-                          'flex',
-                          'flex-col',
-
-                          'xs:max-inline-15',
-
-                          'sm:max-inline-30',
-
-                          'md:max-inline-40',
-                        )}
-                      >
-                        <span
-                          className={cn(
-                            'uppercase',
-                            'text-base',
-                            'truncate',
-
-                            'text-black',
-                          )}
-                        >
-                          {name}
-                        </span>
-                        <span className={cn('text-xs', 'truncate')}>
-                          {toMoney(price)}
-                        </span>
-                      </div>
-                    </div>
-
-                    <QuantitySelector
-                      value={quantity}
-                      label={`Quantity for ${name}`}
-                      onChange={(value) =>
-                        handleQuantityChange({ id, quantity: value })
-                      }
-                      className={cn('max-inline-30')}
-                    />
-                  </li>
-                ))}
-              </ul>
-
-              <dl
-                className={cn(
-                  'inline-full',
-                  'flex',
-                  'justify-between',
-                  'items-center',
-                  'gap-8',
-                  'mbe-6',
-                )}
-              >
-                <dt className={cn('uppercase')}>Subtotal</dt>
-                <dd
-                  className={cn(
-                    'max-inline-50',
-                    'truncate',
-                    'text-md',
-
-                    'text-black',
-                  )}
-                >
-                  {toMoney(grandTotal)}
-                </dd>
-              </dl>
-
-              <Modal.Close asChild>
-                <Button
-                  variant='primary'
-                  asChild
-                >
-                  <Link
-                    to={APP_ROUTES.checkout}
-                    className={cn('inline-full')}
-                  >
-                    Checkout
-                  </Link>
-                </Button>
-              </Modal.Close>
-            </>
-          )}
+          {children}
         </Modal.Content>
       </Modal.Portal>
     </Modal>
   );
+};
+
+const CartModalError = () => {
+  return (
+    <BaseCartModal>
+      <Modal.Title
+        asChild
+        className={cn('h6')}
+      >
+        <h2>Cart</h2>
+      </Modal.Title>
+      <Modal.Description className={cn('text-center', 'my-8')}>
+        Failed to load cart. Please try again.
+      </Modal.Description>
+    </BaseCartModal>
+  );
+};
+
+const CartModalLoading = () => {
+  return (
+    <BaseCartModal>
+      <StatusVisuallyHidden>
+        <Modal.Title asChild>
+          <h2>Cart</h2>
+        </Modal.Title>
+        <Modal.Description>Loading your cart.</Modal.Description>
+      </StatusVisuallyHidden>
+
+      <Spinner
+        variant={'primary'}
+        size={'sm'}
+        className={cn('mx-auto', 'my-8')}
+      />
+    </BaseCartModal>
+  );
+};
+
+interface SingleCartItemProps {
+  item: CartItem;
+}
+
+const SingleCartItem = ({
+  item: { id, productId, image, name, price, quantity },
+}: SingleCartItemProps) => {
+  const [updateItemQuantity, { isLoading: isUpdatingItemQuantity }] =
+    useUpdateCartItemQuantityMutation();
+
+  const handleQuantityChange = useDebouncedCallback(
+    async ({
+      productId,
+      quantity,
+    }: {
+      productId: number;
+      quantity: number;
+    }) => {
+      try {
+        await updateItemQuantity({ productId, quantity }).unwrap();
+      } catch (error) {
+        console.error(`Failed to update quantity for ${id}`, error);
+      }
+    },
+    500,
+  );
+
+  return (
+    <>
+      <div className={cn('flex', 'justify-start', 'items-center', 'gap-4')}>
+        <ResponsiveImage
+          image={image}
+          alt={name}
+          width={64}
+          height={64}
+          loading='lazy'
+          className={cn(
+            'aspect-64/64',
+
+            'rounded-lg',
+          )}
+        />
+
+        <div
+          className={cn(
+            'max-inline-10',
+            'flex',
+            'flex-col',
+
+            'xs:max-inline-15',
+
+            'sm:max-inline-30',
+
+            'md:max-inline-40',
+          )}
+        >
+          <span
+            className={cn(
+              'uppercase',
+              'text-base',
+              'truncate',
+
+              'text-black',
+            )}
+          >
+            {name}
+          </span>
+          <span className={cn('text-xs', 'truncate')}>{toMoney(price)}</span>
+        </div>
+      </div>
+
+      <QuantitySelector
+        value={quantity}
+        label={`Quantity for ${name}`}
+        disabled={isUpdatingItemQuantity}
+        onChange={(value) =>
+          handleQuantityChange({ productId, quantity: value })
+        }
+        className={cn('max-inline-30')}
+      />
+    </>
+  );
+};
+
+interface CartItemListProps {
+  items: CartItem[];
+}
+
+const CartItemList = ({ items }: CartItemListProps) => {
+  return (
+    <ul
+      role='list'
+      className={cn(
+        'inline-full',
+        'max-block-70',
+        'overflow-auto',
+        'flex',
+        'flex-col',
+        'gap-6',
+        'my-8',
+      )}
+    >
+      {items.map((item) => (
+        <li
+          key={item.id}
+          className={cn('flex', 'justify-between', 'items-center', 'gap-6')}
+        >
+          <SingleCartItem item={item} />
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+interface CartModalFilledProps {
+  cart: Cart;
+}
+
+const CartModalFilled = ({ cart }: CartModalFilledProps) => {
+  const [clearCart, { isLoading: isClearingCart }] = useClearCartMutation();
+
+  const handleClearCart = async () => {
+    try {
+      await clearCart().unwrap();
+    } catch (error) {
+      console.error('Failed to clear cart', error);
+    }
+  };
+
+  const { subtotal, items } = cart;
+  const itemsCount = getCartItemsCount(items);
+
+  if (itemsCount === 0) {
+    return (
+      <BaseCartModal>
+        <Modal.Title
+          asChild
+          className={cn('h6')}
+        >
+          <h2>Cart</h2>
+        </Modal.Title>
+        <Modal.Description className={cn('text-center', 'my-8')}>
+          Your cart is empty.
+        </Modal.Description>
+      </BaseCartModal>
+    );
+  }
+
+  return (
+    <BaseCartModal itemsCount={itemsCount}>
+      <div className={cn('flex', 'justify-between', 'items-center', 'gap-8')}>
+        <Modal.Title
+          className={cn('max-inline-50', 'truncate', 'h6')}
+          asChild
+        >
+          <h2>
+            <span className={cn('sr-only')}>Cart</span>
+            <span aria-hidden={true}>Cart ({itemsCount})</span>
+          </h2>
+        </Modal.Title>
+
+        <Modal.Description className={cn('sr-only')}>
+          Your cart has {itemsCount} item(s).
+        </Modal.Description>
+
+        <Button
+          type='button'
+          variant='link'
+          onClick={handleClearCart}
+          disabled={isClearingCart}
+        >
+          <span className={cn('sr-only')}>Remove all cart items</span>
+          {isClearingCart ? <>Removing...</> : <>Remove all</>}
+        </Button>
+      </div>
+      <CartItemList items={items} />
+      <dl
+        className={cn(
+          'inline-full',
+          'flex',
+          'justify-between',
+          'items-center',
+          'gap-8',
+          'mbe-6',
+        )}
+      >
+        <dt className={cn('uppercase')}>Subtotal</dt>
+        <dd
+          className={cn(
+            'max-inline-50',
+            'truncate',
+            'text-md',
+
+            'text-black',
+          )}
+        >
+          {toMoney(subtotal)}
+        </dd>
+      </dl>
+
+      <Modal.Close asChild>
+        <Button
+          variant='primary'
+          asChild
+        >
+          <Link
+            to={APP_ROUTES.checkout}
+            className={cn('inline-full')}
+          >
+            Checkout
+          </Link>
+        </Button>
+      </Modal.Close>
+    </BaseCartModal>
+  );
+};
+
+const CartModal = () => {
+  const { isLoading, isError, data } = useGetCartQuery();
+
+  if (isLoading) {
+    return <CartModalLoading />;
+  }
+
+  if (isError) {
+    return <CartModalError />;
+  }
+
+  return <CartModalFilled cart={data!.cart} />;
 };
 
 export default CartModal;

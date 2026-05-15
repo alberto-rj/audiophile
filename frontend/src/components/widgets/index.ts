@@ -9,6 +9,7 @@ export { CategoryList } from './category-listing/category-list';
 export { CategoryListSkeleton } from './category-listing/category-list-skeleton';
 
 export { default as CartModal } from './cart-modal/cart-modal';
+export { default as CartModalTrigger } from './cart-modal/cart-modal-trigger';
 
 export { default as ErrorMessage } from './error-message/error-message';
 
