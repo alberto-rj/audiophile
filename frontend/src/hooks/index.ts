@@ -11,3 +11,5 @@ export { useProfileForm } from './use-profile-form';
 export { useRegisterForm } from './use-register-form';
 
 export { useSecondaryPage } from './use-secondary-page';
+
+export { useItemsCount } from './use-items-count';

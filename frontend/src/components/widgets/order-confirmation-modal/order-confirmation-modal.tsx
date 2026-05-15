@@ -1,16 +1,15 @@
 import { useId, type ComponentProps } from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { selectGrandTotal, selectItems } from '@/app/features/cart';
 import { OrderConfirmation } from '@/assets/icons';
 import { Button, Modal } from '@/components/ui';
 import { ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
+import { cart } from '@/libs/mocks/cart';
 
 const CartItemListing = () => {
-  const items = useSelector(selectItems);
+  const items = cart.items;
 
   return (
     <ul
@@ -96,7 +95,7 @@ const CartItemListing = () => {
 };
 
 const CartItemCard = () => {
-  const grandTotal = useSelector(selectGrandTotal);
+  const grandTotal = cart.grandTotal;
 
   return (
     <div className={cn('flex', 'flex-col', 'md:flex-row')}>

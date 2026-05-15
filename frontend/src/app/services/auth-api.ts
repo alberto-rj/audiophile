@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { clearCredentials, setCredentials } from '@/app/features/auth';
+import { setIsCartModalOpen } from '@/app/features/cart';
 import { API_ENDPOINTS } from '@/config/api-endpoints';
 import type { AuthResponse, LoginPayload, RegisterPayload } from '@/libs/types';
 
@@ -48,6 +49,7 @@ export const authApi = createApi({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         await queryFulfilled;
 
+        dispatch(setIsCartModalOpen(false));
         dispatch(clearCredentials());
       },
     }),

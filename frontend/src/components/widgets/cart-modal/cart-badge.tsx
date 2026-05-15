@@ -4,7 +4,7 @@ interface CartBadgeProps {
   itemsCount: number;
 }
 
-const CartBadge = ({ itemsCount }: CartBadgeProps) => {
+export const CartBadge = ({ itemsCount }: CartBadgeProps) => {
   return (
     <div
       aria-hidden={true}
@@ -31,5 +31,3 @@ const CartBadge = ({ itemsCount }: CartBadgeProps) => {
     </div>
   );
 };
-
-export default CartBadge;

@@ -1,16 +1,15 @@
 import type { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { selectItems } from '@/app/features/cart';
 import { APP_ROUTES } from '@/config/app-routes';
+import { cart } from '@/libs/mocks/cart';
 
 interface RequireCartProps {
   children: ReactNode;
 }
 
 const RequireCart = ({ children }: RequireCartProps) => {
-  const items = useSelector(selectItems);
+  const items = cart.items;
 
   if (items.length === 0) {
     return (

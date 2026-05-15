@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { selectIsAuthenticated } from '@/app/features/auth';
 import { Logo, Close, Menu } from '@/assets/icons';
 import { Separator } from '@/components/ui';
-import { AuthCTA, CartModal, ProfileMenu } from '@/components/widgets';
+import { AuthCTA, CartModalTrigger, ProfileMenu } from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import { navLinks } from '@/libs/constants';
@@ -207,7 +207,7 @@ const Navbar = () => {
         </div>
 
         {/* Cart */}
-        <CartModal />
+        <CartModalTrigger />
       </div>
 
       {/* Mobile Decorator */}
