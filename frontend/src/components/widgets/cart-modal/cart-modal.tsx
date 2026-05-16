@@ -17,6 +17,7 @@ import {
   StatusVisuallyHidden,
 } from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
+import { useToast } from '@/hooks';
 import { cn } from '@/libs/cn';
 import { getCartItemsCount, toMoney } from '@/libs/helpers';
 import type { Cart, CartItem } from '@/libs/types';
@@ -216,13 +217,21 @@ interface CartModalFilledProps {
 }
 
 const CartModalFilled = ({ cart }: CartModalFilledProps) => {
+  const toast = useToast();
   const [clearCart, { isLoading: isClearingCart }] = useClearCartMutation();
 
   const handleClearCart = async () => {
     try {
       await clearCart().unwrap();
-    } catch (error) {
-      console.error('Failed to clear cart', error);
+      toast.success({
+        title: 'Success!',
+        description: 'Cart cleared successfully.',
+      });
+    } catch {
+      toast.error({
+        title: 'Something went wrong',
+        description: 'Failed to clear cart.',
+      });
     }
   };
 
