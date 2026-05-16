@@ -1,13 +1,10 @@
 import {
   useToastContext,
+  type AddToastParams,
   type ToastVariant,
 } from '@/components/ui/toast/toast-context';
 
-interface ShowToastOptions {
-  title: string;
-  description?: string;
-  duration?: number;
-}
+type ShowToastOptions = Omit<AddToastParams, 'variant'>;
 
 export const useToast = () => {
   const { addToast } = useToastContext();
