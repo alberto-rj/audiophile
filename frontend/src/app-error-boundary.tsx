@@ -2,6 +2,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useLocation } from 'react-router-dom';
 
 import App from '@/app';
+import { ToastProvider, ToastRenderer } from '@/components/ui';
 import { AppInitializer, PageError } from '@/components/widgets';
 
 function AppErrorBoundary() {
@@ -13,7 +14,10 @@ function AppErrorBoundary() {
       resetKeys={[location.pathname]}
     >
       <AppInitializer>
-        <App />
+        <ToastProvider>
+          <App />
+          <ToastRenderer />
+        </ToastProvider>
       </AppInitializer>
     </ErrorBoundary>
   );

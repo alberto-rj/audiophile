@@ -115,8 +115,6 @@
 
   /* black */
   --color-black: #000000;
-  --color-black-o-50: rgba(0, 0, 0, 0.5);
-  --color-black-o-40: rgba(0, 0, 0, 0.4);
 
   /* white */
   --color-white: #ffffff;
@@ -129,6 +127,60 @@
   --color-gray-400: #f1f1f1;
   --color-gray-300: #f2f2f2;
   --color-gray-200: #fafafa;
+
+  /* success */
+  --color-success-50: #f1faf5;
+  --color-success-100: #e2f5ea;
+  --color-success-200: #d4f1e0;
+  --color-success-300: #c5ecd5;
+  --color-success-400: #b7e7cb;
+  --color-success-500: #a9e2c1;
+  --color-success-600: #9addb6;
+  --color-success-700: #8cd9ac;
+  --color-success-800: #7dd4a1;
+  --color-success-900: #6fcf97;
+  --color-success-950: #64ba88;
+  --color-success-1000: #59a679;
+  --color-success-1050: #4e916a;
+  --color-success-1100: #437c5b;
+  --color-success-1200: #38684c;
+  --color-success-1300: #2c533c;
+  --color-success-1400: #213e2d;
+  --color-success-1500: #16291e;
+  --color-success-1600: #0b150f;
+
+  /* info */
+  --color-info-50: #ecfeff;
+  --color-info-100: #cffafe;
+  --color-info-200: #a5f3fc;
+  --color-info-300: #67e8f9;
+  --color-info-400: #22d3ee;
+  --color-info-500: #06b6d4;
+  --color-info-600: #0891b2;
+  --color-info-700: #0369a1;
+  --color-info-800: #155e75;
+  --color-info-900: #164e63;
+  --color-info-950: #083344;
+
+  /* warning */
+  --color-warning-50: #fefaed;
+  --color-warning-100: #fcf4db;
+  --color-warning-200: #fbefc9;
+  --color-warning-300: #fae9b7;
+  --color-warning-400: #f7df94;
+  --color-warning-500: #f6d982;
+  --color-warning-600: #f5d470;
+  --color-warning-700: #f3ce5e;
+  --color-warning-800: #f2c94c;
+  --color-warning-900: #dab544;
+  --color-warning-950: #c2a13d;
+  --color-warning-1000: #a98d35;
+  --color-warning-1050: #91792e;
+  --color-warning-1100: #796526;
+  --color-warning-1200: #61501e;
+  --color-warning-1300: #493c17;
+  --color-warning-1400: #30280f;
+  --color-warning-1500: #181408;
 
   /* danger */
   --color-danger-50: #fffcfc;
@@ -149,40 +201,85 @@
   --tw-outline-style: solid;
   /* tailwind (end) */
 
-  /* custom properties (start) */
-  /* outline */
+  /* outline (start) */
   --outline-width: 2px;
   --outline-offset: 2px;
   --outline-style: solid;
   --outline-color: var(--color-primary-200);
+  /* outline (end) */
 
-  /* flow spacing */
+  /* flow spacing (start) */
   --form-flow-spacing: 2rem;
   --form-flow-spacing-md: 2rem;
   --form-flow-spacing-lg: 3rem;
+  /* flow spacing (end) */
 
-  /* flow spacing */
+  /* flow spacing (start) */
   --flow-spacing: 7.5rem;
   --flow-spacing-xs: 7.5rem;
   --flow-spacing-sm: 7.5rem;
   --flow-spacing-md: 7.5rem;
   --flow-spacing-lg: 10rem;
+  /* flow spacing (end) */
 
-  /* order status */
+  /* order status (start) */
   --order-cancelled: var(--color-danger-400);
   --order-pending: var(--color-blue-400);
   --order-shipped: var(--color-gray-900);
   --order-processing: var(--color-orange-600);
   --order-delivered: var(--color-green-400);
+  /* order status (end) */
 
-  /* category card */
+  /* category card (start) */
   --category-card-margin: 7.1875rem;
   --category-card-margin-lg: 8.875rem;
+  /* category card (end) */
 
-  /* wrapper padding */
+  /* wrapper padding (start) */
   --wrapper-padding: 1.25rem;
   --wrapper-padding-md: 2.5rem;
-  /* custom properties (end) */
+  /* wrapper padding (end) */
+
+  /* toast (start) */
+  --toast-offset: 1rem;
+  --toast-spacing: 1rem;
+  --toast-viewport-padding: 1.5rem;
+  /* toast (end) */
+
+  /* animations (start) */
+  /* hide */
+  --animate-hide: hide 100ms ease-in;
+  @keyframes hide {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* slide in */
+  --animate-toast-slide-in: toast-slide-in 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  @keyframes toast-slide-in {
+    from {
+      transform: translateX(calc(100% + var(--toast-viewport-padding)));
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* swipe out */
+  --animate-toast-swipe-out: toast-swipe-out 100ms ease-out;
+  @keyframes toast-swipe-out {
+    from {
+      transform: translateX(var(--radix-toast-swipe-end-x));
+    }
+    to {
+      transform: translateX(calc(100% + var(--toast-viewport-padding)));
+    }
+  }
+  /* animations (end) */
 }
 
 @layer base {
@@ -281,5 +378,13 @@
 
   .h6 {
     @apply text-md text-black uppercase;
+  }
+
+  .h7 {
+    @apply text-xs text-black uppercase;
+  }
+
+  .h8 {
+    @apply text-2xs text-black uppercase;
   }
 }
