@@ -1,16 +1,25 @@
 import type { Decorator } from '@storybook/react-vite';
 import { Provider } from 'react-redux';
 
-import { store } from '@/app/store';
+import { authApi } from '@/app/services/auth-api';
+import { cartApi } from '@/app/services/cart-api';
 import { categoryApi } from '@/app/services/categories-api';
+import { ordersApi } from '@/app/services/orders-api';
 import { productApi } from '@/app/services/products-api';
-import { clearCart } from '@/app/features/cart';
+import { usersApi } from '@/app/services/users-api';
+import { store } from '@/app/store';
 
 export const StoreDecorator: Decorator = (Story, context) => {
-  store.dispatch(categoryApi.util.resetApiState());
-  store.dispatch(productApi.util.resetApiState());
+  const apiList = [
+    authApi,
+    cartApi,
+    categoryApi,
+    ordersApi,
+    productApi,
+    usersApi,
+  ];
 
-  store.dispatch(clearCart());
+  apiList.forEach((api) => store.dispatch(api.util.resetApiState()));
 
   return (
     <Provider store={store}>

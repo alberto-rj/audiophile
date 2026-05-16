@@ -11,3 +11,8 @@ export { default as Menu } from './icon-menu.svg?react';
 export { default as OrderConfirmation } from './icon-order-confirmation.svg?react';
 export { default as Instagram } from './icon-instagram.svg?react';
 export { default as Twitter } from './icon-twitter.svg?react';
+
+export { default as AlertCircle } from './icon-alert-circle.svg?react';
+export { default as CheckCircle } from './icon-check-circle.svg?react';
+export { default as XCircle } from './icon-x-circle.svg?react';
+export { default as InfoCircle } from './icon-info.svg?react';

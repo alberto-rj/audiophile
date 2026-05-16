@@ -1,8 +1,9 @@
 import { useId } from 'react';
+
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
+import { cart } from '@/libs/mocks';
 import { ResponsiveImage } from '@/components/widgets';
-import { cart } from '@/libs/mocks/cart';
 
 export const CartSummary = () => {
   const summaryHeadingId = useId();
