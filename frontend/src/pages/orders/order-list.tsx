@@ -24,6 +24,8 @@ const OrderList = ({ orders }: OrderListProps) => {
 
             'md:grid-cols-2',
             'md:justify-center',
+
+            'lg:grid-cols-3',
           )}
         >
           {orders.map((order) => (
