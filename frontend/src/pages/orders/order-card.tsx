@@ -75,19 +75,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
 
   return (
     <Card
-      className={cn(
-        'inline-full',
-        'max-inline-140',
-        'p-0',
-
-        'xs:p-0',
-
-        'sm:p-0',
-
-        'md:p-0',
-
-        'lg:p-0',
-      )}
+      className={cn('inline-full', 'max-inline-96')}
       asChild
     >
       <article aria-labelledby={headingId}>
