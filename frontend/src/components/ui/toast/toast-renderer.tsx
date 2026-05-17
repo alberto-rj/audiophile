@@ -2,7 +2,7 @@ import { Close as CloseIcon } from '@/assets/icons';
 import { cn } from '@/libs/cn';
 
 import Toast from './toast';
-import { useToastContext } from './toast-context';
+import { defaultToastVariant, useToastContext } from './toast-context';
 
 export const ToastRenderer = () => {
   const { toasts, removeToast } = useToastContext();
@@ -12,7 +12,7 @@ export const ToastRenderer = () => {
       {toasts.map((toast) => (
         <Toast
           key={toast.id}
-          variant={toast.variant ?? 'info'}
+          variant={toast.variant ?? defaultToastVariant}
           duration={toast.duration}
           onOpenChange={(open) => {
             if (!open) {
