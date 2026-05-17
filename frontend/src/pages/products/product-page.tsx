@@ -86,7 +86,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
   );
 };
 
-const ProductDetailsFetching = () => {
+const ProductDetailsQuery = () => {
   const slug = useParams()?.slug;
   const {
     isLoading,
@@ -116,11 +116,12 @@ const ProductDetailsFetching = () => {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
-          Failed to load product details for {`"${slug}"`}.
+          We couldn't load product details for "{slug}". Please try again.
         </ErrorMessage.Description>
+
         <ErrorMessage.Retry
           onClick={refetch}
-          aria-label='Try again - reload product details'
+          aria-label='Try again loading product details'
         >
           Try again
         </ErrorMessage.Retry>
@@ -138,7 +139,7 @@ const ProductPage = () => {
         <GoBack.Control />
       </GoBack>
       <div className={cn('wrapper', 'flow')}>
-        <ProductDetailsFetching />
+        <ProductDetailsQuery />
         <CategoryListing />
         <BestGear />
       </div>
