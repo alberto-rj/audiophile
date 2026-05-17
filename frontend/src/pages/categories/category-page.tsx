@@ -41,11 +41,12 @@ const CategoryPage = () => {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
-          Failed to load products for {`"${slug}"`}.
+          We could not load products for "{slug}". Please try again.
         </ErrorMessage.Description>
+
         <ErrorMessage.Retry
           onClick={refetch}
-          aria-label='Try again - reload products'
+          aria-label='Try again loading products'
         >
           Try again
         </ErrorMessage.Retry>
