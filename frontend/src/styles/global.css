@@ -304,6 +304,10 @@
     @apply not-disabled:cursor-pointer hover:text-primary-800;
   }
 
+  button {
+    @apply not-disabled:cursor-pointer;
+  }
+
   *:focus,
   *:focus-visible,
   .focus-within:focus-within {
