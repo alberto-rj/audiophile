@@ -5,6 +5,8 @@ import { cn } from '@/libs/cn';
 
 const spinnerVariants = cva(
   cn(
+    'mx-auto',
+
     'rounded-full',
 
     'motion-safe:animate-spin',
@@ -12,11 +14,11 @@ const spinnerVariants = cva(
   {
     variants: {
       variant: {
-        primary: cn('border-gray-300', 'border-bs-primary-400'),
+        primary: cn('border-gray-300', 'border-bs-primary-700'),
 
         secondary: cn('border-gray-300', 'border-bs-gray-900'),
 
-        danger: cn('border-gray-300', 'border-bs-danger-400'),
+        danger: cn('border-gray-300', 'border-bs-danger-950'),
       },
 
       size: {
