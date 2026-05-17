@@ -21,6 +21,7 @@ const Card = ({ asChild, className, children }: CardProps) => {
         'p-6',
 
         'bg-white',
+        'shadow-sm',
 
         className,
       )}
