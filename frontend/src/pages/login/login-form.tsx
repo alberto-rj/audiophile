@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import type { AppDispatch } from '@/app/store';
-import { useLoginMutation } from '@/app/services/auth-api';
 import { setCredentials } from '@/app/features/auth';
+import { useLoginMutation } from '@/app/services/auth-api';
+import type { AppDispatch } from '@/app/store';
 import { Button, Input, Label, Spinner } from '@/components/ui';
 import {
   FormField,
@@ -12,7 +12,7 @@ import {
   StatusVisuallyHidden,
 } from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
-import { useLoginForm } from '@/hooks';
+import { useLoginForm, useToast } from '@/hooks';
 import type { LoginFormData } from '@/libs/schemas';
 import type { ApiError } from '@/libs/types';
 
@@ -27,10 +27,11 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    setError,
     reset,
     formState: { errors },
   } = useLoginForm();
+
+  const toast = useToast();
 
   const from =
     (location.state as { from?: { pathname: string } })?.from?.pathname ??
@@ -48,12 +49,17 @@ export const LoginForm = () => {
       const apiError = error as ApiError;
 
       if (apiError?.status == 401) {
-        setError('password', { message: 'Invalid email or password.' });
-      } else {
-        setError('password', { message: 'Failed to sign in.' });
+        toast.error({
+          title: 'Sign in failed',
+          description: 'Invalid email or password.',
+        });
+        return;
       }
 
-      console.error('Failed to sign in:', error);
+      toast.error({
+        title: 'Sign in failed',
+        description: 'Something went wrong. Please try again.',
+      });
     }
   };
 
