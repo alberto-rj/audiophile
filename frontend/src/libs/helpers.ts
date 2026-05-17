@@ -67,4 +67,4 @@ export {
   setPendingCartItem,
 } from './pending-cart-item-storage';
 
-export { getCartItemsCount } from './get-cart-items-count';
+export { getItemsCount } from './get-items-count';

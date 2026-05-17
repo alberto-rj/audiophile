@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { Button, Card } from '@/components/ui';
 import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
-import { toStatusText, toMoney, toTimeAgo } from '@/libs/helpers';
+import {
+  toStatusText,
+  toMoney,
+  toTimeAgo,
+  getItemsCount,
+} from '@/libs/helpers';
 import type { Order } from '@/libs/types';
 
 interface OrderCardProps {
@@ -30,7 +35,7 @@ const OrderCard = ({
     {
       isHighlighted: false,
       name: 'Number of items',
-      value: items?.length || 0,
+      value: getItemsCount(items ?? []),
     },
     {
       isHighlighted: false,
