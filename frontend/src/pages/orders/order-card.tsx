@@ -1,7 +1,8 @@
 import { useId } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Card } from '@/components/ui';
+import { ChevronDown } from '@/assets/icons';
+import { Card, DropdownMenu } from '@/components/ui';
 import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import {
@@ -9,144 +10,144 @@ import {
   toMoney,
   toTimeAgo,
   getItemsCount,
+  toOrderNumber,
 } from '@/libs/helpers';
 import type { Order } from '@/libs/types';
+
+interface OrderCardMenuProps {
+  order: Order;
+}
+
+const OrderCardMenu = ({ order: { id, status } }: OrderCardMenuProps) => {
+  const handleCancel = async () => {};
+  const handleRemove = async () => {};
+
+  const isCancellable =
+    status !== 'cancelled' && status !== 'shipped' && status !== 'delivered';
+
+  const isRemovable = status === 'cancelled' || status === 'delivered';
+
+  return (
+    <DropdownMenu>
+      <DropdownMenu.Trigger type='button'>
+        <ChevronDown
+          focusable={false}
+          aria-hidden={true}
+        />
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content className={cn('min-inline-fit')}>
+          <DropdownMenu.Item>
+            <Link
+              aria-label={`View order - ${id}`}
+              to={`${APP_ROUTES.orders}/${id}`}
+              className={cn('outline-none', 'text-inherit')}
+            >
+              View order
+            </Link>
+          </DropdownMenu.Item>
+          {(isCancellable || isRemovable) && <DropdownMenu.Separator />}
+
+          {isCancellable && (
+            <DropdownMenu.Item onSelect={handleCancel}>
+              Cancel
+            </DropdownMenu.Item>
+          )}
+          {isRemovable && (
+            <DropdownMenu.Item onSelect={handleRemove}>
+              Remove
+            </DropdownMenu.Item>
+          )}
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu>
+  );
+};
 
 interface OrderCardProps {
   order: Order;
 }
 
-const OrderCard = ({
-  order: { createdAt, id, items, subtotal, status },
-}: OrderCardProps) => {
+const OrderCard = ({ order }: OrderCardProps) => {
   const headingId = useId();
 
-  const orderSummary = [
-    {
-      isHighlighted: false,
-      name: 'Order number',
-      value: id,
-    },
-    {
-      isHighlighted: false,
-      name: 'Created at',
-      value: toTimeAgo(createdAt),
-    },
-    {
-      isHighlighted: false,
-      name: 'Number of items',
-      value: getItemsCount(items ?? []),
-    },
-    {
-      isHighlighted: false,
-      name: 'Subtotal',
-      value: toMoney(subtotal),
-    },
-    {
-      isHighlighted: true,
-      name: 'Status',
-      value: toStatusText(status),
-    },
-  ];
+  const { createdAt, id, items, subtotal, status } = order;
 
   return (
-    <Card
-      className={cn(
-        'inline-full',
-        'max-inline-140',
-        'p-6',
+    <Card asChild>
+      <article
+        aria-labelledby={headingId}
+        className={cn(
+          'inline-full',
+          'max-inline-140',
+          'flex',
+          'flex-col',
+          'gap-8',
+          'p-6',
 
-        'md:p-8',
-
-        'border-bs-4',
-        {
-          'border-(--order-delivered)': status === 'delivered',
-          'border-(--order-cancelled)': status === 'cancelled',
-          'border-(--order-processing)': status === 'processing',
-          'border-(--order-pending)': status === 'pending',
-          'border-(--order-shipped)': status === 'shipped',
-        },
-      )}
-      asChild
-    >
-      <article aria-labelledby={headingId}>
-        <h2
-          id={headingId}
-          className={cn('sr-only')}
-        >
-          Order summary - {id}
-        </h2>
-        <div
-          className={cn(
-            'flex',
-            'flex-col',
-            'gap-8',
-
-            'uppercase',
-          )}
-        >
-          <ul
-            role='list'
-            className={cn('flex', 'flex-col', 'gap-8', 'md:gap-2')}
+          'md:p-8',
+        )}
+      >
+        <div className={cn('flex', 'justify-between', 'items-center')}>
+          <h2
+            id={headingId}
+            className={cn('h6')}
           >
-            {orderSummary.map(({ isHighlighted, name, value }) => (
-              <li key={name}>
-                <dl
-                  className={cn(
-                    'flex',
-                    'flex-col',
-                    'justify-between',
-                    'items-center',
-                    'gap-1',
-                    'text-center',
+            Order {toOrderNumber(id)}
+          </h2>
+          <div className={cn('flex', 'items-center', 'gap-4')}>
+            <dl>
+              <dt className={cn('sr-only')}>Status</dt>
+              <dd
+                className={cn(
+                  'inline-fit',
+                  'px-3',
+                  'py-1',
 
-                    'md:flex-row',
-                    'md:text-start',
-                  )}
-                >
-                  <dt>{name}</dt>
-                  <dd
-                    className={cn(
-                      'flex',
-                      'items-center',
-                      'gap-2',
-                      'text-md',
+                  'h8',
+                  'rounded-lg',
+                  {
+                    'bg-success-50': status === 'delivered',
+                    'text-success-1400': status === 'delivered',
 
-                      {
-                        'text-(--order-delivered)':
-                          isHighlighted && status === 'delivered',
-                        'text-(--order-cancelled)':
-                          isHighlighted && status === 'cancelled',
-                        'text-(--order-processing)':
-                          isHighlighted && status === 'processing',
-                        'text-(--order-pending)':
-                          isHighlighted && status === 'pending',
-                        'text-(--order-shipped)':
-                          isHighlighted && status === 'shipped',
-                        'text-black': !isHighlighted,
-                      },
-                    )}
-                  >
-                    {value}
-                  </dd>
-                </dl>
-              </li>
-            ))}
-          </ul>
+                    'bg-info-50': status === 'processing',
+                    'text-info-950': status === 'processing',
 
-          <Button
-            variant={'link'}
-            className={cn('md:self-end')}
-            asChild
-          >
-            <Link
-              aria-label={`View order - ${id}`}
-              to={`${APP_ROUTES.orders}/${id}`}
-            >
-              View order
-            </Link>
-          </Button>
+                    'bg-warning-100': status === 'pending',
+                    'text-warning-1100': status === 'pending',
+
+                    'bg-danger-300': status === 'cancelled',
+                    'text-danger-950': status === 'cancelled',
+
+                    'bg-primary-50': status === 'shipped',
+                    'text-primary-950': status === 'shipped',
+                  },
+                )}
+              >
+                {toStatusText(status)}
+              </dd>
+            </dl>
+            <OrderCardMenu order={order} />
+          </div>
         </div>
+        <dl className={cn('flex', 'flex-col', 'gap-2')}>
+          <div>
+            <dt className={cn('sr-only')}>Subtotal</dt>
+            <dd className={cn('h6')}>{toMoney(subtotal)}</dd>
+          </div>
+          <div
+            className={cn('flex', 'justify-between', 'items-center', 'gap-6')}
+          >
+            <dt>Created on:</dt>
+            <dd>{toTimeAgo(createdAt)}</dd>
+          </div>
+          <div
+            className={cn('flex', 'justify-between', 'items-center', 'gap-6')}
+          >
+            <dt>Number of items:</dt>
+            <dd>{getItemsCount(items ?? [])}</dd>
+          </div>
+        </dl>
       </article>
     </Card>
   );

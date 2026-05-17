@@ -17,10 +17,13 @@ const OrderList = ({ orders }: OrderListProps) => {
           role='list'
           className={cn(
             'inline-full',
-            'flex',
-            'flex-col',
+            'grid',
+            'grid-cols-1',
             'items-center',
             'gap-8',
+
+            'md:grid-cols-2',
+            'md:justify-center',
           )}
         >
           {orders.map((order) => (

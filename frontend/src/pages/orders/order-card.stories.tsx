@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { LayoutCenteredOnScreen } from '@/layouts';
 import { orders } from '@/libs/mocks/orders';
+import { useSecondaryPage } from '@/hooks';
 
 import OrderCard from './order-card';
 
@@ -11,6 +13,15 @@ const meta = {
   component: OrderCard,
   parameters: {
     layout: 'fullscreen',
+  },
+  decorators: (Story, ctx) => {
+    useSecondaryPage();
+
+    return (
+      <LayoutCenteredOnScreen>
+        <Story {...ctx} />
+      </LayoutCenteredOnScreen>
+    );
   },
 } satisfies Meta<StoryProps>;
 
