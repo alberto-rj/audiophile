@@ -1,34 +1,28 @@
 import { useGetOrdersQuery } from '@/app/services/orders-api';
-import { ErrorMessage, GoBack } from '@/components/widgets';
 import { Spinner } from '@/components/ui';
+import { ErrorMessage, GoBack } from '@/components/widgets';
 import { useSecondaryPage } from '@/hooks';
 import { cn } from '@/libs/cn';
 
 import OrderList from './order-list';
 
-const OrdersPage = () => {
-  useSecondaryPage();
-
+const OrdersPageQuery = () => {
   const { isLoading, isError, data, refetch } = useGetOrdersQuery();
 
   if (isLoading) {
-    return (
-      <Spinner
-        aria-label='Loading orders...'
-        className={cn('mx-auto')}
-      />
-    );
+    return <Spinner />;
   }
 
   if (isError) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
-          Failed to load orders.
+          We couldn't load your orders. Please try again.
         </ErrorMessage.Description>
+
         <ErrorMessage.Retry
           onClick={refetch}
-          aria-label='Try again - reload orders'
+          aria-label='Try again loading orders'
         >
           Try again
         </ErrorMessage.Retry>
@@ -36,7 +30,11 @@ const OrdersPage = () => {
     );
   }
 
-  const orders = data!.orders;
+  return <OrderList orders={data!.orders} />;
+};
+
+const OrdersPage = () => {
+  useSecondaryPage();
 
   return (
     <>
@@ -68,7 +66,7 @@ const OrdersPage = () => {
         >
           My Orders
         </h1>
-        <OrderList orders={orders} />
+        <OrdersPageQuery />
       </div>
     </>
   );
