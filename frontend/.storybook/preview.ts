@@ -2,7 +2,11 @@ import type { Preview } from '@storybook/react-vite';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 
 import { handlers } from '@/mocks/handlers';
-import { RouterDecorator, StoreDecorator } from '@/config/storybook';
+import {
+  RouterDecorator,
+  StoreDecorator,
+  ToastDecorator,
+} from '@/config/storybook';
 
 import '@/styles/global.css';
 
@@ -28,7 +32,7 @@ const preview: Preview = {
       test: 'todo',
     },
   },
-  decorators: [StoreDecorator, RouterDecorator],
+  decorators: [StoreDecorator, RouterDecorator, ToastDecorator],
 };
 
 export default preview;

@@ -5,8 +5,6 @@ import { Button } from '@/components/ui';
 import { useToast } from '@/hooks';
 import { cn } from '@/libs/cn';
 
-import { ToastProvider } from './toast-provider';
-import { ToastRenderer } from './toast-renderer';
 import type { ToastVariant } from './toast-context';
 
 interface ToastDemoProps {
@@ -65,14 +63,6 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
-  },
-  decorators: (Story) => {
-    return (
-      <ToastProvider>
-        <Story />
-        <ToastRenderer />
-      </ToastProvider>
-    );
   },
   args: {
     title: 'Notification title',

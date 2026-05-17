@@ -2,11 +2,11 @@ import { useId, useState } from 'react';
 
 import { Button, Card, Spinner } from '@/components/ui';
 import { GoBack } from '@/components/widgets';
-import { cn } from '@/libs/cn';
 import { useSecondaryPage } from '@/hooks';
+import { cn } from '@/libs/cn';
 
 import { CheckoutForm } from './checkout-form';
-import { CartSummary } from './cart-summary';
+import { CartSummaryQuery } from './cart-summary';
 
 const CheckoutPage = () => {
   useSecondaryPage();
@@ -77,7 +77,7 @@ const CheckoutPage = () => {
               'gap-8',
             )}
           >
-            <CartSummary />
+            <CartSummaryQuery />
             <Button
               type='submit'
               form={formId}
@@ -88,9 +88,9 @@ const CheckoutPage = () => {
               {isSubmitting ? (
                 <>
                   <Spinner
-                    variant='secondary'
+                    variant='primary'
                     size='sm'
-                  />{' '}
+                  />
                   Submitting...
                 </>
               ) : (

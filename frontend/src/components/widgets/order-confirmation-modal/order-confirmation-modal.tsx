@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 
 import { OrderConfirmation } from '@/assets/icons';
 import { Button, Modal } from '@/components/ui';
-import { ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
-import { cart } from '@/libs/mocks/cart';
+import type { Order, OrderItem } from '@/libs/types';
 
-const CartItemListing = () => {
-  const items = cart.items;
+interface CartItemListingProps {
+  items: OrderItem[];
+}
 
+const CartItemListing = ({ items }: CartItemListingProps) => {
   return (
     <ul
       role='list'
@@ -30,9 +31,9 @@ const CartItemListing = () => {
           className={cn('flex', 'justify-between', 'items-start', 'gap-4')}
         >
           <div className={cn('flex', 'items-center', 'gap-4')}>
-            <ResponsiveImage
+            <img
               alt={name}
-              image={image}
+              src={image}
               width={50}
               height={50}
               loading='lazy'
@@ -70,7 +71,6 @@ const CartItemListing = () => {
                   'text-xs',
                   'truncate',
 
-                  'text-black/50',
                   'font-bold',
                 )}
               >
@@ -94,8 +94,12 @@ const CartItemListing = () => {
   );
 };
 
-const CartItemCard = () => {
-  const grandTotal = cart.grandTotal;
+interface CartItemCardProps {
+  order: Order;
+}
+
+const CartItemCard = ({ order }: CartItemCardProps) => {
+  const { grandTotal, items } = order;
 
   return (
     <div className={cn('flex', 'flex-col', 'md:flex-row')}>
@@ -112,7 +116,7 @@ const CartItemCard = () => {
           'bg-gray-400',
         )}
       >
-        <CartItemListing />
+        <CartItemListing items={items!} />
       </div>
       <div
         className={cn(
@@ -130,7 +134,7 @@ const CartItemCard = () => {
         )}
       >
         <dl className={cn('flex', 'flex-col', 'gap-2')}>
-          <dt className={cn('text-white/50', 'uppercase')}>Grand Total</dt>
+          <dt className={cn('text-white/75', 'uppercase')}>Grand Total</dt>
           <dd
             className={cn(
               'text-md',
@@ -150,9 +154,14 @@ const CartItemCard = () => {
   );
 };
 
-type OrderConfirmationModalProps = ComponentProps<typeof Modal>;
+interface OrderConfirmationModalProps extends ComponentProps<typeof Modal> {
+  order: Order;
+}
 
-const OrderConfirmationModal = ({ ...props }: OrderConfirmationModalProps) => {
+const OrderConfirmationModal = ({
+  order,
+  ...props
+}: OrderConfirmationModalProps) => {
   const headingId = useId();
 
   return (
@@ -209,7 +218,7 @@ const OrderConfirmationModal = ({ ...props }: OrderConfirmationModalProps) => {
             </Modal.Description>
           </div>
 
-          <CartItemCard />
+          <CartItemCard order={order} />
 
           <Modal.Close asChild>
             <Button
