@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import type { AppDispatch } from '@/app/store';
-import { useRegisterMutation } from '@/app/services/auth-api';
 import { setCredentials } from '@/app/features/auth';
+import { useRegisterMutation } from '@/app/services/auth-api';
+import type { AppDispatch } from '@/app/store';
 import { Button, Input, Label, Spinner } from '@/components/ui';
 import {
   FormField,
@@ -12,7 +12,7 @@ import {
   StatusVisuallyHidden,
 } from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
-import { useRegisterForm } from '@/hooks';
+import { useRegisterForm, useToast } from '@/hooks';
 import type { RegisterFormData } from '@/libs/schemas';
 import type { ApiError } from '@/libs/types';
 
@@ -29,6 +29,8 @@ export const RegisterForm = () => {
     reset,
     formState: { errors },
   } = useRegisterForm();
+
+  const toast = useToast();
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
@@ -49,9 +51,13 @@ export const RegisterForm = () => {
 
       if (apiError.status === 409) {
         setError('email', { message: 'This email is already in use.' });
+        return;
       }
 
-      console.error('Registration failed:', error);
+      toast.error({
+        title: 'Sign up failed',
+        description: 'Something went wrong. Please try again.',
+      });
     }
   };
 

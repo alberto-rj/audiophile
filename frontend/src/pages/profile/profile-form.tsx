@@ -1,9 +1,10 @@
 import { useUpdateProfileMutation } from '@/app/services/users-api';
 import { Button, Input, Label, Spinner } from '@/components/ui';
 import { FormField, FormFieldAlert, FormFieldFlow } from '@/components/widgets';
-import { useProfileForm, useSecondaryPage } from '@/hooks';
+import { useProfileForm, useSecondaryPage, useToast } from '@/hooks';
 import type { ProfileFormData } from '@/libs/schemas';
 import { cn } from '@/libs/cn';
+import type { ApiError } from '@/libs/types';
 
 const ProfileForm = () => {
   useSecondaryPage();
@@ -13,9 +14,12 @@ const ProfileForm = () => {
   const {
     register,
     handleSubmit,
+    setError,
     reset,
     formState: { errors },
   } = useProfileForm();
+
+  const toast = useToast();
 
   const onSubmit = async (data: ProfileFormData) => {
     try {
@@ -25,8 +29,19 @@ const ProfileForm = () => {
 
       reset({ name, email });
     } catch (error) {
-      alert('Failed to upload your profile.');
-      console.error(error);
+      const apiError = error as ApiError;
+
+      if (apiError.status === 409) {
+        setError('email', {
+          message: 'This email is already in use.',
+        });
+        return;
+      }
+
+      toast.error({
+        title: 'Profile update failed',
+        description: 'Something went wrong. Please try again.',
+      });
     }
   };
 
