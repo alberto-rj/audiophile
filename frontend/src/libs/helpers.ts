@@ -39,18 +39,6 @@ export function toStatusText(status: OrderStatus) {
   return statusTextMap[status];
 }
 
-export function toStatusColor(status: OrderStatus): string {
-  const statusColorMap: Record<OrderStatus, string> = {
-    delivered: 'var(--order-delivered)',
-    pending: 'var(--order-pending)',
-    shipped: 'var(--order-shipped)',
-    cancelled: 'var(--order-cancelled)',
-    processing: 'var(--order-processing)',
-  };
-
-  return statusColorMap[status];
-}
-
 export function toTimeAgo(time: string) {
   return new Intl.DateTimeFormat('en-US', {
     dateStyle: 'short',
