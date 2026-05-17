@@ -18,7 +18,6 @@ const Card = ({ asChild, className, children }: CardProps) => {
         'inline-full',
         'rounded-lg',
         'overflow-hidden',
-        'p-6',
 
         'bg-white',
         'shadow-sm',
