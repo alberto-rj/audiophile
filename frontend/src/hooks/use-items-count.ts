@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { selectIsAuthenticated } from '@/app/features/auth';
 import { useGetCartQuery } from '@/app/services/cart-api';
-import { getCartItemsCount } from '@/libs/helpers';
+import { getItemsCount } from '@/libs/helpers';
 
 export const useItemsCount = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -13,5 +13,5 @@ export const useItemsCount = () => {
     return 0;
   }
 
-  return getCartItemsCount(data?.cart.items ?? []);
+  return getItemsCount(data?.cart.items ?? []);
 };

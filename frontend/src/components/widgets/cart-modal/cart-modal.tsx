@@ -19,7 +19,7 @@ import {
 import { APP_ROUTES } from '@/config/app-routes';
 import { useToast } from '@/hooks';
 import { cn } from '@/libs/cn';
-import { getCartItemsCount, toMoney } from '@/libs/helpers';
+import { getItemsCount, toMoney } from '@/libs/helpers';
 import type { Cart, CartItem } from '@/libs/types';
 
 interface BaseCartModalProps {
@@ -236,7 +236,7 @@ const CartModalFilled = ({ cart }: CartModalFilledProps) => {
   };
 
   const { subtotal, items } = cart;
-  const itemsCount = getCartItemsCount(items);
+  const itemsCount = getItemsCount(items);
 
   if (itemsCount === 0) {
     return (
