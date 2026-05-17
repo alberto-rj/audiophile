@@ -1,10 +1,11 @@
+import { useId } from 'react';
+
 import { useGetCategoriesQuery } from '@/app/services/categories-api';
 import { ErrorMessage } from '@/components/widgets';
-
-import { CategoryList } from './category-list';
-import { CategoryListSkeleton } from './category-list-skeleton';
-import { useId } from 'react';
 import { cn } from '@/libs/cn';
+
+import { CategoryListSkeleton } from './category-list-skeleton';
+import { CategoryList } from './category-list';
 
 const CategoryListing = () => {
   const headingId = useId();
@@ -31,11 +32,12 @@ const CategoryListing = () => {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
-          Failed to load categories.
+          We couldn't load categories. Please try again.
         </ErrorMessage.Description>
+
         <ErrorMessage.Retry
           onClick={refetch}
-          aria-label='Try again - reload categories'
+          aria-label='Try again loading categories'
         >
           Try again
         </ErrorMessage.Retry>
