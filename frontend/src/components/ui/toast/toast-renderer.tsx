@@ -40,7 +40,9 @@ export const ToastRenderer = () => {
                 'inline-full',
               )}
             >
-              <Toast.Title>{toast.title}</Toast.Title>
+              <Toast.Title asChild>
+                <h2>{toast.title}</h2>
+              </Toast.Title>
               {toast.description && (
                 <Toast.Description className={cn('inline-full')}>
                   {toast.description}
