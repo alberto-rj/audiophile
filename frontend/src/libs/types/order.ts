@@ -47,11 +47,6 @@ export interface CreateOrderPayload {
   city: string;
   country: string;
   paymentMethod: PaymentMethod;
-  subtotal: number;
-  shipping: number;
-  vat: number;
-  grandTotal: number;
-  items: OrderItem[];
 }
 
 export interface OrderResponse {

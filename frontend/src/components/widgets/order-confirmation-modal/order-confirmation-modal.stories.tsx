@@ -1,19 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { fn } from 'storybook/test';
 
-import { addItem } from '@/app/features/cart';
-import type { AppDispatch } from '@/app/store';
-import { OrderConfirmationModal } from '@/components/widgets';
 import { Button } from '@/components/ui';
+import { OrderConfirmationModal } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import { cartItems } from '@/libs/mocks/cart-items';
-import type { CartItem } from '@/libs/types';
+import { orders } from '@/libs/mocks';
 
-type StoryProps = React.ComponentProps<typeof OrderConfirmationModal> & {
-  items: CartItem[];
-};
+type StoryProps = React.ComponentProps<typeof OrderConfirmationModal>;
 
 const meta = {
   title: 'widgets/OrderConfirmationModal',
@@ -25,12 +19,8 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: ({ items, open, ...orderConfirmationModalProps }) => {
+  render: ({ open, ...orderConfirmationModalProps }) => {
     const [openModal, setOpenModal] = useState<boolean>(open === true);
-
-    const dispatch = useDispatch<AppDispatch>();
-
-    items.forEach((item) => dispatch(addItem(item)));
 
     const handleOpenChange = (open: boolean) => {
       setOpenModal(open);
@@ -61,20 +51,32 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const order = orders[0];
+const orderItems = order.items!;
+
 export const Default: Story = {
   args: {
-    items: [...cartItems].splice(0, 3),
+    order: {
+      ...order,
+      items: [...orderItems].splice(0, 3),
+    },
   },
 };
 
 export const WithMultipleItems: Story = {
   args: {
-    items: [...cartItems],
+    order: {
+      ...order,
+      items: [...orderItems],
+    },
   },
 };
 
 export const WithSingleItem: Story = {
   args: {
-    items: [...cartItems].splice(0, 1),
+    order: {
+      ...order,
+      items: [...orderItems].splice(0, 1),
+    },
   },
 };

@@ -1,17 +1,8 @@
 import { useEffect, useState, type ComponentProps } from 'react';
 import { Controller } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { selectUser } from '@/app/features/auth';
-import {
-  clearCart,
-  selectGrandTotal,
-  selectItems,
-  selectShipping,
-  selectSubtotal,
-  selectVAT,
-} from '@/app/features/cart';
-import type { AppDispatch } from '@/app/store';
 import { useCreateOrderMutation } from '@/app/services/orders-api';
 import { CashOnDelivery } from '@/assets/icons';
 import { Input, Label, Radio } from '@/components/ui';
@@ -26,10 +17,10 @@ import {
   FormSubgroupTitle,
   OrderConfirmationModal,
 } from '@/components/widgets';
-import { useCheckoutForm } from '@/hooks';
+import { useCheckoutForm, useToast } from '@/hooks';
 import { cn } from '@/libs/cn';
 import type { CheckoutFormData } from '@/libs/schemas';
-import type { OrderItem } from '@/libs/types';
+import type { Order } from '@/libs/types';
 
 interface CheckoutFormProps extends ComponentProps<'form'> {
   id: string;
@@ -43,17 +34,12 @@ export const CheckoutForm = ({
   onSubmittingChange,
   ...formProps
 }: CheckoutFormProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const cartItems = useSelector(selectItems);
-  const grandTotal = useSelector(selectGrandTotal);
-  const subtotal = useSelector(selectSubtotal);
-  const shipping = useSelector(selectShipping);
-  const vat = useSelector(selectVAT);
   const user = useSelector(selectUser);
 
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [createdOrder, setCreatedOrder] = useState<Order | null>(null);
 
   const {
     register,
@@ -72,52 +58,44 @@ export const CheckoutForm = ({
     onValidChange?.(isValid);
   }, [isValid, onValidChange]);
 
+  const toast = useToast();
+
   const paymentMethod = watch('paymentMethod');
 
   const onSubmit = async (data: CheckoutFormData) => {
     try {
-      const userId = user?.id || -1;
-      const orderItems: OrderItem[] = cartItems.map((item) => ({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.image.desktop,
-        orderId: -1,
-        productId: -1,
-      }));
+      const userId = user!.id;
 
-      await createOrder({
+      const response = await createOrder({
         ...data,
         userId,
-        items: orderItems,
-        vat,
-        shipping,
-        subtotal,
-        grandTotal,
       }).unwrap();
 
       reset();
+
+      setCreatedOrder(response.order);
       setIsModalOpen(true);
-    } catch (error) {
-      console.error('Order failed:', error);
+    } catch {
+      toast.error({
+        title: 'Unable to place order',
+        description: 'Something interrupted the checkout process. Try again.',
+      });
     }
   };
 
   const handleOpenChange = (open: boolean) => {
     setIsModalOpen(open);
-
-    if (!open) {
-      dispatch(clearCart());
-    }
   };
 
   return (
     <>
-      <OrderConfirmationModal
-        open={isModalOpen}
-        onOpenChange={handleOpenChange}
-      />
+      {createdOrder && (
+        <OrderConfirmationModal
+          open={isModalOpen}
+          onOpenChange={handleOpenChange}
+          order={createdOrder}
+        />
+      )}
       <form
         {...formProps}
         id={id}
@@ -136,7 +114,6 @@ export const CheckoutForm = ({
                   Name
                 </Label>
                 <Input
-                  type='text'
                   id='name'
                   autoComplete='cc-name'
                   placeholder='John Doe'
@@ -185,7 +162,6 @@ export const CheckoutForm = ({
                   Phone Number
                 </Label>
                 <Input
-                  type='text'
                   id='phone'
                   autoComplete='tel'
                   placeholder='+1 202-55-0136'
@@ -214,7 +190,6 @@ export const CheckoutForm = ({
                   Address
                 </Label>
                 <Input
-                  type='text'
                   id='address'
                   autoCapitalize='address-line1'
                   placeholder='1137 Williams Avenue'
@@ -238,7 +213,6 @@ export const CheckoutForm = ({
                   Zip Code
                 </Label>
                 <Input
-                  type='text'
                   id='zip'
                   autoComplete='postal-code'
                   placeholder='10001'
@@ -262,7 +236,6 @@ export const CheckoutForm = ({
                   City
                 </Label>
                 <Input
-                  type='text'
                   id='city'
                   placeholder='New York'
                   autoComplete='address-level2'
@@ -286,7 +259,6 @@ export const CheckoutForm = ({
                   Country
                 </Label>
                 <Input
-                  type='text'
                   id='country'
                   placeholder='United States'
                   autoComplete='country-name'
@@ -394,7 +366,6 @@ export const CheckoutForm = ({
                       e-Money Number
                     </Label>
                     <Input
-                      type='text'
                       id='eMoneyNumber'
                       autoComplete='cc-number'
                       placeholder='238521993'
@@ -420,7 +391,6 @@ export const CheckoutForm = ({
                       e-Money PIN
                     </Label>
                     <Input
-                      type='text'
                       id='eMoneyPin'
                       autoComplete='cc-csc'
                       placeholder='6891'

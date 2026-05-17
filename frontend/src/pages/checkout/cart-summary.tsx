@@ -1,23 +1,25 @@
 import { useId } from 'react';
 
+import { useGetCartQuery } from '@/app/services/cart-api';
+import { Spinner } from '@/components/ui';
+import { ErrorMessage, ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
-import { cart } from '@/libs/mocks';
-import { ResponsiveImage } from '@/components/widgets';
+import type { Cart } from '@/libs/types';
 
-export const CartSummary = () => {
+interface CartSummaryProps {
+  cart: Cart;
+}
+
+export const CartSummary = ({ cart }: CartSummaryProps) => {
   const summaryHeadingId = useId();
 
-  const cartItems = cart.items;
-  const subtotal = cart.subtotal;
-  const shipping = cart.shipping;
-  const VAT = cart.vat;
-  const grandTotal = cart.grandTotal;
+  const { items, subtotal, shipping, vat, grandTotal } = cart;
 
   const cartSummary = [
     { name: 'Subtotal', value: subtotal, isHighlighted: false },
     { name: 'Shipping', value: shipping, isHighlighted: false },
-    { name: 'VAT (Included)', value: VAT, isHighlighted: false },
+    { name: 'VAT (Included)', value: vat, isHighlighted: false },
     { name: 'Grand Total', value: grandTotal, isHighlighted: true },
   ];
 
@@ -25,12 +27,7 @@ export const CartSummary = () => {
     <section aria-labelledby={summaryHeadingId}>
       <h2
         id={summaryHeadingId}
-        className={cn(
-          'text-md',
-
-          'text-black',
-          'uppercase',
-        )}
+        className={cn('h6')}
       >
         Summary
       </h2>
@@ -47,7 +44,7 @@ export const CartSummary = () => {
           'overflow-auto',
         )}
       >
-        {cartItems.map(({ id, image, name, price, quantity }) => (
+        {items.map(({ id, image, name, price, quantity }) => (
           <li
             key={id}
             className={cn('flex', 'justify-between', 'items-start', 'gap-8')}
@@ -85,15 +82,7 @@ export const CartSummary = () => {
                 >
                   {name}
                 </span>
-                <span
-                  className={cn(
-                    'uppercase',
-                    'text-xs',
-                    'truncate',
-
-                    'font-bold',
-                  )}
-                >
+                <span className={cn('uppercase', 'text-xs', 'truncate')}>
                   {toMoney(price)}
                 </span>
               </div>
@@ -143,4 +132,31 @@ export const CartSummary = () => {
       </dl>
     </section>
   );
+};
+
+export const CartSummaryQuery = () => {
+  const { isLoading, isError, refetch, data } = useGetCartQuery();
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return (
+      <ErrorMessage>
+        <ErrorMessage.Description>
+          We could not load your cart. Please try again.
+        </ErrorMessage.Description>
+
+        <ErrorMessage.Retry
+          onClick={refetch}
+          aria-label='Try again loading cart'
+        >
+          Try again
+        </ErrorMessage.Retry>
+      </ErrorMessage>
+    );
+  }
+
+  return <CartSummary cart={data!.cart} />;
 };
