@@ -1,7 +1,12 @@
-import { delay, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import { products } from '@/libs/mocks/products';
-import type { Product } from '@/libs/types';
+import type {
+  Product,
+  ProductListResponse,
+  ProductResponse,
+} from '@/libs/types';
+import { withDelay } from '../middlewares/with-delay';
 
 function sortProductsByNewFirst(products: Product[]) {
   return [...products].sort((a, b) => {
@@ -17,25 +22,36 @@ function sortProductsByNewFirst(products: Product[]) {
   });
 }
 
-export const productHandlers = [
-  http.get<never, never, Product[]>('/api/products', async () => {
-    await delay(6 * 1000);
+export const getProductBySlug = http.get(
+  '/api/products/:slug',
+  withDelay(async ({ params }) => {
+    const { slug } = params as { slug?: string };
 
-    return HttpResponse.json(sortProductsByNewFirst(products));
+    const foundProduct = products.find(
+      (p) => p.slug.toLowerCase() === slug?.toLowerCase(),
+    );
+
+    if (!foundProduct) {
+      return new HttpResponse(undefined, { status: 404 });
+    }
+
+    const response: ProductResponse = {
+      product: foundProduct,
+    };
+
+    return HttpResponse.json(response);
   }),
+);
 
-  http.get<{ slug: string }, never, Product>(
-    '/api/products/:slug',
-    async ({ params }) => {
-      await delay(6 * 1000);
+export const getProducts = http.get(
+  '/api/products',
+  withDelay(async () => {
+    const response: ProductListResponse = {
+      products: sortProductsByNewFirst(products),
+    };
 
-      const product = products.find((p) => p.slug === params.slug);
+    return HttpResponse.json(response);
+  }),
+);
 
-      if (!product) {
-        return new HttpResponse(null, { status: 404 });
-      }
-
-      return HttpResponse.json(product);
-    },
-  ),
-];
+export const productHandlers = [getProducts, getProductBySlug];

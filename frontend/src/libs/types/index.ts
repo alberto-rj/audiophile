@@ -5,6 +5,8 @@ export type {
   GalleryImages,
   ItemInclude,
   Product,
+  ProductListResponse,
+  ProductResponse,
 } from './product';
 
 export type {

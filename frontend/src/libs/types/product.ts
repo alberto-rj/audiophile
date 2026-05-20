@@ -29,3 +29,11 @@ export interface Product extends BasicProduct {
   gallery: GalleryImages;
   others: BasicProduct[];
 }
+
+export interface ProductResponse {
+  product: Product;
+}
+
+export interface ProductListResponse {
+  products: Product[];
+}

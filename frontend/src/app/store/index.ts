@@ -10,7 +10,7 @@ import { authApi } from '@/app/services/auth-api';
 import { cartApi } from '@/app/services/cart-api';
 import { categoryApi } from '@/app/services/categories-api';
 import { ordersApi } from '@/app/services/orders-api';
-import { productApi } from '@/app/services/products-api';
+import { productsApi } from '@/app/services/products-api';
 import { usersApi } from '@/app/services/users-api';
 
 export const store = configureStore({
@@ -18,7 +18,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
-    [productApi.reducerPath]: productApi.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
     cart: cartReducer,
@@ -29,7 +29,7 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(usersApi.middleware)
       .concat(categoryApi.middleware)
-      .concat(productApi.middleware)
+      .concat(productsApi.middleware)
       .concat(cartApi.middleware)
       .concat(ordersApi.middleware);
   },

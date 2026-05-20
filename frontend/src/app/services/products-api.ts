@@ -1,19 +1,19 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { API_ENDPOINTS } from '@/config/api-endpoints';
-import type { Product } from '@/libs/types';
+import type { ProductListResponse, ProductResponse } from '@/libs/types';
 
 import { baseQuery } from './base-query';
 
-export const productApi = createApi({
+export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: baseQuery,
   endpoints: (builder) => ({
-    getProducts: builder.query<Product[], void>({
+    getProducts: builder.query<ProductListResponse, void>({
       query: () => API_ENDPOINTS.products,
     }),
 
-    getProductBySlug: builder.query<Product, string>({
+    getProductBySlug: builder.query<ProductResponse, string>({
       query: (slug) => `${API_ENDPOINTS.products}/${slug}`,
     }),
   }),
@@ -24,4 +24,4 @@ export const {
   useGetProductBySlugQuery,
   useLazyGetProductBySlugQuery,
   useLazyGetProductsQuery,
-} = productApi;
+} = productsApi;
