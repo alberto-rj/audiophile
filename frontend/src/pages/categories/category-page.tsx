@@ -6,15 +6,16 @@ import {
   CategoryListing,
   CategoryListSkeleton,
   ErrorMessage,
-  Header,
-  HeaderSkeleton,
   ProductList,
   ProductListSkeleton,
 } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 
+import { HeaderSkeleton } from './header/header-skeleton';
+import { Header } from './header/header';
+
 const CategoryPage = () => {
-  const slug = useParams()?.slug;
+  const { slug } = useParams() as { slug?: string };
 
   const { isLoading, isError, refetch, data } =
     useGetProductsByCategorySlugQuery(slug!, { skip: !slug });

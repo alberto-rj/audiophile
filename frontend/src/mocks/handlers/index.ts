@@ -13,3 +13,5 @@ export const handlers = [
   ...productHandlers,
   ...userHandlers,
 ];
+
+export { getCategoryProducts, getCategories } from './category.handlers';
