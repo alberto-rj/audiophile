@@ -4,7 +4,7 @@ export function withDelay(
   resolver: HttpResponseResolver,
 ): HttpResponseResolver {
   return async (info) => {
-    await delay(6 * 1000);
+    await delay(500);
 
     return resolver(info);
   };
