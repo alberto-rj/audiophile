@@ -175,10 +175,11 @@ export const RegisterForm = () => {
             )}
           </FormField>
           <Button
+            data-testid='signUp'
             type='submit'
             variant='primary'
-            disabled={isLoading}
-            aria-busy={isLoading}
+            disabled={isLoading ?? undefined}
+            aria-busy={isLoading ?? undefined}
           >
             {isLoading ? (
               <>

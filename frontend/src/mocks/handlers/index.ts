@@ -39,21 +39,28 @@ export const makeNotFoundHandler = (endpoint: string) => {
 };
 
 export {
+  makeLoginHandler,
+  makeLogoutHandler,
+  makeRefreshHandler,
+  makeRegisterHandler,
+} from './auth.handlers';
+
+export { makeGetCartHandler } from './cart.handlers';
+
+export {
   getCategoryProducts,
   getCategories,
   makeGetCategoriesHandler,
   makeGetCategoryProductsHandler,
 } from './category.handlers';
 
-export { getProductBySlug, getProducts } from './product.handlers';
-
-export { makeGetCartHandler } from './cart.handlers';
-
 export {
   makeCreateOrderHandler,
   makeGetOrdersHandler,
   makeGetOrderHandler,
 } from './order.handlers';
+
+export { getProductBySlug, getProducts } from './product.handlers';
 
 export const handlers = [
   ...authHandlers,

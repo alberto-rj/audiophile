@@ -98,9 +98,11 @@ export const makeCreateOrderHandler = (
 ) => {
   const { type = 'default' } = options;
 
+  const endpoint = '/api/orders';
+
   if (type === 'error') {
     return http.post(
-      '/api/orders',
+      endpoint,
 
       withDelay(
         withAuth(async () => {
@@ -112,10 +114,9 @@ export const makeCreateOrderHandler = (
 
   if (type === 'infinite') {
     return http.post(
-      '/api/orders',
-
-      withInfiniteDelay(
-        withAuth(async () => {
+      endpoint,
+      withAuth(
+        withInfiniteDelay(async () => {
           return HttpResponse.json(undefined, { status: 201 });
         }),
       ),
@@ -123,7 +124,7 @@ export const makeCreateOrderHandler = (
   }
 
   return http.post(
-    '/api/orders',
+    endpoint,
 
     withDelay(
       withAuth(async ({ request }) => {

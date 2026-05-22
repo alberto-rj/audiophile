@@ -128,8 +128,8 @@ export const LoginForm = () => {
             data-testid='signIn'
             type='submit'
             variant='primary'
-            disabled={isLoading}
-            aria-busy={isLoading}
+            disabled={isLoading ?? undefined}
+            aria-busy={isLoading ?? undefined}
           >
             {isLoading ? (
               <>

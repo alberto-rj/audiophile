@@ -12,7 +12,7 @@ import {
   mockUsers,
 } from '../auth-store';
 import { withAuth } from '../middlewares/with-auth';
-import { withDelay } from '../middlewares/with-delay';
+import { withDelay, withInfiniteDelay } from '../middlewares/with-delay';
 
 const REFRESH_TOKEN_COOKIE = 'refreshToken';
 
@@ -40,9 +40,36 @@ function setRefreshCookie(httpResponse: Response, token: string): Response {
   return httpResponse;
 }
 
-export const authHandlers = [
-  http.post(
-    '/api/auth/register',
+export function makeRegisterHandler(
+  options: {
+    type?: 'error' | 'infinite' | 'default';
+  } = {},
+) {
+  const { type = 'default' } = options;
+
+  const endpoint = '/api/auth/register';
+
+  if (type === 'infinite') {
+    return http.post(
+      endpoint,
+      withInfiniteDelay(async () => {
+        return HttpResponse.json(undefined, { status: 201 });
+      }),
+    );
+  }
+
+  if (type === 'error') {
+    return http.post(
+      endpoint,
+      withDelay(async () => {
+        return HttpResponse.json(undefined, { status: 500 });
+      }),
+    );
+  }
+
+  return http.post(
+    endpoint,
+
     withDelay(async ({ request }) => {
       const { name, email, password } =
         (await request.json()) as RegisterPayload;
@@ -70,10 +97,38 @@ export const authHandlers = [
 
       return setRefreshCookie(httpResponse, refreshToken);
     }),
-  ),
+  );
+}
 
-  http.post(
-    '/api/auth/login',
+export function makeLoginHandler(
+  options: {
+    type?: 'error' | 'infinite' | 'default';
+  } = {},
+) {
+  const { type = 'default' } = options;
+
+  const endpoint = '/api/auth/login';
+
+  if (type === 'infinite') {
+    return http.post(
+      endpoint,
+      withInfiniteDelay(async () => {
+        return HttpResponse.json(undefined, { status: 200 });
+      }),
+    );
+  }
+
+  if (type === 'error') {
+    return http.post(
+      endpoint,
+      withDelay(async () => {
+        return HttpResponse.json(undefined, { status: 500 });
+      }),
+    );
+  }
+
+  return http.post(
+    endpoint,
     withDelay(async ({ request }) => {
       const { email, password } = (await request.json()) as LoginPayload;
 
@@ -91,10 +146,38 @@ export const authHandlers = [
 
       return setRefreshCookie(httpResponse, refreshToken);
     }),
-  ),
+  );
+}
 
-  http.post(
-    '/api/auth/logout',
+export function makeLogoutHandler(
+  options: {
+    type?: 'error' | 'infinite' | 'default';
+  } = {},
+) {
+  const { type = 'default' } = options;
+
+  const endpoint = '/api/auth/logout';
+
+  if (type === 'infinite') {
+    return http.post(
+      endpoint,
+      withInfiniteDelay(async () => {
+        return HttpResponse.json(undefined, { status: 204 });
+      }),
+    );
+  }
+
+  if (type === 'error') {
+    return http.post(
+      endpoint,
+      withDelay(async () => {
+        return HttpResponse.json(undefined, { status: 500 });
+      }),
+    );
+  }
+
+  return http.post(
+    endpoint,
     withDelay(
       withAuth(async ({ request }) => {
         const authHeader = request.headers.get('Authorization');
@@ -124,10 +207,38 @@ export const authHandlers = [
         return httpResponse;
       }),
     ),
-  ),
+  );
+}
 
-  http.post(
-    '/api/auth/refresh',
+export function makeRefreshHandler(
+  options: {
+    type?: 'error' | 'infinite' | 'default';
+  } = {},
+) {
+  const { type = 'default' } = options;
+
+  const endpoint = '/api/auth/refresh';
+
+  if (type === 'infinite') {
+    return http.post(
+      endpoint,
+      withInfiniteDelay(async () => {
+        return HttpResponse.json(undefined, { status: 204 });
+      }),
+    );
+  }
+
+  if (type === 'error') {
+    return http.post(
+      endpoint,
+      withDelay(async () => {
+        return HttpResponse.json(undefined, { status: 500 });
+      }),
+    );
+  }
+
+  return http.post(
+    endpoint,
     withDelay(async ({ request }) => {
       const cookieHeader = request.headers.get('Cookie') ?? '';
 
@@ -154,5 +265,12 @@ export const authHandlers = [
       const httpResponse = HttpResponse.json(response);
       return setRefreshCookie(httpResponse, newRefreshToken);
     }),
-  ),
+  );
+}
+
+export const authHandlers = [
+  makeRefreshHandler(),
+  makeRegisterHandler(),
+  makeLoginHandler(),
+  makeLogoutHandler(),
 ];
