@@ -121,10 +121,16 @@ export const makeCreateOrderHandler = (
       withAuth(async ({ request }) => {
         const payload = (await request.json()) as CreateOrderPayload;
 
+        const orderId = orders.length + 1;
         const createdOrder: Order = {
           ...payload,
-          id: orders.length + 1,
+          id: orderId,
           status: 'pending',
+          items: cart.items.map((item) => ({
+            ...item,
+            orderId,
+            image: item.image.mobile,
+          })),
           vat: getVAT(cart.items),
           shipping: getShipping(),
           subtotal: getSubtotal(cart.items),
