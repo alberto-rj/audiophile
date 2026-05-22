@@ -9,7 +9,7 @@ import OrderCard from './order-card';
 type StoryProps = React.ComponentProps<typeof OrderCard>;
 
 const meta = {
-  title: 'pages/OrdersPage/OrderCard',
+  title: 'pages/OrderDetailsPage/OrderCard',
   component: OrderCard,
   parameters: {
     layout: 'fullscreen',
