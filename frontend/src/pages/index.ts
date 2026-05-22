@@ -7,7 +7,9 @@ export const CategoryPage = lazy(
   () => import('@/pages/categories/category-page'),
 );
 
-export const ProductPage = lazy(() => import('@/pages/products/product-page'));
+export const ProductDetailsPage = lazy(
+  () => import('@/pages/products/product-details-page'),
+);
 
 export const CheckoutPage = lazy(
   () => import('@/pages/checkout/checkout-page'),

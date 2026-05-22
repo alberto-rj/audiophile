@@ -8,7 +8,7 @@ import InTheBoxSection from './in-the-box-section';
 type StoryProps = React.ComponentProps<typeof InTheBoxSection>;
 
 const meta = {
-  title: 'pages/ProductPage/InTheBoxSection',
+  title: 'pages/ProductDetailsPage/InTheBoxSection',
   component: InTheBoxSection,
   parameters: {
     layout: 'fullscreen',

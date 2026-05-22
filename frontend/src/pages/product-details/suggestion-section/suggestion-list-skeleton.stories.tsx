@@ -8,7 +8,7 @@ type StoryProps = React.ComponentProps<typeof SuggestionListSkeleton>;
 
 const meta = {
   title:
-    'pages/ProductPage/SuggestionSection/SuggestionList/SuggestionListSkeleton',
+    'pages/ProductDetailsPage/SuggestionSection/SuggestionList/SuggestionListSkeleton',
   component: SuggestionListSkeleton,
   parameters: {
     layout: 'fullscreen',

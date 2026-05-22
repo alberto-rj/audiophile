@@ -1,25 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { cn } from '@/libs/cn';
-import { products } from '@/libs/mocks';
 
-import SuggestionCard from './suggestion-card';
+import SuggestionCardSkeleton from './suggestion-card-skeleton';
 
-type StoryProps = React.ComponentProps<typeof SuggestionCard>;
+type StoryProps = React.ComponentProps<typeof SuggestionCardSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/SuggestionSection/SuggestionCard',
-  component: SuggestionCard,
+  title:
+    'pages/ProductDetailsPage/SuggestionSection/SuggestionCard/SuggestionCardSkeleton',
+  component: SuggestionCardSkeleton,
   parameters: {
     layout: 'fullscreen',
   },
-  args: {
-    product: products.find((p) => p.id === 6),
-  },
+
   render: (props) => {
     return (
       <div className={cn('region', 'wrapper')}>
-        <SuggestionCard {...props} />
+        <SuggestionCardSkeleton {...props} />
       </div>
     );
   },

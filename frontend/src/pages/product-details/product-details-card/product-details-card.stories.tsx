@@ -11,7 +11,7 @@ type StoryProps = React.ComponentProps<typeof ProductDetailsCard> & {
 };
 
 const meta = {
-  title: 'pages/ProductPage/ProductDetailsCard',
+  title: 'pages/ProductDetailsPage/ProductDetailsCard',
   component: ProductDetailsCard,
   parameters: {
     layout: 'fullscreen',

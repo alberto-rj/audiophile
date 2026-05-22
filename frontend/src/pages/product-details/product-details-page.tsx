@@ -132,7 +132,7 @@ const ProductDetailsQuery = () => {
   return <ProductDetails product={product} />;
 };
 
-const ProductPage = () => {
+const ProductDetailsPage = () => {
   return (
     <div>
       <GoBack>
@@ -147,4 +147,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default ProductDetailsPage;

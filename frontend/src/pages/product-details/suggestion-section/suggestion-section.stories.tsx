@@ -8,7 +8,7 @@ import SuggestionSection from './suggestion-section';
 type StoryProps = React.ComponentProps<typeof SuggestionSection>;
 
 const meta = {
-  title: 'pages/ProductPage/SuggestionSection',
+  title: 'pages/ProductDetailsPage/SuggestionSection',
   component: SuggestionSection,
   parameters: {
     layout: 'fullscreen',

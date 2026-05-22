@@ -7,7 +7,8 @@ import ProductDetailsCardSkeleton from './product-details-card-skeleton';
 type StoryProps = React.ComponentProps<typeof ProductDetailsCardSkeleton>;
 
 const meta = {
-  title: 'pages/ProductPage/ProductDetailsCard/ProductDetailsCardSkeleton',
+  title:
+    'pages/ProductDetailsPage/ProductDetailsCard/ProductDetailsCardSkeleton',
   component: ProductDetailsCardSkeleton,
   parameters: {
     layout: 'fullscreen',

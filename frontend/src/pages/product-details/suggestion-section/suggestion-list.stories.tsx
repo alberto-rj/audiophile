@@ -8,7 +8,7 @@ import SuggestionList from './suggestion-list';
 type StoryProps = React.ComponentProps<typeof SuggestionList>;
 
 const meta = {
-  title: 'pages/ProductPage/SuggestionSection/SuggestionList',
+  title: 'pages/ProductDetailsPage/SuggestionSection/SuggestionList',
   component: SuggestionList,
   parameters: {
     layout: 'fullscreen',

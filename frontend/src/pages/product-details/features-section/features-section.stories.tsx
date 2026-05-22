@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { galleryContent } from '@/libs/constants';
+import { featuresSectionContent } from '@/libs/constants';
 import { cn } from '@/libs/cn';
 
-import Gallery from './gallery';
+import FeaturesSection from './features-section';
 
-type StoryProps = React.ComponentProps<typeof Gallery>;
+type StoryProps = React.ComponentProps<typeof FeaturesSection>;
 
 const meta = {
-  title: 'pages/ProductPage/Gallery',
-  component: Gallery,
+  title: 'pages/ProductDetailsPage/FeaturesSection',
+  component: FeaturesSection,
   parameters: {
     layout: 'fullscreen',
   },
-  render: (galleryProps) => {
+  render: (featuresSectionProps) => {
     return (
       <div className={cn('region', 'wrapper')}>
-        <Gallery {...galleryProps} />
+        <FeaturesSection {...featuresSectionProps} />
       </div>
     );
   },
@@ -28,6 +28,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    content: galleryContent,
+    content: featuresSectionContent,
   },
 };

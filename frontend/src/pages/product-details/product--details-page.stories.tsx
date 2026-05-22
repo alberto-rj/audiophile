@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ProductPage } from '@/pages';
+import { ProductDetailsPage } from '@/pages';
 import { APP_ROUTES } from '@/config/app-routes';
 import {
   getCategories,
@@ -9,11 +9,11 @@ import {
   makeNotFoundHandler,
 } from '@/mocks/handlers';
 
-type StoryProps = React.ComponentProps<typeof ProductPage>;
+type StoryProps = React.ComponentProps<typeof ProductDetailsPage>;
 
 const meta = {
-  title: 'pages/ProductPage',
-  component: ProductPage,
+  title: 'pages/ProductDetailsPage',
+  component: ProductDetailsPage,
   parameters: {
     layout: 'fullscreen',
     routePath: `${APP_ROUTES.productDetails}`,
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 const endpoint = '/api/products/:slug';
 
-export const FetchingProduct: Story = {
+export const FetchingProductDetails: Story = {
   parameters: {
     msw: {
       handlers: [makeInfiniteHandler(endpoint), getCategories],
@@ -35,7 +35,7 @@ export const FetchingProduct: Story = {
   },
 };
 
-export const ProductNotFound: Story = {
+export const FailedToLoad: Story = {
   parameters: {
     msw: {
       handlers: [makeNotFoundHandler(endpoint), getCategories],

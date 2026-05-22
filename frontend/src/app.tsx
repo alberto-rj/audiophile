@@ -10,7 +10,7 @@ import {
   NotFoundPage,
   OrderDetailsPage,
   OrdersPage,
-  ProductPage,
+  ProductDetailsPage,
   ProfilePage,
   RegisterPage,
 } from '@/pages';
@@ -102,7 +102,7 @@ const App = () => {
             />
             <Route
               path={`${APP_ROUTES.products}/:slug`}
-              element={<ProductPage />}
+              element={<ProductDetailsPage />}
             />
             <Route
               path={APP_ROUTES.checkout}
