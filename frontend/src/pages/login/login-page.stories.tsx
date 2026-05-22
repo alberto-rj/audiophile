@@ -1,9 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 
 import { APP_ROUTES } from '@/config/app-routes';
-import { LoginPage } from '@/pages';
 import { LayoutCenteredOnScreen } from '@/layouts';
-import { expect, userEvent, within } from 'storybook/test';
+import type { LoginFormData } from '@/libs/schemas';
+import { makeLoginHandler } from '@/mocks/handlers';
+import { LoginPage } from '@/pages';
+
+const loginFormData: LoginFormData = {
+  email: 'john@example.com',
+  password: 'password123',
+};
+
+const wrongLoginFormData: LoginFormData = {
+  email: 'wrong@example.com',
+  password: 'wrong_password',
+};
 
 type StoryProps = React.ComponentProps<typeof LoginPage>;
 
@@ -34,23 +46,11 @@ export const FilledValid: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.type(canvas.getByTestId('email'), 'john@example.com');
-    await userEvent.type(canvas.getByTestId('password'), 'password123');
-  },
-};
-
-export const InvalidCredentials: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.type(canvas.getByTestId('email'), 'wrong@example.com');
-    await userEvent.type(canvas.getByTestId('password'), 'wrongpassword');
-
-    await userEvent.click(canvas.getByTestId('signIn'));
-
-    const alert = await canvas.findByRole('status');
-
-    await expect(alert).toBeInTheDocument();
+    await userEvent.type(canvas.getByTestId('email'), loginFormData.email);
+    await userEvent.type(
+      canvas.getByTestId('password'),
+      loginFormData.password,
+    );
   },
 };
 
@@ -61,5 +61,84 @@ export const ValidationErrors: Story = {
     await userEvent.click(canvas.getByTestId('email'));
     await userEvent.click(canvas.getByTestId('password'));
     await userEvent.tab();
+  },
+};
+
+export const SigningYouIn: Story = {
+  parameters: {
+    msw: {
+      handlers: [makeLoginHandler({ type: 'infinite' })],
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByTestId('email'), loginFormData.email);
+    await userEvent.type(
+      canvas.getByTestId('password'),
+      loginFormData.password,
+    );
+
+    await userEvent.click(canvas.getByTestId('signIn'));
+  },
+};
+
+export const InvalidCredentials: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByTestId('email'), wrongLoginFormData.email);
+    await userEvent.type(
+      canvas.getByTestId('password'),
+      wrongLoginFormData.password,
+    );
+
+    await userEvent.click(canvas.getByTestId('signIn'));
+
+    const alert = await canvas.findByRole('status');
+
+    await expect(alert).toBeInTheDocument();
+  },
+};
+
+export const SignInFailed: Story = {
+  parameters: {
+    msw: {
+      handlers: [makeLoginHandler({ type: 'error' })],
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByTestId('email'), loginFormData.email);
+    await userEvent.type(
+      canvas.getByTestId('password'),
+      loginFormData.password,
+    );
+
+    await userEvent.click(canvas.getByTestId('signIn'));
+
+    const alert = await canvas.findByRole('status');
+
+    await expect(alert).toBeInTheDocument();
+  },
+};
+
+export const SignInSuccess: Story = {
+  parameters: {
+    msw: {
+      handlers: [makeLoginHandler()],
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByTestId('email'), loginFormData.email);
+    await userEvent.type(
+      canvas.getByTestId('password'),
+      loginFormData.password,
+    );
+
+    await userEvent.click(canvas.getByTestId('signIn'));
   },
 };
