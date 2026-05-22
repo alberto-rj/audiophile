@@ -24,7 +24,7 @@ const LoginPage = () => {
             'cursor-pointer',
           )}
         >
-          <span className={cn('sr-only')}>Audiophile - home</span>
+          <span className={cn('sr-only')}>Go to Audiophile homepage</span>
           <Logo
             aria-hidden={true}
             focusable={false}
@@ -33,7 +33,7 @@ const LoginPage = () => {
         <FormCard.Header>
           <FormCard.Title>Sign in</FormCard.Title>
           <FormCard.Description>
-            Please fill the fields below to have access to your account.
+            Enter your credentials to access your account.
           </FormCard.Description>
         </FormCard.Header>
         <FormCard.Body>
@@ -53,7 +53,7 @@ const LoginPage = () => {
               variant='link'
               asChild
             >
-              <Link to='/register'>Create one</Link>
+              <Link to={APP_ROUTES.register}>Sign up</Link>
             </Button>
           </p>
         </FormCard.Footer>

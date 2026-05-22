@@ -48,7 +48,7 @@ export const LoginForm = () => {
     } catch (error) {
       const apiError = error as ApiError;
 
-      if (apiError?.status == 401) {
+      if (apiError?.status === 401) {
         toast.error({
           title: 'Sign in failed',
           description: 'Invalid email or password.',
@@ -66,7 +66,7 @@ export const LoginForm = () => {
   return (
     <>
       <StatusVisuallyHidden>
-        {isLoading ? 'Signing in' : ''}
+        {isLoading ? 'Signing you in...' : ''}
       </StatusVisuallyHidden>
       <form
         noValidate
@@ -129,6 +129,7 @@ export const LoginForm = () => {
             type='submit'
             variant='primary'
             disabled={isLoading}
+            aria-busy={isLoading}
           >
             {isLoading ? (
               <>
@@ -136,7 +137,7 @@ export const LoginForm = () => {
                   variant='primary'
                   size='sm'
                 />
-                Signing in...
+                Signing you in...
               </>
             ) : (
               <>Sign in</>
