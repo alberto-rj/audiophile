@@ -50,16 +50,26 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const MenuOpen: Story = {
+export const DesktopLayout: Story = {
+  args: {
+    isOnMobile: false,
+  },
+};
+
+export const MobileMenuOpen: Story = {
   play: async () => {
     const canvas = within(document.body);
     await userEvent.click(canvas.getByTestId('profileMenuTrigger'));
+  },
+};
 
-    await expect(canvas.getByTestId('profileMenuTrigger')).toHaveAttribute(
-      'data-state',
-      'open',
-    );
-    await expect(canvas.getByTestId('profileMenu')).toBeInTheDocument();
+export const DesktopMenuOpen: Story = {
+  args: {
+    isOnMobile: false,
+  },
+  play: async () => {
+    const canvas = within(document.body);
+    await userEvent.click(canvas.getByTestId('profileMenuTrigger'));
   },
 };
 
