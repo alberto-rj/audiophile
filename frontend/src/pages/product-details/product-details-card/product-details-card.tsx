@@ -166,7 +166,7 @@ const ProductDetailsCard = ({
                 'text-black',
               )}
             >
-              <dt className={cn('sr-only')}>Price: </dt>
+              <dt className={cn('sr-only')}>Price</dt>
               <dd>{formattedPrice}</dd>
             </dl>
           </div>
@@ -180,16 +180,12 @@ const ProductDetailsCard = ({
               className={cn('max-inline-30')}
             />
             <Button
-              variant='primary'
               onClick={handleAddToCart}
               disabled={isLoading || undefined}
             >
               {isLoading ? (
                 <>
-                  <Spinner
-                    variant='primary'
-                    size='sm'
-                  />
+                  <Spinner size='sm' />
                   Adding to cart...
                 </>
               ) : (

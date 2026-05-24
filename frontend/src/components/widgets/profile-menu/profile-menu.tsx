@@ -136,7 +136,6 @@ const ProfileMenu = ({ isOnMobile = true }: ProfileMenuProps) => {
             <DropdownMenu.Item
               data-testid={'signOutItem'}
               disabled={isLoggingOut || undefined}
-              aria-busy={isLoggingOut || undefined}
               onSelect={handleLogout}
             >
               Sign out

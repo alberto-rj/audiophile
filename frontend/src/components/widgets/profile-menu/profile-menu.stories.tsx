@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { Canvas } from 'storybook/internal/csf';
 import { expect, userEvent, within } from 'storybook/test';
+import type { Canvas } from 'storybook/internal/types';
 
 import { ProfileMenu } from '@/components/widgets';
-import { WithCredentialsDecorator } from '@/config/storybook';
+import { expectErrorAlert, WithCredentialsDecorator } from '@/config/storybook';
 import { cn } from '@/libs/cn';
 import { makeLogoutHandler } from '@/mocks/handlers';
 
@@ -87,7 +87,7 @@ export const SigningOut: Story = {
     await userEvent.click(await canvas.findByTestId('profileMenuTrigger'));
 
     await expect(await canvas.findByTestId('signOutItem')).toHaveAttribute(
-      'aria-busy',
+      'aria-disabled',
       'true',
     );
   },
@@ -104,7 +104,7 @@ export const SignOutFailed: Story = {
 
     await openMenuAndSignOut(canvas);
 
-    await expect(await canvas.findByRole('status')).toBeInTheDocument();
+    await expectErrorAlert(canvas);
   },
 };
 
