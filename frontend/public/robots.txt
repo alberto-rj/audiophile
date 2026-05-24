@@ -1,0 +1,6 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /orders
+Disallow: /profile
