@@ -112,8 +112,10 @@ export const makeClearCartHandler = (
     endpoint,
     withDelay(
       withAuth(async () => {
+        cart.items = [];
+
         const response: CartResponse = {
-          cart: getUpdatedCart(cart, []),
+          cart: getUpdatedCart(cart, cart.items),
         };
 
         return HttpResponse.json(response, { status: 200 });
