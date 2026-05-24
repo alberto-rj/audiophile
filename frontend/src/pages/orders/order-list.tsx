@@ -11,7 +11,7 @@ const OrderList = ({ orders }: OrderListProps) => {
   return (
     <>
       {orders.length === 0 ? (
-        <p>You have no orders yet.</p>
+        <p className={cn('text-center')}>You have no orders yet.</p>
       ) : (
         <ul
           role='list'
