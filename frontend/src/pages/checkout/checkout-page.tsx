@@ -1,7 +1,7 @@
 import { useId, useState } from 'react';
 
 import { Button, Card, Spinner } from '@/components/ui';
-import { GoBack, StatusVisuallyHidden } from '@/components/widgets';
+import { GoBack, SEO, StatusVisuallyHidden } from '@/components/widgets';
 import { useSecondaryPage } from '@/hooks';
 import { cn } from '@/libs/cn';
 
@@ -16,6 +16,13 @@ const CheckoutPage = () => {
 
   return (
     <>
+      <SEO
+        metadata={{
+          title: 'Checkout | Audiophile',
+          description:
+            'Complete your purchase securely at Audiophile checkout. Review your order, enter shipping details, and proceed to payment.',
+        }}
+      />
       <StatusVisuallyHidden>
         {isSubmitting ? 'Your order is being processed.' : ''}
       </StatusVisuallyHidden>
