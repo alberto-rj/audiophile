@@ -2,7 +2,17 @@ import { Close as CloseIcon } from '@/assets/icons';
 import { cn } from '@/libs/cn';
 
 import Toast from './toast';
-import { defaultToastVariant, useToastContext } from './toast-context';
+import {
+  defaultToastVariant,
+  useToastContext,
+  type ToastVariant,
+} from './toast-context';
+
+function toDataToastId(variant: ToastVariant) {
+  const toastVariant = variant ?? defaultToastVariant;
+
+  return `toast_${toastVariant}`;
+}
 
 export const ToastRenderer = () => {
   const { toasts, removeToast } = useToastContext();
@@ -11,6 +21,7 @@ export const ToastRenderer = () => {
     <Toast.Provider swipeDirection='right'>
       {toasts.map((toast) => (
         <Toast
+          data-testid={toDataToastId(toast.variant)}
           key={toast.id}
           variant={toast.variant ?? defaultToastVariant}
           duration={toast.duration}

@@ -1,11 +1,37 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import type { Canvas } from 'storybook/internal/types';
 
 import { CartModalTrigger } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import { WithCredentialsDecorator } from '@/config/storybook';
-import { makeClearCartHandler, makeGetCartHandler } from '@/mocks/handlers';
-import { userEvent, within } from 'storybook/test';
+import {
+  expectErrorAlert,
+  expectSuccessAlert,
+  WithCredentialsDecorator,
+} from '@/config/storybook';
+import {
+  makeClearCartHandler,
+  makeGetCartHandler,
+  makeUpdateCartItemQuantityHandler,
+} from '@/mocks/handlers';
+
+async function openCartModalAndClear(canvas: Canvas) {
+  await userEvent.click(canvas.getByTestId('cartModalTrigger'));
+
+  await userEvent.click(await canvas.findByTestId('cartModalClear'));
+}
+
+async function openCartModalAndTypeQuantity(
+  canvas: Canvas,
+  lastQuantityInputDigit: number,
+) {
+  await userEvent.click(canvas.getByTestId('cartModalTrigger'));
+
+  const [input] = await canvas.findAllByTestId('quantityInput');
+
+  await userEvent.clear(input);
+  await userEvent.type(input, String(lastQuantityInputDigit));
+}
 
 type StoryProps = React.ComponentProps<typeof CartModalTrigger>;
 
@@ -89,12 +115,6 @@ export const WithEmptyCart: Story = {
   decorators: [WithCredentialsDecorator],
 };
 
-async function openCartModalAndClear(canvas: Canvas) {
-  await userEvent.click(canvas.getByTestId('cartModalTrigger'));
-
-  await userEvent.click(await canvas.findByTestId('cartModalClear'));
-}
-
 export const ClearingCart: Story = {
   parameters: {
     msw: {
@@ -109,6 +129,8 @@ export const ClearingCart: Story = {
     const canvas = within(document.body);
 
     await openCartModalAndClear(canvas);
+
+    await expect(await canvas.findByTestId('cartModalClear')).toBeDisabled();
   },
 };
 
@@ -123,6 +145,8 @@ export const ClearCartFailed: Story = {
     const canvas = within(document.body);
 
     await openCartModalAndClear(canvas);
+
+    await expectErrorAlert(canvas);
   },
 };
 
@@ -137,5 +161,59 @@ export const ClearCartSucceeds: Story = {
     const canvas = within(document.body);
 
     await openCartModalAndClear(canvas);
+
+    await expectSuccessAlert(canvas);
+  },
+};
+
+const lastQuantityInputDigit = 0;
+
+export const UpdatingItemQuantity: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        makeGetCartHandler(),
+        makeUpdateCartItemQuantityHandler({ type: 'infinite' }),
+      ],
+    },
+  },
+  decorators: [WithCredentialsDecorator],
+  play: async () => {
+    const canvas = within(document.body);
+
+    await openCartModalAndTypeQuantity(canvas, lastQuantityInputDigit);
+  },
+};
+
+export const UpdateItemQuantityFailed: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        makeGetCartHandler(),
+        makeUpdateCartItemQuantityHandler({ type: 'error' }),
+      ],
+    },
+  },
+  decorators: [WithCredentialsDecorator],
+  play: async () => {
+    const canvas = within(document.body);
+
+    await openCartModalAndTypeQuantity(canvas, lastQuantityInputDigit);
+
+    await expectErrorAlert(canvas);
+  },
+};
+
+export const UpdateItemQuantitySucceeds: Story = {
+  parameters: {
+    msw: {
+      handlers: [makeGetCartHandler(), makeUpdateCartItemQuantityHandler()],
+    },
+  },
+  decorators: [WithCredentialsDecorator],
+  play: async () => {
+    const canvas = within(document.body);
+
+    await openCartModalAndTypeQuantity(canvas, lastQuantityInputDigit);
   },
 };

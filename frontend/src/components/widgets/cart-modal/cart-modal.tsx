@@ -286,7 +286,6 @@ const CartModalFilled = ({ cart }: CartModalFilledProps) => {
           onClick={handleClearCart}
           disabled={isClearingCart}
         >
-          <span className={cn('sr-only')}>Remove all cart items</span>
           {isClearingCart ? <>Clearing cart...</> : <>Remove all</>}
         </Button>
       </div>

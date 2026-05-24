@@ -59,7 +59,7 @@ const QuantitySelector = ({
 
     if (isNaN(parsed)) return;
 
-    if (parsed <= min) return;
+    if (parsed < min) return;
 
     onChange(parsed);
   };
@@ -87,8 +87,9 @@ const QuantitySelector = ({
       )}
     >
       <QuantityButton
-        disabled={disabled}
+        data-testid='quantityDecrease'
         type='button'
+        disabled={disabled}
         onClick={handleDecrement}
       >
         <span className={cn('sr-only')}>Decrease {label}</span>
@@ -103,6 +104,7 @@ const QuantitySelector = ({
       </label>
       <input
         id={inputId}
+        data-testid='quantityInput'
         disabled={disabled}
         type='number'
         inputMode='numeric'
@@ -128,8 +130,9 @@ const QuantitySelector = ({
         )}
       />
       <QuantityButton
-        disabled={disabled}
+        data-testid='quantityIncrease'
         type='button'
+        disabled={disabled}
         onClick={handleIncrement}
       >
         <span className={cn('sr-only')}>Increase {label}</span>
