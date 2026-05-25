@@ -3,11 +3,15 @@ import type { Canvas } from 'storybook/internal/types';
 import { expect, userEvent, within } from 'storybook/test';
 
 import { APP_ROUTES } from '@/config/app-routes';
-import { WithCredentialsDecorator } from '@/config/storybook';
-import { ProfilePage } from '@/pages';
+import {
+  expectErrorAlert,
+  expectSuccessAlert,
+  WithCredentialsDecorator,
+} from '@/config/storybook';
+import { demo } from '@/libs/mocks';
 import type { ProfileFormData } from '@/libs/schemas';
 import { makeUpdateMeHandler } from '@/mocks/handlers';
-import { demo } from '@/libs/mocks';
+import { ProfilePage } from '@/pages';
 
 async function fillProfileForm(canvas: Canvas, data: ProfileFormData) {
   await userEvent.type(canvas.getByTestId('name'), data.name);
@@ -122,6 +126,8 @@ export const SavingFailed: Story = {
     await fillProfileForm(canvas, profileFormData);
 
     await userEvent.click(canvas.getByTestId('saveProfile'));
+
+    await expectErrorAlert(within(document.body));
   },
 };
 
@@ -142,5 +148,7 @@ export const SavingSucceeds: Story = {
     });
 
     await userEvent.click(canvas.getByTestId('saveProfile'));
+
+    await expectSuccessAlert(within(document.body));
   },
 };
