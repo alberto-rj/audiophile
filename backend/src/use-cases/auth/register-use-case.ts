@@ -47,10 +47,7 @@ export async function registerUseCase({
     userEmail: email,
   });
 
-  const refreshToken = getRefreshToken({
-    userId: createdUser.id,
-    userEmail: email,
-  });
+  const refreshToken = getRefreshToken();
 
   await refreshTokenRepository.create({
     token: refreshToken,

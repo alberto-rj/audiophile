@@ -1,15 +1,11 @@
 import type { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
 
 import { env } from '@/config';
 
-const {
-  NODE_ENV,
-  ACCESS_EXPIRES_IN_MS,
-  ACCESS_SECRET,
-  REFRESH_EXPIRES_IN_MS,
-  REFRESH_SECRET,
-} = env;
+const { NODE_ENV, ACCESS_EXPIRES_IN_MS, ACCESS_SECRET, REFRESH_EXPIRES_IN_MS } =
+  env;
 
 const REFRESH_TOKEN_COOKIE_KEY = 'refreshToken';
 const REFRESH_TOKEN_COOKIE_OPTIONS = {
@@ -44,17 +40,8 @@ export function getAccessToken({ userId, userEmail }: AuthPayload) {
   return accessToken;
 }
 
-export function getRefreshToken({ userId, userEmail }: AuthPayload) {
-  const refreshToken = jwt.sign(
-    {
-      userId,
-      userEmail,
-    },
-    REFRESH_SECRET,
-    {
-      expiresIn: `${REFRESH_EXPIRES_IN_MS}ms`,
-    },
-  );
+export function getRefreshToken() {
+  const refreshToken = uuidv4();
 
   return refreshToken;
 }
