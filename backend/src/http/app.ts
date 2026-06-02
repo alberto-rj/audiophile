@@ -1,7 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
-import { env } from '@/config/env';
+import { env } from '@/config';
 
 import { errorHandler, notFoundHandler } from './middlewares';
 import { authRoute } from './routes';
