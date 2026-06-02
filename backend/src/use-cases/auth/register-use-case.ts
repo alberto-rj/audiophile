@@ -30,8 +30,8 @@ export async function registerUseCase({
     email,
   });
 
-  if (typeof foundUserWithEmail === 'object') {
-    throw new ConflictError('Email already exists.');
+  if (foundUserWithEmail) {
+    throw new ConflictError();
   }
 
   const passwordHash = await getHash(password);

@@ -10,7 +10,11 @@ export async function registerController(
   next: NextFunction,
 ) {
   try {
-    const { user, accessToken, refreshToken } = await registerUseCase(req.body);
+    const payload = req.body;
+
+    const { user, accessToken, refreshToken } = await registerUseCase({
+      payload,
+    });
 
     setRefreshTokenCookie(res, refreshToken);
 
