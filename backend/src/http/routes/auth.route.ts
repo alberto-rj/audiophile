@@ -1,6 +1,5 @@
 import { Router } from 'express';
 
-import { requireAuth } from '../middlewares';
 import {
   loginController,
   logoutController,
@@ -16,4 +15,4 @@ authRoute.post('/login', loginController);
 
 authRoute.post('/refresh', refreshController);
 
-authRoute.post('/logout', requireAuth, logoutController);
+authRoute.post('/logout', logoutController);
