@@ -1,5 +1,5 @@
 export { env } from './env';
 
-export { userRepository } from './user-repository';
+export { refreshTokenRepository, userRepository } from './repositories';
 
 export { default as z } from './zod';

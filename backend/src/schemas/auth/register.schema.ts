@@ -1,8 +1,5 @@
 import { z } from '@/config';
 
-import { parseSchema } from '@/helpers';
-import type { UserCreateParams } from '@/repositories';
-
 import {
   UserEmailSchema,
   UserNameSchema,
@@ -16,7 +13,3 @@ export const ApiRegisterBodySchema = z.object({
 });
 
 export type ApiRegisterBody = z.infer<typeof ApiRegisterBodySchema>;
-
-export function makeRegisterPresenter(params: UserCreateParams) {
-  return parseSchema<ApiRegisterBody>(ApiRegisterBodySchema, params);
-}

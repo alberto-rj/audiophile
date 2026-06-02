@@ -1,3 +1,5 @@
+export { type RefreshToken } from './refresh-token/refresh-token.types';
+
 export {
   ApiUserCreateBodySchema,
   ApiUserResultResponseSchema,
@@ -18,5 +20,4 @@ export { ApiLoginBodySchema, type ApiLoginBody } from './auth/login.schema';
 export {
   ApiRegisterBodySchema,
   type ApiRegisterBody,
-  makeRegisterPresenter,
 } from './auth/register.schema';

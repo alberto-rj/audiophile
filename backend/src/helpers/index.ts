@@ -1,3 +1,6 @@
+export { makeLoginPresenter } from './auth/make-login-presenter';
+export { makeRegisterPresenter } from './auth/make-register-presenter';
+
 export {
   AppError,
   BadRequestError,
@@ -7,14 +10,12 @@ export {
   ValidationError,
 } from './app-error';
 
-export {
-  clearAccessTokenCookie,
-  getAccessToken,
-  getAccessTokenPayload,
-  setAccessTokenCookie,
-  type AuthPayload,
-  type AuthRequest,
-} from './jwt';
+export { makeRefreshToken } from './refresh-token/make-refresh-token';
+export { makeRefreshTokenRepository } from './refresh-token/make-refresh-token-repository';
+
+export { makeUser } from './user/make-user';
+export { makeUserRepository } from './user/make-user-repository';
+export { toSafeUser } from './user/to-safe-user';
 
 export {
   makeResBodyError,
@@ -31,5 +32,13 @@ export { parseSchema } from './parse-schema';
 
 export { getHash, hasCorrectHash } from './password';
 
-export { makeUser } from './user/make-user';
-export { makeUserRepository } from './user/make-user-repository';
+export {
+  clearRefreshTokenCookie,
+  getAccessToken,
+  getAccessTokenPayload,
+  getRefreshToken,
+  refreshTokenExpiresAt,
+  setRefreshTokenCookie,
+  type AuthPayload,
+  type AuthRequest,
+} from './tokens';

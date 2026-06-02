@@ -1,7 +1,13 @@
-import type { Request, Response, NextFunction } from 'express';
+import {
+  type Request,
+  type Response,
+  type NextFunction,
+  response,
+} from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { makeResBodyResult } from '@/helpers';
+import { setRefreshTokenCookie } from '@/helpers';
+import { loginUseCase } from '@/use-cases';
 
 export async function loginController(
   req: Request,
@@ -9,7 +15,18 @@ export async function loginController(
   next: NextFunction,
 ) {
   try {
-    res.status(StatusCodes.OK).json(makeResBodyResult(req.body));
+    const payload = req.body;
+
+    const { accessToken, refreshToken, user } = await loginUseCase({
+      payload,
+    });
+
+    setRefreshTokenCookie(response, refreshToken);
+
+    res.status(StatusCodes.OK).json({
+      accessToken,
+      user,
+    });
   } catch (error) {
     next(error);
   }
