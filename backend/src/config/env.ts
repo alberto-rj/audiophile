@@ -12,7 +12,6 @@ const envSchema = z.object({
     .default('development'),
   ACCESS_SECRET: z.string(),
   ACCESS_EXPIRES_IN_MS: z.coerce.number(),
-  REFRESH_SECRET: z.string(),
   REFRESH_EXPIRES_IN_MS: z.coerce.number(),
   DATABASE_URL: z.string(),
 });

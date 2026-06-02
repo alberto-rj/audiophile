@@ -47,10 +47,7 @@ export async function loginUseCase({
     userEmail: email,
   });
 
-  const refreshToken = getRefreshToken({
-    userId: foundUserWithEmail.id,
-    userEmail: email,
-  });
+  const refreshToken = getRefreshToken();
 
   await refreshTokenRepository.create({
     token: refreshToken,

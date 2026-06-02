@@ -49,10 +49,7 @@ export async function refreshUseCase({
     userId: foundUser.id,
     userEmail: foundUser.email,
   });
-  const newRefreshToken = getRefreshToken({
-    userId: foundUser.id,
-    userEmail: foundUser.email,
-  });
+  const newRefreshToken = getRefreshToken();
 
   await refreshTokenRepository.create({
     token: newRefreshToken,
