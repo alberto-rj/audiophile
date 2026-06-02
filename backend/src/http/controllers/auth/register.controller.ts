@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { makeResBodyResult } from '@/helpers';
+import { setRefreshTokenCookie } from '@/helpers';
 import { registerUseCase } from '@/use-cases';
 
 export async function registerController(
@@ -10,9 +10,14 @@ export async function registerController(
   next: NextFunction,
 ) {
   try {
-    const { user } = await registerUseCase(req.body);
+    const { user, accessToken, refreshToken } = await registerUseCase(req.body);
 
-    res.status(StatusCodes.CREATED).json(makeResBodyResult(user));
+    setRefreshTokenCookie(res, refreshToken);
+
+    res.status(StatusCodes.CREATED).json({
+      user,
+      accessToken,
+    });
   } catch (error) {
     next(error);
   }

@@ -10,8 +10,10 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
-  JWT_ACCESS_SECRET: z.string().default('secret'),
-  JWT_ACCESS_EXPIRES_IN_DAYS: z.coerce.number().default(7),
+  ACCESS_SECRET: z.string(),
+  ACCESS_EXPIRES_IN_MS: z.coerce.number(),
+  REFRESH_SECRET: z.string(),
+  REFRESH_EXPIRES_IN_MS: z.coerce.number(),
   DATABASE_URL: z.string(),
 });
 

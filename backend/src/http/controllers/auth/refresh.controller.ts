@@ -1,26 +1,40 @@
-import type { Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import {
-  getAccessToken,
-  setAccessTokenCookie,
-  type AuthPayload,
-  type AuthRequest,
-} from '@/helpers';
+import { setRefreshTokenCookie } from '@/helpers';
+import { refreshUseCase } from '@/use-cases';
 
-export function refreshController(
-  req: AuthRequest,
+export async function refreshController(
+  req: Request,
   res: Response,
   next: NextFunction,
 ) {
   try {
-    const payload = req.payload as AuthPayload;
+    const { refreshToken } = req.cookies as {
+      refreshToken?: string;
+    };
 
-    const accessToken = getAccessToken(payload);
-    setAccessTokenCookie(res, accessToken);
+    if (typeof refreshToken === 'undefined') {
+      return res.sendStatus(StatusCodes.UNAUTHORIZED);
+    }
 
-    res.sendStatus(StatusCodes.NO_CONTENT);
+    const {
+      accessToken,
+      refreshToken: newRefreshToken,
+      user,
+    } = await refreshUseCase({
+      payload: {
+        token: refreshToken,
+      },
+    });
+
+    setRefreshTokenCookie(res, newRefreshToken);
+
+    return res.status(StatusCodes.OK).json({
+      user,
+      accessToken,
+    });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
