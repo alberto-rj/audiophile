@@ -1,9 +1,4 @@
-import {
-  type Request,
-  type Response,
-  type NextFunction,
-  response,
-} from 'express';
+import { type Request, type Response, type NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import { setRefreshTokenCookie } from '@/helpers';
@@ -21,7 +16,7 @@ export async function loginController(
       payload,
     });
 
-    setRefreshTokenCookie(response, refreshToken);
+    setRefreshTokenCookie(res, refreshToken);
 
     res.status(StatusCodes.OK).json({
       accessToken,
