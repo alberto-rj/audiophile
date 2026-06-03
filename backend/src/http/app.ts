@@ -48,9 +48,9 @@ if (NODE_ENV !== 'test') {
     logger.info(`Server is running at http://localhost:${PORT}`, {
       mode: NODE_ENV,
     });
-  });
 
-  logger.info(`Swagger UI is available at http://localhost:${PORT}/api-docs`);
+    logger.info(`Swagger UI is available at http://localhost:${PORT}/api-docs`);
+  });
 
   // Uncaught synchronous errors
   process.on('uncaughtException', (err) => {
