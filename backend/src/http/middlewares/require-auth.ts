@@ -3,6 +3,7 @@ import type { Response, NextFunction } from 'express';
 import {
   getAccessTokenPayload,
   UnauthorizedError,
+  updateRequestContext,
   type AuthRequest,
 } from '@/helpers';
 
@@ -12,17 +13,27 @@ export async function requireAuth(
   next: NextFunction,
 ) {
   try {
-    const { accessToken } = req.cookies;
+    const authHeader = req.headers['authorization'];
+
+    if (!authHeader?.startsWith('Bearer ')) {
+      throw new UnauthorizedError('Missing access token');
+    }
+
+    const [, accessToken] = authHeader.split(' ');
 
     if (!accessToken) {
-      throw new UnauthorizedError('No token provided.');
+      throw new UnauthorizedError('Missing access token');
     }
 
     const payload = getAccessTokenPayload(accessToken);
 
     if (!payload) {
-      throw new UnauthorizedError('Invalid or expired token.');
+      throw new UnauthorizedError('Invalid or expired access token');
     }
+
+    updateRequestContext({
+      userId: payload.userId.toString(10),
+    });
 
     req.payload = payload;
 
