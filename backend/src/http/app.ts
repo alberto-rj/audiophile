@@ -2,7 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import { env } from '@/config';
-import { logger } from '@/helpers';
+import { logger, scheduleTasks } from '@/helpers';
 
 import {
   errorHandler,
@@ -71,4 +71,7 @@ if (NODE_ENV !== 'test') {
     logger.info('SIGTERM received - closing server');
     process.exit(0);
   });
+
+  // Cron tasks
+  scheduleTasks();
 }
