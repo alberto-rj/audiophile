@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
-import { z } from 'zod';
+
+import { z } from '@/config';
 
 const instructionsURL =
   'https://github.com/alberto-rj/audiophile/backend/README.md#environment-variables';
@@ -14,6 +15,8 @@ const envSchema = z.object({
   ACCESS_EXPIRES_IN_MS: z.coerce.number(),
   REFRESH_EXPIRES_IN_MS: z.coerce.number(),
   DATABASE_URL: z.string(),
+  LOG_REQUEST_BODY: z.coerce.boolean().default(false),
+  LOG_REQUEST_HEADERS: z.coerce.boolean().default(false),
 });
 
 dotenv.config({ path: '.env', quiet: true });
