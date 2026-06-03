@@ -19,6 +19,8 @@ export {
   ValidationError,
 } from './app-error';
 
+export { scheduleTasks } from './cron';
+
 export { makeRefreshToken } from './refresh-token/make-refresh-token';
 export { makeRefreshTokenRepository } from './refresh-token/make-refresh-token-repository';
 
