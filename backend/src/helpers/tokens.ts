@@ -4,15 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { env } from '@/config';
 
-const { NODE_ENV, ACCESS_EXPIRES_IN_MS, ACCESS_SECRET, REFRESH_EXPIRES_IN_MS } =
-  env;
+const { NODE_ENV, ACCESS_EXPIRES_MS, ACCESS_SECRET, REFRESH_EXPIRES_MS } = env;
 
 const REFRESH_TOKEN_COOKIE_KEY = 'refreshToken';
 const REFRESH_TOKEN_COOKIE_OPTIONS = {
   httpOnly: true,
   secure: NODE_ENV === 'production',
   sameSite: 'none',
-  maxAge: REFRESH_EXPIRES_IN_MS,
+  maxAge: REFRESH_EXPIRES_MS,
   path: '/auth',
 } as const;
 
@@ -33,7 +32,7 @@ export function getAccessToken({ userId, userEmail }: AuthPayload) {
     },
     ACCESS_SECRET,
     {
-      expiresIn: `${ACCESS_EXPIRES_IN_MS}ms`,
+      expiresIn: `${ACCESS_EXPIRES_MS}ms`,
     },
   );
 
@@ -71,7 +70,7 @@ export function clearRefreshTokenCookie(res: Response) {
 }
 
 export function refreshTokenExpiresAt() {
-  const expiresAt = new Date(Date.now() + REFRESH_EXPIRES_IN_MS).toISOString();
+  const expiresAt = new Date(Date.now() + REFRESH_EXPIRES_MS).toISOString();
 
   return expiresAt;
 }
