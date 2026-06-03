@@ -11,7 +11,7 @@ const REFRESH_TOKEN_COOKIE_KEY = 'refreshToken';
 const REFRESH_TOKEN_COOKIE_OPTIONS = {
   httpOnly: true,
   secure: NODE_ENV === 'production',
-  sameSite: 'strict',
+  sameSite: 'none',
   maxAge: REFRESH_EXPIRES_IN_MS,
   path: '/auth',
 } as const;
