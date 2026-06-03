@@ -12,8 +12,8 @@ const envSchema = z.object({
     .enum(['development', 'test', 'production'])
     .default('development'),
   ACCESS_SECRET: z.string(),
-  ACCESS_EXPIRES_IN_MS: z.coerce.number(),
-  REFRESH_EXPIRES_IN_MS: z.coerce.number(),
+  ACCESS_EXPIRES_MS: z.coerce.number(),
+  REFRESH_EXPIRES_MS: z.coerce.number(),
   DATABASE_URL: z.string(),
   LOG_REQUEST_BODY: z.coerce.boolean().default(false),
   LOG_REQUEST_HEADERS: z.coerce.boolean().default(false),
