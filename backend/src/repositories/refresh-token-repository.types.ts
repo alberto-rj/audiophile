@@ -29,5 +29,7 @@ export interface RefreshTokenRepository {
 
   delete: (params: RefreshTokenDeleteParams) => Promise<RefreshToken | null>;
 
+  deleteManyExpired: () => Promise<void>;
+
   clear: () => Promise<void>;
 }

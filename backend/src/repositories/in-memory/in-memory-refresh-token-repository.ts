@@ -56,6 +56,17 @@ export class InMemoryRefreshTokenRepository implements RefreshTokenRepository {
     return foundItem;
   }
 
+  async deleteManyExpired() {
+    for (const [, refreshToken] of this.items.entries()) {
+      const now = new Date();
+      const expiresAt = new Date(refreshToken.expiresAt);
+
+      if (expiresAt < now) {
+        this.items.delete(refreshToken.id);
+      }
+    }
+  }
+
   async clear() {
     this.items.clear();
   }
