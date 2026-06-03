@@ -2,6 +2,15 @@ export { makeLoginPresenter } from './auth/make-login-presenter';
 export { makeRegisterPresenter } from './auth/make-register-presenter';
 
 export {
+  asyncLocalStorage,
+  getRequestContext,
+  setRequestContext,
+  updateRequestContext,
+} from './logger/context';
+export { logger } from './logger/logger';
+export type { LogContext, RequestContext } from './logger/logger.types';
+
+export {
   AppError,
   BadRequestError,
   ConflictError,
