@@ -2,14 +2,27 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import { env } from '@/config';
+import { logger } from '@/helpers';
 
-import { errorHandler, notFoundHandler } from './middlewares';
+import {
+  errorHandler,
+  notFoundHandler,
+  requestLogger,
+  runWithContext,
+} from './middlewares';
 import { authRoute } from './routes';
 
 const { PORT, NODE_ENV } = env;
 
 const app = express();
 
+// Async context
+app.use(runWithContext);
+
+// Request logger
+app.use(requestLogger);
+
+// External middlewares
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,16 +37,38 @@ app.get('/api/v1/health', (_, res) => {
   });
 });
 
-// Middleware for not found routes
+// Not found handler
 app.use(notFoundHandler);
 
-// Middleware for global error handling
+// Global error handler
 app.use(errorHandler);
 
 if (NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    logger.info(`Server is running at http://localhost:${PORT}`, {
+      mode: NODE_ENV,
+    });
   });
 
-  console.log(`Swagger UI is available at http://localhost:/api-docs`);
+  logger.info(`Swagger UI is available at http://localhost:${PORT}/api-docs`);
+
+  // Uncaught synchronous errors
+  process.on('uncaughtException', (err) => {
+    const { message: error, stack } = err;
+
+    logger.error('uncaughtException', { error, stack });
+    process.exit(1);
+  });
+
+  // Rejected promises not fulfilled
+  process.on('unhandledRejection', (reason) => {
+    logger.error('unhandledRejection', { reason });
+    process.exit(1);
+  });
+
+  // Graceful shutdown
+  process.on('SIGTERM', () => {
+    logger.info('SIGTERM received - closing server');
+    process.exit(0);
+  });
 }
