@@ -17,6 +17,9 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   LOG_REQUEST_BODY: z.coerce.boolean().default(false),
   LOG_REQUEST_HEADERS: z.coerce.boolean().default(false),
+  CORS_ORIGINS: z.string().transform((arg) => arg.split(';')),
+  CORS_METHODS: z.string().transform((arg) => arg.split(';')),
+  CORS_HEADERS: z.string().transform((arg) => arg.split(';')),
 });
 
 dotenv.config({ path: '.env', quiet: true });
