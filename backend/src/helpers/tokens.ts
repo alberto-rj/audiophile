@@ -6,14 +6,7 @@ import { env } from '@/config';
 
 const { NODE_ENV, ACCESS_EXPIRES_MS, ACCESS_SECRET, REFRESH_EXPIRES_MS } = env;
 
-const REFRESH_TOKEN_COOKIE_KEY = 'refreshToken';
-const REFRESH_TOKEN_COOKIE_OPTIONS = {
-  httpOnly: true,
-  secure: NODE_ENV === 'production',
-  sameSite: 'none',
-  maxAge: REFRESH_EXPIRES_MS,
-  path: '/auth',
-} as const;
+export const REFRESH_TOKEN_COOKIE_KEY = 'refreshToken';
 
 export interface AuthPayload {
   userId: number;
@@ -54,17 +47,36 @@ export function getAccessTokenPayload(token: string): AuthPayload | null {
   }
 }
 
+export function getRefreshTokenCookieOptions() {
+  const options = {
+    httpOnly: true,
+    secure: false,
+    sameSite: 'lax',
+    maxAge: REFRESH_EXPIRES_MS,
+    path: '/auth',
+  } as const;
+
+  if (NODE_ENV === 'production') {
+    return {
+      ...options,
+      secure: true,
+      sameSite: 'strict',
+    } as const;
+  }
+
+  return options;
+}
+
 export function setRefreshTokenCookie(res: Response, refreshToken: string) {
-  res.cookie(
-    REFRESH_TOKEN_COOKIE_KEY,
-    refreshToken,
-    REFRESH_TOKEN_COOKIE_OPTIONS,
-  );
+  const options = getRefreshTokenCookieOptions();
+
+  res.cookie(REFRESH_TOKEN_COOKIE_KEY, refreshToken, options);
 }
 
 export function clearRefreshTokenCookie(res: Response) {
+  const options = getRefreshTokenCookieOptions();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { maxAge, ...restOptions } = REFRESH_TOKEN_COOKIE_OPTIONS;
+  const { maxAge, ...restOptions } = options;
 
   res.clearCookie(REFRESH_TOKEN_COOKIE_KEY, restOptions);
 }
