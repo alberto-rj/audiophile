@@ -3,17 +3,17 @@ import { toSafeUser, UnauthorizedError } from '@/helpers';
 import type { UserFindByIdParams } from '@/repositories';
 import type { SafeUser } from '@/schemas';
 
-interface ProfileUseCaseParams {
+interface GetProfileUseCaseParams {
   payload: UserFindByIdParams;
 }
 
-interface ProfileUseCaseResult {
+interface GetProfileUseCaseResult {
   user: SafeUser;
 }
 
-export async function profileUseCase({
+export async function getProfileUseCase({
   payload,
-}: ProfileUseCaseParams): Promise<ProfileUseCaseResult> {
+}: GetProfileUseCaseParams): Promise<GetProfileUseCaseResult> {
   const { id } = payload;
 
   const foundUser = await userRepository.findById({

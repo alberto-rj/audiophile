@@ -6,6 +6,7 @@ import type {
   UserFindByIdParams,
   UserFindByEmailParams,
   UserRepository,
+  UserUpdateParams,
 } from '../user-repository.types';
 
 export class InMemoryUserRepository implements UserRepository {
@@ -41,6 +42,23 @@ export class InMemoryUserRepository implements UserRepository {
     }
 
     return null;
+  }
+
+  async update({ id, ...changes }: UserUpdateParams) {
+    const foundItem = this.items.get(id);
+
+    if (!foundItem) {
+      return null;
+    }
+
+    const updateItem = {
+      ...foundItem,
+      ...changes,
+    };
+
+    this.items.set(id, updateItem);
+
+    return updateItem;
   }
 
   async clear() {

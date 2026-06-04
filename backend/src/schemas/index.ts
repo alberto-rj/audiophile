@@ -1,6 +1,10 @@
 export { type RefreshToken } from './refresh-token/refresh-token.types';
 
 export {
+  ApiUpdateProfileBodySchema,
+  type ApiUpdateProfileBody,
+} from './user/update-profile.schema';
+export {
   ApiUserCreateBodySchema,
   ApiUserResultResponseSchema,
   ApiUserSchema,
