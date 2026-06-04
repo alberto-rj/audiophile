@@ -1,9 +1,7 @@
 import { z } from '@/config';
+import { registry } from '@/openapi';
 
-import {
-  createApiResultResponseSchema,
-  CreatedAtSchema,
-} from '@/schemas/common';
+import { CreatedAtSchema } from '@/schemas/common';
 
 export const UserIdSchema = z.coerce
   .number({
@@ -72,6 +70,7 @@ export const UserPasswordSchema = z
     description:
       'A strong password with at least 8 characters, including uppercase, lowercase and numbers.',
     example: 'JohnDoe12',
+    writeOnly: true,
   });
 
 export const ApiUserCreateBodySchema = z.object({
@@ -80,12 +79,14 @@ export const ApiUserCreateBodySchema = z.object({
   password: UserPasswordSchema,
 });
 
-export const ApiUserSchema = z.object({
-  id: UserIdSchema,
-  name: UserNameSchema,
-  email: UserEmailSchema,
-  createdAt: CreatedAtSchema,
-});
-
-export const ApiUserResultResponseSchema =
-  createApiResultResponseSchema(ApiUserSchema);
+export const ApiUserSchema = registry.register(
+  'User',
+  z
+    .object({
+      id: UserIdSchema,
+      name: UserNameSchema,
+      email: UserEmailSchema,
+      createdAt: CreatedAtSchema,
+    })
+    .openapi('User'),
+);

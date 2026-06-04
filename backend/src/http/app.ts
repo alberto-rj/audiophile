@@ -2,8 +2,12 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
+import swaggerUi from 'swagger-ui-express';
+
 import { env } from '@/config';
 import { logger, scheduleTasks } from '@/helpers';
+import { generateOpenAPISpec } from '@/openapi';
+import '@/openapi/paths';
 
 import {
   errorHandler,
@@ -53,6 +57,29 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Swagger UI
+if (NODE_ENV !== 'production') {
+  // Generate the spec once on startup (not on every request)
+  const openApiSpec = generateOpenAPISpec();
+
+  // Serve raw JSON specs (useful for importing in Postman, Insomnia, etc.)
+  app.get('/api-docs.json', (_req, res) => res.json(openApiSpec));
+
+  // Serve Interactive Swagger UI
+  app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(openApiSpec, {
+      customSiteTitle: 'audiophile API - Docs',
+      swaggerOptions: {
+        persistAuthorization: true, // Keep the token between page reloads
+        filter: true, // endpoint search bar
+        displayRequestDuration: true, // shows response time in tests.
+      },
+    }),
+  );
+}
 
 // Async context
 app.use(runWithContext);
