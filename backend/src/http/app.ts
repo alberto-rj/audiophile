@@ -1,5 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import { env } from '@/config';
 import { logger, scheduleTasks } from '@/helpers';
@@ -12,7 +13,7 @@ import {
 } from './middlewares';
 import { authRoute } from './routes';
 
-const { PORT, NODE_ENV } = env;
+const { PORT, NODE_ENV, CORS_HEADERS, CORS_METHODS, CORS_ORIGINS } = env;
 
 const app = express();
 
@@ -21,6 +22,38 @@ app.use(runWithContext);
 
 // Request logger
 app.use(requestLogger);
+
+// Cors
+app.use(
+  cors({
+    // Dynamically validate the origin
+    origin: (origin, callback) => {
+      // Allow requests without origin (e.g., Postman, curl, server-to-server)
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (CORS_ORIGINS.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: origin not allowed: ${origin}`));
+      }
+    },
+
+    // REQUIRED for cross-domain cookies
+    // Allows the browser to send and receive cookies in cross-origin requests
+    credentials: true,
+
+    // Allowed methods
+    methods: CORS_METHODS,
+
+    // Allowed headers
+    allowedHeaders: CORS_HEADERS,
+
+    // Preflight OPTIONS cache for 10 minutes
+    maxAge: 10 * 60,
+  }),
+);
 
 // External middlewares
 app.use(cookieParser());
