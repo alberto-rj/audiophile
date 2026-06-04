@@ -1,4 +1,5 @@
 import { z } from '@/config';
+import { registry } from '@/openapi';
 
 import {
   UserEmailSchema,
@@ -6,10 +7,15 @@ import {
   UserPasswordSchema,
 } from '../user/user.schema';
 
-export const ApiRegisterBodySchema = z.object({
-  name: UserNameSchema,
-  email: UserEmailSchema,
-  password: UserPasswordSchema,
-});
+export const ApiRegisterBodySchema = registry.register(
+  'RegisterBody',
+  z
+    .object({
+      name: UserNameSchema,
+      email: UserEmailSchema,
+      password: UserPasswordSchema,
+    })
+    .openapi('RegisterBody'),
+);
 
 export type ApiRegisterBody = z.infer<typeof ApiRegisterBodySchema>;
