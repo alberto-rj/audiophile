@@ -6,6 +6,12 @@ export interface UserCreateParams {
   password: string;
 }
 
+export interface UserUpdateParams {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export interface UserFindByIdParams {
   id: number;
 }
@@ -20,6 +26,8 @@ export interface UserRepository {
   findById: (params: UserFindByIdParams) => Promise<User | null>;
 
   findByEmail: (params: UserFindByEmailParams) => Promise<User | null>;
+
+  update: (params: UserUpdateParams) => Promise<User | null>;
 
   clear: () => Promise<void>;
 }

@@ -11,17 +11,11 @@ import {
   requestLogger,
   runWithContext,
 } from './middlewares';
-import { authRoute } from './routes';
+import { authRoute, usersRoute } from './routes';
 
 const { PORT, NODE_ENV, CORS_HEADERS, CORS_METHODS, CORS_ORIGINS } = env;
 
 const app = express();
-
-// Async context
-app.use(runWithContext);
-
-// Request logger
-app.use(requestLogger);
 
 // Cors
 app.use(
@@ -56,12 +50,19 @@ app.use(
 );
 
 // External middlewares
-app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Async context
+app.use(runWithContext);
+
+// Request logger
+app.use(requestLogger);
 
 // API routes
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/users', usersRoute);
 
 app.get('/api/v1/health', (_, res) => {
   res.status(200).json({

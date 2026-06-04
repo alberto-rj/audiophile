@@ -15,4 +15,5 @@ export type {
   UserFindByEmailParams,
   UserFindByIdParams,
   UserRepository,
+  UserUpdateParams,
 } from './user-repository.types';

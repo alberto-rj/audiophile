@@ -25,6 +25,7 @@ export { makeRefreshToken } from './refresh-token/make-refresh-token';
 export { makeRefreshTokenRepository } from './refresh-token/make-refresh-token-repository';
 
 export { makeUser } from './user/make-user';
+export { makeUpdateProfilePresenter } from './user/make-update-profile-presenter';
 export { makeUserRepository } from './user/make-user-repository';
 export { toSafeUser } from './user/to-safe-user';
 
