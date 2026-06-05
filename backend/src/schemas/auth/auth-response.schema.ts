@@ -1,5 +1,5 @@
 import { z } from '@/config';
-import { registry } from '@/openapi';
+import { registry } from '@/http/openapi';
 
 import { ApiUserSchema } from '../user/user.schema';
 

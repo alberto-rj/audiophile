@@ -5,9 +5,9 @@ import swaggerUi from 'swagger-ui-express';
 
 import { env } from '@/config';
 import { logger, scheduleTasks } from '@/helpers';
-import { generateOpenAPISpec } from '@/openapi';
-import '@/openapi/paths';
 
+import { generateOpenAPISpec } from './openapi';
+import './openapi/paths';
 import {
   errorHandler,
   notFoundHandler,
