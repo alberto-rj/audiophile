@@ -1,24 +1,10 @@
-import type { User } from '@/schemas';
-
-export interface UserCreateParams {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface UserUpdateParams {
-  id: number;
-  name: string;
-  email: string;
-}
-
-export interface UserFindByIdParams {
-  id: number;
-}
-
-export interface UserFindByEmailParams {
-  email: string;
-}
+import type {
+  User,
+  UserCreateParams,
+  UserFindByEmailParams,
+  UserFindByIdParams,
+  UserUpdateParams,
+} from '@/schemas';
 
 export interface UserRepository {
   create: (params: UserCreateParams) => Promise<User>;

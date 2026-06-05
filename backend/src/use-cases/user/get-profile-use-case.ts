@@ -1,7 +1,6 @@
 import { userRepository } from '@/config';
 import { toSafeUser, UnauthorizedError } from '@/helpers';
-import type { UserFindByIdParams } from '@/repositories';
-import type { SafeUser } from '@/schemas';
+import type { SafeUser, UserFindByIdParams } from '@/schemas';
 
 interface GetProfileUseCaseParams {
   payload: UserFindByIdParams;

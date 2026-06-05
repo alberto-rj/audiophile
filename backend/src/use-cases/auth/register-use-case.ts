@@ -8,8 +8,7 @@ import {
   refreshTokenExpiresAt,
   toSafeUser,
 } from '@/helpers';
-import type { UserCreateParams } from '@/repositories';
-import { type SafeUser } from '@/schemas';
+import type { SafeUser, UserCreateParams } from '@/schemas';
 
 interface RegisterUseCaseParams {
   payload: UserCreateParams;

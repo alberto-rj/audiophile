@@ -45,6 +45,8 @@ export const UserEmailSchema = z
     example: 'johndoe@example.com',
   });
 
+export const UserCreatedAtSchema = CreatedAtSchema;
+
 export const USER_PASSWORD_ERRORS = {
   STRING: 'password must be a string.',
   MIN: 'password must have at least 8 characters.',
