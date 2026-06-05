@@ -45,25 +45,34 @@ export const UserEmailSchema = z
     example: 'johndoe@example.com',
   });
 
+export const USER_PASSWORD_ERRORS = {
+  STRING: 'password must be a string.',
+  MIN: 'password must have at least 8 characters.',
+  MAX: 'password cannot exceed 32 characters.',
+  LOWERCASE: 'password must include at least 1 lowercase letter.',
+  UPPERCASE: 'password must include at least 1 uppercase letter.',
+  DIGIT: 'password must include at least 1 digit.',
+} as const;
+
 export const UserPasswordSchema = z
   .string({
-    error: 'password must be a string.',
+    error: USER_PASSWORD_ERRORS.STRING,
   })
   .trim()
   .min(8, {
-    error: 'password must have at least 8 characters.',
+    error: USER_PASSWORD_ERRORS.MIN,
   })
   .max(32, {
-    error: 'password cannot exceed 32 characters.',
+    error: USER_PASSWORD_ERRORS.MAX,
   })
   .regex(/(?=.*[a-z])/, {
-    error: 'password must include at least 1 lowercase letter.',
+    error: USER_PASSWORD_ERRORS.LOWERCASE,
   })
   .regex(/(?=.*[A-Z])/, {
-    error: 'password must include at least 1 uppercase letter.',
+    error: USER_PASSWORD_ERRORS.UPPERCASE,
   })
   .regex(/(?=.*\d)/, {
-    error: 'password must include at least 1 digit.',
+    error: USER_PASSWORD_ERRORS.DIGIT,
   })
   .openapi({
     title: 'password',

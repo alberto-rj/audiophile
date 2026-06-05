@@ -1,10 +1,6 @@
-import {
-  OpenAPIRegistry,
-  OpenApiGeneratorV31,
-} from '@asteasolutions/zod-to-openapi';
+import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 
-// Registry singleton - imported by all schema and route files.
-export const registry = new OpenAPIRegistry();
+import { registry } from './registry';
 
 // Register the Bearer security scheme (JWT)
 // Done here once - all endpoints can reference 'bearerAuth'

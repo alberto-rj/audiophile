@@ -1,6 +1,5 @@
 import type { ZodObject } from 'zod';
 
-import { z } from '@/config';
 import { ValidationError } from '@/helpers';
 
 export function parseSchema<T>(schema: ZodObject, data: unknown) {
@@ -10,6 +9,23 @@ export function parseSchema<T>(schema: ZodObject, data: unknown) {
     return result.data as T;
   }
 
-  const properties = z.treeifyError(result.error).properties;
-  throw new ValidationError(properties);
+  const errorMap = result.error.issues
+    .map((issue) => ({
+      field: issue.path.join('.'),
+      message: issue.message,
+    }))
+    .reduce(
+      (errorMap, { field, message }) => {
+        if (!(field in errorMap)) {
+          errorMap[field] = [];
+        }
+
+        errorMap[field]?.push(message);
+
+        return errorMap;
+      },
+      {} as { [key: string]: string[] },
+    );
+
+  throw new ValidationError(errorMap);
 }

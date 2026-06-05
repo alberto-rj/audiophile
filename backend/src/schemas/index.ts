@@ -19,6 +19,7 @@ export {
   makeApiPaginatedResponseSchema,
   makeApiResultListResponseSchema,
   makeApiResultResponseSchema,
+  makeApiValidationErrorResponseSchema,
   PageSchema,
   UpdatedAtSchema,
 } from './common';

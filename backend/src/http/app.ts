@@ -71,7 +71,7 @@ if (NODE_ENV !== 'production') {
     '/api-docs',
     swaggerUi.serve,
     swaggerUi.setup(openApiSpec, {
-      customSiteTitle: 'audiophile API - Docs',
+      customSiteTitle: 'audiophile API | Docs',
       swaggerOptions: {
         persistAuthorization: true, // Keep the token between page reloads
         filter: true, // endpoint search bar

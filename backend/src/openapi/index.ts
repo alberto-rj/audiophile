@@ -1,1 +1,2 @@
-export { generateOpenAPISpec, registry } from './openapi';
+export { generateOpenAPISpec } from './generator';
+export { registry } from './registry';
