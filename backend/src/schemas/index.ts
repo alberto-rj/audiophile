@@ -65,4 +65,8 @@ export type {
   UserCreatedAt,
   UserName,
   UserPassword,
+  UserCreateParams,
+  UserFindByEmailParams,
+  UserFindByIdParams,
+  UserUpdateParams,
 } from './user/user.types';

@@ -1,16 +1,17 @@
 import { makeUser } from '@/helpers';
-import type { User } from '@/schemas';
-
 import type {
+  User,
   UserCreateParams,
-  UserFindByIdParams,
   UserFindByEmailParams,
-  UserRepository,
+  UserFindByIdParams,
+  UserId,
   UserUpdateParams,
-} from '../types/user-repository.types';
+} from '@/schemas';
+
+import type { UserRepository } from '../types/user-repository.types';
 
 export class InMemoryUserRepository implements UserRepository {
-  private items: Map<number, User>;
+  private items: Map<UserId, User>;
 
   constructor() {
     this.items = new Map();
