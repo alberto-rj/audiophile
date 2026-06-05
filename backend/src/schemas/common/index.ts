@@ -1,5 +1,4 @@
 import { z } from '@/config';
-import { registry } from '@/openapi';
 
 export const CreatedAtSchema = z.string().openapi({
   format: 'datetime',
@@ -39,24 +38,16 @@ export const LimitSchema = z.coerce
     maximum: 100,
   });
 
-export const ApiErrorSchema = registry.register(
-  'Error',
-  z.object({
-    message: z.string().openapi({
-      example: 'Something went wrong',
-    }),
+export const ApiErrorSchema = z.object({
+  message: z.string().openapi({
+    example: 'Something went wrong',
   }),
-);
+});
 
-export const ApiPaginationSchema = registry.register(
-  'Pagination',
-  z
-    .object({
-      page: PageSchema,
-      limit: LimitSchema,
-    })
-    .openapi('Pagination'),
-);
+export const ApiPaginationSchema = z.object({
+  page: PageSchema,
+  limit: LimitSchema,
+});
 
 export const ApiResultListResponse = z
   .object({
@@ -66,14 +57,9 @@ export const ApiResultListResponse = z
     results: [],
   });
 
-export const ApiErrorResponseSchema = registry.register(
-  'ErrorResponse',
-  z
-    .object({
-      error: ApiErrorSchema,
-    })
-    .openapi('ErrorResponse'),
-);
+export const ApiErrorResponseSchema = z.object({
+  error: ApiErrorSchema,
+});
 
 export const ApiValidationErrorResponseSchema = z
   .object({
@@ -88,7 +74,7 @@ export const ApiValidationErrorResponseSchema = z
 
 export function makeApiResultResponseSchema<T extends z.ZodType>(schema: T) {
   return z.object({
-    results: z.array(schema).openapi('ResultResponse'),
+    results: z.array(schema),
   });
 }
 
