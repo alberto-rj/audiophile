@@ -15,7 +15,7 @@ export const unauthorizedResponse = {
       },
     },
   },
-};
+} as const;
 
 export const notFoundResponse = {
   [StatusCodes.NOT_FOUND]: {
@@ -26,7 +26,7 @@ export const notFoundResponse = {
       },
     },
   },
-};
+} as const;
 
 export const unprocessableEntityResponse = {
   [StatusCodes.UNPROCESSABLE_ENTITY]: {
@@ -38,7 +38,7 @@ export const unprocessableEntityResponse = {
       },
     },
   },
-};
+} as const;
 
 export const internalServerErrorResponse = {
   [StatusCodes.INTERNAL_SERVER_ERROR]: {
@@ -49,4 +49,18 @@ export const internalServerErrorResponse = {
       },
     },
   },
-};
+} as const;
+
+export const RefreshTokenCookieHeader = {
+  description:
+    'Refresh token in httpOnly cookie. Automatically sent by the browser in /auth/refresh and /auth/logout.',
+  schema: {
+    type: 'string',
+    example:
+      'refreshToken=abc123; HttpOnly; Secure; SameSite=None; Path=/auth; Max-Age=604800',
+  },
+} as const;
+
+export const AuthCookieHeader = {
+  'Set-Cookie': RefreshTokenCookieHeader,
+} as const;

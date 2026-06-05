@@ -10,21 +10,20 @@ import { registry } from '../../registry';
 import {
   AuthCookieHeader,
   internalServerErrorResponse,
-  unprocessableEntityResponse,
 } from '../common/response';
 
 registry.registerPath({
   method: 'post',
-  path: '/auth/login',
+  path: '/auth/refresh',
   tags: ['Auth'],
   security: [],
-  summary: 'Login user',
+  summary: 'Refresh access token',
   description:
-    'Authenticates a user using email and password. On success, an access token is returned and a refresh token cookie is issued.',
+    'Issues a new access token using the refresh token stored in the cookie. On success, the refresh token is rotated and a new refresh token cookie is issued.',
   request: {
     body: {
       required: true,
-      description: 'User credentials.',
+      description: 'User login payload.',
       content: {
         'application/json': {
           schema: ApiLoginBodySchema,
@@ -35,7 +34,7 @@ registry.registerPath({
   responses: {
     [StatusCodes.OK]: {
       description:
-        'Authentication successful. An access token is returned and a refresh token cookie is issued.',
+        'Token refresh successful. A new access token is returned and the refresh token cookie is updated.',
       headers: {
         ...AuthCookieHeader,
       },
@@ -46,14 +45,13 @@ registry.registerPath({
       },
     },
     [StatusCodes.UNAUTHORIZED]: {
-      description: 'Invalid email or password.',
+      description: 'Refresh token is missing, invalid, expired, or revoked.',
       content: {
         'application/json': {
           schema: ApiErrorResponseSchema,
         },
       },
     },
-    ...unprocessableEntityResponse,
     ...internalServerErrorResponse,
   },
 });

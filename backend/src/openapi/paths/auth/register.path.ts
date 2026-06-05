@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import {
   ApiAuthResponseSchema,
   ApiErrorResponseSchema,
-  ApiLoginBodySchema,
+  ApiRegisterBodySchema,
 } from '@/schemas';
 
 import { registry } from '../../registry';
@@ -15,27 +15,27 @@ import {
 
 registry.registerPath({
   method: 'post',
-  path: '/auth/login',
+  path: '/auth/register',
   tags: ['Auth'],
   security: [],
-  summary: 'Login user',
+  summary: 'Register a new user',
   description:
-    'Authenticates a user using email and password. On success, an access token is returned and a refresh token cookie is issued.',
+    'Registers a new user account and signs the user in by issuing an access token and a refresh token cookie.',
   request: {
     body: {
       required: true,
-      description: 'User credentials.',
+      description: 'New user account information.',
       content: {
         'application/json': {
-          schema: ApiLoginBodySchema,
+          schema: ApiRegisterBodySchema,
         },
       },
     },
   },
   responses: {
-    [StatusCodes.OK]: {
+    [StatusCodes.CREATED]: {
       description:
-        'Authentication successful. An access token is returned and a refresh token cookie is issued.',
+        'User account created successfully. An access token is returned and a refresh token cookie is issued.',
       headers: {
         ...AuthCookieHeader,
       },
@@ -45,8 +45,9 @@ registry.registerPath({
         },
       },
     },
-    [StatusCodes.UNAUTHORIZED]: {
-      description: 'Invalid email or password.',
+    [StatusCodes.CONFLICT]: {
+      description:
+        'The provided email address is already associated with an existing account.',
       content: {
         'application/json': {
           schema: ApiErrorResponseSchema,
