@@ -7,8 +7,7 @@ import {
 
 export const unauthorizedResponse = {
   [StatusCodes.UNAUTHORIZED]: {
-    description:
-      'Authentication required. The request does not contain a valid authentication cookie.',
+    description: 'Missing, invalid, or expired access token.',
     content: {
       'application/json': {
         schema: ApiErrorResponseSchema,

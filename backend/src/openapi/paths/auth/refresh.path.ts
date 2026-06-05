@@ -1,15 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
 
-import {
-  ApiAuthResponseSchema,
-  ApiErrorResponseSchema,
-  ApiLoginBodySchema,
-} from '@/schemas';
+import { ApiAuthResponseSchema, ApiLoginBodySchema } from '@/schemas';
+import { registry } from '@/openapi';
 
-import { registry } from '../../registry';
 import {
   AuthCookieHeader,
   internalServerErrorResponse,
+  unauthorizedResponse,
 } from '../common/response';
 
 registry.registerPath({
@@ -44,14 +41,7 @@ registry.registerPath({
         },
       },
     },
-    [StatusCodes.UNAUTHORIZED]: {
-      description: 'Refresh token is missing, invalid, expired, or revoked.',
-      content: {
-        'application/json': {
-          schema: ApiErrorResponseSchema,
-        },
-      },
-    },
+    ...unauthorizedResponse,
     ...internalServerErrorResponse,
   },
 });
