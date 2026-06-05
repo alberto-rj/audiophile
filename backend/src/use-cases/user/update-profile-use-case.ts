@@ -4,8 +4,7 @@ import {
   toSafeUser,
   UnauthorizedError,
 } from '@/helpers';
-import type { UserUpdateParams } from '@/repositories';
-import type { SafeUser } from '@/schemas';
+import type { SafeUser, UserUpdateParams } from '@/schemas';
 
 interface UpdateProfileUseCaseParams {
   payload: UserUpdateParams;

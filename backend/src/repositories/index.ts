@@ -10,10 +10,4 @@ export type {
   RefreshTokenRepository,
 } from './types/refresh-token-repository.types';
 
-export type {
-  UserCreateParams,
-  UserFindByEmailParams,
-  UserFindByIdParams,
-  UserRepository,
-  UserUpdateParams,
-} from './types/user-repository.types';
+export type { UserRepository } from './types/user-repository.types';
