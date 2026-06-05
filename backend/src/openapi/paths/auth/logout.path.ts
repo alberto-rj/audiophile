@@ -1,6 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
-import { registry } from '../../registry';
+import { registry } from '@/openapi';
+
 import { internalServerErrorResponse } from '../common/response';
 
 registry.registerPath({
