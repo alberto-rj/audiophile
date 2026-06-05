@@ -1,6 +1,10 @@
 import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 
+import { env } from '@/config';
+
 import { registry } from './registry';
+
+const { DEV_API_BASE_URL, PROD_API_BASE_URL } = env;
 
 // Register the Bearer security scheme (JWT)
 // Done here once - all endpoints can reference 'bearerAuth'
@@ -45,8 +49,8 @@ export function generateOpenAPISpec() {
       },
     ],
     servers: [
-      { url: 'http://localhost:4224', description: 'Development' },
-      { url: 'https://api.example.com', description: 'Production' },
+      { url: DEV_API_BASE_URL, description: 'Development' },
+      { url: PROD_API_BASE_URL, description: 'Production' },
     ],
     // Global security - all endpoints require Bearer by default
     // Public endpoints override with security: [] in its definition
