@@ -23,7 +23,7 @@ export function generateOpenAPISpec() {
     info: {
       title: 'audiophile API',
       version: '1.0.0',
-      description: 'Api complete documentation',
+      description: 'A complete audiophile API documentation.',
       contact: {
         name: 'Alberto José',
         url: 'https://github.com/alberto-rj',
@@ -46,6 +46,18 @@ export function generateOpenAPISpec() {
       {
         name: 'Orders',
         description: 'Orders management',
+      },
+      {
+        name: 'Cart',
+        description: 'Cart management',
+      },
+      {
+        name: 'Products',
+        description: 'Products management',
+      },
+      {
+        name: 'Categories',
+        description: 'Categories management',
       },
     ],
     servers: [
