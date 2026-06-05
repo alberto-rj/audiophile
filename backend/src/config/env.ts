@@ -7,7 +7,8 @@ const instructionsURL =
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(4224),
-  SERVER_URL: z.string(),
+  DEV_API_BASE_URL: z.string(),
+  PROD_API_BASE_URL: z.string(),
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
