@@ -77,27 +77,12 @@ export const ApiErrorResponseSchema = registry.register(
 
 export const ApiValidationErrorResponseSchema = z
   .object({
-    error: z.record(
-      z.string(),
-      z.object({
-        errors: z.array(z.string()),
-      }),
-    ),
+    error: z.record(z.string(), z.array(z.string())),
   })
   .default({
     error: {
-      fieldA: {
-        errors: [
-          'fieldA is required error message 1.',
-          'filedA must be a string.',
-        ],
-      },
-      fieldB: {
-        errors: [
-          'fieldB is required error message 1.',
-          'filedB must be a string.',
-        ],
-      },
+      fieldA: ['fieldA is required.', 'filedA must be a string.'],
+      fieldB: ['fieldB is required.', 'filedB must be a string.'],
     },
   });
 
@@ -110,18 +95,22 @@ export function makeApiResultResponseSchema<T extends z.ZodType>(schema: T) {
 export function makeApiResultListResponseSchema<T extends z.ZodType>(
   schema: T,
 ) {
-  return z
-    .object({
-      results: z.array(schema),
-    })
-    .openapi('ResultListResponse');
+  return z.object({
+    results: z.array(schema),
+  });
 }
 
 export function makeApiPaginatedResponseSchema<T extends z.ZodType>(schema: T) {
-  return z
-    .object({
-      results: z.array(schema),
-      pagination: ApiPaginationSchema,
-    })
-    .openapi('PaginatedResponse');
+  return z.object({
+    results: z.array(schema),
+    pagination: ApiPaginationSchema,
+  });
+}
+
+export function makeApiValidationErrorResponseSchema<T extends z.ZodType>(
+  schema: T,
+) {
+  return z.object({
+    error: schema,
+  });
 }

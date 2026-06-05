@@ -28,9 +28,7 @@ export function makeResBodyValidationError<T>(
   details: T,
 ): ResBodyValidationError<T> {
   return {
-    error: {
-      ...details,
-    },
+    error: details,
   };
 }
 
