@@ -60,5 +60,9 @@ export type {
   BaseUser,
   User,
   SafeUser,
-  UserCreateParams,
+  UserEmail,
+  UserId,
+  UserCreatedAt,
+  UserName,
+  UserPassword,
 } from './user/user.types';

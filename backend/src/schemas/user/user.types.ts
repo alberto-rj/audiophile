@@ -1,18 +1,33 @@
 import { z } from '@/config';
 
-import type { ApiUserCreateBodySchema, ApiUserSchema } from './user.schema';
+import type {
+  ApiUserSchema,
+  UserEmailSchema,
+  UserIdSchema,
+  UserNameSchema,
+  UserPasswordSchema,
+  UserCreatedAtSchema,
+} from './user.schema';
 
-export type UserCreateParams = z.infer<typeof ApiUserCreateBodySchema>;
+export type UserId = z.infer<typeof UserIdSchema>;
+
+export type UserName = z.infer<typeof UserNameSchema>;
+
+export type UserEmail = z.infer<typeof UserEmailSchema>;
+
+export type UserPassword = z.infer<typeof UserPasswordSchema>;
+
+export type UserCreatedAt = z.infer<typeof UserCreatedAtSchema>;
 
 export type SafeUser = z.infer<typeof ApiUserSchema>;
 
 export type BaseUser = {
-  id: number;
-  name: string;
-  email: string;
+  id: UserId;
+  name: UserName;
+  email: UserEmail;
 };
 
 export type User = BaseUser & {
-  password: string;
-  createdAt: string;
+  password: UserPassword;
+  createdAt: UserCreatedAt;
 };
