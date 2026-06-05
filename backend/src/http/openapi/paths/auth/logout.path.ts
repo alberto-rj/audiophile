@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 
-import { registry } from '@/openapi';
+import { registry } from '@/http/openapi';
 
 import { internalServerErrorResponse } from '../common/response';
 

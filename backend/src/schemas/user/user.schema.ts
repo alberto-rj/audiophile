@@ -1,5 +1,5 @@
 import { z } from '@/config';
-import { registry } from '@/openapi';
+import { registry } from '@/http/openapi';
 
 import { CreatedAtSchema } from '@/schemas/common';
 
