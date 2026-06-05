@@ -1,12 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
 
+import { registry } from '@/openapi';
 import {
   ApiAuthResponseSchema,
   ApiErrorResponseSchema,
   ApiRegisterBodySchema,
 } from '@/schemas';
 
-import { registry } from '../../registry';
 import {
   AuthCookieHeader,
   internalServerErrorResponse,

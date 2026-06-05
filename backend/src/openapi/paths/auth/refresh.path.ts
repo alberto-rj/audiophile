@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
-import { ApiAuthResponseSchema, ApiLoginBodySchema } from '@/schemas';
 import { registry } from '@/openapi';
+import { ApiAuthResponseSchema, ApiLoginBodySchema } from '@/schemas';
 
 import {
   AuthCookieHeader,
