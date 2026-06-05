@@ -7,7 +7,7 @@ import type {
   UserFindByEmailParams,
   UserRepository,
   UserUpdateParams,
-} from '../user-repository.types';
+} from '../types/user-repository.types';
 
 export class InMemoryUserRepository implements UserRepository {
   private items: Map<number, User>;

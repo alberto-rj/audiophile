@@ -8,7 +8,7 @@ export type {
   RefreshTokenFindByIdParams,
   RefreshTokenFindParams,
   RefreshTokenRepository,
-} from './refresh-token-repository.types';
+} from './types/refresh-token-repository.types';
 
 export type {
   UserCreateParams,
@@ -16,4 +16,4 @@ export type {
   UserFindByIdParams,
   UserRepository,
   UserUpdateParams,
-} from './user-repository.types';
+} from './types/user-repository.types';
