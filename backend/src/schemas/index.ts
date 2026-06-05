@@ -9,6 +9,23 @@ export {
 } from './auth/auth-response.schema';
 
 export {
+  CategoryDescriptionSchema,
+  CategoryIdSchema,
+  CategoryImageSchema,
+  CategoryNameSchema,
+  CategorySchema,
+  CategorySlugSchema,
+} from './category/category.schema';
+export type {
+  Category,
+  CategoryDescription,
+  CategoryId,
+  CategoryImage,
+  CategoryName,
+  CategorySlug,
+} from './category/category.types';
+
+export {
   ApiErrorResponseSchema,
   ApiErrorSchema,
   ApiPaginationSchema,
