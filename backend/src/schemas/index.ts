@@ -30,6 +30,7 @@ export {
   ApiUpdateProfileBodySchema,
   type ApiUpdateProfileBody,
 } from './user/update-profile.schema';
+export { ApiUserResponseSchema } from './user/user-response.schema';
 export {
   ApiUserCreateBodySchema,
   ApiUserSchema,
