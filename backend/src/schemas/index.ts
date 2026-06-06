@@ -32,14 +32,59 @@ export {
   ApiResultListResponse,
   ApiValidationErrorResponseSchema,
   CreatedAtSchema,
+  ImageSchema,
   LimitSchema,
   makeApiPaginatedResponseSchema,
   makeApiResultListResponseSchema,
   makeApiResultResponseSchema,
   makeApiValidationErrorResponseSchema,
   PageSchema,
+  ResponsiveImageSchema,
   UpdatedAtSchema,
 } from './common';
+
+export {
+  ApiGallerySchema,
+  GalleryIdSchema,
+  GallerySchema,
+} from './product/gallery.schema';
+export type { ApiGallery, Gallery, GalleryId } from './product/gallery.types';
+export {
+  ApiIncludeSchema,
+  IncludeIdSchema,
+  IncludeItemSchema,
+  IncludeQuantitySchema,
+} from './product/include.schema';
+export type {
+  ApiInclude,
+  Include,
+  IncludeItem,
+  IncludeQuantity,
+} from './product/include.types';
+export {
+  ApiProductSchema,
+  ProductBaseSchema,
+  ProductDescriptionSchema,
+  ProductFeaturesSchema,
+  ProductIdSchema,
+  ProductIsNewSchema,
+  ProductNameSchema,
+  ProductPriceSchema,
+  ProductSchema,
+  ProductSlugSchema,
+} from './product/product.schema';
+export type {
+  ApiProduct,
+  Product,
+  ProductBase,
+  ProductDescription,
+  ProductFeatures,
+  ProductId,
+  ProductIsNew,
+  ProductName,
+  ProductPrice,
+  ProductSlug,
+} from './product/product.types';
 
 export { type RefreshToken } from './refresh-token/refresh-token.types';
 

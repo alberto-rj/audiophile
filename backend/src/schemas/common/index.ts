@@ -38,6 +38,16 @@ export const LimitSchema = z.coerce
     maximum: 100,
   });
 
+export const ImageSchema = z.url({
+  error: 'image must be a url.',
+});
+
+export const ResponsiveImageSchema = z.object({
+  mobile: ImageSchema,
+  tablet: ImageSchema,
+  desktop: ImageSchema,
+});
+
 export const ApiErrorSchema = z.object({
   message: z.string().openapi({
     example: 'Something went wrong',
