@@ -20,6 +20,8 @@ const { PORT, NODE_ENV, CORS_HEADERS, CORS_METHODS, CORS_ORIGINS } = env;
 
 const app = express();
 
+app.use(express.static('public'));
+
 // Cors
 app.use(
   cors({
@@ -71,6 +73,7 @@ if (NODE_ENV !== 'production') {
     swaggerUi.serve,
     swaggerUi.setup(openApiSpec, {
       customSiteTitle: 'audiophile API | Docs',
+      customfavIcon: '/favicon.svg',
       swaggerOptions: {
         persistAuthorization: true, // Keep the token between page reloads
         filter: true, // endpoint search bar
