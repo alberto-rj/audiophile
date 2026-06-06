@@ -2,7 +2,7 @@
 
 # Audiophile (In Development)
 
-A full-stack e-commerce application for premium audio equipment built with React, TypeScript, Express.js, and PostgreSQL.
+A full-stack e-commerce platform for premium audio equipment featuring authentication, shopping cart management, product catalog, order processing, responsive design, and a REST API built with TypeScript.
 
 [Live Demo (coming soon)](#)
 •
