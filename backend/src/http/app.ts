@@ -74,6 +74,7 @@ if (NODE_ENV !== 'production') {
     swaggerUi.setup(openApiSpec, {
       customSiteTitle: 'audiophile API | Docs',
       customfavIcon: '/favicon.svg',
+      customCssUrl: '/css/swagger-ui.css',
       swaggerOptions: {
         persistAuthorization: true, // Keep the token between page reloads
         filter: true, // endpoint search bar
