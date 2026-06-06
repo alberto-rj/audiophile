@@ -1,119 +1,460 @@
-# Frontend Mentor - Audiophile e-commerce website solution
+<div align="center">
 
-This is a solution to the [Audiophile e-commerce website challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+# Audiophile
 
-## Table of contents
+A full-stack e-commerce application for premium audio equipment built with React, TypeScript, Express.js, and PostgreSQL.
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
+[Live Demo](#)
+•
+[API Docs](#)
+•
+[Source Code](https://github.com/alberto-rj/audiophile)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+</div>
 
-## Overview
+---
 
-### The challenge
+## About The Project
 
-Users should be able to:
+Audiophile is a full-stack e-commerce platform inspired by a real-world online store for high-end audio products.
 
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Add/Remove products from the cart
-- Edit product quantities in the cart
-- Fill in all fields in the checkout
-- Receive form validations if fields are missed or incorrect during checkout
-- See correct checkout totals depending on the products in the cart
-  - Shipping always adds $50 to the order
-  - VAT is calculated as 20% of the product total, excluding shipping
-- See an order confirmation modal after checking out with an order summary
-- **Bonus**: Keep track of what's in the cart, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
+The project was built to practice production-oriented frontend and backend development, focusing on authentication, shopping cart management, API design, validation, accessibility, and scalable application architecture.
 
-### Screenshot
+Rather than focusing only on features, the main goal was to build a system with clear separation of concerns, reusable business logic, and maintainable code that could realistically evolve into a larger application.
 
-![](./screenshot.jpg)
+---
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
+## Screenshots
 
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
+### Home Page
 
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
+![Image](./screenshots/desktop-home-page.png)
 
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+### Product Details
 
-### Links
+![Image](./screenshots/desktop-product-details-page.png)
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+### Shopping Cart
 
-## My process
+![Image](./screenshots/desktop-shopping-cart.png)
 
-### Built with
+### Checkout Flow
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Styled Components](https://styled-components.com/) - For styles
+![Image](./screenshots/desktop-checkout-page.png)
 
-### What I learned
+### Mobile Experience
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+![Image](./screenshots/mobile-categories-page.png)
 
-To see how you can add code snippets, see below:
+---
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+## Live Demo
+
+- **Frontend:** https://your-demo.vercel.app
+
+- **Backend API:** https://your-api.onrender.com
+
+- **Swagger Documentation:** https://your-api.onrender.com/api-docs
+
+---
+
+## Architecture Overview
+
+```text
+┌───────────────┐
+│ React Client  │
+└───────┬───────┘
+        │ HTTP
+        ▼
+┌────────────────────┐
+│ Express API        │
+├────────────────────┤
+│ Controllers        │
+│ Use Cases          │
+│ Repository Layer   │
+│ Validation (Zod)   │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│ PostgreSQL         │
+└────────────────────┘
 ```
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
+### Backend Layers
+
+```text
+HTTP Layer
+   ↓
+Controllers
+   ↓
+Use Cases
+   ↓
+Repositories
+   ↓
+Database
 ```
 
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉');
-};
+The business rules live entirely inside use cases, allowing repositories, databases, and HTTP implementations to be swapped without affecting application logic.
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- React 19
+- Tailwind
+- TypeScript
+- Redux Toolkit
+- RTK Query
+- React Router
+- React Hook Form
+- Zod
+- Storybook
+- MSW
+- Vitest
+
+### Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- Zod
+- JWT Authentication
+- OpenAPI / Swagger
+
+### Database
+
+- PostgreSQL
+- Repository Pattern
+- In-Memory Repositories (Testing)
+
+### Tooling
+
+- ESLint
+- Prettier
+- GitHub
+- Vite
+
+---
+
+## Key Features
+
+### Authentication
+
+- User registration
+- Login
+- Logout
+- Refresh token flow
+- Protected routes
+
+### User Management
+
+- View profile
+- Update profile information
+
+### Shopping Experience
+
+- Product catalog
+- Product details page
+- Responsive gallery
+- Shopping cart
+- Checkout flow
+
+### Developer Experience
+
+- Auto-generated OpenAPI documentation
+- Shared validation schemas
+- In-memory repositories
+- Mock Service Worker integration
+- Storybook component documentation
+
+---
+
+## Technical Decisions
+
+### Repository Pattern
+
+The API depends on repository interfaces rather than concrete implementations.
+
+This allows business logic to remain independent from the persistence layer and makes testing significantly easier.
+
+Current implementations include:
+
+- In-memory repositories
+- Database repositories (planned)
+
+This approach makes replacing PostgreSQL, Prisma, or any other persistence solution straightforward.
+
+---
+
+### Zod as a Single Source of Truth
+
+All request and response contracts are defined with Zod schemas.
+
+Benefits:
+
+- Runtime validation
+- Strong TypeScript inference
+- Consistent API contracts
+- OpenAPI documentation generation
+
+This avoids duplicated validation logic and reduces maintenance overhead.
+
+---
+
+### Use Cases Over Fat Controllers
+
+Controllers are intentionally thin.
+
+Their responsibilities are limited to:
+
+- Parsing requests
+- Calling use cases
+- Returning responses
+
+Business rules live inside dedicated use cases, making them easier to test and reuse.
+
+---
+
+### RTK Query for Server State
+
+The frontend uses RTK Query instead of manually managing loading and caching logic.
+
+Benefits include:
+
+- Automatic caching
+- Request deduplication
+- Optimistic updates
+- Built-in loading and error states
+
+This reduced boilerplate significantly compared to traditional Redux approaches.
+
+---
+
+### HTTP-Only Authentication Cookies
+
+Authentication tokens are stored in HTTP-only cookies rather than localStorage.
+
+Benefits:
+
+- Better protection against XSS attacks
+- Improved security for authentication flows
+- More realistic production setup
+
+The tradeoff is a slightly more complex refresh token implementation.
+
+---
+
+## Project Structure
+
+### Frontend
+
+```bash
+src/
+├── app/
+├── components/
+├── hooks/
+├── pages/
+├── layouts/
+├── mocks/
+├── libs/
+└── assets/
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+### Backend
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+```bash
+src/
+├── config/
+├── helpers/
+├── http/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── routes/
+│   └── openapi/
+├── repositories/
+├── schemas/
+└── use-cases/
+```
 
-### Continued development
+---
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+## Running Locally
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+```bash
+git clone https://github.com/alberto-rj/audiophile.git
 
-### Useful resources
+cd audiophile
+```
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+### Backend
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+Terminal 1
+
+```bash
+cd backend
+
+npm install
+
+cp .env.example .env
+
+npm run dev
+```
+
+### Frontend
+
+Terminal 2
+
+```bash
+cd frontend
+
+npm install
+
+cp .env.example .env
+
+npm run dev
+```
+
+Frontend:
+http://localhost:5173
+
+Backend:
+http://localhost:4224
+
+### Clone the repositories
+
+```bash
+git clone https://github.com/alberto-rj/audiophile
+```
+
+### Backend
+
+```bash
+cd backend
+
+npm install
+
+cp .env.example .env
+
+npm run dev
+```
+
+### Frontend
+
+```bash
+cd frontend
+
+npm install
+
+cp .env.example .env
+
+npm run dev
+```
+
+---
+
+## Environment Variables
+
+### Backend
+
+```env
+NODE_ENV=development
+
+PORT=4224
+
+DEV_API_BASE_URL=http://localhost:4224/api/v1
+
+DATABASE_URL=postgresql://user_example:password_example@localhost:5432/db_example
+
+ACCESS_SECRET=your-secret
+
+ACCESS_EXPIRES_MS=420000
+
+REFRESH_EXPIRES_MS=604800000
+
+CORS_ORIGINS=http://localhost:5173
+```
+
+### Frontend
+
+```env
+VITE_NODE_ENV=development
+
+VITE_API_BASE_URL=/api
+```
+
+---
+
+## API Documentation
+
+Swagger UI is automatically generated from the OpenAPI registry.
+
+After starting the backend:
+
+```bash
+http://localhost:3333/api-docs
+```
+
+This keeps validation rules and documentation synchronized.
+
+---
+
+## Engineering Highlights
+
+This project was intentionally designed with software engineering practices commonly found in production applications rather than focusing exclusively on features.
+
+Highlights include:
+
+- Layered backend architecture (Controllers → Use Cases → Repositories)
+- Repository Pattern with swappable implementations
+- JWT authentication with refresh token rotation
+- HTTP-only cookie authentication
+- OpenAPI documentation generated from source schemas
+- Shared validation through Zod
+- RTK Query for server-state management
+- Storybook for component development
+- Mock Service Worker for frontend isolation and testing
+- In-memory repositories for fast and deterministic tests
+
+## What I Learned
+
+Building Audiophile taught me that application architecture becomes increasingly important as a project grows.
+
+The most valuable lessons were:
+
+- Designing backend systems around use cases rather than framework code
+- Keeping business logic independent from Express and database implementations
+- Managing authentication securely using HTTP-only cookies and refresh tokens
+- Treating validation schemas as a single source of truth
+- Building reusable UI systems with Storybook
+- Separating client state from server state using RTK Query
+
+If I started the project again today, I would introduce the PostgreSQL layer earlier and add end-to-end testing from the beginning to validate the complete purchase flow.
+
+---
+
+## Future Improvements
+
+- PostgreSQL persistence layer
+- Drizzle ORM integration
+- Order management system
+- Payment gateway integration
+- Product reviews
+- Admin dashboard
+- CI/CD pipeline
+- Docker support
+- End-to-end testing
+
+---
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+### Alberto José
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- GitHub: [https://github.com/alberto-rj](https://github.com/alberto-rj)
 
-## Acknowledgments
+- LinkedIn: [https://linkedin.com/in/alberto-rj](https://linkedin.com/in/alberto-rj)
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Frontend Mentor: [https://frontendmentor.io/profile/alberto-rj](https://frontendmentor.io/profile/alberto-rj)
