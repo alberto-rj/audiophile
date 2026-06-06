@@ -303,6 +303,9 @@ cp .env.example .env
 npm run dev
 ```
 
+Backend:
+http://localhost:4224
+
 ### Frontend
 
 Terminal 2
@@ -320,66 +323,49 @@ npm run dev
 Frontend:
 http://localhost:5173
 
-Backend:
-http://localhost:4224
-
-### Clone the repositories
-
-```bash
-git clone https://github.com/alberto-rj/audiophile
-```
-
-### Backend
-
-```bash
-cd backend
-
-npm install
-
-cp .env.example .env
-
-npm run dev
-```
-
-### Frontend
-
-```bash
-cd frontend
-
-npm install
-
-cp .env.example .env
-
-npm run dev
-```
-
 ---
 
 ## Environment Variables
 
-### Backend
+`backend/.env.example`:
 
 ```env
+# Server
 NODE_ENV=development
-
 PORT=4224
-
 DEV_API_BASE_URL=http://localhost:4224/api/v1
+PROD_API_BASE_URL=https://api.audiophile-domain.com/api/v1
 
+# Database
 DATABASE_URL=postgresql://user_example:password_example@localhost:5432/db_example
+POSTGRES_USER=user_example
+POSTGRES_PASSWORD=password_example
 
-ACCESS_SECRET=your-secret
-
+# Access Token
+ACCESS_SECRET=your-super-secret-jwt-key-change-this # to generate run: openssl rand -base64 32
 ACCESS_EXPIRES_MS=420000
 
+# Refresh Token
 REFRESH_EXPIRES_MS=604800000
 
-CORS_ORIGINS=http://localhost:5173
+# Logger
+LOG_REQUEST_BODY=true
+LOG_REQUEST_HEADER=true
+
+# CORS
+CORS_ORIGINS=https://audiophile-domain.com;https://www.audiophile-domain.com;http://localhost:5173;http://localhost:4224;https://api.audiophile-domain.com
+CORS_METHODS=GET;POST;PUT;PATCH;DELETE;OPTIONS
+CORS_HEADERS=Content-Type;Authorization
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
 ```
 
-### Frontend
+`frontend/.env.example`:
 
 ```env
+
 VITE_NODE_ENV=development
 
 VITE_API_BASE_URL=/api
@@ -394,7 +380,7 @@ Swagger UI is automatically generated from the OpenAPI registry.
 After starting the backend:
 
 ```bash
-http://localhost:3333/api-docs
+http://localhost:4224/api-docs
 ```
 
 This keeps validation rules and documentation synchronized.
