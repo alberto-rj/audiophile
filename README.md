@@ -2,17 +2,15 @@
 
 # Audiophile (In Development)
 
-A full-stack e-commerce application for premium audio equipment built with React, TypeScript, Express.js, and PostgreSQL.
+A full-stack e-commerce platform for premium audio equipment featuring authentication, shopping cart management, product catalog, order processing, responsive design, and a REST API built with TypeScript.
 
-[Live Demo](#)
+[Live Demo (coming soon)](#)
 •
-[API Docs](#)
+[API Docs](#api-documentation)
 •
 [Source Code](https://github.com/alberto-rj/audiophile)
 
 </div>
-
----
 
 ## About The Project
 
@@ -21,8 +19,6 @@ Audiophile is a full-stack e-commerce platform inspired by a real-world online s
 The project was built to practice production-oriented frontend and backend development, focusing on authentication, shopping cart management, API design, validation, accessibility, and scalable application architecture.
 
 Rather than focusing only on features, the main goal was to build a system with clear separation of concerns, reusable business logic, and maintainable code that could realistically evolve into a larger application.
-
----
 
 ## Screenshots
 
@@ -46,8 +42,6 @@ Rather than focusing only on features, the main goal was to build a system with 
 
 ![Image](./screenshots/mobile-categories-page.png)
 
----
-
 ## Live Demo
 
 - **Frontend:** https://your-demo.vercel.app
@@ -55,8 +49,6 @@ Rather than focusing only on features, the main goal was to build a system with 
 - **Backend API:** https://your-api.onrender.com
 
 - **Swagger Documentation:** https://your-api.onrender.com/api-docs
-
----
 
 ## Architecture Overview
 
@@ -97,8 +89,6 @@ Database
 
 The business rules live entirely inside use cases, allowing repositories, databases, and HTTP implementations to be swapped without affecting application logic.
 
----
-
 ## Tech Stack
 
 ### Frontend
@@ -137,8 +127,6 @@ The business rules live entirely inside use cases, allowing repositories, databa
 - GitHub
 - Vite
 
----
-
 ## Key Features
 
 ### Authentication
@@ -170,8 +158,6 @@ The business rules live entirely inside use cases, allowing repositories, databa
 - Mock Service Worker integration
 - Storybook component documentation
 
----
-
 ## Technical Decisions
 
 ### Repository Pattern
@@ -187,8 +173,6 @@ Current implementations include:
 
 This approach makes replacing PostgreSQL, Prisma, or any other persistence solution straightforward.
 
----
-
 ### Zod as a Single Source of Truth
 
 All request and response contracts are defined with Zod schemas.
@@ -202,8 +186,6 @@ Benefits:
 
 This avoids duplicated validation logic and reduces maintenance overhead.
 
----
-
 ### Use Cases Over Fat Controllers
 
 Controllers are intentionally thin.
@@ -215,8 +197,6 @@ Their responsibilities are limited to:
 - Returning responses
 
 Business rules live inside dedicated use cases, making them easier to test and reuse.
-
----
 
 ### RTK Query for Server State
 
@@ -231,8 +211,6 @@ Benefits include:
 
 This reduced boilerplate significantly compared to traditional Redux approaches.
 
----
-
 ### HTTP-Only Authentication Cookies
 
 Authentication tokens are stored in HTTP-only cookies rather than localStorage.
@@ -244,8 +222,6 @@ Benefits:
 - More realistic production setup
 
 The tradeoff is a slightly more complex refresh token implementation.
-
----
 
 ## Project Structure
 
@@ -278,8 +254,6 @@ src/
 ├── schemas/
 └── use-cases/
 ```
-
----
 
 ## Running Locally
 
@@ -322,8 +296,6 @@ npm run dev
 
 Frontend:
 http://localhost:5173
-
----
 
 ## Environment Variables
 
@@ -371,8 +343,6 @@ VITE_NODE_ENV=development
 VITE_API_BASE_URL=/api
 ```
 
----
-
 ## API Documentation
 
 Swagger UI is automatically generated from the OpenAPI registry.
@@ -384,8 +354,6 @@ http://localhost:4224/api-docs
 ```
 
 This keeps validation rules and documentation synchronized.
-
----
 
 ## Engineering Highlights
 
@@ -419,8 +387,6 @@ The most valuable lessons were:
 
 If I started the project again today, I would introduce the PostgreSQL layer earlier and add end-to-end testing from the beginning to validate the complete purchase flow.
 
----
-
 ## Future Improvements
 
 - PostgreSQL persistence layer
@@ -432,8 +398,6 @@ If I started the project again today, I would introduce the PostgreSQL layer ear
 - CI/CD pipeline
 - Docker support
 - End-to-end testing
-
----
 
 ## Author
 
