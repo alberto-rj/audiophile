@@ -1,6 +1,6 @@
 <div align="center">
 
-# Audiophile
+# Audiophile (In Development)
 
 A full-stack e-commerce application for premium audio equipment built with React, TypeScript, Express.js, and PostgreSQL.
 
