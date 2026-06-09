@@ -1,7 +1,7 @@
 import { z } from '@/config';
 import { registry } from '@/http/openapi';
 
-import { CreatedAtSchema } from '@/schemas/common';
+import { CreatedAtSchema } from '@/schemas/common/common.schema';
 
 export const UserIdSchema = z.coerce
   .number({

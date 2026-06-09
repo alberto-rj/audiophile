@@ -1,3 +1,22 @@
+export {
+  ApiErrorResponseSchema,
+  ApiErrorSchema,
+  ApiPaginationSchema,
+  ApiResultListResponse,
+  ApiValidationErrorResponseSchema,
+  CreatedAtSchema,
+  ImageSchema,
+  LimitSchema,
+  makeApiPaginatedResponseSchema,
+  makeApiResultListResponseSchema,
+  makeApiResultResponseSchema,
+  makeApiValidationErrorResponseSchema,
+  PageSchema,
+  ResponsiveImageSchema,
+  UpdatedAtSchema,
+} from './common/common.schema';
+export type { ResponsiveImage } from './common/common.types';
+
 export { ApiLoginBodySchema, type ApiLoginBody } from './auth/login.schema';
 export {
   ApiRegisterBodySchema,
@@ -26,42 +45,6 @@ export type {
 } from './category/category.types';
 
 export {
-  ApiErrorResponseSchema,
-  ApiErrorSchema,
-  ApiPaginationSchema,
-  ApiResultListResponse,
-  ApiValidationErrorResponseSchema,
-  CreatedAtSchema,
-  ImageSchema,
-  LimitSchema,
-  makeApiPaginatedResponseSchema,
-  makeApiResultListResponseSchema,
-  makeApiResultResponseSchema,
-  makeApiValidationErrorResponseSchema,
-  PageSchema,
-  ResponsiveImageSchema,
-  UpdatedAtSchema,
-} from './common';
-
-export {
-  ApiGallerySchema,
-  GalleryIdSchema,
-  GallerySchema,
-} from './product/gallery.schema';
-export type { ApiGallery, Gallery, GalleryId } from './product/gallery.types';
-export {
-  ApiIncludeSchema,
-  IncludeIdSchema,
-  IncludeItemSchema,
-  IncludeQuantitySchema,
-} from './product/include.schema';
-export type {
-  ApiInclude,
-  Include,
-  IncludeItem,
-  IncludeQuantity,
-} from './product/include.types';
-export {
   ApiProductSchema,
   ProductBaseSchema,
   ProductDescriptionSchema,
@@ -72,6 +55,10 @@ export {
   ProductPriceSchema,
   ProductSchema,
   ProductSlugSchema,
+  ApiIncludeSchema,
+  IncludeIdSchema,
+  IncludeItemSchema,
+  IncludeQuantitySchema,
 } from './product/product.schema';
 export type {
   ApiProduct,
@@ -84,6 +71,14 @@ export type {
   ProductName,
   ProductPrice,
   ProductSlug,
+  ApiGallery,
+  Gallery,
+  GalleryId,
+  GalleryImage,
+  ApiInclude,
+  Include,
+  IncludeItem,
+  IncludeQuantity,
 } from './product/product.types';
 
 export { type RefreshToken } from './refresh-token/refresh-token.types';
