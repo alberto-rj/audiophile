@@ -44,6 +44,8 @@ export { parseSchema } from './parse-schema';
 
 export { getHash, hasCorrectHash } from './password';
 
+export { toSlug } from './to-slug';
+
 export {
   clearRefreshTokenCookie,
   getAccessToken,

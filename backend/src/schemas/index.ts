@@ -15,7 +15,7 @@ export {
   ResponsiveImageSchema,
   UpdatedAtSchema,
 } from './common/common.schema';
-export type { ResponsiveImage } from './common/common.types';
+export type { ResponsiveImage, Pagination } from './common/common.types';
 
 export { ApiLoginBodySchema, type ApiLoginBody } from './auth/login.schema';
 export {
@@ -28,21 +28,45 @@ export {
 } from './auth/auth-response.schema';
 
 export {
+  ApiCategorySchema,
   CategoryDescriptionSchema,
   CategoryIdSchema,
   CategoryImageSchema,
   CategoryNameSchema,
   CategorySchema,
   CategorySlugSchema,
+  CategoryCreateParamsSchema,
+  CategoryDeleteByIdParamsSchema,
+  CategoryDeleteBySlugParamsSchema,
+  CategoryFindByIdParamsSchema,
+  CategoryFindBySlugParamsSchema,
+  CategoryUpdateParamsSchema,
 } from './category/category.schema';
 export type {
+  ApiCategory,
   Category,
   CategoryDescription,
   CategoryId,
   CategoryImage,
   CategoryName,
   CategorySlug,
+  CategoryCreateParams,
+  CategoryDeleteByIdParams,
+  CategoryDeleteBySlugParams,
+  CategoryFindByIdParams,
+  CategoryFindBySlugParams,
+  CategoryFindManyParams,
+  CategoryUpdateParams,
 } from './category/category.types';
+export {
+  makeCategory,
+  makeCategoryCreateParams,
+  makeCategoryDeleteByIdParams,
+  makeCategoryDeleteBySlugParams,
+  makeCategoryFindByIdParams,
+  makeCategoryFindBySlugParams,
+  makeCategoryUpdateParams,
+} from './category/category.helpers';
 
 export {
   ApiProductSchema,

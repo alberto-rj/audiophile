@@ -2,6 +2,8 @@ export { InMemoryUserRepository } from './in-memory/in-memory-user-repository';
 
 export { InMemoryRefreshTokenRepository } from './in-memory/in-memory-refresh-token-repository';
 
+export type { CategoryRepository } from './types/category-repository.types';
+
 export type {
   RefreshTokenCreateParams,
   RefreshTokenDeleteParams,
