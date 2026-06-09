@@ -21,6 +21,9 @@ const envSchema = z.object({
   CORS_ORIGINS: z.string().transform((arg) => arg.split(';')),
   CORS_METHODS: z.string().transform((arg) => arg.split(';')),
   CORS_HEADERS: z.string().transform((arg) => arg.split(';')),
+  CLOUDINARY_CLOUD_NAME: z.string(),
+  CLOUDINARY_API_KEY: z.string(),
+  CLOUDINARY_API_SECRET: z.string(),
 });
 
 dotenv.config({ path: '.env', quiet: true });
