@@ -1,3 +1,5 @@
+import type { PaginateResult } from './paginate';
+
 export type ResBodyError = {
   error: {
     message: string;
@@ -14,6 +16,18 @@ export type ResBodyResult<T> = {
 
 export type ResBodyResultList<T> = {
   results: T;
+};
+
+export type ResBodyPagination = {
+  totalPages: number;
+  page: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+};
+
+export type ResBodyPaginationResult<T> = {
+  results: T[];
+  pagination: ResBodyPagination;
 };
 
 export function makeResBodyError(message: string): ResBodyError {
@@ -41,5 +55,23 @@ export function makeResBodyResult<T>(resource: T): ResBodyResult<T> {
 export function makeResBodyResultList<T>(resources: T): ResBodyResultList<T> {
   return {
     results: resources,
+  };
+}
+
+export function makeResBodyPaginationResult<T>({
+  items,
+  hasNext,
+  hasPrev,
+  page,
+  totalPages,
+}: PaginateResult<T>) {
+  return {
+    results: items,
+    pagination: {
+      hasNext,
+      hasPrev,
+      page,
+      totalPages,
+    },
   };
 }

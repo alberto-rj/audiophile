@@ -1,25 +1,19 @@
 import type { z } from '@/config';
 
 import {
-  ApiGallerySchema,
-  ApiIncludeSchema,
   ApiProductSchema,
-  GalleryIdSchema,
-  GalleryImageSchema,
-  GallerySchema,
-  IncludeItemSchema,
-  IncludeQuantitySchema,
-  IncludeSchema,
   ProductBaseSchema,
+  ProductSchema,
+} from './product.schema';
+import type {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
   ProductIdSchema,
   ProductIsNewSchema,
   ProductNameSchema,
   ProductPriceSchema,
-  ProductSchema,
   ProductSlugSchema,
-} from './product.schema';
+} from './product.base.schema';
 
 export type ProductId = z.infer<typeof ProductIdSchema>;
 
@@ -40,21 +34,3 @@ export type ProductBase = z.infer<typeof ProductBaseSchema>;
 export type Product = z.infer<typeof ProductSchema>;
 
 export type ApiProduct = z.infer<typeof ApiProductSchema>;
-
-// gallery
-export type GalleryId = z.infer<typeof GalleryIdSchema>;
-
-export type GalleryImage = z.infer<typeof GalleryImageSchema>;
-
-export type Gallery = z.infer<typeof GallerySchema>;
-
-export type ApiGallery = z.infer<typeof ApiGallerySchema>;
-
-// include
-export type IncludeQuantity = z.infer<typeof IncludeQuantitySchema>;
-
-export type IncludeItem = z.infer<typeof IncludeItemSchema>;
-
-export type Include = z.infer<typeof IncludeSchema>;
-
-export type ApiInclude = z.infer<typeof ApiIncludeSchema>;

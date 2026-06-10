@@ -1,13 +1,13 @@
 export {
   ApiErrorResponseSchema,
   ApiErrorSchema,
-  ApiPaginationSchema,
+  ApiPaginationQuerySchema,
   ApiResultListResponse,
   ApiValidationErrorResponseSchema,
   CreatedAtSchema,
   ImageSchema,
   LimitSchema,
-  makeApiPaginatedResponseSchema,
+  makeApiPaginationResponseSchema,
   makeApiResultListResponseSchema,
   makeApiResultResponseSchema,
   makeApiValidationErrorResponseSchema,
@@ -15,7 +15,11 @@ export {
   ResponsiveImageSchema,
   UpdatedAtSchema,
 } from './common/common.schema';
-export type { ResponsiveImage, Pagination } from './common/common.types';
+export type {
+  ApiPaginationQuery,
+  ApiPaginationResponse,
+  ResponsiveImage,
+} from './common/common.types';
 
 export { ApiLoginBodySchema, type ApiLoginBody } from './auth/login.schema';
 export {
@@ -28,22 +32,31 @@ export {
 } from './auth/auth-response.schema';
 
 export {
+  ApiCategoryCreateBodySchema,
+  ApiCategoryIdParamsSchema,
+  ApiCategoryPaginationQuerySchema,
   ApiCategorySchema,
+  ApiCategorySlugParamsSchema,
+  ApiCategoryUpdateBodySchema,
+} from './category/category.api.schema';
+export type {
+  ApiCategory,
+  ApiCategoryCreateBody,
+  ApiCategoryIdParams,
+  ApiCategoryPaginationQuery,
+  ApiCategorySlugParams,
+  ApiCategoryUpdateBody,
+} from './category/category.api.types';
+export {
   CategoryDescriptionSchema,
   CategoryIdSchema,
   CategoryImageSchema,
   CategoryNameSchema,
-  CategorySchema,
   CategorySlugSchema,
-  CategoryCreateParamsSchema,
-  CategoryDeleteByIdParamsSchema,
-  CategoryDeleteBySlugParamsSchema,
-  CategoryFindByIdParamsSchema,
-  CategoryFindBySlugParamsSchema,
-  CategoryUpdateParamsSchema,
-} from './category/category.schema';
+} from './category/category.base.schema';
+export { CategorySchema } from './category/category.schema';
+
 export type {
-  ApiCategory,
   Category,
   CategoryDescription,
   CategoryId,
@@ -65,24 +78,46 @@ export {
   makeCategoryDeleteBySlugParams,
   makeCategoryFindByIdParams,
   makeCategoryFindBySlugParams,
-  makeCategoryUpdateParams,
+  makeCategoryFindManyParams,
+  makeCategoryUpdateBody,
 } from './category/category.helpers';
 
 export {
-  ApiProductSchema,
-  ProductBaseSchema,
+  GalleryIdSchema,
+  GalleryImageSchema,
+} from './product/gallery.base.schema';
+export { ApiGallerySchema, GallerySchema } from './product/gallery.schema';
+export type {
+  ApiGallery,
+  Gallery,
+  GalleryId,
+  GalleryImage,
+} from './product/gallery.types';
+export {
+  IncludeIdSchema,
+  IncludeItemSchema,
+  IncludeQuantitySchema,
+} from './product/include.base.schema';
+export { ApiIncludeSchema, IncludeSchema } from './product/include.schema';
+export type {
+  ApiInclude,
+  Include,
+  IncludeItem,
+  IncludeQuantity,
+} from './product/include.types';
+export {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
   ProductIdSchema,
   ProductIsNewSchema,
   ProductNameSchema,
   ProductPriceSchema,
-  ProductSchema,
   ProductSlugSchema,
-  ApiIncludeSchema,
-  IncludeIdSchema,
-  IncludeItemSchema,
-  IncludeQuantitySchema,
+} from './product/product.base.schema';
+export {
+  ApiProductSchema,
+  ProductBaseSchema,
+  ProductSchema,
 } from './product/product.schema';
 export type {
   ApiProduct,
@@ -95,14 +130,6 @@ export type {
   ProductName,
   ProductPrice,
   ProductSlug,
-  ApiGallery,
-  Gallery,
-  GalleryId,
-  GalleryImage,
-  ApiInclude,
-  Include,
-  IncludeItem,
-  IncludeQuantity,
 } from './product/product.types';
 
 export { type RefreshToken } from './refresh-token/refresh-token.types';

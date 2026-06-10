@@ -1,6 +1,16 @@
 export { makeLoginPresenter } from './auth/make-login-presenter';
 export { makeRegisterPresenter } from './auth/make-register-presenter';
 
+export { makeCategoryRepository } from './category/make-category-repository';
+
+export {
+  IMAGE_TRANSFORMS,
+  buildImageUrl,
+  buildResponseImage,
+  cloudinary,
+  uploadImage,
+} from './cloudinary/cloudinary';
+
 export {
   asyncLocalStorage,
   getRequestContext,
@@ -31,6 +41,7 @@ export { toSafeUser } from './user/to-safe-user';
 
 export {
   makeResBodyError,
+  makeResBodyPaginationResult,
   makeResBodyResult,
   makeResBodyResultList,
   makeResBodyValidationError,
@@ -39,6 +50,8 @@ export {
   type ResBodyResultList,
   type ResBodyValidationError,
 } from './make-res-body';
+
+export { paginate, type PaginateParams, type PaginateResult } from './paginate';
 
 export { parseSchema } from './parse-schema';
 

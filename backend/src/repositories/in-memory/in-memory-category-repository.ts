@@ -1,15 +1,16 @@
-import { makeCategory, type Category } from '@/schemas';
-
+import {
+  makeCategory,
+  type Category,
+  type CategoryCreateParams,
+  type CategoryDeleteByIdParams,
+  type CategoryDeleteBySlugParams,
+  type CategoryFindByIdParams,
+  type CategoryFindBySlugParams,
+  type CategoryFindManyParams,
+  type CategoryUpdateParams,
+} from '@/schemas';
 import type { CategoryRepository } from '@/repositories';
-import type {
-  CategoryCreateParams,
-  CategoryDeleteByIdParams,
-  CategoryDeleteBySlugParams,
-  CategoryFindByIdParams,
-  CategoryFindBySlugParams,
-  CategoryFindManyParams,
-  CategoryUpdateParams,
-} from '@/schemas/category/category.types';
+import { paginate } from '@/helpers';
 
 export class InMemoryCategoryRepository implements CategoryRepository {
   private items: Map<number, Category>;
@@ -56,10 +57,8 @@ export class InMemoryCategoryRepository implements CategoryRepository {
 
   async findMany({ page, limit }: CategoryFindManyParams) {
     const items = Array.from(this.items.values());
-    const start = (page - 1) * limit;
-    const end = start + limit;
 
-    const foundItems = items.slice(start, end);
+    const foundItems = paginate({ items, page, limit });
 
     return foundItems;
   }
@@ -69,6 +68,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
 
     for (const [, category] of this.items.entries()) {
       if (category.id === id) {
+        this.items.delete(category.id);
         foundItem = category;
       }
     }
@@ -81,6 +81,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
 
     for (const [, category] of this.items.entries()) {
       if (category.slug === slug) {
+        this.items.delete(category.id);
         foundItem = category;
       }
     }

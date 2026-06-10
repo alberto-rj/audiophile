@@ -1,3 +1,5 @@
+export { InMemoryCategoryRepository } from './in-memory/in-memory-category-repository';
+
 export { InMemoryUserRepository } from './in-memory/in-memory-user-repository';
 
 export { InMemoryRefreshTokenRepository } from './in-memory/in-memory-refresh-token-repository';

@@ -54,9 +54,28 @@ export const ApiErrorSchema = z.object({
   }),
 });
 
-export const ApiPaginationSchema = z.object({
+export const ApiPaginationQuerySchema = z.object({
   page: PageSchema,
   limit: LimitSchema,
+});
+
+export const ApiPaginationResponseSchema = z.object({
+  page: PageSchema,
+  totalPages: z.number().openapi({
+    description: 'Number of the pages.',
+    example: 10,
+    readOnly: true,
+  }),
+  hasPrev: z.boolean().openapi({
+    description: 'Has previous page or not.',
+    example: false,
+    readOnly: true,
+  }),
+  hasNext: z.boolean().openapi({
+    description: 'Has next page or not.',
+    example: true,
+    readOnly: true,
+  }),
 });
 
 export const ApiResultListResponse = z
@@ -96,10 +115,12 @@ export function makeApiResultListResponseSchema<T extends z.ZodType>(
   });
 }
 
-export function makeApiPaginatedResponseSchema<T extends z.ZodType>(schema: T) {
+export function makeApiPaginationResponseSchema<T extends z.ZodType>(
+  schema: T,
+) {
   return z.object({
     results: z.array(schema),
-    pagination: ApiPaginationSchema,
+    pagination: ApiPaginationResponseSchema,
   });
 }
 

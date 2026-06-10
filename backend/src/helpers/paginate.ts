@@ -1,4 +1,10 @@
-interface PaginatedResult<T> {
+export interface PaginateParams<T> {
+  items: T[];
+  page?: number;
+  limit?: number;
+}
+
+export interface PaginateResult<T> {
   items: T[];
   page: number;
   limit: number;
@@ -7,11 +13,11 @@ interface PaginatedResult<T> {
   hasNext: boolean;
 }
 
-export function paginate<T>(
-  items: T[],
-  page: number = 1,
-  limit: number = 20,
-): PaginatedResult<T> {
+export function paginate<T>({
+  items,
+  limit = 20,
+  page = 1,
+}: PaginateParams<T>): PaginateResult<T> {
   const validPage = Math.max(1, page);
   const validLimit = Math.max(1, limit);
 
@@ -27,6 +33,6 @@ export function paginate<T>(
     limit: validLimit,
     totalPages,
     hasPrev: validPage > 1,
-    hasNext: validPage > totalPages,
+    hasNext: validPage < totalPages,
   };
 }

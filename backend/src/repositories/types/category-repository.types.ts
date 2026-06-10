@@ -1,3 +1,4 @@
+import type { PaginateResult } from '@/helpers';
 import type {
   Category,
   CategoryCreateParams,
@@ -18,7 +19,9 @@ export interface CategoryRepository {
 
   findBySlug: (params: CategoryFindBySlugParams) => Promise<Category | null>;
 
-  findMany: (params: CategoryFindManyParams) => Promise<Category[]>;
+  findMany: (
+    params: CategoryFindManyParams,
+  ) => Promise<PaginateResult<Category>>;
 
   update: (params: CategoryUpdateParams) => Promise<Category | null>;
 

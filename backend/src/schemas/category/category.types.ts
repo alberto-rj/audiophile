@@ -1,21 +1,20 @@
 import { z } from '@/config';
 
-import {
-  CategorySchema,
+import type {
   CategoryDescriptionSchema,
   CategoryIdSchema,
   CategoryImageSchema,
   CategoryNameSchema,
   CategorySlugSchema,
-  CategoryCreateParamsSchema,
-  CategoryUpdateParamsSchema,
-  CategoryDeleteByIdParamsSchema,
-  CategoryDeleteBySlugParamsSchema,
-  CategoryFindByIdParamsSchema,
-  CategoryFindBySlugParamsSchema,
-  ApiCategorySchema,
-} from './category.schema';
-import type { Pagination } from '../common/common.types';
+} from './category.base.schema';
+import type {
+  ApiCategoryCreateBody,
+  ApiCategoryIdParams,
+  ApiCategoryPaginationQuery,
+  ApiCategorySlugParams,
+  ApiCategoryUpdateBody,
+} from './category.api.types';
+import type { CategorySchema } from './category.schema';
 
 export type CategoryId = z.infer<typeof CategoryIdSchema>;
 
@@ -29,26 +28,16 @@ export type CategoryDescription = z.infer<typeof CategoryDescriptionSchema>;
 
 export type Category = z.infer<typeof CategorySchema>;
 
-export type CategoryCreateParams = z.infer<typeof CategoryCreateParamsSchema>;
+export type CategoryCreateParams = ApiCategoryCreateBody;
 
-export type CategoryUpdateParams = z.infer<typeof CategoryUpdateParamsSchema>;
+export type CategoryUpdateParams = ApiCategoryUpdateBody;
 
-export type CategoryFindByIdParams = z.infer<
-  typeof CategoryFindByIdParamsSchema
->;
+export type CategoryFindByIdParams = ApiCategoryIdParams;
 
-export type CategoryFindBySlugParams = z.infer<
-  typeof CategoryFindBySlugParamsSchema
->;
+export type CategoryFindBySlugParams = ApiCategorySlugParams;
 
-export type CategoryFindManyParams = Pagination;
+export type CategoryFindManyParams = ApiCategoryPaginationQuery;
 
-export type CategoryDeleteByIdParams = z.infer<
-  typeof CategoryDeleteByIdParamsSchema
->;
+export type CategoryDeleteByIdParams = ApiCategoryIdParams;
 
-export type CategoryDeleteBySlugParams = z.infer<
-  typeof CategoryDeleteBySlugParamsSchema
->;
-
-export type ApiCategory = z.infer<typeof ApiCategorySchema>;
+export type CategoryDeleteBySlugParams = ApiCategorySlugParams;

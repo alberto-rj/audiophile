@@ -7,16 +7,16 @@ import type {
   CategoryDeleteBySlugParams,
   CategoryFindByIdParams,
   CategoryFindBySlugParams,
+  CategoryFindManyParams,
   CategoryUpdateParams,
 } from './category.types';
 import {
-  CategoryCreateParamsSchema,
-  CategoryDeleteByIdParamsSchema,
-  CategoryDeleteBySlugParamsSchema,
-  CategoryFindByIdParamsSchema,
-  CategoryFindBySlugParamsSchema,
-  CategoryUpdateParamsSchema,
-} from './category.schema';
+  ApiCategoryCreateBodySchema,
+  ApiCategoryIdParamsSchema,
+  ApiCategoryPaginationQuerySchema,
+  ApiCategorySlugParamsSchema,
+  ApiCategoryUpdateBodySchema,
+} from './category.api.schema';
 
 export function makeCategory({
   name,
@@ -33,35 +33,39 @@ export function makeCategory({
 export function makeCategoryCreateParams(
   params: unknown,
 ): CategoryCreateParams {
-  return parseSchema(CategoryCreateParamsSchema, params);
+  return parseSchema(ApiCategoryCreateBodySchema, params);
 }
 
-export function makeCategoryUpdateParams(
-  params: unknown,
-): CategoryUpdateParams {
-  return parseSchema(CategoryUpdateParamsSchema, params);
+export function makeCategoryUpdateBody(params: unknown): CategoryUpdateParams {
+  return parseSchema(ApiCategoryUpdateBodySchema, params);
 }
 
 export function makeCategoryFindByIdParams(
   params: unknown,
 ): CategoryFindByIdParams {
-  return parseSchema(CategoryFindByIdParamsSchema, params);
+  return parseSchema(ApiCategoryIdParamsSchema, params);
 }
 
 export function makeCategoryFindBySlugParams(
   params: unknown,
 ): CategoryFindBySlugParams {
-  return parseSchema(CategoryFindBySlugParamsSchema, params);
+  return parseSchema(ApiCategorySlugParamsSchema, params);
 }
 
 export function makeCategoryDeleteByIdParams(
   params: unknown,
 ): CategoryDeleteByIdParams {
-  return parseSchema(CategoryDeleteByIdParamsSchema, params);
+  return parseSchema(ApiCategoryIdParamsSchema, params);
 }
 
 export function makeCategoryDeleteBySlugParams(
   params: unknown,
 ): CategoryDeleteBySlugParams {
-  return parseSchema(CategoryDeleteBySlugParamsSchema, params);
+  return parseSchema(ApiCategorySlugParamsSchema, params);
+}
+
+export function makeCategoryFindManyParams(
+  params: unknown,
+): CategoryFindManyParams {
+  return parseSchema(ApiCategoryPaginationQuerySchema, params);
 }
