@@ -79,17 +79,17 @@ export {
   makeCategoryFindByIdParams,
   makeCategoryFindBySlugParams,
   makeCategoryFindManyParams,
-  makeCategoryUpdateBody,
+  makeCategoryUpdateParams,
 } from './category/category.helpers';
 
 export {
   GalleryIdSchema,
   GalleryImageSchema,
 } from './product/gallery.base.schema';
-export { GallerySchema } from './product/gallery.schema';
 export { ApiGallerySchema } from './product/gallery.api.schema';
-export type { Gallery, GalleryId, GalleryImage } from './product/gallery.types';
 export type { ApiGallery } from './product/gallery.api.types';
+export { GallerySchema } from './product/gallery.schema';
+export type { Gallery, GalleryId, GalleryImage } from './product/gallery.types';
 export {
   IncludeIdSchema,
   IncludeItemSchema,

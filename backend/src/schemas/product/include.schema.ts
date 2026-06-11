@@ -13,8 +13,3 @@ export const IncludeSchema = z.object({
   item: IncludeItemSchema,
   productId: ProductIdSchema,
 });
-
-export const ApiIncludeSchema = IncludeSchema.omit({
-  id: true,
-  productId: true,
-});
