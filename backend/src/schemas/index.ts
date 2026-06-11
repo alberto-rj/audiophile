@@ -95,6 +95,13 @@ export {
   IncludeItemSchema,
   IncludeQuantitySchema,
 } from './product/include.base.schema';
+export {
+  makeInclude,
+  makeIncludeCreateParams,
+  makeIncludeDeleteByIdParams,
+  makeIncludeFindByIdParams,
+  makeIncludeFindManyParams,
+} from './product/include.helpers';
 export { ApiIncludeSchema } from './product/include.api.schema';
 export type { ApiInclude } from './product/include.api.types';
 export { IncludeSchema } from './product/include.schema';
@@ -102,6 +109,10 @@ export type {
   Include,
   IncludeItem,
   IncludeQuantity,
+  IncludeCreateParams,
+  IncludeDeleteByIdParams,
+  IncludeFindByIdParams,
+  IncludeFindManyParams,
 } from './product/include.types';
 export {
   ProductDescriptionSchema,

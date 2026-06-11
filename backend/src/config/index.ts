@@ -4,6 +4,7 @@ export { env } from './env';
 
 export {
   categoryRepository,
+  includeRepository,
   refreshTokenRepository,
   userRepository,
 } from './repositories';

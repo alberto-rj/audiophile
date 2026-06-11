@@ -9,6 +9,7 @@ import type {
   ApiIncludeCreateBodySchema,
   ApiIncludeIdParamsSchema,
 } from './include.api.schema';
+import type { ApiPaginationQuerySchema } from '../common/common.schema';
 
 export type IncludeQuantity = z.infer<typeof IncludeQuantitySchema>;
 
@@ -22,4 +23,4 @@ export type IncludeDeleteByIdParams = z.infer<typeof ApiIncludeIdParamsSchema>;
 
 export type IncludeFindByIdParams = z.infer<typeof ApiIncludeIdParamsSchema>;
 
-export type IncludeFindManyParams = z.infer<typeof ApiIncludeIdParamsSchema>;
+export type IncludeFindManyParams = z.infer<typeof ApiPaginationQuerySchema>;
