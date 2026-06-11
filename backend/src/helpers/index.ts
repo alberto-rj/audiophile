@@ -39,6 +39,7 @@ export { makeUpdateProfilePresenter } from './user/make-update-profile-presenter
 export { makeUserRepository } from './user/make-user-repository';
 export { toSafeUser } from './user/to-safe-user';
 
+export { makeId } from './make-id';
 export {
   makeResBodyError,
   makeResBodyPaginationResult,

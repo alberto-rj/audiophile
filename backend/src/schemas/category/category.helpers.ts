@@ -36,7 +36,9 @@ export function makeCategoryCreateParams(
   return parseSchema(ApiCategoryCreateBodySchema, params);
 }
 
-export function makeCategoryUpdateBody(params: unknown): CategoryUpdateParams {
+export function makeCategoryUpdateParams(
+  params: unknown,
+): CategoryUpdateParams {
   return parseSchema(ApiCategoryUpdateBodySchema, params);
 }
 
