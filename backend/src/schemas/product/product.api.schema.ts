@@ -1,19 +1,47 @@
 import { z } from '@/config';
 
-import { CategoryNameSchema } from '../category/category.base.schema';
-import { ResponsiveImageSchema } from '../common/common.schema';
+import {
+  CategoryIdSchema,
+  CategoryNameSchema,
+} from '../category/category.base.schema';
+import {
+  ApiPaginationQuerySchema,
+  ResponsiveImageSchema,
+} from '../common/common.schema';
 import { ApiGallerySchema } from './gallery.api.schema';
 import { ApiIncludeSchema } from './include.api.schema';
 import {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
   ProductIdSchema,
+  ProductImageSchema,
   ProductIsNewSchema,
   ProductNameSchema,
   ProductPriceSchema,
   ProductSlugSchema,
 } from './product.base.schema';
 import { ProductBaseSchema } from './product.schema';
+
+export const ApiProductCreateBodySchema = z.object({
+  image: ProductImageSchema,
+  name: ProductNameSchema,
+  description: ProductDescriptionSchema,
+  features: ProductFeaturesSchema,
+  price: ProductPriceSchema,
+  categoryId: CategoryIdSchema,
+});
+
+export const ApiProductAddOtherBodySchema = z.object({
+  otherId: ProductIdSchema,
+});
+
+export const ApiProductIdParamsSchema = z.object({
+  id: ProductIdSchema,
+});
+
+export const ApiProductSlugParamsSchema = z.object({
+  slug: ProductSlugSchema,
+});
 
 export const ApiProductSchema = z.object({
   id: ProductIdSchema,
@@ -30,3 +58,5 @@ export const ApiProductSchema = z.object({
   gallery: ApiGallerySchema,
   others: z.array(ProductBaseSchema),
 });
+
+export const ApiProductFindManyQuerySchema = ApiPaginationQuerySchema;

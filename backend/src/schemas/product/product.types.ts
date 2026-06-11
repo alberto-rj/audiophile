@@ -10,6 +10,13 @@ import type {
   ProductPriceSchema,
   ProductSlugSchema,
 } from './product.base.schema';
+import type {
+  ApiProductAddOtherBodySchema,
+  ApiProductCreateBodySchema,
+  ApiProductFindManyQuerySchema,
+  ApiProductIdParamsSchema,
+  ApiProductSlugParamsSchema,
+} from './product.api.schema';
 
 export type ProductId = z.infer<typeof ProductIdSchema>;
 
@@ -28,3 +35,25 @@ export type ProductPrice = z.infer<typeof ProductPriceSchema>;
 export type ProductBase = z.infer<typeof ProductBaseSchema>;
 
 export type Product = z.infer<typeof ProductSchema>;
+
+export type ProductAddOtherParams = z.infer<
+  typeof ApiProductAddOtherBodySchema
+>;
+
+export type ProductCreateParams = z.infer<typeof ApiProductCreateBodySchema>;
+
+export type ProductDeleteByIdParams = z.infer<typeof ApiProductIdParamsSchema>;
+
+export type ProductDeleteBySlugParams = z.infer<
+  typeof ApiProductSlugParamsSchema
+>;
+
+export type ProductFindByIdParams = z.infer<typeof ApiProductIdParamsSchema>;
+
+export type ProductFindBySlugParams = z.infer<
+  typeof ApiProductSlugParamsSchema
+>;
+
+export type ProductFindManyParams = z.infer<
+  typeof ApiProductFindManyQuerySchema
+>;

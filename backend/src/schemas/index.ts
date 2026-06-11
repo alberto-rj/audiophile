@@ -148,9 +148,26 @@ export {
   ProductPriceSchema,
   ProductSlugSchema,
 } from './product/product.base.schema';
-export { ApiProductSchema } from './product/product.api.schema';
+export {
+  ApiProductSchema,
+  ApiProductAddOtherBodySchema,
+  ApiProductCreateBodySchema,
+  ApiProductFindManyQuerySchema,
+  ApiProductIdParamsSchema,
+  ApiProductSlugParamsSchema,
+} from './product/product.api.schema';
 export type { ApiProduct } from './product/product.api.types';
 export { ProductBaseSchema, ProductSchema } from './product/product.schema';
+export {
+  makeProduct,
+  makeProductAddOtherParams,
+  makeProductCreateParams,
+  makeProductDeleteByIdParams,
+  makeProductDeleteBySlugParams,
+  makeProductFindByIdParams,
+  makeProductFindBySlugParams,
+  makeProductFindManyParams,
+} from './product/product.helpers';
 export type {
   Product,
   ProductBase,
@@ -161,6 +178,13 @@ export type {
   ProductName,
   ProductPrice,
   ProductSlug,
+  ProductAddOtherParams,
+  ProductCreateParams,
+  ProductDeleteByIdParams,
+  ProductDeleteBySlugParams,
+  ProductFindByIdParams,
+  ProductFindBySlugParams,
+  ProductFindManyParams,
 } from './product/product.types';
 
 export { type RefreshToken } from './refresh-token/refresh-token.types';
