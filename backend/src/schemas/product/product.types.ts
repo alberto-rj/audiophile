@@ -1,10 +1,6 @@
 import type { z } from '@/config';
 
-import {
-  ApiProductSchema,
-  ProductBaseSchema,
-  ProductSchema,
-} from './product.schema';
+import { ProductBaseSchema, ProductSchema } from './product.schema';
 import type {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
@@ -32,5 +28,3 @@ export type ProductPrice = z.infer<typeof ProductPriceSchema>;
 export type ProductBase = z.infer<typeof ProductBaseSchema>;
 
 export type Product = z.infer<typeof ProductSchema>;
-
-export type ApiProduct = z.infer<typeof ApiProductSchema>;
