@@ -124,7 +124,6 @@ The business rules live entirely inside use cases, allowing repositories, databa
 
 - ESLint
 - Prettier
-- GitHub
 - Vite
 
 ## Key Features
@@ -225,7 +224,7 @@ The tradeoff is a slightly more complex refresh token implementation.
 
 ## Project Structure
 
-`/frontend`:
+`frontend/`:
 
 ```bash
 src/
@@ -239,7 +238,7 @@ src/
 └── assets/
 ```
 
-`/backend`:
+`backend/`:
 
 ```bash
 src/
@@ -263,9 +262,7 @@ git clone https://github.com/alberto-rj/audiophile.git
 cd audiophile
 ```
 
-### Backend
-
-Terminal 1
+### Terminal 1 (Backend)
 
 ```bash
 cd backend
@@ -277,12 +274,9 @@ cp .env.example .env
 npm run dev
 ```
 
-Backend:
-http://localhost:4224
+Backend: http://localhost:4224
 
-### Frontend
-
-Terminal 2
+### Terminal 2 (Frontend)
 
 ```bash
 cd frontend
@@ -294,8 +288,7 @@ cp .env.example .env
 npm run dev
 ```
 
-Frontend:
-http://localhost:5173
+Frontend: http://localhost:5173
 
 ## Environment Variables
 
