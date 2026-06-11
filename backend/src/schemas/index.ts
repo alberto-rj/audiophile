@@ -102,7 +102,12 @@ export {
   makeIncludeFindByIdParams,
   makeIncludeFindManyParams,
 } from './product/include.helpers';
-export { ApiIncludeSchema } from './product/include.api.schema';
+export {
+  ApiIncludeCreateBodySchema,
+  ApiIncludeIdParamsSchema,
+  ApiIncludePaginationQuerySchema,
+  ApiIncludeSchema,
+} from './product/include.api.schema';
 export type { ApiInclude } from './product/include.api.types';
 export { IncludeSchema } from './product/include.schema';
 export type {
