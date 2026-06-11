@@ -2,9 +2,9 @@ import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
 import {
+  ApiCategorySchema,
   ApiCategorySlugParamsSchema,
   ApiErrorResponseSchema,
-  CategorySchema,
   makeApiResultResponseSchema,
 } from '@/schemas';
 
@@ -28,7 +28,7 @@ registry.registerPath({
       description: 'Category retrieved successfully.',
       content: {
         'application/json': {
-          schema: makeApiResultResponseSchema(CategorySchema),
+          schema: makeApiResultResponseSchema(ApiCategorySchema),
         },
       },
     },
