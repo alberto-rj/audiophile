@@ -15,7 +15,7 @@ import {
   ProductPriceSchema,
   ProductSlugSchema,
 } from './product.base.schema';
-import { ApiGallerySchema } from './gallery.schema';
+import { ApiGallerySchema } from './gallery.api.schema';
 import { ApiIncludeSchema } from './include.schema';
 
 export const ProductBaseSchema = z.object({

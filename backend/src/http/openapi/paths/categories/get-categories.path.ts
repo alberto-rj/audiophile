@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { registry } from '@/http/openapi';
 import {
   ApiCategoryPaginationQuerySchema,
-  CategorySchema,
+  ApiCategorySchema,
   makeApiPaginationResponseSchema,
 } from '@/schemas';
 
@@ -27,7 +27,7 @@ registry.registerPath({
       description: 'Categories retrieved successfully.',
       content: {
         'application/json': {
-          schema: makeApiPaginationResponseSchema(CategorySchema),
+          schema: makeApiPaginationResponseSchema(ApiCategorySchema),
         },
       },
     },
