@@ -6,7 +6,7 @@ A full-stack e-commerce platform for premium audio equipment featuring authentic
 
 [Live Demo (coming soon)](#)
 •
-[API Docs](#api-documentation)
+[API Docs](https://your-api.onrender.com/api-docs)
 •
 [Source Code](https://github.com/alberto-rj/audiophile)
 
@@ -274,7 +274,8 @@ cp .env.example .env
 npm run dev
 ```
 
-Backend: http://localhost:4224
+- **Backend API:** http://localhost:4224
+- **Swagger Documentation:** http://localhost:4224/api-docs
 
 ### Terminal 2 (Frontend)
 
@@ -288,7 +289,7 @@ cp .env.example .env
 npm run dev
 ```
 
-Frontend: http://localhost:5173
+- **Frontend:** http://localhost:5173
 
 ## Environment Variables
 
@@ -335,18 +336,6 @@ VITE_NODE_ENV=development
 
 VITE_API_BASE_URL=/api
 ```
-
-## API Documentation
-
-Swagger UI is automatically generated from the OpenAPI registry.
-
-After starting the backend:
-
-```bash
-http://localhost:4224/api-docs
-```
-
-This keeps validation rules and documentation synchronized.
 
 ## What I Learned
 
