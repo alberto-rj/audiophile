@@ -225,7 +225,7 @@ The tradeoff is a slightly more complex refresh token implementation.
 
 ## Project Structure
 
-### Frontend
+`/frontend`:
 
 ```bash
 src/
@@ -239,7 +239,7 @@ src/
 └── assets/
 ```
 
-### Backend
+`/backend`:
 
 ```bash
 src/
@@ -354,23 +354,6 @@ http://localhost:4224/api-docs
 ```
 
 This keeps validation rules and documentation synchronized.
-
-## Engineering Highlights
-
-This project was intentionally designed with software engineering practices commonly found in production applications rather than focusing exclusively on features.
-
-Highlights include:
-
-- Layered backend architecture (Controllers → Use Cases → Repositories)
-- Repository Pattern with swappable implementations
-- JWT authentication with refresh token rotation
-- HTTP-only cookie authentication
-- OpenAPI documentation generated from source schemas
-- Shared validation through Zod
-- RTK Query for server-state management
-- Storybook for component development
-- Mock Service Worker for frontend isolation and testing
-- In-memory repositories for fast and deterministic tests
 
 ## What I Learned
 
