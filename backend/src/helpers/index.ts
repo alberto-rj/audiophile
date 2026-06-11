@@ -20,6 +20,7 @@ export {
 export { logger } from './logger/logger';
 export type { LogContext, RequestContext } from './logger/logger.types';
 
+export { makeGalleryRepository } from './product/make-gallery-repository';
 export { makeIncludeRepository } from './product/make-include-repository';
 
 export {
