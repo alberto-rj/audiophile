@@ -2,8 +2,8 @@ import { z } from '@/config';
 
 import { CategoryNameSchema } from '../category/category.base.schema';
 import { ResponsiveImageSchema } from '../common/common.schema';
-import { ApiIncludeSchema } from './include.schema';
 import { ApiGallerySchema } from './gallery.api.schema';
+import { ApiIncludeSchema } from './include.api.schema';
 import {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
