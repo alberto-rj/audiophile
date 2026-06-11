@@ -86,13 +86,10 @@ export {
   GalleryIdSchema,
   GalleryImageSchema,
 } from './product/gallery.base.schema';
-export { ApiGallerySchema, GallerySchema } from './product/gallery.schema';
-export type {
-  ApiGallery,
-  Gallery,
-  GalleryId,
-  GalleryImage,
-} from './product/gallery.types';
+export { GallerySchema } from './product/gallery.schema';
+export { ApiGallerySchema } from './product/gallery.api.schema';
+export type { Gallery, GalleryId, GalleryImage } from './product/gallery.types';
+export type { ApiGallery } from './product/gallery.api.types';
 export {
   IncludeIdSchema,
   IncludeItemSchema,
