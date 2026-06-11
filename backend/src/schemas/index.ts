@@ -95,9 +95,10 @@ export {
   IncludeItemSchema,
   IncludeQuantitySchema,
 } from './product/include.base.schema';
-export { ApiIncludeSchema, IncludeSchema } from './product/include.schema';
+export { ApiIncludeSchema } from './product/include.api.schema';
+export type { ApiInclude } from './product/include.api.types';
+export { IncludeSchema } from './product/include.schema';
 export type {
-  ApiInclude,
   Include,
   IncludeItem,
   IncludeQuantity,
@@ -111,13 +112,10 @@ export {
   ProductPriceSchema,
   ProductSlugSchema,
 } from './product/product.base.schema';
-export {
-  ApiProductSchema,
-  ProductBaseSchema,
-  ProductSchema,
-} from './product/product.schema';
+export { ApiProductSchema } from './product/product.api.schema';
+export type { ApiProduct } from './product/product.api.types';
+export { ProductBaseSchema, ProductSchema } from './product/product.schema';
 export type {
-  ApiProduct,
   Product,
   ProductBase,
   ProductDescription,
