@@ -1,11 +1,13 @@
 import {
   makeCategoryRepository,
+  makeGalleryRepository,
   makeIncludeRepository,
   makeRefreshTokenRepository,
   makeUserRepository,
 } from '@/helpers';
 import type {
   CategoryRepository,
+  GalleryRepository,
   IncludeRepository,
   RefreshTokenRepository,
   UserRepository,
@@ -19,3 +21,5 @@ export const refreshTokenRepository: RefreshTokenRepository =
 export const categoryRepository: CategoryRepository = makeCategoryRepository();
 
 export const includeRepository: IncludeRepository = makeIncludeRepository();
+
+export const galleryRepository: GalleryRepository = makeGalleryRepository();
