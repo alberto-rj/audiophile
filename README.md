@@ -115,7 +115,7 @@ The business rules live entirely inside use cases, allowing repositories, databa
 
 ### Database
 
-- PostgreSQL
+- PostgreSQL & Drizzle ORM
 - Repository Pattern
 - In-Memory Repositories (Testing)
 
