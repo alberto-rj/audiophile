@@ -1,12 +1,14 @@
 export { InMemoryCategoryRepository } from './in-memory/in-memory-category-repository';
 export { InMemoryGalleryRepository } from './in-memory/in-memory-gallery-repository';
 export { InMemoryIncludeRepository } from './in-memory/in-memory-include-repository';
+export { InMemoryProductRepository } from './in-memory/in-memory-product-repository';
 export { InMemoryUserRepository } from './in-memory/in-memory-user-repository';
 export { InMemoryRefreshTokenRepository } from './in-memory/in-memory-refresh-token-repository';
 
 export type { CategoryRepository } from './types/category-repository.types';
 export type { GalleryRepository } from './types/gallery-repository.types';
 export type { IncludeRepository } from './types/include.types';
+export type { ProductRepository } from './types/product-repository.types';
 export type {
   RefreshTokenCreateParams,
   RefreshTokenDeleteParams,
