@@ -64,7 +64,6 @@ Rather than focusing only on features, the main goal was to build a system with 
 │ Controllers        │
 │ Use Cases          │
 │ Repository Layer   │
-│ Validation (Zod)   │
 └─────────┬──────────┘
           │
           ▼
@@ -353,8 +352,6 @@ If I started the project again today, I would introduce the PostgreSQL layer ear
 
 ## Future Improvements
 
-- PostgreSQL persistence layer
-- Drizzle ORM integration
 - Order management system
 - Payment gateway integration
 - Product reviews
