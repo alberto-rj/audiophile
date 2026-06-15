@@ -304,8 +304,6 @@ PROD_API_BASE_URL=https://api.audiophile-domain.com/api/v1
 
 # Database
 DATABASE_URL=postgresql://user_example:password_example@localhost:5432/db_example
-POSTGRES_USER=user_example
-POSTGRES_PASSWORD=password_example
 
 # Access Token
 ACCESS_SECRET=your-super-secret-jwt-key-change-this # to generate run: openssl rand -base64 32
@@ -323,9 +321,10 @@ CORS_ORIGINS=https://audiophile-domain.com;https://www.audiophile-domain.com;htt
 CORS_METHODS=GET;POST;PUT;PATCH;DELETE;OPTIONS
 CORS_HEADERS=Content-Type;Authorization
 
-# Rate Limiting
-RATE_LIMIT_WINDOW_MS=900000
-RATE_LIMIT_MAX_REQUESTS=100
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 `frontend/.env.example`:
