@@ -24,6 +24,16 @@ export class InMemoryProductRepository implements ProductRepository {
     return newItem;
   }
 
+  async createMany(paramsList: ProductCreateParams[]) {
+    const newItems = paramsList.map(makeProduct);
+
+    for (const newItem of newItems) {
+      this.items.set(newItem.id, newItem);
+    }
+
+    return newItems;
+  }
+
   async findById({ id }: ProductFindByIdParams) {
     const foundItem = this.items.get(id);
 

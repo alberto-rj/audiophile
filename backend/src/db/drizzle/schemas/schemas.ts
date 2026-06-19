@@ -1,5 +1,4 @@
 import {
-  boolean,
   integer,
   pgTable,
   primaryKey,
@@ -55,7 +54,6 @@ export const products = pgTable('products', {
     .references(() => categories.id),
   slug: text('slug').notNull(),
   image: text('image').notNull(),
-  isNew: boolean('is_new').default(false),
   name: varchar('name', { length: 128 }).notNull(),
   description: text('description'),
   features: text('features').notNull(),

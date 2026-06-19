@@ -156,7 +156,11 @@ export {
   ApiProductIdParamsSchema,
   ApiProductSlugParamsSchema,
 } from './product/product.api.schema';
-export type { ApiProduct } from './product/product.api.types';
+export type {
+  ApiProduct,
+  ApiProductIdParams,
+  ApiProductSlugParams,
+} from './product/product.api.types';
 export { ProductBaseSchema, ProductSchema } from './product/product.schema';
 export {
   makeProduct,
