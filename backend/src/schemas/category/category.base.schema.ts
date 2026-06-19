@@ -45,6 +45,7 @@ export const CategoryDescriptionSchema = z
     error: 'description must be a string.',
   })
   .max(255, { error: 'description cannot exceed 255 characters.' })
+  .nullable()
   .openapi({
     description: 'Short description of the category.',
     example:

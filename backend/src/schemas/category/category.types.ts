@@ -28,9 +28,12 @@ export type CategoryDescription = z.infer<typeof CategoryDescriptionSchema>;
 
 export type Category = z.infer<typeof CategorySchema>;
 
-export type CategoryCreateParams = ApiCategoryCreateBody;
+export type CategoryCreateParams = ApiCategoryCreateBody &
+  ApiCategorySlugParams;
 
-export type CategoryUpdateParams = ApiCategoryUpdateBody;
+export type CategoryUpdateParams = ApiCategoryUpdateBody &
+  ApiCategoryIdParams &
+  ApiCategorySlugParams;
 
 export type CategoryFindByIdParams = ApiCategoryIdParams;
 
