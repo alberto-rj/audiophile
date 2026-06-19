@@ -10,6 +10,8 @@ import type {
 export interface ProductRepository {
   create: (params: ProductCreateParams) => Promise<Product>;
 
+  createMany: (params: ProductCreateParams[]) => Promise<Product[]>;
+
   findById: (params: ProductFindByIdParams) => Promise<Product | null>;
 
   findMany: (params: ProductFindManyParams) => Promise<PaginateResult<Product>>;
