@@ -1,12 +1,12 @@
-import { paginate } from '@/helpers';
+import { paginate, type PaginateResult } from '@/helpers';
 import type { IncludeRepository } from '@/repositories';
-import {
-  makeInclude,
-  type Include,
-  type IncludeCreateParams,
-  type IncludeDeleteByIdParams,
-  type IncludeFindByIdParams,
-  type IncludeFindManyParams,
+import { makeInclude } from '@/schemas';
+import type {
+  Include,
+  IncludeCreateParams,
+  IncludeDeleteByIdParams,
+  IncludeFindByIdParams,
+  IncludeFindManyParams,
 } from '@/schemas';
 
 export class InMemoryIncludeRepository implements IncludeRepository {
@@ -16,7 +16,7 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     this.items = new Map();
   }
 
-  async create(params: IncludeCreateParams) {
+  async create(params: IncludeCreateParams): Promise<Include> {
     const newItem = makeInclude(params);
 
     this.items.set(newItem.id, newItem);
@@ -34,7 +34,7 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     return newItems;
   }
 
-  async findById({ id }: IncludeFindByIdParams) {
+  async findById({ id }: IncludeFindByIdParams): Promise<Include | null> {
     const foundItem = this.items.get(id);
 
     if (typeof foundItem === 'undefined') {
@@ -44,7 +44,10 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     return foundItem;
   }
 
-  async findMany({ page, limit }: IncludeFindManyParams) {
+  async findMany({
+    page,
+    limit,
+  }: IncludeFindManyParams): Promise<PaginateResult<Include>> {
     const items = Array.from(this.items.values());
 
     const foundItems = paginate({
@@ -56,7 +59,7 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     return foundItems;
   }
 
-  async deleteById({ id }: IncludeDeleteByIdParams) {
+  async deleteById({ id }: IncludeDeleteByIdParams): Promise<Include | null> {
     let foundItem: Include | null = null;
 
     for (const [, include] of this.items.entries()) {
@@ -69,7 +72,7 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     return foundItem;
   }
 
-  async clear() {
+  async clear(): Promise<void> {
     this.items.clear();
   }
 }

@@ -3,12 +3,12 @@ import { asc, count, eq } from 'drizzle-orm';
 import { db, products, type Product as RawProduct } from '@/db/drizzle';
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import type { ProductRepository } from '@/repositories';
-import {
-  type Product,
-  type ProductCreateParams,
-  type ProductDeleteByIdParams,
-  type ProductFindByIdParams,
-  type ProductFindManyParams,
+import type {
+  Product,
+  ProductCreateParams,
+  ProductDeleteByIdParams,
+  ProductFindByIdParams,
+  ProductFindManyParams,
 } from '@/schemas';
 
 function parseItem(item: RawProduct): Product {
@@ -55,35 +55,29 @@ export class DrizzleProductRepository implements ProductRepository {
   }
 
   async findMany({
-    page: pageParams,
-    limit: limitParams,
+    page,
+    limit,
   }: ProductFindManyParams): Promise<PaginateResult<Product>> {
     const [foundItems, [totalItemsResult]] = await Promise.all([
       db
         .select()
         .from(products)
         .orderBy(asc(products.createdAt))
-        .limit(limitParams)
-        .offset(getOffset({ limit: limitParams, page: pageParams })),
+        .limit(limit)
+        .offset(getOffset({ limit, page: page })),
       db.select({ totalItems: count() }).from(products),
     ]);
 
     const totalItems = totalItemsResult!.totalItems;
-
-    const { hasNext, hasPrev, limit, page, totalPages } = getBaseResult({
-      limit: limitParams,
-      page: pageParams,
+    const result = getBaseResult({
+      limit: limit,
+      page: page,
       totalItems,
     });
 
     return {
+      ...result,
       items: foundItems.map(parseItem),
-      hasNext,
-      hasPrev,
-      limit,
-      page,
-      totalItems,
-      totalPages,
     };
   }
 

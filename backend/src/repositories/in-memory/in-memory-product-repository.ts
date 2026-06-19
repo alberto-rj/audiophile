@@ -1,12 +1,12 @@
-import { paginate } from '@/helpers';
+import { paginate, type PaginateResult } from '@/helpers';
 import type { ProductRepository } from '@/repositories';
-import {
-  makeProduct,
-  type Product,
-  type ProductCreateParams,
-  type ProductDeleteByIdParams,
-  type ProductFindByIdParams,
-  type ProductFindManyParams,
+import { makeProduct } from '@/schemas';
+import type {
+  Product,
+  ProductCreateParams,
+  ProductDeleteByIdParams,
+  ProductFindByIdParams,
+  ProductFindManyParams,
 } from '@/schemas';
 
 export class InMemoryProductRepository implements ProductRepository {
@@ -16,7 +16,7 @@ export class InMemoryProductRepository implements ProductRepository {
     this.items = new Map();
   }
 
-  async create(params: ProductCreateParams) {
+  async create(params: ProductCreateParams): Promise<Product> {
     const newItem = makeProduct(params);
 
     this.items.set(newItem.id, newItem);
@@ -24,7 +24,7 @@ export class InMemoryProductRepository implements ProductRepository {
     return newItem;
   }
 
-  async createMany(paramsList: ProductCreateParams[]) {
+  async createMany(paramsList: ProductCreateParams[]): Promise<Product[]> {
     const newItems = paramsList.map(makeProduct);
 
     for (const newItem of newItems) {
@@ -34,7 +34,7 @@ export class InMemoryProductRepository implements ProductRepository {
     return newItems;
   }
 
-  async findById({ id }: ProductFindByIdParams) {
+  async findById({ id }: ProductFindByIdParams): Promise<Product | null> {
     const foundItem = this.items.get(id);
 
     if (typeof foundItem === 'undefined') {
@@ -44,7 +44,10 @@ export class InMemoryProductRepository implements ProductRepository {
     return foundItem;
   }
 
-  async findMany({ page, limit }: ProductFindManyParams) {
+  async findMany({
+    page,
+    limit,
+  }: ProductFindManyParams): Promise<PaginateResult<Product>> {
     const items = Array.from(this.items.values());
 
     const foundItems = paginate({
@@ -56,7 +59,7 @@ export class InMemoryProductRepository implements ProductRepository {
     return foundItems;
   }
 
-  async deleteById({ id }: ProductDeleteByIdParams) {
+  async deleteById({ id }: ProductDeleteByIdParams): Promise<Product | null> {
     let foundItem: Product | null = null;
 
     for (const [, product] of this.items.entries()) {
@@ -69,7 +72,7 @@ export class InMemoryProductRepository implements ProductRepository {
     return foundItem;
   }
 
-  async clear() {
+  async clear(): Promise<void> {
     this.items.clear();
   }
 }
