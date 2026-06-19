@@ -2,15 +2,15 @@ import { count, eq } from 'drizzle-orm';
 
 import { db, categories, type Category as RawCategory } from '@/db/drizzle';
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
-import {
-  type Category,
-  type CategoryCreateParams,
-  type CategoryDeleteByIdParams,
-  type CategoryDeleteBySlugParams,
-  type CategoryFindByIdParams,
-  type CategoryFindBySlugParams,
-  type CategoryFindManyParams,
-  type CategoryUpdateParams,
+import type {
+  Category,
+  CategoryCreateParams,
+  CategoryDeleteByIdParams,
+  CategoryDeleteBySlugParams,
+  CategoryFindByIdParams,
+  CategoryFindBySlugParams,
+  CategoryFindManyParams,
+  CategoryUpdateParams,
 } from '@/schemas';
 import type { CategoryRepository } from '@/repositories';
 
@@ -85,33 +85,28 @@ export class DrizzleCategoryRepository implements CategoryRepository {
   }
 
   async findMany({
-    page: pageParams,
-    limit: limitParams,
+    page,
+    limit,
   }: CategoryFindManyParams): Promise<PaginateResult<Category>> {
     const [foundItems, [countResult]] = await Promise.all([
       db
         .select()
         .from(categories)
-        .limit(limitParams)
-        .offset(getOffset({ limit: limitParams, page: pageParams })),
+        .limit(limit)
+        .offset(getOffset({ limit, page })),
       db.select({ totalCount: count() }).from(categories),
     ]);
 
-    const totalItems = countResult?.totalCount as number;
-    const { page, limit, totalPages, hasNext, hasPrev } = getBaseResult({
-      page: pageParams,
-      limit: limitParams,
+    const totalItems = countResult!.totalCount;
+    const result = getBaseResult({
+      page: page,
+      limit: limit,
       totalItems,
     });
 
     return {
+      ...result,
       items: foundItems.map(parseItem),
-      totalItems,
-      totalPages,
-      hasPrev,
-      hasNext,
-      limit,
-      page,
     };
   }
 

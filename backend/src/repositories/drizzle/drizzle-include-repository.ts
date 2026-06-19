@@ -3,12 +3,12 @@ import { count, eq } from 'drizzle-orm';
 import { db, includes, type Include as RawInclude } from '@/db/drizzle';
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import type { IncludeRepository } from '@/repositories';
-import {
-  type Include,
-  type IncludeCreateParams,
-  type IncludeDeleteByIdParams,
-  type IncludeFindByIdParams,
-  type IncludeFindManyParams,
+import type {
+  Include,
+  IncludeCreateParams,
+  IncludeDeleteByIdParams,
+  IncludeFindByIdParams,
+  IncludeFindManyParams,
 } from '@/schemas';
 
 function toItem(item: RawInclude): Include {
@@ -48,21 +48,21 @@ export class DrizzleIncludeRepository implements IncludeRepository {
   }
 
   async findMany({
-    page: pageParams,
-    limit: limitParams,
+    page,
+    limit,
   }: IncludeFindManyParams): Promise<PaginateResult<Include>> {
     const [foundItems, [totalItemsResult]] = await Promise.all([
       db
         .select()
         .from(includes)
-        .limit(limitParams)
-        .offset(getOffset({ limit: limitParams, page: pageParams })),
+        .limit(limit)
+        .offset(getOffset({ limit, page })),
       db.select({ totalItems: count() }).from(includes),
     ]);
 
     const result = getBaseResult({
-      limit: limitParams,
-      page: pageParams,
+      limit,
+      page,
       totalItems: totalItemsResult!.totalItems,
     });
 

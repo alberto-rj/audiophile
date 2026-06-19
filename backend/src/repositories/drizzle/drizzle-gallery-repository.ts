@@ -1,12 +1,12 @@
 import { db, galleries, type Gallery as RawGallery } from '@/db/drizzle';
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import type { GalleryRepository } from '@/repositories';
-import {
-  type Gallery,
-  type GalleryCreateParams,
-  type GalleryDeleteByIdParams,
-  type GalleryFindByIdParams,
-  type GalleryFindManyParams,
+import type {
+  Gallery,
+  GalleryCreateParams,
+  GalleryDeleteByIdParams,
+  GalleryFindByIdParams,
+  GalleryFindManyParams,
 } from '@/schemas';
 import { count, eq } from 'drizzle-orm';
 
