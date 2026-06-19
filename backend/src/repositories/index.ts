@@ -13,6 +13,7 @@ export type { UserRepository } from './types/user-repository.types';
 
 export { DrizzleCategoryRepository } from './drizzle/drizzle-category-repository';
 export { DrizzleIncludeRepository } from './drizzle/drizzle-include-repository';
+export { DrizzleGalleryRepository } from './drizzle/drizzle-gallery-repository';
 export { DrizzleProductRepository } from './drizzle/drizzle-product-repository';
 
 export { InMemoryCategoryRepository } from './in-memory/in-memory-category-repository';
