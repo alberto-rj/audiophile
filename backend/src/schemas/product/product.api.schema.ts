@@ -25,7 +25,7 @@ import { ProductBaseSchema } from './product.schema';
 export const ApiProductCreateBodySchema = z.object({
   image: ProductImageSchema,
   name: ProductNameSchema,
-  description: ProductDescriptionSchema,
+  description: ProductDescriptionSchema.optional(),
   features: ProductFeaturesSchema,
   price: ProductPriceSchema,
   categoryId: CategoryIdSchema,
@@ -49,7 +49,7 @@ export const ApiProductSchema = z.object({
   name: ProductNameSchema,
   isNew: ProductIsNewSchema,
   price: ProductPriceSchema,
-  description: ProductDescriptionSchema,
+  description: ProductDescriptionSchema.nullish(),
   features: ProductFeaturesSchema,
   category: CategoryNameSchema,
   image: ResponsiveImageSchema,

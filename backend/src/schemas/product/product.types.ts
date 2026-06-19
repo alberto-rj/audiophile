@@ -17,6 +17,7 @@ import type {
   ApiProductIdParamsSchema,
   ApiProductSlugParamsSchema,
 } from './product.api.schema';
+import type { ApiProductSlugParams } from './product.api.types';
 
 export type ProductId = z.infer<typeof ProductIdSchema>;
 
@@ -40,7 +41,8 @@ export type ProductAddOtherParams = z.infer<
   typeof ApiProductAddOtherBodySchema
 >;
 
-export type ProductCreateParams = z.infer<typeof ApiProductCreateBodySchema>;
+export type ProductCreateParams = z.infer<typeof ApiProductCreateBodySchema> &
+  ApiProductSlugParams;
 
 export type ProductDeleteByIdParams = z.infer<typeof ApiProductIdParamsSchema>;
 

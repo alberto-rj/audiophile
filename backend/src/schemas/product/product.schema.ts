@@ -24,7 +24,7 @@ export const ProductSchema = z.object({
   name: ProductNameSchema,
   image: ProductImageSchema,
   isNew: ProductIsNewSchema,
-  description: ProductDescriptionSchema,
+  description: ProductDescriptionSchema.nullish(),
   features: ProductFeaturesSchema,
   categoryId: CategoryIdSchema,
 });
