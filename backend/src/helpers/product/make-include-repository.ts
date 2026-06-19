@@ -1,15 +1,15 @@
 import {
+  DrizzleIncludeRepository,
   InMemoryIncludeRepository,
   type IncludeRepository,
 } from '@/repositories';
 
-type IncludeRepositoryType = 'pg' | 'in-memory' | 'default';
+type IncludeRepositoryType = 'drizzle' | 'in-memory';
 
-export function makeIncludeRepository(type: IncludeRepositoryType = 'default') {
+export function makeIncludeRepository(type: IncludeRepositoryType = 'drizzle') {
   const repositories: Record<IncludeRepositoryType, IncludeRepository> = {
     'in-memory': new InMemoryIncludeRepository(),
-    pg: new InMemoryIncludeRepository(),
-    default: new InMemoryIncludeRepository(),
+    drizzle: new DrizzleIncludeRepository(),
   };
 
   return repositories[type];
