@@ -31,6 +31,12 @@ export class DrizzleCategoryRepository implements CategoryRepository {
     return parseItem(createdItem!);
   }
 
+  async createMany(params: CategoryCreateParams[]): Promise<Category[]> {
+    const createdItems = await db.insert(categories).values(params).returning();
+
+    return createdItems.map(parseItem);
+  }
+
   async update({
     id,
     ...changes
