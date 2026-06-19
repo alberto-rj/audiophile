@@ -10,6 +10,8 @@ import type {
 export interface GalleryRepository {
   create: (params: GalleryCreateParams) => Promise<Gallery>;
 
+  createMany: (params: GalleryCreateParams[]) => Promise<Gallery[]>;
+
   findById: (params: GalleryFindByIdParams) => Promise<Gallery | null>;
 
   findMany: (params: GalleryFindManyParams) => Promise<PaginateResult<Gallery>>;

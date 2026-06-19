@@ -24,6 +24,16 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     return newItem;
   }
 
+  async createMany(paramsList: GalleryCreateParams[]): Promise<Gallery[]> {
+    const newItems = paramsList.map(makeGallery);
+
+    for (const newItem of newItems) {
+      this.items.set(newItem.id, newItem);
+    }
+
+    return newItems;
+  }
+
   async findById({ id }: GalleryFindByIdParams) {
     const foundItem = this.items.get(id);
 
