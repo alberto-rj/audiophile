@@ -1,4 +1,4 @@
-import { paginate } from '@/helpers';
+import { paginate, type PaginateResult } from '@/helpers';
 import type { GalleryRepository } from '@/repositories';
 import {
   makeGallery,
@@ -16,7 +16,7 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     this.items = new Map();
   }
 
-  async create(params: GalleryCreateParams) {
+  async create(params: GalleryCreateParams): Promise<Gallery> {
     const newItem = makeGallery(params);
 
     this.items.set(newItem.id, newItem);
@@ -34,7 +34,7 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     return newItems;
   }
 
-  async findById({ id }: GalleryFindByIdParams) {
+  async findById({ id }: GalleryFindByIdParams): Promise<Gallery | null> {
     const foundItem = this.items.get(id);
 
     if (typeof foundItem === 'undefined') {
@@ -44,7 +44,10 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     return foundItem;
   }
 
-  async findMany({ page, limit }: GalleryFindManyParams) {
+  async findMany({
+    page,
+    limit,
+  }: GalleryFindManyParams): Promise<PaginateResult<Gallery>> {
     const items = Array.from(this.items.values());
 
     const foundItems = paginate({
@@ -56,7 +59,7 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     return foundItems;
   }
 
-  async deleteById({ id }: GalleryDeleteByIdParams) {
+  async deleteById({ id }: GalleryDeleteByIdParams): Promise<Gallery | null> {
     let foundItem: Gallery | null = null;
 
     for (const [, gallery] of this.items.entries()) {
@@ -69,7 +72,7 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     return foundItem;
   }
 
-  async clear() {
+  async clear(): Promise<void> {
     this.items.clear();
   }
 }
