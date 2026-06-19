@@ -1,6 +1,6 @@
 export type { CategoryRepository } from './types/category-repository.types';
 export type { GalleryRepository } from './types/gallery-repository.types';
-export type { IncludeRepository } from './types/include.types';
+export type { IncludeRepository } from './types/include-repository.types';
 export type { ProductRepository } from './types/product-repository.types';
 export type {
   RefreshTokenCreateParams,
@@ -12,6 +12,7 @@ export type {
 export type { UserRepository } from './types/user-repository.types';
 
 export { DrizzleCategoryRepository } from './drizzle/drizzle-category-repository';
+export { DrizzleIncludeRepository } from './drizzle/drizzle-include-repository';
 export { DrizzleProductRepository } from './drizzle/drizzle-product-repository';
 
 export { InMemoryCategoryRepository } from './in-memory/in-memory-category-repository';
