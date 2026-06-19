@@ -1,17 +1,17 @@
 import {
+  DrizzleCategoryRepository,
   InMemoryCategoryRepository,
   type CategoryRepository,
 } from '@/repositories';
 
-type CategoryRepositoryType = 'pg' | 'in-memory' | 'default';
+type CategoryRepositoryType = 'drizzle' | 'in-memory';
 
 export function makeCategoryRepository(
-  type: CategoryRepositoryType = 'default',
+  type: CategoryRepositoryType = 'drizzle',
 ) {
   const repositories: Record<CategoryRepositoryType, CategoryRepository> = {
+    drizzle: new DrizzleCategoryRepository(),
     'in-memory': new InMemoryCategoryRepository(),
-    pg: new InMemoryCategoryRepository(),
-    default: new InMemoryCategoryRepository(),
   };
 
   return repositories[type];
