@@ -55,7 +55,13 @@ export {
   type ResBodyValidationError,
 } from './make-res-body';
 
-export { paginate, type PaginateParams, type PaginateResult } from './paginate';
+export {
+  getBaseResult,
+  getOffset,
+  paginate,
+  type PaginateParams,
+  type PaginateResult,
+} from './paginate';
 
 export { parseSchema } from './parse-schema';
 
