@@ -24,6 +24,16 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     return newItem;
   }
 
+  async createMany(paramsList: IncludeCreateParams[]): Promise<Include[]> {
+    const newItems = paramsList.map(makeInclude);
+
+    for (const newItem of newItems) {
+      this.items.set(newItem.id, newItem);
+    }
+
+    return newItems;
+  }
+
   async findById({ id }: IncludeFindByIdParams) {
     const foundItem = this.items.get(id);
 
