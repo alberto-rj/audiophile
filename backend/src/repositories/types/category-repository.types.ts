@@ -15,6 +15,8 @@ import type {
 export interface CategoryRepository {
   create: (params: CategoryCreateParams) => Promise<Category>;
 
+  createMany: (params: CategoryCreateParams[]) => Promise<Category[]>;
+
   findById: (params: CategoryFindByIdParams) => Promise<Category | null>;
 
   findBySlug: (params: CategoryFindBySlugParams) => Promise<Category | null>;

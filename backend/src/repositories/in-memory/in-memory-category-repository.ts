@@ -27,6 +27,16 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     return newItem;
   }
 
+  async createMany(params: CategoryCreateParams[]): Promise<Category[]> {
+    const newItems = params.map(makeCategory);
+
+    for (const newItem of newItems) {
+      this.items.set(newItem.id, newItem);
+    }
+
+    return newItems;
+  }
+
   async update(params: CategoryUpdateParams) {
     const newItem = makeCategory(params);
 
