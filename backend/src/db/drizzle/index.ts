@@ -1,10 +1,19 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+export { db } from './db';
 
-import { env } from '@/config';
-
-const { DATABASE_URL } = env;
-
-// Disable prefetch as it is not supported for "Transaction" pool mode
-const client = postgres(DATABASE_URL, { prepare: false });
-export const db = drizzle(client);
+export {
+  categories,
+  galleries,
+  includes,
+  otherProducts,
+  products,
+  refreshTokens,
+  users,
+} from './schemas/schemas';
+export type {
+  Category,
+  Gallery,
+  Include,
+  OtherProduct,
+  Product,
+  User,
+} from './schemas/schemas.types';
