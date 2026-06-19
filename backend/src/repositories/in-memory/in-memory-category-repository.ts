@@ -1,13 +1,13 @@
-import {
-  makeCategory,
-  type Category,
-  type CategoryCreateParams,
-  type CategoryDeleteByIdParams,
-  type CategoryDeleteBySlugParams,
-  type CategoryFindByIdParams,
-  type CategoryFindBySlugParams,
-  type CategoryFindManyParams,
-  type CategoryUpdateParams,
+import { makeCategory } from '@/schemas';
+import type {
+  Category,
+  CategoryCreateParams,
+  CategoryDeleteByIdParams,
+  CategoryDeleteBySlugParams,
+  CategoryFindByIdParams,
+  CategoryFindBySlugParams,
+  CategoryFindManyParams,
+  CategoryUpdateParams,
 } from '@/schemas';
 import type { CategoryRepository } from '@/repositories';
 import { paginate, type PaginateResult } from '@/helpers';

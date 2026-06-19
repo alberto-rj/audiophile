@@ -1,12 +1,12 @@
 import { paginate, type PaginateResult } from '@/helpers';
 import type { GalleryRepository } from '@/repositories';
-import {
-  makeGallery,
-  type Gallery,
-  type GalleryCreateParams,
-  type GalleryDeleteByIdParams,
-  type GalleryFindByIdParams,
-  type GalleryFindManyParams,
+import { makeGallery } from '@/schemas';
+import type {
+  Gallery,
+  GalleryCreateParams,
+  GalleryDeleteByIdParams,
+  GalleryFindByIdParams,
+  GalleryFindManyParams,
 } from '@/schemas';
 
 export class InMemoryGalleryRepository implements GalleryRepository {

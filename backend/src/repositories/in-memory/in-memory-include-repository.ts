@@ -1,12 +1,12 @@
 import { paginate, type PaginateResult } from '@/helpers';
 import type { IncludeRepository } from '@/repositories';
-import {
-  makeInclude,
-  type Include,
-  type IncludeCreateParams,
-  type IncludeDeleteByIdParams,
-  type IncludeFindByIdParams,
-  type IncludeFindManyParams,
+import { makeInclude } from '@/schemas';
+import type {
+  Include,
+  IncludeCreateParams,
+  IncludeDeleteByIdParams,
+  IncludeFindByIdParams,
+  IncludeFindManyParams,
 } from '@/schemas';
 
 export class InMemoryIncludeRepository implements IncludeRepository {

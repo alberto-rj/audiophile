@@ -1,12 +1,12 @@
 import { paginate, type PaginateResult } from '@/helpers';
 import type { ProductRepository } from '@/repositories';
-import {
-  makeProduct,
-  type Product,
-  type ProductCreateParams,
-  type ProductDeleteByIdParams,
-  type ProductFindByIdParams,
-  type ProductFindManyParams,
+import { makeProduct } from '@/schemas';
+import type {
+  Product,
+  ProductCreateParams,
+  ProductDeleteByIdParams,
+  ProductFindByIdParams,
+  ProductFindManyParams,
 } from '@/schemas';
 
 export class InMemoryProductRepository implements ProductRepository {
