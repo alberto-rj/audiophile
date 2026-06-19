@@ -1,15 +1,15 @@
 import {
+  DrizzleGalleryRepository,
   InMemoryGalleryRepository,
   type GalleryRepository,
 } from '@/repositories';
 
-type GalleryRepositoryType = 'pg' | 'in-memory' | 'default';
+type GalleryRepositoryType = 'drizzle' | 'in-memory';
 
-export function makeGalleryRepository(type: GalleryRepositoryType = 'default') {
+export function makeGalleryRepository(type: GalleryRepositoryType = 'drizzle') {
   const repositories: Record<GalleryRepositoryType, GalleryRepository> = {
     'in-memory': new InMemoryGalleryRepository(),
-    pg: new InMemoryGalleryRepository(),
-    default: new InMemoryGalleryRepository(),
+    drizzle: new DrizzleGalleryRepository(),
   };
 
   return repositories[type];
