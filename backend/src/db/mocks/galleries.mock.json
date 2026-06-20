@@ -1,0 +1,38 @@
+[
+  {
+    "product": "YX1 Wireless Earphones",
+    "first": "/assets/product-yx1-earphones/desktop/image-gallery-1.jpg",
+    "second": "/assets/product-yx1-earphones/desktop/image-gallery-2.jpg",
+    "third": "/assets/product-yx1-earphones/desktop/image-gallery-3.jpg"
+  },
+  {
+    "product": "XX59 Headphones",
+    "first": "/assets/product-xx59-headphones/desktop/image-gallery-1.jpg",
+    "second": "/assets/product-xx59-headphones/desktop/image-gallery-2.jpg",
+    "third": "/assets/product-xx59-headphones/desktop/image-gallery-3.jpg"
+  },
+  {
+    "product": "XX99 Mark One Headphones",
+    "first": "/assets/product-xx99-mark-one-headphones/desktop/image-gallery-1.jpg",
+    "second": "/assets/product-xx99-mark-one-headphones/desktop/image-gallery-2.jpg",
+    "third": "/assets/product-xx99-mark-one-headphones/desktop/image-gallery-3.jpg"
+  },
+  {
+    "product": "XX99 Mark Two Headphones",
+    "first": "/assets/product-xx99-mark-two-headphones/desktop/image-gallery-1.jpg",
+    "second": "/assets/product-xx99-mark-two-headphones/desktop/image-gallery-2.jpg",
+    "third": "/assets/product-xx99-mark-two-headphones/desktop/image-gallery-3.jpg"
+  },
+  {
+    "product": "ZX7 Speaker",
+    "first": "/assets/product-zx7-speaker/desktop/image-gallery-1.jpg",
+    "second": "/assets/product-zx7-speaker/desktop/image-gallery-2.jpg",
+    "third": "/assets/product-zx7-speaker/desktop/image-gallery-3.jpg"
+  },
+  {
+    "product": "ZX9 Speaker",
+    "first": "/assets/product-zx9-speaker/desktop/image-gallery-1.jpg",
+    "second": "/assets/product-zx9-speaker/desktop/image-gallery-2.jpg",
+    "third": "/assets/product-zx9-speaker/desktop/image-gallery-3.jpg"
+  }
+]
