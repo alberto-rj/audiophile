@@ -7,16 +7,21 @@ import type {
   Product,
   ProductCreateParams,
   ProductDeleteByIdParams,
+  ProductDeleteBySlugParams,
   ProductFindByIdParams,
+  ProductFindBySlugParams,
   ProductFindManyParams,
 } from '@/schemas';
 
-function parseItem(item: RawProduct): Product {
+function toItem(item: RawProduct): Product {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
 
   const distance = new Date().getTime() - createdAt.getTime();
-  const isNew = distance / 1000 / 3600 / 24 < 8;
+  const distanceInSeconds = Math.floor(distance / 1000);
+  const distanceInHours = Math.floor(distanceInSeconds / 3600);
+  const distanceInDays = Math.floor(distanceInHours / 24);
+  const isNew = distanceInDays < 8;
 
   return {
     ...itemWithoutTimestamp,
@@ -28,7 +33,7 @@ export class DrizzleProductRepository implements ProductRepository {
   async create(params: ProductCreateParams): Promise<Product> {
     const [createdItem] = await db.insert(products).values(params).returning();
 
-    return parseItem(createdItem!);
+    return toItem(createdItem!);
   }
 
   async createMany(paramsList: ProductCreateParams[]): Promise<Product[]> {
@@ -37,7 +42,7 @@ export class DrizzleProductRepository implements ProductRepository {
       .values(paramsList)
       .returning();
 
-    return createdItems.map(parseItem);
+    return createdItems.map(toItem);
   }
 
   async findById({ id }: ProductFindByIdParams): Promise<Product | null> {
@@ -51,7 +56,21 @@ export class DrizzleProductRepository implements ProductRepository {
       return null;
     }
 
-    return parseItem(foundItem);
+    return toItem(foundItem);
+  }
+
+  async findBySlug({ slug }: ProductFindBySlugParams): Promise<Product | null> {
+    const [foundItem] = await db
+      .select()
+      .from(products)
+      .where(eq(products.slug, slug))
+      .limit(1);
+
+    if (!foundItem) {
+      return null;
+    }
+
+    return toItem(foundItem);
   }
 
   async findMany({
@@ -64,20 +83,20 @@ export class DrizzleProductRepository implements ProductRepository {
         .from(products)
         .orderBy(asc(products.createdAt))
         .limit(limit)
-        .offset(getOffset({ limit, page: page })),
+        .offset(getOffset({ limit, page })),
       db.select({ totalItems: count() }).from(products),
     ]);
 
     const totalItems = totalItemsResult!.totalItems;
     const result = getBaseResult({
-      limit: limit,
-      page: page,
+      limit,
+      page,
       totalItems,
     });
 
     return {
       ...result,
-      items: foundItems.map(parseItem),
+      items: foundItems.map(toItem),
     };
   }
 
@@ -91,7 +110,22 @@ export class DrizzleProductRepository implements ProductRepository {
       return null;
     }
 
-    return parseItem(deletedItem);
+    return toItem(deletedItem);
+  }
+
+  async deleteBySlug({
+    slug,
+  }: ProductDeleteBySlugParams): Promise<Product | null> {
+    const [deletedItem] = await db
+      .delete(products)
+      .where(eq(products.slug, slug))
+      .returning();
+
+    if (!deletedItem) {
+      return null;
+    }
+
+    return toItem(deletedItem);
   }
 
   async clear() {
