@@ -30,7 +30,7 @@ export const refreshTokens = pgTable('refresh_tokens', {
   id: serial('id').primaryKey(),
   userId: integer('user_id')
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: 'cascade' }),
   token: text('token').notNull().unique(),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   createdAt,
@@ -51,7 +51,7 @@ export const products = pgTable('products', {
   id: serial('id').primaryKey(),
   categoryId: integer('category_id')
     .notNull()
-    .references(() => categories.id),
+    .references(() => categories.id, { onDelete: 'cascade' }),
   slug: text('slug').notNull(),
   image: text('image').notNull(),
   name: varchar('name', { length: 128 }).notNull(),
@@ -66,10 +66,10 @@ export const otherProducts = pgTable(
   {
     otherId: integer('other_id')
       .notNull()
-      .references(() => products.id),
+      .references(() => products.id, { onDelete: 'cascade' }),
     productId: integer('product_id')
       .notNull()
-      .references(() => products.id),
+      .references(() => products.id, { onDelete: 'cascade' }),
     createdAt,
     updatedAt,
   },
@@ -80,7 +80,7 @@ export const galleries = pgTable('galleries', {
   id: serial('id').primaryKey(),
   productId: integer('product_id')
     .notNull()
-    .references(() => products.id)
+    .references(() => products.id, { onDelete: 'cascade' })
     .unique(),
   first: text('first').notNull(),
   second: text('second').notNull(),
@@ -93,8 +93,7 @@ export const includes = pgTable('includes', {
   id: serial('id').primaryKey(),
   productId: integer('product_id')
     .notNull()
-    .references(() => products.id)
-    .unique(),
+    .references(() => products.id, { onDelete: 'cascade' }),
   quantity: integer('quantity').notNull().default(0),
   item: varchar('item', { length: 128 }).notNull(),
   createdAt,
