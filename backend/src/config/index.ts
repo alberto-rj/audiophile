@@ -6,6 +6,7 @@ export {
   categoryRepository,
   galleryRepository,
   includeRepository,
+  otherProductRepository,
   productRepository,
   refreshTokenRepository,
   userRepository,

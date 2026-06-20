@@ -5,7 +5,9 @@ import type {
   Product,
   ProductCreateParams,
   ProductDeleteByIdParams,
+  ProductDeleteBySlugParams,
   ProductFindByIdParams,
+  ProductFindBySlugParams,
   ProductFindManyParams,
 } from '@/schemas';
 
@@ -44,6 +46,22 @@ export class InMemoryProductRepository implements ProductRepository {
     return foundItem;
   }
 
+  async findBySlug({ slug }: ProductFindBySlugParams): Promise<Product | null> {
+    let foundItem: Product | null = null;
+
+    for (const [, product] of this.items.entries()) {
+      if (product.slug === slug) {
+        foundItem = product;
+      }
+    }
+
+    if (!foundItem) {
+      return null;
+    }
+
+    return foundItem;
+  }
+
   async findMany({
     page,
     limit,
@@ -64,6 +82,21 @@ export class InMemoryProductRepository implements ProductRepository {
 
     for (const [, product] of this.items.entries()) {
       if (product.id === id) {
+        this.items.delete(product.id);
+        foundItem = product;
+      }
+    }
+
+    return foundItem;
+  }
+
+  async deleteBySlug({
+    slug,
+  }: ProductDeleteBySlugParams): Promise<Product | null> {
+    let foundItem: Product | null = null;
+
+    for (const [, product] of this.items.entries()) {
+      if (product.slug === slug) {
         this.items.delete(product.id);
         foundItem = product;
       }

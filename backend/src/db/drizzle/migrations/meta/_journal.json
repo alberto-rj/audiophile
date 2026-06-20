@@ -15,6 +15,20 @@
       "when": 1781533580065,
       "tag": "0001_lowly_network",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781935565450,
+      "tag": "0002_powerful_winter_soldier",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1781964850495,
+      "tag": "0003_wise_randall",
+      "breakpoints": true
     }
   ]
 }

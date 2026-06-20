@@ -5,11 +5,9 @@ import {
   ApiProductIdParamsSchema,
   ApiProductFindManyQuerySchema,
   ApiProductSlugParamsSchema,
-  ApiProductAddOtherBodySchema,
 } from './product.api.schema';
 import type {
   Product,
-  ProductAddOtherParams,
   ProductCreateParams,
   ProductDeleteByIdParams,
   ProductDeleteBySlugParams,
@@ -29,12 +27,6 @@ export function makeProduct({ name, ...rest }: ProductCreateParams): Product {
     name,
     slug: toSlug(name),
   };
-}
-
-export function makeProductAddOtherParams(
-  params: unknown,
-): ProductAddOtherParams {
-  return parseSchema(ApiProductAddOtherBodySchema, params);
 }
 
 export function makeProductCreateParams(params: unknown): ProductCreateParams {
