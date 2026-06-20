@@ -64,7 +64,7 @@ export const products = pgTable('products', {
 export const otherProducts = pgTable(
   'other_products',
   {
-    otherId: integer()
+    otherId: integer('other_id')
       .notNull()
       .references(() => products.id),
     productId: integer('product_id')
