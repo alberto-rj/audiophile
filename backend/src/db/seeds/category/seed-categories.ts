@@ -1,25 +1,28 @@
 import { categoryRepository } from '@/config';
-import { categories, type Categories } from '@/db/mocks';
+import { type Categories } from '@/db/mocks';
 import { logger, toSlug } from '@/helpers';
 
-export async function createCategories(categories: Categories) {
-  await categoryRepository.clear();
+type CreateCategoriesParams = {
+  categories: Categories;
+};
 
-  const newParams = categories.map(({ name, description, image }) => ({
+export async function createCategories({ categories }: CreateCategoriesParams) {
+  const newParamsList = categories.map(({ name, description, image }) => ({
+    slug: toSlug(name),
     name,
     description,
     image,
-    slug: toSlug(name),
   }));
-  const createdCategories = await categoryRepository.createMany(newParams);
+
+  const createdCategories = await categoryRepository.createMany(newParamsList);
 
   return createdCategories;
 }
 
-export async function seedCategories() {
+export async function seedCategories({ categories }: CreateCategoriesParams) {
   try {
     logger.info('Seeding "categories"...');
-    const createdCategories = await createCategories(categories);
+    const createdCategories = await createCategories({ categories });
     logger.info('"categories" was successfully seeded.');
     return createdCategories;
   } catch (error) {
