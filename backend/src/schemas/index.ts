@@ -140,6 +140,19 @@ export type {
   IncludeFindManyParams,
 } from './product/include.types';
 export {
+  makeOtherProduct,
+  makeOtherProductCreateParams,
+} from './product/other-product.helpers';
+export {
+  OtherProductCreateParamsSchema,
+  OtherProductSchema,
+} from './product/other-product.schema';
+export type {
+  OtherProduct,
+  OtherProductCreateParams,
+  OtherProductId,
+} from './product/other-product.types';
+export {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
   ProductIdSchema,
@@ -150,7 +163,6 @@ export {
 } from './product/product.base.schema';
 export {
   ApiProductSchema,
-  ApiProductAddOtherBodySchema,
   ApiProductCreateBodySchema,
   ApiProductFindManyQuerySchema,
   ApiProductIdParamsSchema,
@@ -164,7 +176,6 @@ export type {
 export { ProductBaseSchema, ProductSchema } from './product/product.schema';
 export {
   makeProduct,
-  makeProductAddOtherParams,
   makeProductCreateParams,
   makeProductDeleteByIdParams,
   makeProductDeleteBySlugParams,
@@ -182,7 +193,6 @@ export type {
   ProductName,
   ProductPrice,
   ProductSlug,
-  ProductAddOtherParams,
   ProductCreateParams,
   ProductDeleteByIdParams,
   ProductDeleteBySlugParams,

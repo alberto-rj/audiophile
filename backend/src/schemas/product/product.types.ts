@@ -11,7 +11,6 @@ import type {
   ProductSlugSchema,
 } from './product.base.schema';
 import type {
-  ApiProductAddOtherBodySchema,
   ApiProductCreateBodySchema,
   ApiProductFindManyQuerySchema,
   ApiProductIdParamsSchema,
@@ -36,10 +35,6 @@ export type ProductPrice = z.infer<typeof ProductPriceSchema>;
 export type ProductBase = z.infer<typeof ProductBaseSchema>;
 
 export type Product = z.infer<typeof ProductSchema>;
-
-export type ProductAddOtherParams = z.infer<
-  typeof ApiProductAddOtherBodySchema
->;
 
 export type ProductCreateParams = z.infer<typeof ApiProductCreateBodySchema> &
   ApiProductSlugParams;

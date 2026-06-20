@@ -31,10 +31,6 @@ export const ApiProductCreateBodySchema = z.object({
   categoryId: CategoryIdSchema,
 });
 
-export const ApiProductAddOtherBodySchema = z.object({
-  otherId: ProductIdSchema,
-});
-
 export const ApiProductIdParamsSchema = z.object({
   id: ProductIdSchema,
 });
