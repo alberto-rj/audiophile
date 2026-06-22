@@ -1,4 +1,4 @@
-import { asc, count, eq } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 
 import { db, products, type Product as RawProduct } from '@/db/drizzle';
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
@@ -8,10 +8,65 @@ import type {
   ProductCreateParams,
   ProductDeleteByIdParams,
   ProductDeleteBySlugParams,
+  ProductDetailed,
   ProductFindByIdParams,
   ProductFindBySlugParams,
   ProductFindManyParams,
 } from '@/schemas';
+
+const PRODUCT_WITH = {
+  category: {
+    columns: {
+      name: true,
+      slug: true,
+      description: true,
+      image: true,
+    },
+  },
+  gallery: {
+    columns: {
+      first: true,
+      second: true,
+      third: true,
+    },
+  },
+  includes: {
+    columns: {
+      item: true,
+      quantity: true,
+    },
+  },
+  suggestedIns: {
+    columns: {},
+    with: {
+      suggestion: {
+        columns: {
+          name: true,
+          slug: true,
+          image: true,
+        },
+      },
+    },
+  },
+} as const;
+
+const PRODUCT_COLUMNS = {
+  categoryId: false,
+  createdAt: false,
+  updatedAt: false,
+} as const;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function _inferRawProductDetailed() {
+  return db.query.products.findFirst({
+    with: PRODUCT_WITH,
+    columns: PRODUCT_COLUMNS,
+  });
+}
+
+type RawProductDetailed = NonNullable<
+  Awaited<ReturnType<typeof _inferRawProductDetailed>>
+>;
 
 function toItem(item: RawProduct): Product {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,6 +81,17 @@ function toItem(item: RawProduct): Product {
   return {
     ...itemWithoutTimestamp,
     isNew,
+  };
+}
+
+function toItemDetailed(item: RawProductDetailed): ProductDetailed {
+  return {
+    ...item,
+    suggestions: item.suggestedIns.map((item) => ({
+      name: item.suggestion.name,
+      slug: item.suggestion.slug,
+      image: item.suggestion.image,
+    })),
   };
 }
 
@@ -45,45 +111,49 @@ export class DrizzleProductRepository implements ProductRepository {
     return createdItems.map(toItem);
   }
 
-  async findById({ id }: ProductFindByIdParams): Promise<Product | null> {
-    const [foundItem] = await db
-      .select()
-      .from(products)
-      .where(eq(products.id, id))
-      .limit(1);
+  async findById({
+    id,
+  }: ProductFindByIdParams): Promise<ProductDetailed | null> {
+    const foundItem = await db.query.products.findFirst({
+      where: eq(products.id, id),
+      with: PRODUCT_WITH,
+      columns: PRODUCT_COLUMNS,
+    });
 
     if (!foundItem) {
       return null;
     }
 
-    return toItem(foundItem);
+    return toItemDetailed(foundItem);
   }
 
-  async findBySlug({ slug }: ProductFindBySlugParams): Promise<Product | null> {
-    const [foundItem] = await db
-      .select()
-      .from(products)
-      .where(eq(products.slug, slug))
-      .limit(1);
+  async findBySlug({
+    slug,
+  }: ProductFindBySlugParams): Promise<ProductDetailed | null> {
+    const foundItem = await db.query.products.findFirst({
+      where: eq(products.slug, slug),
+      with: PRODUCT_WITH,
+      columns: PRODUCT_COLUMNS,
+    });
 
     if (!foundItem) {
       return null;
     }
 
-    return toItem(foundItem);
+    return toItemDetailed(foundItem);
   }
 
   async findMany({
     page,
     limit,
-  }: ProductFindManyParams): Promise<PaginateResult<Product>> {
+  }: ProductFindManyParams): Promise<PaginateResult<ProductDetailed>> {
     const [foundItems, [totalItemsResult]] = await Promise.all([
-      db
-        .select()
-        .from(products)
-        .orderBy(asc(products.createdAt))
-        .limit(limit)
-        .offset(getOffset({ limit, page })),
+      db.query.products.findMany({
+        limit,
+        offset: getOffset({ limit, page }),
+        with: PRODUCT_WITH,
+        columns: PRODUCT_COLUMNS,
+      }),
       db.select({ totalItems: count() }).from(products),
     ]);
 
@@ -96,7 +166,7 @@ export class DrizzleProductRepository implements ProductRepository {
 
     return {
       ...result,
-      items: foundItems.map(toItem),
+      items: foundItems.map(toItemDetailed),
     };
   }
 

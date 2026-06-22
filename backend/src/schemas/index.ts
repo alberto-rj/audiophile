@@ -173,7 +173,11 @@ export type {
   ApiProductIdParams,
   ApiProductSlugParams,
 } from './product/product.api.types';
-export { ProductBaseSchema, ProductSchema } from './product/product.schema';
+export {
+  ProductBaseSchema,
+  ProductSchema,
+  ProductDetailedSchema,
+} from './product/product.schema';
 export {
   makeProduct,
   makeProductCreateParams,
@@ -187,6 +191,7 @@ export type {
   Product,
   ProductBase,
   ProductDescription,
+  ProductDetailed,
   ProductFeatures,
   ProductId,
   ProductIsNew,

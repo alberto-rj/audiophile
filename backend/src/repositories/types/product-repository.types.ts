@@ -4,6 +4,7 @@ import type {
   ProductCreateParams,
   ProductDeleteByIdParams,
   ProductDeleteBySlugParams,
+  ProductDetailed,
   ProductFindByIdParams,
   ProductFindBySlugParams,
   ProductFindManyParams,
@@ -14,11 +15,15 @@ export interface ProductRepository {
 
   createMany: (params: ProductCreateParams[]) => Promise<Product[]>;
 
-  findById: (params: ProductFindByIdParams) => Promise<Product | null>;
+  findById: (params: ProductFindByIdParams) => Promise<ProductDetailed | null>;
 
-  findBySlug: (params: ProductFindBySlugParams) => Promise<Product | null>;
+  findBySlug: (
+    params: ProductFindBySlugParams,
+  ) => Promise<ProductDetailed | null>;
 
-  findMany: (params: ProductFindManyParams) => Promise<PaginateResult<Product>>;
+  findMany: (
+    params: ProductFindManyParams,
+  ) => Promise<PaginateResult<ProductDetailed>>;
 
   deleteById: (params: ProductDeleteByIdParams) => Promise<Product | null>;
 
