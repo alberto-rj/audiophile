@@ -1,4 +1,6 @@
+import { relations } from 'drizzle-orm';
 import {
+  boolean,
   integer,
   pgTable,
   primaryKey,
@@ -57,6 +59,7 @@ export const products = pgTable('products', {
   name: varchar('name', { length: 128 }).notNull(),
   description: text('description'),
   features: text('features').notNull(),
+  isNew: boolean('is_new').default(false).notNull(),
   createdAt,
   updatedAt,
 });
@@ -99,3 +102,63 @@ export const includes = pgTable('includes', {
   createdAt,
   updatedAt,
 });
+
+export const userRelations = relations(users, ({ many }) => ({
+  refreshTokens: many(refreshTokens),
+}));
+
+export const refreshTokenToUserRelations = relations(
+  refreshTokens,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [refreshTokens.userId],
+      references: [users.id],
+    }),
+  }),
+);
+
+export const categoryRelations = relations(categories, ({ many }) => ({
+  products: many(products),
+}));
+
+export const productRelations = relations(products, ({ one, many }) => ({
+  category: one(categories, {
+    fields: [products.categoryId],
+    references: [categories.id],
+  }),
+  gallery: one(galleries),
+  includes: many(includes),
+  suggestedIns: many(otherProducts, {
+    relationName: 'sourceProductRef',
+  }),
+  suggestions: many(otherProducts, {
+    relationName: 'otherProduct',
+  }),
+}));
+
+export const galleryRelations = relations(galleries, ({ one }) => ({
+  product: one(products, {
+    fields: [galleries.productId],
+    references: [products.id],
+  }),
+}));
+
+export const includeRelations = relations(includes, ({ one }) => ({
+  product: one(products, {
+    fields: [includes.productId],
+    references: [products.id],
+  }),
+}));
+
+export const otherProductRelations = relations(otherProducts, ({ one }) => ({
+  suggestedIn: one(products, {
+    fields: [otherProducts.productId],
+    references: [products.id],
+    relationName: 'sourceProductRef',
+  }),
+  suggestion: one(products, {
+    fields: [otherProducts.otherId],
+    references: [products.id],
+    relationName: 'otherProductRef',
+  }),
+}));
