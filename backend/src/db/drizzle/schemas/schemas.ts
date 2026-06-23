@@ -60,6 +60,7 @@ export const products = pgTable('products', {
   description: text('description'),
   features: text('features').notNull(),
   isNew: boolean('is_new').default(false).notNull(),
+  price: integer('price').notNull(),
   createdAt,
   updatedAt,
 });
@@ -129,10 +130,10 @@ export const productRelations = relations(products, ({ one, many }) => ({
   gallery: one(galleries),
   includes: many(includes),
   suggestedIns: many(otherProducts, {
-    relationName: 'sourceProductRef',
+    relationName: 'sourceProduct',
   }),
   suggestions: many(otherProducts, {
-    relationName: 'otherProduct',
+    relationName: 'targetProduct',
   }),
 }));
 
@@ -154,11 +155,11 @@ export const otherProductRelations = relations(otherProducts, ({ one }) => ({
   suggestedIn: one(products, {
     fields: [otherProducts.productId],
     references: [products.id],
-    relationName: 'sourceProductRef',
+    relationName: 'sourceProduct',
   }),
   suggestion: one(products, {
     fields: [otherProducts.otherId],
     references: [products.id],
-    relationName: 'otherProductRef',
+    relationName: 'targetProduct',
   }),
 }));
