@@ -1,6 +1,11 @@
 import { count, eq } from 'drizzle-orm';
 
-import { db, products, type Product as RawProduct } from '@/db/drizzle';
+import {
+  db,
+  products,
+  type Product as RawProduct,
+  type ProductDetailed as RawProductDetailed,
+} from '@/db/drizzle';
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import type { ProductRepository } from '@/repositories';
 import type {
@@ -52,48 +57,7 @@ const PRODUCT_WITH = {
 
 const PRODUCT_COLUMNS = {
   categoryId: false,
-  createdAt: false,
-  updatedAt: false,
 } as const;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function _inferRawProductDetailed() {
-  return db.query.products.findFirst({
-    with: PRODUCT_WITH,
-    columns: PRODUCT_COLUMNS,
-  });
-}
-
-type RawProductDetailed = NonNullable<
-  Awaited<ReturnType<typeof _inferRawProductDetailed>>
->;
-
-function toItem(item: RawProduct): Product {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
-
-  const distance = new Date().getTime() - createdAt.getTime();
-  const distanceInSeconds = Math.floor(distance / 1000);
-  const distanceInHours = Math.floor(distanceInSeconds / 3600);
-  const distanceInDays = Math.floor(distanceInHours / 24);
-  const isNew = distanceInDays < 8;
-
-  return {
-    ...itemWithoutTimestamp,
-    isNew,
-  };
-}
-
-function toItemDetailed(item: RawProductDetailed): ProductDetailed {
-  return {
-    ...item,
-    suggestions: item.suggestedIns.map((item) => ({
-      name: item.suggestion.name,
-      slug: item.suggestion.slug,
-      image: item.suggestion.image,
-    })),
-  };
-}
 
 export class DrizzleProductRepository implements ProductRepository {
   async create(params: ProductCreateParams): Promise<Product> {
@@ -103,12 +67,14 @@ export class DrizzleProductRepository implements ProductRepository {
   }
 
   async createMany(paramsList: ProductCreateParams[]): Promise<Product[]> {
-    const createdItems = await db
-      .insert(products)
-      .values(paramsList)
-      .returning();
+    return db.transaction(async (tx) => {
+      const createdItems = await tx
+        .insert(products)
+        .values(paramsList)
+        .returning();
 
-    return createdItems.map(toItem);
+      return createdItems.map(toItem);
+    });
   }
 
   async findById({
@@ -157,11 +123,10 @@ export class DrizzleProductRepository implements ProductRepository {
       db.select({ totalItems: count() }).from(products),
     ]);
 
-    const totalItems = totalItemsResult!.totalItems;
     const result = getBaseResult({
       limit,
       page,
-      totalItems,
+      totalItems: totalItemsResult!.totalItems,
     });
 
     return {
@@ -201,4 +166,37 @@ export class DrizzleProductRepository implements ProductRepository {
   async clear() {
     await db.delete(products);
   }
+}
+
+function isNewItem(createdAt: Date) {
+  const distance = new Date().getTime() - createdAt.getTime();
+  const distanceInSeconds = Math.floor(distance / 1000);
+  const distanceInHours = Math.floor(distanceInSeconds / 3600);
+  const distanceInDays = Math.floor(distanceInHours / 24);
+  const isNew = distanceInDays < 8;
+
+  return isNew;
+}
+
+function toItem(item: RawProduct): Product {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
+
+  return {
+    ...itemWithoutTimestamp,
+    isNew: isNewItem(createdAt),
+  };
+}
+
+function toItemDetailed(item: RawProductDetailed): ProductDetailed {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
+
+  return {
+    ...itemWithoutTimestamp,
+    isNew: isNewItem(createdAt),
+    suggestions: itemWithoutTimestamp.suggestedIns.map(({ suggestion }) => ({
+      ...suggestion,
+    })),
+  };
 }

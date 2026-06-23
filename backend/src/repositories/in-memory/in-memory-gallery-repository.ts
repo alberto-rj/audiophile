@@ -1,5 +1,5 @@
+import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers';
-import type { GalleryRepository } from '@/repositories';
 import { makeGallery } from '@/schemas';
 import type {
   Gallery,
@@ -9,17 +9,13 @@ import type {
   GalleryFindManyParams,
 } from '@/schemas';
 
+import type { GalleryRepository } from '../types/gallery-repository.types';
+
 export class InMemoryGalleryRepository implements GalleryRepository {
-  private items: Map<number, Gallery>;
-
-  constructor() {
-    this.items = new Map();
-  }
-
   async create(params: GalleryCreateParams): Promise<Gallery> {
     const newItem = makeGallery(params);
 
-    this.items.set(newItem.id, newItem);
+    db.galleries.set(newItem.id, newItem);
 
     return newItem;
   }
@@ -28,16 +24,16 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     const newItems = paramsList.map(makeGallery);
 
     for (const newItem of newItems) {
-      this.items.set(newItem.id, newItem);
+      db.galleries.set(newItem.id, newItem);
     }
 
     return newItems;
   }
 
   async findById({ id }: GalleryFindByIdParams): Promise<Gallery | null> {
-    const foundItem = this.items.get(id);
+    const foundItem = db.galleries.get(id);
 
-    if (typeof foundItem === 'undefined') {
+    if (!foundItem) {
       return null;
     }
 
@@ -48,7 +44,7 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     page,
     limit,
   }: GalleryFindManyParams): Promise<PaginateResult<Gallery>> {
-    const items = Array.from(this.items.values());
+    const items = Array.from(db.galleries.values());
 
     const foundItems = paginate({
       items,
@@ -60,19 +56,20 @@ export class InMemoryGalleryRepository implements GalleryRepository {
   }
 
   async deleteById({ id }: GalleryDeleteByIdParams): Promise<Gallery | null> {
-    let foundItem: Gallery | null = null;
+    const foundItem = Array.from(db.galleries.values()).find(
+      (item) => item.id === id,
+    );
 
-    for (const [, gallery] of this.items.entries()) {
-      if (gallery.id === id) {
-        this.items.delete(gallery.id);
-        foundItem = gallery;
-      }
+    if (!foundItem) {
+      return null;
     }
+
+    db.galleries.delete(foundItem.id);
 
     return foundItem;
   }
 
   async clear(): Promise<void> {
-    this.items.clear();
+    db.galleries.clear();
   }
 }

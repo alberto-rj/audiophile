@@ -15,5 +15,6 @@ export type {
   Include,
   OtherProduct,
   Product,
+  ProductDetailed,
   User,
 } from './schemas/schemas.types';

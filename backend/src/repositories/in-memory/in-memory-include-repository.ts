@@ -1,5 +1,5 @@
+import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers';
-import type { IncludeRepository } from '@/repositories';
 import { makeInclude } from '@/schemas';
 import type {
   Include,
@@ -9,17 +9,13 @@ import type {
   IncludeFindManyParams,
 } from '@/schemas';
 
+import type { IncludeRepository } from '../types/include-repository.types';
+
 export class InMemoryIncludeRepository implements IncludeRepository {
-  private items: Map<number, Include>;
-
-  constructor() {
-    this.items = new Map();
-  }
-
   async create(params: IncludeCreateParams): Promise<Include> {
     const newItem = makeInclude(params);
 
-    this.items.set(newItem.id, newItem);
+    db.includes.set(newItem.id, newItem);
 
     return newItem;
   }
@@ -28,16 +24,16 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     const newItems = paramsList.map(makeInclude);
 
     for (const newItem of newItems) {
-      this.items.set(newItem.id, newItem);
+      db.includes.set(newItem.id, newItem);
     }
 
     return newItems;
   }
 
   async findById({ id }: IncludeFindByIdParams): Promise<Include | null> {
-    const foundItem = this.items.get(id);
+    const foundItem = db.includes.get(id);
 
-    if (typeof foundItem === 'undefined') {
+    if (!foundItem) {
       return null;
     }
 
@@ -48,7 +44,7 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     page,
     limit,
   }: IncludeFindManyParams): Promise<PaginateResult<Include>> {
-    const items = Array.from(this.items.values());
+    const items = Array.from(db.includes.values());
 
     const foundItems = paginate({
       items,
@@ -60,19 +56,20 @@ export class InMemoryIncludeRepository implements IncludeRepository {
   }
 
   async deleteById({ id }: IncludeDeleteByIdParams): Promise<Include | null> {
-    let foundItem: Include | null = null;
+    const foundItem = Array.from(db.includes.values()).find(
+      (item) => item.id === id,
+    );
 
-    for (const [, include] of this.items.entries()) {
-      if (include.id === id) {
-        this.items.delete(include.id);
-        foundItem = include;
-      }
+    if (!foundItem) {
+      return null;
     }
+
+    db.includes.delete(foundItem.id);
 
     return foundItem;
   }
 
   async clear(): Promise<void> {
-    this.items.clear();
+    db.includes.clear();
   }
 }

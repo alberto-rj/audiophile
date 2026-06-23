@@ -1,3 +1,5 @@
+import { db } from '@/db/in-memory';
+import { paginate, type PaginateResult } from '@/helpers';
 import { makeCategory } from '@/schemas';
 import type {
   Category,
@@ -9,20 +11,14 @@ import type {
   CategoryFindManyParams,
   CategoryUpdateParams,
 } from '@/schemas';
-import type { CategoryRepository } from '@/repositories';
-import { paginate, type PaginateResult } from '@/helpers';
+
+import type { CategoryRepository } from '../types/category-repository.types';
 
 export class InMemoryCategoryRepository implements CategoryRepository {
-  private items: Map<number, Category>;
-
-  constructor() {
-    this.items = new Map();
-  }
-
   async create(params: CategoryCreateParams): Promise<Category> {
     const newItem = makeCategory(params);
 
-    this.items.set(newItem.id, newItem);
+    db.categories.set(newItem.id, newItem);
 
     return newItem;
   }
@@ -31,7 +27,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     const newItems = params.map(makeCategory);
 
     for (const newItem of newItems) {
-      this.items.set(newItem.id, newItem);
+      db.categories.set(newItem.id, newItem);
     }
 
     return newItems;
@@ -41,7 +37,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     id,
     ...changes
   }: CategoryUpdateParams): Promise<Category | null> {
-    const foundItem = this.items.get(id);
+    const foundItem = db.categories.get(id);
 
     if (!foundItem) {
       return null;
@@ -52,27 +48,29 @@ export class InMemoryCategoryRepository implements CategoryRepository {
       ...changes,
     };
 
-    this.items.set(id, newItem);
+    db.categories.set(id, newItem);
 
     return newItem;
+  }
+
+  async findById({ id }: CategoryFindByIdParams): Promise<Category | null> {
+    const foundItem = db.categories.get(id);
+
+    if (!foundItem) {
+      return null;
+    }
+
+    return foundItem;
   }
 
   async findBySlug({
     slug,
   }: CategoryFindBySlugParams): Promise<Category | null> {
-    for (const [, category] of this.items.entries()) {
-      if (category.slug === slug) {
-        return category;
-      }
-    }
+    const foundItem = Array.from(db.categories.values()).find(
+      (item) => item.slug === slug,
+    );
 
-    return null;
-  }
-
-  async findById({ id }: CategoryFindByIdParams): Promise<Category | null> {
-    const foundItem = this.items.get(id);
-
-    if (typeof foundItem === 'undefined') {
+    if (!foundItem) {
       return null;
     }
 
@@ -83,7 +81,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     page,
     limit,
   }: CategoryFindManyParams): Promise<PaginateResult<Category>> {
-    const items = Array.from(this.items.values());
+    const items = Array.from(db.categories.values());
 
     const foundItems = paginate({ items, page, limit });
 
@@ -91,14 +89,15 @@ export class InMemoryCategoryRepository implements CategoryRepository {
   }
 
   async deleteById({ id }: CategoryDeleteByIdParams): Promise<Category | null> {
-    let foundItem = null;
+    const foundItem = Array.from(db.categories.values()).find(
+      (item) => item.id === id,
+    );
 
-    for (const [, category] of this.items.entries()) {
-      if (category.id === id) {
-        this.items.delete(category.id);
-        foundItem = category;
-      }
+    if (!foundItem) {
+      return null;
     }
+
+    db.categories.delete(foundItem.id);
 
     return foundItem;
   }
@@ -106,19 +105,20 @@ export class InMemoryCategoryRepository implements CategoryRepository {
   async deleteBySlug({
     slug,
   }: CategoryDeleteBySlugParams): Promise<Category | null> {
-    let foundItem = null;
+    const foundItem = Array.from(db.categories.values()).find(
+      (item) => item.slug === slug,
+    );
 
-    for (const [, category] of this.items.entries()) {
-      if (category.slug === slug) {
-        this.items.delete(category.id);
-        foundItem = category;
-      }
+    if (!foundItem) {
+      return null;
     }
+
+    db.categories.delete(foundItem.id);
 
     return foundItem;
   }
 
   async clear(): Promise<void> {
-    this.items.clear();
+    db.categories.clear();
   }
 }
