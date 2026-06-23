@@ -1,6 +1,7 @@
 import type { z } from '@/config';
 
 import type {
+  IncludeIdSchema,
   IncludeItemSchema,
   IncludeQuantitySchema,
 } from './include.base.schema';
@@ -10,6 +11,8 @@ import type {
   ApiIncludeIdParamsSchema,
 } from './include.api.schema';
 import type { ApiPaginationQuerySchema } from '../common/common.schema';
+
+export type IncludeId = z.infer<typeof IncludeIdSchema>;
 
 export type IncludeQuantity = z.infer<typeof IncludeQuantitySchema>;
 
