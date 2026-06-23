@@ -1,27 +1,25 @@
+import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers';
 import type { ProductRepository } from '@/repositories';
-import { makeProduct } from '@/schemas';
+import { makeCategory, makeProduct } from '@/schemas';
 import type {
+  CategoryId,
   Product,
   ProductCreateParams,
   ProductDeleteByIdParams,
   ProductDeleteBySlugParams,
+  ProductDetailed,
   ProductFindByIdParams,
   ProductFindBySlugParams,
   ProductFindManyParams,
+  ProductId,
 } from '@/schemas';
 
 export class InMemoryProductRepository implements ProductRepository {
-  private items: Map<number, Product>;
-
-  constructor() {
-    this.items = new Map();
-  }
-
   async create(params: ProductCreateParams): Promise<Product> {
     const newItem = makeProduct(params);
 
-    this.items.set(newItem.id, newItem);
+    db.products.set(newItem.id, newItem);
 
     return newItem;
   }
@@ -30,43 +28,43 @@ export class InMemoryProductRepository implements ProductRepository {
     const newItems = paramsList.map(makeProduct);
 
     for (const newItem of newItems) {
-      this.items.set(newItem.id, newItem);
+      db.products.set(newItem.id, newItem);
     }
 
     return newItems;
   }
 
-  async findById({ id }: ProductFindByIdParams): Promise<Product | null> {
-    const foundItem = this.items.get(id);
-
-    if (typeof foundItem === 'undefined') {
-      return null;
-    }
-
-    return foundItem;
-  }
-
-  async findBySlug({ slug }: ProductFindBySlugParams): Promise<Product | null> {
-    let foundItem: Product | null = null;
-
-    for (const [, product] of this.items.entries()) {
-      if (product.slug === slug) {
-        foundItem = product;
-      }
-    }
+  async findById({
+    id,
+  }: ProductFindByIdParams): Promise<ProductDetailed | null> {
+    const foundItem = db.products.get(id);
 
     if (!foundItem) {
       return null;
     }
 
-    return foundItem;
+    return toItemDetailed(foundItem);
+  }
+
+  async findBySlug({
+    slug,
+  }: ProductFindBySlugParams): Promise<ProductDetailed | null> {
+    const foundItem = Array.from(db.products.values()).find(
+      (p) => p.slug === slug,
+    );
+
+    if (!foundItem) {
+      return null;
+    }
+
+    return toItemDetailed(foundItem);
   }
 
   async findMany({
     page,
     limit,
-  }: ProductFindManyParams): Promise<PaginateResult<Product>> {
-    const items = Array.from(this.items.values());
+  }: ProductFindManyParams): Promise<PaginateResult<ProductDetailed>> {
+    const items = Array.from(db.products.values()).map(toItemDetailed);
 
     const foundItems = paginate({
       items,
@@ -78,13 +76,12 @@ export class InMemoryProductRepository implements ProductRepository {
   }
 
   async deleteById({ id }: ProductDeleteByIdParams): Promise<Product | null> {
-    let foundItem: Product | null = null;
+    const foundItem = Array.from(db.products.values()).find(
+      (item) => item.id === id,
+    );
 
-    for (const [, product] of this.items.entries()) {
-      if (product.id === id) {
-        this.items.delete(product.id);
-        foundItem = product;
-      }
+    if (!foundItem) {
+      return null;
     }
 
     return foundItem;
@@ -93,19 +90,75 @@ export class InMemoryProductRepository implements ProductRepository {
   async deleteBySlug({
     slug,
   }: ProductDeleteBySlugParams): Promise<Product | null> {
-    let foundItem: Product | null = null;
+    const foundItem = Array.from(db.products.values()).find(
+      (item) => item.slug === slug,
+    );
 
-    for (const [, product] of this.items.entries()) {
-      if (product.slug === slug) {
-        this.items.delete(product.id);
-        foundItem = product;
-      }
+    if (!foundItem) {
+      return null;
     }
 
     return foundItem;
   }
 
   async clear(): Promise<void> {
-    this.items.clear();
+    db.products.clear();
   }
+}
+
+function getProductGallery(productId: ProductId) {
+  for (const [, gallery] of db.galleries.entries()) {
+    if (gallery.productId === productId) {
+      return gallery;
+    }
+  }
+
+  return null;
+}
+
+function getProductCategory(categoryId: CategoryId) {
+  for (const [, category] of db.categories.entries()) {
+    if (category.id === categoryId) {
+      return category;
+    }
+  }
+
+  return makeCategory({
+    name: 'category not found',
+    description: '',
+    image: '',
+    slug: 'category-not-found',
+  });
+}
+
+function getProductIncludes(productId: ProductId) {
+  const includes = Array.from(db.includes.values())
+    .filter((include) => include.productId === productId)
+    .map(({ item, quantity }) => ({ item, quantity }));
+
+  return includes;
+}
+
+function getProductSuggestions(productId: ProductId) {
+  const otherRelations = Array.from(db.otherProducts.values()).filter(
+    (other) => other.productId === productId,
+  );
+
+  const suggestions = Array.from(db.products.values())
+    .filter((product) =>
+      otherRelations.some((rel) => rel.otherId === product.id),
+    )
+    .map(({ name, slug, image }) => ({ name, slug, image }));
+
+  return suggestions;
+}
+
+function toItemDetailed(item: Product): ProductDetailed {
+  return {
+    ...item,
+    gallery: getProductGallery(item.id),
+    category: getProductCategory(item.categoryId),
+    includes: getProductIncludes(item.id),
+    suggestions: getProductSuggestions(item.id),
+  };
 }
