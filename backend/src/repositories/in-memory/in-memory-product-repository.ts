@@ -1,6 +1,5 @@
 import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers';
-import type { ProductRepository } from '@/repositories';
 import { makeCategory, makeProduct } from '@/schemas';
 import type {
   CategoryId,
@@ -14,6 +13,8 @@ import type {
   ProductFindManyParams,
   ProductId,
 } from '@/schemas';
+
+import type { ProductRepository } from '../types/product-repository.types';
 
 export class InMemoryProductRepository implements ProductRepository {
   async create(params: ProductCreateParams): Promise<Product> {
