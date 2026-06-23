@@ -1,5 +1,4 @@
-import type { UserCreateParams } from '@/repositories';
-import type { User } from '@/schemas';
+import type { User, UserCreateParams } from '@/schemas';
 
 export function makeUser(params: UserCreateParams): User {
   return {
