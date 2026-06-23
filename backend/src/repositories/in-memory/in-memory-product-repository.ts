@@ -84,6 +84,8 @@ export class InMemoryProductRepository implements ProductRepository {
       return null;
     }
 
+    db.products.delete(foundItem.id);
+
     return foundItem;
   }
 
@@ -97,6 +99,8 @@ export class InMemoryProductRepository implements ProductRepository {
     if (!foundItem) {
       return null;
     }
+
+    db.products.delete(foundItem.id);
 
     return foundItem;
   }
