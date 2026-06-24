@@ -1,6 +1,6 @@
 import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers';
-import { makeCategory, makeProduct } from '@/schemas';
+import { makeCategory, makeGallery, makeProduct } from '@/schemas';
 import type {
   CategoryId,
   Product,
@@ -118,7 +118,12 @@ function getProductGallery(productId: ProductId) {
     }
   }
 
-  return null;
+  return makeGallery({
+    first: 'first-not-found',
+    second: 'second-not-found',
+    third: 'third-not-found',
+    productId,
+  });
 }
 
 function getProductCategory(categoryId: CategoryId) {
@@ -130,8 +135,8 @@ function getProductCategory(categoryId: CategoryId) {
 
   return makeCategory({
     name: 'category not found',
-    description: '',
-    image: '',
+    description: 'category not found',
+    image: 'category-not-found',
     slug: 'category-not-found',
   });
 }

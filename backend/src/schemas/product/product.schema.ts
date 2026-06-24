@@ -15,6 +15,7 @@ import {
   ProductImageSchema,
   ProductIsNewSchema,
   ProductNameSchema,
+  ProductPriceSchema,
   ProductSlugSchema,
 } from './product.base.schema';
 import {
@@ -33,6 +34,7 @@ export const ProductSchema = z.object({
   id: ProductIdSchema,
   slug: ProductSlugSchema,
   name: ProductNameSchema,
+  price: ProductPriceSchema,
   image: ProductImageSchema,
   isNew: ProductIsNewSchema,
   description: ProductDescriptionSchema.nullish(),
@@ -46,6 +48,7 @@ export const ProductDetailedSchema = z.object({
   name: ProductNameSchema,
   image: ProductImageSchema,
   isNew: ProductIsNewSchema,
+  price: ProductPriceSchema,
   description: ProductDescriptionSchema.nullish(),
   features: ProductFeaturesSchema,
   includes: z.array(
@@ -60,13 +63,11 @@ export const ProductDetailedSchema = z.object({
     image: CategoryImageSchema,
     description: CategoryDescriptionSchema.nullish(),
   }),
-  gallery: z
-    .object({
-      first: GalleryImageSchema,
-      second: GalleryImageSchema,
-      third: GalleryImageSchema,
-    })
-    .nullable(),
+  gallery: z.object({
+    first: GalleryImageSchema,
+    second: GalleryImageSchema,
+    third: GalleryImageSchema,
+  }),
   suggestions: z.array(
     z.object({
       name: ProductNameSchema,
