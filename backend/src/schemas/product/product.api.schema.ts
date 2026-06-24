@@ -52,7 +52,7 @@ export const ApiProductSchema = z.object({
   categoryImage: ResponsiveImageSchema,
   includes: z.array(ApiIncludeSchema),
   gallery: ApiGallerySchema,
-  others: z.array(ProductBaseSchema),
+  suggestions: z.array(ProductBaseSchema),
 });
 
 export const ApiProductFindManyQuerySchema = ApiPaginationQuerySchema;
