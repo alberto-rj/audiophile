@@ -28,14 +28,14 @@ export function toApiProduct(product: ProductDetailed): ApiProduct {
     name,
 
     image: buildResponseImage(image, 'product'),
+    previewImage: buildResponseImage(image, 'productPreview'),
 
     category: category.name,
-    categoryImage: buildResponseImage(category.image, 'category'),
 
     gallery: {
-      first: buildResponseImage(gallery.first, 'gallery'),
-      second: buildResponseImage(gallery.second, 'gallery'),
-      third: buildResponseImage(gallery.third, 'gallery'),
+      first: buildResponseImage(gallery.first, 'firstGalleryItem'),
+      second: buildResponseImage(gallery.second, 'secondGalleryItem'),
+      third: buildResponseImage(gallery.third, 'thirdGalleryItem'),
     },
     includes,
 

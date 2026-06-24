@@ -49,7 +49,7 @@ export const ApiProductSchema = z.object({
   features: ProductFeaturesSchema,
   category: CategoryNameSchema,
   image: ResponsiveImageSchema,
-  categoryImage: ResponsiveImageSchema,
+  previewImage: ResponsiveImageSchema,
   includes: z.array(ApiIncludeSchema),
   gallery: ApiGallerySchema,
   suggestions: z.array(ProductBaseSchema),
