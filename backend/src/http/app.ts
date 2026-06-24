@@ -14,7 +14,12 @@ import {
   requestLogger,
   runWithContext,
 } from './middlewares';
-import { authRoute, categoriesRoute, usersRoute } from './routes';
+import {
+  authRoute,
+  categoriesRoute,
+  productsRoute,
+  usersRoute,
+} from './routes';
 
 const { PORT, NODE_ENV, CORS_HEADERS, CORS_METHODS, CORS_ORIGINS } = env;
 
@@ -93,6 +98,7 @@ app.use(requestLogger);
 // API routes
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/categories', categoriesRoute);
+app.use('/api/v1/products', productsRoute);
 app.use('/api/v1/users', usersRoute);
 
 app.get('/api/v1/health', (_, res) => {
