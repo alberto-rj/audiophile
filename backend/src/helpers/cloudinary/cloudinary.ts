@@ -38,6 +38,11 @@ export const IMAGE_TRANSFORMS = {
     tablet: 'w_790,h_736,c_fill,q_auto,f_auto',
     desktop: 'w_635,h_592,c_fill,q_auto,f_auto',
   },
+  productSuggestion: {
+    mobile: 'w_654,h_240,c_fill,q_auto,f_auto',
+    tablet: 'w_446,h_636,c_fill,q_auto,f_auto',
+    desktop: 'w_700,h_336,c_fill,q_auto,f_auto',
+  },
 } as const;
 
 type TransformContext = keyof typeof IMAGE_TRANSFORMS;

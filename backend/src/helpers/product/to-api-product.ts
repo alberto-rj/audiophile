@@ -42,7 +42,7 @@ export function toApiProduct(product: ProductDetailed): ApiProduct {
     suggestions: suggestions.map(({ slug, name, image }) => ({
       name,
       slug,
-      image: buildResponseImage(image, 'product'),
+      image: buildResponseImage(image, 'productSuggestion'),
     })),
   };
 }
