@@ -24,6 +24,7 @@ export { makeGalleryRepository } from './product/make-gallery-repository';
 export { makeIncludeRepository } from './product/make-include-repository';
 export { makeProductRepository } from './product/make-product-repository';
 export { makeOtherProductRepository } from './product/make-other-repository';
+export { toApiProduct } from './product/to-api-product';
 
 export {
   AppError,
