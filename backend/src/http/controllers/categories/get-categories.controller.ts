@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import { findCategoriesUseCase } from '@/use-cases';
-import { makeResBodyPaginationResult } from '@/helpers';
+import { makeResBodyPaginationResult, toApiCategory } from '@/helpers';
 
 export async function getCategoriesController(
   req: Request,
@@ -12,11 +12,15 @@ export async function getCategoriesController(
   try {
     const payload = req.query;
 
-    const result = await findCategoriesUseCase({
+    const { items, ...rest } = await findCategoriesUseCase({
       payload,
     });
 
-    res.status(StatusCodes.OK).json(makeResBodyPaginationResult(result));
+    const apiItems = items.map(toApiCategory);
+
+    res
+      .status(StatusCodes.OK)
+      .json(makeResBodyPaginationResult({ ...rest, items: apiItems }));
   } catch (error) {
     next(error);
   }
