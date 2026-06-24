@@ -2,6 +2,7 @@ export { makeLoginPresenter } from './auth/make-login-presenter';
 export { makeRegisterPresenter } from './auth/make-register-presenter';
 
 export { makeCategoryRepository } from './category/make-category-repository';
+export { toApiCategory } from './category/to-api-category';
 
 export {
   IMAGE_TRANSFORMS,

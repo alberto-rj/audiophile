@@ -1,6 +1,6 @@
 import { z } from '@/config';
 
-import { PageSchema } from '../common/common.schema';
+import { PageSchema, ResponsiveImageSchema } from '../common/common.schema';
 import {
   CategoryDescriptionSchema,
   CategoryIdSchema,
@@ -37,7 +37,7 @@ export const ApiCategorySlugParamsSchema = z.object({
 export const ApiCategorySchema = z.object({
   id: CategoryIdSchema,
   slug: CategorySlugSchema,
-  image: CategoryImageSchema,
+  image: ResponsiveImageSchema,
   name: CategoryNameSchema,
   description: CategoryDescriptionSchema,
 });
