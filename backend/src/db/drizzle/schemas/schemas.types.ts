@@ -21,7 +21,7 @@ export type Product = typeof products.$inferSelect;
 
 export type ProductDetailed = Omit<Product, 'categoryId'> & {
   category: Pick<Category, 'name' | 'slug' | 'description' | 'image'>;
-  gallery: Pick<Gallery, 'first' | 'second' | 'third'> | null;
+  gallery: Pick<Gallery, 'first' | 'second' | 'third'>;
   includes: Array<Pick<Include, 'item' | 'quantity'>>;
   suggestedIns: Array<{
     suggestion: Pick<Product, 'name' | 'slug' | 'image'>;

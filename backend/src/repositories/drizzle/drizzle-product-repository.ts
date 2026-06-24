@@ -90,7 +90,7 @@ export class DrizzleProductRepository implements ProductRepository {
       return null;
     }
 
-    return toItemDetailed(foundItem);
+    return toItemDetailed(foundItem as RawProductDetailed);
   }
 
   async findBySlug({
@@ -106,7 +106,7 @@ export class DrizzleProductRepository implements ProductRepository {
       return null;
     }
 
-    return toItemDetailed(foundItem);
+    return toItemDetailed(foundItem as RawProductDetailed);
   }
 
   async findMany({
@@ -131,7 +131,9 @@ export class DrizzleProductRepository implements ProductRepository {
 
     return {
       ...result,
-      items: foundItems.map(toItemDetailed),
+      items: foundItems.map((item) =>
+        toItemDetailed(item as RawProductDetailed),
+      ),
     };
   }
 
