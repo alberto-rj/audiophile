@@ -7,6 +7,7 @@ export { getCategoriesController } from './categories/get-categories.controller'
 export { getCategoryBySlugController } from './categories/get-category-by-slug-controller';
 
 export { getProductBySlugController } from './products/get-product-by-slug.controller';
+export { getProductsController } from './products/get-products.controller';
 
 export { getProfileController } from './users/get-profile.controller';
 export { updateProfileController } from './users/update-profile.controller';
