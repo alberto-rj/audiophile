@@ -3,7 +3,6 @@ import { z } from '@/config';
 import {
   CategoryDescriptionSchema,
   CategoryIdSchema,
-  CategoryImageSchema,
   CategoryNameSchema,
   CategorySlugSchema,
 } from '../category/category.base.schema';
@@ -60,7 +59,6 @@ export const ProductDetailedSchema = z.object({
   category: z.object({
     name: CategoryNameSchema,
     slug: CategorySlugSchema,
-    image: CategoryImageSchema,
     description: CategoryDescriptionSchema.nullish(),
   }),
   gallery: z.object({
