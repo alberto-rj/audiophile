@@ -16,10 +16,6 @@ import {
 import { seedCategories } from './category/seed-categories';
 import { seedProducts } from './product/seed-product';
 import { seedOtherProducts } from './product/seed-other-product';
-import {
-  uploadCategoryImages,
-  uploadProductImages,
-} from '@/scripts/upload/upload';
 
 async function main() {
   try {
@@ -30,9 +26,6 @@ async function main() {
     ]);
     await productRepository.clear();
     await categoryRepository.clear();
-
-    await uploadCategoryImages(categories);
-    await uploadProductImages(products);
 
     const createdCategories = await seedCategories({ categories });
 

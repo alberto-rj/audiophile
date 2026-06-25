@@ -48,6 +48,36 @@ export const IMAGE_TRANSFORMS = {
     tablet: 'w_790,h_736,c_fill,q_auto,f_auto',
     desktop: 'w_635,h_592,c_fill,q_auto,f_auto',
   },
+  cartItem: {
+    mobile: 'w_150,h_150,c_fill,q_auto,f_auto',
+    tablet: 'w_150,h_150,c_fill,q_auto,f_auto',
+    desktop: 'w_150,h_150,c_fill,q_auto,f_auto',
+  },
+  earphonesYX1: {
+    mobile: 'w_654,h_400,c_fill,q_auto,f_auto',
+    tablet: 'w_678,h_640,c_fill,q_auto,f_auto',
+    desktop: 'w_540,h_320,c_fill,q_auto,f_auto',
+  },
+  speakerZX7: {
+    mobile: 'w_654,h_640,c_fill,q_auto,f_auto',
+    tablet: 'w_689,h_320,c_fill,q_auto,f_auto',
+    desktop: 'w_110,h_320,c_fill,q_auto,f_auto',
+  },
+  speakerZX9: {
+    mobile: 'w_320,h_388,c_fill,q_auto,f_auto',
+    tablet: 'w_366,h_444,c_fill,q_auto,f_auto',
+    desktop: 'w_756,h_918,c_fill,q_auto,f_auto',
+  },
+  hero: {
+    mobile: 'w_750,h_1200,c_fill,q_auto,f_auto',
+    tablet: 'w_1536,h_1458,c_fill,q_auto,f_auto',
+    desktop: 'w_1440,h_729,c_fill,q_auto,f_auto',
+  },
+  bestGear: {
+    mobile: 'w_540,h_588,c_fill,q_auto,f_auto',
+    tablet: 'w_1378,h_600,c_fill,q_auto,f_auto',
+    desktop: 'w_654,h_600,c_fill,q_auto,f_auto',
+  },
 } as const;
 
 type TransformContext = keyof typeof IMAGE_TRANSFORMS;

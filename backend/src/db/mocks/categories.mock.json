@@ -1,16 +1,16 @@
 [
   {
-    "image": "/assets/shared/desktop/image-category-thumbnail-headphones.png",
+    "image": "audiophile/categories/neo6kemk57jj4ipywgxs",
     "name": "Headphones",
     "description": "Headphones description"
   },
   {
-    "image": "/assets/shared/desktop/image-category-thumbnail-speakers.png",
+    "image": "audiophile/categories/ivkrxcp3jvtpsaxoqnrz",
     "name": "Speakers",
     "description": "Speakers description"
   },
   {
-    "image": "/assets/shared/desktop/image-category-thumbnail-earphones.png",
+    "image": "audiophile/categories/k2gmqklq6ldwlm8u49so",
     "name": "Earphones",
     "description": "Earphones description"
   }
