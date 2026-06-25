@@ -1,7 +1,7 @@
 [
   {
     "name": "YX1 Wireless Earphones",
-    "image": "/assets/product-yx1-earphones/desktop/image-product.jpg",
+    "image": "audiophile/products/ojahthufdml5umhp8m7e",
     "category": "earphones",
     "price": 599,
     "description": "Tailor your listening experience with bespoke dynamic drivers from the new YX1 Wireless Earphones. Enjoy incredible high-fidelity sound even in noisy environments with its active noise cancellation feature.",
@@ -9,7 +9,7 @@
   },
   {
     "name": "XX59 Headphones",
-    "image": "/assets/product-xx59-headphones/desktop/image-product.jpg",
+    "image": "audiophile/products/rel3nzqtcgn6ncc08swa",
     "category": "headphones",
     "price": 899,
     "description": "Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move.",
@@ -17,7 +17,7 @@
   },
   {
     "name": "XX99 Mark One Headphones",
-    "image": "/assets/product-xx99-mark-one-headphones/desktop/image-product.jpg",
+    "image": "audiophile/products/u5mo7pcrxbse1k2zljyu",
     "category": "headphones",
     "price": 1750,
     "description": "As the gold standard for headphones, the classic XX99 Mark One offers detailed and accurate audio reproduction for audiophiles, mixing engineers, and music aficionados alike in studios and on the go.",
@@ -25,7 +25,7 @@
   },
   {
     "name": "XX99 Mark Two Headphones",
-    "image": "/assets/product-xx99-mark-two-headphones/desktop/image-product.jpg",
+    "image": "audiophile/products/ilfavp9ax8jn3di5gxsi",
     "category": "headphones",
     "price": 2999,
     "description": "The new XX99 Mark Two headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.",
@@ -33,7 +33,7 @@
   },
   {
     "name": "ZX7 Speaker",
-    "image": "/assets/product-zx7-speaker/desktop/image-product.jpg",
+    "image": "audiophile/products/dxkuqvhg6t96byy9kxx1",
     "category": "speakers",
     "price": 3500,
     "description": "Stream high quality sound wirelessly with minimal to no loss. The ZX7 speaker uses high-end audiophile components that represents the top of the line powered speakers for home or studio use.",
@@ -41,7 +41,7 @@
   },
   {
     "name": "ZX9 Speaker",
-    "image": "/assets/product-zx9-speaker/desktop/image-product.jpg",
+    "image": "audiophile/products/ivmbjt3nwdm7gb9mh0mc",
     "category": "speakers",
     "price": 4500,
     "description": "Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups.",
