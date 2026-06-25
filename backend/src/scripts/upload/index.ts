@@ -1,10 +1,13 @@
-import { categories, products } from '@/db/mocks';
-
-import { uploadCategoryImages, uploadProductImages } from './upload';
+import {
+  uploadCategoryImages,
+  uploadProductImages,
+  uploadSharedImages,
+} from './upload';
 
 async function main() {
-  await uploadCategoryImages(categories);
-  await uploadProductImages(products);
+  await uploadCategoryImages();
+  await uploadProductImages();
+  await uploadSharedImages();
 }
 
 main();
