@@ -87,7 +87,8 @@ type TransformContext = keyof typeof IMAGE_TRANSFORMS;
  */
 export function buildImageUrl(publicId: string, transform: string): string {
   return cloudinary.url(publicId, {
-    transformation: transform,
+    resource_type: 'image',
+    raw_transformation: transform,
     secure: true,
   });
 }
