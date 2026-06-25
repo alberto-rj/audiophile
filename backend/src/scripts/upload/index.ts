@@ -1,5 +1,6 @@
 import {
   uploadCategoryImages,
+  uploadGalleryImages,
   uploadProductImages,
   uploadSharedImages,
 } from './upload';
@@ -7,6 +8,7 @@ import {
 async function main() {
   await uploadCategoryImages();
   await uploadProductImages();
+  await uploadGalleryImages();
   await uploadSharedImages();
 }
 
