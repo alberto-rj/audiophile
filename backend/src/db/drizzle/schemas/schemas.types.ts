@@ -1,4 +1,6 @@
 import type {
+  cartItems,
+  carts,
   categories,
   galleries,
   includes,
@@ -27,3 +29,7 @@ export type ProductDetailed = Omit<Product, 'categoryId'> & {
     suggestion: Pick<Product, 'name' | 'slug' | 'image'>;
   }>;
 };
+
+export type Cart = typeof carts.$inferSelect;
+
+export type CartItem = typeof cartItems.$inferSelect;
