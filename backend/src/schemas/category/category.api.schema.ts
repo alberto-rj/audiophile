@@ -1,6 +1,10 @@
 import { z } from '@/config';
 
-import { PageSchema, ResponsiveImageSchema } from '../common/common.schema';
+import {
+  LimitSchema,
+  PageSchema,
+  ResponsiveImageSchema,
+} from '../common/common.schema';
 import {
   CategoryDescriptionSchema,
   CategoryIdSchema,
@@ -23,7 +27,7 @@ export const ApiCategoryUpdateBodySchema = z.object({
 
 export const ApiCategoryPaginationQuerySchema = z.object({
   page: PageSchema,
-  limit: PageSchema,
+  limit: LimitSchema,
 });
 
 export const ApiCategoryIdParamsSchema = z.object({
