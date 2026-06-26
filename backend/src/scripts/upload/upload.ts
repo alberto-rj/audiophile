@@ -1,7 +1,7 @@
 import path from 'node:path';
 
 import { logger } from '../../helpers/logger/logger';
-import { uploadImage } from '../../helpers/cloudinary/cloudinary';
+import { toPublicId, uploadImage } from '../../helpers/cloudinary/cloudinary';
 
 const CATEGORY_IMAGE_FOLDER = 'audiophile/categories';
 const CATEGORY_IMAGES = [
@@ -66,11 +66,12 @@ const SHARED_IMAGES = [
 async function uploadSingleImage(source: string, folder: string) {
   try {
     const filePath = path.join('public', 'assets', source);
-    logger.info(`Trying to upload "${source}" into "${folder}"...`);
-    await uploadImage(filePath, folder);
-    logger.info(`"${source}" was uploaded successfully into "${folder}"`);
+    const publicId = toPublicId(source);
+    logger.info(`Uploading "${source}"...`);
+    await uploadImage(filePath, folder, publicId);
+    logger.info(`Done: "${source}"`);
   } catch (error) {
-    logger.error(`Failed to upload "${source}" into "${folder}"`, error);
+    logger.error(`Failed to upload "${source}"`, error);
   }
 }
 

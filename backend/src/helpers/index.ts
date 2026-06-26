@@ -5,10 +5,11 @@ export { makeCategoryRepository } from './category/make-category-repository';
 export { toApiCategory } from './category/to-api-category';
 
 export {
-  IMAGE_TRANSFORMS,
+  cloudinary,
   buildImageUrl,
   buildResponseImage,
-  cloudinary,
+  IMAGE_TRANSFORMS,
+  toPublicId,
   uploadImage,
 } from './cloudinary/cloudinary';
 
