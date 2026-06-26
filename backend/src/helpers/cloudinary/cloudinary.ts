@@ -137,4 +137,8 @@ export async function uploadImage(
   return public_id;
 }
 
+export function toPublicId(source: string) {
+  return source.replace(/\.[^/.]+$/, '');
+}
+
 export { cloudinary };
