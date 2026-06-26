@@ -16,7 +16,7 @@ export const ProductNameSchema = z.string({
 });
 
 export const ProductImageSchema = z.string({
-  error: 'name must be a string.',
+  error: 'image must be a string.',
 });
 
 export const ProductDescriptionSchema = z.string({
@@ -27,7 +27,10 @@ export const ProductCategorySchema = z
   .string({
     error: 'category must be a string.',
   })
-  .openapi({ description: 'Product category.', example: 'Headphones' });
+  .openapi({
+    description: 'Product category.',
+    example: 'Headphones',
+  });
 
 export const ProductFeaturesSchema = z.string({
   error: 'features must be a string.',
@@ -39,6 +42,9 @@ export const ProductIsNewSchema = z
   })
   .transform((value) => value === 'true');
 
-export const ProductPriceSchema = z.number({
-  error: 'price must be a number.',
-});
+export const ProductPriceSchema = z
+  .number({
+    error: 'price must be a number.',
+  })
+  .int({ error: 'price must be an integer.' })
+  .nonnegative({ error: 'price must be equal or greater than 0.' });
