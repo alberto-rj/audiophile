@@ -22,7 +22,7 @@ const updatedAt = timestamp('updated_at', { withTimezone: true })
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 128 }).notNull(),
-  email: varchar('email', { length: 256 }).notNull(),
+  email: varchar('email', { length: 256 }).notNull().unique(),
   password: varchar('password', { length: 256 }).notNull(),
   createdAt,
   updatedAt,
@@ -41,8 +41,8 @@ export const refreshTokens = pgTable('refresh_tokens', {
 
 export const categories = pgTable('categories', {
   id: serial('id').primaryKey(),
-  slug: text('slug').notNull(),
-  image: text('image').notNull(),
+  slug: text('slug').notNull().unique(),
+  image: text('image').notNull().unique(),
   name: varchar('name', { length: 128 }).notNull(),
   description: text('description'),
   createdAt,
@@ -54,8 +54,8 @@ export const products = pgTable('products', {
   categoryId: integer('category_id')
     .notNull()
     .references(() => categories.id, { onDelete: 'cascade' }),
-  slug: text('slug').notNull(),
-  image: text('image').notNull(),
+  slug: text('slug').notNull().unique(),
+  image: text('image').notNull().unique(),
   name: varchar('name', { length: 128 }).notNull(),
   description: text('description'),
   features: text('features').notNull(),
@@ -86,9 +86,9 @@ export const galleries = pgTable('galleries', {
     .notNull()
     .references(() => products.id, { onDelete: 'cascade' })
     .unique(),
-  first: text('first').notNull(),
-  second: text('second').notNull(),
-  third: text('third').notNull(),
+  first: text('first').notNull().unique(),
+  second: text('second').notNull().unique(),
+  third: text('third').notNull().unique(),
   createdAt,
   updatedAt,
 });
