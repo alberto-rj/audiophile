@@ -4,7 +4,7 @@
 
 A full-stack e-commerce platform for premium audio equipment featuring authentication, shopping cart management, product catalog, order processing, responsive design, and a REST API built with TypeScript.
 
-[Live Demo](https://audiophile-seven-iota.vercel.app)
+[Live Demo](https://audiophile-frontend-v2.vercel.app)
 •
 [API Docs](https://your-api.onrender.com/api-docs)
 •
@@ -28,7 +28,7 @@ The focus throughout was architecture before features: clear separation between 
 
 ## Live Demo
 
-- **Frontend:** https://audiophile-seven-iota.vercel.app
+- **Frontend:** https://audiophile-frontend-v2.vercel.app
 
 - **Backend API:** https://your-api.onrender.com
 
