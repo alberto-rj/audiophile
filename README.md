@@ -106,34 +106,11 @@ The backend is organized in strict layers. Controllers parse HTTP input and retu
 
 ## Key Features
 
-### Authentication
+- **Authentication:** user registration, login, logout, refresh token flow, protected routes.
 
-- User registration
-- Login
-- Logout
-- Refresh token flow
-- Protected routes
+- **User Management:** view profile, update profile information.
 
-### User Management
-
-- View profile
-- Update profile information
-
-### Shopping Experience
-
-- Product catalog
-- Product details page
-- Responsive gallery
-- Shopping cart
-- Checkout flow
-
-### Developer Experience
-
-- Auto-generated OpenAPI documentation
-- Shared validation schemas
-- In-memory repositories
-- Mock Service Worker integration
-- Storybook component documentation
+- **Shopping Experience:** product catalog, product details page, responsive gallery, shopping cart, checkout flow.
 
 ## Key Technical Decisions
 
