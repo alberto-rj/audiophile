@@ -138,7 +138,7 @@ backend/src/
 │   ├── in-memory/   # In-memory database for testing
 │   ├── mocks/       # Seed data (JSON)
 │   └── seeds/       # Seeding scripts with FK-ordered insertion
-├── helpers/         # Factory functions, logger (Pino + AsyncLocalStorage), utilities
+├── helpers/         # Factory functions, logger (Winston + AsyncLocalStorage), utilities
 ├── http/
 │   ├── controllers/ # Thin HTTP handlers - parse, call use case, respond
 │   ├── middlewares/ # Auth guard, error handler, request logger, context propagation
@@ -194,6 +194,12 @@ npm run dev
 | -------------------------------- | ----------- |
 | `http://localhost:4224`          | REST API    |
 | `http://localhost:4224/api-docs` | Swagger UI  |
+
+**Uploading images (first time only):** requires local images in `public/assets/`. This is only necessary if you are using your own Cloudinary account - the public IDs in `@/db/mocks/categories.mock.json`, `@/db/mocks/products.mock.json`, and `@/db/mocks/galleries.mock.json` are deterministic and derived from the filenames, so they do not need to be updated.
+
+```bash
+npm run upload
+```
 
 **Run migrations and seed the database:**
 
