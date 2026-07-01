@@ -24,8 +24,6 @@ Audiophile is a full-stack e-commerce application for high-end audio products - 
 
 The focus throughout was architecture before features: clear separation between HTTP, business logic, and persistence layers; a single source of truth for validation and API documentation; and a frontend built with the same discipline - isolated component documentation, mock-driven development, and clean server state management.
 
-## Demo video (coming soon)
-
 ## Live Demo
 
 - **Frontend:** https://audiophile-frontend-v2.vercel.app
