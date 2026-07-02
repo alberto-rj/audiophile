@@ -112,7 +112,7 @@ app.use(notFoundHandler);
 // Global error handler
 app.use(errorHandler);
 
-if (NODE_ENV === 'development') {
+if (NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     logger.info(`Server is running at http://localhost:${PORT}`, {
       mode: NODE_ENV,
@@ -120,9 +120,7 @@ if (NODE_ENV === 'development') {
 
     logger.info(`Swagger UI is available at http://localhost:${PORT}/api-docs`);
   });
-}
 
-if (NODE_ENV !== 'test') {
   // Uncaught synchronous errors
   process.on('uncaughtException', (err) => {
     const { message: error, stack } = err;
