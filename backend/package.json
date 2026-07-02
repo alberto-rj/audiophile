@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node dist/http/app.js",
     "dev": "tsx watch src/http/app.ts",
-    "build": "tsc",
+    "build": "tsc && tsc-alias -f",
     "clean": "rm -rf dist",
     "type-check": "tsc --noEmit",
     "prebuild": "npm run clean && npm run type-check",
