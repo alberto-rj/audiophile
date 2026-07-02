@@ -6,7 +6,7 @@ A full-stack e-commerce platform for premium audio equipment featuring authentic
 
 [Live Demo](https://audiophile-frontend-v2.vercel.app)
 •
-[API Docs](https://your-api.onrender.com/api-docs)
+[API Docs](https://audiophile-qoxm.onrender.com/api-docs)
 •
 [Source Code](https://github.com/alberto-rj/audiophile)
 
@@ -28,9 +28,9 @@ The focus throughout was architecture before features: clear separation between 
 
 - **Frontend:** https://audiophile-frontend-v2.vercel.app
 
-- **Backend API:** https://your-api.onrender.com
+- **Backend API:** https://audiophile-qoxm.onrender.com
 
-- **Swagger Documentation:** https://your-api.onrender.com/api-docs
+- **Swagger Documentation:** https://audiophile-qoxm.onrender.com/api-docs
 
 ## Architecture Overview
 
