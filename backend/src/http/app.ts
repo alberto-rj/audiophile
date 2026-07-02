@@ -65,29 +65,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Swagger UI
-if (NODE_ENV !== 'production') {
-  // Generate the spec once on startup (not on every request)
-  const openApiSpec = generateOpenAPISpec();
+// Generate the spec once on startup (not on every request)
+const openApiSpec = generateOpenAPISpec();
 
-  // Serve raw JSON specs (useful for importing in Postman, Insomnia, etc.)
-  app.get('/api-docs.json', (_req, res) => res.json(openApiSpec));
+// Serve raw JSON specs (useful for importing in Postman, Insomnia, etc.)
+app.get('/api-docs.json', (_req, res) => res.json(openApiSpec));
 
-  // Serve Interactive Swagger UI
-  app.use(
-    '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(openApiSpec, {
-      customSiteTitle: 'audiophile API | Docs',
-      customfavIcon: '/favicon.svg',
-      customCssUrl: '/css/swagger-ui.css',
-      swaggerOptions: {
-        persistAuthorization: true, // Keep the token between page reloads
-        filter: true, // endpoint search bar
-        displayRequestDuration: true, // shows response time in tests.
-      },
-    }),
-  );
-}
+// Serve Interactive Swagger UI
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(openApiSpec, {
+    customSiteTitle: 'audiophile API | Docs',
+    customfavIcon: '/favicon.svg',
+    customCssUrl: '/css/swagger-ui.css',
+    swaggerOptions: {
+      persistAuthorization: true, // Keep the token between page reloads
+      filter: true, // endpoint search bar
+      displayRequestDuration: true, // shows response time in tests.
+    },
+  }),
+);
 
 // Async context
 app.use(runWithContext);
