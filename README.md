@@ -131,11 +131,6 @@ cp .env.example .env   # Fill in the required variables (see Environment Variabl
 npm run dev            # API runs at http://localhost:4224 | Documentation at /api-docs
 ```
 
-| URL                              | Description |
-| -------------------------------- | ----------- |
-| `http://localhost:4224`          | REST API    |
-| `http://localhost:4224/api-docs` | Swagger UI  |
-
 **Uploading images (first time only):** requires local images in `public/assets/`. This is only necessary if you are using your own Cloudinary account - the public IDs in `@/db/mocks/categories.mock.json`, `@/db/mocks/products.mock.json`, and `@/db/mocks/galleries.mock.json` are deterministic and derived from the filenames, so they do not need to be updated.
 
 ```bash
