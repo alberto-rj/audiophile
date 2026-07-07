@@ -2,7 +2,7 @@
 
 # Audiophile (In Development)
 
-A full-stack e-commerce platform for premium audio equipment featuring authentication, shopping cart management, product catalog, order processing, responsive design, and a REST API built with TypeScript.
+A full-stack e-commerce platform built with React, Node.js, TypeScript, and PostgreSQL, focusing on scalable architecture, API design, accessibility, and modern software engineering practices.
 
 [Live Demo](https://audiophile-frontend-v2.vercel.app)
 •
@@ -12,49 +12,24 @@ A full-stack e-commerce platform for premium audio equipment featuring authentic
 
 </div>
 
-## About The Project
+## About the Project
 
-Audiophile is a full-stack e-commerce platform inspired by a real-world online store for high-end audio products.
+Audiophile is a full-stack e-commerce platform for premium audio products, originally created as a Frontend Mentor challenge and expanded into a complete application.
 
-The project was built to practice production-oriented frontend and backend development, focusing on authentication, shopping cart management, API design, validation, accessibility, and scalable application architecture.
+The project focuses on production-oriented software engineering practices, including layered architecture, reusable components, API design, accessibility, and maintainable code organization.
 
-Rather than focusing only on features, the main goal was to build a system with clear separation of concerns, reusable business logic, and maintainable code that could realistically evolve into a larger application.
+It includes authentication, product management, cart functionality, checkout flow, order processing, and a documented REST API.
 
-Audiophile is a full-stack e-commerce application for high-end audio products - headphones, speakers, and earphones. It started as a Frontend Mentor challenge and grew into a production-oriented build covering authentication, cart management, order processing, image storage, and a documented REST API.
+## Design Goals
 
-The focus throughout was architecture before features: clear separation between HTTP, business logic, and persistence layers; a single source of truth for validation and API documentation; and a frontend built with the same discipline - isolated component documentation, mock-driven development, and clean server state management.
+The project focuses on:
 
-## Live Demo
-
-- **Frontend:** https://audiophile-frontend-v2.vercel.app
-
-- **Backend API:** https://audiophile-qoxm.onrender.com
-
-- **Swagger Documentation:** https://audiophile-qoxm.onrender.com/api-docs
+- Clean separation between business logic and infrastructure
+- Reusable and accessible frontend components
+- Type-safe validation and API contracts
+- Maintainable architecture and developer experience
 
 ## Architecture Overview
-
-```text
-┌───────────────┐
-│ React Client  │
-└───────┬───────┘
-        │ HTTP
-        ▼
-┌────────────────────┐
-│ Express API        │
-├────────────────────┤
-│ Controllers        │
-│ Use Cases          │
-│ Repository Layer   │
-└─────────┬──────────┘
-          │
-          ▼
-┌────────────────────┐
-│ PostgreSQL         │
-└────────────────────┘
-```
-
-### Backend Layers
 
 ```text
 HTTP Layer
@@ -68,7 +43,9 @@ Repositories
 Database
 ```
 
-The backend is organized in strict layers. Controllers parse HTTP input and return responses. Use cases contain all business logic and are completely independent of Express and the database. Repositories are injected as interfaces - the same use case runs against in-memory implementations in tests and Drizzle/PostgreSQL in production.
+The backend follows a layered architecture separating HTTP concerns, business logic, and data access.
+
+Use cases are framework-independent and rely on repository interfaces, allowing different implementations for production and testing environments.
 
 ## Tech Stack
 
@@ -80,7 +57,7 @@ The backend is organized in strict layers. Controllers parse HTTP input and retu
 - React Router
 - Tailwind CSS
 - React Hook Form
-- Zod
+- Zod (Forms & Shared Schemas)
 - Storybook
 - MSW
 - Vitest
@@ -102,27 +79,35 @@ The backend is organized in strict layers. Controllers parse HTTP input and retu
 - Prettier
 - Vite
 
-## Key Features
-
-- **Authentication:** user registration, login, logout, refresh token flow, protected routes.
-
-- **User Management:** view profile, update profile information.
-
-- **Shopping Experience:** product catalog, product details page, responsive gallery, shopping cart, checkout flow.
-
 ## Key Technical Decisions
 
-- **Repository pattern with swappable implementations.** The API depends on repository interfaces, not concrete classes. Every use case receives its dependencies via injection - in tests, those are in-memory implementations; in production, they are Drizzle/PostgreSQL implementations. This means business logic is never coupled to a specific database, ORM, or infrastructure detail. Adding a Redis cache layer or switching from PostgreSQL to another DB would require writing a new implementation, not rewriting use cases.
+- **Repository pattern with swappable implementations:** The API depends on repository interfaces, not concrete classes. Every use case receives its dependencies via injection - in tests, those are in-memory implementations; in production, they are Drizzle/PostgreSQL implementations. This means business logic is never coupled to a specific database, ORM, or infrastructure detail.
 
-- **`zod-to-openapi` as a single source of truth.** Every request and response schema is a Zod schema registered with `@asteasolutions/zod-to-openapi`. The OpenAPI 3.1 spec and the Swagger UI are generated from those registrations at startup. This means runtime validation and documentation are the same artifact - changing a schema updates both simultaneously, with no risk of the spec drifting from the actual API behaviour.
+- **Dual-token authentication:** Authentication uses a short-lived JWT access token together with a long-lived refresh token. The access token is returned to the client and attached to authenticated API requests. The refresh token is generated as an opaque UUID, persisted in the database, and stored in an HTTP-only cookie. Because refresh tokens are server-managed, they can be revoked independently of JWT expiration while remaining inaccessible to client-side JavaScript. This provides a balance between security, user experience, and session management.
 
-- **`AsyncLocalStorage` for request context propagation.** Rather than threading `userId` and request metadata through every function signature, the backend uses Node's `AsyncLocalStorage` to store per-request context after authentication. Downstream helpers (logger, use cases, presenters) read from context when they need it. This keeps function signatures clean and makes structured logging with per-request correlation IDs straightforward.
+- **`zod-to-openapi` as a single source of truth:** Every request and response schema is a Zod schema registered with `@asteasolutions/zod-to-openapi`. The OpenAPI 3.1 spec and the Swagger UI are generated from those registrations at startup. This means runtime validation and documentation are the same artifact - changing a schema updates both simultaneously, with no risk of the spec drifting from the actual API behavior.
 
-- **Cloudinary `publicId` stored in the database, URLs built at the presenter layer.** Rather than storing full URLs, only the Cloudinary `publicId` is persisted. The presenter constructs responsive image URLs (different sizes, formats, transformations) at response time. This decouples the database from Cloudinary's URL structure - a CDN migration or image transformation change requires updating the presenter, not the database.
+- **`AsyncLocalStorage` for request context propagation:** Rather than threading `userId` and request metadata through every function signature, the backend uses Node's `AsyncLocalStorage` to store per-request context after authentication. Downstream helpers (logger, use cases, presenters) read from context when they need it. This keeps function signatures clean and makes structured logging with per-request correlation IDs straightforward.
 
-- **RTK Query for all server state.** The frontend uses RTK Query instead of manual fetch + `useEffect` patterns. This gives automatic caching, request deduplication, built-in loading/error states, and optimistic updates without custom reducer logic. It also created a clear boundary between server state (RTK Query) and client state (Redux slices), which kept the cart and auth logic simpler than a mixed approach would have been.
+- **Cloudinary `publicId` stored in the database, URLs built at the presenter layer:** Rather than storing full URLs, only the Cloudinary `publicId` is persisted. The presenter constructs responsive image URLs (different sizes, formats, transformations) at response time. This decouples the database from Cloudinary's URL structure - a CDN migration or image transformation change requires updating the presenter, not the database.
 
-- **HTTP-Only Authentication Cookies.** Authentication tokens are stored in HTTP-only cookies rather than localStorage. Benefits: better protection against XSS attacks, improved security for authentication flows, more realistic production setup. The tradeoff is a slightly more complex refresh token implementation.
+- **RTK Query for all server state:** The frontend uses RTK Query instead of manual fetch + `useEffect` patterns. This gives automatic caching, request deduplication, built-in loading/error states, and optimistic updates without custom reducer logic. It also created a clear boundary between server state (RTK Query) and client state (Redux slices), which kept the cart and auth logic simpler than a mixed approach would have been.
+
+- **Radix UI as the accessibility foundation:** Rather than building complex interactive components from scratch, the frontend is built on top of Radix UI primitives. This provides accessible behaviors such as focus management, keyboard navigation, and ARIA support out of the box, while allowing the application to expose its own reusable component API and consistent visual design. This approach reduces implementation complexity without sacrificing accessibility or maintainability.
+
+## Frontend Architecture
+
+The frontend was designed with the same engineering principles applied to the backend, prioritizing maintainability, accessibility, consistency, and developer experience over simply implementing features.
+
+- **Component Architecture:** The application is built around reusable UI primitives and composite widgets. Complex components are implemented on top of Radix UI primitives, providing a consistent API while preserving accessible behaviors such as keyboard navigation, focus management, and screen reader support. Reusable components are documented and developed in isolation using Storybook, making them easier to validate, maintain, and reuse across the application.
+
+- **State Management:** Server state is managed exclusively with RTK Query, providing automatic caching, request deduplication, optimistic updates, and consistent loading and error handling. Client state (authentication, shopping cart, UI preferences) is managed separately with Redux Toolkit, creating a clear boundary between server and client concerns.
+
+- **User Experience:** The application provides consistent asynchronous experiences by handling loading, validation, empty, error, and success states across data fetching and user actions such as authentication, checkout, cart management, and profile updates. Routes are lazy-loaded to improve perceived performance.
+
+- **Accessibility:** Rather than implementing accessibility features from scratch, the project builds upon Radix UI's accessible primitives, extending them into reusable application-specific components. Additional accessibility practices include semantic HTML, descriptive labels, screen-reader-only content where appropriate, and accessible navigation patterns throughout the interface.
+
+- **Development Experience:** Mock Service Worker (MSW) is used to simulate backend APIs, allowing frontend development, Storybook stories, and component testing to run independently of backend availability. This enables faster iteration while keeping API interactions realistic.
 
 ## Project Structure
 
@@ -171,21 +156,24 @@ frontend/src/
 
 ## Running Locally
 
-**Prerequisites:** Node.js 20+, PostgreSQL, a Cloudinary account (free tier is sufficient).
+**Prerequisites:**
+
+- Node.js 20+
+- PostgreSQL
+- Cloudinary account (free tier is sufficient)
 
 ```bash
 git clone https://github.com/alberto-rj/audiophile.git
 cd audiophile
 ```
 
-### Backend (terminal 1)
+### Backend Server Setup
 
 ```bash
 cd backend
 npm install
-cp .env.example .env
-# Fill in the required variables (see Environment Variables below)
-npm run dev
+cp .env.example .env   # Fill in the required variables (see Environment Variables below)
+npm run dev            # API runs at http://localhost:4224 | Documentation at /api-docs
 ```
 
 | URL                              | Description |
@@ -206,25 +194,16 @@ npm run db:migrate   # Apply schema migrations
 npm run db:seed      # Seed categories and products
 ```
 
-### Frontend (terminal 2)
+### Frontend Application Setup
 
 Open a second terminal:
 
 ```bash
 cd frontend
 npm install
-cp .env.example .env
-npm run dev
-```
-
-| URL                     | Description       |
-| ----------------------- | ----------------- |
-| `http://localhost:5173` | React application |
-
-**Run Storybook (optional):**
-
-```bash
-npm run storybook    # Component documentation at http://localhost:6006
+cp .env.example .env       # Fill in the required variables (see Environment Variables below)
+npm run dev                # Vite server runs at http://localhost:5173
+npm run storybook          # Optional: Visual component testing workspace at http://localhost:6006
 ```
 
 ## Environment Variables
@@ -272,22 +251,20 @@ VITE_NODE_ENV=development
 VITE_API_BASE_URL=/api
 ```
 
-## What I'd Do Differently
+## Lessons Learned
 
-- **Introduce the database layer earlier.** The backend started with in-memory repositories only. That was intentional - it let me focus on use cases and API contracts first - but it meant the Drizzle schema, migrations, and seeding scripts were written later, when the domain model was already established. Writing the schema alongside the use cases would have surfaced FK constraints, nullable columns, and relation design issues much earlier, rather than discovering them during seeding.
+- **Introduce the database layer earlier:** I intentionally started with in-memory repositories to focus on business logic before persistence. In hindsight, designing the database schema alongside the domain model would have exposed relationships and migration issues much earlier.
 
-- **Define repository interfaces before implementations.** On several entities I wrote the Drizzle implementation first and extracted the interface afterwards. The correct order is the reverse: write the interface as a contract, then write both the in-memory and Drizzle implementations to satisfy it. Working implementation-first led to interfaces that were slightly too specific to Drizzle's return shapes, which the in-memory implementations then had to work around.
+- **Define repository interfaces before implementations:** On several entities I wrote the Drizzle implementation first and extracted the interface afterwards. The correct order is the reverse: write the interface as a contract, then write both the in-memory and Drizzle implementations to satisfy it. Working implementation-first led to interfaces that were slightly too specific to Drizzle's return shapes, which the in-memory implementations then had to work around.
 
-- **Register every Zod schema with the OpenAPI registry from the start.** Some early schemas were written without `registry.register(...)`. Going back to register them later - and verifying the generated spec matched the actual behaviour - was tedious and easy to get wrong. The discipline of "every schema gets registered immediately" should be established before writing the first endpoint, not retrofitted.
+- **Register every Zod schema with the OpenAPI registry from the start:** Some early schemas were written without `registry.register(...)`. Going back to register them later - and verifying the generated spec matched the actual behavior - was tedious and easy to get wrong. The discipline of "every schema gets registered immediately" should be established before writing the first endpoint, not retrofitted.
 
-- **Add end-to-end tests covering the full purchase flow.** Unit and integration tests cover individual use cases and endpoints, but there are no E2E tests that walk the complete user journey: register → browse → add to cart → checkout → confirm order. That path involves coordination between auth, cart, products, and orders in a way that isolated tests cannot fully validate.
+- **Add end-to-end tests covering the full purchase flow:** Unit and integration tests cover individual use cases and endpoints, but there are no E2E tests that walk the complete user journey: register → browse → add to cart → checkout → confirm order. That path involves coordination between auth, cart, products, and orders in a way that isolated tests cannot fully validate.
 
 ## Author
 
 ### Alberto José
 
-- GitHub: [https://github.com/alberto-rj](https://github.com/alberto-rj)
-
-- LinkedIn: [https://linkedin.com/in/alberto-rj](https://linkedin.com/in/alberto-rj)
-
-- Frontend Mentor: [https://frontendmentor.io/profile/alberto-rj](https://frontendmentor.io/profile/alberto-rj)
+- GitHub: [github.com/alberto-rj](https://github.com/alberto-rj)
+- LinkedIn: [linkedin.com/in/alberto-rj](https://linkedin.com/in/alberto-rj)
+- Frontend Mentor: [frontendmentor.io/profile/alberto-rj](https://frontendmentor.io/profile/alberto-rj)
