@@ -114,7 +114,7 @@ The frontend was designed with the same engineering principles applied to the ba
 **Prerequisites:**
 
 - Node.js 20+
-- PostgreSQL
+- PostgreSQL instance
 - Cloudinary account (free tier is sufficient)
 
 ```bash
