@@ -109,51 +109,6 @@ The frontend was designed with the same engineering principles applied to the ba
 
 - **Development Experience:** Mock Service Worker (MSW) is used to simulate backend APIs, allowing frontend development, Storybook stories, and component testing to run independently of backend availability. This enables faster iteration while keeping API interactions realistic.
 
-## Project Structure
-
-### Backend structure
-
-```bash
-backend/src/
-├── config/          # Environment variables and OpenAPI registry setup
-├── db/
-│   ├── drizzle/     # Schema definitions and migrations
-│   ├── in-memory/   # In-memory database for testing
-│   ├── mocks/       # Seed data (JSON)
-│   └── seeds/       # Seeding scripts with FK-ordered insertion
-├── helpers/         # Factory functions, logger (Winston + AsyncLocalStorage), utilities
-├── http/
-│   ├── controllers/ # Thin HTTP handlers - parse, call use case, respond
-│   ├── middlewares/ # Auth guard, error handler, request logger, context propagation
-│   ├── openapi/     # Per-endpoint OpenAPI path definitions (zod-to-openapi)
-│   └── routes/      # Route registration
-├── repositories/
-│   ├── drizzle/     # PostgreSQL implementations via Drizzle ORM
-│   ├── in-memory/   # In-memory implementations (auth, users, products, categories)
-│   └── types/       # Repository interfaces (contracts)
-├── schemas/         # Zod schemas - shared across validation, types, and OpenAPI spec
-└── use-cases/       # Business logic - pure TypeScript, no Express or DB dependency
-```
-
-### Frontend structure
-
-```bash
-frontend/src/
-├── app/
-│   ├── features/    # Redux slices (auth, cart)
-│   ├── services/    # RTK Query API definitions (auth, users, products, categories, orders, cart)
-│   └── store/       # Redux store configuration
-├── components/
-│   ├── ui/          # Primitive components (Button, Input, Modal, Toast, etc.)
-│   └── widgets/     # Composite components (Navbar, CartModal, OrderConfirmation, etc.)
-├── config/          # API endpoints, app routes, env, Storybook decorators
-├── hooks/           # Custom hooks (checkout form, auth credentials, cart state, etc.)
-├── libs/            # Utilities, form schemas (Zod), shared types, mock data
-├── mocks/           # MSW handlers for all API domains (auth, cart, orders, products)
-├── pages/           # Route-level components with co-located Storybook stories
-└── layouts/         # Shared page layout
-```
-
 ## Running Locally
 
 **Prerequisites:**
@@ -208,48 +163,33 @@ npm run storybook          # Optional: Visual component testing workspace at htt
 
 ## Environment Variables
 
-`backend/.env.example`:
+### Backend (`backend/.env`)
 
-```env
-# Server
-NODE_ENV=development
-PORT=4224
-DEV_API_BASE_URL=http://localhost:4224/api/v1
-PROD_API_BASE_URL=https://api.audiophile-domain.com/api/v1
+| Variable                | Description                                                  |
+| ----------------------- | ------------------------------------------------------------ |
+| `NODE_ENV`              | Application environment (`development`, `production`, etc.). |
+| `PORT`                  | Backend server port.                                         |
+| `DEV_API_BASE_URL`      | API base URL used during local development.                  |
+| `PROD_API_BASE_URL`     | API base URL used in production.                             |
+| `DATABASE_URL`          | PostgreSQL connection string.                                |
+| `ACCESS_SECRET`         | Secret key used to sign JWT access tokens.                   |
+| `ACCESS_EXPIRES_MS`     | Access token expiration time in milliseconds.                |
+| `REFRESH_EXPIRES_MS`    | Refresh token expiration time in milliseconds.               |
+| `LOG_REQUEST_BODY`      | Enables or disables request body logging.                    |
+| `LOG_REQUEST_HEADER`    | Enables or disables request header logging.                  |
+| `CORS_ORIGINS`          | Allowed origins for cross-origin requests.                   |
+| `CORS_METHODS`          | Allowed HTTP methods for CORS requests.                      |
+| `CORS_HEADERS`          | Allowed HTTP headers for CORS requests.                      |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud identifier.                                 |
+| `CLOUDINARY_API_KEY`    | Cloudinary API key.                                          |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret.                                       |
 
-# Database
-DATABASE_URL=postgresql://user_example:password_example@localhost:5432/db_example
+### Frontend (`frontend/.env`)
 
-# Access Token
-ACCESS_SECRET=your-super-secret-jwt-key-change-this # to generate run: openssl rand -base64 32
-ACCESS_EXPIRES_MS=420000
-
-# Refresh Token
-REFRESH_EXPIRES_MS=604800000
-
-# Logger
-LOG_REQUEST_BODY=true
-LOG_REQUEST_HEADER=true
-
-# CORS
-CORS_ORIGINS=https://audiophile-domain.com;https://www.audiophile-domain.com;http://localhost:5173;http://localhost:4224;https://api.audiophile-domain.com
-CORS_METHODS=GET;POST;PUT;PATCH;DELETE;OPTIONS
-CORS_HEADERS=Content-Type;Authorization
-
-# Cloudinary
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
-
-`frontend/.env.example`:
-
-```env
-
-VITE_NODE_ENV=development
-
-VITE_API_BASE_URL=/api
-```
+| Variable            | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `VITE_NODE_ENV`     | Frontend application environment.           |
+| `VITE_API_BASE_URL` | Backend API base path used by the frontend. |
 
 ## Lessons Learned
 
