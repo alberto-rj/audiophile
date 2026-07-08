@@ -2,7 +2,7 @@
 
 # Audiophile (In Development)
 
-A full-stack e-commerce platform built with React, Node.js, TypeScript, and PostgreSQL, focusing on scalable architecture, API design, accessibility, and modern software engineering practices.
+A full-stack e-commerce platform built with React, Node.js, TypeScript, and PostgreSQL.
 
 [Live Demo](https://audiophile-frontend-v2.vercel.app)
 •
@@ -14,20 +14,9 @@ A full-stack e-commerce platform built with React, Node.js, TypeScript, and Post
 
 ## About the Project
 
-Audiophile is a full-stack e-commerce platform for premium audio products, originally created as a Frontend Mentor challenge and expanded into a complete application.
+Audiophile is a full-stack e-commerce platform for premium audio products, originally created as a Frontend Mentor challenge and expanded into a complete application with authentication, product management, cart functionality, checkout flow, order processing, and a documented REST API.
 
-The project focuses on production-oriented software engineering practices, including layered architecture, reusable components, API design, accessibility, and maintainable code organization.
-
-It includes authentication, product management, cart functionality, checkout flow, order processing, and a documented REST API.
-
-## Design Goals
-
-The project focuses on:
-
-- Clean separation between business logic and infrastructure
-- Reusable and accessible frontend components
-- Type-safe validation and API contracts
-- Maintainable architecture and developer experience
+The backend follows a layered architecture separating HTTP concerns, business logic, and data access, with type-safe validation shared between API contracts and documentation. The frontend is built around reusable, accessible components with a clear separation between server state and client state.
 
 ## Architecture Overview
 
@@ -42,8 +31,6 @@ Repositories
    ↓
 Database
 ```
-
-The backend follows a layered architecture separating HTTP concerns, business logic, and data access.
 
 Use cases are framework-independent and rely on repository interfaces, allowing different implementations for production and testing environments.
 
@@ -60,7 +47,6 @@ Use cases are framework-independent and rely on repository interfaces, allowing 
 - Zod (Forms & Shared Schemas)
 - Storybook
 - MSW
-- Vitest
 
 ### Backend
 
@@ -70,7 +56,7 @@ Use cases are framework-independent and rely on repository interfaces, allowing 
 - Zod
 - JWT Authentication
 - Cloudinary
-- OpenAPI / Swagger
+- OpenAPI/Swagger
 - PostgreSQL & Drizzle ORM
 
 ### Tooling
@@ -83,7 +69,7 @@ Use cases are framework-independent and rely on repository interfaces, allowing 
 
 - **Repository pattern with swappable implementations:** The API depends on repository interfaces, not concrete classes. Every use case receives its dependencies via injection - in tests, those are in-memory implementations; in production, they are Drizzle/PostgreSQL implementations. This means business logic is never coupled to a specific database, ORM, or infrastructure detail.
 
-- **Dual-token authentication:** Authentication uses a short-lived JWT access token together with a long-lived refresh token. The access token is returned to the client and attached to authenticated API requests. The refresh token is generated as an opaque UUID, persisted in the database, and stored in an HTTP-only cookie. Because refresh tokens are server-managed, they can be revoked independently of JWT expiration while remaining inaccessible to client-side JavaScript. This provides a balance between security, user experience, and session management.
+- **Dual-token authentication:** Authentication uses a short-lived JWT access token together with a long-lived refresh token. The access token is returned to the client and attached to authenticated API requests. The refresh token is generated as an opaque UUID, persisted in the database, and stored in an HTTP-only cookie. Because refresh tokens are server-managed, they can be revoked independently of JWT expiration while remaining inaccessible to client-side JavaScript.
 
 - **`zod-to-openapi` as a single source of truth:** Every request and response schema is a Zod schema registered with `@asteasolutions/zod-to-openapi`. The OpenAPI 3.1 spec and the Swagger UI are generated from those registrations at startup. This means runtime validation and documentation are the same artifact - changing a schema updates both simultaneously, with no risk of the spec drifting from the actual API behavior.
 
@@ -93,21 +79,11 @@ Use cases are framework-independent and rely on repository interfaces, allowing 
 
 - **RTK Query for all server state:** The frontend uses RTK Query instead of manual fetch + `useEffect` patterns. This gives automatic caching, request deduplication, built-in loading/error states, and optimistic updates without custom reducer logic. It also created a clear boundary between server state (RTK Query) and client state (Redux slices), which kept the cart and auth logic simpler than a mixed approach would have been.
 
-- **Radix UI as the accessibility foundation:** Rather than building complex interactive components from scratch, the frontend is built on top of Radix UI primitives. This provides accessible behaviors such as focus management, keyboard navigation, and ARIA support out of the box, while allowing the application to expose its own reusable component API and consistent visual design. This approach reduces implementation complexity without sacrificing accessibility or maintainability.
+- **Radix UI as the accessibility foundation:** Rather than building complex interactive components from scratch, the frontend is built on top of Radix UI primitives, which provide focus management, keyboard navigation, and ARIA support out of the box. Application-specific components are built on top of these primitives, keeping a consistent API without reimplementing accessibility behavior.
 
-## Frontend Architecture
+- **Component development and testing via Storybook + MSW:** Components are developed and reviewed in isolation using Storybook, with MSW simulating backend responses. This covers interaction and visual testing during development. There are currently no automated unit or integration tests (e.g. Vitest, Supertest) - this is listed under Lessons Learned / Next Steps below.
 
-The frontend was designed with the same engineering principles applied to the backend, prioritizing maintainability, accessibility, consistency, and developer experience over simply implementing features.
-
-- **Component Architecture:** The application is built around reusable UI primitives and composite widgets. Complex components are implemented on top of Radix UI primitives, providing a consistent API while preserving accessible behaviors such as keyboard navigation, focus management, and screen reader support. Reusable components are documented and developed in isolation using Storybook, making them easier to validate, maintain, and reuse across the application.
-
-- **State Management:** Server state is managed exclusively with RTK Query, providing automatic caching, request deduplication, optimistic updates, and consistent loading and error handling. Client state (authentication, shopping cart, UI preferences) is managed separately with Redux Toolkit, creating a clear boundary between server and client concerns.
-
-- **User Experience:** The application provides consistent asynchronous experiences by handling loading, validation, empty, error, and success states across data fetching and user actions such as authentication, checkout, cart management, and profile updates. Routes are lazy-loaded to improve perceived performance.
-
-- **Accessibility:** Rather than implementing accessibility features from scratch, the project builds upon Radix UI's accessible primitives, extending them into reusable application-specific components. Additional accessibility practices include semantic HTML, descriptive labels, screen-reader-only content where appropriate, and accessible navigation patterns throughout the interface.
-
-- **Development Experience:** Mock Service Worker (MSW) is used to simulate backend APIs, allowing frontend development, Storybook stories, and component testing to run independently of backend availability. This enables faster iteration while keeping API interactions realistic.
+- **Lazy-loaded routes and consistent async states:** Routes are lazy-loaded to reduce initial bundle size. Loading, validation, empty, error, and success states are handled consistently across the main async flows (authentication, cart, checkout, profile updates).
 
 ## Running Locally
 
@@ -122,7 +98,7 @@ git clone https://github.com/alberto-rj/audiophile.git
 cd audiophile
 ```
 
-### Backend Server Setup
+### Backend (Setup)
 
 ```bash
 cd backend
@@ -144,7 +120,7 @@ npm run db:migrate   # Apply schema migrations
 npm run db:seed      # Seed categories and products
 ```
 
-### Frontend Application Setup
+### Frontend (Setup)
 
 Open a second terminal:
 
@@ -194,7 +170,7 @@ npm run storybook          # Optional: Visual component testing workspace at htt
 
 - **Register every Zod schema with the OpenAPI registry from the start:** Some early schemas were written without `registry.register(...)`. Going back to register them later - and verifying the generated spec matched the actual behavior - was tedious and easy to get wrong. The discipline of "every schema gets registered immediately" should be established before writing the first endpoint, not retrofitted.
 
-- **Add end-to-end tests covering the full purchase flow:** Unit and integration tests cover individual use cases and endpoints, but there are no E2E tests that walk the complete user journey: register → browse → add to cart → checkout → confirm order. That path involves coordination between auth, cart, products, and orders in a way that isolated tests cannot fully validate.
+- **Add automated tests beyond Storybook/MSW:** Storybook + MSW currently cover component interaction and visual testing, but there are no unit tests for use cases, no integration tests for endpoints (Supertest), and no end-to-end tests covering the full purchase flow (register → browse → add to cart → checkout → confirm order). This is the main gap left to close.
 
 ## Author
 
