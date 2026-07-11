@@ -31,6 +31,62 @@ export {
   type ApiAuthResponse,
 } from './auth/auth-response.schema';
 
+export { ApiCartItemSchema } from './cart/cart-item.api.schema';
+export type { ApiCartItem } from './cart/cart-item.api.types';
+export {
+  CartItemIdSchema,
+  CartItemQuantitySchema,
+} from './cart/cart-item.base.schema';
+export {
+  CartItemSchema,
+  CartItemDetailedSchema,
+} from './cart/cart-item.schema';
+export type {
+  CartItem,
+  CartItemDetailed,
+  CartItemId,
+  CartItemQuantity,
+} from './cart/cart-item.types';
+export {
+  ApiCartAddItemBodySchema,
+  ApiCartIdParamsSchema,
+  ApiCartPaginationQuerySchema,
+  ApiCartSchema,
+  ApiCartUpdateItemBodySchema,
+} from './cart/cart.api.schema';
+export type {
+  ApiCart,
+  ApiCartAddItemBody,
+  ApiCartIdParams,
+  ApiCartPaginationQuery,
+  ApiCartUpdateItemBody,
+} from './cart/cart.api.types';
+export {
+  CartGrandTotalSchema,
+  CartIdSchema,
+  CartShippingSchema,
+  CartSubtotalSchema,
+  CartVatSchema,
+} from './cart/cart.base.schema';
+export {
+  CartAddItemParamsSchema,
+  CartFindManyItemsParamsSchema,
+  CartFindParamsSchema,
+  CartRemoveItemParamsSchema,
+  CartRemoveAllParamsSchema,
+  CartUpdateItemParamsSchema,
+} from './cart/cart.params.schema';
+export type {
+  CartAddItemParams,
+  CartFindManyItemsParams,
+  CartFindParams,
+  CartRemoveItemParams,
+  CartRemoveAllParams,
+  CartUpdateItemParams,
+} from './cart/cart.params.types';
+export { CartSchema, CartDetailedSchema } from './cart/cart.schema';
+export type { Cart, CartDetailed, CartId } from './cart/cart.types';
+
 export {
   ApiCategoryCreateBodySchema,
   ApiCategoryIdParamsSchema,
