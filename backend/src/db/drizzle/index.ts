@@ -1,6 +1,8 @@
 export { db } from './db';
 
 export {
+  carts,
+  cartItems,
   categories,
   galleries,
   includes,
@@ -10,6 +12,8 @@ export {
   users,
 } from './schemas/schemas';
 export type {
+  Cart,
+  CartItem,
   Category,
   Gallery,
   Include,

@@ -289,4 +289,8 @@ export const cartItemRelations = relations(cartItems, ({ one }) => ({
     fields: [cartItems.cartId],
     references: [carts.id],
   }),
+  product: one(products, {
+    fields: [cartItems.productId],
+    references: [products.id],
+  }),
 }));
