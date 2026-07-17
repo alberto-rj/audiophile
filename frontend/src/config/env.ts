@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const instructionsURL =
-  'https://github.com/alberto-rj/audiophile/blob/main/README.md#environment-variables';
+  'https://github.com/alberto-rj/audiophile/blob/main/README.md#frontend-frontendenv';
 
 const envSchema = z.object({
   VITE_NODE_ENV: z.enum(['development', 'production', 'test']),
