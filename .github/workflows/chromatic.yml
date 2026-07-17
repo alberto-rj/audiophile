@@ -18,10 +18,12 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
+        working-directory: ./frontend
         run: npm ci
 
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
+          workingDir: frontend
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitOnceUploaded: true
