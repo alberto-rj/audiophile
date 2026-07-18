@@ -94,7 +94,7 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 
 - **Radix UI as the accessibility foundation:** Interactive components are built on Radix UI primitives, which provide keyboard navigation, focus management, and ARIA attributes out of the box. The application exposes its own component API on top, with a consistent visual design.
 
-- **MSW for mock-driven frontend development:** Mock Service Worker intercepts requests at the network level. The frontend and all Storybook stories run without a backend — MSW handlers mirror real API contracts, so switching to live responses requires no changes to components or hooks.
+- **MSW for mock-driven frontend development:** Mock Service Worker intercepts requests at the network level. The frontend and all Storybook stories run without a backend - MSW handlers mirror real API contracts, so switching to live responses requires no changes to components or hooks.
 
 - **Lazy-loaded routes and consistent async states:** Routes are lazy-loaded to reduce initial bundle size. Loading, validation, empty, error, and success states are handled consistently across the main async flows (authentication, cart, checkout, profile updates).
 
@@ -102,9 +102,10 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 
 **Prerequisites:**
 
-- Node.js 20+
+- Node.js 24+
 - PostgreSQL instance
-- Cloudinary account (free tier is sufficient)
+- [Cloudinary](https://cloudinary.com) account (free tier is sufficient)
+- [Chromatic](https://www.chromatic.com) account (free tier is sufficient)
 
 ```bash
 git clone https://github.com/alberto-rj/audiophile.git
