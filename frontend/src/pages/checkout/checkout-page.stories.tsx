@@ -22,8 +22,8 @@ const checkoutFormData: CheckoutFormData = {
 };
 
 async function clearCheckoutForm(canvas: Canvas) {
-  await userEvent.clear(canvas.getByTestId('name'));
-  await userEvent.clear(canvas.getByTestId('email'));
+  await userEvent.clear(await canvas.findByTestId('name'));
+  await userEvent.clear(await canvas.findByTestId('email'));
 }
 
 async function fillCheckoutForm(canvas: Canvas) {
@@ -55,11 +55,11 @@ async function fillCheckoutForm(canvas: Canvas) {
     checkoutFormData.country,
   );
   await userEvent.type(
-    canvas.getByTestId('eMoneyNumber'),
+    await canvas.findByTestId('eMoneyNumber'),
     checkoutFormData.eMoneyNumber!,
   );
   await userEvent.type(
-    canvas.getByTestId('eMoneyPin'),
+    await canvas.findByTestId('eMoneyPin'),
     checkoutFormData.eMoneyPin!,
   );
 }
@@ -138,7 +138,7 @@ export const ProcessingOrder: Story = {
 
     await fillCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('checkout'));
+    await userEvent.click(await canvas.findByTestId('checkout'));
   },
 };
 
@@ -153,7 +153,7 @@ export const CheckoutFailed: Story = {
 
     await fillCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('checkout'));
+    await userEvent.click(await canvas.findByTestId('checkout'));
   },
 };
 
@@ -168,6 +168,6 @@ export const CheckoutSucceeds: Story = {
 
     await fillCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('checkout'));
+    await userEvent.click(await canvas.findByTestId('checkout'));
   },
 };
