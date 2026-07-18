@@ -12,7 +12,7 @@ import {
 } from '@/mocks/handlers';
 
 async function openCartModalAndClear(canvas: Canvas) {
-  await userEvent.click(canvas.getByTestId('cartModalTrigger'));
+  await userEvent.click(await canvas.findByTestId('cartModalTrigger'));
 
   await userEvent.click(await canvas.findByTestId('cartModalClear'));
 }
@@ -21,7 +21,7 @@ async function openCartModalAndTypeQuantity(
   canvas: Canvas,
   lastQuantityInputDigit: number,
 ) {
-  await userEvent.click(canvas.getByTestId('cartModalTrigger'));
+  await userEvent.click(await canvas.findByTestId('cartModalTrigger'));
 
   const [input] = await canvas.findAllByTestId('quantityInput');
 
@@ -84,7 +84,7 @@ export const FailedToLoadCart: Story = {
   decorators: [WithCredentialsDecorator],
 };
 
-export const WithCart: Story = {
+export const CartLoaded: Story = {
   parameters: {
     msw: {
       handlers: [makeGetCartHandler()],
@@ -93,7 +93,7 @@ export const WithCart: Story = {
   decorators: [WithCredentialsDecorator],
 };
 
-export const WithSingleItem: Story = {
+export const CartWithSingleItem: Story = {
   parameters: {
     msw: {
       handlers: [makeGetCartHandler({ limit: 1 })],
@@ -102,7 +102,7 @@ export const WithSingleItem: Story = {
   decorators: [WithCredentialsDecorator],
 };
 
-export const WithEmptyCart: Story = {
+export const EmptyCart: Story = {
   parameters: {
     msw: {
       handlers: [makeGetCartHandler({ limit: 0 })],

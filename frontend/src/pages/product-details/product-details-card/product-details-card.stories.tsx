@@ -11,7 +11,7 @@ import { makeAddCartItemHandler } from '@/mocks/handlers';
 import ProductDetailsCard from './product-details-card';
 
 async function clickToAddItemToCart(canvas: Canvas) {
-  await userEvent.click(await canvas.getByTestId('addItemToCart'));
+  await userEvent.click(await canvas.findByTestId('addItemToCart'));
 }
 
 type StoryProps = React.ComponentProps<typeof ProductDetailsCard> & {
