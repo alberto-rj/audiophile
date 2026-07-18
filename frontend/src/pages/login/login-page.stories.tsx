@@ -77,8 +77,6 @@ export const SigningIn: Story = {
     const canvas = within(canvasElement);
 
     await fillSignUpFormAndSubmit(canvas, loginFormData);
-
-    // await expect(canvas.getByTestId('signIn')).toBeDisabled();
   },
 };
 
@@ -92,8 +90,6 @@ export const SignInFailed: Story = {
     const canvas = within(canvasElement);
 
     await fillSignUpFormAndSubmit(canvas, loginFormData);
-
-    // await expectErrorAlert(canvas);
   },
 };
 
@@ -105,8 +101,6 @@ export const InvalidCredentials: Story = {
       email: 'wrong@example.com',
       password: 'wrong_password',
     });
-
-    // await expectErrorAlert(canvas);
   },
 };
 

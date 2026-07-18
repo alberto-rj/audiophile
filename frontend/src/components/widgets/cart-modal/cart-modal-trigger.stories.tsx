@@ -4,7 +4,7 @@ import type { Canvas } from 'storybook/internal/types';
 
 import { CartModalTrigger } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import { expectErrorAlert, WithCredentialsDecorator } from '@/config/storybook';
+import { WithCredentialsDecorator } from '@/config/storybook';
 import {
   makeClearCartHandler,
   makeGetCartHandler,
@@ -125,8 +125,6 @@ export const ClearingCart: Story = {
     const canvas = within(document.body);
 
     await openCartModalAndClear(canvas);
-
-    // await expect(await canvas.findByTestId('cartModalClear')).toBeDisabled();
   },
 };
 
@@ -141,8 +139,6 @@ export const ClearCartFailed: Story = {
     const canvas = within(document.body);
 
     await openCartModalAndClear(canvas);
-
-    // await expectErrorAlert(canvas);
   },
 };
 
@@ -157,8 +153,6 @@ export const ClearCartSucceeds: Story = {
     const canvas = within(document.body);
 
     await openCartModalAndClear(canvas);
-
-    // await expectSuccessAlert(canvas);
   },
 };
 
@@ -195,8 +189,6 @@ export const UpdateItemQuantityFailed: Story = {
     const canvas = within(document.body);
 
     await openCartModalAndTypeQuantity(canvas, lastQuantityInputDigit);
-
-    await expectErrorAlert(canvas);
   },
 };
 

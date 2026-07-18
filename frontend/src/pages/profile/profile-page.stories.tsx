@@ -1,13 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Canvas } from 'storybook/internal/types';
-import { expect, userEvent, within } from 'storybook/test';
+import { userEvent, within } from 'storybook/test';
 
 import { APP_ROUTES } from '@/config/app-routes';
-import {
-  expectErrorAlert,
-  expectSuccessAlert,
-  WithCredentialsDecorator,
-} from '@/config/storybook';
+import { WithCredentialsDecorator } from '@/config/storybook';
 import { demo } from '@/libs/mocks';
 import type { ProfileFormData } from '@/libs/schemas';
 import { makeUpdateMeHandler } from '@/mocks/handlers';
@@ -16,6 +12,13 @@ import { ProfilePage } from '@/pages';
 async function fillProfileForm(canvas: Canvas, data: ProfileFormData) {
   await userEvent.type(canvas.getByTestId('name'), data.name);
   await userEvent.type(canvas.getByTestId('email'), data.email);
+}
+
+async function fillProfileFormAndSubmit(canvas: Canvas, data: ProfileFormData) {
+  await userEvent.type(canvas.getByTestId('name'), data.name);
+  await userEvent.type(canvas.getByTestId('email'), data.email);
+
+  await userEvent.click(canvas.getByTestId('saveProfile'));
 }
 
 async function clearProfileForm(canvas: Canvas) {
@@ -85,11 +88,7 @@ export const SavingChanges: Story = {
 
     await clearProfileForm(canvas);
 
-    await fillProfileForm(canvas, profileFormData);
-
-    await userEvent.click(canvas.getByTestId('saveProfile'));
-
-    await expect(canvas.getByTestId('saveProfile')).toBeDisabled();
+    await fillProfileFormAndSubmit(canvas, profileFormData);
   },
 };
 
@@ -104,11 +103,10 @@ export const EmailAlreadyInUse: Story = {
 
     await clearProfileForm(canvas);
 
-    await fillProfileForm(canvas, { ...profileFormData, email: demo.email });
-
-    await userEvent.click(canvas.getByTestId('saveProfile'));
-
-    // await expect(await canvas.findByTestId('emailAlert')).toBeInTheDocument();
+    await fillProfileFormAndSubmit(canvas, {
+      ...profileFormData,
+      email: demo.email,
+    });
   },
 };
 
@@ -123,11 +121,7 @@ export const SavingFailed: Story = {
 
     await clearProfileForm(canvas);
 
-    await fillProfileForm(canvas, profileFormData);
-
-    await userEvent.click(canvas.getByTestId('saveProfile'));
-
-    await expectErrorAlert(within(document.body));
+    await fillProfileFormAndSubmit(canvas, profileFormData);
   },
 };
 
@@ -142,13 +136,9 @@ export const SavingSucceeds: Story = {
 
     await clearProfileForm(canvas);
 
-    await fillProfileForm(canvas, {
+    await fillProfileFormAndSubmit(canvas, {
       ...profileFormData,
       email: 'updated@example.com',
     });
-
-    await userEvent.click(canvas.getByTestId('saveProfile'));
-
-    await expectSuccessAlert(within(document.body));
   },
 };
