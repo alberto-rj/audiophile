@@ -22,8 +22,8 @@ const checkoutFormData: CheckoutFormData = {
 };
 
 async function clearCheckoutForm(canvas: Canvas) {
-  await userEvent.clear(canvas.getByTestId('name'));
-  await userEvent.clear(canvas.getByTestId('email'));
+  await userEvent.clear(await canvas.findByTestId('name'));
+  await userEvent.clear(await canvas.findByTestId('email'));
 }
 
 async function fillCheckoutForm(canvas: Canvas) {
@@ -55,11 +55,11 @@ async function fillCheckoutForm(canvas: Canvas) {
     checkoutFormData.country,
   );
   await userEvent.type(
-    canvas.getByTestId('eMoneyNumber'),
+    await canvas.findByTestId('eMoneyNumber'),
     checkoutFormData.eMoneyNumber!,
   );
   await userEvent.type(
-    canvas.getByTestId('eMoneyPin'),
+    await canvas.findByTestId('eMoneyPin'),
     checkoutFormData.eMoneyPin!,
   );
 }
@@ -87,15 +87,15 @@ export const EmptyForm: Story = {
 
     await clearCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('name'));
-    await userEvent.click(canvas.getByTestId('email'));
-    await userEvent.click(canvas.getByTestId('phone'));
-    await userEvent.click(canvas.getByTestId('address'));
-    await userEvent.click(canvas.getByTestId('zip'));
-    await userEvent.click(canvas.getByTestId('city'));
-    await userEvent.click(canvas.getByTestId('country'));
-    await userEvent.click(canvas.getByTestId('eMoneyNumber'));
-    await userEvent.click(canvas.getByTestId('eMoneyPin'));
+    await userEvent.click(await canvas.findByTestId('name'));
+    await userEvent.click(await canvas.findByTestId('email'));
+    await userEvent.click(await canvas.findByTestId('phone'));
+    await userEvent.click(await canvas.findByTestId('address'));
+    await userEvent.click(await canvas.findByTestId('zip'));
+    await userEvent.click(await canvas.findByTestId('city'));
+    await userEvent.click(await canvas.findByTestId('country'));
+    await userEvent.click(await canvas.findByTestId('eMoneyNumber'));
+    await userEvent.click(await canvas.findByTestId('eMoneyPin'));
     await userEvent.tab();
   },
 };
@@ -106,15 +106,15 @@ export const ValidationErrors: Story = {
 
     await clearCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('name'));
-    await userEvent.click(canvas.getByTestId('email'));
-    await userEvent.click(canvas.getByTestId('phone'));
-    await userEvent.click(canvas.getByTestId('address'));
-    await userEvent.click(canvas.getByTestId('zip'));
-    await userEvent.click(canvas.getByTestId('city'));
-    await userEvent.click(canvas.getByTestId('country'));
-    await userEvent.click(canvas.getByTestId('eMoneyNumber'));
-    await userEvent.click(canvas.getByTestId('eMoneyPin'));
+    await userEvent.click(await canvas.findByTestId('name'));
+    await userEvent.click(await canvas.findByTestId('email'));
+    await userEvent.click(await canvas.findByTestId('phone'));
+    await userEvent.click(await canvas.findByTestId('address'));
+    await userEvent.click(await canvas.findByTestId('zip'));
+    await userEvent.click(await canvas.findByTestId('city'));
+    await userEvent.click(await canvas.findByTestId('country'));
+    await userEvent.click(await canvas.findByTestId('eMoneyNumber'));
+    await userEvent.click(await canvas.findByTestId('eMoneyPin'));
     await userEvent.tab();
   },
 };
@@ -138,7 +138,7 @@ export const ProcessingOrder: Story = {
 
     await fillCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('checkout'));
+    await userEvent.click(await canvas.findByTestId('checkout'));
   },
 };
 
@@ -153,7 +153,7 @@ export const CheckoutFailed: Story = {
 
     await fillCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('checkout'));
+    await userEvent.click(await canvas.findByTestId('checkout'));
   },
 };
 
@@ -168,6 +168,6 @@ export const CheckoutSucceeds: Story = {
 
     await fillCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('checkout'));
+    await userEvent.click(await canvas.findByTestId('checkout'));
   },
 };

@@ -9,8 +9,8 @@ import { makeLoginHandler } from '@/mocks/handlers';
 import { LoginPage } from '@/pages';
 
 async function fillSignUpForm(canvas: Canvas, data: LoginFormData) {
-  await userEvent.type(canvas.getByTestId('email'), data.email);
-  await userEvent.type(canvas.getByTestId('password'), data.password);
+  await userEvent.type(await canvas.findByTestId('email'), data.email);
+  await userEvent.type(await canvas.findByTestId('password'), data.password);
 }
 
 async function fillSignUpFormAndSubmit(canvas: Canvas, data: LoginFormData) {
@@ -61,8 +61,8 @@ export const ValidationErrors: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.click(canvas.getByTestId('email'));
-    await userEvent.click(canvas.getByTestId('password'));
+    await userEvent.click(await canvas.findByTestId('email'));
+    await userEvent.click(await canvas.findByTestId('password'));
     await userEvent.tab();
   },
 };

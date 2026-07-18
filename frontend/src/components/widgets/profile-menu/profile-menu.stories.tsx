@@ -8,7 +8,7 @@ import { cn } from '@/libs/cn';
 import { makeLogoutHandler } from '@/mocks/handlers';
 
 async function openMenuAndSignOut(canvas: Canvas) {
-  await userEvent.click(canvas.getByTestId('profileMenuTrigger'));
+  await userEvent.click(await canvas.findByTestId('profileMenuTrigger'));
   await userEvent.click(await canvas.findByTestId('signOutItem'));
 }
 
@@ -59,7 +59,7 @@ export const DesktopLayout: Story = {
 export const MobileMenuOpen: Story = {
   play: async () => {
     const canvas = within(document.body);
-    await userEvent.click(canvas.getByTestId('profileMenuTrigger'));
+    await userEvent.click(await canvas.findByTestId('profileMenuTrigger'));
   },
 };
 
@@ -69,7 +69,7 @@ export const DesktopMenuOpen: Story = {
   },
   play: async () => {
     const canvas = within(document.body);
-    await userEvent.click(canvas.getByTestId('profileMenuTrigger'));
+    await userEvent.click(await canvas.findByTestId('profileMenuTrigger'));
   },
 };
 

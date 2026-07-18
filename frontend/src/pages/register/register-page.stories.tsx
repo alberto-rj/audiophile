@@ -16,11 +16,11 @@ const registerFormData: RegisterFormData = {
 };
 
 async function fillRegisterForm(canvas: Canvas, data: RegisterFormData) {
-  await userEvent.type(canvas.getByTestId('name'), data.name);
-  await userEvent.type(canvas.getByTestId('email'), data.email);
-  await userEvent.type(canvas.getByTestId('password'), data.password);
+  await userEvent.type(await canvas.findByTestId('name'), data.name);
+  await userEvent.type(await canvas.findByTestId('email'), data.email);
+  await userEvent.type(await canvas.findByTestId('password'), data.password);
   await userEvent.type(
-    canvas.getByTestId('confirmPassword'),
+    await canvas.findByTestId('confirmPassword'),
     data.confirmPassword,
   );
 }
@@ -31,7 +31,7 @@ async function fillRegisterFormAndSubmit(
 ) {
   await fillRegisterForm(canvas, data);
 
-  await userEvent.click(canvas.getByTestId('signUp'));
+  await userEvent.click(await canvas.findByTestId('signUp'));
 }
 
 type StoryProps = React.ComponentProps<typeof RegisterPage>;
@@ -63,14 +63,20 @@ export const FilledValid: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.type(canvas.getByTestId('name'), registerFormData.name);
-    await userEvent.type(canvas.getByTestId('email'), registerFormData.email);
     await userEvent.type(
-      canvas.getByTestId('password'),
+      await canvas.findByTestId('name'),
+      registerFormData.name,
+    );
+    await userEvent.type(
+      await canvas.findByTestId('email'),
+      registerFormData.email,
+    );
+    await userEvent.type(
+      await canvas.findByTestId('password'),
       registerFormData.password,
     );
     await userEvent.type(
-      canvas.getByTestId('confirmPassword'),
+      await canvas.findByTestId('confirmPassword'),
       registerFormData.confirmPassword,
     );
   },
@@ -80,13 +86,22 @@ export const PasswordMismatch: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.type(canvas.getByTestId('name'), registerFormData.name);
-    await userEvent.type(canvas.getByTestId('email'), registerFormData.email);
     await userEvent.type(
-      canvas.getByTestId('password'),
+      await canvas.findByTestId('name'),
+      registerFormData.name,
+    );
+    await userEvent.type(
+      await canvas.findByTestId('email'),
+      registerFormData.email,
+    );
+    await userEvent.type(
+      await canvas.findByTestId('password'),
       registerFormData.password,
     );
-    await userEvent.type(canvas.getByTestId('confirmPassword'), 'different456');
+    await userEvent.type(
+      await canvas.findByTestId('confirmPassword'),
+      'different456',
+    );
     await userEvent.tab();
   },
 };
@@ -95,10 +110,10 @@ export const ValidationErrors: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.click(canvas.getByTestId('name'));
-    await userEvent.click(canvas.getByTestId('email'));
-    await userEvent.click(canvas.getByTestId('password'));
-    await userEvent.click(canvas.getByTestId('confirmPassword'));
+    await userEvent.click(await canvas.findByTestId('name'));
+    await userEvent.click(await canvas.findByTestId('email'));
+    await userEvent.click(await canvas.findByTestId('password'));
+    await userEvent.click(await canvas.findByTestId('confirmPassword'));
     await userEvent.tab();
   },
 };
