@@ -10,20 +10,20 @@ import { makeUpdateMeHandler } from '@/mocks/handlers';
 import { ProfilePage } from '@/pages';
 
 async function fillProfileForm(canvas: Canvas, data: ProfileFormData) {
-  await userEvent.type(canvas.getByTestId('name'), data.name);
-  await userEvent.type(canvas.getByTestId('email'), data.email);
+  await userEvent.type(await canvas.findByTestId('name'), data.name);
+  await userEvent.type(await canvas.findByTestId('email'), data.email);
 }
 
 async function fillProfileFormAndSubmit(canvas: Canvas, data: ProfileFormData) {
-  await userEvent.type(canvas.getByTestId('name'), data.name);
-  await userEvent.type(canvas.getByTestId('email'), data.email);
+  await userEvent.type(await canvas.findByTestId('name'), data.name);
+  await userEvent.type(await canvas.findByTestId('email'), data.email);
 
-  await userEvent.click(canvas.getByTestId('saveProfile'));
+  await userEvent.click(await canvas.findByTestId('saveProfile'));
 }
 
 async function clearProfileForm(canvas: Canvas) {
-  await userEvent.clear(canvas.getByTestId('name'));
-  await userEvent.clear(canvas.getByTestId('email'));
+  await userEvent.clear(await canvas.findByTestId('name'));
+  await userEvent.clear(await canvas.findByTestId('email'));
 }
 
 const profileFormData: ProfileFormData = {
@@ -71,8 +71,8 @@ export const ValidationErrors: Story = {
 
     await clearProfileForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('name'));
-    await userEvent.click(canvas.getByTestId('email'));
+    await userEvent.click(await canvas.findByTestId('name'));
+    await userEvent.click(await canvas.findByTestId('email'));
     await userEvent.tab();
   },
 };

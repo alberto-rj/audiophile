@@ -87,15 +87,15 @@ export const EmptyForm: Story = {
 
     await clearCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('name'));
-    await userEvent.click(canvas.getByTestId('email'));
-    await userEvent.click(canvas.getByTestId('phone'));
-    await userEvent.click(canvas.getByTestId('address'));
-    await userEvent.click(canvas.getByTestId('zip'));
-    await userEvent.click(canvas.getByTestId('city'));
-    await userEvent.click(canvas.getByTestId('country'));
-    await userEvent.click(canvas.getByTestId('eMoneyNumber'));
-    await userEvent.click(canvas.getByTestId('eMoneyPin'));
+    await userEvent.click(await canvas.findByTestId('name'));
+    await userEvent.click(await canvas.findByTestId('email'));
+    await userEvent.click(await canvas.findByTestId('phone'));
+    await userEvent.click(await canvas.findByTestId('address'));
+    await userEvent.click(await canvas.findByTestId('zip'));
+    await userEvent.click(await canvas.findByTestId('city'));
+    await userEvent.click(await canvas.findByTestId('country'));
+    await userEvent.click(await canvas.findByTestId('eMoneyNumber'));
+    await userEvent.click(await canvas.findByTestId('eMoneyPin'));
     await userEvent.tab();
   },
 };
@@ -106,15 +106,15 @@ export const ValidationErrors: Story = {
 
     await clearCheckoutForm(canvas);
 
-    await userEvent.click(canvas.getByTestId('name'));
-    await userEvent.click(canvas.getByTestId('email'));
-    await userEvent.click(canvas.getByTestId('phone'));
-    await userEvent.click(canvas.getByTestId('address'));
-    await userEvent.click(canvas.getByTestId('zip'));
-    await userEvent.click(canvas.getByTestId('city'));
-    await userEvent.click(canvas.getByTestId('country'));
-    await userEvent.click(canvas.getByTestId('eMoneyNumber'));
-    await userEvent.click(canvas.getByTestId('eMoneyPin'));
+    await userEvent.click(await canvas.findByTestId('name'));
+    await userEvent.click(await canvas.findByTestId('email'));
+    await userEvent.click(await canvas.findByTestId('phone'));
+    await userEvent.click(await canvas.findByTestId('address'));
+    await userEvent.click(await canvas.findByTestId('zip'));
+    await userEvent.click(await canvas.findByTestId('city'));
+    await userEvent.click(await canvas.findByTestId('country'));
+    await userEvent.click(await canvas.findByTestId('eMoneyNumber'));
+    await userEvent.click(await canvas.findByTestId('eMoneyPin'));
     await userEvent.tab();
   },
 };
