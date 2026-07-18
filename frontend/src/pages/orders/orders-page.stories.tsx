@@ -38,7 +38,7 @@ export const FailedToLoadOrders: Story = {
   },
 };
 
-export const WithOrders: Story = {
+export const OrdersLoaded: Story = {
   parameters: {
     msw: {
       handlers: [makeGetOrdersHandler()],

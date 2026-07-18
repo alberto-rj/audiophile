@@ -22,7 +22,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const FetchingOrder: Story = {
+export const LoadingOrder: Story = {
   parameters: {
     msw: {
       handlers: [makeGetOrderHandler({ type: 'infinite' })],
@@ -38,7 +38,7 @@ export const FailedToLoadOrder: Story = {
   },
 };
 
-export const WithOrder: Story = {
+export const OrderLoaded: Story = {
   parameters: {
     msw: {
       handlers: [makeGetOrderHandler()],
