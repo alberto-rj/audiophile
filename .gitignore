@@ -47,6 +47,7 @@ log
 .env
 .env.*
 !.env.example
+!.env.ci
 
 # Docker
 secrets/

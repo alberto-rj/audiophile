@@ -21,6 +21,10 @@ jobs:
         working-directory: frontend
         run: npm ci
 
+      - name: Copy CI env
+        working-directory: frontend
+        run: cp .env.ci .env
+
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
