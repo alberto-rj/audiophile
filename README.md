@@ -23,18 +23,28 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 ## Architecture Overview
 
 ```text
-HTTP Layer
-   ↓
-Controllers
-   ↓
-Use Cases
-   ↓
-Repositories
-   ↓
-Database
+┌─────────────────────────────────┐
+│         React Client            │
+│  Redux Toolkit · RTK Query      │
+└────────────────┬────────────────┘
+                 │ HTTP / REST
+                 ▼
+┌─────────────────────────────────┐
+│          Express API            │
+│                                 │
+│  Controllers                    │
+│       ↓                         │
+│  Use Cases                      │
+│       ↓                         │
+│  Repository Interfaces          │
+└──────┬──────────────────┬───────┘
+       │                  │
+       ▼                  ▼
+┌─────────────┐    ┌─────────────┐
+│  PostgreSQL │    │  Cloudinary │
+│ Drizzle ORM │    │ Image Store │
+└─────────────┘    └─────────────┘
 ```
-
-Use cases are framework-independent and rely on repository interfaces, allowing different implementations for production and testing environments.
 
 ## Tech Stack
 
@@ -70,21 +80,21 @@ Use cases are framework-independent and rely on repository interfaces, allowing 
 
 ## Key Technical Decisions
 
-- **Repository pattern with swappable implementations:** The API depends on repository interfaces, not concrete classes. Every use case receives its dependencies via injection - in tests, those are in-memory implementations; in production, they are Drizzle/PostgreSQL implementations. This means business logic is never coupled to a specific database, ORM, or infrastructure detail.
+- **Repository pattern with swappable implementations:** The API depends on repository interfaces, not concrete classes. Every use case receives its dependencies via injection - in tests and early development, those are in-memory implementations; in production, they are Drizzle/PostgreSQL implementations.
 
-- **Dual-token authentication:** Authentication uses a short-lived JWT access token together with a long-lived refresh token. The access token is returned to the client and attached to authenticated API requests. The refresh token is generated as an opaque UUID, persisted in the database, and stored in an HTTP-only cookie. Because refresh tokens are server-managed, they can be revoked independently of JWT expiration while remaining inaccessible to client-side JavaScript.
+- **Dual-token authentication:** Authentication uses a short-lived JWT access token together with a long-lived refresh token. The access token is returned to the client and attached to authenticated requests. The refresh token is an opaque UUID, persisted in the database and stored in an HTTP-only cookie - server-managed, revocable, and inaccessible to client-side JavaScript.
 
-- **`zod-to-openapi` as a single source of truth:** Every request and response schema is a Zod schema registered with `@asteasolutions/zod-to-openapi`. The OpenAPI 3.1 spec and the Swagger UI are generated from those registrations at startup. This means runtime validation and documentation are the same artifact - changing a schema updates both simultaneously, with no risk of the spec drifting from the actual API behavior.
+- **`zod-to-openapi` as a single source of truth:** Every request and response schema is a Zod schema registered with `@asteasolutions/zod-to-openapi`. The OpenAPI 3.1 spec and Swagger UI are generated from those registrations at startup - runtime validation and documentation are the same artifact.
 
-- **`AsyncLocalStorage` for request context propagation:** Rather than threading `userId` and request metadata through every function signature, the backend uses Node's `AsyncLocalStorage` to store per-request context after authentication. Downstream helpers (logger, use cases, presenters) read from context when they need it. This keeps function signatures clean and makes structured logging with per-request correlation IDs straightforward.
+- **`AsyncLocalStorage` for request context propagation:** Per-request context (user ID, correlation ID) is stored in Node's `AsyncLocalStorage` after the auth middleware runs. Downstream helpers - the logger, use cases, and presenters - read from context without needing it threaded through every function signature.
 
-- **Cloudinary `publicId` stored in the database, URLs built at the presenter layer:** Rather than storing full URLs, only the Cloudinary `publicId` is persisted. The presenter constructs responsive image URLs (different sizes, formats, transformations) at response time. This decouples the database from Cloudinary's URL structure - a CDN migration or image transformation change requires updating the presenter, not the database.
+- **Cloudinary `publicId` stored in the database, URLs built at the presenter layer:** Only the `publicId` is persisted. Presenters construct responsive image URLs (size variants, format conversions, transformations) at response time, keeping the database decoupled from Cloudinary's URL structure.
 
-- **RTK Query for all server state:** The frontend uses RTK Query instead of manual fetch + `useEffect` patterns. This gives automatic caching, request deduplication, built-in loading/error states, and optimistic updates without custom reducer logic. It also created a clear boundary between server state (RTK Query) and client state (Redux slices), which kept the cart and auth logic simpler than a mixed approach would have been.
+- **RTK Query for all server state:** The frontend uses RTK Query instead of manual fetch + useEffect patterns - automatic caching, request deduplication, and built-in loading and error states. Server state (RTK Query) and client state (Redux slices) are kept strictly separate.
 
-- **Radix UI as the accessibility foundation:** Rather than building complex interactive components from scratch, the frontend is built on top of Radix UI primitives, which provide focus management, keyboard navigation, and ARIA support out of the box. Application-specific components are built on top of these primitives, keeping a consistent API without reimplementing accessibility behavior.
+- **Radix UI as the accessibility foundation:** Interactive components are built on Radix UI primitives, which provide keyboard navigation, focus management, and ARIA attributes out of the box. The application exposes its own component API on top, with a consistent visual design.
 
-- **Component development and testing via Storybook + MSW:** Components are developed and reviewed in isolation using Storybook, with MSW simulating backend responses. This covers interaction and visual testing during development. There are currently no automated unit or integration tests (e.g. Vitest, Supertest) - this is listed under Lessons Learned / Next Steps below.
+- **MSW for mock-driven frontend development:** Mock Service Worker intercepts requests at the network level. The frontend and all Storybook stories run without a backend — MSW handlers mirror real API contracts, so switching to live responses requires no changes to components or hooks.
 
 - **Lazy-loaded routes and consistent async states:** Routes are lazy-loaded to reduce initial bundle size. Loading, validation, empty, error, and success states are handled consistently across the main async flows (authentication, cart, checkout, profile updates).
 
