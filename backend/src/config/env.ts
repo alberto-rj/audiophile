@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { z } from '@/config';
 
 const instructionsURL =
-  'https://github.com/alberto-rj/audiophile/blob/main/README.md#environment-variables';
+  'https://github.com/alberto-rj/audiophile/README.md#backend-backendenv';
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(4224),
