@@ -88,8 +88,6 @@ export const PasswordMismatch: Story = {
     );
     await userEvent.type(canvas.getByTestId('confirmPassword'), 'different456');
     await userEvent.tab();
-
-    // await expect(await canvas.findByRole('alert')).toBeInTheDocument();
   },
 };
 
@@ -115,8 +113,6 @@ export const SigningUp: Story = {
     const canvas = within(canvasElement);
 
     await fillRegisterFormAndSubmit(canvas, registerFormData);
-
-    // await expect(canvas.getByTestId('signUp')).toBeDisabled();
   },
 };
 
@@ -130,10 +126,6 @@ export const SignUpFailed: Story = {
     const canvas = within(canvasElement);
 
     await fillRegisterFormAndSubmit(canvas, registerFormData);
-
-    await userEvent.click(canvas.getByTestId('signUp'));
-
-    // await expectErrorAlert(within(document.body));
   },
 };
 
@@ -147,8 +139,6 @@ export const EmailAlreadyInUse: Story = {
     const canvas = within(canvasElement);
 
     await fillRegisterFormAndSubmit(canvas, registerFormData);
-
-    // await expect(await canvas.findByTestId('emailAlert')).toBeInTheDocument();
   },
 };
 

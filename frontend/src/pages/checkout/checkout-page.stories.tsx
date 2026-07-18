@@ -29,13 +29,31 @@ async function clearCheckoutForm(canvas: Canvas) {
 async function fillCheckoutForm(canvas: Canvas) {
   await clearCheckoutForm(canvas);
 
-  await userEvent.type(canvas.getByTestId('name'), checkoutFormData.name);
-  await userEvent.type(canvas.getByTestId('email'), checkoutFormData.email);
-  await userEvent.type(canvas.getByTestId('phone'), checkoutFormData.phone);
-  await userEvent.type(canvas.getByTestId('address'), checkoutFormData.address);
-  await userEvent.type(canvas.getByTestId('zip'), checkoutFormData.zip);
-  await userEvent.type(canvas.getByTestId('city'), checkoutFormData.city);
-  await userEvent.type(canvas.getByTestId('country'), checkoutFormData.country);
+  await userEvent.type(
+    await canvas.findByTestId('name'),
+    checkoutFormData.name,
+  );
+  await userEvent.type(
+    await canvas.findByTestId('email'),
+    checkoutFormData.email,
+  );
+  await userEvent.type(
+    await canvas.findByTestId('phone'),
+    checkoutFormData.phone,
+  );
+  await userEvent.type(
+    await canvas.findByTestId('address'),
+    checkoutFormData.address,
+  );
+  await userEvent.type(await canvas.findByTestId('zip'), checkoutFormData.zip);
+  await userEvent.type(
+    await canvas.findByTestId('city'),
+    checkoutFormData.city,
+  );
+  await userEvent.type(
+    await canvas.findByTestId('country'),
+    checkoutFormData.country,
+  );
   await userEvent.type(
     canvas.getByTestId('eMoneyNumber'),
     checkoutFormData.eMoneyNumber!,
@@ -121,8 +139,6 @@ export const ProcessingOrder: Story = {
     await fillCheckoutForm(canvas);
 
     await userEvent.click(canvas.getByTestId('checkout'));
-
-    // await expect(canvas.getByTestId('checkout')).toBeDisabled();
   },
 };
 
@@ -138,8 +154,6 @@ export const CheckoutFailed: Story = {
     await fillCheckoutForm(canvas);
 
     await userEvent.click(canvas.getByTestId('checkout'));
-
-    // await expect(await canvas.findByRole('status')).toBeInTheDocument();
   },
 };
 
