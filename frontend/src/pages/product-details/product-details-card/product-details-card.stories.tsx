@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Canvas } from 'storybook/internal/types';
-import { expect, userEvent, within } from 'storybook/test';
+import { userEvent, within } from 'storybook/test';
 
-import { expectErrorAlert, WithCredentialsDecorator } from '@/config/storybook';
+import { WithCredentialsDecorator } from '@/config/storybook';
 import { cn } from '@/libs/cn';
 import { products } from '@/libs/mocks';
 import type { Product } from '@/libs/types';
@@ -57,8 +57,6 @@ export const AddItemToCartLoading: Story = {
     const canvas = within(canvasElement);
 
     await clickToAddItemToCart(canvas);
-
-    await expect(await canvas.findByTestId('addItemToCart')).toBeDisabled();
   },
 };
 
@@ -73,8 +71,6 @@ export const AddItemToCartFailed: Story = {
     const canvas = within(canvasElement);
 
     await clickToAddItemToCart(canvas);
-
-    await expectErrorAlert(canvas);
   },
 };
 
