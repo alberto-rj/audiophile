@@ -8,7 +8,9 @@ import {
 import {
   ProductIdSchema,
   ProductImageSchema,
+  ProductNameSchema,
   ProductPriceSchema,
+  ProductSlugSchema,
 } from '../product/product.base.schema';
 
 export const CartItemSchema = z.object({
@@ -20,7 +22,8 @@ export const CartItemDetailedSchema = z.object({
   id: CartItemIdSchema,
   quantity: CartItemQuantitySchema,
   productId: ProductIdSchema,
+  name: ProductNameSchema,
   price: ProductPriceSchema,
-  slug: ProductPriceSchema,
+  slug: ProductSlugSchema,
   image: ProductImageSchema,
 });
