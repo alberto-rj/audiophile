@@ -1,87 +1,118 @@
 import { eq } from 'drizzle-orm';
 
+import { getCartSummary } from '@/helpers';
 import type {
   CartAddItemParams,
-  Cart,
   CartUpdateItemParams,
   CartRemoveItemParams,
   CartRemoveAllParams,
   CartFindParams,
   CartDetailed,
+  CartId,
+  UserId,
+  ProductId,
+  CartItemId,
+  ProductPrice,
+  ProductSlug,
+  ProductName,
+  CartItemQuantity,
+  CartItemDetailed,
+  ProductImage,
 } from '@/schemas';
-import {
-  cartItems,
-  carts,
-  db,
-  products,
-  type Cart as RawCart,
-} from '@/db/drizzle';
+import { cartItems, carts, db } from '@/db/drizzle';
 
 import type { CartRepository } from '../types/cart-repository.types';
 
-function parseItem(rawItem: RawCart): Cart {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { createdAt, updatedAt, ...itemWithoutTimestamp } = rawItem;
+type DrizzleCartItemDetailed = {
+  id: CartItemId;
+  quantity: CartItemQuantity;
+  product: {
+    id: ProductId;
+    name: ProductName;
+    slug: ProductSlug;
+    image: ProductImage;
+    price: ProductPrice;
+  };
+};
 
-  return itemWithoutTimestamp;
+type DrizzleCartDetailed = {
+  id: CartId;
+  userId: UserId;
+  items: DrizzleCartItemDetailed[];
+};
+
+function toCartItemDetailed(
+  rawItem: DrizzleCartItemDetailed,
+): CartItemDetailed {
+  const {
+    id,
+    product: { id: productId, name, price, slug, image },
+    quantity,
+  } = rawItem;
+
+  return {
+    id,
+    name,
+    price,
+    slug,
+    image,
+    quantity,
+    productId,
+  };
+}
+
+function toCartDetailed(rawCart: DrizzleCartDetailed): CartDetailed {
+  const { id, items, userId } = rawCart;
+  const detailedItems = items.map(toCartItemDetailed);
+
+  return {
+    id,
+    userId,
+    items: detailedItems,
+    ...getCartSummary(detailedItems),
+  };
 }
 
 export class DrizzleCartRepository implements CartRepository {
   async add(params: CartAddItemParams): Promise<CartDetailed | null> {
     await db.insert(cartItems).values(params);
 
-    const [foundCart] = await db
-      .select()
-      .from(carts)
-      .where(eq(carts.id, params.cartId))
-      .limit(1);
-
-    if (!foundCart) {
-      return null;
-    }
-
-    return parseItem(foundCart);
+    return this.find({ cartId: params.cartId });
   }
 
   async find({ cartId }: CartFindParams): Promise<CartDetailed | null> {
-    const foundItem = await db.query.carts.findFirst({
+    const foundCart = await db.query.carts.findFirst({
       where: eq(carts.id, cartId),
+      columns: {
+        id: true,
+        userId: true,
+      },
       with: {
         items: {
+          columns: {
+            id: true,
+            quantity: true,
+          },
           with: {
             product: {
               columns: {
                 id: true,
                 name: true,
                 price: true,
+                slug: true,
+                image: true,
               },
             },
           },
-          columns: {
-            id: true,
-            quantity: true,
-          },
         },
-      },
-      columns: {
-        id: true,
-        userId: true,
       },
     });
 
-    const foundCart = await db
-      .select({
-        id: carts.id,
-        userId: carts.userId,
-        name: products.name,
-        price: products.price,
-        quantity: cartItems.quantity,
-      })
-      .from(cartItems)
-      .innerJoin(cartItems, eq(cartItems.cartId, carts.id))
-      .innerJoin(cartItems, eq(cartItems.productId, products.id));
+    if (!foundCart) {
+      return null;
+    }
 
-    return { id: 20, userId: 10 };
+    return toCartDetailed(foundCart);
   }
 
   async update({
@@ -98,17 +129,7 @@ export class DrizzleCartRepository implements CartRepository {
       return null;
     }
 
-    const [foundCart] = await db
-      .select()
-      .from(carts)
-      .where(eq(carts.id, updatedItem.cartId))
-      .limit(1);
-
-    if (!foundCart) {
-      return null;
-    }
-
-    return parseItem(foundCart);
+    return this.find({ cartId: updatedItem.cartId });
   }
 
   async remove({ itemId }: CartRemoveItemParams): Promise<CartDetailed | null> {
@@ -121,17 +142,7 @@ export class DrizzleCartRepository implements CartRepository {
       return null;
     }
 
-    const [foundCart] = await db
-      .select()
-      .from(carts)
-      .where(eq(carts.id, deletedItem.cartId))
-      .limit(1);
-
-    if (!foundCart) {
-      return null;
-    }
-
-    return parseItem(foundCart);
+    return this.find({ cartId: deletedItem.cartId });
   }
 
   async removeAll({
@@ -139,17 +150,7 @@ export class DrizzleCartRepository implements CartRepository {
   }: CartRemoveAllParams): Promise<CartDetailed | null> {
     await db.delete(cartItems).where(eq(cartItems.cartId, cartId));
 
-    const [foundCart] = await db
-      .select()
-      .from(carts)
-      .where(eq(carts.id, cartId))
-      .limit(1);
-
-    if (!foundCart) {
-      return null;
-    }
-
-    return parseItem(foundCart);
+    return this.find({ cartId });
   }
 
   async fill(params: CartAddItemParams[]): Promise<CartDetailed | null> {
@@ -161,17 +162,7 @@ export class DrizzleCartRepository implements CartRepository {
 
     const cartId = params[0]!.cartId;
 
-    const [foundCart] = await db
-      .select()
-      .from(carts)
-      .where(eq(carts.id, cartId))
-      .limit(1);
-
-    if (!foundCart) {
-      return null;
-    }
-
-    return parseItem(foundCart);
+    return this.find({ cartId });
   }
 
   async clear(): Promise<void> {

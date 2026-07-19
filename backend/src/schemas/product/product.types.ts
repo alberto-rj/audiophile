@@ -9,6 +9,7 @@ import type {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
   ProductIdSchema,
+  ProductImageSchema,
   ProductIsNewSchema,
   ProductNameSchema,
   ProductPriceSchema,
@@ -25,6 +26,8 @@ import type { ApiProductSlugParams } from './product.api.types';
 export type ProductId = z.infer<typeof ProductIdSchema>;
 
 export type ProductSlug = z.infer<typeof ProductSlugSchema>;
+
+export type ProductImage = z.infer<typeof ProductImageSchema>;
 
 export type ProductName = z.infer<typeof ProductNameSchema>;
 
