@@ -85,7 +85,15 @@ export type {
   CartUpdateItemParams,
 } from './cart/cart.params.types';
 export { CartSchema, CartDetailedSchema } from './cart/cart.schema';
-export type { Cart, CartDetailed, CartId } from './cart/cart.types';
+export type {
+  Cart,
+  CartDetailed,
+  CartId,
+  CartGrandTotal,
+  CartShipping,
+  CartSubtotal,
+  CartVat,
+} from './cart/cart.types';
 
 export {
   ApiCategoryCreateBodySchema,
@@ -251,6 +259,7 @@ export type {
   ProductDetailed,
   ProductFeatures,
   ProductId,
+  ProductImage,
   ProductIsNew,
   ProductName,
   ProductPrice,
