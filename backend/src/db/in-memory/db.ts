@@ -1,4 +1,8 @@
 import type {
+  Cart,
+  CartId,
+  CartItemDetailed,
+  CartItemId,
   Category,
   CategoryId,
   Gallery,
@@ -15,6 +19,8 @@ import type {
 } from '@/schemas';
 
 export const db = {
+  carts: new Map<CartId, Cart>(),
+  cartItems: new Map<CartItemId, CartItemDetailed>(),
   categories: new Map<CategoryId, Category>(),
   galleries: new Map<GalleryId, Gallery>(),
   includes: new Map<IncludeId, Include>(),
