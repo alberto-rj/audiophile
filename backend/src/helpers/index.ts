@@ -1,7 +1,10 @@
 export { makeLoginPresenter } from './auth/make-login-presenter';
 export { makeRegisterPresenter } from './auth/make-register-presenter';
 
+export { toApiCart } from './cart/cart.api';
 export { getCartSummary, type CartSummary } from './cart/get-cart-summary';
+export { makeCartRepository } from './cart/make-cart-repository';
+export { makeCart, makeCartItem, makeCartItemDetailed } from './cart/make-cart';
 
 export { makeCategoryRepository } from './category/make-category-repository';
 export { toApiCategory } from './category/to-api-category';

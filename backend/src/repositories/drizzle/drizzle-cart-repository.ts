@@ -26,6 +26,9 @@ import type { CartRepository } from '../types/cart-repository.types';
 type DrizzleCartItemDetailed = {
   id: CartItemId;
   quantity: CartItemQuantity;
+  cart: {
+    id: ProductId;
+  };
   product: {
     id: ProductId;
     name: ProductName;
@@ -46,12 +49,14 @@ function toCartItemDetailed(
 ): CartItemDetailed {
   const {
     id,
+    cart: { id: cartId },
     product: { id: productId, name, price, slug, image },
     quantity,
   } = rawItem;
 
   return {
     id,
+    cartId,
     name,
     price,
     slug,
@@ -74,10 +79,13 @@ function toCartDetailed(rawCart: DrizzleCartDetailed): CartDetailed {
 }
 
 export class DrizzleCartRepository implements CartRepository {
-  async add(params: CartAddItemParams): Promise<CartDetailed | null> {
-    await db.insert(cartItems).values(params);
+  async add({
+    cartId,
+    ...rest
+  }: CartAddItemParams): Promise<CartDetailed | null> {
+    await db.insert(cartItems).values({ cartId, ...rest });
 
-    return this.find({ cartId: params.cartId });
+    return this.find({ cartId });
   }
 
   async find({ cartId }: CartFindParams): Promise<CartDetailed | null> {
@@ -94,6 +102,11 @@ export class DrizzleCartRepository implements CartRepository {
             quantity: true,
           },
           with: {
+            cart: {
+              columns: {
+                id: true,
+              },
+            },
             product: {
               columns: {
                 id: true,
