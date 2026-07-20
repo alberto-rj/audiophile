@@ -20,6 +20,7 @@ export const CartItemSchema = z.object({
 
 export const CartItemDetailedSchema = z.object({
   id: CartItemIdSchema,
+  cartId: CartIdSchema,
   quantity: CartItemQuantitySchema,
   productId: ProductIdSchema,
   name: ProductNameSchema,
