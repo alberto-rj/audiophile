@@ -29,7 +29,7 @@ async function main() {
     ]);
     await productRepository.clear();
     await categoryRepository.clear();
-    userRepository.clear();
+    await userRepository.clear();
 
     const createdCategories = await seedCategories({ categories });
 
