@@ -19,6 +19,16 @@ export class InMemoryUserRepository implements UserRepository {
     return newItem;
   }
 
+  async createMany(params: UserCreateParams[]): Promise<User[]> {
+    const newItems = params.map(makeUser);
+
+    for (const newItem of newItems) {
+      db.users.set(newItem.id, newItem);
+    }
+
+    return newItems;
+  }
+
   async findById({ id }: UserFindByIdParams): Promise<User | null> {
     const foundItem = db.users.get(id);
 

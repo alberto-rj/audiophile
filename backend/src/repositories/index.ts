@@ -19,6 +19,7 @@ export { DrizzleGalleryRepository } from './drizzle/drizzle-gallery-repository';
 export { DrizzleIncludeRepository } from './drizzle/drizzle-include-repository';
 export { DrizzleOtherProductRepository } from './drizzle/drizzle-other-product-repository';
 export { DrizzleProductRepository } from './drizzle/drizzle-product-repository';
+export { DrizzleUserRepository } from './drizzle/drizzle-user-repository';
 
 export { InMemoryCartRepository } from './in-memory/in-memory-cart-repository';
 export { InMemoryCategoryRepository } from './in-memory/in-memory-category-repository';

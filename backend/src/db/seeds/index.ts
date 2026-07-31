@@ -4,6 +4,7 @@ import {
   includeRepository,
   otherProductRepository,
   productRepository,
+  userRepository,
 } from '@/config';
 import {
   categories,
@@ -11,11 +12,13 @@ import {
   includes,
   otherProducts,
   products,
+  users,
 } from '@/db/mocks';
 
 import { seedCategories } from './category/seed-categories';
 import { seedProducts } from './product/seed-product';
 import { seedOtherProducts } from './product/seed-other-product';
+import { seedUsers } from './user/seed-users';
 
 async function main() {
   try {
@@ -26,6 +29,7 @@ async function main() {
     ]);
     await productRepository.clear();
     await categoryRepository.clear();
+    await userRepository.clear();
 
     const createdCategories = await seedCategories({ categories });
 
@@ -40,6 +44,8 @@ async function main() {
       otherProducts,
       products: createdProducts,
     });
+
+    await seedUsers({ users });
 
     process.exit(0);
   } catch {
