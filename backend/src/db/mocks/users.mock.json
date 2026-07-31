@@ -1,0 +1,27 @@
+[
+  {
+    "name": "John Carter",
+    "email": "john.carter@example.com",
+    "password": "SafePassword202!"
+  },
+  {
+    "name": "Emily Johnson",
+    "email": "emily.johnson@example.com",
+    "password": "SafePassword202!"
+  },
+  {
+    "name": "Michael Brown",
+    "email": "michael.brown@example.com",
+    "password": "SafePassword202!"
+  },
+  {
+    "name": "Sophia Davis",
+    "email": "sophia.davis@example.com",
+    "password": "SafePassword202!"
+  },
+  {
+    "name": "Daniel Wilson",
+    "email": "daniel.wilson@example.com",
+    "password": "SafePassword202!"
+  }
+]
