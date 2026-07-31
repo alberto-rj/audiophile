@@ -82,7 +82,7 @@ export function clearRefreshTokenCookie(res: Response) {
 }
 
 export function refreshTokenExpiresAt() {
-  const expiresAt = new Date(Date.now() + REFRESH_EXPIRES_MS).toISOString();
+  const expiresAt = new Date(Date.now() + REFRESH_EXPIRES_MS);
 
   return expiresAt;
 }

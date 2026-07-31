@@ -20,5 +20,6 @@ export type {
   OtherProduct,
   Product,
   ProductDetailed,
+  RefreshToken,
   User,
 } from './schemas/schemas.types';

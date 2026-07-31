@@ -7,7 +7,7 @@ export const RefreshTokenIdSchema = z.coerce
   .int()
   .positive();
 
-export const RefreshTokenExpiresAtSchema = z.string({
+export const RefreshTokenExpiresAtSchema = z.date({
   error: 'expires at must be a string.',
 });
 

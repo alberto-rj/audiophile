@@ -1,14 +1,14 @@
 import { db } from '@/db/in-memory';
 import { makeRefreshToken } from '@/helpers';
-import type { RefreshToken } from '@/schemas';
-
 import type {
+  RefreshToken,
   RefreshTokenCreateParams,
   RefreshTokenDeleteParams,
   RefreshTokenFindByIdParams,
   RefreshTokenFindParams,
-  RefreshTokenRepository,
-} from '../types/refresh-token-repository.types';
+} from '@/schemas';
+
+import type { RefreshTokenRepository } from '../types/refresh-token-repository.types';
 
 export class InMemoryRefreshTokenRepository implements RefreshTokenRepository {
   async create(params: RefreshTokenCreateParams): Promise<RefreshToken> {

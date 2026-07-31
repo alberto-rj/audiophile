@@ -6,12 +6,15 @@ import type {
   includes,
   otherProducts,
   products,
+  refreshTokens,
   users,
 } from './schemas';
 
 export type Category = typeof categories.$inferSelect;
 
 export type User = typeof users.$inferSelect;
+
+export type RefreshToken = typeof refreshTokens.$inferSelect;
 
 export type Gallery = typeof galleries.$inferSelect;
 
