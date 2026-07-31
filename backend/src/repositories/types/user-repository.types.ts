@@ -9,6 +9,8 @@ import type {
 export interface UserRepository {
   create: (params: UserCreateParams) => Promise<User>;
 
+  createMany: (params: UserCreateParams[]) => Promise<User[]>;
+
   findById: (params: UserFindByIdParams) => Promise<User | null>;
 
   findByEmail: (params: UserFindByEmailParams) => Promise<User | null>;
