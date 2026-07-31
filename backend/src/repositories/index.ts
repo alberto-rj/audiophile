@@ -19,6 +19,7 @@ export { DrizzleGalleryRepository } from './drizzle/drizzle-gallery-repository';
 export { DrizzleIncludeRepository } from './drizzle/drizzle-include-repository';
 export { DrizzleOtherProductRepository } from './drizzle/drizzle-other-product-repository';
 export { DrizzleProductRepository } from './drizzle/drizzle-product-repository';
+export { DrizzleRefreshTokenRepository } from './drizzle/drizzle-refresh-token-repository';
 export { DrizzleUserRepository } from './drizzle/drizzle-user-repository';
 
 export { InMemoryCartRepository } from './in-memory/in-memory-cart-repository';
@@ -27,5 +28,5 @@ export { InMemoryGalleryRepository } from './in-memory/in-memory-gallery-reposit
 export { InMemoryIncludeRepository } from './in-memory/in-memory-include-repository';
 export { InMemoryOtherProductRepository } from './in-memory/in-memory-other-product-repository';
 export { InMemoryProductRepository } from './in-memory/in-memory-product-repository';
-export { InMemoryUserRepository } from './in-memory/in-memory-user-repository';
 export { InMemoryRefreshTokenRepository } from './in-memory/in-memory-refresh-token-repository';
+export { InMemoryUserRepository } from './in-memory/in-memory-user-repository';

@@ -1,22 +1,10 @@
-import type { RefreshToken } from '@/schemas';
-
-export interface RefreshTokenCreateParams {
-  userId: number;
-  token: string;
-  expiresAt: string;
-}
-
-export interface RefreshTokenFindByIdParams {
-  id: number;
-}
-
-export interface RefreshTokenFindParams {
-  token: string;
-}
-
-export interface RefreshTokenDeleteParams {
-  token: string;
-}
+import type {
+  RefreshToken,
+  RefreshTokenCreateParams,
+  RefreshTokenDeleteParams,
+  RefreshTokenFindByIdParams,
+  RefreshTokenFindParams,
+} from '@/schemas';
 
 export interface RefreshTokenRepository {
   create: (params: RefreshTokenCreateParams) => Promise<RefreshToken>;
