@@ -282,6 +282,10 @@ export type {
   RefreshTokenExpiresAt,
   RefreshTokenId,
   RefreshTokenToken,
+  RefreshTokenCreateParams,
+  RefreshTokenDeleteParams,
+  RefreshTokenFindByIdParams,
+  RefreshTokenFindParams,
 } from './refresh-token/refresh-token.types';
 
 export {
