@@ -98,7 +98,7 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 
 - **MSW for mock-driven frontend development:** Mock Service Worker intercepts requests at the network level. The frontend and all Storybook stories run without a backend - MSW handlers mirror real API contracts, so switching to live responses requires no changes to components or hooks.
 
-- **Storybook published automatically via CI:** Every push triggers a GitHub Actions workflow that builds Storybook and publishes it to Chromatic, keeping the hosted UI documentation in sync with the codebase without manual steps.
+- **Automated Storybook deployment via CI/CD:** Set up a GitHub Actions workflow that builds and publishes Storybook to Chromatic on every push, resolving CI-specific issues around working directory scoping, secret injection, and Vite environment variable validation at build time
 
 ## Running Locally
 
