@@ -7,19 +7,21 @@ import type {
 
 import { makeId } from '../make-id';
 
-export function makeCart(params: CartAddItemParams): Cart {
-  const userId = makeId();
+type MakeCartParams = Pick<Cart, 'userId'>;
 
+type MakeCartItemParams = Pick<CartItem, 'cartId'>;
+
+export function makeCart({ userId }: MakeCartParams): Cart {
   return {
-    id: params.cartId,
+    id: makeId(),
     userId,
   };
 }
 
-export function makeCartItem(params: CartAddItemParams): CartItem {
+export function makeCartItem({ cartId }: MakeCartItemParams): CartItem {
   return {
     id: makeId(),
-    cartId: params.cartId,
+    cartId: cartId,
   };
 }
 

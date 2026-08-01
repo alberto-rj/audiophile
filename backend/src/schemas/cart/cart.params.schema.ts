@@ -6,6 +6,7 @@ import {
   CartItemQuantitySchema,
 } from './cart-item.base.schema';
 import { CartIdSchema } from './cart.base.schema';
+import { UserIdSchema } from '../user/user.schema';
 
 export const CartFindManyItemsParamsSchema = z.object({
   cartId: CartIdSchema,
@@ -19,6 +20,10 @@ export const CartAddItemParamsSchema = z.object({
 
 export const CartFindParamsSchema = z.object({
   cartId: CartIdSchema,
+});
+
+export const CartFindOrCreateByUserIdParamsSchema = z.object({
+  userId: UserIdSchema,
 });
 
 export const CartUpdateItemParamsSchema = z.object({

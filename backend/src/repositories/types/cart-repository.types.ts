@@ -1,6 +1,7 @@
 import type {
   CartAddItemParams,
   CartDetailed,
+  CartFindOrCreateByUserIdParams,
   CartFindParams,
   CartRemoveAllParams,
   CartRemoveItemParams,
@@ -12,13 +13,15 @@ export interface CartRepository {
 
   find: (params: CartFindParams) => Promise<CartDetailed | null>;
 
+  findOrCreateByUserId: (
+    params: CartFindOrCreateByUserIdParams,
+  ) => Promise<CartDetailed>;
+
   update: (params: CartUpdateItemParams) => Promise<CartDetailed | null>;
 
   remove: (params: CartRemoveItemParams) => Promise<CartDetailed | null>;
 
   removeAll: (params: CartRemoveAllParams) => Promise<CartDetailed | null>;
-
-  fill: (params: CartAddItemParams[]) => Promise<CartDetailed | null>;
 
   clear: () => Promise<void>;
 }
