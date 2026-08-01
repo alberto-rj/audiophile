@@ -58,6 +58,16 @@ export class ResourceNotFoundError extends AppError<ResBodyError> {
   }
 }
 
+export class InternalServerError extends AppError<ResBodyError> {
+  constructor(message: string = 'Internal server error.') {
+    super(message, StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+
+  format() {
+    return makeResBodyError(this.message);
+  }
+}
+
 export class ValidationError<T> extends AppError<ResBodyValidationError<T>> {
   protected details: T;
 
