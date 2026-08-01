@@ -18,5 +18,5 @@ export const CartItemQuantitySchema = z.coerce
   .positive({ error: 'quantity must be greater than 0.' })
   .default(1)
   .openapi({
-    readOnly: true,
+    description: 'quantity',
   });
