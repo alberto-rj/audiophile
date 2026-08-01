@@ -86,6 +86,24 @@ export type {
   CartRemoveAllParams,
   CartUpdateItemParams,
 } from './cart/cart.params.types';
+export {
+  CartAddItemInputSchema,
+  CartFindManyItemsInputSchema,
+  CartFindInputSchema,
+  CartFindOrCreateByUserIdInputSchema,
+  CartRemoveItemInputSchema,
+  CartRemoveAllInputSchema,
+  CartUpdateItemInputSchema,
+} from './cart/cart.input.schema';
+export type {
+  CartAddItemInput,
+  CartFindManyItemsInput,
+  CartFindInput,
+  CartFindOrCreateByUserIdInput,
+  CartRemoveItemInput,
+  CartRemoveAllInput,
+  CartUpdateItemInput,
+} from './cart/cart.input.types';
 export { CartSchema, CartDetailedSchema } from './cart/cart.schema';
 export type {
   Cart,
