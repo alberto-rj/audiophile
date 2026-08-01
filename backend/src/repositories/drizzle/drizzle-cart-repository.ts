@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 import { getCartSummary } from '@/helpers';
 import type {
@@ -8,39 +8,22 @@ import type {
   CartRemoveAllParams,
   CartFindParams,
   CartDetailed,
-  CartId,
-  UserId,
-  ProductId,
-  CartItemId,
-  ProductPrice,
-  ProductSlug,
-  ProductName,
-  CartItemQuantity,
   CartItemDetailed,
-  ProductImage,
+  CartFindOrCreateByUserIdParams,
+  Product,
 } from '@/schemas';
 import { cartItems, carts, db } from '@/db/drizzle';
 
 import type { CartRepository } from '../types/cart-repository.types';
 
-type DrizzleCartItemDetailed = {
-  id: CartItemId;
-  quantity: CartItemQuantity;
-  cart: {
-    id: ProductId;
-  };
-  product: {
-    id: ProductId;
-    name: ProductName;
-    slug: ProductSlug;
-    image: ProductImage;
-    price: ProductPrice;
-  };
+type DrizzleCartItemDetailed = Pick<
+  CartItemDetailed,
+  'id' | 'cartId' | 'quantity'
+> & {
+  product: Pick<Product, 'id' | 'name' | 'slug' | 'image' | 'price'>;
 };
 
-type DrizzleCartDetailed = {
-  id: CartId;
-  userId: UserId;
+type DrizzleCartDetailed = Pick<CartDetailed, 'id' | 'userId'> & {
   items: DrizzleCartItemDetailed[];
 };
 
@@ -49,20 +32,20 @@ function toCartItemDetailed(
 ): CartItemDetailed {
   const {
     id,
-    cart: { id: cartId },
-    product: { id: productId, name, price, slug, image },
+    cartId,
     quantity,
+    product: { id: productId, name, price, slug, image },
   } = rawItem;
 
   return {
     id,
     cartId,
+    productId,
     name,
     price,
     slug,
     image,
     quantity,
-    productId,
   };
 }
 
@@ -81,9 +64,18 @@ function toCartDetailed(rawCart: DrizzleCartDetailed): CartDetailed {
 export class DrizzleCartRepository implements CartRepository {
   async add({
     cartId,
-    ...rest
+    productId,
+    quantity,
   }: CartAddItemParams): Promise<CartDetailed | null> {
-    await db.insert(cartItems).values({ cartId, ...rest });
+    await db
+      .insert(cartItems)
+      .values({ cartId, productId, quantity })
+      .onConflictDoUpdate({
+        target: [cartItems.cartId, cartItems.productId],
+        set: {
+          quantity: sql`${cartItems.quantity} + excluded.quantity`,
+        },
+      });
 
     return this.find({ cartId });
   }
@@ -99,14 +91,10 @@ export class DrizzleCartRepository implements CartRepository {
         items: {
           columns: {
             id: true,
+            cartId: true,
             quantity: true,
           },
           with: {
-            cart: {
-              columns: {
-                id: true,
-              },
-            },
             product: {
               columns: {
                 id: true,
@@ -128,6 +116,33 @@ export class DrizzleCartRepository implements CartRepository {
     return toCartDetailed(foundCart);
   }
 
+  async findOrCreateByUserId({
+    userId,
+  }: CartFindOrCreateByUserIdParams): Promise<CartDetailed> {
+    const [foundBaseCart] = await db
+      .select({ id: carts.id })
+      .from(carts)
+      .where(eq(carts.userId, userId));
+
+    if (foundBaseCart) {
+      const foundCart = await this.find({ cartId: foundBaseCart.id });
+      return foundCart!;
+    }
+
+    const [createdCart] = await db
+      .insert(carts)
+      .values({ userId })
+      .onConflictDoUpdate({
+        target: carts.userId,
+        set: { userId: sql`excluded.user_id` },
+      })
+      .returning({ id: carts.id, userId: carts.userId });
+
+    const foundCart = await this.find({ cartId: createdCart!.id });
+
+    return foundCart!;
+  }
+
   async update({
     itemId,
     ...changes
@@ -136,7 +151,7 @@ export class DrizzleCartRepository implements CartRepository {
       .update(cartItems)
       .set(changes)
       .where(eq(cartItems.id, itemId))
-      .returning();
+      .returning({ cartId: cartItems.cartId });
 
     if (!updatedItem) {
       return null;
@@ -149,7 +164,7 @@ export class DrizzleCartRepository implements CartRepository {
     const [deletedItem] = await db
       .delete(cartItems)
       .where(eq(cartItems.id, itemId))
-      .returning();
+      .returning({ cartId: cartItems.cartId });
 
     if (!deletedItem) {
       return null;
@@ -166,19 +181,8 @@ export class DrizzleCartRepository implements CartRepository {
     return this.find({ cartId });
   }
 
-  async fill(params: CartAddItemParams[]): Promise<CartDetailed | null> {
-    if (params.length === 0) {
-      return null;
-    }
-
-    await db.insert(cartItems).values(params).returning();
-
-    const cartId = params[0]!.cartId;
-
-    return this.find({ cartId });
-  }
-
   async clear(): Promise<void> {
+    await db.delete(cartItems);
     await db.delete(carts);
   }
 }

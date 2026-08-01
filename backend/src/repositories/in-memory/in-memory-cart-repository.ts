@@ -8,6 +8,7 @@ import type {
   CartDetailed,
   Cart,
   CartItemDetailed,
+  CartFindOrCreateByUserIdParams,
 } from '@/schemas';
 import { db } from '@/db/in-memory';
 
@@ -15,7 +16,10 @@ import type { CartRepository } from '../types/cart-repository.types';
 
 function toCartDetailed(cart: Cart): CartDetailed {
   const { id, userId } = cart;
-  const detailedItems = [...db.cartItems.values()];
+
+  const detailedItems = Array.from(db.cartItems.values()).filter(
+    (item) => item.cartId === id,
+  );
 
   return {
     id,
@@ -32,7 +36,7 @@ function createCartItem(params: CartAddItemParams): CartItemDetailed {
   const foundProduct = db.products.get(productId);
 
   if (!foundProduct) {
-    throw new Error('Cannot add item without a product');
+    throw new Error('Cannot create cart item without a product');
   }
 
   const { name, price, slug, image } = foundProduct;
@@ -51,11 +55,27 @@ function createCartItem(params: CartAddItemParams): CartItemDetailed {
 
 export class InMemoryCartRepository implements CartRepository {
   async add(params: CartAddItemParams): Promise<CartDetailed | null> {
-    const createdCart = makeCart(params);
-    const createdCartItem = createCartItem(params);
+    const cart = db.carts.get(params.cartId);
 
-    db.carts.set(createdCart.id, createdCart);
-    db.cartItems.set(createdCart.id, createdCartItem);
+    if (!cart) {
+      return null;
+    }
+
+    const allItems = Array.from(db.cartItems.values());
+    const existingItem = allItems.find(
+      (i) => i.cartId === params.cartId && i.productId === params.productId,
+    );
+
+    if (existingItem) {
+      const updated = {
+        ...existingItem,
+        quantity: existingItem.quantity + params.quantity,
+      };
+      db.cartItems.set(existingItem.id, updated);
+    } else {
+      const newItem = createCartItem(params);
+      db.cartItems.set(newItem.id, newItem);
+    }
 
     return this.find({ cartId: params.cartId });
   }
@@ -68,6 +88,33 @@ export class InMemoryCartRepository implements CartRepository {
     }
 
     return toCartDetailed(foundCart);
+  }
+
+  async findOrCreateByUserId({
+    userId,
+  }: CartFindOrCreateByUserIdParams): Promise<CartDetailed> {
+    const foundCart = Array.from(db.carts.values()).find(
+      (c) => c.userId === userId,
+    );
+
+    if (foundCart) {
+      return toCartDetailed(foundCart);
+    }
+
+    const foundProduct = Array.from(db.products.values()).find(
+      (_, index) => index === 0,
+    );
+
+    if (!foundProduct) {
+      throw new Error('Cannot create cart without a product');
+    }
+
+    const newCart = makeCart({
+      userId,
+    });
+    db.carts.set(newCart.id, newCart);
+
+    return toCartDetailed(newCart);
   }
 
   async update({
@@ -112,24 +159,6 @@ export class InMemoryCartRepository implements CartRepository {
     cartItems.forEach((item) => db.cartItems.delete(item.id));
 
     return this.find({ cartId });
-  }
-
-  async fill(params: CartAddItemParams[]): Promise<CartDetailed | null> {
-    if (params.length === 0) {
-      return null;
-    }
-
-    const cartParams = params[0]!;
-    const createdCart = makeCart(cartParams);
-    const createdCartItems = params.map((args) => createCartItem(args));
-
-    db.carts.set(createdCart.id, createdCart);
-
-    for (const createdCartItem of createdCartItems) {
-      db.cartItems.set(createdCart.id, createdCartItem);
-    }
-
-    return this.find({ cartId: cartParams.cartId });
   }
 
   async clear(): Promise<void> {
