@@ -4,13 +4,7 @@ export type { GalleryRepository } from './types/gallery-repository.types';
 export type { IncludeRepository } from './types/include-repository.types';
 export type { OtherProductRepository } from './types/other-product-repository.types';
 export type { ProductRepository } from './types/product-repository.types';
-export type {
-  RefreshTokenCreateParams,
-  RefreshTokenDeleteParams,
-  RefreshTokenFindByIdParams,
-  RefreshTokenFindParams,
-  RefreshTokenRepository,
-} from './types/refresh-token-repository.types';
+export type { RefreshTokenRepository } from './types/refresh-token-repository.types';
 export type { UserRepository } from './types/user-repository.types';
 
 export { DrizzleCartRepository } from './drizzle/drizzle-cart-repository';
