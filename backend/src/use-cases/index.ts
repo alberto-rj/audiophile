@@ -3,6 +3,7 @@ export { refreshUseCase } from './auth/refresh-use-case';
 export { registerUseCase } from './auth/register-use-case';
 
 export { addCartItemUseCase } from './cart/add-cart-item.use-case';
+export { getCartUseCase } from './cart/get-cart.use-case';
 export { removeCartItemUseCase } from './cart/remove-cart-item.use-case';
 export { removeCartItemsUseCase } from './cart/remove-cart-items.use-case';
 export { updateCartItemUseCase } from './cart/update-cart-item.use-case';

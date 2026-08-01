@@ -6,6 +6,7 @@ export {
   toCartAddItemInput,
   toCartFindOrCreateByUserIdInput,
   toCartFindInput,
+  toCartGetInput,
   toCartRemoveAllInput,
   toCartRemoveItemInput,
   toCartUpdateItemInput,

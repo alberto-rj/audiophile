@@ -38,3 +38,7 @@ export const CartRemoveItemInputSchema = z.object({
 export const CartRemoveAllInputSchema = z.object({
   userId: UserIdSchema,
 });
+
+export const CartGetInputSchema = z.object({
+  userId: UserIdSchema,
+});
