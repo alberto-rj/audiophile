@@ -2,6 +2,7 @@ import {
   CartAddItemInputSchema,
   CartFindOrCreateByUserIdInputSchema,
   CartFindInputSchema,
+  CartGetInputSchema,
   CartRemoveAllInputSchema,
   CartRemoveItemInputSchema,
   CartUpdateItemInputSchema,
@@ -11,6 +12,7 @@ import {
   type CartRemoveAllInput,
   type CartRemoveItemInput,
   type CartUpdateItemInput,
+  type CartGetInput,
 } from '@/schemas';
 
 import { parseSchema } from '../parse-schema';
@@ -36,6 +38,10 @@ export function toCartFindOrCreateByUserIdInput(data: unknown) {
 
 export function toCartRemoveItemInput(data: unknown) {
   return parseSchema<CartRemoveItemInput>(CartRemoveItemInputSchema, data);
+}
+
+export function toCartGetInput(data: unknown) {
+  return parseSchema<CartGetInput>(CartGetInputSchema, data);
 }
 
 export function toCartRemoveAllInput(data: unknown) {
