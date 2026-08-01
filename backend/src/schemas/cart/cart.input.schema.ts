@@ -8,33 +8,33 @@ import {
 } from './cart-item.base.schema';
 import { CartIdSchema } from './cart.base.schema';
 
-export const CartFindManyItemsParamsSchema = z.object({
+export const CartFindManyItemsInputSchema = z.object({
   cartId: CartIdSchema,
 });
 
-export const CartAddItemParamsSchema = z.object({
-  cartId: CartIdSchema,
+export const CartAddItemInputSchema = z.object({
+  userId: UserIdSchema,
   productId: ProductIdSchema,
   quantity: CartItemQuantitySchema,
 });
 
-export const CartFindParamsSchema = z.object({
+export const CartFindInputSchema = z.object({
   cartId: CartIdSchema,
 });
 
-export const CartFindOrCreateByUserIdParamsSchema = z.object({
+export const CartFindOrCreateByUserIdInputSchema = z.object({
   userId: UserIdSchema,
 });
 
-export const CartUpdateItemParamsSchema = z.object({
+export const CartUpdateItemInputSchema = z.object({
   itemId: CartItemIdSchema,
   quantity: CartItemQuantitySchema,
 });
 
-export const CartRemoveItemParamsSchema = z.object({
+export const CartRemoveItemInputSchema = z.object({
   itemId: CartItemIdSchema,
 });
 
-export const CartRemoveAllParamsSchema = z.object({
-  cartId: CartIdSchema,
+export const CartRemoveAllInputSchema = z.object({
+  userId: UserIdSchema,
 });
