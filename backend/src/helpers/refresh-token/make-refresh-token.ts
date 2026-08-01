@@ -1,12 +1,17 @@
-import type { RefreshTokenCreateParams } from '@/repositories';
-import type { RefreshToken } from '@/schemas';
+import type { RefreshToken, RefreshTokenCreateParams } from '@/schemas';
 
-export function makeRefreshToken(
-  params: RefreshTokenCreateParams,
-): RefreshToken {
+import { makeId } from '../make-id';
+
+export function makeRefreshToken({
+  expiresAt,
+  token,
+  userId,
+}: RefreshTokenCreateParams): RefreshToken {
   return {
-    ...params,
-    id: Math.floor(Date.now() * Math.random()),
+    id: makeId(),
+    userId,
+    token,
+    expiresAt: expiresAt.toISOString(),
     createdAt: new Date().toISOString(),
   };
 }

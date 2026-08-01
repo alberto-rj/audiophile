@@ -6,8 +6,7 @@ import {
   toSafeUser,
   UnauthorizedError,
 } from '@/helpers';
-import type { RefreshTokenFindParams } from '@/repositories';
-import type { SafeUser } from '@/schemas';
+import type { RefreshTokenFindParams, SafeUser } from '@/schemas';
 
 interface RefreshUseCaseParams {
   payload: RefreshTokenFindParams;
