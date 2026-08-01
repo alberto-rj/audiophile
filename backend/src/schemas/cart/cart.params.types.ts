@@ -3,6 +3,7 @@ import type { z } from '@/config';
 import {
   CartAddItemParamsSchema,
   CartFindManyItemsParamsSchema,
+  CartFindOrCreateByUserIdParamsSchema,
   CartFindParamsSchema,
   CartRemoveAllParamsSchema,
   CartRemoveItemParamsSchema,
@@ -18,6 +19,10 @@ export type CartRemoveItemParams = z.infer<typeof CartRemoveItemParamsSchema>;
 export type CartRemoveAllParams = z.infer<typeof CartRemoveAllParamsSchema>;
 
 export type CartFindParams = z.infer<typeof CartFindParamsSchema>;
+
+export type CartFindOrCreateByUserIdParams = z.infer<
+  typeof CartFindOrCreateByUserIdParamsSchema
+>;
 
 export type CartFindManyItemsParams = z.infer<
   typeof CartFindManyItemsParamsSchema
