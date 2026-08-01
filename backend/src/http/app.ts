@@ -16,6 +16,7 @@ import {
 } from './middlewares';
 import {
   authRoute,
+  cartRoute,
   categoriesRoute,
   productsRoute,
   usersRoute,
@@ -95,6 +96,7 @@ app.use(requestLogger);
 
 // API routes
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/cart', cartRoute);
 app.use('/api/v1/categories', categoriesRoute);
 app.use('/api/v1/products', productsRoute);
 app.use('/api/v1/users', usersRoute);

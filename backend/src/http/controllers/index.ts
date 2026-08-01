@@ -3,6 +3,12 @@ export { logoutController } from './auth/logout.controller';
 export { refreshController } from './auth/refresh.controller';
 export { registerController } from './auth/register.controller';
 
+export { addCartItemController } from './cart/add-cart-item.controller';
+export { getCartItemController } from './cart/get-cart-item.controller';
+export { updateCartItemController } from './cart/update-cart-item.controller';
+export { removeCartItemController } from './cart/remove-cart-item.controller';
+export { removeCartItemsController } from './cart/remove-cart-items.controller';
+
 export { getCategoriesController } from './categories/get-categories.controller';
 export { getCategoryBySlugController } from './categories/get-category-by-slug-controller';
 
