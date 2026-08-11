@@ -17,6 +17,8 @@ export type {
   Category,
   Gallery,
   Include,
+  Order,
+  OrderItem,
   OtherProduct,
   Product,
   ProductDetailed,
