@@ -9,6 +9,7 @@ import {
   timestamp,
   varchar,
   unique,
+  pgEnum,
 } from 'drizzle-orm/pg-core';
 
 const createdAt = timestamp('created_at', { withTimezone: true })
@@ -215,9 +216,72 @@ export const cartItems = pgTable(
   ],
 );
 
+export const orderStatus = pgEnum('order_status', [
+  'pending',
+  'paid',
+  'processing',
+  'shipped',
+  'delivered',
+  'cancelled',
+]);
+
+export const orderPaymentMethod = pgEnum('order_payment_method', [
+  'e-money',
+  'cash-on-delivery',
+]);
+
+export const orders = pgTable(
+  'orders',
+  {
+    id: serial('id').primaryKey(),
+    userId: integer('user_id')
+      .notNull()
+      .references(() => users.id),
+    status: orderStatus('status').notNull().default('pending'),
+    name: text('name').notNull(),
+    email: text('email').notNull(),
+    phone: text('phone').notNull(),
+    address: text('address').notNull(),
+    zip: text('zip').notNull(),
+    city: text('city').notNull(),
+    country: text('country').notNull(),
+    paymentMethod: orderPaymentMethod('payment_method')
+      .notNull()
+      .default('e-money'),
+    subtotal: integer('subtotal').notNull(),
+    shipping: integer('shipping').notNull(),
+    vat: integer('vat').notNull(),
+    grandTotal: integer('grand_total').notNull(),
+    createdAt,
+    updatedAt,
+  },
+  ({ id }) => [primaryKey({ name: 'orders_pk_id', columns: [id] })],
+);
+
+export const orderItems = pgTable(
+  'order_items',
+  {
+    id: serial('id'),
+    orderId: integer('order_id')
+      .notNull()
+      .references(() => orders.id),
+    productId: integer('product_id')
+      .notNull()
+      .references(() => products.id),
+    name: text('name').notNull(),
+    price: integer('price').notNull(),
+    quantity: integer('quantity').notNull(),
+  },
+  ({ id, productId, orderId }) => [
+    primaryKey({ name: 'order_items_pk_id', columns: [id] }),
+    unique('order_items_uk_order_id_product_id').on(orderId, productId),
+  ],
+);
+
 export const userRelations = relations(users, ({ one, many }) => ({
   refreshTokens: many(refreshTokens),
   cart: one(carts),
+  orders: many(orders),
 }));
 
 export const refreshTokenToUserRelations = relations(
@@ -291,6 +355,25 @@ export const cartItemRelations = relations(cartItems, ({ one }) => ({
   }),
   product: one(products, {
     fields: [cartItems.productId],
+    references: [products.id],
+  }),
+}));
+
+export const ordersRelations = relations(orders, ({ one, many }) => ({
+  user: one(users, {
+    fields: [orders.userId],
+    references: [users.id],
+  }),
+  items: many(orderItems),
+}));
+
+export const orderItemRelations = relations(orderItems, ({ one }) => ({
+  order: one(orders, {
+    fields: [orderItems.orderId],
+    references: [orders.id],
+  }),
+  product: one(products, {
+    fields: [orderItems.productId],
     references: [products.id],
   }),
 }));

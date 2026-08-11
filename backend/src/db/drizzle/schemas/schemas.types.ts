@@ -4,6 +4,8 @@ import type {
   categories,
   galleries,
   includes,
+  orderItems,
+  orders,
   otherProducts,
   products,
   refreshTokens,
@@ -36,3 +38,7 @@ export type ProductDetailed = Omit<Product, 'categoryId'> & {
 export type Cart = typeof carts.$inferSelect;
 
 export type CartItem = typeof cartItems.$inferSelect;
+
+export type Order = typeof orders.$inferSelect;
+
+export type OrderItem = typeof orderItems.$inferSelect;
