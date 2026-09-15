@@ -48,35 +48,11 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 
 ## Tech Stack
 
-### Frontend
+- **Frontend:** React, TypeScript, Redux Toolkit, React Router, Tailwind CSS, Radix UI, React Hook Form, Zod (Forms & Shared Schemas), Storybook, MSW
 
-- React
-- TypeScript
-- Redux Toolkit
-- React Router
-- Tailwind CSS
-- Radix UI
-- React Hook Form
-- Zod (Forms & Shared Schemas)
-- Storybook
-- MSW
+- **Backend:** Node.js, Express.js, TypeScript, Zod, JWT Authentication, Cloudinary, OpenAPI/Swagger, PostgreSQL & Drizzle ORM
 
-### Backend
-
-- Node.js
-- Express.js
-- TypeScript
-- Zod
-- JWT Authentication
-- Cloudinary
-- OpenAPI/Swagger
-- PostgreSQL & Drizzle ORM
-
-### Tooling
-
-- ESLint
-- Prettier
-- Vite
+- **Tooling:** ESLint, Prettier, Vite
 
 ## Key Technical Decisions
 
@@ -114,7 +90,7 @@ git clone https://github.com/alberto-rj/audiophile.git
 cd audiophile
 ```
 
-### Backend (Setup)
+### Backend setup
 
 ```bash
 cd backend
@@ -136,7 +112,7 @@ npm run db:migrate   # Apply schema migrations
 npm run db:seed      # Seed categories and products
 ```
 
-### Frontend (Setup)
+### Frontend setup
 
 Open a second terminal:
 
