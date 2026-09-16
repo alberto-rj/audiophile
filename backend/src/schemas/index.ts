@@ -169,6 +169,46 @@ export {
 } from './category/category.helpers';
 
 export {
+  ApiOrderCreateBodySchema,
+  ApiOrderIdParamsSchema,
+  ApiOrderItemSchema,
+  ApiOrderSchema,
+} from './order/order.api.schema';
+export type {
+  ApiOrder,
+  ApiOrderCreateBody,
+  ApiOrderIdParams,
+  ApiOrderItem,
+} from './order/order.api.types';
+export {
+  OrderAddressSchema,
+  OrderCitySchema,
+  OrderCountrySchema,
+  OrderGrandTotalSchema,
+  OrderIdSchema,
+  OrderItemIdSchema,
+  OrderItemQuantitySchema,
+  OrderPaymentMethodSchema,
+  OrderShippingSchema,
+  OrderStatusSchema,
+  OrderSubtotalSchema,
+  OrderVatSchema,
+  OrderZipSchema,
+} from './order/order.base.schema';
+export {
+  OrderCreateInputSchema,
+  OrderFindInputSchema,
+  OrderFindManyInputSchema,
+} from './order/order.input.schema';
+export type {
+  OrderCreateInput,
+  OrderFindInput,
+  OrderFindManyInput,
+} from './order/order.input.types';
+export { OrderItemSchema, OrderSchema } from './order/order.schema';
+export type { Order, OrderItem } from './order/order.types';
+
+export {
   GalleryIdSchema,
   GalleryImageSchema,
 } from './product/gallery.base.schema';
