@@ -6,6 +6,7 @@ import {
   OrderCountrySchema,
   OrderGrandTotalSchema,
   OrderIdSchema,
+  OrderItemQuantitySchema,
   OrderPaymentMethodSchema,
   OrderShippingSchema,
   OrderSubtotalSchema,
@@ -17,6 +18,11 @@ import {
   UserIdSchema,
   UserNameSchema,
 } from '../user/user.schema';
+import {
+  ProductIdSchema,
+  ProductNameSchema,
+  ProductPriceSchema,
+} from '../product/product.base.schema';
 
 export const OrderCreateParamsSchema = z.object({
   userId: UserIdSchema,
@@ -27,15 +33,25 @@ export const OrderCreateParamsSchema = z.object({
   city: OrderCitySchema,
   country: OrderCountrySchema,
   paymentMethod: OrderPaymentMethodSchema,
+  items: z.array(
+    z.object({
+      productId: ProductIdSchema,
+      name: ProductNameSchema,
+      price: ProductPriceSchema,
+      quantity: OrderItemQuantitySchema,
+    }),
+  ),
   subtotal: OrderSubtotalSchema,
   shipping: OrderShippingSchema,
   vat: OrderVatSchema,
   grandTotal: OrderGrandTotalSchema,
 });
 
-export const OrderFindByIdParamsSchema = z.object({
+export const OrderIdParamsSchema = z.object({
   id: OrderIdSchema,
 });
+
+export const OrderFindByIdParamsSchema = OrderIdParamsSchema.extend({});
 
 export const OrderFindManyParamsSchema = z.object({
   userId: UserIdSchema,

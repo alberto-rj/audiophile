@@ -1,10 +1,5 @@
 import { z } from '@/config';
 import {
-  UserEmailSchema,
-  UserIdSchema,
-  UserNameSchema,
-} from '../user/user.schema';
-import {
   OrderAddressSchema,
   OrderCitySchema,
   OrderCountrySchema,
@@ -19,30 +14,26 @@ import {
   OrderVatSchema,
   OrderZipSchema,
 } from './order.base.schema';
+import { OrderCreateParamsSchema } from './order.params.schema';
+
 import { CreatedAtSchema } from '../common/common.schema';
 import {
   ProductIdSchema,
+  ProductImageSchema,
   ProductPriceSchema,
   ProductSlugSchema,
 } from '../product/product.base.schema';
+import {
+  UserEmailSchema,
+  UserIdSchema,
+  UserNameSchema,
+} from '../user/user.schema';
 
 export const ApiOrderIdParamsSchema = z.object({
   id: OrderIdSchema,
 });
 
-export const ApiOrderCreateBodySchema = z.object({
-  name: UserNameSchema,
-  email: UserEmailSchema,
-  address: OrderAddressSchema,
-  zip: OrderZipSchema,
-  city: OrderCitySchema,
-  country: OrderCountrySchema,
-  paymentMethod: OrderPaymentMethodSchema,
-  subtotal: OrderSubtotalSchema,
-  shipping: OrderShippingSchema,
-  vat: OrderVatSchema,
-  grandTotal: OrderGrandTotalSchema,
-});
+export const ApiOrderCreateBodySchema = OrderCreateParamsSchema.extend({});
 
 export const ApiOrderItemSchema = z.object({
   id: OrderItemIdSchema,
@@ -52,6 +43,7 @@ export const ApiOrderItemSchema = z.object({
   name: UserNameSchema,
   price: ProductPriceSchema,
   slug: ProductSlugSchema,
+  image: ProductImageSchema,
 });
 
 export const ApiOrderSchema = z.object({

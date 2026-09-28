@@ -209,11 +209,13 @@ export {
   OrderCreateParamsSchema,
   OrderFindByIdParamsSchema,
   OrderFindManyParamsSchema,
+  OrderIdParamsSchema,
 } from './order/order.params.schema';
 export type {
   OrderCreateParams,
   OrderFindByIdParams,
   OrderFindManyParams,
+  OrderIdParams,
 } from './order/order.params.types';
 export { OrderItemSchema, OrderSchema } from './order/order.schema';
 export type { Order, OrderItem } from './order/order.types';
