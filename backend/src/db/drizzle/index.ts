@@ -9,6 +9,8 @@ export {
   otherProducts,
   products,
   refreshTokens,
+  orders,
+  orderItems,
   users,
 } from './schemas/schemas';
 export type {
