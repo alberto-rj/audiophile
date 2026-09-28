@@ -240,7 +240,6 @@ export const orders = pgTable(
     status: orderStatus('status').notNull().default('pending'),
     name: text('name').notNull(),
     email: text('email').notNull(),
-    phone: text('phone').notNull(),
     address: text('address').notNull(),
     zip: text('zip').notNull(),
     city: text('city').notNull(),
