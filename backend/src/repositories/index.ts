@@ -2,6 +2,7 @@ export type { CartRepository } from './types/cart-repository.types';
 export type { CategoryRepository } from './types/category-repository.types';
 export type { GalleryRepository } from './types/gallery-repository.types';
 export type { IncludeRepository } from './types/include-repository.types';
+export type { OrderRepository } from './types/order-repository.types';
 export type { OtherProductRepository } from './types/other-product-repository.types';
 export type { ProductRepository } from './types/product-repository.types';
 export type { RefreshTokenRepository } from './types/refresh-token-repository.types';
