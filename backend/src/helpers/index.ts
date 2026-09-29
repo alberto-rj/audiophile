@@ -36,6 +36,9 @@ export {
 export { logger } from './logger/logger';
 export type { LogContext, RequestContext } from './logger/logger.types';
 
+export { makeOrder } from './order/make-order';
+export { makeOrderRepository } from './order/make-order-repository';
+
 export { makeGalleryRepository } from './product/make-gallery-repository';
 export { makeIncludeRepository } from './product/make-include-repository';
 export { makeProductRepository } from './product/make-product-repository';
