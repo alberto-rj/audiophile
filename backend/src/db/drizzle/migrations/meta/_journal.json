@@ -57,6 +57,20 @@
       "when": 1786456646870,
       "tag": "0007_sticky_kinsey_walden",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790680546871,
+      "tag": "0008_numerous_quasar",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1790680800809,
+      "tag": "0009_happy_thunderball",
+      "breakpoints": true
     }
   ]
 }
