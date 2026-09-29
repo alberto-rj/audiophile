@@ -3,6 +3,7 @@ import {
   makeCategoryRepository,
   makeGalleryRepository,
   makeIncludeRepository,
+  makeOrderRepository,
   makeOtherProductRepository,
   makeProductRepository,
   makeRefreshTokenRepository,
@@ -13,6 +14,7 @@ import type {
   CategoryRepository,
   GalleryRepository,
   IncludeRepository,
+  OrderRepository,
   OtherProductRepository,
   ProductRepository,
   RefreshTokenRepository,
@@ -36,3 +38,5 @@ export const otherProductRepository: OtherProductRepository =
   makeOtherProductRepository();
 
 export const productRepository: ProductRepository = makeProductRepository();
+
+export const orderRepository: OrderRepository = makeOrderRepository();
