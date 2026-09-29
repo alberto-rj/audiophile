@@ -9,8 +9,6 @@ import type {
 export interface OrderRepository {
   create: (params: OrderCreateParams) => Promise<Order>;
 
-  createMany: (params: OrderCreateParams[]) => Promise<Order[]>;
-
   findById: (params: OrderFindByIdParams) => Promise<Order | null>;
 
   findMany: (params: OrderFindManyParams) => Promise<PaginateResult<Order>>;
