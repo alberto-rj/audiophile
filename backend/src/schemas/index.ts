@@ -173,6 +173,7 @@ export {
   ApiOrderIdParamsSchema,
   ApiOrderItemSchema,
   ApiOrderSchema,
+  ApiOrderListingQuerySchema,
 } from './order/order.api.schema';
 export type {
   ApiOrder,

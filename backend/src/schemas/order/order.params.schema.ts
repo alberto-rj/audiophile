@@ -20,9 +20,11 @@ import {
 } from '../user/user.schema';
 import {
   ProductIdSchema,
+  ProductImageSchema,
   ProductNameSchema,
   ProductPriceSchema,
 } from '../product/product.base.schema';
+import { LimitSchema, PageSchema } from '../common/common.schema';
 
 export const OrderCreateParamsSchema = z.object({
   userId: UserIdSchema,
@@ -36,6 +38,7 @@ export const OrderCreateParamsSchema = z.object({
   items: z.array(
     z.object({
       productId: ProductIdSchema,
+      image: ProductImageSchema,
       name: ProductNameSchema,
       price: ProductPriceSchema,
       quantity: OrderItemQuantitySchema,
@@ -55,4 +58,6 @@ export const OrderFindByIdParamsSchema = OrderIdParamsSchema.extend({});
 
 export const OrderFindManyParamsSchema = z.object({
   userId: UserIdSchema,
+  limit: LimitSchema,
+  page: PageSchema,
 });

@@ -5,9 +5,12 @@ import type {
   ApiOrderSchema,
   ApiOrderIdParamsSchema,
   ApiOrderItemSchema,
+  ApiOrderListingQuerySchema,
 } from './order.api.schema';
 
 export type ApiOrderIdParams = z.infer<typeof ApiOrderIdParamsSchema>;
+
+export type ApiOrderListingQuery = z.infer<typeof ApiOrderListingQuerySchema>;
 
 export type ApiOrderCreateBody = z.infer<typeof ApiOrderCreateBodySchema>;
 
