@@ -268,12 +268,14 @@ export const orderItems = pgTable(
       .notNull()
       .references(() => products.id),
     name: text('name').notNull(),
+    image: text('image').notNull(),
     price: integer('price').notNull(),
     quantity: integer('quantity').notNull(),
   },
-  ({ id, productId, orderId }) => [
+  ({ id, productId, orderId, image }) => [
     primaryKey({ name: 'order_items_pk_id', columns: [id] }),
     unique('order_items_uk_order_id_product_id').on(orderId, productId),
+    unique('orders_items_uk_image').on(image),
   ],
 );
 
