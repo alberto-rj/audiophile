@@ -14,7 +14,11 @@ import {
   OrderVatSchema,
   OrderZipSchema,
 } from './order.base.schema';
-import { OrderCreateParamsSchema } from './order.params.schema';
+import {
+  OrderCreateParamsSchema,
+  OrderFindManyParamsSchema,
+  OrderIdParamsSchema,
+} from './order.params.schema';
 
 import { CreatedAtSchema } from '../common/common.schema';
 import {
@@ -29,11 +33,11 @@ import {
   UserNameSchema,
 } from '../user/user.schema';
 
-export const ApiOrderIdParamsSchema = z.object({
-  id: OrderIdSchema,
-});
+export const ApiOrderIdParamsSchema = OrderIdParamsSchema.extend({});
 
 export const ApiOrderCreateBodySchema = OrderCreateParamsSchema.extend({});
+
+export const ApiOrderListingQuerySchema = OrderFindManyParamsSchema.extend({});
 
 export const ApiOrderItemSchema = z.object({
   id: OrderItemIdSchema,
