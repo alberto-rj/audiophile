@@ -28,6 +28,16 @@ export class UnauthorizedError extends AppError<ResBodyError> {
   }
 }
 
+export class ForbiddenError extends AppError<ResBodyError> {
+  constructor(message: string = 'Forbidden error.') {
+    super(message, StatusCodes.FORBIDDEN);
+  }
+
+  format() {
+    return makeResBodyError(this.message);
+  }
+}
+
 export class BadRequestError extends AppError<ResBodyError> {
   constructor(message: string = 'Bad request error.') {
     super(message, StatusCodes.BAD_REQUEST);
