@@ -1,0 +1,51 @@
+import { orderRepository } from '@/config';
+import { toOrderCreateInput } from '@/helpers';
+import type { Order } from '@/schemas';
+
+type CreateOrderUseCaseParams = {
+  payload: unknown;
+};
+
+type CreateOrderUseCaseResult = {
+  item: Order;
+};
+
+export async function createOrderUseCase({
+  payload,
+}: CreateOrderUseCaseParams): Promise<CreateOrderUseCaseResult> {
+  const {
+    userId,
+    name,
+    email,
+    address,
+    zip,
+    city,
+    country,
+    paymentMethod,
+    items,
+    subtotal,
+    shipping,
+    vat,
+    grandTotal,
+  } = toOrderCreateInput(payload);
+
+  const createdOrder = await orderRepository.create({
+    userId,
+    name,
+    email,
+    address,
+    zip,
+    city,
+    country,
+    paymentMethod,
+    items,
+    subtotal,
+    shipping,
+    vat,
+    grandTotal,
+  });
+
+  return {
+    item: createdOrder,
+  };
+}
