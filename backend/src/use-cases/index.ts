@@ -12,6 +12,7 @@ export { findCategoryBySlugUseCase } from './category/find-category-by-slug.use-
 export { findCategoriesUseCase } from './category/find-categories.use-case';
 
 export { createOrderUseCase } from './order/create-order.use-case';
+export { findOrderUseCase } from './order/find-order.use-case';
 
 export { findProductBySlugUseCase } from './product/find-product-by-slug.use-case';
 export { findProductsUseCase } from './product/find-products.use-case';
