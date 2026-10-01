@@ -53,6 +53,11 @@ export const IMAGE_TRANSFORMS = {
     tablet: 'w_150,h_150,c_fill,q_auto,f_auto',
     desktop: 'w_150,h_150,c_fill,q_auto,f_auto',
   },
+  orderItem: {
+    mobile: 'w_150,h_150,c_fill,q_auto,f_auto',
+    tablet: 'w_150,h_150,c_fill,q_auto,f_auto',
+    desktop: 'w_150,h_150,c_fill,q_auto,f_auto',
+  },
   earphonesYX1: {
     mobile: 'w_654,h_400,c_fill,q_auto,f_auto',
     tablet: 'w_678,h_640,c_fill,q_auto,f_auto',
