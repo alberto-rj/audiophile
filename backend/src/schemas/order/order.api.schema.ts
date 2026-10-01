@@ -20,10 +20,12 @@ import {
   OrderIdParamsSchema,
 } from './order.params.schema';
 
-import { CreatedAtSchema } from '../common/common.schema';
+import {
+  CreatedAtSchema,
+  ResponsiveImageSchema,
+} from '../common/common.schema';
 import {
   ProductIdSchema,
-  ProductImageSchema,
   ProductPriceSchema,
   ProductSlugSchema,
 } from '../product/product.base.schema';
@@ -47,7 +49,7 @@ export const ApiOrderItemSchema = z.object({
   name: UserNameSchema,
   price: ProductPriceSchema,
   slug: ProductSlugSchema,
-  image: ProductImageSchema,
+  image: ResponsiveImageSchema,
 });
 
 export const ApiOrderSchema = z.object({

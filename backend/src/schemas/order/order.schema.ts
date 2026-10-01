@@ -1,9 +1,18 @@
 import { z } from '@/config';
+
 import {
   UserEmailSchema,
   UserIdSchema,
   UserNameSchema,
 } from '../user/user.schema';
+import {
+  ProductIdSchema,
+  ProductImageSchema,
+  ProductNameSchema,
+  ProductPriceSchema,
+} from '../product/product.base.schema';
+import { CreatedAtSchema } from '../common/common.schema';
+
 import {
   OrderAddressSchema,
   OrderCitySchema,
@@ -19,19 +28,15 @@ import {
   OrderVatSchema,
   OrderZipSchema,
 } from './order.base.schema';
-import { CreatedAtSchema } from '../common/common.schema';
-import {
-  ProductIdSchema,
-  ProductPriceSchema,
-} from '../product/product.base.schema';
 
 export const OrderItemSchema = z.object({
   id: OrderItemIdSchema,
   productId: ProductIdSchema,
   orderId: OrderIdSchema,
-  quantity: OrderItemQuantitySchema,
-  name: UserNameSchema,
+  name: ProductNameSchema,
+  image: ProductImageSchema,
   price: ProductPriceSchema,
+  quantity: OrderItemQuantitySchema,
 });
 
 export const OrderSchema = z.object({
