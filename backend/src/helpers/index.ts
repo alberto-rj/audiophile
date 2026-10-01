@@ -36,6 +36,7 @@ export {
 export { logger } from './logger/logger';
 export type { LogContext, RequestContext } from './logger/logger.types';
 
+export { toApiOrder } from './order/to-api-order';
 export { makeOrder } from './order/make-order';
 export { makeOrderRepository } from './order/make-order-repository';
 export { toOrderCreateInput } from './order/to-order-create-input';

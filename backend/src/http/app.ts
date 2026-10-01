@@ -18,6 +18,7 @@ import {
   authRoute,
   cartRoute,
   categoriesRoute,
+  ordersRoute,
   productsRoute,
   usersRoute,
 } from './routes';
@@ -98,6 +99,7 @@ app.use(requestLogger);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/cart', cartRoute);
 app.use('/api/v1/categories', categoriesRoute);
+app.use('/api/v1/orders', ordersRoute);
 app.use('/api/v1/products', productsRoute);
 app.use('/api/v1/users', usersRoute);
 
