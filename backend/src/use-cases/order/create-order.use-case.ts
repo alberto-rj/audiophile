@@ -3,7 +3,7 @@ import { toOrderCreateInput } from '@/helpers';
 import type { Order } from '@/schemas';
 
 type CreateOrderUseCaseParams = {
-  payload: unknown;
+  input: unknown;
 };
 
 type CreateOrderUseCaseResult = {
@@ -11,7 +11,7 @@ type CreateOrderUseCaseResult = {
 };
 
 export async function createOrderUseCase({
-  payload,
+  input,
 }: CreateOrderUseCaseParams): Promise<CreateOrderUseCaseResult> {
   const {
     userId,
@@ -27,7 +27,7 @@ export async function createOrderUseCase({
     shipping,
     vat,
     grandTotal,
-  } = toOrderCreateInput(payload);
+  } = toOrderCreateInput(input);
 
   const createdOrder = await orderRepository.create({
     userId,
