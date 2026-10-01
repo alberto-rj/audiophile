@@ -12,6 +12,10 @@ export { removeCartItemsController } from './cart/remove-cart-items.controller';
 export { getCategoriesController } from './categories/get-categories.controller';
 export { getCategoryBySlugController } from './categories/get-category-by-slug-controller';
 
+export { createOrderController } from './orders/create-order.controller';
+export { getOrderController } from './orders/get-order.controller';
+export { getOrdersController } from './orders/get-orders.controller';
+
 export { getProductBySlugController } from './products/get-product-by-slug.controller';
 export { getProductsController } from './products/get-products.controller';
 

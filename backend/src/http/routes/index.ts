@@ -1,5 +1,6 @@
 export { authRoute } from './auth.route';
 export { cartRoute } from './cart.route';
 export { categoriesRoute } from './categories.route';
+export { ordersRoute } from './orders.route';
 export { productsRoute } from './products.route';
 export { usersRoute } from './users.route';
