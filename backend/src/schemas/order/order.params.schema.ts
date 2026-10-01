@@ -54,7 +54,9 @@ export const OrderIdParamsSchema = z.object({
   id: OrderIdSchema,
 });
 
-export const OrderFindByIdParamsSchema = OrderIdParamsSchema.extend({});
+export const OrderFindByIdParamsSchema = OrderIdParamsSchema.extend({
+  userId: UserIdSchema,
+});
 
 export const OrderFindManyParamsSchema = z.object({
   userId: UserIdSchema,
