@@ -1,13 +1,9 @@
 import { orderRepository } from '@/config';
-import {
-  ForbiddenError,
-  ResourceNotFoundError,
-  toOrderFindInput,
-} from '@/helpers';
+import { ResourceNotFoundError, toOrderFindInput } from '@/helpers';
 import type { Order } from '@/schemas';
 
 type FindOrderUseCaseParams = {
-  payload: unknown;
+  input: unknown;
 };
 
 type FindOrderUseCaseResult = {
@@ -15,20 +11,17 @@ type FindOrderUseCaseResult = {
 };
 
 export async function findOrderUseCase({
-  payload,
+  input,
 }: FindOrderUseCaseParams): Promise<FindOrderUseCaseResult> {
-  const { id, userId } = toOrderFindInput(payload);
+  const { id, userId } = toOrderFindInput(input);
 
   const foundOrder = await orderRepository.findById({
     id,
+    userId,
   });
 
   if (!foundOrder) {
     throw new ResourceNotFoundError('Order not found.');
-  }
-
-  if (foundOrder.userId !== userId) {
-    throw new ForbiddenError('Not allowed to access order.');
   }
 
   return {
