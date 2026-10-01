@@ -3,7 +3,10 @@ import { z } from '@/config';
 import { UserIdSchema } from '../user/user.schema';
 
 import { OrderIdSchema } from './order.base.schema';
-import { OrderCreateParamsSchema } from './order.params.schema';
+import {
+  OrderCreateParamsSchema,
+  OrderFindManyParamsSchema,
+} from './order.params.schema';
 
 export const OrderCreateInputSchema = OrderCreateParamsSchema.extend({
   userId: UserIdSchema,
@@ -17,6 +20,4 @@ export const OrderFindInputSchema = z.object({
   userId: UserIdSchema,
 });
 
-export const OrderFindManyInputSchema = z.object({
-  userId: UserIdSchema,
-});
+export const OrderFindManyInputSchema = OrderFindManyParamsSchema.extend({});

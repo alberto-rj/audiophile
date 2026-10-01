@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "Audiophile",
+  "name": "audiophile",
+  "short_name": "audiophile",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

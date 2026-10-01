@@ -7,7 +7,7 @@ type CreateOrderUseCaseParams = {
 };
 
 type CreateOrderUseCaseResult = {
-  item: Order;
+  output: Order;
 };
 
 export async function createOrderUseCase({
@@ -46,6 +46,6 @@ export async function createOrderUseCase({
   });
 
   return {
-    item: createdOrder,
+    output: createdOrder,
   };
 }

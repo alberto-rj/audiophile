@@ -40,6 +40,7 @@ export { makeOrder } from './order/make-order';
 export { makeOrderRepository } from './order/make-order-repository';
 export { toOrderCreateInput } from './order/to-order-create-input';
 export { toOrderFindInput } from './order/to-order-find-input';
+export { toOrderFindManyInput } from './order/to-order-find-many-input';
 
 export { makeGalleryRepository } from './product/make-gallery-repository';
 export { makeIncludeRepository } from './product/make-include-repository';

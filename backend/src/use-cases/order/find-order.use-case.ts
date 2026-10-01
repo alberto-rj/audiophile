@@ -7,7 +7,7 @@ type FindOrderUseCaseParams = {
 };
 
 type FindOrderUseCaseResult = {
-  item: Order;
+  output: Order;
 };
 
 export async function findOrderUseCase({
@@ -25,6 +25,6 @@ export async function findOrderUseCase({
   }
 
   return {
-    item: foundOrder,
+    output: foundOrder,
   };
 }
