@@ -11,9 +11,13 @@ import { OrderItemSchema, OrderSchema } from './order.schema';
 
 export const ApiOrderIdParamsSchema = OrderIdParamsSchema.extend({});
 
-export const ApiOrderCreateBodySchema = OrderCreateParamsSchema.extend({});
+export const ApiOrderCreateBodySchema = OrderCreateParamsSchema.omit({
+  userId: true,
+});
 
-export const ApiOrderListingQuerySchema = OrderFindManyParamsSchema.extend({});
+export const ApiOrderListingQuerySchema = OrderFindManyParamsSchema.omit({
+  userId: true,
+});
 
 export const ApiOrderItemSchema = OrderItemSchema.extend({
   image: ResponsiveImageSchema,

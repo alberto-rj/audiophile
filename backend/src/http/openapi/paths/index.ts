@@ -12,6 +12,10 @@ import './cart/update-cart-item.path';
 import './categories/get-categories.path';
 import './categories/get-category-by-slug.path';
 
+import './orders/create-order.path';
+import './orders/get-order.path';
+import './orders/get-orders.path';
+
 import './products/get-product-by-slug.path';
 import './products/get-products.path';
 
