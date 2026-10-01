@@ -2,7 +2,10 @@ import type { Order, OrderCreateParams } from '@/schemas';
 
 import { makeId } from '../make-id';
 
-export function makeOrder({ items, ...orderFields }: OrderCreateParams): Order {
+export function makeOrder({
+  items,
+  ...remainingFields
+}: OrderCreateParams): Order {
   const orderId = makeId();
 
   return {
@@ -14,6 +17,6 @@ export function makeOrder({ items, ...orderFields }: OrderCreateParams): Order {
       orderId: orderId,
       ...item,
     })),
-    ...orderFields,
+    ...remainingFields,
   };
 }
