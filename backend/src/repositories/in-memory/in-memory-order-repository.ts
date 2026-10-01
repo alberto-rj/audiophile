@@ -21,8 +21,10 @@ export class InMemoryOrderRepository implements OrderRepository {
     return createdOrder;
   }
 
-  async findById({ id }: OrderFindByIdParams): Promise<Order | null> {
-    const foundOrder = db.orders.get(id);
+  async findById({ id, userId }: OrderFindByIdParams): Promise<Order | null> {
+    const foundOrder = Array.from(db.orders.values()).find(
+      (order) => order.id == id && order.userId == userId,
+    );
 
     if (!foundOrder) {
       return null;

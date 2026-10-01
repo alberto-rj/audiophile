@@ -1,4 +1,4 @@
-import { count, eq } from 'drizzle-orm';
+import { and, count, eq } from 'drizzle-orm';
 
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import { db, orderItems, orders } from '@/db/drizzle';
@@ -128,9 +128,9 @@ export class DrizzleOrderRepository implements OrderRepository {
     return toOrder({ order: createdOrder!, items: createdOrderItems });
   }
 
-  async findById({ id }: OrderFindByIdParams): Promise<Order | null> {
+  async findById({ id, userId }: OrderFindByIdParams): Promise<Order | null> {
     const foundOrder = await db.query.orders.findFirst({
-      where: eq(orders.id, id),
+      where: and(eq(orders.id, id), eq(orders.userId, userId)),
       columns: ORDER_COLUMNS,
       with: ORDER_WITH,
     });
