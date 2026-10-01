@@ -1,17 +1,17 @@
 import { z } from '@/config';
 
-import {
-  UserEmailSchema,
-  UserIdSchema,
-  UserNameSchema,
-} from '../user/user.schema';
+import { CreatedAtSchema } from '../common/common.schema';
 import {
   ProductIdSchema,
   ProductImageSchema,
   ProductNameSchema,
   ProductPriceSchema,
 } from '../product/product.base.schema';
-import { CreatedAtSchema } from '../common/common.schema';
+import {
+  UserEmailSchema,
+  UserIdSchema,
+  UserNameSchema,
+} from '../user/user.schema';
 
 import {
   OrderAddressSchema,
