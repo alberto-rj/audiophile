@@ -2,6 +2,7 @@ import {
   categoryRepository,
   galleryRepository,
   includeRepository,
+  orderRepository,
   otherProductRepository,
   productRepository,
   userRepository,
@@ -10,12 +11,15 @@ import {
   categories,
   galleries,
   includes,
+  orders,
   otherProducts,
   products,
   users,
 } from '@/db/mocks';
+import { logger } from '@/helpers';
 
 import { seedCategories } from './category/seed-categories';
+import { seedOrders } from './order/seed-orders';
 import { seedProducts } from './product/seed-product';
 import { seedOtherProducts } from './product/seed-other-product';
 import { seedUsers } from './user/seed-users';
@@ -23,6 +27,7 @@ import { seedUsers } from './user/seed-users';
 async function main() {
   try {
     await Promise.all([
+      orderRepository.clear(),
       galleryRepository.clear(),
       includeRepository.clear(),
       otherProductRepository.clear(),
@@ -45,10 +50,18 @@ async function main() {
       products: createdProducts,
     });
 
-    await seedUsers({ users });
+    const createdUsers = await seedUsers({ users });
 
+    await seedOrders({
+      orders,
+      products: createdProducts,
+      users: createdUsers,
+    });
+
+    logger.info('All entities successfully seeded.');
     process.exit(0);
-  } catch {
+  } catch (error) {
+    logger.error('Seed failed.', error);
     process.exit(1);
   }
 }

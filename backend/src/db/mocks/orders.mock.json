@@ -8,7 +8,7 @@
     "paymentMethod": "e-money",
     "items": [
       {
-        "name": "XX99 Mark II Headphones",
+        "name": "XX99 Mark Two Headphones",
         "quantity": 1
       },
       {
@@ -40,7 +40,7 @@
     "paymentMethod": "e-money",
     "items": [
       {
-        "name": "XX99 Mark II Headphones",
+        "name": "XX99 Mark Two Headphones",
         "quantity": 2
       }
     ]
@@ -114,7 +114,7 @@
     "paymentMethod": "cash-on-delivery",
     "items": [
       {
-        "name": "XX99 Mark II Headphones",
+        "name": "XX99 Mark Two Headphones",
         "quantity": 7
       }
     ]
