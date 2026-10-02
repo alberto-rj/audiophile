@@ -1,6 +1,6 @@
 [
   {
-    "email": "john.carter@example.com",
+    "email": "johndoe@example.com",
     "address": "123 Main Street",
     "zip": "10001",
     "city": "New York",
@@ -18,7 +18,7 @@
     ]
   },
   {
-    "email": "john.carter@example.com",
+    "email": "johndoe@example.com",
     "address": "123 Main Street",
     "zip": "10001",
     "city": "New York",
