@@ -71,6 +71,13 @@
       "when": 1790680800809,
       "tag": "0009_happy_thunderball",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1790944403492,
+      "tag": "0010_open_crystal",
+      "breakpoints": true
     }
   ]
 }

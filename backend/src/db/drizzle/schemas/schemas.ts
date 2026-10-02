@@ -202,7 +202,7 @@ export const cartItems = pgTable(
       .references(() => carts.id, { onDelete: 'cascade' }),
     productId: integer('product_id')
       .notNull()
-      .references(() => products.id),
+      .references(() => products.id, { onDelete: 'cascade' }),
     quantity: integer('quantity').notNull().default(1),
     createdAt,
     updatedAt,
@@ -236,7 +236,7 @@ export const orders = pgTable(
     id: serial('id').primaryKey(),
     userId: integer('user_id')
       .notNull()
-      .references(() => users.id),
+      .references(() => users.id, { onDelete: 'cascade' }),
     status: orderStatus('status').notNull().default('pending'),
     name: text('name').notNull(),
     email: text('email').notNull(),
@@ -263,10 +263,10 @@ export const orderItems = pgTable(
     id: serial('id'),
     orderId: integer('order_id')
       .notNull()
-      .references(() => orders.id),
+      .references(() => orders.id, { onDelete: 'cascade' }),
     productId: integer('product_id')
       .notNull()
-      .references(() => products.id),
+      .references(() => products.id, { onDelete: 'cascade' }),
     name: text('name').notNull(),
     image: text('image').notNull(),
     price: integer('price').notNull(),
