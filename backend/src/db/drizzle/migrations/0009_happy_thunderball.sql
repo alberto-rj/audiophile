@@ -1,1 +1,0 @@
-ALTER TABLE "order_items" ADD CONSTRAINT "orders_items_uk_image" UNIQUE("image");
