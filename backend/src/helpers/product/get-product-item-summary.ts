@@ -1,19 +1,18 @@
-import type {
-  CartGrandTotal,
-  CartItemDetailed,
-  CartShipping,
-  CartSubtotal,
-  CartVat,
-} from '@/schemas';
-
-export type CartSummary = {
-  subtotal: CartSubtotal;
-  shipping: CartShipping;
-  vat: CartVat;
-  grandTotal: CartGrandTotal;
+export type ProductItemSummary = {
+  subtotal: number;
+  shipping: number;
+  vat: number;
+  grandTotal: number;
 };
 
-export function getCartSummary(items: CartItemDetailed[]): CartSummary {
+export type ProductItem = {
+  price: number;
+  quantity: number;
+};
+
+export function getProductItemSummary(
+  items: ProductItem[],
+): ProductItemSummary {
   const subtotal = items.reduce(
     (total, item) => total + item.price * item.quantity,
     0,

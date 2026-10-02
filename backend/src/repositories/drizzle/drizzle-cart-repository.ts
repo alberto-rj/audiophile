@@ -1,6 +1,6 @@
 import { eq, sql } from 'drizzle-orm';
 
-import { getCartSummary } from '@/helpers';
+import { getProductItemSummary } from '@/helpers';
 import type {
   CartAddItemParams,
   CartUpdateItemParams,
@@ -57,7 +57,7 @@ function toCartDetailed(rawCart: DrizzleCartDetailed): CartDetailed {
     id,
     userId,
     items: detailedItems,
-    ...getCartSummary(detailedItems),
+    ...getProductItemSummary(detailedItems),
   };
 }
 
