@@ -157,7 +157,7 @@ export const galleries = pgTable(
 export const includes = pgTable(
   'includes',
   {
-    id: serial('id').primaryKey(),
+    id: serial('id'),
     productId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
