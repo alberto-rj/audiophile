@@ -13,6 +13,10 @@ export const ApiOrderIdParamsSchema = OrderIdParamsSchema.extend({});
 
 export const ApiOrderCreateBodySchema = OrderCreateParamsSchema.omit({
   userId: true,
+  subtotal: true,
+  shipping: true,
+  vat: true,
+  grandTotal: true,
 });
 
 export const ApiOrderListingQuerySchema = OrderFindManyParamsSchema.omit({

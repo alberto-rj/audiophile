@@ -10,10 +10,17 @@ import {
 
 export const OrderCreateInputSchema = OrderCreateParamsSchema.extend({
   userId: UserIdSchema,
-}).refine(({ items }) => items.length == 0, {
-  error: 'items cannot be empty.',
-  path: ['items'],
-});
+})
+  .refine(({ items }) => items.length == 0, {
+    error: 'items cannot be empty.',
+    path: ['items'],
+  })
+  .omit({
+    subtotal: true,
+    shipping: true,
+    vat: true,
+    grandTotal: true,
+  });
 
 export const OrderFindInputSchema = z.object({
   id: OrderIdSchema,
