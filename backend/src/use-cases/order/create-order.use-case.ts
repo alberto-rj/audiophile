@@ -1,5 +1,5 @@
 import { orderRepository } from '@/config';
-import { toOrderCreateInput } from '@/helpers';
+import { getProductItemSummary, toOrderCreateInput } from '@/helpers';
 import type { Order } from '@/schemas';
 
 type CreateOrderUseCaseParams = {
@@ -23,11 +23,9 @@ export async function createOrderUseCase({
     country,
     paymentMethod,
     items,
-    subtotal,
-    shipping,
-    vat,
-    grandTotal,
   } = toOrderCreateInput(input);
+
+  const { subtotal, shipping, vat, grandTotal } = getProductItemSummary(items);
 
   const createdOrder = await orderRepository.create({
     userId,
