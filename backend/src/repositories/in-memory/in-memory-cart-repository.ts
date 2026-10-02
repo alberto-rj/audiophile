@@ -1,4 +1,4 @@
-import { getCartSummary, makeCart, makeCartItem } from '@/helpers';
+import { getProductItemSummary, makeCart, makeCartItem } from '@/helpers';
 import type {
   CartAddItemParams,
   CartUpdateItemParams,
@@ -25,7 +25,7 @@ function toCartDetailed(cart: Cart): CartDetailed {
     id,
     userId,
     items: detailedItems,
-    ...getCartSummary(detailedItems),
+    ...getProductItemSummary(detailedItems),
   };
 }
 

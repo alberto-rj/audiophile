@@ -11,7 +11,11 @@ export {
   toCartRemoveItemInput,
   toCartUpdateItemInput,
 } from './cart/cart.input';
-export { getCartSummary, type CartSummary } from './cart/get-cart-summary';
+export {
+  getProductItemSummary,
+  type ProductItemSummary,
+  type ProductItem,
+} from './product/get-product-item-summary';
 export { makeCartRepository } from './cart/make-cart-repository';
 export { makeCart, makeCartItem, makeCartItemDetailed } from './cart/make-cart';
 
