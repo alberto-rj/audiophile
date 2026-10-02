@@ -1,0 +1,1 @@
+ALTER TABLE "order_items" DROP CONSTRAINT "orders_items_uk_image";
