@@ -132,7 +132,7 @@ export const otherProducts = pgTable(
 export const galleries = pgTable(
   'galleries',
   {
-    id: serial('id').primaryKey(),
+    id: serial('id'),
     productId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
@@ -177,7 +177,7 @@ export const includes = pgTable(
 export const carts = pgTable(
   'carts',
   {
-    id: serial('id').primaryKey(),
+    id: serial('id'),
     userId: integer('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
@@ -233,7 +233,7 @@ export const orderPaymentMethod = pgEnum('order_payment_method', [
 export const orders = pgTable(
   'orders',
   {
-    id: serial('id').primaryKey(),
+    id: serial('id'),
     userId: integer('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
@@ -272,11 +272,7 @@ export const orderItems = pgTable(
     price: integer('price').notNull(),
     quantity: integer('quantity').notNull(),
   },
-  ({ id, productId, orderId, image }) => [
-    primaryKey({ name: 'order_items_pk_id', columns: [id] }),
-    unique('order_items_uk_order_id_product_id').on(orderId, productId),
-    unique('orders_items_uk_image').on(image),
-  ],
+  ({ id }) => [primaryKey({ name: 'order_items_pk_id', columns: [id] })],
 );
 
 export const userRelations = relations(users, ({ one, many }) => ({
