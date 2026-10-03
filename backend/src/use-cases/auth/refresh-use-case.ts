@@ -3,25 +3,24 @@ import {
   getAccessToken,
   getRefreshToken,
   refreshTokenExpiresAt,
-  toSafeUser,
   UnauthorizedError,
 } from '@/helpers';
-import type { RefreshTokenFindParams, SafeUser } from '@/schemas';
+import type { RefreshTokenFindParams, User } from '@/schemas';
 
 interface RefreshUseCaseParams {
-  payload: RefreshTokenFindParams;
+  input: RefreshTokenFindParams;
 }
 
 interface RefreshUseCaseResult {
-  user: SafeUser;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
 
 export async function refreshUseCase({
-  payload,
+  input,
 }: RefreshUseCaseParams): Promise<RefreshUseCaseResult> {
-  const { token } = payload;
+  const { token } = input;
 
   const foundToken = await refreshTokenRepository.find({
     token,
@@ -57,7 +56,7 @@ export async function refreshUseCase({
   });
 
   return {
-    user: toSafeUser(foundUser),
+    user: foundUser,
     accessToken: newAccessToken,
     refreshToken: newRefreshToken,
   };

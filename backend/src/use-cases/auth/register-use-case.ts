@@ -4,26 +4,25 @@ import {
   getAccessToken,
   getHash,
   getRefreshToken,
-  makeRegisterPresenter,
+  toAuthRegisterInput,
   refreshTokenExpiresAt,
-  toSafeUser,
 } from '@/helpers';
-import type { SafeUser, UserCreateParams } from '@/schemas';
+import type { User } from '@/schemas';
 
 interface RegisterUseCaseParams {
-  payload: UserCreateParams;
+  input: unknown;
 }
 
 interface RegisterUseCaseResult {
-  user: SafeUser;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
 
 export async function registerUseCase({
-  payload,
+  input,
 }: RegisterUseCaseParams): Promise<RegisterUseCaseResult> {
-  const { name, email, password } = makeRegisterPresenter(payload);
+  const { name, email, password } = toAuthRegisterInput(input);
 
   const foundUserWithEmail = await userRepository.findByEmail({
     email,
@@ -55,7 +54,7 @@ export async function registerUseCase({
   });
 
   return {
-    user: toSafeUser(createdUser),
+    user: createdUser,
     accessToken,
     refreshToken,
   };
