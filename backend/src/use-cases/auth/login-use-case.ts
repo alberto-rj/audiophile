@@ -3,27 +3,26 @@ import {
   getAccessToken,
   getRefreshToken,
   hasCorrectHash,
-  makeLoginPresenter,
+  toAuthLoginInput,
   refreshTokenExpiresAt,
-  toSafeUser,
   UnauthorizedError,
 } from '@/helpers';
-import { type ApiLoginBody, type SafeUser } from '@/schemas';
+import type { User } from '@/schemas';
 
 interface LoginUseCaseParams {
-  payload: ApiLoginBody;
+  input: unknown;
 }
 
 interface LoginUseCaseResult {
-  user: SafeUser;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
 
 export async function loginUseCase({
-  payload,
+  input,
 }: LoginUseCaseParams): Promise<LoginUseCaseResult> {
-  const { email, password } = makeLoginPresenter(payload);
+  const { email, password } = toAuthLoginInput(input);
 
   const foundUserWithEmail = await userRepository.findByEmail({
     email,
@@ -56,7 +55,7 @@ export async function loginUseCase({
   });
 
   return {
-    user: toSafeUser(foundUserWithEmail),
+    user: foundUserWithEmail,
     accessToken,
     refreshToken,
   };
