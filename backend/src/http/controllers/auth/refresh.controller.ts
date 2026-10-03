@@ -23,7 +23,7 @@ export async function refreshController(
       refreshToken: newRefreshToken,
       user,
     } = await refreshUseCase({
-      payload: {
+      input: {
         token: refreshToken,
       },
     });

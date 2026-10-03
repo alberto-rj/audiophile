@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { setRefreshTokenCookie } from '@/helpers';
+import { setRefreshTokenCookie, toApiUser } from '@/helpers';
 import { registerUseCase } from '@/use-cases';
 
 export async function registerController(
@@ -10,17 +10,17 @@ export async function registerController(
   next: NextFunction,
 ) {
   try {
-    const payload = req.body;
+    const { name, email, password } = req.body;
 
     const { user, accessToken, refreshToken } = await registerUseCase({
-      payload,
+      input: { name, email, password },
     });
 
     setRefreshTokenCookie(res, refreshToken);
 
     res.status(StatusCodes.CREATED).json({
-      user,
       accessToken,
+      user: toApiUser(user),
     });
   } catch (error) {
     next(error);

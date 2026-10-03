@@ -1,7 +1,7 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { setRefreshTokenCookie } from '@/helpers';
+import { setRefreshTokenCookie, toApiUser } from '@/helpers';
 import { loginUseCase } from '@/use-cases';
 
 export async function loginController(
@@ -10,17 +10,17 @@ export async function loginController(
   next: NextFunction,
 ) {
   try {
-    const payload = req.body;
+    const { email, password } = req.body;
 
     const { accessToken, refreshToken, user } = await loginUseCase({
-      payload,
+      input: { email, password },
     });
 
     setRefreshTokenCookie(res, refreshToken);
 
     res.status(StatusCodes.OK).json({
       accessToken,
-      user,
+      user: toApiUser(user),
     });
   } catch (error) {
     next(error);
