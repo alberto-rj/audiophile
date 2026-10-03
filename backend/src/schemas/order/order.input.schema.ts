@@ -1,6 +1,6 @@
 import { z } from '@/config';
 
-import { UserIdSchema } from '../user/user.schema';
+import { UserIdSchema } from '../user/user.base.schema';
 
 import { OrderIdSchema } from './order.base.schema';
 import {
@@ -11,15 +11,19 @@ import {
 export const OrderCreateInputSchema = OrderCreateParamsSchema.extend({
   userId: UserIdSchema,
 })
+  .pick({
+    name: true,
+    email: true,
+    address: true,
+    zip: true,
+    city: true,
+    country: true,
+    paymentMethod: true,
+    items: true,
+  })
   .refine(({ items }) => items.length == 0, {
     error: 'items cannot be empty.',
     path: ['items'],
-  })
-  .omit({
-    subtotal: true,
-    shipping: true,
-    vat: true,
-    grandTotal: true,
   });
 
 export const OrderFindInputSchema = z.object({
