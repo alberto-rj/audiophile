@@ -1,7 +1,7 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import type { AuthPayload, AuthRequest } from '@/helpers';
+import { toApiUser, type AuthPayload, type AuthRequest } from '@/helpers';
 import { updateProfileUseCase } from '@/use-cases';
 
 export async function updateProfileController(
@@ -12,16 +12,17 @@ export async function updateProfileController(
   try {
     const { userId } = req.payload as AuthPayload;
 
-    const changes = req.body;
+    const { name, email } = req.body;
 
     const { user } = await updateProfileUseCase({
-      payload: {
+      input: {
         id: userId,
-        ...changes,
+        name,
+        email,
       },
     });
 
-    res.status(StatusCodes.OK).json({ user });
+    res.status(StatusCodes.OK).json({ user: toApiUser(user) });
   } catch (error) {
     next(error);
   }
