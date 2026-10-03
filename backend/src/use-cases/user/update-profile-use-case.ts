@@ -1,25 +1,19 @@
 import { userRepository } from '@/config';
-import {
-  makeUpdateProfilePresenter,
-  toSafeUser,
-  UnauthorizedError,
-} from '@/helpers';
-import type { SafeUser, UserUpdateParams } from '@/schemas';
+import { toUserUpdateProfileInput, UnauthorizedError } from '@/helpers';
+import type { User } from '@/schemas';
 
 interface UpdateProfileUseCaseParams {
-  payload: UserUpdateParams;
+  input: unknown;
 }
 
 interface UpdateProfileUseCaseResult {
-  user: SafeUser;
+  user: User;
 }
 
 export async function updateProfileUseCase({
-  payload,
+  input,
 }: UpdateProfileUseCaseParams): Promise<UpdateProfileUseCaseResult> {
-  const { id, ...changes } = payload;
-
-  const parsedChanges = makeUpdateProfilePresenter(changes);
+  const { id, name, email } = toUserUpdateProfileInput(input);
 
   const foundUser = await userRepository.findById({
     id,
@@ -31,7 +25,8 @@ export async function updateProfileUseCase({
 
   const updatedUser = await userRepository.update({
     id,
-    ...parsedChanges,
+    name,
+    email,
   });
 
   if (!updatedUser) {
@@ -39,6 +34,6 @@ export async function updateProfileUseCase({
   }
 
   return {
-    user: toSafeUser(updatedUser),
+    user: updatedUser,
   };
 }
