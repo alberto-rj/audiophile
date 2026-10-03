@@ -4,7 +4,7 @@ import { registry } from '@/http/openapi';
 import {
   ApiAuthResponseSchema,
   ApiErrorResponseSchema,
-  ApiRegisterBodySchema,
+  ApiAuthRegisterBodySchema,
 } from '@/schemas';
 
 import {
@@ -27,7 +27,7 @@ registry.registerPath({
       description: 'New user account information.',
       content: {
         'application/json': {
-          schema: ApiRegisterBodySchema,
+          schema: ApiAuthRegisterBodySchema,
         },
       },
     },
