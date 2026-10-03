@@ -4,7 +4,7 @@ import {
   UserEmailSchema,
   UserIdSchema,
   UserNameSchema,
-} from '../user/user.schema';
+} from '../user/user.base.schema';
 import {
   ProductIdSchema,
   ProductImageSchema,
