@@ -7,7 +7,7 @@ import {
   CartSubtotalSchema,
   CartVatSchema,
 } from './cart.base.schema';
-import { UserIdSchema } from '../user/user.schema';
+import { UserIdSchema } from '../user/user.base.schema';
 import { CartItemDetailedSchema } from './cart-item.schema';
 
 export const CartSchema = z.object({

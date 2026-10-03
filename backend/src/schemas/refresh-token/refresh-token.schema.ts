@@ -6,7 +6,7 @@ import {
   RefreshTokenTokenSchema,
 } from './refresh-token.base.schema';
 import { CreatedAtSchema } from '../common/common.schema';
-import { UserIdSchema } from '../user/user.schema';
+import { UserIdSchema } from '../user/user.base.schema';
 
 export const RefreshTokenSchema = z
   .object({

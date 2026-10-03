@@ -21,15 +21,24 @@ export type {
   ResponsiveImage,
 } from './common/common.types';
 
-export { ApiLoginBodySchema, type ApiLoginBody } from './auth/login.schema';
 export {
-  ApiRegisterBodySchema,
-  type ApiRegisterBody,
-} from './auth/register.schema';
-export {
+  ApiAuthLoginBodySchema,
+  ApiAuthRegisterBodySchema,
   ApiAuthResponseSchema,
-  type ApiAuthResponse,
-} from './auth/auth-response.schema';
+} from './auth/auth.api.schema';
+export type {
+  ApiAuthLoginBody,
+  ApiAuthRegisterBody,
+  ApiAuthResponse,
+} from './auth/auth.api.types';
+export {
+  AuthLoginInputSchema,
+  AuthRegisterInputSchema,
+} from './auth/auth.input.schema';
+export type {
+  AuthLoginInput,
+  AuthRegisterInput,
+} from './auth/auth.input.types';
 
 export { ApiCartItemSchema } from './cart/cart-item.api.schema';
 export type { ApiCartItem } from './cart/cart-item.api.types';
@@ -364,29 +373,48 @@ export type {
 } from './refresh-token/refresh-token.types';
 
 export {
-  ApiUpdateProfileBodySchema,
-  type ApiUpdateProfileBody,
-} from './user/update-profile.schema';
-export { ApiUserResponseSchema } from './user/user-response.schema';
-export {
-  ApiUserCreateBodySchema,
+  ApiUserResponseSchema,
   ApiUserSchema,
+  ApiUserUpdateProfileBodySchema,
+} from './user/user.api.schema';
+export type {
+  ApiUser,
+  ApiUserResponse,
+  ApiUserUpdateProfileBody,
+} from './user/user.api.types';
+export {
   UserEmailSchema,
   UserIdSchema,
   UserNameSchema,
   UserPasswordSchema,
+} from './user/user.base.schema';
+export {
+  UserSchema,
+  UserBasicSchema,
+  UserSafeSchema,
 } from './user/user.schema';
+export type { User, UserBasic, UserSafe } from './user/user.types';
+export {
+  UserCreateInputSchema,
+  UserFindByIdInputSchema,
+  UserUpdateProfileInputSchema,
+} from './user/user.input.schema';
 export type {
-  BaseUser,
-  User,
-  SafeUser,
-  UserEmail,
-  UserId,
-  UserCreatedAt,
-  UserName,
-  UserPassword,
+  UserCreateInput,
+  UserFindByIdInput,
+  UserUpdateProfileInput,
+} from './user/user.input.types';
+export {
+  UserCreateParamsSchema,
+  UserFindByEmailParamsSchema,
+  UserFindByIdParamsSchema,
+  UserIdParamsSchema,
+  UserUpdateParamsSchema,
+} from './user/user.params.schema';
+export type {
   UserCreateParams,
-  UserFindByEmailParams,
   UserFindByIdParams,
+  UserFindByEmailParams,
+  UserIdParams,
   UserUpdateParams,
-} from './user/user.types';
+} from './user/user.params.types';

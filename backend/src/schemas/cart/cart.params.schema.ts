@@ -1,7 +1,7 @@
 import { z } from '@/config';
 
 import { ProductIdSchema } from '../product/product.base.schema';
-import { UserIdSchema } from '../user/user.schema';
+import { UserIdSchema } from '../user/user.base.schema';
 import {
   CartItemIdSchema,
   CartItemQuantitySchema,
