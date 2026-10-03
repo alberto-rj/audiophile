@@ -1,5 +1,5 @@
-export { makeLoginPresenter } from './auth/make-login-presenter';
-export { makeRegisterPresenter } from './auth/make-register-presenter';
+export { toAuthLoginInput } from './auth/to-auth-login-input';
+export { toAuthRegisterInput } from './auth/to-auth-register-input';
 
 export { toApiCart } from './cart/cart.api';
 export {
@@ -70,9 +70,10 @@ export { makeRefreshToken } from './refresh-token/make-refresh-token';
 export { makeRefreshTokenRepository } from './refresh-token/make-refresh-token-repository';
 
 export { makeUser } from './user/make-user';
-export { makeUpdateProfilePresenter } from './user/make-update-profile-presenter';
 export { makeUserRepository } from './user/make-user-repository';
-export { toSafeUser } from './user/to-safe-user';
+export { toApiUser } from './user/to-api-user';
+export { toUserFindByIdInput } from './user/to-user-find-by-id-input';
+export { toUserUpdateProfileInput } from './user/to-user-update-profile-input';
 
 export { makeId } from './make-id';
 export {
