@@ -8,6 +8,7 @@ import { logger, scheduleTasks } from '@/helpers';
 
 import { generateOpenAPISpec } from './openapi';
 import './openapi/paths';
+import './openapi/schemas';
 import {
   errorHandler,
   notFoundHandler,

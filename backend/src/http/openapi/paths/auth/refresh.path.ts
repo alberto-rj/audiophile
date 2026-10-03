@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
-import { ApiAuthResponseSchema, ApiLoginBodySchema } from '@/schemas';
+import { ApiAuthResponseSchema } from '@/schemas';
 
 import {
   AuthCookieHeader,
@@ -17,17 +17,7 @@ registry.registerPath({
   summary: 'Refresh access token',
   description:
     'Issues a new access token using the refresh token stored in the cookie. On success, the refresh token is rotated and a new refresh token cookie is issued.',
-  request: {
-    body: {
-      required: true,
-      description: 'User login payload.',
-      content: {
-        'application/json': {
-          schema: ApiLoginBodySchema,
-        },
-      },
-    },
-  },
+  request: {},
   responses: {
     [StatusCodes.OK]: {
       description:

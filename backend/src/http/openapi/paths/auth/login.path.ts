@@ -4,7 +4,7 @@ import { registry } from '@/http/openapi';
 import {
   ApiAuthResponseSchema,
   ApiErrorResponseSchema,
-  ApiLoginBodySchema,
+  ApiAuthLoginBodySchema,
 } from '@/schemas';
 
 import {
@@ -27,7 +27,7 @@ registry.registerPath({
       description: 'User credentials.',
       content: {
         'application/json': {
-          schema: ApiLoginBodySchema,
+          schema: ApiAuthLoginBodySchema,
         },
       },
     },

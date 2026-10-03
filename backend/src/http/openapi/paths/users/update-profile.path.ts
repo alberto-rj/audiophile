@@ -1,7 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
-import { ApiUpdateProfileBodySchema, ApiUserResponseSchema } from '@/schemas';
+import {
+  ApiUserUpdateProfileBodySchema,
+  ApiUserResponseSchema,
+} from '@/schemas';
 
 import {
   internalServerErrorResponse,
@@ -22,7 +25,7 @@ registry.registerPath({
       description: 'Profile fields to update.',
       content: {
         'application/json': {
-          schema: ApiUpdateProfileBodySchema,
+          schema: ApiUserUpdateProfileBodySchema,
         },
       },
     },
