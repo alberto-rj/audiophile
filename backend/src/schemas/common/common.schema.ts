@@ -1,5 +1,4 @@
 import { z } from '@/config';
-import { registry } from '@/http/openapi';
 
 export const CreatedAtSchema = z.string().openapi({
   format: 'date-time',
@@ -49,20 +48,15 @@ export const ImageSchema = z
     example: 'https://cdn.audiophile.com/images/product-xx99-mark-two.jpg',
   });
 
-export const ResponsiveImageSchema = registry.register(
-  'ResponsiveImage',
-  z
-    .object({
-      mobile: ImageSchema,
-      tablet: ImageSchema,
-      desktop: ImageSchema,
-    })
-    .openapi({
-      description:
-        'Responsive image URLs optimized for different screen sizes.',
-    }),
-);
-
+export const ResponsiveImageSchema = z
+  .object({
+    mobile: ImageSchema,
+    tablet: ImageSchema,
+    desktop: ImageSchema,
+  })
+  .openapi({
+    description: 'Responsive image URLs optimized for different screen sizes.',
+  });
 export const ApiErrorSchema = z.object({
   message: z.string().openapi({
     description: 'Human-readable error message.',
@@ -74,31 +68,28 @@ export const ApiPaginationQuerySchema = z.object({
   limit: LimitSchema,
 });
 
-export const ApiPaginationResponseSchema = registry.register(
-  'PaginationMetadata',
-  z
-    .object({
-      page: PageSchema,
-      totalPages: z.number().openapi({
-        description: 'Total number of available pages.',
-        example: 10,
-        readOnly: true,
-      }),
-      hasPrev: z.boolean().openapi({
-        description: 'Whether a previous page is available.',
-        example: false,
-        readOnly: true,
-      }),
-      hasNext: z.boolean().openapi({
-        description: 'Whether a next page is available.',
-        example: true,
-        readOnly: true,
-      }),
-    })
-    .openapi({
-      description: 'Pagination metadata.',
+export const ApiPaginationResponseSchema = z
+  .object({
+    page: PageSchema,
+    totalPages: z.number().openapi({
+      description: 'Total number of available pages.',
+      example: 10,
+      readOnly: true,
     }),
-);
+    hasPrev: z.boolean().openapi({
+      description: 'Whether a previous page is available.',
+      example: false,
+      readOnly: true,
+    }),
+    hasNext: z.boolean().openapi({
+      description: 'Whether a next page is available.',
+      example: true,
+      readOnly: true,
+    }),
+  })
+  .openapi({
+    description: 'Pagination metadata.',
+  });
 
 export const ApiResultListResponse = z
   .object({
