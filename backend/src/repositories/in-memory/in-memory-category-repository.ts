@@ -1,14 +1,11 @@
 import { db } from '@/db/in-memory';
-import { paginate, type PaginateResult } from '@/helpers';
-import { makeCategory } from '@/schemas';
+import { makeCategory, paginate, type PaginateResult } from '@/helpers';
 import type {
   Category,
   CategoryCreateParams,
-  CategoryDeleteByIdParams,
-  CategoryDeleteBySlugParams,
-  CategoryFindByIdParams,
-  CategoryFindBySlugParams,
   CategoryFindManyParams,
+  CategoryIdParams,
+  CategorySlugParams,
   CategoryUpdateParams,
 } from '@/schemas';
 
@@ -53,7 +50,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     return newItem;
   }
 
-  async findById({ id }: CategoryFindByIdParams): Promise<Category | null> {
+  async findById({ id }: CategoryIdParams): Promise<Category | null> {
     const foundItem = db.categories.get(id);
 
     if (!foundItem) {
@@ -63,9 +60,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     return foundItem;
   }
 
-  async findBySlug({
-    slug,
-  }: CategoryFindBySlugParams): Promise<Category | null> {
+  async findBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
     const foundItem = Array.from(db.categories.values()).find(
       (item) => item.slug === slug,
     );
@@ -88,7 +83,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     return foundItems;
   }
 
-  async deleteById({ id }: CategoryDeleteByIdParams): Promise<Category | null> {
+  async deleteById({ id }: CategoryIdParams): Promise<Category | null> {
     const foundItem = Array.from(db.categories.values()).find(
       (item) => item.id === id,
     );
@@ -102,9 +97,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     return foundItem;
   }
 
-  async deleteBySlug({
-    slug,
-  }: CategoryDeleteBySlugParams): Promise<Category | null> {
+  async deleteBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
     const foundItem = Array.from(db.categories.values()).find(
       (item) => item.slug === slug,
     );
