@@ -1,47 +1,29 @@
-import { z } from '@/config';
+import { ResponsiveImageSchema } from '../common/common.schema';
 
 import {
-  LimitSchema,
-  PageSchema,
-  ResponsiveImageSchema,
-} from '../common/common.schema';
-import {
-  CategoryDescriptionSchema,
-  CategoryIdSchema,
-  CategoryImageSchema,
-  CategoryNameSchema,
-  CategorySlugSchema,
-} from './category.base.schema';
+  CategoryCreateParamsSchema,
+  CategoryFindManyParamsSchema,
+  CategoryIdParamsSchema,
+  CategorySlugParamsSchema,
+  CategoryUpdateParamsSchema,
+} from './category.params.schema';
+import { CategorySchema } from './category.schema';
 
-export const ApiCategoryCreateBodySchema = z.object({
-  image: CategoryImageSchema,
-  name: CategoryNameSchema,
-  description: CategoryDescriptionSchema,
+export const ApiCategoryCreateBodySchema = CategoryCreateParamsSchema.extend(
+  {},
+);
+
+export const ApiCategoryUpdateBodySchema = CategoryUpdateParamsSchema.omit({
+  id: true,
 });
 
-export const ApiCategoryUpdateBodySchema = z.object({
-  image: CategoryImageSchema,
-  name: CategoryNameSchema,
-  description: CategoryDescriptionSchema,
-});
+export const ApiCategoryFindManyQuerySchema =
+  CategoryFindManyParamsSchema.extend({});
 
-export const ApiCategoryPaginationQuerySchema = z.object({
-  page: PageSchema,
-  limit: LimitSchema,
-});
+export const ApiCategoryIdParamsSchema = CategoryIdParamsSchema.extend({});
 
-export const ApiCategoryIdParamsSchema = z.object({
-  id: CategoryIdSchema,
-});
+export const ApiCategorySlugParamsSchema = CategorySlugParamsSchema.extend({});
 
-export const ApiCategorySlugParamsSchema = z.object({
-  slug: CategorySlugSchema,
-});
-
-export const ApiCategorySchema = z.object({
-  id: CategoryIdSchema,
-  slug: CategorySlugSchema,
+export const ApiCategorySchema = CategorySchema.extend({
   image: ResponsiveImageSchema,
-  name: CategoryNameSchema,
-  description: CategoryDescriptionSchema,
 });

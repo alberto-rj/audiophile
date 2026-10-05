@@ -2,8 +2,8 @@ import { z } from '@/config';
 
 import type {
   ApiCategoryCreateBodySchema,
+  ApiCategoryFindManyQuerySchema,
   ApiCategoryIdParamsSchema,
-  ApiCategoryPaginationQuerySchema,
   ApiCategorySchema,
   ApiCategorySlugParamsSchema,
   ApiCategoryUpdateBodySchema,
@@ -13,8 +13,8 @@ export type ApiCategoryCreateBody = z.infer<typeof ApiCategoryCreateBodySchema>;
 
 export type ApiCategoryUpdateBody = z.infer<typeof ApiCategoryUpdateBodySchema>;
 
-export type ApiCategoryPaginationQuery = z.infer<
-  typeof ApiCategoryPaginationQuerySchema
+export type ApiCategoryFindManyQuery = z.infer<
+  typeof ApiCategoryFindManyQuerySchema
 >;
 
 export type ApiCategorySlugParams = z.infer<typeof ApiCategorySlugParamsSchema>;

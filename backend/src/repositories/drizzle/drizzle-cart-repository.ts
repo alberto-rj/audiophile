@@ -182,7 +182,9 @@ export class DrizzleCartRepository implements CartRepository {
   }
 
   async clear(): Promise<void> {
-    await db.delete(cartItems);
-    await db.delete(carts);
+    await db.transaction(async (tx) => {
+      await tx.delete(cartItems);
+      await tx.delete(carts);
+    });
   }
 }
