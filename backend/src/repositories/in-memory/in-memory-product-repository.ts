@@ -1,8 +1,8 @@
 import { db } from '@/db/in-memory';
-import { paginate, type PaginateResult } from '@/helpers';
-import { makeCategory, makeGallery, makeProduct } from '@/schemas';
+import { makeCategory, paginate, type PaginateResult } from '@/helpers';
+import { makeGallery, makeProduct } from '@/schemas';
 import type {
-  CategoryId,
+  Category,
   Product,
   ProductCreateParams,
   ProductDeleteByIdParams,
@@ -126,7 +126,7 @@ function getProductGallery(productId: ProductId) {
   });
 }
 
-function getProductCategory(categoryId: CategoryId) {
+function getProductCategory(categoryId: Category['id']) {
   for (const [, category] of db.categories.entries()) {
     if (category.id === categoryId) {
       return category;
