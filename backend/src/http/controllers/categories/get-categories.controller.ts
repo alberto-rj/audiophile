@@ -10,10 +10,10 @@ export async function getCategoriesController(
   next: NextFunction,
 ) {
   try {
-    const payload = req.query;
+    const { page, limit } = req.query;
 
     const { items, ...rest } = await findCategoriesUseCase({
-      payload,
+      input: { page, limit },
     });
 
     const apiItems = items.map(toApiCategory);

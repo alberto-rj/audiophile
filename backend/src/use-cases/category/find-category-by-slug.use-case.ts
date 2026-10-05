@@ -1,19 +1,19 @@
 import { categoryRepository } from '@/config';
-import { ResourceNotFoundError } from '@/helpers';
-import { makeCategoryFindBySlugParams, type Category } from '@/schemas';
+import { ResourceNotFoundError, toCategorySlugInput } from '@/helpers';
+import type { Category } from '@/schemas';
 
 interface FindCategoryBySlugUseCaseParams {
-  payload: unknown;
+  input: unknown;
 }
 
 interface FindCategoryBySlugUseCaseResult {
-  item: Category;
+  output: Category;
 }
 
 export async function findCategoryBySlugUseCase({
-  payload,
+  input,
 }: FindCategoryBySlugUseCaseParams): Promise<FindCategoryBySlugUseCaseResult> {
-  const { slug } = makeCategoryFindBySlugParams(payload);
+  const { slug } = toCategorySlugInput(input);
 
   const foundItem = await categoryRepository.findBySlug({ slug });
 
@@ -22,6 +22,6 @@ export async function findCategoryBySlugUseCase({
   }
 
   return {
-    item: foundItem,
+    output: foundItem,
   };
 }

@@ -10,13 +10,13 @@ export async function getCategoryBySlugController(
   next: NextFunction,
 ) {
   try {
-    const payload = req.params;
+    const { slug } = req.params;
 
-    const { item } = await findCategoryBySlugUseCase({
-      payload,
+    const { output } = await findCategoryBySlugUseCase({
+      input: { slug },
     });
 
-    const apiItem = toApiCategory(item);
+    const apiItem = toApiCategory(output);
 
     res.status(StatusCodes.OK).json(makeResBodyResult(apiItem));
   } catch (error) {

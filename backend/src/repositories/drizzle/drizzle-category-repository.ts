@@ -5,11 +5,9 @@ import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import type {
   Category,
   CategoryCreateParams,
-  CategoryDeleteByIdParams,
-  CategoryDeleteBySlugParams,
-  CategoryFindByIdParams,
-  CategoryFindBySlugParams,
   CategoryFindManyParams,
+  CategoryIdParams,
+  CategorySlugParams,
   CategoryUpdateParams,
 } from '@/schemas';
 import type { CategoryRepository } from '@/repositories';
@@ -54,9 +52,7 @@ export class DrizzleCategoryRepository implements CategoryRepository {
     return parseItem(updatedItem);
   }
 
-  async findBySlug({
-    slug,
-  }: CategoryFindBySlugParams): Promise<Category | null> {
+  async findBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
     const [foundItem] = await db
       .select()
       .from(categories)
@@ -70,7 +66,7 @@ export class DrizzleCategoryRepository implements CategoryRepository {
     return parseItem(foundItem);
   }
 
-  async findById({ id }: CategoryFindByIdParams): Promise<Category | null> {
+  async findById({ id }: CategoryIdParams): Promise<Category | null> {
     const [foundItem] = await db
       .select()
       .from(categories)
@@ -110,7 +106,7 @@ export class DrizzleCategoryRepository implements CategoryRepository {
     };
   }
 
-  async deleteById({ id }: CategoryDeleteByIdParams): Promise<Category | null> {
+  async deleteById({ id }: CategoryIdParams): Promise<Category | null> {
     const [deletedItem] = await db
       .delete(categories)
       .where(eq(categories.id, id))
@@ -123,9 +119,7 @@ export class DrizzleCategoryRepository implements CategoryRepository {
     return parseItem(deletedItem);
   }
 
-  async deleteBySlug({
-    slug,
-  }: CategoryDeleteBySlugParams): Promise<Category | null> {
+  async deleteBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
     const [deletedItem] = await db
       .delete(categories)
       .where(eq(categories.slug, slug))

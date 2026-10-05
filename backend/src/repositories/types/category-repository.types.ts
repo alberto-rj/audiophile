@@ -2,24 +2,20 @@ import type { PaginateResult } from '@/helpers';
 import type {
   Category,
   CategoryCreateParams,
+  CategoryFindManyParams,
+  CategoryIdParams,
+  CategorySlugParams,
   CategoryUpdateParams,
 } from '@/schemas';
-import type {
-  CategoryDeleteByIdParams,
-  CategoryDeleteBySlugParams,
-  CategoryFindByIdParams,
-  CategoryFindBySlugParams,
-  CategoryFindManyParams,
-} from '@/schemas/category/category.types';
 
 export interface CategoryRepository {
   create: (params: CategoryCreateParams) => Promise<Category>;
 
   createMany: (params: CategoryCreateParams[]) => Promise<Category[]>;
 
-  findById: (params: CategoryFindByIdParams) => Promise<Category | null>;
+  findById: (params: CategoryIdParams) => Promise<Category | null>;
 
-  findBySlug: (params: CategoryFindBySlugParams) => Promise<Category | null>;
+  findBySlug: (params: CategorySlugParams) => Promise<Category | null>;
 
   findMany: (
     params: CategoryFindManyParams,
@@ -27,11 +23,9 @@ export interface CategoryRepository {
 
   update: (params: CategoryUpdateParams) => Promise<Category | null>;
 
-  deleteById: (params: CategoryDeleteByIdParams) => Promise<Category | null>;
+  deleteById: (params: CategoryIdParams) => Promise<Category | null>;
 
-  deleteBySlug: (
-    params: CategoryDeleteBySlugParams,
-  ) => Promise<Category | null>;
+  deleteBySlug: (params: CategorySlugParams) => Promise<Category | null>;
 
   clear: () => Promise<void>;
 }

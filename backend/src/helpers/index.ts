@@ -20,7 +20,13 @@ export { makeCartRepository } from './cart/make-cart-repository';
 export { makeCart, makeCartItem, makeCartItemDetailed } from './cart/make-cart';
 
 export { makeCategoryRepository } from './category/make-category-repository';
+export { makeCategory } from './category/make-category';
 export { toApiCategory } from './category/to-api-category';
+export { toCategoryCreateInput } from './category/to-category-create-input';
+export { toCategoryFindManyInput } from './category/to-category-find-many-input';
+export { toCategoryIdInput } from './category/to-category-id-input';
+export { toCategorySlugInput } from './category/to-category-slug-input';
+export { toCategoryUpdateInput } from './category/to-category-update-input';
 
 export {
   cloudinary,
