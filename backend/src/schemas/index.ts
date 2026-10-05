@@ -50,12 +50,7 @@ export {
   CartItemSchema,
   CartItemDetailedSchema,
 } from './cart/cart-item.schema';
-export type {
-  CartItem,
-  CartItemDetailed,
-  CartItemId,
-  CartItemQuantity,
-} from './cart/cart-item.types';
+export type { CartItem, CartItemDetailed } from './cart/cart-item.types';
 export {
   ApiCartAddItemBodySchema,
   ApiCartIdParamsSchema,
@@ -116,15 +111,7 @@ export type {
   CartUpdateItemInput,
 } from './cart/cart.input.types';
 export { CartSchema, CartDetailedSchema } from './cart/cart.schema';
-export type {
-  Cart,
-  CartDetailed,
-  CartId,
-  CartGrandTotal,
-  CartShipping,
-  CartSubtotal,
-  CartVat,
-} from './cart/cart.types';
+export type { Cart, CartDetailed } from './cart/cart.types';
 
 export {
   ApiCategoryCreateBodySchema,
