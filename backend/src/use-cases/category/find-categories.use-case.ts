@@ -1,17 +1,17 @@
 import { categoryRepository } from '@/config';
-import { type PaginateResult } from '@/helpers';
-import { makeCategoryFindManyParams, type Category } from '@/schemas';
+import { toCategoryFindManyInput, type PaginateResult } from '@/helpers';
+import { type Category } from '@/schemas';
 
 type FindCategoriesUseCaseParams = {
-  payload: unknown;
+  input: unknown;
 };
 
 type FindCategoriesUseCaseResult = PaginateResult<Category>;
 
 export async function findCategoriesUseCase({
-  payload,
+  input,
 }: FindCategoriesUseCaseParams): Promise<FindCategoriesUseCaseResult> {
-  const { page, limit } = makeCategoryFindManyParams(payload);
+  const { page, limit } = toCategoryFindManyInput(input);
 
   const result = await categoryRepository.findMany({ page, limit });
 
