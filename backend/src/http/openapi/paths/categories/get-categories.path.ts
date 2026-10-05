@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
 import {
-  ApiCategoryPaginationQuerySchema,
+  ApiCategoryFindManyQuerySchema,
   ApiCategorySchema,
   makeApiPaginationResponseSchema,
 } from '@/schemas';
@@ -20,7 +20,7 @@ registry.registerPath({
   summary: 'Get categories',
   description: 'Returns a paginated list of product categories.',
   request: {
-    query: ApiCategoryPaginationQuerySchema,
+    query: ApiCategoryFindManyQuerySchema,
   },
   responses: {
     [StatusCodes.OK]: {
