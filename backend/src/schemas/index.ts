@@ -116,19 +116,49 @@ export type { Cart, CartDetailed } from './cart/cart.types';
 export {
   ApiCategoryCreateBodySchema,
   ApiCategoryIdParamsSchema,
-  ApiCategoryPaginationQuerySchema,
   ApiCategorySchema,
   ApiCategorySlugParamsSchema,
   ApiCategoryUpdateBodySchema,
+  ApiCategoryFindManyQuerySchema,
 } from './category/category.api.schema';
 export type {
   ApiCategory,
   ApiCategoryCreateBody,
   ApiCategoryIdParams,
-  ApiCategoryPaginationQuery,
   ApiCategorySlugParams,
   ApiCategoryUpdateBody,
+  ApiCategoryFindManyQuery,
 } from './category/category.api.types';
+export {
+  CategoryCreateInputSchema,
+  CategoryFindManyInputSchema,
+  CategoryIdInputSchema,
+  CategorySlugInputSchema,
+  CategoryUpdateInputSchema,
+} from './category/category.input.schema';
+export type {
+  CategoryCreateInput,
+  CategoryFindManyInput,
+  CategoryIdInput,
+  CategorySlugInput,
+  CategoryUpdateInput,
+} from './category/category.input.types';
+export {
+  CategoryCreateParamsSchema,
+  CategoryFindByIdParamsSchema,
+  CategoryFindBySlugParamsSchema,
+  CategoryFindManyParamsSchema,
+  CategoryIdParamsSchema,
+  CategorySlugParamsSchema,
+  CategoryUpdateParamsSchema,
+} from './category/category.params.schema';
+export type {
+  CategoryCreateParams,
+  CategoryFindManyParams,
+  CategoryIdParams,
+  CategorySlugParams,
+  CategoryUpdateParams,
+} from './category/category.params.types';
 export {
   CategoryDescriptionSchema,
   CategoryIdSchema,
@@ -138,31 +168,7 @@ export {
 } from './category/category.base.schema';
 export { CategorySchema } from './category/category.schema';
 
-export type {
-  Category,
-  CategoryDescription,
-  CategoryId,
-  CategoryImage,
-  CategoryName,
-  CategorySlug,
-  CategoryCreateParams,
-  CategoryDeleteByIdParams,
-  CategoryDeleteBySlugParams,
-  CategoryFindByIdParams,
-  CategoryFindBySlugParams,
-  CategoryFindManyParams,
-  CategoryUpdateParams,
-} from './category/category.types';
-export {
-  makeCategory,
-  makeCategoryCreateParams,
-  makeCategoryDeleteByIdParams,
-  makeCategoryDeleteBySlugParams,
-  makeCategoryFindByIdParams,
-  makeCategoryFindBySlugParams,
-  makeCategoryFindManyParams,
-  makeCategoryUpdateParams,
-} from './category/category.helpers';
+export type { Category } from './category/category.types';
 
 export {
   ApiOrderCreateBodySchema,
