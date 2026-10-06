@@ -16,7 +16,7 @@ const meta = {
     return (
       <Skeleton
         {...props}
-        aria-label='Loading something...'
+        aria-label="Loading something..."
         className={cn('inline-20', 'block-6')}
       />
     );

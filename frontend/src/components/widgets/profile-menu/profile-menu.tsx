@@ -41,8 +41,8 @@ const ProfileMenu = ({ isOnMobile = true }: ProfileMenuProps) => {
       <DropdownMenu>
         <DropdownMenu.Trigger asChild>
           <button
-            data-testid='profileMenuTrigger'
-            type='button'
+            data-testid="profileMenuTrigger"
+            type="button"
             aria-label={`Account menu for ${user.name}`}
             className={cn(
               'flex',
@@ -83,7 +83,7 @@ const ProfileMenu = ({ isOnMobile = true }: ProfileMenuProps) => {
         <DropdownMenu.Portal>
           <DropdownMenu.Content
             side={isOnMobile ? 'top' : undefined}
-            data-testid='profileMenu'
+            data-testid="profileMenu"
             className={cn(
               'absolute',
               'inset-s-1/2',

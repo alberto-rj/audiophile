@@ -37,7 +37,7 @@ export const CategoryCard = ({
       )}
     >
       <img
-        alt=''
+        alt=""
         src={image}
         className={cn(
           'aspect-90/103',
@@ -47,7 +47,7 @@ export const CategoryCard = ({
           'lg:aspect-125/126',
           'lg:-mbs-(--category-card-margin-lg)',
         )}
-        loading='lazy'
+        loading="lazy"
       />
       <div
         aria-hidden={true}
@@ -55,7 +55,7 @@ export const CategoryCard = ({
       >
         <span className={cn('h6')}>{name}</span>
         <Button
-          variant='link'
+          variant="link"
           asChild
         >
           <span>

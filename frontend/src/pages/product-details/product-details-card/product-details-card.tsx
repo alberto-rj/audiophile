@@ -67,8 +67,8 @@ const ProductDetailsCard = ({
       <SignInRequiredAlert
         open={isSignAlertOpen}
         onOpenChange={setIsSignAlertOpen}
-        title='Sign in required'
-        description='Sign in to add items to your cart.'
+        title="Sign in required"
+        description="Sign in to add items to your cart."
         onSignIn={handleSignIn}
       />
       <StatusVisuallyHidden>
@@ -93,8 +93,8 @@ const ProductDetailsCard = ({
         )}
       >
         <ResponsiveImage
-          alt=''
-          loading='lazy'
+          alt=""
+          loading="lazy"
           image={image}
           className={cn(
             'aspect-327/327',
@@ -180,14 +180,14 @@ const ProductDetailsCard = ({
               className={cn('max-inline-30')}
             />
             <Button
-              data-testid='addItemToCart'
-              type='button'
+              data-testid="addItemToCart"
+              type="button"
               onClick={handleAddToCart}
               disabled={isLoading || undefined}
             >
               {isLoading ? (
                 <>
-                  <Spinner size='sm' />
+                  <Spinner size="sm" />
                   Adding to cart...
                 </>
               ) : (

@@ -10,7 +10,7 @@ interface SuggestionListProps {
 const SuggestionList = ({ items }: SuggestionListProps) => {
   return (
     <ul
-      role='list'
+      role="list"
       className={cn(
         'grid',
         'grid-cols-[repeat(1,minmax(0,20.4375em))]',

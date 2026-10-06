@@ -10,7 +10,7 @@ interface AuthCTAProps {
 const AuthCTA = ({ className }: AuthCTAProps) => {
   return (
     <ul
-      role='list'
+      role="list"
       className={className}
     >
       <li>

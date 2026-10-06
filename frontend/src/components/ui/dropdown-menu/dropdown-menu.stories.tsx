@@ -28,7 +28,7 @@ export const Default: Story = {
     return (
       <DropdownMenu {...dropdownMenuProps}>
         <DropdownMenu.Trigger asChild>
-          <Button type='button'>
+          <Button type="button">
             Dropdown menu
             <ChevronDown
               focusable={false}
@@ -63,7 +63,7 @@ export const Controlled = {
         onOpenChange={setOpen}
       >
         <DropdownMenu.Trigger asChild>
-          <Button type='button'>
+          <Button type="button">
             Dropdown menu
             <ChevronDown
               focusable={false}

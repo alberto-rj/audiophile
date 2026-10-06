@@ -15,7 +15,7 @@ interface CartItemListingProps {
 const CartItemListing = ({ items }: CartItemListingProps) => {
   return (
     <ul
-      role='list'
+      role="list"
       className={cn(
         'inline-full',
         'max-block-36',
@@ -37,7 +37,7 @@ const CartItemListing = ({ items }: CartItemListingProps) => {
               src={image}
               width={50}
               height={50}
-              loading='lazy'
+              loading="lazy"
               className={cn(
                 'aspect-50/50',
 

@@ -15,7 +15,7 @@ const meta = {
     return (
       <Spinner
         {...props}
-        aria-label='Loading something...'
+        aria-label="Loading something..."
       />
     );
   },

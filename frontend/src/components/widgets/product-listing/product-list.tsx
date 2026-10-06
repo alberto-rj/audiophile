@@ -12,7 +12,7 @@ export function ProductList({ products }: ProductListProps) {
     <p className={cn('text-center')}>We have no products yet.</p>
   ) : (
     <ul
-      role='list'
+      role="list"
       className={cn('flow')}
     >
       {products.map(({ id, image, name, description, isNew, slug }, i) => (

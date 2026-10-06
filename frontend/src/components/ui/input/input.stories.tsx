@@ -18,7 +18,7 @@ const meta = {
   },
   render: (inputProps) => {
     return (
-      <div className=''>
+      <div className="">
         <div className={cn('min-w-80')}>
           <Input {...inputProps} />
         </div>

@@ -64,13 +64,13 @@ const PageError = () => {
         </div>
         <div className={cn('flex', 'flex-wrap', 'justify-center', 'gap-4')}>
           <Button
-            variant='outline'
+            variant="outline"
             onClick={handleRetry}
           >
             Try again
           </Button>
           <Button
-            variant='primary'
+            variant="primary"
             asChild
           >
             <Link to={APP_ROUTES.home}>Go back home</Link>

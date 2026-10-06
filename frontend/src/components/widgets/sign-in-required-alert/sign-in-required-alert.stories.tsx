@@ -31,8 +31,8 @@ const meta = {
         )}
       >
         <Button
-          type='button'
-          value='primary'
+          type="button"
+          value="primary"
           onClick={() => setOpen(true)}
         >
           Require sign in

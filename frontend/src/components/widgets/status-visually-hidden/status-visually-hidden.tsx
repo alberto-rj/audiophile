@@ -9,8 +9,8 @@ const StatusVisuallyHidden = ({
   return (
     <div
       {...props}
-      role='status'
-      aria-live='polite'
+      role="status"
+      aria-live="polite"
       aria-atomic={true}
       className={cn('sr-only', className)}
     />

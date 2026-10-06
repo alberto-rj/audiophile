@@ -58,7 +58,7 @@ const LoginPage = () => {
             >
               Don't have an account?{' '}
               <Button
-                variant='link'
+                variant="link"
                 asChild
               >
                 <Link to={APP_ROUTES.register}>Sign up</Link>

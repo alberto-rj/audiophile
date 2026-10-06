@@ -91,8 +91,8 @@ export const FormFieldAlert = ({ ...props }: FormFieldAlertProps) => {
   return (
     <p
       {...props}
-      role='alert'
-      aria-live='polite'
+      role="alert"
+      aria-live="polite"
       className={cn('text-3xs', 'text-danger-950')}
     />
   );

@@ -17,11 +17,11 @@ const ResponsiveImage = ({
   return (
     <picture className={pictureClassName}>
       <source
-        media='(min-width: 64em)'
+        media="(min-width: 64em)"
         srcSet={image.desktop}
       />
       <source
-        media='(min-width: 48em)'
+        media="(min-width: 48em)"
         srcSet={image.tablet}
       />
       <img

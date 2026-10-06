@@ -65,14 +65,14 @@ const Gallery = ({
       >
         <ResponsiveImage
           alt={`${title} - view 1`}
-          loading='lazy'
+          loading="lazy"
           image={first}
           className={cn(imageBaseStyles)}
         />
 
         <ResponsiveImage
           alt={`${title} - view 2`}
-          loading='lazy'
+          loading="lazy"
           image={second}
           className={cn(imageBaseStyles)}
         />
@@ -80,7 +80,7 @@ const Gallery = ({
 
       <ResponsiveImage
         alt={`${title} - view 3`}
-        loading='lazy'
+        loading="lazy"
         image={third}
         className={cn(
           imageBaseStyles,

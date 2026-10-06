@@ -23,7 +23,7 @@ export const Default: Story = {
         <ErrorMessage.Description>
           Something went wrong. Please try again.
         </ErrorMessage.Description>
-        <ErrorMessage.Retry variant='primary'>Try again</ErrorMessage.Retry>
+        <ErrorMessage.Retry variant="primary">Try again</ErrorMessage.Retry>
       </ErrorMessage>
     );
   },

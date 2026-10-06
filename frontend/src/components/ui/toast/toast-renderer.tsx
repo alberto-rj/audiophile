@@ -18,7 +18,7 @@ export const ToastRenderer = () => {
   const { toasts, removeToast } = useToastContext();
 
   return (
-    <Toast.Provider swipeDirection='right'>
+    <Toast.Provider swipeDirection="right">
       {toasts.map((toast) => (
         <Toast
           data-testid={toDataToastId(toast.variant)}
@@ -61,7 +61,7 @@ export const ToastRenderer = () => {
               )}
               {toast.action && (
                 <Toast.Action
-                  type='button'
+                  type="button"
                   altText={toast.action.altText}
                   onClick={toast.action.onClick}
                   className={cn('self-start')}
@@ -73,7 +73,7 @@ export const ToastRenderer = () => {
           </div>
 
           <Toast.Close
-            aria-label='Close notification'
+            aria-label="Close notification"
             className={cn('shrink-0')}
           >
             <CloseIcon

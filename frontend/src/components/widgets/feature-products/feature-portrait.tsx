@@ -34,8 +34,8 @@ const FeaturePortrait = ({
     >
       <div className={cn('relative', 'rounded-lg', 'overflow-hidden')}>
         <ResponsiveImage
-          alt=''
-          loading='lazy'
+          alt=""
+          loading="lazy"
           image={image}
           className={cn(
             'absolute',

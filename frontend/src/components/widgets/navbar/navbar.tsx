@@ -73,7 +73,7 @@ const Navbar = () => {
         <div className={cn('flex', 'items-center', 'gap-8')}>
           <button
             ref={toggleButtonRef}
-            type='button'
+            type="button"
             aria-expanded={isOpen}
             aria-controls={menuId}
             className={cn(
@@ -137,7 +137,7 @@ const Navbar = () => {
           )}
         >
           <ul
-            role='list'
+            role="list"
             className={cn('flex', 'flex-col', 'gap-8', 'items-center')}
           >
             {navLinks.map(({ url, text }, i) => (
@@ -184,7 +184,7 @@ const Navbar = () => {
           )}
         >
           <ul
-            role='list'
+            role="list"
             className={cn('flex', 'items-center', 'gap-8')}
           >
             {navLinks.map(({ url, text }) => (

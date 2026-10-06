@@ -69,18 +69,18 @@ export const LoginForm = () => {
         <FormFieldFlow>
           <FormField>
             <Label
-              htmlFor='email'
+              htmlFor="email"
               isInvalid={!!errors.email}
             >
               Email
             </Label>
             <Input
-              type='email'
-              inputMode='email'
-              id='email'
-              data-testid='email'
-              autoComplete='email'
-              placeholder='Your email'
+              type="email"
+              inputMode="email"
+              id="email"
+              data-testid="email"
+              autoComplete="email"
+              placeholder="Your email"
               required
               aria-required
               aria-describedby={errors.email ? 'emailAlert' : undefined}
@@ -88,24 +88,24 @@ export const LoginForm = () => {
               {...register('email')}
             />
             {errors.email && (
-              <FormFieldAlert id='emailAlert'>
+              <FormFieldAlert id="emailAlert">
                 {errors.email.message}
               </FormFieldAlert>
             )}
           </FormField>
           <FormField>
             <Label
-              htmlFor='password'
+              htmlFor="password"
               isInvalid={!!errors.password}
             >
               Password
             </Label>
             <Input
-              type='password'
-              id='password'
-              data-testid='password'
-              autoComplete='current-password'
-              placeholder='Your password'
+              type="password"
+              id="password"
+              data-testid="password"
+              autoComplete="current-password"
+              placeholder="Your password"
               required
               aria-required
               aria-describedby={errors.password ? 'passwordAlert' : undefined}
@@ -113,22 +113,22 @@ export const LoginForm = () => {
               {...register('password')}
             />
             {errors.password && (
-              <FormFieldAlert id='passwordAlert'>
+              <FormFieldAlert id="passwordAlert">
                 {errors.password.message}
               </FormFieldAlert>
             )}
           </FormField>
           <Button
-            data-testid='signIn'
-            type='submit'
-            variant='primary'
+            data-testid="signIn"
+            type="submit"
+            variant="primary"
             disabled={isLoading || undefined}
           >
             {isLoading ? (
               <>
                 <Spinner
-                  variant='primary'
-                  size='sm'
+                  variant="primary"
+                  size="sm"
                 />
                 Signing you in...
               </>

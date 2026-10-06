@@ -49,7 +49,7 @@ const SignInRequiredAlert = ({
           >
             <Alert.Action asChild>
               <Button
-                variant='primary'
+                variant="primary"
                 asChild
               >
                 <Link
@@ -62,7 +62,7 @@ const SignInRequiredAlert = ({
               </Button>
             </Alert.Action>
             <Alert.Cancel asChild>
-              <Button variant='link'>{cancel}</Button>
+              <Button variant="link">{cancel}</Button>
             </Alert.Cancel>
           </div>
         </Alert.Content>

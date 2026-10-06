@@ -28,7 +28,7 @@ export const Default: Story = {
     return (
       <Select {...selectProps}>
         <Select.Trigger asChild>
-          <Button type='button'>
+          <Button type="button">
             Select
             <ChevronDown
               focusable={false}
@@ -52,7 +52,7 @@ export const WithDefaultValue: Story = {
     return (
       <Select {...selectProps}>
         <Select.Trigger asChild>
-          <Button type='button'>
+          <Button type="button">
             Select
             <ChevronDown
               focusable={false}
@@ -81,7 +81,7 @@ export const Controlled: Story = {
         onValueChange={setValue}
       >
         <Select.Trigger asChild>
-          <Button type='button'>
+          <Button type="button">
             {value}
             <ChevronDown
               focusable={false}
@@ -127,37 +127,37 @@ const SelectContent = () => {
       <Select.Viewport>
         <Select.Group>
           <Select.Label>Fruits</Select.Label>
-          <SelectItem value='apple'>Apple</SelectItem>
-          <SelectItem value='banana'>Banana</SelectItem>
-          <SelectItem value='blueberry'>Blueberry</SelectItem>
-          <SelectItem value='grapes'>Grapes</SelectItem>
-          <SelectItem value='pineapple'>Pineapple</SelectItem>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
         </Select.Group>
 
         <Select.Separator />
 
         <Select.Group>
           <Select.Label>Vegetables</Select.Label>
-          <SelectItem value='aubergine'>Aubergine</SelectItem>
-          <SelectItem value='broccoli'>Broccoli</SelectItem>
+          <SelectItem value="aubergine">Aubergine</SelectItem>
+          <SelectItem value="broccoli">Broccoli</SelectItem>
           <SelectItem
-            value='carrot'
+            value="carrot"
             disabled
           >
             Carrot
           </SelectItem>
-          <SelectItem value='courgette'>Courgette</SelectItem>
-          <SelectItem value='leek'>Leek</SelectItem>
+          <SelectItem value="courgette">Courgette</SelectItem>
+          <SelectItem value="leek">Leek</SelectItem>
         </Select.Group>
 
         <Select.Separator />
 
         <Select.Group>
           <Select.Label>Meat</Select.Label>
-          <SelectItem value='beef'>Beef</SelectItem>
-          <SelectItem value='chicken'>Chicken</SelectItem>
-          <SelectItem value='lamb'>Lamb</SelectItem>
-          <SelectItem value='pork'>Pork</SelectItem>
+          <SelectItem value="beef">Beef</SelectItem>
+          <SelectItem value="chicken">Chicken</SelectItem>
+          <SelectItem value="lamb">Lamb</SelectItem>
+          <SelectItem value="pork">Pork</SelectItem>
         </Select.Group>
       </Select.Viewport>
       <Select.ScrollDownButton>

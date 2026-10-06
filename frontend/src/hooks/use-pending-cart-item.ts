@@ -19,11 +19,7 @@ export function usePendingCartItem() {
     removePendingCartItem();
 
     const handleAddCartItem = async () => {
-      try {
-        await addCartItem(pending).unwrap();
-      } catch (error) {
-        console.error('Failed to restore pending cart item:', error);
-      }
+      await addCartItem(pending).unwrap();
     };
 
     handleAddCartItem();

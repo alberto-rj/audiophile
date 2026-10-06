@@ -28,8 +28,8 @@ export const Default: Story = {
       <Alert {...aleAlertProps}>
         <Alert.Trigger asChild>
           <Button
-            type='button'
-            variant='danger'
+            type="button"
+            variant="danger"
           >
             Delete account
           </Button>
@@ -59,16 +59,16 @@ export const Default: Story = {
             >
               <Alert.Action asChild>
                 <Button
-                  type='button'
-                  variant='danger'
+                  type="button"
+                  variant="danger"
                 >
                   Yes, delete account
                 </Button>
               </Alert.Action>
               <Alert.Cancel asChild>
                 <Button
-                  type='button'
-                  variant='link'
+                  type="button"
+                  variant="link"
                 >
                   Cancel
                 </Button>

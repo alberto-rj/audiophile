@@ -27,7 +27,7 @@ const Hero = ({
     >
       <ResponsiveImage
         image={image}
-        alt=''
+        alt=""
         className={cn(
           'absolute',
           'inset-0',

@@ -32,7 +32,7 @@ export const CartSummary = ({ cart }: CartSummaryProps) => {
         Summary
       </h2>
       <ul
-        role='list'
+        role="list"
         className={cn(
           'flex',
           'flex-col',
@@ -51,10 +51,10 @@ export const CartSummary = ({ cart }: CartSummaryProps) => {
           >
             <div className={cn('flex', 'items-center', 'gap-4')}>
               <ResponsiveImage
-                alt=''
+                alt=""
                 width={64}
                 height={64}
-                loading='lazy'
+                loading="lazy"
                 image={image}
                 className={cn(
                   'aspect-64/64',
@@ -150,7 +150,7 @@ export const CartSummaryQuery = () => {
 
         <ErrorMessage.Retry
           onClick={refetch}
-          aria-label='Try again loading cart'
+          aria-label="Try again loading cart"
         >
           Try again
         </ErrorMessage.Retry>

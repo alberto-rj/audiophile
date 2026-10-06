@@ -10,7 +10,7 @@ interface OrderItemsListProps {
 const OrderItemsList = ({ items }: OrderItemsListProps) => {
   return (
     <ul
-      role='list'
+      role="list"
       className={cn(
         'max-block-80',
         'overflow-auto',
@@ -32,7 +32,7 @@ const OrderItemsList = ({ items }: OrderItemsListProps) => {
               src={image}
               width={64}
               height={64}
-              loading='lazy'
+              loading="lazy"
               className={cn(
                 'aspect-64/64',
 

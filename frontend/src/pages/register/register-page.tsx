@@ -57,7 +57,7 @@ const RegisterPage = () => {
           >
             Already have an account?{' '}
             <Button
-              variant='link'
+              variant="link"
               asChild
             >
               <Link to={APP_ROUTES.login}>Sign in</Link>
