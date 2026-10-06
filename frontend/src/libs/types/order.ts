@@ -1,9 +1,5 @@
 export type OrderStatus =
-  | 'pending'
-  | 'processing'
-  | 'shipped'
-  | 'delivered'
-  | 'cancelled';
+  'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 
 export type PaymentMethod = 'e-money' | 'cash-on-delivery';
 

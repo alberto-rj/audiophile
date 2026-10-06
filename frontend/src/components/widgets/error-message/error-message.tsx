@@ -23,8 +23,8 @@ const ErrorMessage = ({ className, ...props }: ErrorMessageProps) => {
   return (
     <div
       {...props}
-      role='alert'
-      aria-live='polite'
+      role="alert"
+      aria-live="polite"
       className={cn(
         'flex',
         'flex-col',

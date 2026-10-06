@@ -14,11 +14,11 @@ const SEO = ({ metadata: { title, description } }: SEOProps) => {
     <Helmet>
       <title>{title}</title>
       <meta
-        name='title'
+        name="title"
         content={title}
       />
       <meta
-        name='description'
+        name="description"
         content={description}
       />
     </Helmet>

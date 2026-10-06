@@ -41,7 +41,7 @@ export const ProductCard = ({
       )}
     >
       <ResponsiveImage
-        alt=''
+        alt=""
         image={image}
         className={cn(
           'aspect-327/352',

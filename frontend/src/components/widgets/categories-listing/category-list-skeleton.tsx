@@ -13,7 +13,7 @@ export const CategoryListSkeleton = ({
 }: CategoryListSkeletonProps) => {
   return (
     <ul
-      role='list'
+      role="list"
       className={cn(
         'inline-full',
         'grid',

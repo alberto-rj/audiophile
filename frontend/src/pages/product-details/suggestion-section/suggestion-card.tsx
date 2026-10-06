@@ -31,8 +31,8 @@ const SuggestionCard = ({
       )}
     >
       <ResponsiveImage
-        alt=''
-        loading='lazy'
+        alt=""
+        loading="lazy"
         image={image}
         className={cn(
           'object-cover',

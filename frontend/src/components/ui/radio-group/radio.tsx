@@ -63,7 +63,7 @@ const Radio = ({
       )}
     >
       <input
-        type='radio'
+        type="radio"
         name={name}
         value={value}
         checked={checked}

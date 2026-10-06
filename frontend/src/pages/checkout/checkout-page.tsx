@@ -89,18 +89,18 @@ const CheckoutPage = () => {
           >
             <CartSummaryQuery />
             <Button
-              data-testid='checkout'
-              type='submit'
+              data-testid="checkout"
+              type="submit"
               form={formId}
-              variant='primary'
+              variant="primary"
               disabled={isSubmitting || undefined}
               className={cn('inline-full')}
             >
               {isSubmitting ? (
                 <>
                   <Spinner
-                    variant='primary'
-                    size='sm'
+                    variant="primary"
+                    size="sm"
                   />
                   Processing order...
                 </>

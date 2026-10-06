@@ -41,7 +41,7 @@ export const Default: Story = {
     return (
       <Modal {...modalProps}>
         <Modal.Trigger asChild>
-          <Button type='button'>Open modal</Button>
+          <Button type="button">Open modal</Button>
         </Modal.Trigger>
 
         <Modal.Portal>
@@ -57,8 +57,8 @@ export const Default: Story = {
 
             <Modal.Close asChild>
               <Button
-                type='button'
-                variant='secondary'
+                type="button"
+                variant="secondary"
               >
                 Close modal
               </Button>
@@ -99,8 +99,8 @@ export const Controlled = {
 
             <Modal.Close asChild>
               <Button
-                type='button'
-                variant='secondary'
+                type="button"
+                variant="secondary"
               >
                 Close
               </Button>
@@ -120,7 +120,7 @@ export const WithoutTrigger = {
     return (
       <>
         <Button
-          type='button'
+          type="button"
           onClick={() => setOpen(true)}
         >
           Open externally
@@ -143,8 +143,8 @@ export const WithoutTrigger = {
 
               <Modal.Close asChild>
                 <Button
-                  type='button'
-                  variant='secondary'
+                  type="button"
+                  variant="secondary"
                 >
                   Close
                 </Button>

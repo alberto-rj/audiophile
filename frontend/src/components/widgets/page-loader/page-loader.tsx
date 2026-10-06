@@ -27,7 +27,7 @@ const PageLoader = () => {
         )}
       >
         <Spinner
-          size='lg'
+          size="lg"
           className={cn('mx-auto')}
         />
         <p

@@ -70,7 +70,7 @@ const Footer = () => {
 
           {/* Nav Links */}
           <ul
-            role='list'
+            role="list"
             className={cn(
               'flex',
               'flex-col',
@@ -134,15 +134,15 @@ const Footer = () => {
               Our social networks
             </h2>
             <ul
-              role='list'
+              role="list"
               className={cn('flex', 'items-center', 'gap-4')}
             >
               {socialLinks.map(({ url, Icon, text }) => (
                 <li key={text}>
                   <a
                     href={url}
-                    rel='noopener noreferrer'
-                    target='_blank'
+                    rel="noopener noreferrer"
+                    target="_blank"
                     className={cn('nav-link')}
                   >
                     <span className={cn('sr-only')}>{text}</span>

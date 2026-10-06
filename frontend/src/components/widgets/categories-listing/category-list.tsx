@@ -12,7 +12,7 @@ export const CategoryList = ({ items }: CategoryListProps) => {
     <p className={cn('text-center')}>We have no categories yet.</p>
   ) : (
     <ul
-      role='list'
+      role="list"
       className={cn(
         'inline-full',
         'grid',

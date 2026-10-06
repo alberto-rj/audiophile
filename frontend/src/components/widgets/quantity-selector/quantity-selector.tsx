@@ -87,8 +87,8 @@ const QuantitySelector = ({
       )}
     >
       <QuantityButton
-        data-testid='quantityDecrease'
-        type='button'
+        data-testid="quantityDecrease"
+        type="button"
         disabled={disabled}
         onClick={handleDecrement}
       >
@@ -104,10 +104,10 @@ const QuantitySelector = ({
       </label>
       <input
         id={inputId}
-        data-testid='quantityInput'
+        data-testid="quantityInput"
         disabled={disabled}
-        type='number'
-        inputMode='numeric'
+        type="number"
+        inputMode="numeric"
         min={min}
         name={name}
         onChange={handleChange}
@@ -130,8 +130,8 @@ const QuantitySelector = ({
         )}
       />
       <QuantityButton
-        data-testid='quantityIncrease'
-        type='button'
+        data-testid="quantityIncrease"
+        type="button"
         disabled={disabled}
         onClick={handleIncrement}
       >

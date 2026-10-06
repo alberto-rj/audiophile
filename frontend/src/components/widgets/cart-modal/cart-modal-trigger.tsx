@@ -35,13 +35,13 @@ const CartModalTrigger = () => {
         <SignInRequiredAlert
           open={isSignInAlertOpen}
           onOpenChange={setIsSignInAlertOpen}
-          description='Sign in to view your cart.'
+          description="Sign in to view your cart."
         />
       )}
       {isAuthenticated && <CartModal />}
       <button
-        type='button'
-        data-testid='cartModalTrigger'
+        type="button"
+        data-testid="cartModalTrigger"
         onClick={handleViewCart}
         className={cn('relative')}
       >

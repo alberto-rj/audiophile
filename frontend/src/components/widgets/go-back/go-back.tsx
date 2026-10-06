@@ -21,7 +21,7 @@ const GoBackControl = ({ label = 'Go back' }: GoBackControlProps) => {
 
   return (
     <button
-      type='button'
+      type="button"
       aria-label={`${label} - return to previous page`}
       onClick={handleClick}
       className={cn('link', 'capitalize')}

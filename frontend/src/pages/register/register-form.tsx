@@ -67,17 +67,17 @@ export const RegisterForm = () => {
         <FormFieldFlow>
           <FormField>
             <Label
-              htmlFor='name'
+              htmlFor="name"
               isInvalid={!!errors.name}
             >
               Name
             </Label>
             <Input
-              type='text'
-              id='name'
-              data-testid='name'
-              autoComplete='name'
-              placeholder='John Doe'
+              type="text"
+              id="name"
+              data-testid="name"
+              autoComplete="name"
+              placeholder="John Doe"
               required
               aria-required
               aria-describedby={errors.name ? 'nameAlert' : undefined}
@@ -85,25 +85,25 @@ export const RegisterForm = () => {
               {...register('name')}
             />
             {errors.name && (
-              <FormFieldAlert id='nameAlert'>
+              <FormFieldAlert id="nameAlert">
                 {errors.name.message}
               </FormFieldAlert>
             )}
           </FormField>
           <FormField>
             <Label
-              htmlFor='email'
+              htmlFor="email"
               isInvalid={!!errors.email}
             >
               Email
             </Label>
             <Input
-              type='email'
-              inputMode='email'
-              id='email'
-              data-testid='email'
-              autoComplete='email'
-              placeholder='johndoe@example.com'
+              type="email"
+              inputMode="email"
+              id="email"
+              data-testid="email"
+              autoComplete="email"
+              placeholder="johndoe@example.com"
               required
               aria-required
               aria-describedby={errors.email ? 'emailAlert' : undefined}
@@ -112,8 +112,8 @@ export const RegisterForm = () => {
             />
             {errors.email && (
               <FormFieldAlert
-                id='emailAlert'
-                data-testid='emailAlert'
+                id="emailAlert"
+                data-testid="emailAlert"
               >
                 {errors.email.message}
               </FormFieldAlert>
@@ -121,17 +121,17 @@ export const RegisterForm = () => {
           </FormField>
           <FormField>
             <Label
-              htmlFor='password'
+              htmlFor="password"
               isInvalid={!!errors.password}
             >
               Password
             </Label>
             <Input
-              type='password'
-              id='password'
-              data-testid='password'
-              autoComplete='new-password'
-              placeholder='Min. 8 characters'
+              type="password"
+              id="password"
+              data-testid="password"
+              autoComplete="new-password"
+              placeholder="Min. 8 characters"
               required
               aria-required
               aria-describedby={errors.password ? 'passwordAlert' : undefined}
@@ -139,24 +139,24 @@ export const RegisterForm = () => {
               {...register('password')}
             />
             {errors.password && (
-              <FormFieldAlert id='passwordAlert'>
+              <FormFieldAlert id="passwordAlert">
                 {errors.password.message}
               </FormFieldAlert>
             )}
           </FormField>
           <FormField>
             <Label
-              htmlFor='confirmPassword'
+              htmlFor="confirmPassword"
               isInvalid={!!errors.confirmPassword}
             >
               Confirm password
             </Label>
             <Input
-              type='password'
-              id='confirmPassword'
-              data-testid='confirmPassword'
-              autoComplete='new-password'
-              placeholder='Confirm your password'
+              type="password"
+              id="confirmPassword"
+              data-testid="confirmPassword"
+              autoComplete="new-password"
+              placeholder="Confirm your password"
               required
               aria-required
               aria-describedby={
@@ -166,22 +166,22 @@ export const RegisterForm = () => {
               {...register('confirmPassword')}
             />
             {errors.confirmPassword && (
-              <FormFieldAlert id='confirmPasswordAlert'>
+              <FormFieldAlert id="confirmPasswordAlert">
                 {errors.confirmPassword.message}
               </FormFieldAlert>
             )}
           </FormField>
           <Button
-            data-testid='signUp'
-            type='submit'
-            variant='primary'
+            data-testid="signUp"
+            type="submit"
+            variant="primary"
             disabled={isLoading || undefined}
           >
             {isLoading ? (
               <>
                 <Spinner
-                  variant='primary'
-                  size='sm'
+                  variant="primary"
+                  size="sm"
                 />
                 Signing you up...
               </>

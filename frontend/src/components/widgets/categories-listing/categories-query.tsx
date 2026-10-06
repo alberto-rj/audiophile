@@ -15,8 +15,8 @@ const CategoriesQuery = () => {
   if (isLoading) {
     return (
       <div
-        role='status'
-        aria-label='Loading categories...'
+        role="status"
+        aria-label="Loading categories..."
       >
         <CategoryListSkeleton />
       </div>
@@ -32,7 +32,7 @@ const CategoriesQuery = () => {
 
         <ErrorMessage.Retry
           onClick={refetch}
-          aria-label='Try again loading categories'
+          aria-label="Try again loading categories"
         >
           Try again
         </ErrorMessage.Retry>

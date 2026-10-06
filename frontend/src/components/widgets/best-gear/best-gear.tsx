@@ -37,8 +37,8 @@ const BestGear = ({ className }: BestGearProps) => {
         )}
       >
         <ResponsiveImage
-          alt='Person enjoying music with premium headphones'
-          loading='lazy'
+          alt="Person enjoying music with premium headphones"
+          loading="lazy"
           image={bestGear}
           className={cn(
             'object-cover',

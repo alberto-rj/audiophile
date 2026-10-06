@@ -87,7 +87,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       </div>
       <Gallery content={{ title: product.category, images: product.gallery }} />
       <SuggestionSection
-        title='You may also like'
+        title="You may also like"
         items={product.others}
       />
     </>

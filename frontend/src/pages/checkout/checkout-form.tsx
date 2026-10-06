@@ -101,21 +101,21 @@ export const CheckoutForm = ({
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormFlow>
-          <FormGroup data-group='billing-details'>
+          <FormGroup data-group="billing-details">
             <FormGroupTitle>Billing Details</FormGroupTitle>
             <FormGroupContent>
               <FormField>
                 <Label
-                  htmlFor='name'
+                  htmlFor="name"
                   isInvalid={!!errors.name}
                 >
                   Name
                 </Label>
                 <Input
-                  id='name'
-                  data-testid='name'
-                  autoComplete='cc-name'
-                  placeholder='John Doe'
+                  id="name"
+                  data-testid="name"
+                  autoComplete="cc-name"
+                  placeholder="John Doe"
                   required
                   aria-required
                   aria-describedby={errors.name ? 'nameAlert' : undefined}
@@ -123,25 +123,25 @@ export const CheckoutForm = ({
                   {...register('name')}
                 />
                 {errors.name && (
-                  <FormFieldAlert id='nameAlert'>
+                  <FormFieldAlert id="nameAlert">
                     {errors.name.message}
                   </FormFieldAlert>
                 )}
               </FormField>
               <FormField>
                 <Label
-                  htmlFor='email'
+                  htmlFor="email"
                   isInvalid={!!errors.email}
                 >
                   Email Address
                 </Label>
                 <Input
-                  type='email'
-                  inputMode='email'
-                  id='email'
-                  data-testid='email'
-                  autoComplete='email'
-                  placeholder='johndoe@example.com'
+                  type="email"
+                  inputMode="email"
+                  id="email"
+                  data-testid="email"
+                  autoComplete="email"
+                  placeholder="johndoe@example.com"
                   required
                   aria-required
                   aria-describedby={errors.email ? 'emailAlert' : undefined}
@@ -149,23 +149,23 @@ export const CheckoutForm = ({
                   {...register('email')}
                 />
                 {errors.email && (
-                  <FormFieldAlert id='emailAlert'>
+                  <FormFieldAlert id="emailAlert">
                     {errors.email.message}
                   </FormFieldAlert>
                 )}
               </FormField>
               <FormField>
                 <Label
-                  htmlFor='phone'
+                  htmlFor="phone"
                   isInvalid={!!errors.phone}
                 >
                   Phone Number
                 </Label>
                 <Input
-                  id='phone'
-                  data-testid='phone'
-                  autoComplete='tel'
-                  placeholder='+1 202-55-0136'
+                  id="phone"
+                  data-testid="phone"
+                  autoComplete="tel"
+                  placeholder="+1 202-55-0136"
                   required
                   aria-required
                   aria-describedby={errors.phone ? 'phoneAlert' : undefined}
@@ -173,28 +173,28 @@ export const CheckoutForm = ({
                   {...register('phone')}
                 />
                 {errors.phone && (
-                  <FormFieldAlert id='phoneAlert'>
+                  <FormFieldAlert id="phoneAlert">
                     {errors.phone.message}
                   </FormFieldAlert>
                 )}
               </FormField>
             </FormGroupContent>
           </FormGroup>
-          <FormGroup data-group='shipping-info'>
+          <FormGroup data-group="shipping-info">
             <FormGroupTitle>Shipping Info</FormGroupTitle>
             <FormGroupContent>
               <FormField>
                 <Label
-                  htmlFor='address'
+                  htmlFor="address"
                   isInvalid={!!errors.address}
                 >
                   Address
                 </Label>
                 <Input
-                  id='address'
-                  data-testid='address'
-                  autoCapitalize='address-line1'
-                  placeholder='1137 Williams Avenue'
+                  id="address"
+                  data-testid="address"
+                  autoCapitalize="address-line1"
+                  placeholder="1137 Williams Avenue"
                   required
                   aria-required
                   aria-describedby={errors.address ? 'addressAlert' : undefined}
@@ -202,23 +202,23 @@ export const CheckoutForm = ({
                   {...register('address')}
                 />
                 {errors.address && (
-                  <FormFieldAlert id='addressAlert'>
+                  <FormFieldAlert id="addressAlert">
                     {errors.address.message}
                   </FormFieldAlert>
                 )}
               </FormField>
               <FormField>
                 <Label
-                  htmlFor='zip'
+                  htmlFor="zip"
                   isInvalid={!!errors.zip}
                 >
                   Zip Code
                 </Label>
                 <Input
-                  id='zip'
-                  data-testid='zip'
-                  autoComplete='postal-code'
-                  placeholder='10001'
+                  id="zip"
+                  data-testid="zip"
+                  autoComplete="postal-code"
+                  placeholder="10001"
                   required
                   aria-required
                   aria-describedby={errors.zip ? 'zipAlert' : undefined}
@@ -226,23 +226,23 @@ export const CheckoutForm = ({
                   {...register('zip')}
                 />
                 {errors.zip && (
-                  <FormFieldAlert id='zipAlert'>
+                  <FormFieldAlert id="zipAlert">
                     {errors.zip.message}
                   </FormFieldAlert>
                 )}
               </FormField>
               <FormField>
                 <Label
-                  htmlFor='city'
+                  htmlFor="city"
                   isInvalid={!!errors.city}
                 >
                   City
                 </Label>
                 <Input
-                  id='city'
-                  data-testid='city'
-                  placeholder='New York'
-                  autoComplete='address-level2'
+                  id="city"
+                  data-testid="city"
+                  placeholder="New York"
+                  autoComplete="address-level2"
                   required
                   aria-required
                   aria-describedby={errors.city ? 'cityAlert' : undefined}
@@ -250,23 +250,23 @@ export const CheckoutForm = ({
                   {...register('city')}
                 />
                 {errors.city && (
-                  <FormFieldAlert id='cityAlert'>
+                  <FormFieldAlert id="cityAlert">
                     {errors.city.message}
                   </FormFieldAlert>
                 )}
               </FormField>
               <FormField>
                 <Label
-                  htmlFor='country'
+                  htmlFor="country"
                   isInvalid={!!errors.country}
                 >
                   Country
                 </Label>
                 <Input
-                  id='country'
-                  data-testid='country'
-                  placeholder='United States'
-                  autoComplete='country-name'
+                  id="country"
+                  data-testid="country"
+                  placeholder="United States"
+                  autoComplete="country-name"
                   required
                   aria-required
                   aria-describedby={errors.country ? 'countryAlert' : undefined}
@@ -274,14 +274,14 @@ export const CheckoutForm = ({
                   {...register('country')}
                 />
                 {errors.country && (
-                  <FormFieldAlert id='countryAlert'>
+                  <FormFieldAlert id="countryAlert">
                     {errors.country.message}
                   </FormFieldAlert>
                 )}
               </FormField>
             </FormGroupContent>
           </FormGroup>
-          <FormGroup data-group='payment-details'>
+          <FormGroup data-group="payment-details">
             <FormGroupTitle>Payment Details</FormGroupTitle>
             <FormFlow>
               <FormSubgroup>
@@ -295,23 +295,23 @@ export const CheckoutForm = ({
                   )}
                 >
                   <Controller
-                    name='paymentMethod'
+                    name="paymentMethod"
                     control={control}
                     render={({ field }) => (
                       <>
                         <Radio
-                          data-testid='e-money'
-                          label='e-Money'
-                          value='e-money'
+                          data-testid="e-money"
+                          label="e-Money"
+                          value="e-money"
                           name={field.name}
                           checked={field.value === 'e-money'}
                           onChange={field.onChange}
                         />
                         <Radio
-                          data-testid='e-cash-on-delivery'
-                          label='Cash on Delivery'
-                          value='cash-on-delivery'
-                          ariaDescribedby='cashOnDeliveryAlert'
+                          data-testid="e-cash-on-delivery"
+                          label="Cash on Delivery"
+                          value="cash-on-delivery"
+                          ariaDescribedby="cashOnDeliveryAlert"
                           name={field.name}
                           checked={field.value === 'cash-on-delivery'}
                           onChange={field.onChange}
@@ -344,9 +344,9 @@ export const CheckoutForm = ({
                     )}
                   />
                   <p
-                    id='cashOnDeliveryAlert'
-                    aria-live='polite'
-                    role='alert'
+                    id="cashOnDeliveryAlert"
+                    aria-live="polite"
+                    role="alert"
                     className={cn(
                       'text-base',
 
@@ -367,16 +367,16 @@ export const CheckoutForm = ({
                 <FormGroupContent>
                   <FormField>
                     <Label
-                      htmlFor='eMoneyNumber'
+                      htmlFor="eMoneyNumber"
                       isInvalid={!!errors.eMoneyNumber}
                     >
                       e-Money Number
                     </Label>
                     <Input
-                      id='eMoneyNumber'
-                      data-testid='eMoneyNumber'
-                      autoComplete='cc-number'
-                      placeholder='238521993'
+                      id="eMoneyNumber"
+                      data-testid="eMoneyNumber"
+                      autoComplete="cc-number"
+                      placeholder="238521993"
                       required
                       aria-required
                       aria-describedby={
@@ -386,23 +386,23 @@ export const CheckoutForm = ({
                       {...register('eMoneyNumber')}
                     />
                     {errors.eMoneyNumber && (
-                      <FormFieldAlert id='eMoneyNumberAlert'>
+                      <FormFieldAlert id="eMoneyNumberAlert">
                         {errors.eMoneyNumber.message}
                       </FormFieldAlert>
                     )}
                   </FormField>
                   <FormField>
                     <Label
-                      htmlFor='eMoneyPin'
+                      htmlFor="eMoneyPin"
                       isInvalid={!!errors.eMoneyPin}
                     >
                       e-Money PIN
                     </Label>
                     <Input
-                      id='eMoneyPin'
-                      data-testid='eMoneyPin'
-                      autoComplete='cc-csc'
-                      placeholder='6891'
+                      id="eMoneyPin"
+                      data-testid="eMoneyPin"
+                      autoComplete="cc-csc"
+                      placeholder="6891"
                       required
                       aria-required
                       aria-describedby={
@@ -412,7 +412,7 @@ export const CheckoutForm = ({
                       {...register('eMoneyPin')}
                     />
                     {errors.eMoneyPin && (
-                      <FormFieldAlert id='eMoneyPinAlert'>
+                      <FormFieldAlert id="eMoneyPinAlert">
                         {errors.eMoneyPin.message}
                       </FormFieldAlert>
                     )}

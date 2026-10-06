@@ -65,17 +65,17 @@ const ProfileForm = () => {
         <FormFieldFlow>
           <FormField>
             <Label
-              htmlFor='name'
+              htmlFor="name"
               isInvalid={!!errors.name}
             >
               Name
             </Label>
             <Input
-              type='text'
-              id='name'
-              data-testid='name'
-              autoComplete='name'
-              placeholder='John Doe'
+              type="text"
+              id="name"
+              data-testid="name"
+              autoComplete="name"
+              placeholder="John Doe"
               required
               aria-required
               aria-describedby={errors.name ? 'nameAlert' : undefined}
@@ -84,8 +84,8 @@ const ProfileForm = () => {
             />
             {errors.name && (
               <FormFieldAlert
-                id='nameAlert'
-                data-testid='nameAlert'
+                id="nameAlert"
+                data-testid="nameAlert"
               >
                 {errors.name.message}
               </FormFieldAlert>
@@ -93,18 +93,18 @@ const ProfileForm = () => {
           </FormField>
           <FormField>
             <Label
-              htmlFor='email'
+              htmlFor="email"
               isInvalid={!!errors.email}
             >
               Email
             </Label>
             <Input
-              type='email'
-              inputMode='email'
-              id='email'
-              data-testid='email'
-              autoComplete='email'
-              placeholder='johndoe@example.com'
+              type="email"
+              inputMode="email"
+              id="email"
+              data-testid="email"
+              autoComplete="email"
+              placeholder="johndoe@example.com"
               required
               aria-required
               aria-describedby={errors.email ? 'emailAlert' : undefined}
@@ -113,25 +113,25 @@ const ProfileForm = () => {
             />
             {errors.email && (
               <FormFieldAlert
-                id='emailAlert'
-                data-testid='emailAlert'
+                id="emailAlert"
+                data-testid="emailAlert"
               >
                 {errors.email.message}
               </FormFieldAlert>
             )}
           </FormField>
           <Button
-            type='submit'
-            data-testid='saveProfile'
-            variant='primary'
+            type="submit"
+            data-testid="saveProfile"
+            variant="primary"
             disabled={isLoading || undefined}
             className={cn('self-end')}
           >
             {isLoading ? (
               <>
                 <Spinner
-                  variant='primary'
-                  size='sm'
+                  variant="primary"
+                  size="sm"
                 />
                 Saving changes...
               </>

@@ -39,7 +39,7 @@ const InTheBoxSection = ({
         {title}
       </h2>
       <ul
-        role='list'
+        role="list"
         className={cn('flex', 'flex-col', 'gap-2')}
       >
         {items.map(({ item, quantity }) => (

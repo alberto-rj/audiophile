@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { userEvent, within } from 'storybook/test';
+import { userEvent, within, fn } from 'storybook/test';
 
 import { Button } from '@/components/ui';
 import { useToast } from '@/hooks';
@@ -30,7 +30,7 @@ const ToastDemo = ({
         action: {
           label: actionLabel,
           altText: `${actionLabel} - toast action`,
-          onClick: () => console.log('Action clicked'),
+          onClick: fn,
         },
       }),
     });
@@ -47,8 +47,8 @@ const ToastDemo = ({
       )}
     >
       <Button
-        type='button'
-        variant='primary'
+        type="button"
+        variant="primary"
         onClick={handleClick}
       >
         Show toast

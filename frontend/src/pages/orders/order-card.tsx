@@ -30,7 +30,7 @@ const OrderCardMenu = ({ order: { id, status } }: OrderCardMenuProps) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenu.Trigger type='button'>
+      <DropdownMenu.Trigger type="button">
         <ChevronDown
           focusable={false}
           aria-hidden={true}

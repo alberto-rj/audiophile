@@ -27,7 +27,7 @@ const App = () => {
     <ScrollToTop>
       <Routes>
         <Route
-          path='/'
+          path="/"
           element={
             <Suspense fallback={<PageLoader />}>
               <Outlet />
@@ -36,7 +36,7 @@ const App = () => {
         >
           {/* Auth (start) */}
           <Route
-            path='/'
+            path="/"
             element={
               <LayoutCenteredOnScreen>
                 <Outlet />
@@ -55,7 +55,7 @@ const App = () => {
           {/* Auth (end) */}
 
           <Route
-            path='/'
+            path="/"
             element={
               <LayoutBasic>
                 <RequireAuth>
@@ -85,7 +85,7 @@ const App = () => {
 
           {/* Landing (start) */}
           <Route
-            path='/'
+            path="/"
             element={
               <LayoutLanding>
                 <Outlet />

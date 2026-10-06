@@ -141,7 +141,7 @@ const SingleCartItem = ({
           alt={name}
           width={64}
           height={64}
-          loading='lazy'
+          loading="lazy"
           className={cn(
             'aspect-64/64',
 
@@ -197,7 +197,7 @@ interface CartItemListProps {
 const CartItemList = ({ items }: CartItemListProps) => {
   return (
     <ul
-      role='list'
+      role="list"
       className={cn(
         'inline-full',
         'max-block-70',
@@ -280,9 +280,9 @@ const CartModalFilled = ({ cart }: CartModalFilledProps) => {
         </Modal.Description>
 
         <Button
-          type='button'
-          data-testid='cartModalClear'
-          variant='link'
+          type="button"
+          data-testid="cartModalClear"
+          variant="link"
           onClick={handleClearCart}
           disabled={isClearingCart}
         >
@@ -316,7 +316,7 @@ const CartModalFilled = ({ cart }: CartModalFilledProps) => {
 
       <Modal.Close asChild>
         <Button
-          variant='primary'
+          variant="primary"
           asChild
         >
           <Link

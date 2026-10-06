@@ -14,7 +14,7 @@ const OrderList = ({ orders }: OrderListProps) => {
         <p className={cn('text-center')}>You have no orders yet.</p>
       ) : (
         <ul
-          role='list'
+          role="list"
           className={cn(
             'inline-full',
             'grid',
