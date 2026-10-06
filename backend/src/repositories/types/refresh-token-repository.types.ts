@@ -4,7 +4,7 @@ import type {
   RefreshTokenDeleteParams,
   RefreshTokenFindByIdParams,
   RefreshTokenFindParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface RefreshTokenRepository {
   create: (params: RefreshTokenCreateParams) => Promise<RefreshToken>;

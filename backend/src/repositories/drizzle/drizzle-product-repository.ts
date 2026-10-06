@@ -17,7 +17,7 @@ import type {
   ProductFindByIdParams,
   ProductFindBySlugParams,
   ProductFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 const PRODUCT_WITH = {
   category: {

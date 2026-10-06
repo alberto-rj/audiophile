@@ -8,7 +8,7 @@ import type {
   ProductFindByIdParams,
   ProductFindBySlugParams,
   ProductFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface ProductRepository {
   create: (params: ProductCreateParams) => Promise<Product>;

@@ -3,7 +3,7 @@ import {
   makeOtherProduct,
   type OtherProduct,
   type OtherProductCreateParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { OtherProductRepository } from '../types/other-product-repository.types';
 

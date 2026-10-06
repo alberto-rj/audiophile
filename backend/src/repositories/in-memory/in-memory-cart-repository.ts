@@ -9,7 +9,7 @@ import type {
   Cart,
   CartItemDetailed,
   CartFindOrCreateByUserIdParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 import { db } from '@/db/in-memory';
 
 import type { CartRepository } from '../types/cart-repository.types';

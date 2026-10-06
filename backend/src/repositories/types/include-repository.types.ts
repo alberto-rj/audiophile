@@ -5,7 +5,7 @@ import type {
   IncludeDeleteByIdParams,
   IncludeFindByIdParams,
   IncludeFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface IncludeRepository {
   create: (params: IncludeCreateParams) => Promise<Include>;

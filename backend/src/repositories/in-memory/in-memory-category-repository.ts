@@ -7,7 +7,7 @@ import type {
   CategoryIdParams,
   CategorySlugParams,
   CategoryUpdateParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { CategoryRepository } from '../types/category-repository.types';
 

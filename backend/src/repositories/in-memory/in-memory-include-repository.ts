@@ -1,13 +1,13 @@
 import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers';
-import { makeInclude } from '@/schemas';
+import { makeInclude } from '@audiophile/shared';
 import type {
   Include,
   IncludeCreateParams,
   IncludeDeleteByIdParams,
   IncludeFindByIdParams,
   IncludeFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { IncludeRepository } from '../types/include-repository.types';
 

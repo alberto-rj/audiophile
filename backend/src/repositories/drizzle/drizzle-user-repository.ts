@@ -7,7 +7,7 @@ import type {
   UserFindByEmailParams,
   UserFindByIdParams,
   UserUpdateParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { UserRepository } from '../types/user-repository.types';
 

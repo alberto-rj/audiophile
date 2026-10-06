@@ -9,7 +9,7 @@ import type {
   IncludeDeleteByIdParams,
   IncludeFindByIdParams,
   IncludeFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 function toItem(item: RawInclude): Include {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

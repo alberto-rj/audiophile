@@ -12,7 +12,7 @@ import type {
   OrderFindByIdParams,
   OrderFindManyParams,
   OrderItem,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { OrderRepository } from '../types/order-repository.types';
 

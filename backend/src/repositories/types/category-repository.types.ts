@@ -6,7 +6,7 @@ import type {
   CategoryIdParams,
   CategorySlugParams,
   CategoryUpdateParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface CategoryRepository {
   create: (params: CategoryCreateParams) => Promise<Category>;
