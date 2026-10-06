@@ -228,13 +228,6 @@ export {
   GalleryImageSchema,
 } from './product/gallery.base.schema';
 export {
-  makeGallery,
-  makeGalleryCreateParams,
-  makeGalleryDeleteByIdParams,
-  makeGalleryFindByIdParams,
-  makeGalleryFindManyParams,
-} from './product/gallery.helpers';
-export {
   ApiGalleryCreateBodySchema,
   ApiGalleryIdParamsSchema,
   ApiGalleryPaginationQuerySchema,
@@ -257,13 +250,6 @@ export {
   IncludeQuantitySchema,
 } from './product/include.base.schema';
 export {
-  makeInclude,
-  makeIncludeCreateParams,
-  makeIncludeDeleteByIdParams,
-  makeIncludeFindByIdParams,
-  makeIncludeFindManyParams,
-} from './product/include.helpers';
-export {
   ApiIncludeCreateBodySchema,
   ApiIncludeIdParamsSchema,
   ApiIncludePaginationQuerySchema,
@@ -281,10 +267,6 @@ export type {
   IncludeFindByIdParams,
   IncludeFindManyParams,
 } from './product/include.types';
-export {
-  makeOtherProduct,
-  makeOtherProductCreateParams,
-} from './product/other-product.helpers';
 export {
   OtherProductCreateParamsSchema,
   OtherProductSchema,
@@ -320,15 +302,6 @@ export {
   ProductSchema,
   ProductDetailedSchema,
 } from './product/product.schema';
-export {
-  makeProduct,
-  makeProductCreateParams,
-  makeProductDeleteByIdParams,
-  makeProductDeleteBySlugParams,
-  makeProductFindByIdParams,
-  makeProductFindBySlugParams,
-  makeProductFindManyParams,
-} from './product/product.helpers';
 export type {
   Product,
   ProductBase,

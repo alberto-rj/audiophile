@@ -1,14 +1,11 @@
 {
   "name": "backend",
-  "description": "",
-  "version": "1.0.0",
-  "keywords": [],
+  "version": "0.0.0",
   "author": {
     "name": "Alberto José",
     "email": "albertorauljose2@gmail.com",
     "url": "https://github.com/alberto-rj"
   },
-  "license": "ISC",
   "type": "module",
   "main": "dist/http/app.js",
   "scripts": {
@@ -34,6 +31,7 @@
     "upload:shared": "tsx src/scripts/upload/shared.ts"
   },
   "dependencies": {
+    "@audiophile/shared": "*",
     "@asteasolutions/zod-to-openapi": "^8.5.0",
     "@types/cookie-parser": "^1.4.10",
     "bcryptjs": "^3.0.3",

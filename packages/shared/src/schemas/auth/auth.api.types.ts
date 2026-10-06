@@ -1,9 +1,9 @@
 import { z } from '@/config';
 
-import type { ApiAuthResponseSchema } from './auth-response.schema';
 import type {
   ApiAuthLoginBodySchema,
   ApiAuthRegisterBodySchema,
+  ApiAuthResponseSchema,
 } from './auth.api.schema';
 
 export type ApiAuthResponse = z.infer<typeof ApiAuthResponseSchema>;
