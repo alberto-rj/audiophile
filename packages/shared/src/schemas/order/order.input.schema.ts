@@ -8,18 +8,18 @@ import {
   OrderFindManyParamsSchema,
 } from './order.params.schema';
 
-export const OrderCreateInputSchema = OrderCreateParamsSchema.extend({
-  userId: UserIdSchema,
+export const OrderCreateInputSchema = OrderCreateParamsSchema.pick({
+  name: true,
+  email: true,
+  address: true,
+  zip: true,
+  city: true,
+  country: true,
+  paymentMethod: true,
+  items: true,
 })
-  .pick({
-    name: true,
-    email: true,
-    address: true,
-    zip: true,
-    city: true,
-    country: true,
-    paymentMethod: true,
-    items: true,
+  .extend({
+    userId: UserIdSchema,
   })
   .refine(({ items }) => items.length == 0, {
     error: 'items cannot be empty.',
