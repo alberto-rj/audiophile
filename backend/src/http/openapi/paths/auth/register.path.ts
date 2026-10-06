@@ -5,7 +5,7 @@ import {
   ApiAuthResponseSchema,
   ApiErrorResponseSchema,
   ApiAuthRegisterBodySchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import {
   AuthCookieHeader,

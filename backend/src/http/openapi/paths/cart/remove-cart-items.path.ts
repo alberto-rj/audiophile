@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
-import { ApiCartSchema, makeApiResultResponseSchema } from '@/schemas';
+import { ApiCartSchema, makeApiResultResponseSchema } from '@audiophile/shared';
 
 import {
   internalServerErrorResponse,

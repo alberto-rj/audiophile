@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
-import { ApiAuthResponseSchema } from '@/schemas';
+import { ApiAuthResponseSchema } from '@audiophile/shared';
 
 import {
   AuthCookieHeader,

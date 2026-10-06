@@ -5,7 +5,7 @@ import {
   ApiOrderCreateBodySchema,
   ApiOrderSchema,
   makeApiResultResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import {
   internalServerErrorResponse,

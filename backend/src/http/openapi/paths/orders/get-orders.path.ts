@@ -5,7 +5,7 @@ import {
   ApiOrderListingQuerySchema,
   ApiOrderSchema,
   makeApiPaginationResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import {
   internalServerErrorResponse,

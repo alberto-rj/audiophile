@@ -6,7 +6,7 @@ import {
   ApiCartSchema,
   ApiCartUpdateItemBodySchema,
   makeApiResultResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import {
   internalServerErrorResponse,

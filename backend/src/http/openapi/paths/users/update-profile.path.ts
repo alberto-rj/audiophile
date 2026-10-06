@@ -4,7 +4,7 @@ import { registry } from '@/http/openapi';
 import {
   ApiUserUpdateProfileBodySchema,
   ApiUserResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import {
   internalServerErrorResponse,
