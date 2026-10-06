@@ -1,4 +1,7 @@
-import type { RefreshToken, RefreshTokenCreateParams } from '@/schemas';
+import type {
+  RefreshToken,
+  RefreshTokenCreateParams,
+} from '@audiophile/shared';
 
 import { makeId } from '../make-id';
 

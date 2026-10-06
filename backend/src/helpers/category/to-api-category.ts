@@ -1,4 +1,4 @@
-import type { ApiCategory, Category } from '@/schemas';
+import type { ApiCategory, Category } from '@audiophile/shared';
 
 import { buildResponseImage } from '../cloudinary/cloudinary';
 

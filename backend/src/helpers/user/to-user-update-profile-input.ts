@@ -1,7 +1,7 @@
 import {
   UserUpdateProfileInputSchema,
   type UserUpdateProfileInput,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import { parseSchema } from '../parse-schema';
 

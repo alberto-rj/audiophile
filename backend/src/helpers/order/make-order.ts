@@ -1,4 +1,4 @@
-import type { Order, OrderCreateParams } from '@/schemas';
+import type { Order, OrderCreateParams } from '@audiophile/shared';
 
 import { makeId } from '../make-id';
 

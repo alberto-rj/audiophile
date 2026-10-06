@@ -1,7 +1,7 @@
 import {
   CategoryFindManyInputSchema,
   type CategoryFindManyInput,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import { parseSchema } from '../parse-schema';
 

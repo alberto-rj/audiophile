@@ -13,7 +13,7 @@ import {
   type CartRemoveItemInput,
   type CartUpdateItemInput,
   type CartGetInput,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import { parseSchema } from '../parse-schema';
 

@@ -1,4 +1,7 @@
-import { OrderFindManyInputSchema, type OrderFindManyInput } from '@/schemas';
+import {
+  OrderFindManyInputSchema,
+  type OrderFindManyInput,
+} from '@audiophile/shared';
 
 import { parseSchema } from '../parse-schema';
 
