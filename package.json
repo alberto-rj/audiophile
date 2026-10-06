@@ -5,5 +5,9 @@
     "packages/*",
     "backend",
     "frontend"
-  ]
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev:shared": "npm run dev -w @audiophile/shared"
+  }
 }
