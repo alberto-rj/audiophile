@@ -11,7 +11,7 @@ import type {
   Product,
   RefreshToken,
   User,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export const db = {
   carts: new Map<Cart['id'], Cart>(),

@@ -1,7 +1,7 @@
 import { otherProductRepository } from '@/config';
 import type { OtherProducts } from '@/db/mocks';
 import { logger, toSlug } from '@/helpers';
-import type { Product } from '@/schemas';
+import type { Product } from '@audiophile/shared';
 
 type CreateOtherProductsParams = {
   products: Product[];

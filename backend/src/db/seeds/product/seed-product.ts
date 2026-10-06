@@ -5,7 +5,7 @@ import {
 } from '@/config';
 import { type Galleries, type Includes, type Products } from '@/db/mocks';
 import { logger, toSlug } from '@/helpers';
-import type { Category, Product } from '@/schemas';
+import type { Category, Product } from '@audiophile/shared';
 
 type CreateProductsParams = {
   categories: Category[];
