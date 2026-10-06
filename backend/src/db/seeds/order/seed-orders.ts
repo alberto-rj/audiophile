@@ -1,7 +1,12 @@
 import { orderRepository } from '@/config';
 import { type Orders } from '@/db/mocks';
 import { getProductItemSummary, logger } from '@/helpers';
-import type { Order, OrderCreateParams, Product, User } from '@/schemas';
+import type {
+  Order,
+  OrderCreateParams,
+  Product,
+  User,
+} from '@audiophile/shared';
 
 type CreateOrdersParams = {
   orders: Orders;
