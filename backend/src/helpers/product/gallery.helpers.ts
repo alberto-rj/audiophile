@@ -4,14 +4,12 @@ import {
   ApiGalleryCreateBodySchema,
   ApiGalleryIdParamsSchema,
   ApiGalleryPaginationQuerySchema,
-} from './gallery.api.schema';
-import type {
-  Gallery,
-  GalleryCreateParams,
-  GalleryDeleteByIdParams,
-  GalleryFindByIdParams,
-  GalleryFindManyParams,
-} from './gallery.types';
+  type Gallery,
+  type GalleryCreateParams,
+  type GalleryDeleteByIdParams,
+  type GalleryFindByIdParams,
+  type GalleryFindManyParams,
+} from '@audiophile/shared';
 
 export function makeGallery({ ...rest }: GalleryCreateParams): Gallery {
   return {

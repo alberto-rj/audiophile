@@ -4,14 +4,14 @@ import {
   ApiIncludeCreateBodySchema,
   ApiIncludeIdParamsSchema,
   ApiIncludePaginationQuerySchema,
-} from './include.api.schema';
+} from '@audiophile/shared';
 import type {
   Include,
   IncludeCreateParams,
   IncludeDeleteByIdParams,
   IncludeFindByIdParams,
   IncludeFindManyParams,
-} from './include.types';
+} from '@audiophile/shared';
 
 export function makeInclude({ ...rest }: IncludeCreateParams): Include {
   return {
