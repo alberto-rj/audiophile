@@ -1,0 +1,9 @@
+{
+  "name": "audiophile",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "backend",
+    "frontend"
+  ]
+}

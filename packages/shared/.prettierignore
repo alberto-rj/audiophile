@@ -1,0 +1,7 @@
+node_modules
+migrations
+dist
+build
+coverage
+logs
+package-lock.json
