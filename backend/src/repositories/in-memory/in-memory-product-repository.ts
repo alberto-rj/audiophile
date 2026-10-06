@@ -1,6 +1,11 @@
 import { db } from '@/db/in-memory';
-import { makeCategory, paginate, type PaginateResult } from '@/helpers';
-import { makeGallery, makeProduct } from '@audiophile/shared';
+import {
+  makeCategory,
+  makeGallery,
+  makeProduct,
+  paginate,
+  type PaginateResult,
+} from '@/helpers';
 import type {
   Category,
   Product,

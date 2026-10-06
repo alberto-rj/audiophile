@@ -1,6 +1,5 @@
 import { db } from '@/db/in-memory';
-import { paginate, type PaginateResult } from '@/helpers';
-import { makeGallery } from '@audiophile/shared';
+import { makeGallery, paginate, type PaginateResult } from '@/helpers';
 import type {
   Gallery,
   GalleryCreateParams,

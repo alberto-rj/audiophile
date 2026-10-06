@@ -1,9 +1,10 @@
-import { db } from '@/db/in-memory';
 import {
-  makeOtherProduct,
   type OtherProduct,
   type OtherProductCreateParams,
 } from '@audiophile/shared';
+
+import { db } from '@/db/in-memory';
+import { makeOtherProduct } from '@/helpers';
 
 import type { OtherProductRepository } from '../types/other-product-repository.types';
 
