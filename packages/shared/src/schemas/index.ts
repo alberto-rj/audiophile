@@ -113,62 +113,15 @@ export type {
 export { CartSchema, CartDetailedSchema } from './cart/cart.schema';
 export type { Cart, CartDetailed } from './cart/cart.types';
 
-export {
-  ApiCategoryCreateBodySchema,
-  ApiCategoryIdParamsSchema,
-  ApiCategorySchema,
-  ApiCategorySlugParamsSchema,
-  ApiCategoryUpdateBodySchema,
-  ApiCategoryFindManyQuerySchema,
-} from './category/category.api.schema';
-export type {
-  ApiCategory,
-  ApiCategoryCreateBody,
-  ApiCategoryIdParams,
-  ApiCategorySlugParams,
-  ApiCategoryUpdateBody,
-  ApiCategoryFindManyQuery,
-} from './category/category.api.types';
-export {
-  CategoryCreateInputSchema,
-  CategoryFindManyInputSchema,
-  CategoryIdInputSchema,
-  CategorySlugInputSchema,
-  CategoryUpdateInputSchema,
-} from './category/category.input.schema';
-export type {
-  CategoryCreateInput,
-  CategoryFindManyInput,
-  CategoryIdInput,
-  CategorySlugInput,
-  CategoryUpdateInput,
-} from './category/category.input.types';
-export {
-  CategoryCreateParamsSchema,
-  CategoryFindByIdParamsSchema,
-  CategoryFindBySlugParamsSchema,
-  CategoryFindManyParamsSchema,
-  CategoryIdParamsSchema,
-  CategorySlugParamsSchema,
-  CategoryUpdateParamsSchema,
-} from './category/category.params.schema';
-export type {
-  CategoryCreateParams,
-  CategoryFindManyParams,
-  CategoryIdParams,
-  CategorySlugParams,
-  CategoryUpdateParams,
-} from './category/category.params.types';
-export {
-  CategoryDescriptionSchema,
-  CategoryIdSchema,
-  CategoryImageSchema,
-  CategoryNameSchema,
-  CategorySlugSchema,
-} from './category/category.base.schema';
-export { CategorySchema } from './category/category.schema';
-
-export type { Category } from './category/category.types';
+export * from './category/category.api.schema';
+export type * from './category/category.api.types';
+export * from './category/category.input.schema';
+export type * from './category/category.input.types';
+export * from './category/category.params.schema';
+export type * from './category/category.params.types';
+export * from './category/category.base.schema';
+export * from './category/category.schema';
+export type * from './category/category.types';
 
 export {
   ApiOrderCreateBodySchema,

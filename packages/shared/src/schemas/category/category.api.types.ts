@@ -4,6 +4,8 @@ import type {
   ApiCategoryCreateBodySchema,
   ApiCategoryFindManyQuerySchema,
   ApiCategoryIdParamsSchema,
+  ApiCategoryPaginationResponseSchema,
+  ApiCategoryResultListResponseSchema,
   ApiCategorySchema,
   ApiCategorySlugParamsSchema,
   ApiCategoryUpdateBodySchema,
@@ -22,3 +24,11 @@ export type ApiCategorySlugParams = z.infer<typeof ApiCategorySlugParamsSchema>;
 export type ApiCategoryIdParams = z.infer<typeof ApiCategoryIdParamsSchema>;
 
 export type ApiCategory = z.infer<typeof ApiCategorySchema>;
+
+export type ApiCategoryResultListResponse = z.infer<
+  typeof ApiCategoryResultListResponseSchema
+>;
+
+export type ApiCategoryPaginationResponse = z.infer<
+  typeof ApiCategoryPaginationResponseSchema
+>;

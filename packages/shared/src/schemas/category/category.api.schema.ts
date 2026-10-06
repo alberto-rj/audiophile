@@ -1,4 +1,8 @@
-import { ResponsiveImageSchema } from '../common/common.schema';
+import {
+  makeApiPaginationResponseSchema,
+  makeApiResultResponseSchema,
+  ResponsiveImageSchema,
+} from '../common/common.schema';
 
 import {
   CategoryCreateParamsSchema,
@@ -27,3 +31,9 @@ export const ApiCategorySlugParamsSchema = CategorySlugParamsSchema.extend({});
 export const ApiCategorySchema = CategorySchema.extend({
   image: ResponsiveImageSchema,
 });
+
+export const ApiCategoryResultListResponseSchema =
+  makeApiResultResponseSchema(ApiCategorySchema);
+
+export const ApiCategoryPaginationResponseSchema =
+  makeApiPaginationResponseSchema(ApiCategorySchema);
