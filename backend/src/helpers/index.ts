@@ -53,6 +53,10 @@ export { toOrderCreateInput } from './order/to-order-create-input';
 export { toOrderFindInput } from './order/to-order-find-input';
 export { toOrderFindManyInput } from './order/to-order-find-many-input';
 
+export * from './product/gallery.helpers';
+export * from './product/include.helpers';
+export * from './product/other-product.helpers';
+export * from './product/product.helpers';
 export { makeGalleryRepository } from './product/make-gallery-repository';
 export { makeIncludeRepository } from './product/make-include-repository';
 export { makeProductRepository } from './product/make-product-repository';
