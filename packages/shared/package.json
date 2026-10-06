@@ -41,7 +41,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^9.1.0",
+    "@asteasolutions/zod-to-openapi": "^8.5.0",
     "zod": "^4.4.3"
   }
 }

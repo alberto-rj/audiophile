@@ -1,9 +1,6 @@
 import { productRepository } from '@/config';
-import { ResourceNotFoundError } from '@/helpers';
-import {
-  makeProductFindBySlugParams,
-  type ProductDetailed,
-} from '@audiophile/shared';
+import { makeProductFindBySlugParams, ResourceNotFoundError } from '@/helpers';
+import { type ProductDetailed } from '@audiophile/shared';
 
 interface FindProductBySlugUseCaseParams {
   payload: unknown;
