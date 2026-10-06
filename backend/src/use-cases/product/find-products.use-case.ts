@@ -1,6 +1,9 @@
 import { productRepository } from '@/config';
 import { type PaginateResult } from '@/helpers';
-import { makeProductFindManyParams, type ProductDetailed } from '@/schemas';
+import {
+  makeProductFindManyParams,
+  type ProductDetailed,
+} from '@audiophile/shared';
 
 type FindCategoriesUseCaseParams = {
   payload: unknown;

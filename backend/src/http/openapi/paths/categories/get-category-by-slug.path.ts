@@ -6,7 +6,7 @@ import {
   ApiCategorySlugParamsSchema,
   ApiErrorResponseSchema,
   makeApiResultResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import {
   internalServerErrorResponse,

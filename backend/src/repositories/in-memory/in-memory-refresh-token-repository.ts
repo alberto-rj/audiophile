@@ -6,7 +6,7 @@ import type {
   RefreshTokenDeleteParams,
   RefreshTokenFindByIdParams,
   RefreshTokenFindParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { RefreshTokenRepository } from '../types/refresh-token-repository.types';
 

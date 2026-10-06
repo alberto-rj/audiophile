@@ -5,7 +5,7 @@ import {
   ApiProductIdParamsSchema,
   ApiProductFindManyQuerySchema,
   ApiProductSlugParamsSchema,
-} from './product.api.schema';
+} from '@audiophile/shared';
 import type {
   Product,
   ProductCreateParams,
@@ -14,7 +14,7 @@ import type {
   ProductFindByIdParams,
   ProductFindBySlugParams,
   ProductFindManyParams,
-} from './product.types';
+} from '@audiophile/shared';
 
 export function makeProduct({ name, ...rest }: ProductCreateParams): Product {
   const id = makeId();

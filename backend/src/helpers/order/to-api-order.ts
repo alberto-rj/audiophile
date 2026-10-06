@@ -1,4 +1,4 @@
-import type { ApiOrder, Order } from '@/schemas';
+import type { ApiOrder, Order } from '@audiophile/shared';
 
 import { buildResponseImage } from '../cloudinary/cloudinary';
 import { toSlug } from '../to-slug';

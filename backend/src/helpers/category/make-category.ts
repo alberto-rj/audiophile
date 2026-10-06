@@ -1,4 +1,4 @@
-import { type Category, type CategoryCreateParams } from '@/schemas';
+import { type Category, type CategoryCreateParams } from '@audiophile/shared';
 
 import { toSlug } from '../to-slug';
 import { makeId } from '../make-id';

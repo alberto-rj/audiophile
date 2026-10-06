@@ -1,6 +1,6 @@
 import { cartRepository } from '@/config';
 import { InternalServerError, toCartRemoveItemInput } from '@/helpers';
-import type { CartDetailed } from '@/schemas';
+import type { CartDetailed } from '@audiophile/shared';
 
 type RemoveCartItemUseCaseParams = {
   input: unknown;

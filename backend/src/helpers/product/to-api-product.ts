@@ -1,4 +1,4 @@
-import type { ApiProduct, ProductDetailed } from '@/schemas';
+import type { ApiProduct, ProductDetailed } from '@audiophile/shared';
 
 import { buildResponseImage } from '../cloudinary/cloudinary';
 

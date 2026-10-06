@@ -1,4 +1,7 @@
-import { CategoryUpdateInputSchema, type CategoryUpdateInput } from '@/schemas';
+import {
+  CategoryUpdateInputSchema,
+  type CategoryUpdateInput,
+} from '@audiophile/shared';
 
 import { parseSchema } from '../parse-schema';
 

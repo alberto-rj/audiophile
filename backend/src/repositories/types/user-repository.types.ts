@@ -4,7 +4,7 @@ import type {
   UserFindByEmailParams,
   UserFindByIdParams,
   UserUpdateParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface UserRepository {
   create: (params: UserCreateParams) => Promise<User>;

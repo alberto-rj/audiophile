@@ -11,7 +11,7 @@ import type {
   CartItemDetailed,
   CartFindOrCreateByUserIdParams,
   Product,
-} from '@/schemas';
+} from '@audiophile/shared';
 import { cartItems, carts, db } from '@/db/drizzle';
 
 import type { CartRepository } from '../types/cart-repository.types';

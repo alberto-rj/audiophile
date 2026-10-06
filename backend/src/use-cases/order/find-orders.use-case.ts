@@ -1,6 +1,6 @@
 import { orderRepository } from '@/config';
 import { toOrderFindManyInput, type PaginateResult } from '@/helpers';
-import type { Order } from '@/schemas';
+import type { Order } from '@audiophile/shared';
 
 type FindOrdersUseCaseParams = {
   input: unknown;

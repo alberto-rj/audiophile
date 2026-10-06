@@ -1,4 +1,7 @@
-import { UserFindByIdInputSchema, type UserFindByIdInput } from '@/schemas';
+import {
+  UserFindByIdInputSchema,
+  type UserFindByIdInput,
+} from '@audiophile/shared';
 
 import { parseSchema } from '../parse-schema';
 

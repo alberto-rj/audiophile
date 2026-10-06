@@ -1,4 +1,4 @@
-import type { User, UserCreateParams } from '@/schemas';
+import type { User, UserCreateParams } from '@audiophile/shared';
 
 import { makeId } from '../make-id';
 

@@ -7,7 +7,7 @@ import type {
   GalleryDeleteByIdParams,
   GalleryFindByIdParams,
   GalleryFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 import { count, eq } from 'drizzle-orm';
 
 function toItem(item: RawGallery): Gallery {

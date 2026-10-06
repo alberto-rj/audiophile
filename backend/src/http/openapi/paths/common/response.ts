@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import {
   ApiErrorResponseSchema,
   ApiValidationErrorResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export const unauthorizedResponse = {
   [StatusCodes.UNAUTHORIZED]: {

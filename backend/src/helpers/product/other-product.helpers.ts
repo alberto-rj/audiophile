@@ -3,8 +3,8 @@ import { parseSchema } from '@/helpers';
 import type {
   OtherProduct,
   OtherProductCreateParams,
-} from './other-product.types';
-import { OtherProductCreateParamsSchema } from './other-product.schema';
+} from '@audiophile/shared';
+import { OtherProductCreateParamsSchema } from '@audiophile/shared';
 
 export function makeOtherProduct({
   ...rest

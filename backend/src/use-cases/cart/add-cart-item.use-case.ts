@@ -4,7 +4,7 @@ import {
   ResourceNotFoundError,
   toCartAddItemInput,
 } from '@/helpers';
-import type { CartDetailed } from '@/schemas';
+import type { CartDetailed } from '@audiophile/shared';
 
 type AddCartItemUseCaseParams = {
   input: unknown;

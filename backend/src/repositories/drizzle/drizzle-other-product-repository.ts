@@ -3,7 +3,10 @@ import {
   otherProducts,
   type OtherProduct as DrizzleOtherProduct,
 } from '@/db/drizzle';
-import type { OtherProduct, OtherProductCreateParams } from '@/schemas';
+import type {
+  OtherProduct,
+  OtherProductCreateParams,
+} from '@audiophile/shared';
 
 import type { OtherProductRepository } from '../types/other-product-repository.types';
 

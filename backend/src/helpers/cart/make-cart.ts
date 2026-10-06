@@ -3,7 +3,7 @@ import type {
   CartAddItemParams,
   CartItem,
   CartItemDetailed,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import { makeId } from '../make-id';
 

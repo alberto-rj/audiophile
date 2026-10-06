@@ -3,7 +3,7 @@ import type {
   ApiCartItem,
   CartDetailed,
   CartItemDetailed,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import { buildResponseImage } from '../cloudinary/cloudinary';
 

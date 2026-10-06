@@ -1,4 +1,7 @@
-import type { OtherProduct, OtherProductCreateParams } from '@/schemas';
+import type {
+  OtherProduct,
+  OtherProductCreateParams,
+} from '@audiophile/shared';
 
 export interface OtherProductRepository {
   create: (params: OtherProductCreateParams) => Promise<OtherProduct>;

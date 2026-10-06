@@ -1,6 +1,6 @@
 import { db } from '@/db/in-memory';
 import { makeCategory, paginate, type PaginateResult } from '@/helpers';
-import { makeGallery, makeProduct } from '@/schemas';
+import { makeGallery, makeProduct } from '@audiophile/shared';
 import type {
   Category,
   Product,
@@ -12,7 +12,7 @@ import type {
   ProductFindBySlugParams,
   ProductFindManyParams,
   ProductId,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { ProductRepository } from '../types/product-repository.types';
 

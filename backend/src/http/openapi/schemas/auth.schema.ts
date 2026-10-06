@@ -2,7 +2,7 @@ import {
   ApiAuthLoginBodySchema,
   ApiAuthRegisterBodySchema,
   ApiAuthResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import { registry } from '../registry';
 

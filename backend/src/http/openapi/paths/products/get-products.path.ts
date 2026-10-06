@@ -5,7 +5,7 @@ import {
   ApiPaginationQuerySchema,
   ApiProductSchema,
   makeApiPaginationResponseSchema,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import {
   internalServerErrorResponse,

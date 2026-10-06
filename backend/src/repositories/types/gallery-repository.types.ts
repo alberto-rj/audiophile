@@ -5,7 +5,7 @@ import type {
   GalleryDeleteByIdParams,
   GalleryFindByIdParams,
   GalleryFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface GalleryRepository {
   create: (params: GalleryCreateParams) => Promise<Gallery>;

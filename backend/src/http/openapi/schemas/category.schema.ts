@@ -1,4 +1,4 @@
-import { ApiCategorySchema } from '@/schemas';
+import { ApiCategorySchema } from '@audiophile/shared';
 
 import { registry } from '../registry';
 

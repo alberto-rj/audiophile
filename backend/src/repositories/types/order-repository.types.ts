@@ -4,7 +4,7 @@ import type {
   OrderCreateParams,
   OrderFindByIdParams,
   OrderFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface OrderRepository {
   create: (params: OrderCreateParams) => Promise<Order>;

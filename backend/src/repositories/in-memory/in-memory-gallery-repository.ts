@@ -1,13 +1,13 @@
 import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers';
-import { makeGallery } from '@/schemas';
+import { makeGallery } from '@audiophile/shared';
 import type {
   Gallery,
   GalleryCreateParams,
   GalleryDeleteByIdParams,
   GalleryFindByIdParams,
   GalleryFindManyParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 import type { GalleryRepository } from '../types/gallery-repository.types';
 

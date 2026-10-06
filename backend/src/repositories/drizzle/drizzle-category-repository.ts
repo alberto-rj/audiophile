@@ -9,7 +9,7 @@ import type {
   CategoryIdParams,
   CategorySlugParams,
   CategoryUpdateParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 import type { CategoryRepository } from '@/repositories';
 
 function parseItem(rawItem: RawCategory): Category {

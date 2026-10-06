@@ -1,4 +1,4 @@
-import { ApiUserResponseSchema, ApiUserSchema } from '@/schemas';
+import { ApiUserResponseSchema, ApiUserSchema } from '@audiophile/shared';
 
 import { registry } from '../registry';
 

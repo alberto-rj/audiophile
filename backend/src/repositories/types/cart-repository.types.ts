@@ -6,7 +6,7 @@ import type {
   CartRemoveAllParams,
   CartRemoveItemParams,
   CartUpdateItemParams,
-} from '@/schemas';
+} from '@audiophile/shared';
 
 export interface CartRepository {
   add: (params: CartAddItemParams) => Promise<CartDetailed | null>;
