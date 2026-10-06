@@ -7,7 +7,7 @@ import {
   refreshTokenExpiresAt,
   UnauthorizedError,
 } from '@/helpers';
-import type { User } from '@/schemas';
+import type { User } from '@audiophile/shared';
 
 interface LoginUseCaseParams {
   input: unknown;

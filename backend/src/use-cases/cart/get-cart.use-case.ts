@@ -1,6 +1,6 @@
 import { cartRepository } from '@/config';
 import { toCartGetInput } from '@/helpers';
-import type { CartDetailed } from '@/schemas';
+import type { CartDetailed } from '@audiophile/shared';
 
 type GetCartUseCaseParams = {
   input: unknown;

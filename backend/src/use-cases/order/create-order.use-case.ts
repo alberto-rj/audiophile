@@ -1,6 +1,6 @@
 import { orderRepository } from '@/config';
 import { getProductItemSummary, toOrderCreateInput } from '@/helpers';
-import type { Order } from '@/schemas';
+import type { Order } from '@audiophile/shared';
 
 type CreateOrderUseCaseParams = {
   input: unknown;

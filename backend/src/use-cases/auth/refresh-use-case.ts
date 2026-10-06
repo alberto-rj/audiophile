@@ -5,7 +5,7 @@ import {
   refreshTokenExpiresAt,
   UnauthorizedError,
 } from '@/helpers';
-import type { RefreshTokenFindParams, User } from '@/schemas';
+import type { RefreshTokenFindParams, User } from '@audiophile/shared';
 
 interface RefreshUseCaseParams {
   input: RefreshTokenFindParams;

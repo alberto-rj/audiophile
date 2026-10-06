@@ -7,7 +7,7 @@ import {
   toAuthRegisterInput,
   refreshTokenExpiresAt,
 } from '@/helpers';
-import type { User } from '@/schemas';
+import type { User } from '@audiophile/shared';
 
 interface RegisterUseCaseParams {
   input: unknown;
