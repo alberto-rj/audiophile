@@ -9,8 +9,8 @@ import {
 } from './product.base.schema';
 
 export const SuggestionSchema = z.object({
-  otherId: ProductIdSchema,
-  productId: ProductIdSchema,
+  sourceId: ProductIdSchema,
+  targetId: ProductIdSchema,
 });
 
 export const SuggestionDetailedSchema = z.object({

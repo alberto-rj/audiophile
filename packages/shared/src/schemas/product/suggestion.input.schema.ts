@@ -1,14 +1,14 @@
 import {
   SuggestionCreateParamsSchema,
-  SuggestionOtherIdParamsSchema,
-  SuggestionProductIdParamsSchema,
+  SuggestionSourceIdParamsSchema,
+  SuggestionTargetIdParamsSchema,
 } from './suggestion.params.schema';
 
-export const SuggestionOtherIdInputSchema =
-  SuggestionOtherIdParamsSchema.extend({});
+export const SuggestionSourceIdInputSchema =
+  SuggestionSourceIdParamsSchema.extend({});
 
-export const SuggestionProductIdInputSchema =
-  SuggestionProductIdParamsSchema.extend({});
+export const SuggestionTargetIdInputSchema =
+  SuggestionTargetIdParamsSchema.extend({});
 
 export const SuggestionCreateInputSchema = SuggestionCreateParamsSchema.extend(
   {},

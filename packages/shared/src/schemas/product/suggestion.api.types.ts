@@ -2,17 +2,17 @@ import { z } from '@/config';
 
 import {
   ApiSuggestionCreateBodySchema,
-  ApiSuggestionOtherIdParamsSchema,
-  ApiSuggestionProductIdParamsSchema,
+  ApiSuggestionSourceIdParamsSchema,
+  ApiSuggestionTargetIdParamsSchema,
   ApiSuggestionSchema,
 } from './suggestion.api.schema';
 
-export type ApiSuggestionOtherIdParams = z.infer<
-  typeof ApiSuggestionOtherIdParamsSchema
+export type ApiSuggestionSourceIdParams = z.infer<
+  typeof ApiSuggestionSourceIdParamsSchema
 >;
 
-export type ApiSuggestionProductIdParams = z.infer<
-  typeof ApiSuggestionProductIdParamsSchema
+export type ApiSuggestionTargetIdParams = z.infer<
+  typeof ApiSuggestionTargetIdParamsSchema
 >;
 
 export type ApiSuggestionCreateBody = z.infer<

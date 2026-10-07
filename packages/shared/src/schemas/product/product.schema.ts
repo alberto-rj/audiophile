@@ -43,12 +43,3 @@ export const ProductDetailedSchema = z.object({
   gallery: GalleryDetailedSchema,
   suggestions: z.array(SuggestionDetailedSchema),
 });
-
-/*
-
-export const ProductOtherSchema = z.object({
-  id: ProductIdSchema,
-  productId: ProductIdSchema,
-});
-
-*/

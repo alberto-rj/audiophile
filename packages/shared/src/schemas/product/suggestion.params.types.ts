@@ -2,16 +2,16 @@ import { z } from '@/config';
 
 import {
   SuggestionCreateParamsSchema,
-  SuggestionOtherIdParamsSchema,
-  SuggestionProductIdParamsSchema,
+  SuggestionSourceIdParamsSchema,
+  SuggestionTargetIdParamsSchema,
 } from './suggestion.params.schema';
 
-export type SuggestionOtherIdParams = z.infer<
-  typeof SuggestionOtherIdParamsSchema
+export type SuggestionSourceIdParams = z.infer<
+  typeof SuggestionSourceIdParamsSchema
 >;
 
-export type SuggestionProductIdParams = z.infer<
-  typeof SuggestionProductIdParamsSchema
+export type SuggestionTargetIdParams = z.infer<
+  typeof SuggestionTargetIdParamsSchema
 >;
 
 export type SuggestionCreateParams = z.infer<

@@ -70,6 +70,8 @@ export type * from './product/suggestion.types';
 export * from './product/product.base.schema';
 export * from './product/product.api.schema';
 export type * from './product/product.api.types';
+export * from './product/product.input.schema';
+export type * from './product/product.input.types';
 export * from './product/product.params.schema';
 export type * from './product/product.params.types';
 export * from './product/product.schema';
