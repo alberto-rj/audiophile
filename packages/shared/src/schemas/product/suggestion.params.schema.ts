@@ -3,15 +3,15 @@ import { z } from '@/config';
 
 import { ProductIdSchema } from './product.base.schema';
 
-export const SuggestionOtherIdParamsSchema = z.object({
-  otherId: ProductIdSchema,
+export const SuggestionSourceIdParamsSchema = z.object({
+  sourceId: ProductIdSchema,
 });
 
-export const SuggestionProductIdParamsSchema = z.object({
-  productId: ProductIdSchema,
+export const SuggestionTargetIdParamsSchema = z.object({
+  targetId: ProductIdSchema,
 });
 
 export const SuggestionCreateParamsSchema = z.object({
-  otherId: ProductIdSchema,
-  productId: ProductIdSchema,
+  sourceId: ProductIdSchema,
+  targetId: ProductIdSchema,
 });

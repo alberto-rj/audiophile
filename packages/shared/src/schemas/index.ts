@@ -70,6 +70,8 @@ export type * from './product/suggestion.types';
 export * from './product/product.base.schema';
 export * from './product/product.api.schema';
 export type * from './product/product.api.types';
+export * from './product/product.input.schema';
+export type * from './product/product.input.types';
 export * from './product/product.params.schema';
 export type * from './product/product.params.types';
 export * from './product/product.schema';
@@ -77,6 +79,8 @@ export type * from './product/product.types';
 
 export * from './refresh-token/refresh-token.base.schema';
 export type * from './refresh-token/refresh-token.types';
+export * from './refresh-token/refresh-token.params.schema';
+export type * from './refresh-token/refresh-token.params.types';
 
 export * from './user/user.api.schema';
 export type * from './user/user.api.types';

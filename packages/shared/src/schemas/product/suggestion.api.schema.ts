@@ -4,16 +4,16 @@ import { ResponsiveImageSchema } from '../common/common.schema';
 
 import {
   SuggestionCreateParamsSchema,
-  SuggestionOtherIdParamsSchema,
-  SuggestionProductIdParamsSchema,
+  SuggestionSourceIdParamsSchema,
+  SuggestionTargetIdParamsSchema,
 } from './suggestion.params.schema';
 import { ProductNameSchema, ProductSlugSchema } from './product.base.schema';
 
-export const ApiSuggestionOtherIdParamsSchema =
-  SuggestionOtherIdParamsSchema.extend({});
+export const ApiSuggestionSourceIdParamsSchema =
+  SuggestionSourceIdParamsSchema.extend({});
 
-export const ApiSuggestionProductIdParamsSchema =
-  SuggestionProductIdParamsSchema.extend({});
+export const ApiSuggestionTargetIdParamsSchema =
+  SuggestionTargetIdParamsSchema.extend({});
 
 export const ApiSuggestionCreateBodySchema =
   SuggestionCreateParamsSchema.extend({});
