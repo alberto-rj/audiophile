@@ -1,5 +1,7 @@
 import { z } from '@/config';
 
+import { ProductDetailedSchema } from '../product/product.schema';
+
 import {
   CategoryDescriptionSchema,
   CategoryIdSchema,
@@ -14,4 +16,14 @@ export const CategorySchema = z.object({
   image: CategoryImageSchema,
   name: CategoryNameSchema,
   description: CategoryDescriptionSchema,
+});
+
+export const CategoryDetailedSchema = CategorySchema.extend({
+  products: z.array(ProductDetailedSchema),
+});
+
+export const CategoryProductDetailedSchema = z.object({
+  name: CategoryNameSchema,
+  slug: CategorySlugSchema,
+  description: CategoryDescriptionSchema.nullish(),
 });

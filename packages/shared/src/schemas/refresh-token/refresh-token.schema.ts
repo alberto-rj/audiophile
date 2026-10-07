@@ -20,17 +20,3 @@ export const RefreshTokenSchema = z
     ...rest,
     expiresAt: expiresAt.toISOString(),
   }));
-
-export const RefreshTokenCreateParamsSchema = z.object({
-  userId: UserIdSchema,
-  token: RefreshTokenTokenSchema,
-  expiresAt: RefreshTokenExpiresAtSchema,
-});
-
-export const RefreshTokenIdParamsSchema = z.object({
-  id: RefreshTokenIdSchema,
-});
-
-export const RefreshTokenTokenParamsSchema = z.object({
-  token: RefreshTokenTokenSchema,
-});

@@ -1,58 +1,49 @@
 import { z } from '@/config';
 
-import {
-  CategoryIdSchema,
-  CategoryNameSchema,
-} from '../category/category.base.schema';
-import {
-  ApiPaginationQuerySchema,
-  ResponsiveImageSchema,
-} from '../common/common.schema';
+import { CategoryNameSchema } from '../category/category.base.schema';
+import { ResponsiveImageSchema } from '../common/common.schema';
+
 import { ApiGallerySchema } from './gallery.api.schema';
 import { ApiIncludeSchema } from './include.api.schema';
 import {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
   ProductIdSchema,
-  ProductImageSchema,
   ProductIsNewSchema,
   ProductNameSchema,
   ProductPriceSchema,
   ProductSlugSchema,
 } from './product.base.schema';
-import { ProductBaseSchema } from './product.schema';
+import {
+  ProductCreateParamsSchema,
+  ProductFindManyParamsSchema,
+  ProductIdParamsSchema,
+  ProductSlugParamsSchema,
+} from './product.params.schema';
+import { ApiSuggestionSchema } from './suggestion.api.schema';
 
-export const ApiProductCreateBodySchema = z.object({
-  image: ProductImageSchema,
-  name: ProductNameSchema,
-  description: ProductDescriptionSchema.optional(),
-  features: ProductFeaturesSchema,
-  price: ProductPriceSchema,
-  categoryId: CategoryIdSchema,
-});
+export const ApiProductCreateBodySchema = ProductCreateParamsSchema.extend({});
 
-export const ApiProductIdParamsSchema = z.object({
-  id: ProductIdSchema,
-});
+export const ApiProductIdParamsSchema = ProductIdParamsSchema.extend({});
 
-export const ApiProductSlugParamsSchema = z.object({
-  slug: ProductSlugSchema,
-});
+export const ApiProductSlugParamsSchema = ProductSlugParamsSchema.extend({});
 
 export const ApiProductSchema = z.object({
   id: ProductIdSchema,
   slug: ProductSlugSchema,
   name: ProductNameSchema,
-  isNew: ProductIsNewSchema,
   price: ProductPriceSchema,
+  image: ResponsiveImageSchema,
+  isNew: ProductIsNewSchema,
   description: ProductDescriptionSchema.nullish(),
   features: ProductFeaturesSchema,
   category: CategoryNameSchema,
-  image: ResponsiveImageSchema,
   previewImage: ResponsiveImageSchema,
   includes: z.array(ApiIncludeSchema),
   gallery: ApiGallerySchema,
-  suggestions: z.array(ProductBaseSchema),
+  suggestions: z.array(ApiSuggestionSchema),
 });
 
-export const ApiProductFindManyQuerySchema = ApiPaginationQuerySchema;
+export const ApiProductFindManyQuerySchema = ProductFindManyParamsSchema.extend(
+  {},
+);

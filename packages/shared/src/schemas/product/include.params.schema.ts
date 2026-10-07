@@ -1,5 +1,7 @@
 import { z } from '@/config';
 
+import { LimitSchema, PageSchema } from '../common/common.schema';
+
 import {
   IncludeIdSchema,
   IncludeItemSchema,
@@ -7,14 +9,17 @@ import {
 } from './include.base.schema';
 import { ProductIdSchema } from './product.base.schema';
 
-export const IncludeSchema = z.object({
+export const IncludeIdParamsSchema = z.object({
   id: IncludeIdSchema,
+});
+
+export const IncludeCreateParamsSchema = z.object({
   quantity: IncludeQuantitySchema,
   item: IncludeItemSchema,
   productId: ProductIdSchema,
 });
 
-export const IncludeDetailedSchema = z.object({
-  quantity: IncludeQuantitySchema,
-  item: IncludeItemSchema,
+export const IncludeFindManyParamsSchema = z.object({
+  limit: LimitSchema,
+  page: PageSchema,
 });
