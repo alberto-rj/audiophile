@@ -51,3 +51,9 @@ export const CategoryDescriptionSchema = z
     example:
       'Explore our collection of premium headphones designed for exceptional sound quality.',
   });
+
+export const CategoryIncludeProductsSchema = z
+  .boolean({
+    error: 'includeProducts must be a boolean.',
+  })
+  .optional();

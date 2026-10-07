@@ -1,12 +1,8 @@
 import { z } from '@/config';
 
-import {
-  CategoryDescriptionSchema,
-  CategoryIdSchema,
-  CategoryNameSchema,
-  CategorySlugSchema,
-} from '../category/category.base.schema';
-import { ResponsiveImageSchema } from '../common/common.schema';
+import { CategoryIdSchema } from '../category/category.base.schema';
+import { CategoryProductDetailedSchema } from '../category/category.schema';
+
 import {
   ProductDescriptionSchema,
   ProductFeaturesSchema,
@@ -17,17 +13,9 @@ import {
   ProductPriceSchema,
   ProductSlugSchema,
 } from './product.base.schema';
-import {
-  IncludeItemSchema,
-  IncludeQuantitySchema,
-} from './include.base.schema';
-import { GalleryImageSchema } from './gallery.base.schema';
-
-export const ProductBaseSchema = z.object({
-  slug: ProductSlugSchema,
-  name: ProductNameSchema,
-  image: ResponsiveImageSchema,
-});
+import { SuggestionDetailedSchema } from './suggestion.schema';
+import { GalleryDetailedSchema } from './gallery.schema';
+import { IncludeDetailedSchema } from './include.schema';
 
 export const ProductSchema = z.object({
   id: ProductIdSchema,
@@ -50,32 +38,17 @@ export const ProductDetailedSchema = z.object({
   price: ProductPriceSchema,
   description: ProductDescriptionSchema.nullish(),
   features: ProductFeaturesSchema,
-  includes: z.array(
-    z.object({
-      quantity: IncludeQuantitySchema,
-      item: IncludeItemSchema,
-    }),
-  ),
-  category: z.object({
-    name: CategoryNameSchema,
-    slug: CategorySlugSchema,
-    description: CategoryDescriptionSchema.nullish(),
-  }),
-  gallery: z.object({
-    first: GalleryImageSchema,
-    second: GalleryImageSchema,
-    third: GalleryImageSchema,
-  }),
-  suggestions: z.array(
-    z.object({
-      name: ProductNameSchema,
-      slug: ProductSlugSchema,
-      image: ProductImageSchema,
-    }),
-  ),
+  includes: z.array(IncludeDetailedSchema),
+  category: CategoryProductDetailedSchema,
+  gallery: GalleryDetailedSchema,
+  suggestions: z.array(SuggestionDetailedSchema),
 });
+
+/*
 
 export const ProductOtherSchema = z.object({
   id: ProductIdSchema,
   productId: ProductIdSchema,
 });
+
+*/

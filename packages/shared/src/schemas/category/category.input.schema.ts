@@ -1,3 +1,6 @@
+import { LimitSchema, PageSchema } from '../common/common.schema';
+
+import { CategoryIncludeProductsSchema } from './category.base.schema';
 import {
   CategoryCreateParamsSchema,
   CategoryFindByIdParamsSchema,
@@ -12,6 +15,12 @@ export const CategoryUpdateInputSchema = CategoryCreateParamsSchema.extend({});
 export const CategoryIdInputSchema = CategoryFindByIdParamsSchema.extend({});
 
 export const CategorySlugInputSchema = CategorySlugParamsSchema.extend({});
+
+export const CategoryFindBySlugInputSchema = CategorySlugParamsSchema.extend({
+  includeProducts: CategoryIncludeProductsSchema,
+  page: PageSchema,
+  limit: LimitSchema,
+});
 
 export const CategoryFindManyInputSchema = CategoryFindManyParamsSchema.extend(
   {},
