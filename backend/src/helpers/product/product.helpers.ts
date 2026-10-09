@@ -1,64 +1,42 @@
-import { makeId, parseSchema, toSlug } from '@/helpers';
+import { isNewProduct, makeId, parseSchema, toSlug } from '@/helpers';
 
 import {
-  ApiProductCreateBodySchema,
-  ApiProductIdParamsSchema,
-  ApiProductFindManyQuerySchema,
-  ApiProductSlugParamsSchema,
+  ProductCreateInputSchema,
+  ProductIdInputSchema,
+  ProductFindManyInputSchema,
+  ProductSlugInputSchema,
 } from '@audiophile/shared';
 import type {
   Product,
+  ProductCreateInput,
   ProductCreateParams,
-  ProductDeleteByIdParams,
-  ProductDeleteBySlugParams,
-  ProductFindByIdParams,
-  ProductFindBySlugParams,
-  ProductFindManyParams,
+  ProductFindManyInput,
+  ProductIdInput,
+  ProductSlugInput,
 } from '@audiophile/shared';
 
 export function makeProduct({ name, ...rest }: ProductCreateParams): Product {
-  const id = makeId();
-  const isNew = id % 2 === 0;
-
   return {
     ...rest,
-    id,
-    isNew,
     name,
+    id: makeId(),
     slug: toSlug(name),
+    isNew: isNewProduct(new Date()),
   };
 }
 
-export function makeProductCreateParams(params: unknown): ProductCreateParams {
-  return parseSchema(ApiProductCreateBodySchema, params);
+export function toProductCreateInput(data: unknown): ProductCreateInput {
+  return parseSchema(ProductCreateInputSchema, data);
 }
 
-export function makeProductFindByIdParams(
-  params: unknown,
-): ProductFindByIdParams {
-  return parseSchema(ApiProductIdParamsSchema, params);
+export function toProductIdInput(data: unknown): ProductIdInput {
+  return parseSchema(ProductIdInputSchema, data);
 }
 
-export function makeProductFindBySlugParams(
-  params: unknown,
-): ProductFindBySlugParams {
-  return parseSchema(ApiProductSlugParamsSchema, params);
+export function toProductSlugInput(data: unknown): ProductSlugInput {
+  return parseSchema(ProductSlugInputSchema, data);
 }
 
-export function makeProductDeleteByIdParams(
-  params: unknown,
-): ProductDeleteByIdParams {
-  return parseSchema(ApiProductIdParamsSchema, params);
-}
-
-export function makeProductDeleteBySlugParams(
-  params: unknown,
-): ProductDeleteBySlugParams {
-  return parseSchema(ApiProductSlugParamsSchema, params);
-}
-
-export function makeProductFindManyParams(
-  params: unknown,
-): ProductFindManyParams {
-  return parseSchema(ApiProductFindManyQuerySchema, params);
+export function toProductFindManyInput(data: unknown): ProductFindManyInput {
+  return parseSchema(ProductFindManyInputSchema, data);
 }

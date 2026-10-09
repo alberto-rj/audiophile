@@ -1,14 +1,14 @@
 import { makeId, parseSchema } from '@/helpers';
 
 import {
-  ApiGalleryCreateBodySchema,
-  ApiGalleryIdParamsSchema,
-  ApiGalleryPaginationQuerySchema,
+  GalleryCreateInputSchema,
+  GalleryFindManyInputSchema,
+  GalleryIdInputSchema,
   type Gallery,
+  type GalleryCreateInput,
   type GalleryCreateParams,
-  type GalleryDeleteByIdParams,
-  type GalleryFindByIdParams,
-  type GalleryFindManyParams,
+  type GalleryFindManyInput,
+  type GalleryIdInput,
 } from '@audiophile/shared';
 
 export function makeGallery({ ...rest }: GalleryCreateParams): Gallery {
@@ -18,24 +18,14 @@ export function makeGallery({ ...rest }: GalleryCreateParams): Gallery {
   };
 }
 
-export function makeGalleryCreateParams(params: unknown): GalleryCreateParams {
-  return parseSchema(ApiGalleryCreateBodySchema, params);
+export function toGalleryCreateInput(data: unknown): GalleryCreateInput {
+  return parseSchema(GalleryCreateInputSchema, data);
 }
 
-export function makeGalleryFindByIdParams(
-  params: unknown,
-): GalleryFindByIdParams {
-  return parseSchema(ApiGalleryIdParamsSchema, params);
+export function toGalleryIdInput(data: unknown): GalleryIdInput {
+  return parseSchema(GalleryIdInputSchema, data);
 }
 
-export function makeGalleryDeleteByIdParams(
-  params: unknown,
-): GalleryDeleteByIdParams {
-  return parseSchema(ApiGalleryIdParamsSchema, params);
-}
-
-export function makeGalleryFindManyParams(
-  params: unknown,
-): GalleryFindManyParams {
-  return parseSchema(ApiGalleryPaginationQuerySchema, params);
+export function toGalleryFindManyInput(data: unknown): GalleryFindManyInput {
+  return parseSchema(GalleryFindManyInputSchema, data);
 }
