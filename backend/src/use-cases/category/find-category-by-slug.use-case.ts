@@ -1,27 +1,49 @@
-import { categoryRepository } from '@/config';
-import { ResourceNotFoundError, toCategorySlugInput } from '@/helpers';
-import type { Category } from '@audiophile/shared';
+import type { Category, ProductDetailed } from '@audiophile/shared';
+
+import { categoryRepository, productRepository } from '@/config';
+import {
+  paginate,
+  ResourceNotFoundError,
+  toCategoryFindBySlugInput,
+  type PaginateResult,
+} from '@/helpers';
 
 interface FindCategoryBySlugUseCaseParams {
   input: unknown;
 }
 
 interface FindCategoryBySlugUseCaseResult {
-  output: Category;
+  category: Category;
+  products: PaginateResult<ProductDetailed>;
 }
 
 export async function findCategoryBySlugUseCase({
   input,
 }: FindCategoryBySlugUseCaseParams): Promise<FindCategoryBySlugUseCaseResult> {
-  const { slug } = toCategorySlugInput(input);
+  const { slug, includeProducts, limit, page } =
+    toCategoryFindBySlugInput(input);
 
-  const foundItem = await categoryRepository.findBySlug({ slug });
+  const foundCategory = await categoryRepository.findBySlug({ slug });
 
-  if (!foundItem) {
+  if (!foundCategory) {
     throw new ResourceNotFoundError('Category not found.');
   }
 
+  if (!includeProducts) {
+    return {
+      category: foundCategory,
+      products: paginate({ items: [], limit, page }),
+    };
+  }
+
+  const productsPaginationResults = await productRepository.findMany({
+    category: foundCategory.name,
+    limit,
+    page,
+  });
+
   return {
-    output: foundItem,
+    category: foundCategory,
+    products: productsPaginationResults,
   };
 }
