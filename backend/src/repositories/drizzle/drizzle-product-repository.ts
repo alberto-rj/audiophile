@@ -24,45 +24,92 @@ import {
 } from '@/helpers';
 import type { ProductRepository } from '@/repositories';
 
-const PRODUCT_WITH = {
-  category: {
-    columns: {
-      name: true,
-      slug: true,
-      description: true,
-      image: true,
-    },
-  },
-  gallery: {
-    columns: {
-      first: true,
-      second: true,
-      third: true,
-    },
-  },
-  includes: {
-    columns: {
-      item: true,
-      quantity: true,
-    },
-  },
-  targets: {
-    columns: {},
-    with: {
-      source: {
+function getProductWith(params: { categoryName?: string } = {}) {
+  const { categoryName } = params;
+
+  if (typeof categoryName === 'string') {
+    return {
+      category: {
         columns: {
           name: true,
           slug: true,
+          description: true,
           image: true,
+        },
+        where: {
+          name: { eq: categoryName },
+        },
+      },
+      gallery: {
+        columns: {
+          first: true,
+          second: true,
+          third: true,
+        },
+      },
+      includes: {
+        columns: {
+          item: true,
+          quantity: true,
+        },
+      },
+      targets: {
+        columns: {},
+        with: {
+          source: {
+            columns: {
+              name: true,
+              slug: true,
+              image: true,
+            },
+          },
+        },
+      },
+    };
+  }
+
+  return {
+    category: {
+      columns: {
+        name: true,
+        slug: true,
+        description: true,
+        image: true,
+      },
+    },
+    gallery: {
+      columns: {
+        first: true,
+        second: true,
+        third: true,
+      },
+    },
+    includes: {
+      columns: {
+        item: true,
+        quantity: true,
+      },
+    },
+    targets: {
+      columns: {},
+      with: {
+        source: {
+          columns: {
+            name: true,
+            slug: true,
+            image: true,
+          },
         },
       },
     },
-  },
-} as const;
+  };
+}
 
-const PRODUCT_COLUMNS = {
-  categoryId: false,
-} as const;
+function getProductColumns() {
+  return {
+    categoryId: false,
+  };
+}
 
 export type DrizzleProductDetailed = Omit<DrizzleProduct, 'categoryId'> & {
   category: Pick<DrizzleCategory, 'name' | 'slug' | 'description' | 'image'>;
@@ -97,8 +144,8 @@ export class DrizzleProductRepository implements ProductRepository {
   async findById({ id }: ProductIdParams): Promise<ProductDetailed | null> {
     const foundProduct = await db.query.products.findFirst({
       where: eq(products.id, id),
-      with: PRODUCT_WITH,
-      columns: PRODUCT_COLUMNS,
+      with: getProductWith(),
+      columns: getProductColumns(),
     });
 
     if (!foundProduct) {
@@ -113,8 +160,8 @@ export class DrizzleProductRepository implements ProductRepository {
   }: ProductSlugParams): Promise<ProductDetailed | null> {
     const foundProduct = await db.query.products.findFirst({
       where: eq(products.slug, slug),
-      with: PRODUCT_WITH,
-      columns: PRODUCT_COLUMNS,
+      with: getProductWith(),
+      columns: getProductColumns(),
     });
 
     if (!foundProduct) {
@@ -131,8 +178,8 @@ export class DrizzleProductRepository implements ProductRepository {
   }: ProductFindManyParams): Promise<PaginateResult<ProductDetailed>> {
     const [foundProducts, [totalProductsResult]] = await Promise.all([
       db.query.products.findMany({
-        with: PRODUCT_WITH,
-        columns: PRODUCT_COLUMNS,
+        with: getProductWith({ categoryName: category }),
+        columns: getProductColumns(),
         limit,
         offset: getOffset({ limit, page }),
       }),

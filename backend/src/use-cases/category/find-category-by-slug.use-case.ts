@@ -14,7 +14,7 @@ interface FindCategoryBySlugUseCaseParams {
 
 interface FindCategoryBySlugUseCaseResult {
   category: Category;
-  products: PaginateResult<ProductDetailed>;
+  productPaginationResult: PaginateResult<ProductDetailed>;
 }
 
 export async function findCategoryBySlugUseCase({
@@ -32,7 +32,7 @@ export async function findCategoryBySlugUseCase({
   if (!includeProducts) {
     return {
       category: foundCategory,
-      products: paginate({ items: [], limit, page }),
+      productPaginationResult: paginate({ items: [], limit, page }),
     };
   }
 
@@ -44,6 +44,6 @@ export async function findCategoryBySlugUseCase({
 
   return {
     category: foundCategory,
-    products: productsPaginationResults,
+    productPaginationResult: productsPaginationResults,
   };
 }
