@@ -1,17 +1,17 @@
-import { makeId, parseSchema } from '@/helpers';
-
 import {
-  ApiIncludeCreateBodySchema,
-  ApiIncludeIdParamsSchema,
-  ApiIncludePaginationQuerySchema,
+  IncludeCreateInputSchema,
+  IncludeFindManyInputSchema,
+  IncludeIdInputSchema,
 } from '@audiophile/shared';
 import type {
   Include,
+  IncludeCreateInput,
   IncludeCreateParams,
-  IncludeDeleteByIdParams,
-  IncludeFindByIdParams,
-  IncludeFindManyParams,
+  IncludeFindManyInput,
+  IncludeIdInput,
 } from '@audiophile/shared';
+
+import { makeId, parseSchema } from '@/helpers';
 
 export function makeInclude({ ...rest }: IncludeCreateParams): Include {
   return {
@@ -20,24 +20,14 @@ export function makeInclude({ ...rest }: IncludeCreateParams): Include {
   };
 }
 
-export function makeIncludeCreateParams(params: unknown): IncludeCreateParams {
-  return parseSchema(ApiIncludeCreateBodySchema, params);
+export function toIncludeIdInput(data: unknown): IncludeIdInput {
+  return parseSchema(IncludeIdInputSchema, data);
 }
 
-export function makeIncludeFindByIdParams(
-  params: unknown,
-): IncludeFindByIdParams {
-  return parseSchema(ApiIncludeIdParamsSchema, params);
+export function toIncludeCreateInput(data: unknown): IncludeCreateInput {
+  return parseSchema(IncludeCreateInputSchema, data);
 }
 
-export function makeIncludeDeleteByIdParams(
-  params: unknown,
-): IncludeDeleteByIdParams {
-  return parseSchema(ApiIncludeIdParamsSchema, params);
-}
-
-export function makeIncludeFindManyParams(
-  params: unknown,
-): IncludeFindManyParams {
-  return parseSchema(ApiIncludePaginationQuerySchema, params);
+export function toIncludeFindManyInput(data: unknown): IncludeFindManyInput {
+  return parseSchema(IncludeFindManyInputSchema, data);
 }

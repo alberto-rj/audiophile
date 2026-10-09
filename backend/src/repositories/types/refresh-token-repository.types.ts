@@ -1,21 +1,18 @@
 import type {
   RefreshToken,
   RefreshTokenCreateParams,
-  RefreshTokenDeleteParams,
-  RefreshTokenFindByIdParams,
-  RefreshTokenFindParams,
+  RefreshTokenIdParams,
+  RefreshTokenTokenParams,
 } from '@audiophile/shared';
 
 export interface RefreshTokenRepository {
   create: (params: RefreshTokenCreateParams) => Promise<RefreshToken>;
 
-  find: (params: RefreshTokenFindParams) => Promise<RefreshToken | null>;
+  find: (params: RefreshTokenTokenParams) => Promise<RefreshToken | null>;
 
-  findById: (
-    params: RefreshTokenFindByIdParams,
-  ) => Promise<RefreshToken | null>;
+  findById: (params: RefreshTokenIdParams) => Promise<RefreshToken | null>;
 
-  delete: (params: RefreshTokenDeleteParams) => Promise<RefreshToken | null>;
+  delete: (params: RefreshTokenTokenParams) => Promise<RefreshToken | null>;
 
   deleteManyExpired: () => Promise<void>;
 

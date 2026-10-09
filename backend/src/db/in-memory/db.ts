@@ -7,9 +7,9 @@ import type {
   Include,
   Order,
   OrderItem,
-  OtherProduct,
   Product,
   RefreshToken,
+  Suggestion,
   User,
 } from '@audiophile/shared';
 
@@ -19,7 +19,7 @@ export const db = {
   categories: new Map<Category['id'], Category>(),
   galleries: new Map<Gallery['id'], Gallery>(),
   includes: new Map<Include['id'], Include>(),
-  otherProducts: new Map<Product['id'], OtherProduct>(),
+  suggestions: new Map<Product['id'], Suggestion>(),
   products: new Map<Product['id'], Product>(),
   refreshTokens: new Map<RefreshToken['id'], RefreshToken>(),
   users: new Map<User['id'], User>(),

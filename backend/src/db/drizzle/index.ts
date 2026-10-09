@@ -6,11 +6,11 @@ export {
   categories,
   galleries,
   includes,
-  otherProducts,
-  products,
-  refreshTokens,
   orders,
   orderItems,
+  products,
+  refreshTokens,
+  suggestions,
   users,
 } from './schemas/schemas';
 export type {
@@ -21,9 +21,8 @@ export type {
   Include,
   Order,
   OrderItem,
-  OtherProduct,
   Product,
-  ProductDetailed,
   RefreshToken,
+  Suggestion,
   User,
 } from './schemas/schemas.types';

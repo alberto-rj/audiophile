@@ -16,6 +16,7 @@ import {
 
 export const ProductCreateParamsSchema = z.object({
   image: ProductImageSchema,
+  slug: ProductSlugSchema,
   name: ProductNameSchema,
   description: ProductDescriptionSchema.optional(),
   features: ProductFeaturesSchema,

@@ -1,12 +1,11 @@
-import { eq, lt } from 'drizzle-orm';
-
 import type {
   RefreshToken,
   RefreshTokenCreateParams,
-  RefreshTokenDeleteParams,
-  RefreshTokenFindByIdParams,
-  RefreshTokenFindParams,
+  RefreshTokenIdParams,
+  RefreshTokenTokenParams,
 } from '@audiophile/shared';
+import { eq, lt } from 'drizzle-orm';
+
 import {
   db,
   refreshTokens,
@@ -15,70 +14,68 @@ import {
 
 import type { RefreshTokenRepository } from '../types/refresh-token-repository.types';
 
-function parseItem(rawItem: DrizzleRefreshToken): RefreshToken {
+function toRefreshToken(rawItem: DrizzleRefreshToken): RefreshToken {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { updatedAt, ...itemWithoutTimestamp } = rawItem;
+  const { updatedAt, ...refreshTokenWithoutTimestamp } = rawItem;
 
   return {
-    ...itemWithoutTimestamp,
-    createdAt: itemWithoutTimestamp.createdAt.toISOString(),
-    expiresAt: itemWithoutTimestamp.expiresAt.toISOString(),
+    ...refreshTokenWithoutTimestamp,
+    createdAt: refreshTokenWithoutTimestamp.createdAt.toISOString(),
+    expiresAt: refreshTokenWithoutTimestamp.expiresAt.toISOString(),
   };
 }
 
 export class DrizzleRefreshTokenRepository implements RefreshTokenRepository {
   async create(params: RefreshTokenCreateParams): Promise<RefreshToken> {
-    const [createdItem] = await db
+    const [createdRefreshToken] = await db
       .insert(refreshTokens)
       .values(params)
       .returning();
 
-    return parseItem(createdItem!);
+    return toRefreshToken(createdRefreshToken!);
   }
 
-  async find({ token }: RefreshTokenFindParams): Promise<RefreshToken | null> {
-    const [foundItem] = await db
+  async find({ token }: RefreshTokenTokenParams): Promise<RefreshToken | null> {
+    const [foundRefreshToken] = await db
       .select()
       .from(refreshTokens)
       .where(eq(refreshTokens.token, token))
       .limit(1);
 
-    if (!foundItem) {
+    if (!foundRefreshToken) {
       return null;
     }
 
-    return parseItem(foundItem);
+    return toRefreshToken(foundRefreshToken);
   }
 
-  async findById({
-    id,
-  }: RefreshTokenFindByIdParams): Promise<RefreshToken | null> {
-    const [foundItem] = await db
+  async findById({ id }: RefreshTokenIdParams): Promise<RefreshToken | null> {
+    const [foundRefreshToken] = await db
       .select()
       .from(refreshTokens)
       .where(eq(refreshTokens.id, id))
       .limit(1);
 
-    if (!foundItem) {
+    if (!foundRefreshToken) {
       return null;
     }
 
-    return parseItem(foundItem);
+    return toRefreshToken(foundRefreshToken);
   }
 
   async delete({
     token,
-  }: RefreshTokenDeleteParams): Promise<RefreshToken | null> {
-    const [deletedItem] = await db
+  }: RefreshTokenTokenParams): Promise<RefreshToken | null> {
+    const [deletedRefreshToken] = await db
       .delete(refreshTokens)
       .where(eq(refreshTokens.token, token))
       .returning();
 
-    if (!deletedItem) {
+    if (!deletedRefreshToken) {
       return null;
     }
 
-    return parseItem(deletedItem);
+    return toRefreshToken(deletedRefreshToken);
   }
 
   async deleteManyExpired(): Promise<void> {

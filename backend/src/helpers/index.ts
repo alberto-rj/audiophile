@@ -19,14 +19,15 @@ export {
 export { makeCartRepository } from './cart/make-cart-repository';
 export { makeCart, makeCartItem, makeCartItemDetailed } from './cart/make-cart';
 
-export { makeCategoryRepository } from './category/make-category-repository';
-export { makeCategory } from './category/make-category';
-export { toApiCategory } from './category/to-api-category';
-export { toCategoryCreateInput } from './category/to-category-create-input';
-export { toCategoryFindManyInput } from './category/to-category-find-many-input';
-export { toCategoryIdInput } from './category/to-category-id-input';
-export { toCategorySlugInput } from './category/to-category-slug-input';
-export { toCategoryUpdateInput } from './category/to-category-update-input';
+export * from './category/make-category-repository';
+export * from './category/make-category';
+export * from './category/to-api-category';
+export * from './category/to-category-create-input';
+export * from './category/to-category-find-by-slug-input';
+export * from './category/to-category-find-many-input';
+export * from './category/to-category-id-input';
+export * from './category/to-category-slug-input';
+export * from './category/to-category-update-input';
 
 export {
   cloudinary,
@@ -55,13 +56,14 @@ export { toOrderFindManyInput } from './order/to-order-find-many-input';
 
 export * from './product/gallery.helpers';
 export * from './product/include.helpers';
-export * from './product/other-product.helpers';
+export * from './product/is-new-product';
+export * from './product/suggestion.helpers';
 export * from './product/product.helpers';
-export { makeGalleryRepository } from './product/make-gallery-repository';
-export { makeIncludeRepository } from './product/make-include-repository';
-export { makeProductRepository } from './product/make-product-repository';
-export { makeOtherProductRepository } from './product/make-other-repository';
-export { toApiProduct } from './product/to-api-product';
+export * from './product/make-gallery-repository';
+export * from './product/make-include-repository';
+export * from './product/make-product-repository';
+export * from './product/make-suggestion-repository';
+export * from './product/to-api-product';
 
 export {
   AppError,

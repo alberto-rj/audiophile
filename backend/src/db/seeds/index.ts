@@ -3,7 +3,7 @@ import {
   galleryRepository,
   includeRepository,
   orderRepository,
-  otherProductRepository,
+  suggestionRepository,
   productRepository,
   userRepository,
 } from '@/config';
@@ -12,7 +12,7 @@ import {
   galleries,
   includes,
   orders,
-  otherProducts,
+  suggestions,
   products,
   users,
 } from '@/db/mocks';
@@ -20,8 +20,8 @@ import { logger } from '@/helpers';
 
 import { seedCategories } from './category/seed-categories';
 import { seedOrders } from './order/seed-orders';
-import { seedProducts } from './product/seed-product';
-import { seedOtherProducts } from './product/seed-other-product';
+import { seedProducts } from './product/seed-products';
+import { seedSuggestions } from './product/seed-suggestions';
 import { seedUsers } from './user/seed-users';
 
 async function main() {
@@ -30,7 +30,7 @@ async function main() {
       orderRepository.clear(),
       galleryRepository.clear(),
       includeRepository.clear(),
-      otherProductRepository.clear(),
+      suggestionRepository.clear(),
     ]);
     await productRepository.clear();
     await categoryRepository.clear();
@@ -45,8 +45,8 @@ async function main() {
       products,
     });
 
-    await seedOtherProducts({
-      otherProducts,
+    await seedSuggestions({
+      suggestions,
       products: createdProducts,
     });
 

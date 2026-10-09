@@ -6,7 +6,7 @@ import type {
   includes,
   orderItems,
   orders,
-  otherProducts,
+  suggestions,
   products,
   refreshTokens,
   users,
@@ -22,18 +22,9 @@ export type Gallery = typeof galleries.$inferSelect;
 
 export type Include = typeof includes.$inferSelect;
 
-export type OtherProduct = typeof otherProducts.$inferSelect;
+export type Suggestion = typeof suggestions.$inferSelect;
 
 export type Product = typeof products.$inferSelect;
-
-export type ProductDetailed = Omit<Product, 'categoryId'> & {
-  category: Pick<Category, 'name' | 'slug' | 'description' | 'image'>;
-  gallery: Pick<Gallery, 'first' | 'second' | 'third'>;
-  includes: Array<Pick<Include, 'item' | 'quantity'>>;
-  suggestedIns: Array<{
-    suggestion: Pick<Product, 'name' | 'slug' | 'image'>;
-  }>;
-};
 
 export type Cart = typeof carts.$inferSelect;
 
