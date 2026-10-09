@@ -9,8 +9,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     }
   },
   "files": [
@@ -19,14 +18,17 @@
   "scripts": {
     "build": "tsc && tsc-alias -f",
     "clean": "rm -rf dist",
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsc -w & tsc-alias -fw",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prebuild": "npm run clean && npm run type-check",
-    "start": "node dist/index.js",
     "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^8.5.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^26.6.4",
@@ -36,12 +38,6 @@
     "eslint-plugin-prettier": "^5.5.6",
     "globals": "^17.13.0",
     "tsc-alias": "^1.9.7",
-    "tsup": "^8.0.0",
-    "tsx": "^4.23.15",
     "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^8.5.0",
-    "zod": "^4.4.3"
   }
 }
