@@ -1,5 +1,7 @@
 import type { z } from '@/config';
 
-import type { IncludeSchema } from './include.schema';
+import { IncludeDetailedSchema, IncludeSchema } from './include.schema';
 
 export type Include = z.infer<typeof IncludeSchema>;
+
+export type IncludeDetailed = z.infer<typeof IncludeDetailedSchema>;

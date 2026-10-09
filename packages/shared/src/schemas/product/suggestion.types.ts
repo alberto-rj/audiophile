@@ -1,5 +1,10 @@
 import { z } from '@/config';
 
-import type { SuggestionSchema } from './suggestion.schema';
+import {
+  SuggestionDetailedSchema,
+  SuggestionSchema,
+} from './suggestion.schema';
 
 export type Suggestion = z.infer<typeof SuggestionSchema>;
+
+export type SuggestionDetailed = z.infer<typeof SuggestionDetailedSchema>;
