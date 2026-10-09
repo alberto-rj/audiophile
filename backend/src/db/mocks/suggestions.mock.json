@@ -1,0 +1,74 @@
+[
+  {
+    "target": "YX1 Wireless Earphones",
+    "source": "XX99 Mark One Headphones"
+  },
+  {
+    "target": "YX1 Wireless Earphones",
+    "source": "XX59 Headphones"
+  },
+  {
+    "target": "YX1 Wireless Earphones",
+    "source": "ZX9 Speaker"
+  },
+  {
+    "target": "XX59 Headphones",
+    "source": "XX99 Mark Two Headphones"
+  },
+  {
+    "target": "XX59 Headphones",
+    "source": "XX99 Mark One Headphones"
+  },
+  {
+    "target": "XX59 Headphones",
+    "source": "ZX9 Speaker"
+  },
+  {
+    "target": "XX99 Mark One Headphones",
+    "source": "XX99 Mark Two Headphones"
+  },
+  {
+    "target": "XX99 Mark One Headphones",
+    "source": "XX59 Headphones"
+  },
+  {
+    "target": "XX99 Mark One Headphones",
+    "source": "ZX9 Speaker"
+  },
+  {
+    "target": "XX99 Mark Two Headphones",
+    "source": "XX99 Mark One Headphones"
+  },
+  {
+    "target": "XX99 Mark Two Headphones",
+    "source": "XX59 Headphones"
+  },
+  {
+    "target": "XX99 Mark Two Headphones",
+    "source": "ZX9 Speaker"
+  },
+  {
+    "target": "ZX7 Speaker",
+    "source": "ZX9 Speaker"
+  },
+  {
+    "target": "ZX7 Speaker",
+    "source": "XX99 Mark One Headphones"
+  },
+  {
+    "target": "ZX7 Speaker",
+    "source": "XX59 Headphones"
+  },
+  {
+    "target": "ZX9 Speaker",
+    "source": "zx7-speaker"
+  },
+  {
+    "target": "ZX9 Speaker",
+    "source": "XX99 Mark One Headphones"
+  },
+  {
+    "target": "ZX9 Speaker",
+    "source": "XX59 Headphones"
+  }
+]

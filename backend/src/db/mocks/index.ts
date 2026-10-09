@@ -2,7 +2,7 @@ import categories from './categories.mock.json' with { type: 'json' };
 import galleries from './galleries.mock.json' with { type: 'json' };
 import includes from './includes.mock.json' with { type: 'json' };
 import orders from './orders.mock.json' with { type: 'json' };
-import otherProducts from './other-products.mock.json' with { type: 'json' };
+import suggestions from './suggestions.mock.json' with { type: 'json' };
 import products from './products.mock.json' with { type: 'json' };
 import users from './users.mock.json' with { type: 'json' };
 
@@ -14,7 +14,7 @@ export type Includes = typeof includes;
 
 export type Orders = typeof orders;
 
-export type OtherProducts = typeof otherProducts;
+export type Suggestions = typeof suggestions;
 
 export type Products = typeof products;
 
@@ -25,7 +25,7 @@ export {
   galleries,
   includes,
   orders,
-  otherProducts,
+  suggestions,
   products,
   users,
 };

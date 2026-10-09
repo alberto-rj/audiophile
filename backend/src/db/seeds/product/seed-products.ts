@@ -1,3 +1,11 @@
+import type {
+  Category,
+  GalleryCreateParams,
+  IncludeCreateParams,
+  Product,
+  ProductCreateParams,
+} from '@audiophile/shared';
+
 import {
   galleryRepository,
   includeRepository,
@@ -5,18 +13,34 @@ import {
 } from '@/config';
 import { type Galleries, type Includes, type Products } from '@/db/mocks';
 import { logger, toSlug } from '@/helpers';
-import type { Category, Product } from '@audiophile/shared';
 
 type CreateProductsParams = {
-  categories: Category[];
   products: Products;
+  categories: Category[];
 };
 
-export async function createProducts({
+type CreateGalleriesParams = {
+  products: Product[];
+  galleries: Galleries;
+};
+
+type CreateIncludesParams = {
+  products: Product[];
+  includes: Includes;
+};
+
+type SeedProductsParams = {
+  galleries: Galleries;
+  includes: Includes;
+  products: Products;
+  categories: Category[];
+};
+
+function toProductCreateParamsList({
   categories,
   products,
-}: CreateProductsParams) {
-  const newParamsList = products.map(
+}: CreateProductsParams): ProductCreateParams[] {
+  const paramsList = products.map(
     ({ name, price, description, image, features, category }) => {
       const productCategory = categories.find(
         (pc) => pc.slug === toSlug(category),
@@ -38,20 +62,14 @@ export async function createProducts({
     },
   );
 
-  await productRepository.clear();
-
-  const createdProducts = await productRepository.createMany(newParamsList);
-
-  return createdProducts;
+  return paramsList;
 }
 
-type CreateGalleriesParams = {
-  products: Product[];
-  galleries: Galleries;
-};
-
-async function createGalleries({ products, galleries }: CreateGalleriesParams) {
-  const newParamsList = galleries.map((gallery) => {
+function toGalleryCreateParamsList({
+  products,
+  galleries,
+}: CreateGalleriesParams): GalleryCreateParams[] {
+  const paramsList = galleries.map((gallery) => {
     const productSlug = toSlug(gallery.product);
     const product = products.find((product) => product.slug === productSlug);
 
@@ -65,18 +83,14 @@ async function createGalleries({ products, galleries }: CreateGalleriesParams) {
     };
   });
 
-  const createdGalleries = await galleryRepository.createMany(newParamsList);
-
-  return createdGalleries;
+  return paramsList;
 }
 
-type CreateIncludesParams = {
-  products: Product[];
-  includes: Includes;
-};
-
-async function createIncludes({ products, includes }: CreateIncludesParams) {
-  const newParamsList = includes.map(({ quantity, item, product }) => {
+function toIncludeCreateParamsList({
+  includes,
+  products,
+}: CreateIncludesParams): IncludeCreateParams[] {
+  return includes.map(({ quantity, item, product }) => {
     const productSlug = toSlug(product);
     const foundProduct = products.find(
       (product) => product.slug === productSlug,
@@ -92,18 +106,35 @@ async function createIncludes({ products, includes }: CreateIncludesParams) {
       item,
     };
   });
+}
 
-  const createdIncludes = await includeRepository.createMany(newParamsList);
+export async function createProducts({
+  categories,
+  products,
+}: CreateProductsParams) {
+  const paramsList = toProductCreateParamsList({ categories, products });
+
+  await productRepository.clear();
+  const createdProducts = await productRepository.createMany(paramsList);
+
+  return createdProducts;
+}
+
+async function createGalleries({ galleries, products }: CreateGalleriesParams) {
+  const paramsList = toGalleryCreateParamsList({ galleries, products });
+
+  const createdGalleries = await galleryRepository.createMany(paramsList);
+
+  return createdGalleries;
+}
+
+async function createIncludes({ includes, products }: CreateIncludesParams) {
+  const paramsList = toIncludeCreateParamsList({ includes, products });
+
+  const createdIncludes = await includeRepository.createMany(paramsList);
 
   return createdIncludes;
 }
-
-type SeedProductsParams = {
-  galleries: Galleries;
-  includes: Includes;
-  products: Products;
-  categories: Category[];
-};
 
 export async function seedProducts({
   galleries,
