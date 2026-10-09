@@ -109,22 +109,22 @@ export const products = pgTable(
   ],
 );
 
-export const otherProducts = pgTable(
-  'other_products',
+export const suggestions = pgTable(
+  'suggestions',
   {
-    otherId: integer('other_id')
+    sourceId: integer('source_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
-    productId: integer('product_id')
+    targetId: integer('target_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     createdAt,
     updatedAt,
   },
-  ({ otherId, productId }) => [
+  ({ sourceId, targetId }) => [
     primaryKey({
-      name: 'other_products_pk_other_id_product_id',
-      columns: [otherId, productId],
+      name: 'suggestions_pk_source_id_target_id',
+      columns: [sourceId, targetId],
     }),
   ],
 );
@@ -133,7 +133,7 @@ export const galleries = pgTable(
   'galleries',
   {
     id: serial('id'),
-    productId: integer('product_id')
+    targetId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     first: text('first').notNull(),
@@ -142,12 +142,12 @@ export const galleries = pgTable(
     createdAt,
     updatedAt,
   },
-  ({ id, productId, first, second, third }) => [
+  ({ id, targetId, first, second, third }) => [
     primaryKey({
       name: 'galleries_pk_id',
       columns: [id],
     }),
-    unique('galleries_uk_product_id').on(productId),
+    unique('galleries_uk_product_id').on(targetId),
     unique('galleries_uk_first').on(first),
     unique('galleries_uk_second').on(second),
     unique('galleries_uk_third').on(third),
@@ -158,7 +158,7 @@ export const includes = pgTable(
   'includes',
   {
     id: serial('id'),
-    productId: integer('product_id')
+    targetId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     quantity: integer('quantity').notNull().default(0),
@@ -200,19 +200,19 @@ export const cartItems = pgTable(
     cartId: integer('cart_id')
       .notNull()
       .references(() => carts.id, { onDelete: 'cascade' }),
-    productId: integer('product_id')
+    targetId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     quantity: integer('quantity').notNull().default(1),
     createdAt,
     updatedAt,
   },
-  ({ id, cartId, productId }) => [
+  ({ id, cartId, targetId }) => [
     primaryKey({
       name: 'cart_items_pk_id',
       columns: [id],
     }),
-    unique('cart_items_uk_cart_id_product_id').on(cartId, productId),
+    unique('cart_items_uk_cart_id_product_id').on(cartId, targetId),
   ],
 );
 
@@ -264,7 +264,7 @@ export const orderItems = pgTable(
     orderId: integer('order_id')
       .notNull()
       .references(() => orders.id, { onDelete: 'cascade' }),
-    productId: integer('product_id')
+    targetId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     name: text('name').notNull(),
@@ -302,36 +302,36 @@ export const productRelations = relations(products, ({ one, many }) => ({
   }),
   gallery: one(galleries),
   includes: many(includes),
-  suggestedIns: many(otherProducts, {
+  sources: many(suggestions, {
     relationName: 'sourceProduct',
   }),
-  suggestions: many(otherProducts, {
+  targets: many(suggestions, {
     relationName: 'targetProduct',
   }),
 }));
 
 export const galleryRelations = relations(galleries, ({ one }) => ({
   product: one(products, {
-    fields: [galleries.productId],
+    fields: [galleries.targetId],
     references: [products.id],
   }),
 }));
 
 export const includeRelations = relations(includes, ({ one }) => ({
   product: one(products, {
-    fields: [includes.productId],
+    fields: [includes.targetId],
     references: [products.id],
   }),
 }));
 
-export const otherProductRelations = relations(otherProducts, ({ one }) => ({
-  suggestedIn: one(products, {
-    fields: [otherProducts.productId],
+export const suggestionRelations = relations(suggestions, ({ one }) => ({
+  source: one(products, {
+    fields: [suggestions.sourceId],
     references: [products.id],
     relationName: 'sourceProduct',
   }),
-  suggestion: one(products, {
-    fields: [otherProducts.otherId],
+  target: one(products, {
+    fields: [suggestions.targetId],
     references: [products.id],
     relationName: 'targetProduct',
   }),
@@ -351,7 +351,7 @@ export const cartItemRelations = relations(cartItems, ({ one }) => ({
     references: [carts.id],
   }),
   product: one(products, {
-    fields: [cartItems.productId],
+    fields: [cartItems.targetId],
     references: [products.id],
   }),
 }));
@@ -370,7 +370,7 @@ export const orderItemRelations = relations(orderItems, ({ one }) => ({
     references: [orders.id],
   }),
   product: one(products, {
-    fields: [orderItems.productId],
+    fields: [orderItems.targetId],
     references: [products.id],
   }),
 }));
