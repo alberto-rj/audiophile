@@ -1,64 +1,62 @@
-import { db } from '@/db/in-memory';
-import { makeRefreshToken } from '@/helpers';
 import type {
   RefreshToken,
   RefreshTokenCreateParams,
-  RefreshTokenDeleteParams,
-  RefreshTokenFindByIdParams,
-  RefreshTokenFindParams,
+  RefreshTokenIdParams,
+  RefreshTokenTokenParams,
 } from '@audiophile/shared';
+
+import { db } from '@/db/in-memory';
+import { makeRefreshToken } from '@/helpers';
 
 import type { RefreshTokenRepository } from '../types/refresh-token-repository.types';
 
 export class InMemoryRefreshTokenRepository implements RefreshTokenRepository {
   async create(params: RefreshTokenCreateParams): Promise<RefreshToken> {
-    const newItem = makeRefreshToken(params);
+    const createdRefreshToken = makeRefreshToken(params);
 
-    db.refreshTokens.set(newItem.id, newItem);
+    db.refreshTokens.set(createdRefreshToken.id, createdRefreshToken);
 
-    return newItem;
+    return createdRefreshToken;
   }
 
-  async find({ token }: RefreshTokenFindParams): Promise<RefreshToken | null> {
-    const foundItem = Array.from(db.refreshTokens.values()).find(
+  async find({ token }: RefreshTokenTokenParams): Promise<RefreshToken | null> {
+    const foundRefreshToken = Array.from(db.refreshTokens.values()).find(
       (item) => item.token === token,
     );
 
-    if (!foundItem) {
+    if (!foundRefreshToken) {
       return null;
     }
 
-    return foundItem;
+    return foundRefreshToken;
   }
 
-  async findById({
-    id,
-  }: RefreshTokenFindByIdParams): Promise<RefreshToken | null> {
-    const foundItem = Array.from(db.refreshTokens.values()).find(
+  async findById({ id }: RefreshTokenIdParams): Promise<RefreshToken | null> {
+    const foundRefreshToken = Array.from(db.refreshTokens.values()).find(
       (item) => item.id === id,
     );
 
-    if (!foundItem) {
+    if (!foundRefreshToken) {
       return null;
     }
 
-    return foundItem;
+    return foundRefreshToken;
   }
 
   async delete({
     token,
-  }: RefreshTokenDeleteParams): Promise<RefreshToken | null> {
-    const foundItem = Array.from(db.refreshTokens.values()).find(
+  }: RefreshTokenTokenParams): Promise<RefreshToken | null> {
+    const foundRefreshToken = Array.from(db.refreshTokens.values()).find(
       (item) => item.token === token,
     );
 
-    if (!foundItem) {
+    if (!foundRefreshToken) {
       return null;
     }
 
-    db.refreshTokens.delete(foundItem.id);
+    db.refreshTokens.delete(foundRefreshToken.id);
 
-    return foundItem;
+    return foundRefreshToken;
   }
 
   async deleteManyExpired(): Promise<void> {

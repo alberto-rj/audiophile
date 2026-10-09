@@ -1,23 +1,28 @@
+import type {
+  GalleryDetailed,
+  IncludeDetailed,
+  Product,
+  ProductCreateParams,
+  ProductDetailed,
+  ProductFindManyParams,
+  ProductIdParams,
+  ProductSlugParams,
+} from '@audiophile/shared';
 import { count, eq } from 'drizzle-orm';
 
 import {
   db,
   products,
-  type Product as RawProduct,
-  type ProductDetailed as RawProductDetailed,
+  type Product as DrizzleProduct,
+  type Category as DrizzleCategory,
 } from '@/db/drizzle';
-import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
+import {
+  getBaseResult,
+  getOffset,
+  isNewProduct,
+  type PaginateResult,
+} from '@/helpers';
 import type { ProductRepository } from '@/repositories';
-import type {
-  Product,
-  ProductCreateParams,
-  ProductDeleteByIdParams,
-  ProductDeleteBySlugParams,
-  ProductDetailed,
-  ProductFindByIdParams,
-  ProductFindBySlugParams,
-  ProductFindManyParams,
-} from '@audiophile/shared';
 
 const PRODUCT_WITH = {
   category: {
@@ -41,10 +46,10 @@ const PRODUCT_WITH = {
       quantity: true,
     },
   },
-  suggestedIns: {
+  targets: {
     columns: {},
     with: {
-      suggestion: {
+      source: {
         columns: {
           name: true,
           slug: true,
@@ -59,66 +64,77 @@ const PRODUCT_COLUMNS = {
   categoryId: false,
 } as const;
 
+export type DrizzleProductDetailed = Omit<DrizzleProduct, 'categoryId'> & {
+  category: Pick<DrizzleCategory, 'name' | 'slug' | 'description' | 'image'>;
+  gallery: GalleryDetailed;
+  includes: IncludeDetailed[];
+  targets: {
+    source: Pick<DrizzleProduct, 'name' | 'slug' | 'image'>;
+  }[];
+};
+
 export class DrizzleProductRepository implements ProductRepository {
   async create(params: ProductCreateParams): Promise<Product> {
-    const [createdItem] = await db.insert(products).values(params).returning();
+    const [createdProduct] = await db
+      .insert(products)
+      .values(params)
+      .returning();
 
-    return toItem(createdItem!);
+    return toProduct(createdProduct!);
   }
 
   async createMany(paramsList: ProductCreateParams[]): Promise<Product[]> {
     return db.transaction(async (tx) => {
-      const createdItems = await tx
+      const createdProducts = await tx
         .insert(products)
         .values(paramsList)
         .returning();
 
-      return createdItems.map(toItem);
+      return createdProducts.map(toProduct);
     });
   }
 
-  async findById({
-    id,
-  }: ProductFindByIdParams): Promise<ProductDetailed | null> {
-    const foundItem = await db.query.products.findFirst({
+  async findById({ id }: ProductIdParams): Promise<ProductDetailed | null> {
+    const foundProduct = await db.query.products.findFirst({
       where: eq(products.id, id),
       with: PRODUCT_WITH,
       columns: PRODUCT_COLUMNS,
     });
 
-    if (!foundItem) {
+    if (!foundProduct) {
       return null;
     }
 
-    return toItemDetailed(foundItem as RawProductDetailed);
+    return toProductDetailed(foundProduct as DrizzleProductDetailed);
   }
 
   async findBySlug({
     slug,
-  }: ProductFindBySlugParams): Promise<ProductDetailed | null> {
-    const foundItem = await db.query.products.findFirst({
+  }: ProductSlugParams): Promise<ProductDetailed | null> {
+    const foundProduct = await db.query.products.findFirst({
       where: eq(products.slug, slug),
       with: PRODUCT_WITH,
       columns: PRODUCT_COLUMNS,
     });
 
-    if (!foundItem) {
+    if (!foundProduct) {
       return null;
     }
 
-    return toItemDetailed(foundItem as RawProductDetailed);
+    return toProductDetailed(foundProduct as DrizzleProductDetailed);
   }
 
   async findMany({
     page,
     limit,
+    category,
   }: ProductFindManyParams): Promise<PaginateResult<ProductDetailed>> {
-    const [foundItems, [totalItemsResult]] = await Promise.all([
+    const [foundProducts, [totalProductsResult]] = await Promise.all([
       db.query.products.findMany({
-        limit,
-        offset: getOffset({ limit, page }),
         with: PRODUCT_WITH,
         columns: PRODUCT_COLUMNS,
+        limit,
+        offset: getOffset({ limit, page }),
       }),
       db.select({ totalItems: count() }).from(products),
     ]);
@@ -126,43 +142,41 @@ export class DrizzleProductRepository implements ProductRepository {
     const result = getBaseResult({
       limit,
       page,
-      totalItems: totalItemsResult!.totalItems,
+      totalItems: totalProductsResult!.totalItems,
     });
 
     return {
       ...result,
-      items: foundItems.map((item) =>
-        toItemDetailed(item as RawProductDetailed),
+      items: foundProducts.map((item) =>
+        toProductDetailed(item as DrizzleProductDetailed),
       ),
     };
   }
 
-  async deleteById({ id }: ProductDeleteByIdParams): Promise<Product | null> {
-    const [deletedItem] = await db
+  async deleteById({ id }: ProductIdParams): Promise<Product | null> {
+    const [deletedProduct] = await db
       .delete(products)
       .where(eq(products.id, id))
       .returning();
 
-    if (!deletedItem) {
+    if (!deletedProduct) {
       return null;
     }
 
-    return toItem(deletedItem);
+    return toProduct(deletedProduct);
   }
 
-  async deleteBySlug({
-    slug,
-  }: ProductDeleteBySlugParams): Promise<Product | null> {
-    const [deletedItem] = await db
+  async deleteBySlug({ slug }: ProductSlugParams): Promise<Product | null> {
+    const [deletedProduct] = await db
       .delete(products)
       .where(eq(products.slug, slug))
       .returning();
 
-    if (!deletedItem) {
+    if (!deletedProduct) {
       return null;
     }
 
-    return toItem(deletedItem);
+    return toProduct(deletedProduct);
   }
 
   async clear() {
@@ -170,35 +184,25 @@ export class DrizzleProductRepository implements ProductRepository {
   }
 }
 
-function isNewItem(createdAt: Date) {
-  const distance = new Date().getTime() - createdAt.getTime();
-  const distanceInSeconds = Math.floor(distance / 1000);
-  const distanceInHours = Math.floor(distanceInSeconds / 3600);
-  const distanceInDays = Math.floor(distanceInHours / 24);
-  const isNew = distanceInDays < 8;
-
-  return isNew;
-}
-
-function toItem(item: RawProduct): Product {
+function toProduct(product: DrizzleProduct): Product {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
+  const { createdAt, updatedAt, ...productWithoutTimestamp } = product;
 
   return {
-    ...itemWithoutTimestamp,
-    isNew: isNewItem(createdAt),
+    ...productWithoutTimestamp,
+    isNew: isNewProduct(createdAt),
   };
 }
 
-function toItemDetailed(item: RawProductDetailed): ProductDetailed {
+function toProductDetailed(product: DrizzleProductDetailed): ProductDetailed {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
+  const { createdAt, updatedAt, ...productWithoutTimestamp } = product;
 
   return {
-    ...itemWithoutTimestamp,
-    isNew: isNewItem(createdAt),
-    suggestions: itemWithoutTimestamp.suggestedIns.map(({ suggestion }) => ({
-      ...suggestion,
+    ...productWithoutTimestamp,
+    isNew: isNewProduct(createdAt),
+    suggestions: productWithoutTimestamp.targets.map(({ source }) => ({
+      ...source,
     })),
   };
 }

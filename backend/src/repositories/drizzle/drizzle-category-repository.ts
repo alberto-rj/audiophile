@@ -1,7 +1,3 @@
-import { count, eq } from 'drizzle-orm';
-
-import { db, categories, type Category as RawCategory } from '@/db/drizzle';
-import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import type {
   Category,
   CategoryCreateParams,
@@ -10,81 +6,88 @@ import type {
   CategorySlugParams,
   CategoryUpdateParams,
 } from '@audiophile/shared';
+import { count, eq } from 'drizzle-orm';
+
+import { db, categories, type Category as DrizzleCategory } from '@/db/drizzle';
+import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
 import type { CategoryRepository } from '@/repositories';
 
-function parseItem(rawItem: RawCategory): Category {
+function toCategory(category: DrizzleCategory): Category {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { createdAt, updatedAt, ...itemWithoutTimestamp } = rawItem;
+  const { createdAt, updatedAt, ...categoryWithoutTimestamp } = category;
 
-  return itemWithoutTimestamp;
+  return categoryWithoutTimestamp;
 }
 
 export class DrizzleCategoryRepository implements CategoryRepository {
   async create(params: CategoryCreateParams): Promise<Category> {
-    const [createdItem] = await db
+    const [createdCategory] = await db
       .insert(categories)
       .values(params)
       .returning();
 
-    return parseItem(createdItem!);
+    return toCategory(createdCategory!);
   }
 
   async createMany(params: CategoryCreateParams[]): Promise<Category[]> {
-    const createdItems = await db.insert(categories).values(params).returning();
+    const createdCategories = await db
+      .insert(categories)
+      .values(params)
+      .returning();
 
-    return createdItems.map(parseItem);
+    return createdCategories.map(toCategory);
   }
 
   async update({
     id,
     ...changes
   }: CategoryUpdateParams): Promise<Category | null> {
-    const [updatedItem] = await db
+    const [updatedCategory] = await db
       .update(categories)
       .set(changes)
       .where(eq(categories.id, id))
       .returning();
 
-    if (!updatedItem) {
+    if (!updatedCategory) {
       return null;
     }
 
-    return parseItem(updatedItem);
+    return toCategory(updatedCategory);
   }
 
   async findBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
-    const [foundItem] = await db
+    const [foundCategory] = await db
       .select()
       .from(categories)
       .where(eq(categories.slug, slug))
       .limit(1);
 
-    if (!foundItem) {
+    if (!foundCategory) {
       return null;
     }
 
-    return parseItem(foundItem);
+    return toCategory(foundCategory);
   }
 
   async findById({ id }: CategoryIdParams): Promise<Category | null> {
-    const [foundItem] = await db
+    const [foundCategory] = await db
       .select()
       .from(categories)
       .where(eq(categories.id, id))
       .limit(1);
 
-    if (!foundItem) {
+    if (!foundCategory) {
       return null;
     }
 
-    return parseItem(foundItem);
+    return toCategory(foundCategory);
   }
 
   async findMany({
     page,
     limit,
   }: CategoryFindManyParams): Promise<PaginateResult<Category>> {
-    const [foundItems, [countResult]] = await Promise.all([
+    const [foundCategories, [countResult]] = await Promise.all([
       db
         .select()
         .from(categories)
@@ -102,34 +105,34 @@ export class DrizzleCategoryRepository implements CategoryRepository {
 
     return {
       ...result,
-      items: foundItems.map(parseItem),
+      items: foundCategories.map(toCategory),
     };
   }
 
   async deleteById({ id }: CategoryIdParams): Promise<Category | null> {
-    const [deletedItem] = await db
+    const [deletedCategory] = await db
       .delete(categories)
       .where(eq(categories.id, id))
       .returning();
 
-    if (!deletedItem) {
+    if (!deletedCategory) {
       return null;
     }
 
-    return parseItem(deletedItem);
+    return toCategory(deletedCategory);
   }
 
   async deleteBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
-    const [deletedItem] = await db
+    const [deletedCategory] = await db
       .delete(categories)
       .where(eq(categories.slug, slug))
       .returning();
 
-    if (!deletedItem) {
+    if (!deletedCategory) {
       return null;
     }
 
-    return parseItem(deletedItem);
+    return toCategory(deletedCategory);
   }
 
   async clear() {
