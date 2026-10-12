@@ -1,3 +1,5 @@
+import type { User } from '@audiophile/shared';
+
 import { refreshTokenRepository, userRepository } from '@/config';
 import {
   ConflictError,
@@ -7,7 +9,6 @@ import {
   toAuthRegisterInput,
   refreshTokenExpiresAt,
 } from '@/helpers';
-import type { User } from '@audiophile/shared';
 
 interface RegisterUseCaseParams {
   input: unknown;
