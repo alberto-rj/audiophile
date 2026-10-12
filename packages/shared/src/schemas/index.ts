@@ -79,6 +79,8 @@ export type * from './product/product.types';
 
 export * from './refresh-token/refresh-token.base.schema';
 export type * from './refresh-token/refresh-token.types';
+export * from './refresh-token/refresh-token.input.schema';
+export type * from './refresh-token/refresh-token.input.types';
 export * from './refresh-token/refresh-token.params.schema';
 export type * from './refresh-token/refresh-token.params.types';
 

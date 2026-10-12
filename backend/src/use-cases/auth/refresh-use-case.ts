@@ -1,14 +1,16 @@
+import type { User } from '@audiophile/shared';
+
 import { refreshTokenRepository, userRepository } from '@/config';
 import {
   getAccessToken,
   getRefreshToken,
   refreshTokenExpiresAt,
+  toRefreshTokenTokenInput,
   UnauthorizedError,
 } from '@/helpers';
-import type { RefreshTokenFindParams, User } from '@audiophile/shared';
 
 interface RefreshUseCaseParams {
-  input: RefreshTokenFindParams;
+  input: unknown;
 }
 
 interface RefreshUseCaseResult {
@@ -20,7 +22,7 @@ interface RefreshUseCaseResult {
 export async function refreshUseCase({
   input,
 }: RefreshUseCaseParams): Promise<RefreshUseCaseResult> {
-  const { token } = input;
+  const { token } = toRefreshTokenTokenInput(input);
 
   const foundToken = await refreshTokenRepository.find({
     token,
