@@ -133,7 +133,7 @@ export const galleries = pgTable(
   'galleries',
   {
     id: serial('id'),
-    targetId: integer('product_id')
+    productId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     first: text('first').notNull(),
@@ -142,12 +142,12 @@ export const galleries = pgTable(
     createdAt,
     updatedAt,
   },
-  ({ id, targetId, first, second, third }) => [
+  ({ id, productId, first, second, third }) => [
     primaryKey({
       name: 'galleries_pk_id',
       columns: [id],
     }),
-    unique('galleries_uk_product_id').on(targetId),
+    unique('galleries_uk_product_id').on(productId),
     unique('galleries_uk_first').on(first),
     unique('galleries_uk_second').on(second),
     unique('galleries_uk_third').on(third),
@@ -158,7 +158,7 @@ export const includes = pgTable(
   'includes',
   {
     id: serial('id'),
-    targetId: integer('product_id')
+    productId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     quantity: integer('quantity').notNull().default(0),
@@ -200,19 +200,19 @@ export const cartItems = pgTable(
     cartId: integer('cart_id')
       .notNull()
       .references(() => carts.id, { onDelete: 'cascade' }),
-    targetId: integer('product_id')
+    productId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     quantity: integer('quantity').notNull().default(1),
     createdAt,
     updatedAt,
   },
-  ({ id, cartId, targetId }) => [
+  ({ id, cartId, productId }) => [
     primaryKey({
       name: 'cart_items_pk_id',
       columns: [id],
     }),
-    unique('cart_items_uk_cart_id_product_id').on(cartId, targetId),
+    unique('cart_items_uk_cart_id_product_id').on(cartId, productId),
   ],
 );
 
@@ -264,7 +264,7 @@ export const orderItems = pgTable(
     orderId: integer('order_id')
       .notNull()
       .references(() => orders.id, { onDelete: 'cascade' }),
-    targetId: integer('product_id')
+    productId: integer('product_id')
       .notNull()
       .references(() => products.id, { onDelete: 'cascade' }),
     name: text('name').notNull(),
@@ -312,14 +312,14 @@ export const productRelations = relations(products, ({ one, many }) => ({
 
 export const galleryRelations = relations(galleries, ({ one }) => ({
   product: one(products, {
-    fields: [galleries.targetId],
+    fields: [galleries.productId],
     references: [products.id],
   }),
 }));
 
 export const includeRelations = relations(includes, ({ one }) => ({
   product: one(products, {
-    fields: [includes.targetId],
+    fields: [includes.productId],
     references: [products.id],
   }),
 }));
@@ -351,7 +351,7 @@ export const cartItemRelations = relations(cartItems, ({ one }) => ({
     references: [carts.id],
   }),
   product: one(products, {
-    fields: [cartItems.targetId],
+    fields: [cartItems.productId],
     references: [products.id],
   }),
 }));
@@ -370,7 +370,7 @@ export const orderItemRelations = relations(orderItems, ({ one }) => ({
     references: [orders.id],
   }),
   product: one(products, {
-    fields: [orderItems.targetId],
+    fields: [orderItems.productId],
     references: [products.id],
   }),
 }));
