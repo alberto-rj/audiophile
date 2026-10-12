@@ -24,92 +24,45 @@ import {
 } from '@/helpers';
 import type { ProductRepository } from '@/repositories';
 
-function getProductWith(params: { categoryName?: string } = {}) {
-  const { categoryName } = params;
-
-  if (typeof categoryName === 'string') {
-    return {
-      category: {
+const PRODUCT_WITH = {
+  category: {
+    columns: {
+      name: true,
+      slug: true,
+      description: true,
+      image: true,
+    },
+  },
+  gallery: {
+    columns: {
+      first: true,
+      second: true,
+      third: true,
+    },
+  },
+  includes: {
+    columns: {
+      item: true,
+      quantity: true,
+    },
+  },
+  targets: {
+    columns: {},
+    with: {
+      source: {
         columns: {
           name: true,
           slug: true,
-          description: true,
           image: true,
         },
-        where: {
-          name: { eq: categoryName },
-        },
       },
-      gallery: {
-        columns: {
-          first: true,
-          second: true,
-          third: true,
-        },
-      },
-      includes: {
-        columns: {
-          item: true,
-          quantity: true,
-        },
-      },
-      targets: {
-        columns: {},
-        with: {
-          source: {
-            columns: {
-              name: true,
-              slug: true,
-              image: true,
-            },
-          },
-        },
-      },
-    };
-  }
+    },
+  },
+} as const;
 
-  return {
-    category: {
-      columns: {
-        name: true,
-        slug: true,
-        description: true,
-        image: true,
-      },
-    },
-    gallery: {
-      columns: {
-        first: true,
-        second: true,
-        third: true,
-      },
-    },
-    includes: {
-      columns: {
-        item: true,
-        quantity: true,
-      },
-    },
-    targets: {
-      columns: {},
-      with: {
-        source: {
-          columns: {
-            name: true,
-            slug: true,
-            image: true,
-          },
-        },
-      },
-    },
-  };
-}
-
-function getProductColumns() {
-  return {
-    categoryId: false,
-  };
-}
+const PRODUCT_COLUMNS = {
+  categoryId: false,
+} as const;
 
 export type DrizzleProductDetailed = Omit<DrizzleProduct, 'categoryId'> & {
   category: Pick<DrizzleCategory, 'name' | 'slug' | 'description' | 'image'>;
@@ -144,8 +97,8 @@ export class DrizzleProductRepository implements ProductRepository {
   async findById({ id }: ProductIdParams): Promise<ProductDetailed | null> {
     const foundProduct = await db.query.products.findFirst({
       where: eq(products.id, id),
-      with: getProductWith(),
-      columns: getProductColumns(),
+      with: PRODUCT_WITH,
+      columns: PRODUCT_COLUMNS,
     });
 
     if (!foundProduct) {
@@ -160,8 +113,8 @@ export class DrizzleProductRepository implements ProductRepository {
   }: ProductSlugParams): Promise<ProductDetailed | null> {
     const foundProduct = await db.query.products.findFirst({
       where: eq(products.slug, slug),
-      with: getProductWith(),
-      columns: getProductColumns(),
+      with: PRODUCT_WITH,
+      columns: PRODUCT_COLUMNS,
     });
 
     if (!foundProduct) {
@@ -174,12 +127,14 @@ export class DrizzleProductRepository implements ProductRepository {
   async findMany({
     page,
     limit,
-    category,
+    categoryId,
   }: ProductFindManyParams): Promise<PaginateResult<ProductDetailed>> {
     const [foundProducts, [totalProductsResult]] = await Promise.all([
       db.query.products.findMany({
-        with: getProductWith({ categoryName: category }),
-        columns: getProductColumns(),
+        with: PRODUCT_WITH,
+        columns: PRODUCT_COLUMNS,
+        where: (products, { eq }) =>
+          categoryId ? eq(products.categoryId, categoryId) : undefined,
         limit,
         offset: getOffset({ limit, page }),
       }),
