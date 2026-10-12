@@ -1,19 +1,20 @@
-import { productRepository } from '@/config';
-import { toProductFindManyInput, type PaginateResult } from '@/helpers';
 import { type ProductDetailed } from '@audiophile/shared';
 
+import { productRepository } from '@/config';
+import { toProductFindManyInput, type PaginateResult } from '@/helpers';
+
 type FindCategoriesUseCaseParams = {
-  payload: unknown;
+  input: unknown;
 };
 
 type FindCategoriesUseCaseResult = PaginateResult<ProductDetailed>;
 
 export async function findProductsUseCase({
-  payload,
+  input,
 }: FindCategoriesUseCaseParams): Promise<FindCategoriesUseCaseResult> {
-  const { page, limit } = toProductFindManyInput(payload);
+  const { page, limit, category } = toProductFindManyInput(input);
 
-  const result = await productRepository.findMany({ page, limit });
+  const result = await productRepository.findMany({ category, limit, page });
 
   return result;
 }

@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
 import {
-  ApiPaginationQuerySchema,
+  ApiProductFindManyQuerySchema,
   ApiProductSchema,
   makeApiPaginationResponseSchema,
 } from '@audiophile/shared';
@@ -20,7 +20,7 @@ registry.registerPath({
   summary: 'Get products',
   description: 'Returns a paginated list of products.',
   request: {
-    query: ApiPaginationQuerySchema,
+    query: ApiProductFindManyQuerySchema,
   },
   responses: {
     [StatusCodes.OK]: {
