@@ -1,3 +1,13 @@
+import type {
+  Category,
+  Product,
+  ProductCreateParams,
+  ProductDetailed,
+  ProductFindManyParams,
+  ProductIdParams,
+  ProductSlugParams,
+} from '@audiophile/shared';
+
 import { db } from '@/db/in-memory';
 import {
   makeCategory,
@@ -6,64 +16,50 @@ import {
   paginate,
   type PaginateResult,
 } from '@/helpers';
-import type {
-  Category,
-  Product,
-  ProductCreateParams,
-  ProductDeleteByIdParams,
-  ProductDeleteBySlugParams,
-  ProductDetailed,
-  ProductFindByIdParams,
-  ProductFindBySlugParams,
-  ProductFindManyParams,
-  ProductId,
-} from '@audiophile/shared';
 
 import type { ProductRepository } from '../types/product-repository.types';
 
 export class InMemoryProductRepository implements ProductRepository {
   async create(params: ProductCreateParams): Promise<Product> {
-    const newItem = makeProduct(params);
+    const newProduct = makeProduct(params);
 
-    db.products.set(newItem.id, newItem);
+    db.products.set(newProduct.id, newProduct);
 
-    return newItem;
+    return newProduct;
   }
 
   async createMany(paramsList: ProductCreateParams[]): Promise<Product[]> {
-    const newItems = paramsList.map(makeProduct);
+    const createdProducts = paramsList.map(makeProduct);
 
-    for (const newItem of newItems) {
-      db.products.set(newItem.id, newItem);
+    for (const newProduct of createdProducts) {
+      db.products.set(newProduct.id, newProduct);
     }
 
-    return newItems;
+    return createdProducts;
   }
 
-  async findById({
-    id,
-  }: ProductFindByIdParams): Promise<ProductDetailed | null> {
-    const foundItem = db.products.get(id);
+  async findById({ id }: ProductIdParams): Promise<ProductDetailed | null> {
+    const foundProduct = db.products.get(id);
 
-    if (!foundItem) {
+    if (!foundProduct) {
       return null;
     }
 
-    return toItemDetailed(foundItem);
+    return toItemDetailed(foundProduct);
   }
 
   async findBySlug({
     slug,
-  }: ProductFindBySlugParams): Promise<ProductDetailed | null> {
-    const foundItem = Array.from(db.products.values()).find(
+  }: ProductSlugParams): Promise<ProductDetailed | null> {
+    const foundProduct = Array.from(db.products.values()).find(
       (p) => p.slug === slug,
     );
 
-    if (!foundItem) {
+    if (!foundProduct) {
       return null;
     }
 
-    return toItemDetailed(foundItem);
+    return toItemDetailed(foundProduct);
   }
 
   async findMany({
@@ -72,43 +68,41 @@ export class InMemoryProductRepository implements ProductRepository {
   }: ProductFindManyParams): Promise<PaginateResult<ProductDetailed>> {
     const items = Array.from(db.products.values()).map(toItemDetailed);
 
-    const foundItems = paginate({
+    const foundProducts = paginate({
       items,
       page,
       limit,
     });
 
-    return foundItems;
+    return foundProducts;
   }
 
-  async deleteById({ id }: ProductDeleteByIdParams): Promise<Product | null> {
-    const foundItem = Array.from(db.products.values()).find(
+  async deleteById({ id }: ProductIdParams): Promise<Product | null> {
+    const foundProduct = Array.from(db.products.values()).find(
       (item) => item.id === id,
     );
 
-    if (!foundItem) {
+    if (!foundProduct) {
       return null;
     }
 
-    db.products.delete(foundItem.id);
+    db.products.delete(foundProduct.id);
 
-    return foundItem;
+    return foundProduct;
   }
 
-  async deleteBySlug({
-    slug,
-  }: ProductDeleteBySlugParams): Promise<Product | null> {
-    const foundItem = Array.from(db.products.values()).find(
+  async deleteBySlug({ slug }: ProductSlugParams): Promise<Product | null> {
+    const foundProduct = Array.from(db.products.values()).find(
       (item) => item.slug === slug,
     );
 
-    if (!foundItem) {
+    if (!foundProduct) {
       return null;
     }
 
-    db.products.delete(foundItem.id);
+    db.products.delete(foundProduct.id);
 
-    return foundItem;
+    return foundProduct;
   }
 
   async clear(): Promise<void> {
@@ -116,7 +110,7 @@ export class InMemoryProductRepository implements ProductRepository {
   }
 }
 
-function getProductGallery(productId: ProductId) {
+function getProductGallery(productId: Product['id']) {
   for (const [, gallery] of db.galleries.entries()) {
     if (gallery.productId === productId) {
       return gallery;
@@ -146,7 +140,7 @@ function getProductCategory(categoryId: Category['id']) {
   });
 }
 
-function getProductIncludes(productId: ProductId) {
+function getProductIncludes(productId: Product['id']) {
   const includes = Array.from(db.includes.values())
     .filter((include) => include.productId === productId)
     .map(({ item, quantity }) => ({ item, quantity }));
@@ -154,14 +148,14 @@ function getProductIncludes(productId: ProductId) {
   return includes;
 }
 
-function getProductSuggestions(productId: ProductId) {
-  const otherRelations = Array.from(db.otherProducts.values()).filter(
-    (other) => other.productId === productId,
+function getProductSuggestions(productId: Product['id']) {
+  const suggestionRelations = Array.from(db.suggestions.values()).filter(
+    (suggestion) => suggestion.sourceId === productId,
   );
 
   const suggestions = Array.from(db.products.values())
     .filter((product) =>
-      otherRelations.some((rel) => rel.otherId === product.id),
+      suggestionRelations.some((rel) => rel.sourceId === product.id),
     )
     .map(({ name, slug, image }) => ({ name, slug, image }));
 

@@ -1,11 +1,12 @@
-import { db } from '@/db/in-memory';
-import { makeOrder, paginate, type PaginateResult } from '@/helpers';
 import type {
   OrderCreateParams,
   Order,
   OrderFindByIdParams,
   OrderFindManyParams,
 } from '@audiophile/shared';
+
+import { db } from '@/db/in-memory';
+import { makeOrder, paginate, type PaginateResult } from '@/helpers';
 
 import type { OrderRepository } from '../types/order-repository.types';
 

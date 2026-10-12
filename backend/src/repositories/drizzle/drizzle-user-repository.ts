@@ -1,6 +1,3 @@
-import { eq } from 'drizzle-orm';
-
-import { db, users, type User as DrizzleUser } from '@/db/drizzle';
 import type {
   User,
   UserCreateParams,
@@ -8,6 +5,9 @@ import type {
   UserFindByIdParams,
   UserUpdateParams,
 } from '@audiophile/shared';
+import { eq } from 'drizzle-orm';
+
+import { db, users, type User as DrizzleUser } from '@/db/drizzle';
 
 import type { UserRepository } from '../types/user-repository.types';
 

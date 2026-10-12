@@ -1,12 +1,12 @@
-import { db } from '@/db/in-memory';
-import { makeGallery, paginate, type PaginateResult } from '@/helpers';
 import type {
   Gallery,
   GalleryCreateParams,
-  GalleryDeleteByIdParams,
-  GalleryFindByIdParams,
   GalleryFindManyParams,
+  GalleryIdParams,
 } from '@audiophile/shared';
+
+import { db } from '@/db/in-memory';
+import { makeGallery, paginate, type PaginateResult } from '@/helpers';
 
 import type { GalleryRepository } from '../types/gallery-repository.types';
 
@@ -29,7 +29,7 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     return newItems;
   }
 
-  async findById({ id }: GalleryFindByIdParams): Promise<Gallery | null> {
+  async findById({ id }: GalleryIdParams): Promise<Gallery | null> {
     const foundItem = db.galleries.get(id);
 
     if (!foundItem) {
@@ -54,7 +54,7 @@ export class InMemoryGalleryRepository implements GalleryRepository {
     return foundItems;
   }
 
-  async deleteById({ id }: GalleryDeleteByIdParams): Promise<Gallery | null> {
+  async deleteById({ id }: GalleryIdParams): Promise<Gallery | null> {
     const foundItem = Array.from(db.galleries.values()).find(
       (item) => item.id === id,
     );

@@ -1,5 +1,3 @@
-import { db } from '@/db/in-memory';
-import { makeCategory, paginate, type PaginateResult } from '@/helpers';
 import type {
   Category,
   CategoryCreateParams,
@@ -8,6 +6,9 @@ import type {
   CategorySlugParams,
   CategoryUpdateParams,
 } from '@audiophile/shared';
+
+import { db } from '@/db/in-memory';
+import { makeCategory, paginate, type PaginateResult } from '@/helpers';
 
 import type { CategoryRepository } from '../types/category-repository.types';
 

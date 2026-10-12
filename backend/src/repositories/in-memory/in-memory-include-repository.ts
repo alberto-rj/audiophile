@@ -1,12 +1,12 @@
-import { db } from '@/db/in-memory';
-import { makeInclude, paginate, type PaginateResult } from '@/helpers';
 import type {
   Include,
   IncludeCreateParams,
-  IncludeDeleteByIdParams,
-  IncludeFindByIdParams,
   IncludeFindManyParams,
+  IncludeIdParams,
 } from '@audiophile/shared';
+
+import { db } from '@/db/in-memory';
+import { makeInclude, paginate, type PaginateResult } from '@/helpers';
 
 import type { IncludeRepository } from '../types/include-repository.types';
 
@@ -29,7 +29,7 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     return newItems;
   }
 
-  async findById({ id }: IncludeFindByIdParams): Promise<Include | null> {
+  async findById({ id }: IncludeIdParams): Promise<Include | null> {
     const foundItem = db.includes.get(id);
 
     if (!foundItem) {
@@ -54,7 +54,7 @@ export class InMemoryIncludeRepository implements IncludeRepository {
     return foundItems;
   }
 
-  async deleteById({ id }: IncludeDeleteByIdParams): Promise<Include | null> {
+  async deleteById({ id }: IncludeIdParams): Promise<Include | null> {
     const foundItem = Array.from(db.includes.values()).find(
       (item) => item.id === id,
     );
