@@ -1,17 +1,16 @@
-import { count, eq } from 'drizzle-orm';
-
-import { db, includes, type Include as RawInclude } from '@/db/drizzle';
-import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
-import type { IncludeRepository } from '@/repositories';
 import type {
   Include,
   IncludeCreateParams,
-  IncludeDeleteByIdParams,
-  IncludeFindByIdParams,
   IncludeFindManyParams,
+  IncludeIdParams,
 } from '@audiophile/shared';
+import { count, eq } from 'drizzle-orm';
 
-function toItem(item: RawInclude): Include {
+import { db, includes, type Include as DrizzleInclude } from '@/db/drizzle';
+import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
+import type { IncludeRepository } from '@/repositories';
+
+function toInclude(item: DrizzleInclude): Include {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
 
@@ -22,36 +21,36 @@ export class DrizzleIncludeRepository implements IncludeRepository {
   async create(params: IncludeCreateParams): Promise<Include> {
     const [createdItem] = await db.insert(includes).values(params).returning();
 
-    return toItem(createdItem!);
+    return toInclude(createdItem!);
   }
 
   async createMany(paramsList: IncludeCreateParams[]): Promise<Include[]> {
-    const createdItems = await db
+    const createdIncludes = await db
       .insert(includes)
       .values(paramsList)
       .returning();
 
-    return createdItems.map(toItem);
+    return createdIncludes.map(toInclude);
   }
 
-  async findById({ id }: IncludeFindByIdParams): Promise<Include | null> {
-    const [foundItem] = await db
+  async findById({ id }: IncludeIdParams): Promise<Include | null> {
+    const [foundInclude] = await db
       .select()
       .from(includes)
       .where(eq(includes.id, id));
 
-    if (!foundItem) {
+    if (!foundInclude) {
       return null;
     }
 
-    return foundItem;
+    return foundInclude;
   }
 
   async findMany({
     page,
     limit,
   }: IncludeFindManyParams): Promise<PaginateResult<Include>> {
-    const [foundItems, [totalItemsResult]] = await Promise.all([
+    const [foundIncludes, [totalItemsResult]] = await Promise.all([
       db
         .select()
         .from(includes)
@@ -68,21 +67,21 @@ export class DrizzleIncludeRepository implements IncludeRepository {
 
     return {
       ...result,
-      items: foundItems.map(toItem),
+      items: foundIncludes.map(toInclude),
     };
   }
 
-  async deleteById({ id }: IncludeDeleteByIdParams): Promise<Include | null> {
-    const [deletedItem] = await db
+  async deleteById({ id }: IncludeIdParams): Promise<Include | null> {
+    const [deletedInclude] = await db
       .delete(includes)
       .where(eq(includes.id, id))
       .returning();
 
-    if (!deletedItem) {
+    if (!deletedInclude) {
       return null;
     }
 
-    return deletedItem;
+    return deletedInclude;
   }
 
   async clear() {

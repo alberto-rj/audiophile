@@ -1,56 +1,59 @@
-import { db, galleries, type Gallery as RawGallery } from '@/db/drizzle';
-import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
-import type { GalleryRepository } from '@/repositories';
 import type {
   Gallery,
   GalleryCreateParams,
-  GalleryDeleteByIdParams,
-  GalleryFindByIdParams,
   GalleryFindManyParams,
+  GalleryIdParams,
 } from '@audiophile/shared';
 import { count, eq } from 'drizzle-orm';
 
-function toItem(item: RawGallery): Gallery {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { createdAt, updatedAt, ...itemWithoutTimestamp } = item;
+import { db, galleries, type Gallery as DrizzleGallery } from '@/db/drizzle';
+import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
+import type { GalleryRepository } from '@/repositories';
 
-  return itemWithoutTimestamp;
+function toGallery(gallery: DrizzleGallery): Gallery {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { createdAt, updatedAt, ...galleryWithoutTimestamp } = gallery;
+
+  return galleryWithoutTimestamp;
 }
 
 export class DrizzleGalleryRepository implements GalleryRepository {
   async create(params: GalleryCreateParams): Promise<Gallery> {
-    const [createdItem] = await db.insert(galleries).values(params).returning();
+    const [createdGallery] = await db
+      .insert(galleries)
+      .values(params)
+      .returning();
 
-    return toItem(createdItem!);
+    return toGallery(createdGallery!);
   }
 
   async createMany(paramsList: GalleryCreateParams[]): Promise<Gallery[]> {
-    const createdItems = await db
+    const createdGalleries = await db
       .insert(galleries)
       .values(paramsList)
       .returning();
 
-    return createdItems.map(toItem);
+    return createdGalleries.map(toGallery);
   }
 
-  async findById({ id }: GalleryFindByIdParams): Promise<Gallery | null> {
-    const [foundItem] = await db
+  async findById({ id }: GalleryIdParams): Promise<Gallery | null> {
+    const [foundGallery] = await db
       .select()
       .from(galleries)
       .where(eq(galleries.id, id));
 
-    if (!foundItem) {
+    if (!foundGallery) {
       return null;
     }
 
-    return toItem(foundItem);
+    return toGallery(foundGallery);
   }
 
   async findMany({
     page,
     limit,
   }: GalleryFindManyParams): Promise<PaginateResult<Gallery>> {
-    const [foundItems, [totalItemsResult]] = await Promise.all([
+    const [foundGallery, [totalGalleriesResult]] = await Promise.all([
       db
         .select()
         .from(galleries)
@@ -59,25 +62,25 @@ export class DrizzleGalleryRepository implements GalleryRepository {
       db.select({ totalItems: count() }).from(galleries),
     ]);
 
-    const totalItems = totalItemsResult!.totalItems;
+    const totalItems = totalGalleriesResult!.totalItems;
     const result = getBaseResult({ limit, page, totalItems });
 
     return {
       ...result,
-      items: foundItems.map(toItem),
+      items: foundGallery.map(toGallery),
     };
   }
 
-  async deleteById({ id }: GalleryDeleteByIdParams): Promise<Gallery | null> {
-    const [deletedItem] = await db
+  async deleteById({ id }: GalleryIdParams): Promise<Gallery | null> {
+    const [deletedGalleries] = await db
       .delete(galleries)
       .where(eq(galleries.id, id));
 
-    if (!deletedItem) {
+    if (!deletedGalleries) {
       return null;
     }
 
-    return toItem(deletedItem);
+    return toGallery(deletedGalleries);
   }
 
   async clear(): Promise<void> {

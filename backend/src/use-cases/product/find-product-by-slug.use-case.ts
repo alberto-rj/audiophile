@@ -1,5 +1,5 @@
 import { productRepository } from '@/config';
-import { makeProductFindBySlugParams, ResourceNotFoundError } from '@/helpers';
+import { ResourceNotFoundError, toProductSlugInput } from '@/helpers';
 import { type ProductDetailed } from '@audiophile/shared';
 
 interface FindProductBySlugUseCaseParams {
@@ -13,7 +13,7 @@ interface FindProductBySlugUseCaseResult {
 export async function findProductBySlugUseCase({
   payload,
 }: FindProductBySlugUseCaseParams): Promise<FindProductBySlugUseCaseResult> {
-  const { slug } = makeProductFindBySlugParams(payload);
+  const { slug } = toProductSlugInput(payload);
 
   const foundItem = await productRepository.findBySlug({ slug });
 

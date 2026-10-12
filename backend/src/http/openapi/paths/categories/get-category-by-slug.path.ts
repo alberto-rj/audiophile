@@ -5,6 +5,7 @@ import {
   ApiCategorySchema,
   ApiCategorySlugParamsSchema,
   ApiErrorResponseSchema,
+  ApiPaginationQuerySchema,
   makeApiResultResponseSchema,
 } from '@audiophile/shared';
 
@@ -22,6 +23,7 @@ registry.registerPath({
   description: 'Returns a category matching the provided slug.',
   request: {
     params: ApiCategorySlugParamsSchema,
+    query: ApiPaginationQuerySchema,
   },
   responses: {
     [StatusCodes.OK]: {

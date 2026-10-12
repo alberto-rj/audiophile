@@ -1,5 +1,3 @@
-import { db } from '@/db/in-memory';
-import { makeUser } from '@/helpers';
 import type {
   User,
   UserCreateParams,
@@ -7,6 +5,9 @@ import type {
   UserFindByIdParams,
   UserUpdateParams,
 } from '@audiophile/shared';
+
+import { db } from '@/db/in-memory';
+import { makeUser } from '@/helpers';
 
 import type { UserRepository } from '../types/user-repository.types';
 

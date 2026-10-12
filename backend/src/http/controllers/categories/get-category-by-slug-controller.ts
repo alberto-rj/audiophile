@@ -11,10 +11,11 @@ export async function getCategoryBySlugController(
 ) {
   try {
     const { slug } = req.params;
+    const { limit, page } = req.query;
 
     const { category, productPaginationResult } =
       await findCategoryBySlugUseCase({
-        input: { slug },
+        input: { slug, includeProducts: true, limit, page },
       });
 
     const apiCategory = toApiCategory(category);

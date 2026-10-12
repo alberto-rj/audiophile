@@ -1,3 +1,10 @@
+import type {
+  OrderCreateParams,
+  Order,
+  OrderFindByIdParams,
+  OrderFindManyParams,
+  OrderItem,
+} from '@audiophile/shared';
 import { and, count, eq } from 'drizzle-orm';
 
 import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
@@ -6,13 +13,6 @@ import type {
   Order as DrizzleOrder,
   OrderItem as DrizzleOrderItem,
 } from '@/db/drizzle';
-import type {
-  OrderCreateParams,
-  Order,
-  OrderFindByIdParams,
-  OrderFindManyParams,
-  OrderItem,
-} from '@audiophile/shared';
 
 import type { OrderRepository } from '../types/order-repository.types';
 
