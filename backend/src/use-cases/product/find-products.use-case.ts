@@ -12,9 +12,9 @@ type FindCategoriesUseCaseResult = PaginateResult<ProductDetailed>;
 export async function findProductsUseCase({
   input,
 }: FindCategoriesUseCaseParams): Promise<FindCategoriesUseCaseResult> {
-  const { page, limit, category } = toProductFindManyInput(input);
+  const { page, limit, categoryId } = toProductFindManyInput(input);
 
-  const result = await productRepository.findMany({ category, limit, page });
+  const result = await productRepository.findMany({ categoryId, limit, page });
 
   return result;
 }

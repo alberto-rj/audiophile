@@ -10,11 +10,11 @@ export async function getProductsController(
   next: NextFunction,
 ) {
   try {
-    const { category, limit, page } = req.query;
+    const { categoryId, limit, page } = req.query;
 
     const result = await findProductsUseCase({
       input: {
-        category,
+        categoryId,
         limit,
         page,
       },
