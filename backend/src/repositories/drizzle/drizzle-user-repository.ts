@@ -11,13 +11,13 @@ import { db, users, type User as DrizzleUser } from '@/db/drizzle';
 
 import type { UserRepository } from '../types/user-repository.types';
 
-function parseItem(rawItem: DrizzleUser): User {
+function toUser(user: DrizzleUser): User {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { updatedAt, ...itemWithoutTimestamp } = rawItem;
+  const { updatedAt, ...userWithoutTimestamp } = user;
 
   return {
-    ...itemWithoutTimestamp,
-    createdAt: itemWithoutTimestamp.createdAt.toISOString(),
+    ...userWithoutTimestamp,
+    createdAt: userWithoutTimestamp.createdAt.toISOString(),
   };
 }
 
@@ -25,13 +25,13 @@ export class DrizzleUserRepository implements UserRepository {
   async create(params: UserCreateParams): Promise<User> {
     const [createdUser] = await db.insert(users).values(params).returning();
 
-    return parseItem(createdUser!);
+    return toUser(createdUser!);
   }
 
   async createMany(params: UserCreateParams[]): Promise<User[]> {
     const createdUsers = await db.insert(users).values(params).returning();
 
-    return createdUsers.map(parseItem);
+    return createdUsers.map(toUser);
   }
 
   async findById({ id }: UserFindByIdParams): Promise<User | null> {
@@ -45,7 +45,7 @@ export class DrizzleUserRepository implements UserRepository {
       return null;
     }
 
-    return parseItem(foundUser);
+    return toUser(foundUser);
   }
 
   async findByEmail({ email }: UserFindByEmailParams): Promise<User | null> {
@@ -59,21 +59,21 @@ export class DrizzleUserRepository implements UserRepository {
       return null;
     }
 
-    return parseItem(foundUser);
+    return toUser(foundUser);
   }
 
   async update({ id, ...changes }: UserUpdateParams): Promise<User | null> {
-    const [updatedItem] = await db
+    const [updatedUser] = await db
       .update(users)
       .set({ ...changes })
       .where(eq(users.id, id))
       .returning();
 
-    if (!updatedItem) {
+    if (!updatedUser) {
       return null;
     }
 
-    return parseItem(updatedItem);
+    return toUser(updatedUser);
   }
 
   async clear(): Promise<void> {
