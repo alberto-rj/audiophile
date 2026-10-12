@@ -10,10 +10,14 @@ export async function getProductsController(
   next: NextFunction,
 ) {
   try {
-    const payload = req.query;
+    const { category, limit, page } = req.query;
 
     const result = await findProductsUseCase({
-      payload,
+      input: {
+        category,
+        limit,
+        page,
+      },
     });
     const apiItems = result.items.map(toApiProduct);
 
