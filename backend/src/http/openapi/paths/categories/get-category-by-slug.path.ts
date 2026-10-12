@@ -1,13 +1,12 @@
-import { StatusCodes } from 'http-status-codes';
-
-import { registry } from '@/http/openapi';
 import {
   ApiCategorySchema,
   ApiCategorySlugParamsSchema,
   ApiErrorResponseSchema,
-  ApiPaginationQuerySchema,
   makeApiResultResponseSchema,
 } from '@audiophile/shared';
+import { StatusCodes } from 'http-status-codes';
+
+import { registry } from '@/http/openapi';
 
 import {
   internalServerErrorResponse,
@@ -23,7 +22,6 @@ registry.registerPath({
   description: 'Returns a category matching the provided slug.',
   request: {
     params: ApiCategorySlugParamsSchema,
-    query: ApiPaginationQuerySchema,
   },
   responses: {
     [StatusCodes.OK]: {

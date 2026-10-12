@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import { findCategoryBySlugUseCase } from '@/use-cases';
-import { makeResBodyResult, toApiCategory, toApiProduct } from '@/helpers';
+import { makeResBodyResult, toApiCategory } from '@/helpers';
 
 export async function getCategoryBySlugController(
   req: Request,
@@ -11,25 +11,15 @@ export async function getCategoryBySlugController(
 ) {
   try {
     const { slug } = req.params;
-    const { limit, page } = req.query;
 
-    const { category, productPaginationResult } =
-      await findCategoryBySlugUseCase({
-        input: { slug, includeProducts: true, limit, page },
-      });
+    const { output: category } = await findCategoryBySlugUseCase({
+      input: {
+        slug,
+      },
+    });
 
     const apiCategory = toApiCategory(category);
-    const apiProducts = productPaginationResult.items.map(toApiProduct);
-    const apiProductPaginationResult = {
-      ...productPaginationResult,
-      items: apiProducts,
-    };
-    const apiResult = {
-      ...apiCategory,
-      ...apiProductPaginationResult,
-    };
-
-    res.status(StatusCodes.OK).json(makeResBodyResult(apiResult));
+    res.status(StatusCodes.OK).json(makeResBodyResult(apiCategory));
   } catch (error) {
     next(error);
   }
