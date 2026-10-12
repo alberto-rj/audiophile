@@ -1,9 +1,9 @@
-import { StatusCodes } from 'http-status-codes';
-
 import {
   ApiErrorResponseSchema,
   ApiValidationErrorResponseSchema,
 } from '@audiophile/shared';
+
+import { StatusCodes } from 'http-status-codes';
 
 export const unauthorizedResponse = {
   [StatusCodes.UNAUTHORIZED]: {

@@ -1,11 +1,11 @@
-import { StatusCodes } from 'http-status-codes';
-
-import { registry } from '@/http/openapi';
 import {
   ApiAuthResponseSchema,
   ApiErrorResponseSchema,
   ApiAuthLoginBodySchema,
 } from '@audiophile/shared';
+import { StatusCodes } from 'http-status-codes';
+
+import { registry } from '@/http/openapi';
 
 import {
   AuthCookieHeader,
