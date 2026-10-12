@@ -4,7 +4,6 @@ import { CategoryIdSchema } from '../category/category.base.schema';
 import { LimitSchema, PageSchema } from '../common/common.schema';
 
 import {
-  ProductCategorySchema,
   ProductDescriptionSchema,
   ProductFeaturesSchema,
   ProductIdSchema,
@@ -33,7 +32,7 @@ export const ProductSlugParamsSchema = z.object({
 });
 
 export const ProductFindManyParamsSchema = z.object({
+  categoryId: CategoryIdSchema,
   limit: LimitSchema,
   page: PageSchema,
-  category: ProductCategorySchema.optional(),
 });
