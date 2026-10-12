@@ -1,11 +1,11 @@
-import { StatusCodes } from 'http-status-codes';
-
-import { registry } from '@/http/openapi';
 import {
   ApiProductFindManyQuerySchema,
   ApiProductSchema,
   makeApiPaginationResponseSchema,
 } from '@audiophile/shared';
+import { StatusCodes } from 'http-status-codes';
+
+import { registry } from '@/http/openapi';
 
 import {
   internalServerErrorResponse,
