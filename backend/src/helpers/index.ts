@@ -1,5 +1,6 @@
-export { toAuthLoginInput } from './auth/to-auth-login-input';
-export { toAuthRegisterInput } from './auth/to-auth-register-input';
+export * from './auth/to-auth-login-input';
+export * from './auth/to-auth-register-input';
+export * from './auth/to-refresh-token-token-input';
 
 export { toApiCart } from './cart/cart.api';
 export {

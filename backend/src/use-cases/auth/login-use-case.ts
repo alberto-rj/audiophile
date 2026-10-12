@@ -1,3 +1,5 @@
+import type { User } from '@audiophile/shared';
+
 import { refreshTokenRepository, userRepository } from '@/config';
 import {
   getAccessToken,
@@ -7,7 +9,6 @@ import {
   refreshTokenExpiresAt,
   UnauthorizedError,
 } from '@/helpers';
-import type { User } from '@audiophile/shared';
 
 interface LoginUseCaseParams {
   input: unknown;
