@@ -18,10 +18,10 @@ export const useCredentials = () => {
   });
 
   useEffect(() => {
-    if (isSuccess && data.user) {
+    if (isSuccess && data.results && data.results[0]) {
       dispatch(
         setCredentials({
-          user: data.user,
+          user: data.results[0],
           accessToken: accessToken!,
         }),
       );

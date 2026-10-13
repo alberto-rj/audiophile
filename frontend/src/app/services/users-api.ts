@@ -1,8 +1,11 @@
+import type {
+  ApiUserResultListResponse,
+  ApiUserUpdateProfileBody,
+} from '@audiophile/shared';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { setUser } from '@/app/features/auth';
 import { API_ENDPOINTS } from '@/config/api-endpoints';
-import type { ProfileResponse, UpdateProfilePayload } from '@/libs/types';
 
 import { baseQueryWithReauth } from './base-query';
 
@@ -10,11 +13,14 @@ export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
-    getMe: builder.query<ProfileResponse, void>({
+    getMe: builder.query<ApiUserResultListResponse, void>({
       query: () => API_ENDPOINTS.userProfile,
     }),
 
-    updateProfile: builder.mutation<ProfileResponse, UpdateProfilePayload>({
+    updateProfile: builder.mutation<
+      ApiUserResultListResponse,
+      ApiUserUpdateProfileBody
+    >({
       query: (payload) => ({
         url: API_ENDPOINTS.userProfile,
         method: 'PUT',
@@ -22,8 +28,10 @@ export const usersApi = createApi({
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         const {
-          data: { user },
+          data: { results },
         } = await queryFulfilled;
+
+        const [user] = results;
 
         dispatch(setUser({ user }));
       },

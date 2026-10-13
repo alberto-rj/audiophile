@@ -1,12 +1,12 @@
-import type { BaseUser } from '@/libs/types';
+import type { UserBasic } from '@audiophile/shared';
 
 export interface AuthState {
-  user: BaseUser | null;
+  user: UserBasic | null;
   accessToken: string | null;
 }
 
 export interface AuthResponse {
-  user: BaseUser;
+  user: UserBasic;
   accessToken: string;
 }
 
