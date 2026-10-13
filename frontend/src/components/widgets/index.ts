@@ -38,8 +38,9 @@ export { default as GoBack } from './go-back/go-back';
 
 export { default as Hero } from './hero/hero';
 
-export { ProductList } from './product-listing/product-list';
-export { ProductListSkeleton } from './product-listing/product-list-skeleton';
+export { ProductList } from './products-listing/product-list';
+export { ProductListSkeleton } from './products-listing/product-list-skeleton';
+export { ProductsListing } from './products-listing/products-listing';
 
 export { default as OrderConfirmationModal } from './order-confirmation-modal/order-confirmation-modal';
 
