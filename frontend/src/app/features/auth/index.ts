@@ -1,7 +1,8 @@
+import type { UserBasic } from '@audiophile/shared';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/app/store';
-import type { AuthState, BaseUser } from '@/libs/types';
+import type { AuthState } from '@/libs/types';
 
 const TOKEN_KEY = 'auth_token';
 
@@ -29,7 +30,7 @@ const authSlice = createSlice({
       state,
       {
         payload: { user, accessToken },
-      }: PayloadAction<{ user: BaseUser; accessToken: string }>,
+      }: PayloadAction<{ user: UserBasic; accessToken: string }>,
     ) => {
       state.user = user;
       state.accessToken = accessToken;
@@ -42,7 +43,7 @@ const authSlice = createSlice({
 
     setUser: (
       state,
-      { payload: { user } }: PayloadAction<{ user: BaseUser }>,
+      { payload: { user } }: PayloadAction<{ user: UserBasic }>,
     ) => {
       state.user = user;
     },

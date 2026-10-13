@@ -26,9 +26,9 @@ const ProfileForm = () => {
 
   const onSubmit = async (data: ProfileFormData) => {
     try {
-      const {
-        user: { name, email },
-      } = await updateProfile(data).unwrap();
+      const { results } = await updateProfile(data).unwrap();
+      const [user] = results;
+      const { name, email } = user;
 
       reset({ name, email });
 
