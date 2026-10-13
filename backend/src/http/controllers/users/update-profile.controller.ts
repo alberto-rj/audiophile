@@ -1,7 +1,12 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { toApiUser, type AuthPayload, type AuthRequest } from '@/helpers';
+import {
+  makeResBodyResultList,
+  toApiUser,
+  type AuthPayload,
+  type AuthRequest,
+} from '@/helpers';
 import { updateProfileUseCase } from '@/use-cases';
 
 export async function updateProfileController(
@@ -22,7 +27,7 @@ export async function updateProfileController(
       },
     });
 
-    res.status(StatusCodes.OK).json({ user: toApiUser(user) });
+    res.status(StatusCodes.OK).json(makeResBodyResultList(toApiUser(user)));
   } catch (error) {
     next(error);
   }

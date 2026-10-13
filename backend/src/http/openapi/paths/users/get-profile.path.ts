@@ -1,4 +1,4 @@
-import { ApiUserResponseSchema } from '@audiophile/shared';
+import { ApiUserResultListResponseSchema } from '@audiophile/shared';
 import { StatusCodes } from 'http-status-codes';
 
 import { registry } from '@/http/openapi';
@@ -20,7 +20,7 @@ registry.registerPath({
       description: 'Current user profile retrieved successfully.',
       content: {
         'application/json': {
-          schema: ApiUserResponseSchema,
+          schema: ApiUserResultListResponseSchema,
         },
       },
     },
