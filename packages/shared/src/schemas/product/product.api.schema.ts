@@ -1,7 +1,11 @@
 import { z } from '@/config';
 
 import { CategoryNameSchema } from '../category/category.base.schema';
-import { ResponsiveImageSchema } from '../common/common.schema';
+import {
+  makeApiResultListResponseSchema,
+  makeApiResultResponseSchema,
+  ResponsiveImageSchema,
+} from '../common/common.schema';
 
 import { ApiGallerySchema } from './gallery.api.schema';
 import { ApiIncludeSchema } from './include.api.schema';
@@ -47,3 +51,9 @@ export const ApiProductSchema = z.object({
 export const ApiProductFindManyQuerySchema = ProductFindManyParamsSchema.extend(
   {},
 );
+
+export const ApiProductResultListResponseSchema =
+  makeApiResultListResponseSchema(ApiProductSchema);
+
+export const ApiProductPaginationResponseSchema =
+  makeApiResultResponseSchema(ApiProductSchema);

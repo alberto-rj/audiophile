@@ -1,8 +1,7 @@
 import {
-  ApiProductSchema,
   ApiProductSlugParamsSchema,
   ApiErrorResponseSchema,
-  makeApiResultResponseSchema,
+  ApiProductResultListResponseSchema,
 } from '@audiophile/shared';
 import { StatusCodes } from 'http-status-codes';
 
@@ -28,7 +27,7 @@ registry.registerPath({
       description: 'Product retrieved successfully.',
       content: {
         'application/json': {
-          schema: makeApiResultResponseSchema(ApiProductSchema),
+          schema: ApiProductResultListResponseSchema,
         },
       },
     },

@@ -1,10 +1,10 @@
+import type { ApiProduct } from '@audiophile/shared';
 import { cn } from '@/libs/cn';
-import type { Product } from '@/libs/types';
 
 import { ProductCard } from './product-card';
 
 interface ProductListProps {
-  products: Product[];
+  products: ApiProduct[];
 }
 
 export function ProductList({ products }: ProductListProps) {
@@ -15,17 +15,11 @@ export function ProductList({ products }: ProductListProps) {
       role="list"
       className={cn('flow')}
     >
-      {products.map(({ id, image, name, description, isNew, slug }, i) => (
-        <li key={id}>
+      {products.map((product, i) => (
+        <li key={product.slug}>
           <ProductCard
-            content={{
-              image,
-              title: name,
-              description,
-              isNew,
-              slug: slug,
-              isReversed: i % 2 !== 0,
-            }}
+            content={product}
+            isReversed={i % 2 !== 0}
           />
         </li>
       ))}

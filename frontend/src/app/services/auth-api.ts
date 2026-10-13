@@ -1,9 +1,13 @@
+import type {
+  ApiAuthResponse,
+  ApiAuthRegisterBody,
+  ApiAuthLoginBody,
+} from '@audiophile/shared';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { clearCredentials, setCredentials } from '@/app/features/auth';
 import { setIsCartModalOpen } from '@/app/features/cart';
 import { API_ENDPOINTS } from '@/config/api-endpoints';
-import type { AuthResponse, LoginPayload, RegisterPayload } from '@/libs/types';
 
 import { baseQueryWithReauth } from './base-query';
 
@@ -11,7 +15,7 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
-    register: builder.mutation<AuthResponse, RegisterPayload>({
+    register: builder.mutation<ApiAuthResponse, ApiAuthRegisterBody>({
       query: (payload) => ({
         url: API_ENDPOINTS.register,
         method: 'POST',
@@ -26,7 +30,7 @@ export const authApi = createApi({
       },
     }),
 
-    login: builder.mutation<AuthResponse, LoginPayload>({
+    login: builder.mutation<ApiAuthResponse, ApiAuthLoginBody>({
       query: (payload) => ({
         url: API_ENDPOINTS.login,
         method: 'POST',
@@ -54,7 +58,7 @@ export const authApi = createApi({
       },
     }),
 
-    refresh: builder.mutation<AuthResponse, void>({
+    refresh: builder.mutation<ApiAuthResponse, void>({
       query: () => ({
         url: API_ENDPOINTS.refresh,
         method: 'POST',

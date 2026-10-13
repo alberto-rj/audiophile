@@ -121,7 +121,7 @@ import productCardContentDesktop from '@/assets/product-xx99-mark-two-headphones
 import type { ProductCardContent } from '@/libs/types';
 
 export const productCardContent: ProductCardContent = {
-  title: 'XX99 Mark II Headphones',
+  name: 'XX99 Mark II Headphones',
   description:
     'The new XX99 Mark II headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.',
   slug: '#',
