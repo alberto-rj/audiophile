@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { APP_ROUTES } from '@/config/app-routes';
-import { makeGetCategoriesHandler } from '@/mocks/handlers';
+import {
+  makeGetCategoriesHandler,
+  makeGetProductsHandler,
+} from '@/mocks/handlers';
 import { CategoryPage } from '@/pages';
 
 type StoryProps = React.ComponentProps<typeof CategoryPage>;
@@ -31,7 +34,10 @@ export const LoadingProducts: Story = {
 export const FailedToLoadProducts: Story = {
   parameters: {
     msw: {
-      handlers: [makeGetCategoriesHandler()],
+      handlers: [
+        makeGetCategoriesHandler(),
+        makeGetProductsHandler({ type: 'error' }),
+      ],
     },
   },
 };
@@ -39,7 +45,10 @@ export const FailedToLoadProducts: Story = {
 export const ProductsLoaded: Story = {
   parameters: {
     msw: {
-      handlers: [makeGetCategoriesHandler()],
+      handlers: [
+        makeGetCategoriesHandler(),
+        makeGetProductsHandler({ type: 'default' }),
+      ],
     },
   },
 };
@@ -47,7 +56,10 @@ export const ProductsLoaded: Story = {
 export const SingleProductLoaded: Story = {
   parameters: {
     msw: {
-      handlers: [makeGetCategoriesHandler()],
+      handlers: [
+        makeGetCategoriesHandler(),
+        makeGetProductsHandler({ type: 'default', limit: 1 }),
+      ],
     },
   },
 };
@@ -55,7 +67,10 @@ export const SingleProductLoaded: Story = {
 export const NoProductLoaded: Story = {
   parameters: {
     msw: {
-      handlers: [makeGetCategoriesHandler()],
+      handlers: [
+        makeGetCategoriesHandler(),
+        makeGetProductsHandler({ type: 'default', limit: 0 }),
+      ],
     },
   },
 };

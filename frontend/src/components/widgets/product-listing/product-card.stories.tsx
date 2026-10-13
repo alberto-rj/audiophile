@@ -35,8 +35,8 @@ export const Reversed: Story = {
   args: {
     content: {
       ...productCardContent,
-      isReversed: true,
     },
+    isReversed: true,
   },
 };
 
@@ -53,8 +53,8 @@ export const OldAndReversed: Story = {
   args: {
     content: {
       ...productCardContent,
-      isReversed: true,
       isNew: false,
     },
+    isReversed: true,
   },
 };

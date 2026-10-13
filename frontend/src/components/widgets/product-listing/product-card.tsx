@@ -9,12 +9,14 @@ import type { ProductCardContent } from '@/libs/types';
 
 interface ProductCardProps {
   content: ProductCardContent;
+  isReversed?: boolean;
   className?: string;
 }
 
 export const ProductCard = ({
-  content: { image, title, description, slug, isNew, isReversed },
+  content: { image, name, description, slug, isNew },
   className,
+  isReversed = false,
 }: ProductCardProps) => {
   const headingId = useId();
 
@@ -95,7 +97,7 @@ export const ProductCard = ({
                 'uppercase',
               )}
             >
-              {title}
+              {name}
             </h2>
           </div>
           <p>{description}</p>
@@ -105,7 +107,7 @@ export const ProductCard = ({
           asChild
         >
           <Link
-            aria-label={`See product - ${title}`}
+            aria-label={`See product - ${name}`}
             to={`${APP_ROUTES.products}/${slug}`}
           >
             See product

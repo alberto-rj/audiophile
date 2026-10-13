@@ -3,6 +3,7 @@ import type {
   GalleryImages,
   ItemInclude,
 } from '@/libs/types';
+import type { ApiProduct } from '@audiophile/shared';
 
 export interface CategoryContent {
   image: string;
@@ -29,12 +30,10 @@ export interface FeaturePortraitContent {
   image: ResponsiveImageType;
 }
 
-export interface ProductCardContent {
-  title: string;
-  description: string;
-  slug: string;
-  image: ResponsiveImageType;
-  isNew: boolean;
+export interface ProductCardContent extends Pick<
+  ApiProduct,
+  'name' | 'description' | 'slug' | 'image' | 'isNew'
+> {
   isReversed?: boolean;
 }
 
