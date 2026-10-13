@@ -1,6 +1,6 @@
 import {
   ApiUserUpdateProfileBodySchema,
-  ApiUserResponseSchema,
+  ApiUserResultListResponseSchema,
 } from '@audiophile/shared';
 import { StatusCodes } from 'http-status-codes';
 
@@ -35,7 +35,7 @@ registry.registerPath({
       description: 'Current user profile updated successfully.',
       content: {
         'application/json': {
-          schema: ApiUserResponseSchema,
+          schema: ApiUserResultListResponseSchema,
         },
       },
     },
