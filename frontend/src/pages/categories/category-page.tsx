@@ -39,7 +39,7 @@ const CategoryPage = () => {
     );
   }
 
-  if (isError) {
+  if (isError || !data || !data.results[0]) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
@@ -50,7 +50,7 @@ const CategoryPage = () => {
     );
   }
 
-  const { category } = data!;
+  const category = data.results[0];
 
   return (
     <>
@@ -64,7 +64,8 @@ const CategoryPage = () => {
       <div>
         <div className={cn('wrapper', 'flow', 'flow-spacing')}>
           <CategoriesListing />
-          <ProductList products={category.products!} />
+          {/* <ProductList products={category.products!} /> */}
+          <ProductList products={[]} />
           <BestGear />
         </div>
       </div>

@@ -1,13 +1,15 @@
+import type { ApiCategory } from '@audiophile/shared';
 import { Link } from 'react-router-dom';
 
 import { ArrowRight } from '@/assets/icons';
 import { Button } from '@/components/ui';
 import { cn } from '@/libs/cn';
-import type { Category } from '@/libs/types';
 import { createCategoryRoute } from '@/libs/app-routes';
 
+import ResponsiveImage from '../responsive-image/responsive-image';
+
 interface CategoryCardProps {
-  category: Category;
+  category: ApiCategory;
   className?: string;
 }
 
@@ -36,9 +38,9 @@ export const CategoryCard = ({
         className,
       )}
     >
-      <img
+      <ResponsiveImage
         alt=""
-        src={image}
+        image={image}
         className={cn(
           'aspect-90/103',
           'object-cover',
@@ -49,6 +51,7 @@ export const CategoryCard = ({
         )}
         loading="lazy"
       />
+
       <div
         aria-hidden={true}
         className={cn('flex', 'flex-col', 'items-center', 'gap-4')}

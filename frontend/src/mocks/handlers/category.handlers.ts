@@ -1,27 +1,12 @@
+import type {
+  ApiCategoryPaginationResponse,
+  ApiCategoryResultListResponse,
+} from '@audiophile/shared';
 import { http, HttpResponse } from 'msw';
 
-import { products, categories } from '@/libs/mocks';
-import type {
-  CategoryListResponse,
-  CategoryResponse,
-  Product,
-} from '@/libs/types';
+import { categories } from '@/libs/mocks';
 
 import { withDelay, withInfiniteDelay } from '../middlewares/with-delay';
-
-function sortProductsByNewFirst(products: Product[]) {
-  return [...products].sort((a, b) => {
-    if (a.isNew && b.isNew) {
-      return 0;
-    }
-
-    if (a.isNew && !b.isNew) {
-      return -1;
-    }
-
-    return 1;
-  });
-}
 
 export const makeGetCategoriesHandler = (
   options: {
@@ -56,8 +41,14 @@ export const makeGetCategoriesHandler = (
     withDelay(async () => {
       const filteredCategories = categories.slice(0, limit);
 
-      const response: CategoryListResponse = {
-        categories: filteredCategories,
+      const response: ApiCategoryPaginationResponse = {
+        results: filteredCategories,
+        pagination: {
+          hasNext: false,
+          hasPrev: false,
+          page: 1,
+          totalPages: 1,
+        },
       };
 
       return HttpResponse.json(response);
@@ -105,67 +96,8 @@ export const makeGetCategoryBySlugHandler = (
         return new HttpResponse(undefined, { status: 404 });
       }
 
-      const categoryResponse: CategoryResponse = {
-        category: foundCategory,
-      };
-
-      return HttpResponse.json(categoryResponse);
-    }),
-  );
-};
-
-export const makeGetCategoryProductsHandler = (
-  options: {
-    type?: 'error' | 'infinite' | 'default';
-    limit?: number;
-  } = {},
-) => {
-  const endpoint = '/api/categories/:slug/products';
-
-  const { type = 'default', limit = categories.length } = options;
-
-  if (type === 'infinite') {
-    return http.get(
-      endpoint,
-      withInfiniteDelay(async () => {
-        return HttpResponse.json(undefined);
-      }),
-    );
-  }
-
-  if (type === 'error') {
-    return http.get(
-      endpoint,
-      withDelay(async () => {
-        return HttpResponse.json(undefined, { status: 500 });
-      }),
-    );
-  }
-
-  return http.get(
-    endpoint,
-    withDelay(async ({ params }) => {
-      const { slug } = params as { slug?: string };
-
-      const foundCategory = categories.find(
-        (category) => category.slug.toLowerCase() === slug?.toLowerCase(),
-      );
-
-      if (!foundCategory) {
-        return new HttpResponse(undefined, { status: 404 });
-      }
-
-      const filteredProducts = sortProductsByNewFirst(
-        products.filter(
-          (p) => p.category.toLowerCase() === slug?.toLowerCase(),
-        ),
-      ).slice(0, limit);
-
-      const categoryResponse: CategoryResponse = {
-        category: {
-          ...foundCategory,
-          products: filteredProducts,
-        },
+      const categoryResponse: ApiCategoryResultListResponse = {
+        results: [foundCategory],
       };
 
       return HttpResponse.json(categoryResponse);
@@ -176,5 +108,4 @@ export const makeGetCategoryProductsHandler = (
 export const categoryHandlers = [
   makeGetCategoriesHandler(),
   makeGetCategoryBySlugHandler(),
-  makeGetCategoryProductsHandler(),
 ];

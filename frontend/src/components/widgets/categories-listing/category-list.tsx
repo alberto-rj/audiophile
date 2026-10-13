@@ -1,10 +1,10 @@
+import type { ApiCategory } from '@audiophile/shared';
 import { cn } from '@/libs/cn';
-import type { Category } from '@/libs/types';
 
 import { CategoryCard } from './category-card';
 
 interface CategoryListProps {
-  items: Category[];
+  items: ApiCategory[];
 }
 
 export const CategoryList = ({ items }: CategoryListProps) => {
