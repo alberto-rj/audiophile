@@ -1,23 +1,26 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import type { CategoryListResponse, CategoryResponse } from '@/libs/types';
 import { API_ENDPOINTS } from '@/config/api-endpoints';
 
 import { baseQuery } from './base-query';
+import type {
+  ApiCategoryPaginationResponse,
+  ApiCategoryResultListResponse,
+} from '@audiophile/shared';
 
 export const categoriesApi = createApi({
   reducerPath: 'categoriesApi',
   baseQuery: baseQuery,
   endpoints: (builder) => ({
-    getCategories: builder.query<CategoryListResponse, void>({
+    getCategories: builder.query<ApiCategoryPaginationResponse, void>({
       query: () => `${API_ENDPOINTS.categories}`,
     }),
 
-    getCategoryBySlug: builder.query<CategoryResponse, string>({
+    getCategoryBySlug: builder.query<ApiCategoryResultListResponse, string>({
       query: (slug) => `${API_ENDPOINTS.categories}/${slug}`,
     }),
 
-    getCategoryProducts: builder.query<CategoryResponse, string>({
+    getCategoryProducts: builder.query<ApiCategoryResultListResponse, string>({
       query: (slug) =>
         `${API_ENDPOINTS.categories}/${slug}${API_ENDPOINTS.products}`,
     }),

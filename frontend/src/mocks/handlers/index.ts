@@ -56,7 +56,6 @@ export {
 export {
   makeGetCategoriesHandler,
   makeGetCategoryBySlugHandler,
-  makeGetCategoryProductsHandler,
 } from './category.handlers';
 
 export {

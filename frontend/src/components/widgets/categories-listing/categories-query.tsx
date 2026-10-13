@@ -23,7 +23,7 @@ const CategoriesQuery = () => {
     );
   }
 
-  if (isError) {
+  if (isError || !data) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
@@ -40,7 +40,7 @@ const CategoriesQuery = () => {
     );
   }
 
-  const { categories } = data!;
+  const { results: categories } = data;
 
   return (
     <section aria-labelledby={headingId}>
