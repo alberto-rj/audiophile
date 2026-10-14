@@ -13,6 +13,12 @@
     "dev:shared": "npm run dev -w @audiophile/shared",
     "dev:frontend": "npm run dev -w frontend",
     "dev:backend": "npm run dev -w backend",
+    "lint:backend": "npm run lint -w backend -- --max-warnings=0",
+    "lint:frontend": "npm run lint -w frontend -- --max-warnings=0",
+    "format:backend": "npm run format -w backend",
+    "format:frontend": "npm run format -w frontend",
+    "format:check:backend": "npm run format:check -w backend",
+    "format:check:frontend": "npm run format:check -w frontend",
     "start:frontend": "npm run start -w frontend",
     "start:backend": "npm run start -w backend"
   }

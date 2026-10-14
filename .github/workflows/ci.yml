@@ -28,13 +28,13 @@ jobs:
         run: npm ci
 
       - name: Check formatting
-        run: npm run format:check -w backend
+        run: npm run format:check:backend
 
       - name: Check linting
-        run: npm run lint -w backend -- --max-warnings=0
+        run: npm run lint:backend
 
       - name: Build
-        run: npm run build -w backend
+        run: npm run build:backend
 
   frontend:
     name: Frontend
@@ -58,10 +58,10 @@ jobs:
         run: cp .env.ci .env
 
       - name: Check formatting
-        run: npm run format:check -w frontend
+        run: npm run format:check:frontend
 
       - name: Check linting
-        run: npm run lint -w frontend -- --max-warnings=0
+        run: npm run lint:frontend
 
       - name: Build
-        run: npm run build -w frontend
+        run: npm run build:frontend
