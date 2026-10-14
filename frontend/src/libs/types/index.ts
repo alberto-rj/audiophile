@@ -1,13 +1,6 @@
 export type { ResponsiveImageType } from './image';
 
-export type {
-  BasicProduct,
-  GalleryImages,
-  ItemInclude,
-  Product,
-  ProductListResponse,
-  ProductResponse,
-} from './product';
+export type { BasicProduct, GalleryImages, ItemInclude } from './product';
 
 export type {
   CategoryContent,
@@ -21,14 +14,6 @@ export type {
   ProductDetailedCardContent,
   SuggestionCardContent,
 } from './content';
-
-/* category */
-export type {
-  BaseCategory,
-  Category,
-  CategoryListResponse,
-  CategoryResponse,
-} from './category';
 
 /* cart */
 export type {

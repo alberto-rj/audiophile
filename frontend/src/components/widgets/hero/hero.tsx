@@ -1,13 +1,13 @@
+import type { ApiProduct } from '@audiophile/shared';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui';
 import { ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import type { Product } from '@/libs/types';
 import { createProductRoute } from '@/libs/app-routes';
 
 interface HeroProps {
-  product: Product;
+  product: ApiProduct;
 }
 
 const Hero = ({

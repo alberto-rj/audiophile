@@ -1,15 +1,15 @@
+import type {
+  ApiProduct,
+  ApiProductPaginationResponse,
+  ApiProductResultListResponse,
+} from '@audiophile/shared';
 import { http, HttpResponse } from 'msw';
 
 import { products } from '@/libs/mocks/products';
-import type {
-  Product,
-  ProductListResponse,
-  ProductResponse,
-} from '@/libs/types';
 
 import { withDelay, withInfiniteDelay } from '../middlewares/with-delay';
 
-function sortProductsByNewFirst(products: Product[]) {
+function sortProductsByNewFirst(products: ApiProduct[]) {
   return [...products].sort((a, b) => {
     if (a.isNew && b.isNew) {
       return 0;
@@ -22,38 +22,6 @@ function sortProductsByNewFirst(products: Product[]) {
     return 1;
   });
 }
-
-export const getProductBySlug = http.get(
-  '/api/products/:slug',
-  withDelay(async ({ params }) => {
-    const { slug } = params as { slug?: string };
-
-    const foundProduct = products.find(
-      (p) => p.slug.toLowerCase() === slug?.toLowerCase(),
-    );
-
-    if (!foundProduct) {
-      return new HttpResponse(undefined, { status: 404 });
-    }
-
-    const response: ProductResponse = {
-      product: foundProduct,
-    };
-
-    return HttpResponse.json(response);
-  }),
-);
-
-export const getProducts = http.get(
-  '/api/products',
-  withDelay(async () => {
-    const response: ProductListResponse = {
-      products: sortProductsByNewFirst(products),
-    };
-
-    return HttpResponse.json(response);
-  }),
-);
 
 export function makeGetProductsHandler(
   options: { type?: 'error' | 'infinite' | 'default'; limit?: number } = {},
@@ -83,8 +51,14 @@ export function makeGetProductsHandler(
   return http.get(
     endpoint,
     withDelay(async () => {
-      const response: ProductListResponse = {
-        products: sortProductsByNewFirst(products.slice(0, limit)),
+      const response: ApiProductPaginationResponse = {
+        results: sortProductsByNewFirst(products.slice(0, limit)),
+        pagination: {
+          hasNext: false,
+          hasPrev: false,
+          page: 1,
+          totalPages: 1,
+        },
       };
 
       return HttpResponse.json(response);
@@ -130,8 +104,8 @@ export function makeGetProductBySlugHandler(
         return new HttpResponse(undefined, { status: 404 });
       }
 
-      const response: ProductResponse = {
-        product: foundProduct,
+      const response: ApiProductResultListResponse = {
+        results: [foundProduct],
       };
 
       return HttpResponse.json(response);

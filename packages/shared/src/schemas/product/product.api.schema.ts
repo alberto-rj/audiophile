@@ -2,8 +2,8 @@ import { z } from '@/config';
 
 import { CategoryNameSchema } from '../category/category.base.schema';
 import {
+  makeApiPaginationResponseSchema,
   makeApiResultListResponseSchema,
-  makeApiResultResponseSchema,
   ResponsiveImageSchema,
 } from '../common/common.schema';
 
@@ -56,4 +56,4 @@ export const ApiProductResultListResponseSchema =
   makeApiResultListResponseSchema(ApiProductSchema);
 
 export const ApiProductPaginationResponseSchema =
-  makeApiResultResponseSchema(ApiProductSchema);
+  makeApiPaginationResponseSchema(ApiProductSchema);

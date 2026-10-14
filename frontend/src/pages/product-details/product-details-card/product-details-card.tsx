@@ -1,3 +1,4 @@
+import type { ApiProduct } from '@audiophile/shared';
 import { useId, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -12,11 +13,10 @@ import {
 import { Button, Spinner } from '@/components/ui';
 import { cn } from '@/libs/cn';
 import { setPendingCartItem, toMoney } from '@/libs/helpers';
-import type { Product } from '@/libs/types';
 import { useToast } from '@/hooks';
 
 interface ProductDetailsCardProps {
-  product: Product;
+  product: ApiProduct;
   className?: string;
 }
 
