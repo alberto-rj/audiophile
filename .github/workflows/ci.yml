@@ -31,7 +31,7 @@ jobs:
         run: npm run format:check -w backend
 
       - name: Check linting
-        run: npm run lint -- --max-warnings=0 -w backend
+        run: npm run lint -w backend -- --max-warnings=0
 
       - name: Build
         run: npm run build -w backend
@@ -61,7 +61,7 @@ jobs:
         run: npm run format:check -w frontend
 
       - name: Check linting
-        run: npm run lint -- --max-warnings=0 -w frontend
+        run: npm run lint -w frontend -- --max-warnings=0
 
       - name: Build
         run: npm run build -w frontend

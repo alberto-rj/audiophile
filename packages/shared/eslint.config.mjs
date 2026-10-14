@@ -6,7 +6,14 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   {
-    ignores: ['dist', 'node_modules', 'build', 'coverage', 'logs'],
+    ignores: [
+      'dist',
+      'node_modules',
+      'build',
+      'coverage',
+      'logs',
+      'eslint.config.mjs',
+    ],
   },
 
   ...tseslint.configs.recommended,
@@ -16,11 +23,10 @@ export default defineConfig([
 
     languageOptions: {
       globals: globals.browser,
-    },
-
-    parserOptions: {
-      projectService: true,
-      tsconfigRootDir: import.meta.dirname,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
 
     plugins: {
