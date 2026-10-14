@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@7
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.18.0
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting
+        run: npm run format:check -w backend
+
+      - name: Check linting
+        run: npm run lint -- --max-warnings=0 -w backend
+
+      - name: Build
+        run: npm run build -w backend
+
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@7
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.18.0
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Copy CI env
+        working-directory: frontend
+        run: cp .env.ci .env
+
+      - name: Check formatting
+        run: npm run format:check -w frontend
+
+      - name: Check linting
+        run: npm run lint -- --max-warnings=0 -w frontend
+
+      - name: Build
+        run: npm run build -w frontend
