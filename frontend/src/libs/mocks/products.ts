@@ -1,8 +1,8 @@
-import type { Product } from '@/libs/types';
+import type { ApiProduct } from '@audiophile/shared';
 
 import rawProducts from './products.mock.json' with { type: 'json' };
 
-export const products = rawProducts as Product[];
+export const products = rawProducts as ApiProduct[];
 
 export const newProduct = products.find((product) => product.isNew)!;
 export const oldProduct = products.find((product) => !product.isNew)!;

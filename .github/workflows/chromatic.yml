@@ -1,6 +1,12 @@
 name: 'Chromatic'
 
-on: push
+on:
+  push:
+    paths:
+      - 'frontend/**'
+      - 'packages/shared/**'
+      - 'package-lock.json'
+      - '.github/workflows/chromatic.yml'
 
 jobs:
   chromatic:
@@ -16,10 +22,14 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24.18.0
+          cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: frontend
         run: npm ci
+
+      - name: Build shared
+        run: npm run build:shared
 
       - name: Copy CI env
         working-directory: frontend

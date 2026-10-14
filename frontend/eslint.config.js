@@ -11,7 +11,7 @@ import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'public', 'vitest.shims.d.ts']),
   {
     files: ['**/*.{ts,tsx}'],
 
@@ -24,11 +24,10 @@ export default defineConfig([
 
     languageOptions: {
       globals: globals.browser,
-    },
-
-    parserOptions: {
-      projectService: true,
-      tsconfigRootDir: import.meta.dirname,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
 
     plugins: {

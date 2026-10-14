@@ -28,6 +28,8 @@ import heroMobile from '@/assets/images/image-hero-mobile.jpg';
 import heroTablet from '@/assets/images/image-hero-tablet.jpg';
 import heroDesktop from '@/assets/images/image-hero-desktop.jpg';
 
+type Product = (typeof products)[0];
+
 export const heroNewProduct: Product = {
   ...products.find((product) => product.slug === 'xx99-mark-two-headphones')!,
   isNew: true,
@@ -59,7 +61,6 @@ import type {
   FeaturesSectionContent,
   GalleryContent,
   InTheBoxSectionContent,
-  Product,
   ProductDetailedCardContent,
 } from '@/libs/types';
 import { createCategoryRoute, createProductRoute } from '@/libs/app-routes';

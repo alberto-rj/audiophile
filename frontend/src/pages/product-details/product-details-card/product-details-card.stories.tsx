@@ -5,7 +5,6 @@ import { userEvent, within } from 'storybook/test';
 import { WithCredentialsDecorator } from '@/config/storybook';
 import { cn } from '@/libs/cn';
 import { products } from '@/libs/mocks';
-import type { Product } from '@/libs/types';
 import { makeAddCartItemHandler } from '@/mocks/handlers';
 
 import ProductDetailsCard from './product-details-card';
@@ -15,7 +14,7 @@ async function clickToAddItemToCart(canvas: Canvas) {
 }
 
 type StoryProps = React.ComponentProps<typeof ProductDetailsCard> & {
-  product: Product;
+  product: (typeof products)[number];
 };
 
 const meta = {

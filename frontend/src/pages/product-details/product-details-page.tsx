@@ -10,7 +10,6 @@ import {
   StatusVisuallyHidden,
 } from '@/components/widgets';
 import { cn } from '@/libs/cn';
-import type { Product } from '@/libs/types';
 
 import ProductDetailsCard from './product-details-card/product-details-card';
 import FeaturesSection from './features-section/features-section';
@@ -22,6 +21,7 @@ import FeaturesSectionSkeleton from './features-section/features-section-skeleto
 import InTheBoxSectionSkeleton from './in-the-box-section/in-the-box-section.-skeleton';
 import GallerySkeleton from './gallery/gallery-skeleton';
 import { SuggestionSectionSkeleton } from './suggestion-section/suggestion-section-skeleton';
+import type { ApiProduct } from '@audiophile/shared';
 
 const ProductDetailsSkeleton = () => {
   return (
@@ -52,7 +52,7 @@ const ProductDetailsSkeleton = () => {
 };
 
 interface ProductDetailsProps {
-  product: Product;
+  product: ApiProduct;
 }
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
@@ -88,7 +88,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       <Gallery content={{ title: product.category, images: product.gallery }} />
       <SuggestionSection
         title="You may also like"
-        items={product.others}
+        items={product.suggestions}
       />
     </>
   );
@@ -112,7 +112,7 @@ const ProductDetailsQuery = () => {
     );
   }
 
-  if (isError) {
+  if (isError || !data || !data.results || !data.results[0]) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
@@ -123,7 +123,7 @@ const ProductDetailsQuery = () => {
     );
   }
 
-  const { product } = data!;
+  const [product] = data.results;
 
   return <ProductDetails product={product} />;
 };
