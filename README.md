@@ -18,7 +18,23 @@ A full-stack e-commerce platform built with React, Node.js, TypeScript, and Post
 
 Audiophile is a full-stack e-commerce platform for premium audio products, originally created as a Frontend Mentor challenge and expanded into a complete application with authentication, product management, cart functionality, checkout flow, order processing, and a documented REST API.
 
-The backend follows a layered architecture separating HTTP concerns, business logic, and data access, with type-safe validation shared between API contracts and documentation. The frontend is built around reusable, accessible components with a clear separation between server state and client state.
+The backend follows a layered architecture separating HTTP concerns, business logic, and data access. API schemas live in a shared package (`@audiophile/shared`): the backend uses them for validation and OpenAPI generation, and the frontend is being migrated to them for forms and API typing. The frontend is built around reusable, accessible components with a clear separation between server state and client state.
+
+## Repository Structure
+
+An npm workspaces monorepo:
+
+```text
+audiophile/
+├── backend/           # Express API
+├── frontend/          # React client and Storybook
+├── packages/
+│   └── shared/        # @audiophile/shared: Zod schemas and inferred types
+└── .github/workflows/ # CI and Chromatic
+```
+
+- `@audiophile/shared` is a private workspace package, not published to npm and must be built before the apps.
+- **Status:** the backend uses it. In the frontend, the auth, users, products, and categories services are migrated; the rest still use local schemas.
 
 ## Architecture Overview
 
@@ -48,15 +64,21 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 
 ## Tech Stack
 
-- **Frontend:** React, TypeScript, Redux Toolkit, React Router, Tailwind CSS, Radix UI, React Hook Form, Zod (Forms & Shared Schemas), Storybook, MSW
+- **Frontend:** React, TypeScript, Redux Toolkit, RTK Query, React Router, Tailwind CSS, Radix UI, React Hook Form, Zod, Storybook, MSW
 
 - **Backend:** Node.js, Express.js, TypeScript, Zod, JWT Authentication, Cloudinary, OpenAPI/Swagger, PostgreSQL & Drizzle ORM
 
+- **Shared:** `@audiophile/shared` (Zod schemas and types), npm workspaces
+
 - **Tooling:** ESLint, Prettier, Vite
+
+- **CI and Deployment:** GitHub Actions, Chromatic, Vercel (frontend), Render (backend)
 
 ## Key Technical Decisions
 
-- **Repository pattern with swappable implementations:** The API depends on repository interfaces, not concrete classes. Every use case receives its dependencies via injection - in tests and early development, those are in-memory implementations; in production, they are Drizzle/PostgreSQL implementations.
+- **Shared schemas in a workspace package:** The backend and the frontend need the same schemas (forms, API types), so they live in `@audiophile/shared` instead of being copied. A private workspace package fits better than publishing to npm because everything is in one repository: there is no version to bump or publish step.
+
+- **Repository pattern with swappable implementations:** The API depends on repository interfaces, not concrete classes. Every use case receives its dependencies via injection - during early development those were in-memory implementations; in production they are Drizzle/PostgreSQL implementations.
 
 - **Dual-token authentication:** Authentication uses a short-lived JWT access token together with a long-lived refresh token. The access token is returned to the client and attached to authenticated requests. The refresh token is an opaque UUID, persisted in the database and stored in an HTTP-only cookie - server-managed, revocable, and inaccessible to client-side JavaScript.
 
@@ -74,7 +96,13 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 
 - **MSW for mock-driven frontend development:** Mock Service Worker intercepts requests at the network level. The frontend and all Storybook stories run without a backend - MSW handlers mirror real API contracts, so switching to live responses requires no changes to components or hooks.
 
-- **Automated Storybook deployment via CI/CD:** Set up a GitHub Actions workflow that builds and publishes Storybook to Chromatic on every push, resolving CI-specific issues around working directory scoping, secret injection, and Vite environment variable validation at build time
+## CI and Deployment
+
+A GitHub Actions workflow runs on pull requests and pushes to `main`. For the backend and the frontend it checks formatting, runs lint (warnings fail the job), and builds, with `@audiophile/shared` built first. The build includes the type-check. No automated tests run yet.
+
+A second workflow publishes Storybook to Chromatic when the frontend or the shared package changes.
+
+The frontend is deployed on Vercel and the backend on Render. Both builds need the repository root, so that `packages/shared` is available and built before the app.
 
 ## Running Locally
 
@@ -88,28 +116,28 @@ The backend follows a layered architecture separating HTTP concerns, business lo
 ```bash
 git clone https://github.com/alberto-rj/audiophile.git
 cd audiophile
+npm install            # Installs all workspaces
+npm run build:shared   # Required before running the apps; repeat after changing packages/shared
 ```
 
 ### Backend setup
 
 ```bash
-cd backend
-npm install
-cp .env.example .env   # Fill in the required variables (see Environment Variables below)
-npm run dev            # API runs at http://localhost:4224 | Documentation at /api-docs
+cp backend/.env.example backend/.env   # Fill in the required variables (see Environment Variables below)
+npm run dev:backend                    # API runs at http://localhost:4224 | Documentation at /api-docs
 ```
 
 **Uploading images (first time only):** requires local images in `public/assets/`. This is only necessary if you are using your own Cloudinary account - the public IDs in `@/db/mocks/categories.mock.json`, `@/db/mocks/products.mock.json`, and `@/db/mocks/galleries.mock.json` are deterministic and derived from the filenames, so they do not need to be updated.
 
 ```bash
-npm run upload
+npm run upload -w backend
 ```
 
 **Run migrations and seed the database:**
 
 ```bash
-npm run db:migrate   # Apply schema migrations
-npm run db:seed      # Seed categories and products
+npm run db:migrate -w backend   # Apply schema migrations
+npm run db:seed -w backend      # Seed categories and products
 ```
 
 ### Frontend setup
@@ -117,11 +145,9 @@ npm run db:seed      # Seed categories and products
 Open a second terminal:
 
 ```bash
-cd frontend
-npm install
-cp .env.example .env       # Fill in the required variables (see Environment Variables below)
-npm run dev                # Vite server runs at http://localhost:5173
-npm run storybook          # Optional: Visual component testing workspace at http://localhost:6006
+cp frontend/.env.example frontend/.env   # Fill in the required variables (see Environment Variables below)
+npm run dev:frontend                     # Vite server runs at http://localhost:5173
+npm run storybook -w frontend            # Optional: Visual component testing workspace at http://localhost:6006
 ```
 
 ## Environment Variables
@@ -161,6 +187,12 @@ npm run storybook          # Optional: Visual component testing workspace at htt
 - **Define repository interfaces before implementations:** On several entities I wrote the Drizzle implementation first and extracted the interface afterwards. The correct order is the reverse: write the interface as a contract, then write both the in-memory and Drizzle implementations to satisfy it. Working implementation-first led to interfaces that were slightly too specific to Drizzle's return shapes, which the in-memory implementations then had to work around.
 
 - **Register every Zod schema with the OpenAPI registry from the start:** Some early schemas were written without `registry.register(...)`. Going back to register them later - and verifying the generated spec matched the actual behavior - was tedious and easy to get wrong. The discipline of "every schema gets registered immediately" should be established before writing the first endpoint, not retrofitted.
+
+- **Share schemas from the start:** The backend and the frontend each had their own copy of similar schemas before the shared package existed. Starting with a shared package would have avoided the cleanup.
+
+- **Keep one Zod version across workspaces:** With mismatched versions, npm installed a second copy of Zod inside the shared package, which caused type errors in the backend. Aligning the versions and checking `npm ls zod` fixed it.
+
+- **Plan deployment before moving to a monorepo:** Vercel and Render were configured for a single subfolder, so builds broke once the apps depended on `packages/shared`.
 
 - **Add automated tests beyond Storybook/MSW:** Storybook + MSW currently cover component interaction and visual testing, but there are no unit tests for use cases, no integration tests for endpoints (Supertest), and no end-to-end tests covering the full purchase flow (register → browse → add to cart → checkout → confirm order). This is the main gap left to close.
 
