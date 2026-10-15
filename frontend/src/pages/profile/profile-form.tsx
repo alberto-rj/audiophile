@@ -1,3 +1,4 @@
+import type { ApiUserUpdateProfileBody } from '@audiophile/shared';
 import { useUpdateProfileMutation } from '@/app/services/users-api';
 import { Button, Input, Label, Spinner } from '@/components/ui';
 import {
@@ -7,7 +8,6 @@ import {
   StatusVisuallyHidden,
 } from '@/components/widgets';
 import { useProfileForm, useToast } from '@/hooks';
-import type { ProfileFormData } from '@/libs/schemas';
 import { cn } from '@/libs/cn';
 import type { ApiError } from '@/libs/types';
 
@@ -18,19 +18,14 @@ const ProfileForm = () => {
     register,
     handleSubmit,
     setError,
-    reset,
     formState: { errors },
   } = useProfileForm();
 
   const toast = useToast();
 
-  const onSubmit = async (data: ProfileFormData) => {
+  const onSubmit = async (data: ApiUserUpdateProfileBody) => {
     try {
-      const { results } = await updateProfile(data).unwrap();
-      const [user] = results;
-      const { name, email } = user;
-
-      reset({ name, email });
+      await updateProfile(data).unwrap();
 
       toast.success({
         title: 'Profile updated',

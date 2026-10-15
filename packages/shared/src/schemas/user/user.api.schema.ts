@@ -15,4 +15,4 @@ export const ApiUserResponseSchema = z.object({
 });
 
 export const ApiUserResultListResponseSchema =
-  makeApiResultResponseSchema(UserSchema);
+  makeApiResultResponseSchema(ApiUserSchema);
