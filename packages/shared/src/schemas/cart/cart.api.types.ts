@@ -6,6 +6,7 @@ import {
   ApiCartPaginationQuerySchema,
   ApiCartAddItemBodySchema,
   ApiCartUpdateItemBodySchema,
+  ApiCartResultListResponseSchema,
 } from './cart.api.schema';
 
 export type ApiCart = z.infer<typeof ApiCartSchema>;
@@ -18,4 +19,8 @@ export type ApiCartIdParams = z.infer<typeof ApiCartIdParamsSchema>;
 
 export type ApiCartPaginationQuery = z.infer<
   typeof ApiCartPaginationQuerySchema
+>;
+
+export type ApiCartResultListResponse = z.infer<
+  typeof ApiCartResultListResponseSchema
 >;

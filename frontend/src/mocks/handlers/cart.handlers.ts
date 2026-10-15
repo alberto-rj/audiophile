@@ -1,3 +1,8 @@
+import type {
+  ApiCart,
+  ApiCartItem,
+  ApiCartResultListResponse,
+} from '@audiophile/shared';
 import { http, HttpResponse } from 'msw';
 
 import { API_ENDPOINTS } from '@/config/api-endpoints';
@@ -11,16 +16,13 @@ import {
 import { products } from '@/libs/mocks';
 import type {
   AddCartItemPayload,
-  Cart,
-  CartItem,
-  CartResponse,
   UpdateCartItemQuantityPayload,
 } from '@/libs/types';
 
 import { withAuth } from '../middlewares/with-auth';
 import { withDelay, withInfiniteDelay } from '../middlewares/with-delay';
 
-function getUpdatedCart(cart: Cart, newItems: CartItem[]): Cart {
+function getUpdatedCart(cart: ApiCart, newItems: ApiCartItem[]): ApiCart {
   const customCart = {
     ...cart,
     items: newItems,
@@ -69,8 +71,8 @@ export const makeGetCartHandler = (
       withAuth(async () => {
         cart.items.sort((a, b) => a.name.localeCompare(b.name));
 
-        const response: CartResponse = {
-          cart: getUpdatedCart(cart, cart.items.slice(0, limit)),
+        const response: ApiCartResultListResponse = {
+          results: [getUpdatedCart(cart, cart.items.slice(0, limit))],
         };
 
         return HttpResponse.json(response);
@@ -114,8 +116,8 @@ export const makeClearCartHandler = (
       withAuth(async () => {
         cart.items = [];
 
-        const response: CartResponse = {
-          cart: getUpdatedCart(cart, cart.items),
+        const response: ApiCartResultListResponse = {
+          results: [getUpdatedCart(cart, cart.items)],
         };
 
         return HttpResponse.json(response, { status: 200 });
@@ -169,7 +171,7 @@ export function makeAddCartItemHandler(
           return HttpResponse.json(undefined, { status: 404 });
         }
 
-        const createdCartItem: CartItem = {
+        const createdCartItem: ApiCartItem = {
           id: cart.items.length + 1,
           productId,
           name: foundProduct.name,
@@ -182,8 +184,8 @@ export function makeAddCartItemHandler(
         cart.items.push(createdCartItem);
         cart.items.sort((a, b) => a.name.localeCompare(b.name));
 
-        const response: CartResponse = {
-          cart: getUpdatedCart(cart, cart.items),
+        const response: ApiCartResultListResponse = {
+          results: [getUpdatedCart(cart, cart.items)],
         };
 
         return HttpResponse.json(response, { status: 201 });
@@ -246,7 +248,7 @@ export function makeUpdateCartItemQuantityHandler(
         }
 
         const foundItem = cart.items[foundItemIndex];
-        const updatedItem: CartItem = {
+        const updatedItem: ApiCartItem = {
           ...foundItem,
           quantity,
         };
@@ -256,8 +258,8 @@ export function makeUpdateCartItemQuantityHandler(
         cart.items = cart.items.filter((item) => item.quantity > 0);
         cart.items.sort((a, b) => a.name.localeCompare(b.name));
 
-        const response: CartResponse = {
-          cart: getUpdatedCart(cart, cart.items),
+        const response: ApiCartResultListResponse = {
+          results: [getUpdatedCart(cart, cart.items)],
         };
 
         return HttpResponse.json(response, { status: 200 });
@@ -318,8 +320,8 @@ export function makeDeleteCartItemHandler(
         cart.items.splice(foundItemIndex, 1);
         cart.items.sort((a, b) => a.name.localeCompare(b.name));
 
-        const response: CartResponse = {
-          cart: getUpdatedCart(cart, cart.items),
+        const response: ApiCartResultListResponse = {
+          results: [getUpdatedCart(cart, cart.items)],
         };
 
         return HttpResponse.json(response, { status: 200 });

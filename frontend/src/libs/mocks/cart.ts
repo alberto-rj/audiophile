@@ -1,9 +1,8 @@
-import type { Cart, CartItem } from '@/libs/types';
+import type { ApiCart, ApiCartItem } from '@audiophile/shared';
 
 import { cartItems } from './cart-items';
-import { user } from './users';
 
-export const getSubtotal = (items: CartItem[]) => {
+export const getSubtotal = (items: ApiCartItem[]) => {
   return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 };
 
@@ -11,17 +10,16 @@ export const getShipping = () => {
   return 50;
 };
 
-export const getVAT = (items: CartItem[]) => {
+export const getVAT = (items: ApiCartItem[]) => {
   return Math.round(getSubtotal(items) * 0.2);
 };
 
-export const getGrandTotal = (items: CartItem[]) => {
+export const getGrandTotal = (items: ApiCartItem[]) => {
   return getSubtotal(items) + getShipping() + getVAT(items);
 };
 
-export const cart: Cart = {
+export const cart: ApiCart = {
   id: 1,
-  userId: user.id,
   subtotal: getSubtotal(cartItems),
   vat: getVAT(cartItems),
   shipping: getShipping(),

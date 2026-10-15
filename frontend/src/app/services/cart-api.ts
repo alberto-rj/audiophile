@@ -1,9 +1,11 @@
+import type {
+  ApiCartAddItemBody,
+  ApiCartResultListResponse,
+} from '@audiophile/shared';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { API_ENDPOINTS } from '@/config/api-endpoints';
 import type {
-  AddCartItemPayload,
-  CartResponse,
   RemoveCartItemPayload,
   UpdateCartItemQuantityPayload,
 } from '@/libs/types';
@@ -15,12 +17,15 @@ export const cartApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Cart'],
   endpoints: (builder) => ({
-    getCart: builder.query<CartResponse, void>({
+    getCart: builder.query<ApiCartResultListResponse, void>({
       query: () => API_ENDPOINTS.cart,
       providesTags: ['Cart'],
     }),
 
-    addCartItem: builder.mutation<CartResponse, AddCartItemPayload>({
+    addCartItem: builder.mutation<
+      ApiCartResultListResponse,
+      ApiCartAddItemBody
+    >({
       query: (payload) => ({
         url: API_ENDPOINTS.cartItems,
         method: 'POST',
@@ -30,7 +35,7 @@ export const cartApi = createApi({
     }),
 
     updateCartItemQuantity: builder.mutation<
-      CartResponse,
+      ApiCartResultListResponse,
       UpdateCartItemQuantityPayload
     >({
       query: ({ productId, quantity }) => ({
@@ -41,7 +46,10 @@ export const cartApi = createApi({
       invalidatesTags: ['Cart'],
     }),
 
-    removeCartItem: builder.mutation<CartResponse, RemoveCartItemPayload>({
+    removeCartItem: builder.mutation<
+      ApiCartResultListResponse,
+      RemoveCartItemPayload
+    >({
       query: ({ productId }) => ({
         url: `${API_ENDPOINTS.cartItems}/${productId}`,
         method: 'DELETE',
@@ -49,7 +57,7 @@ export const cartApi = createApi({
       invalidatesTags: ['Cart'],
     }),
 
-    clearCart: builder.mutation<CartResponse, void>({
+    clearCart: builder.mutation<ApiCartResultListResponse, void>({
       query: () => ({
         url: API_ENDPOINTS.cart,
         method: 'DELETE',

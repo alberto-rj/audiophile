@@ -7,7 +7,11 @@ import {
   CartSubtotalSchema,
   CartVatSchema,
 } from './cart.base.schema';
-import { LimitSchema, PageSchema } from '../common/common.schema';
+import {
+  LimitSchema,
+  makeApiResultResponseSchema,
+  PageSchema,
+} from '../common/common.schema';
 import { ProductIdSchema } from '../product/product.base.schema';
 import { CartItemQuantitySchema } from './cart-item.base.schema';
 import { ApiCartItemSchema } from './cart-item.api.schema';
@@ -38,3 +42,6 @@ export const ApiCartPaginationQuerySchema = z.object({
 export const ApiCartIdParamsSchema = z.object({
   id: CartIdSchema,
 });
+
+export const ApiCartResultListResponseSchema =
+  makeApiResultResponseSchema(ApiCartSchema);

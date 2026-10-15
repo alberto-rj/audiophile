@@ -18,9 +18,6 @@ export type {
 /* cart */
 export type {
   AddCartItemPayload,
-  Cart,
-  CartItem,
-  CartResponse,
   RemoveCartItemPayload,
   UpdateCartItemQuantityPayload,
 } from './cart';

@@ -1,39 +1,15 @@
-import type { ResponsiveImageType } from '@/libs/types';
-
-export interface CartItem {
-  id: number;
-  productId: number;
-  quantity: number;
-  name: string;
-  price: number;
-  slug: string;
-  image: ResponsiveImageType;
-}
-
-export interface Cart {
-  id: number;
-  userId: number;
-  vat: number;
-  shipping: number;
-  subtotal: number;
-  grandTotal: number;
-  items: CartItem[];
-}
-
-export interface CartResponse {
-  cart: Cart;
-}
+import type { ApiProduct } from '@audiophile/shared';
 
 export interface AddCartItemPayload {
-  productId: number;
+  productId: ApiProduct['id'];
   quantity: number;
 }
 
 export interface UpdateCartItemQuantityPayload {
-  productId: number;
+  productId: ApiProduct['id'];
   quantity: number;
 }
 
 export interface RemoveCartItemPayload {
-  productId: number;
+  productId: ApiProduct['id'];
 }
