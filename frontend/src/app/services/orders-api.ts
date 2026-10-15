@@ -1,11 +1,12 @@
+import type {
+  ApiOrderCreateBody,
+  ApiOrderListingQuery,
+  ApiOrderPaginationResponse,
+  ApiOrderResultListResponse,
+} from '@audiophile/shared';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { API_ENDPOINTS } from '@/config/api-endpoints';
-import type {
-  CreateOrderPayload,
-  OrderListResponse,
-  OrderResponse,
-} from '@/libs/types';
 
 import { baseQueryWithReauth } from './base-query';
 
@@ -15,17 +16,29 @@ export const ordersApi = createApi({
   tagTypes: ['Order'],
 
   endpoints: (builder) => ({
-    getOrders: builder.query<OrderListResponse, void>({
-      query: () => API_ENDPOINTS.orders,
+    getOrders: builder.query<
+      ApiOrderPaginationResponse,
+      Partial<ApiOrderListingQuery> | undefined
+    >({
+      query: (filters) => {
+        return {
+          url: API_ENDPOINTS.orders,
+          method: 'GET',
+          params: filters ? filters : undefined,
+        };
+      },
       providesTags: ['Order'],
     }),
 
-    getOrderById: builder.query<OrderResponse, number>({
+    getOrderById: builder.query<ApiOrderResultListResponse, number>({
       query: (id) => `${API_ENDPOINTS.orders}/${id}`,
       providesTags: (_, __, id) => [{ type: 'Order', id }],
     }),
 
-    createOrder: builder.mutation<OrderResponse, CreateOrderPayload>({
+    createOrder: builder.mutation<
+      ApiOrderResultListResponse,
+      ApiOrderCreateBody
+    >({
       query: (payload) => ({
         url: API_ENDPOINTS.orders,
         method: 'POST',

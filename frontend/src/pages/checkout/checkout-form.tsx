@@ -1,8 +1,7 @@
+import type { ApiOrder } from '@audiophile/shared';
 import { useEffect, useState, type ComponentProps } from 'react';
 import { Controller } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 
-import { selectUser } from '@/app/features/auth';
 import { useCreateOrderMutation } from '@/app/services/orders-api';
 import { CashOnDelivery } from '@/assets/icons';
 import { Input, Label, Radio } from '@/components/ui';
@@ -20,7 +19,6 @@ import {
 import { useCheckoutForm, useToast } from '@/hooks';
 import { cn } from '@/libs/cn';
 import type { CheckoutFormData } from '@/libs/schemas';
-import type { Order } from '@/libs/types';
 
 interface CheckoutFormProps extends ComponentProps<'form'> {
   id: string;
@@ -34,12 +32,10 @@ export const CheckoutForm = ({
   onSubmittingChange,
   ...formProps
 }: CheckoutFormProps) => {
-  const user = useSelector(selectUser)!;
-
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [createdOrder, setCreatedOrder] = useState<Order | null>(null);
+  const [createdOrder, setCreatedOrder] = useState<ApiOrder | null>(null);
 
   const {
     register,
@@ -64,14 +60,12 @@ export const CheckoutForm = ({
 
   const onSubmit = async (data: CheckoutFormData) => {
     try {
-      const { order } = await createOrder({
-        ...data,
-        userId: user.id,
-      }).unwrap();
+      const { results } = await createOrder(data).unwrap();
+      const [createdOrder] = results;
 
       reset();
 
-      setCreatedOrder(order);
+      setCreatedOrder(createdOrder);
       setIsModalOpen(true);
     } catch {
       toast.error({

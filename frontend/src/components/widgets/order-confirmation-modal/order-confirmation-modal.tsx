@@ -1,3 +1,4 @@
+import type { ApiOrder, ApiOrderItem } from '@audiophile/shared';
 import { useId, type ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -6,10 +7,11 @@ import { Button, Modal } from '@/components/ui';
 import { APP_ROUTES } from '@/config/app-routes';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
-import type { Order, OrderItem } from '@/libs/types';
+
+import ResponsiveImage from '../responsive-image/responsive-image';
 
 interface CartItemListingProps {
-  items: OrderItem[];
+  items: ApiOrderItem[];
 }
 
 const CartItemListing = ({ items }: CartItemListingProps) => {
@@ -32,9 +34,9 @@ const CartItemListing = ({ items }: CartItemListingProps) => {
           className={cn('flex', 'justify-between', 'items-start', 'gap-4')}
         >
           <div className={cn('flex', 'items-center', 'gap-4')}>
-            <img
+            <ResponsiveImage
               alt={name}
-              src={image}
+              image={image}
               width={50}
               height={50}
               loading="lazy"
@@ -96,7 +98,7 @@ const CartItemListing = ({ items }: CartItemListingProps) => {
 };
 
 interface CartItemCardProps {
-  order: Order;
+  order: ApiOrder;
 }
 
 const CartItemCard = ({ order }: CartItemCardProps) => {
@@ -156,7 +158,7 @@ const CartItemCard = ({ order }: CartItemCardProps) => {
 };
 
 interface OrderConfirmationModalProps extends ComponentProps<typeof Modal> {
-  order: Order;
+  order: ApiOrder;
 }
 
 const OrderConfirmationModal = ({

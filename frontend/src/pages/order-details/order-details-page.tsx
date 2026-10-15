@@ -19,7 +19,7 @@ const OrderDetailsPageQuery = () => {
   const orderId = typeof slug === 'string' ? parseInt(slug, 10) : undefined;
 
   const { isLoading, isError, refetch, data } = useGetOrderByIdQuery(orderId!, {
-    skip: typeof orderId === 'undefined',
+    skip: !orderId,
   });
 
   if (isLoading) {
@@ -33,7 +33,7 @@ const OrderDetailsPageQuery = () => {
     );
   }
 
-  if (isError) {
+  if (isError || !data?.results?.[0]) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
@@ -44,7 +44,7 @@ const OrderDetailsPageQuery = () => {
     );
   }
 
-  const { order } = data!;
+  const [order] = data.results;
 
   return <OrderDetails order={order} />;
 };

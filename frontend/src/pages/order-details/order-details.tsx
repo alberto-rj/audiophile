@@ -1,11 +1,12 @@
+import type { ApiOrder } from '@audiophile/shared';
+
 import { cn } from '@/libs/cn';
-import type { Order } from '@/libs/types';
 
 import { BasicOrderCard } from './basic-order-card';
 import { OrderSummaryCard } from './order-summary-card';
 
 interface OrderDetailsProps {
-  order: Order;
+  order: ApiOrder;
 }
 
 export const OrderDetails = ({ order }: OrderDetailsProps) => {

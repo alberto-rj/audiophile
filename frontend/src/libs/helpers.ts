@@ -34,6 +34,7 @@ export function toOrderStatusText(status: OrderStatus) {
     pending: 'Pending',
     processing: 'processing',
     shipped: 'Shipped',
+    paid: 'Paid',
   };
 
   return statusTextMap[status];

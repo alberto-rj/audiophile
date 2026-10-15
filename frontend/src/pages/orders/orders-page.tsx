@@ -1,3 +1,5 @@
+import type { ApiOrderListingQuery } from '@audiophile/shared';
+
 import { useGetOrdersQuery } from '@/app/services/orders-api';
 import { Spinner } from '@/components/ui';
 import {
@@ -11,8 +13,12 @@ import { cn } from '@/libs/cn';
 
 import OrderList from './order-list';
 
-const OrdersPageQuery = () => {
-  const { isLoading, isError, data, refetch } = useGetOrdersQuery();
+interface OrdersPageQueryProps {
+  filters?: Partial<ApiOrderListingQuery>;
+}
+
+const OrdersPageQuery = ({ filters }: OrdersPageQueryProps) => {
+  const { isLoading, isError, data, refetch } = useGetOrdersQuery(filters);
 
   if (isLoading) {
     return (
@@ -25,7 +31,7 @@ const OrdersPageQuery = () => {
     );
   }
 
-  if (isError) {
+  if (isError || !data?.results) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
@@ -36,7 +42,7 @@ const OrdersPageQuery = () => {
     );
   }
 
-  const { orders } = data!;
+  const { results: orders } = data;
 
   return <OrderList orders={orders} />;
 };
