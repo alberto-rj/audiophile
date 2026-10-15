@@ -1,11 +1,13 @@
+import {
+  ApiAuthLoginBodySchema,
+  type ApiAuthLoginBody,
+} from '@audiophile/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { loginSchema, type LoginFormData } from '@/libs/schemas';
-
 export const useLoginForm = () => {
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<ApiAuthLoginBody>({
+    resolver: zodResolver(ApiAuthLoginBodySchema),
 
     defaultValues: {
       email: '',

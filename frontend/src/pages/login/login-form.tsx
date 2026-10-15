@@ -1,3 +1,4 @@
+import type { ApiAuthLoginBody } from '@audiophile/shared';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useLoginMutation } from '@/app/services/auth-api';
@@ -10,7 +11,6 @@ import {
 } from '@/components/widgets';
 import { APP_ROUTES } from '@/config/app-routes';
 import { useLoginForm, useToast } from '@/hooks';
-import type { LoginFormData } from '@/libs/schemas';
 import type { ApiError } from '@/libs/types';
 
 export const LoginForm = () => {
@@ -32,7 +32,7 @@ export const LoginForm = () => {
     (location.state as { from?: { pathname: string } })?.from?.pathname ??
     APP_ROUTES.home;
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async (data: ApiAuthLoginBody) => {
     try {
       await login(data).unwrap();
 

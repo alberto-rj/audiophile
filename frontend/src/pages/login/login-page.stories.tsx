@@ -1,25 +1,25 @@
+import type { ApiAuthLoginBody } from '@audiophile/shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { userEvent, within } from 'storybook/test';
 import type { Canvas } from 'storybook/internal/types';
 
 import { APP_ROUTES } from '@/config/app-routes';
 import { LayoutCenteredOnScreen } from '@/layouts';
-import type { LoginFormData } from '@/libs/schemas';
 import { makeLoginHandler } from '@/mocks/handlers';
 import { LoginPage } from '@/pages';
 
-async function fillSignUpForm(canvas: Canvas, data: LoginFormData) {
+async function fillSignUpForm(canvas: Canvas, data: ApiAuthLoginBody) {
   await userEvent.type(await canvas.findByTestId('email'), data.email);
   await userEvent.type(await canvas.findByTestId('password'), data.password);
 }
 
-async function fillSignUpFormAndSubmit(canvas: Canvas, data: LoginFormData) {
+async function fillSignUpFormAndSubmit(canvas: Canvas, data: ApiAuthLoginBody) {
   await fillSignUpForm(canvas, data);
 
   await userEvent.click(await canvas.findByTestId('signIn'));
 }
 
-const loginFormData: LoginFormData = {
+const loginFormData: ApiAuthLoginBody = {
   email: 'john@example.com',
   password: 'password123',
 };
