@@ -1,6 +1,11 @@
-import { orderRepository } from '@/config';
-import { getProductItemSummary, toOrderCreateInput } from '@/helpers';
 import type { Order } from '@audiophile/shared';
+
+import { cartRepository, orderRepository } from '@/config';
+import {
+  EmptyOrderError,
+  getProductItemSummary,
+  toOrderCreateInput,
+} from '@/helpers';
 
 type CreateOrderUseCaseParams = {
   input: unknown;
@@ -13,19 +18,27 @@ type CreateOrderUseCaseResult = {
 export async function createOrderUseCase({
   input,
 }: CreateOrderUseCaseParams): Promise<CreateOrderUseCaseResult> {
-  const {
-    userId,
-    name,
-    email,
-    address,
-    zip,
-    city,
-    country,
-    paymentMethod,
-    items,
-  } = toOrderCreateInput(input);
+  const { userId, name, email, address, zip, city, country, paymentMethod } =
+    toOrderCreateInput(input);
 
-  const { subtotal, shipping, vat, grandTotal } = getProductItemSummary(items);
+  const userCart = await cartRepository.findOrCreateByUserId({ userId });
+
+  if (userCart.items.length === 0) {
+    throw new EmptyOrderError('Cannot create order with no item.');
+  }
+
+  const orderItems = userCart.items.map(
+    ({ productId, image, name, price, quantity }) => ({
+      productId,
+      image,
+      name,
+      price,
+      quantity,
+    }),
+  );
+
+  const { subtotal, shipping, vat, grandTotal } =
+    getProductItemSummary(orderItems);
 
   const createdOrder = await orderRepository.create({
     userId,
@@ -36,11 +49,11 @@ export async function createOrderUseCase({
     city,
     country,
     paymentMethod,
-    items,
     subtotal,
     shipping,
     vat,
     grandTotal,
+    items: orderItems,
   });
 
   return {

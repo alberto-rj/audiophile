@@ -16,15 +16,9 @@ export const OrderCreateInputSchema = OrderCreateParamsSchema.pick({
   city: true,
   country: true,
   paymentMethod: true,
-  items: true,
-})
-  .extend({
-    userId: UserIdSchema,
-  })
-  .refine(({ items }) => items.length == 0, {
-    error: 'items cannot be empty.',
-    path: ['items'],
-  });
+}).extend({
+  userId: UserIdSchema,
+});
 
 export const OrderFindInputSchema = z.object({
   id: OrderIdSchema,
