@@ -42,6 +42,3 @@ export type {
   LoginPayload,
   RegisterPayload,
 } from './auth';
-
-/* user */
-export type { BaseUser, ProfileResponse, UpdateProfilePayload } from './user';

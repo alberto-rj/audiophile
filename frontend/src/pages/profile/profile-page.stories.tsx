@@ -1,3 +1,4 @@
+import type { ApiUserUpdateProfileBody } from '@audiophile/shared';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Canvas } from 'storybook/internal/types';
 import { userEvent, within } from 'storybook/test';
@@ -5,16 +6,18 @@ import { userEvent, within } from 'storybook/test';
 import { APP_ROUTES } from '@/config/app-routes';
 import { WithCredentialsDecorator } from '@/config/storybook';
 import { demo } from '@/libs/mocks';
-import type { ProfileFormData } from '@/libs/schemas';
 import { makeUpdateMeHandler } from '@/mocks/handlers';
 import { ProfilePage } from '@/pages';
 
-async function fillProfileForm(canvas: Canvas, data: ProfileFormData) {
+async function fillProfileForm(canvas: Canvas, data: ApiUserUpdateProfileBody) {
   await userEvent.type(await canvas.findByTestId('name'), data.name);
   await userEvent.type(await canvas.findByTestId('email'), data.email);
 }
 
-async function fillProfileFormAndSubmit(canvas: Canvas, data: ProfileFormData) {
+async function fillProfileFormAndSubmit(
+  canvas: Canvas,
+  data: ApiUserUpdateProfileBody,
+) {
   await userEvent.type(await canvas.findByTestId('name'), data.name);
   await userEvent.type(await canvas.findByTestId('email'), data.email);
 
@@ -26,7 +29,7 @@ async function clearProfileForm(canvas: Canvas) {
   await userEvent.clear(await canvas.findByTestId('email'));
 }
 
-const profileFormData: ProfileFormData = {
+const profileFormData: ApiUserUpdateProfileBody = {
   name: 'Jane Doe',
   email: 'jane@example.com',
 };

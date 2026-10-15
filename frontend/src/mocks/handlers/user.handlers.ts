@@ -1,11 +1,23 @@
+import type {
+  ApiUser,
+  ApiUserResultListResponse,
+  ApiUserUpdateProfileBody,
+} from '@audiophile/shared';
 import { http, HttpResponse } from 'msw';
-
-import type { ProfileResponse, UpdateProfilePayload } from '@/libs/types';
 
 import { mockUsers } from '../auth-store';
 import { withAuth } from '../middlewares/with-auth';
 import { withDelay, withInfiniteDelay } from '../middlewares/with-delay';
-import type { AuthenticatedRequest } from '../types';
+import type { AuthenticatedRequest, MockUser } from '../types';
+
+function toApiUser(user: MockUser): ApiUser {
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    createdAt: user.createdAt,
+  };
+}
 
 export function makeGetMeHandler(
   options: { type?: 'error' | 'infinite' | 'default' } = {},
@@ -42,12 +54,8 @@ export function makeGetMeHandler(
       withAuth(async ({ request }) => {
         const { authUser } = request as AuthenticatedRequest;
 
-        const response: ProfileResponse = {
-          user: {
-            id: authUser.id,
-            name: authUser.name,
-            email: authUser.email,
-          },
+        const response: ApiUserResultListResponse = {
+          results: [toApiUser(authUser)],
         };
 
         return HttpResponse.json(response);
@@ -92,11 +100,11 @@ export function makeUpdateMeHandler(
       withAuth(async ({ request }) => {
         const { authUser } = request as AuthenticatedRequest;
 
-        const payload = (await request.json()) as UpdateProfilePayload;
+        const payload = (await request.json()) as ApiUserUpdateProfileBody;
 
         const foundUser = mockUsers.find((user) => user.id === authUser.id);
 
-        if (typeof foundUser === 'undefined') {
+        if (!foundUser) {
           return HttpResponse.json(undefined, { status: 401 });
         }
 
@@ -110,7 +118,7 @@ export function makeUpdateMeHandler(
           return HttpResponse.json(undefined, { status: 409 });
         }
 
-        const updatedUser = {
+        const updatedUser: MockUser = {
           ...authUser,
           ...payload,
         };
@@ -123,12 +131,8 @@ export function makeUpdateMeHandler(
         mockUsers.splice(0, mockUsers.length);
         newUsers.forEach((user) => mockUsers.push(user));
 
-        const response: ProfileResponse = {
-          user: {
-            id: updatedUser.id,
-            name: updatedUser.name,
-            email: updatedUser.email,
-          },
+        const response: ApiUserResultListResponse = {
+          results: [toApiUser(updatedUser)],
         };
 
         return HttpResponse.json(response);

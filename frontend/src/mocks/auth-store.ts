@@ -1,24 +1,26 @@
 import { user, users } from '@/libs/mocks';
 
 import type { MockUser } from './types';
-import type { BaseUser } from '@/libs/types';
+import type { UserBasic } from '@audiophile/shared';
 
 export const defaultUser: MockUser = {
   id: user.id,
   name: user.name,
   email: user.email,
   password: 'password123',
+  createdAt: new Date().toISOString(),
 };
 
 export const mockUsers: MockUser[] = users.map((user) => ({
   ...user,
   password: 'password123',
+  createdAt: new Date().toISOString(),
 }));
 
 export const mockSessions = new Map<string, number>();
 export const mockRefreshSessions = new Map<string, number>();
 
-export function getMockCredentials(): { user: BaseUser; accessToken: string } {
+export function getMockCredentials(): { user: UserBasic; accessToken: string } {
   return {
     user,
     accessToken: generateMockToken(user.id),

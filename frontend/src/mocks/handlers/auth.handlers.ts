@@ -13,6 +13,7 @@ import {
 } from '../auth-store';
 import { withAuth } from '../middlewares/with-auth';
 import { withDelay, withInfiniteDelay } from '../middlewares/with-delay';
+import type { MockUser } from '../types';
 
 const REFRESH_TOKEN_COOKIE = 'refreshToken';
 
@@ -80,8 +81,9 @@ export function makeRegisterHandler(
         return HttpResponse.json(undefined, { status: 409 });
       }
 
-      const newUser = {
+      const newUser: MockUser = {
         id: mockUsers.length + 1,
+        createdAt: new Date().toISOString(),
         name,
         email,
         password,
