@@ -1,12 +1,12 @@
+import type {
+  ApiOrder,
+  ApiOrderCreateBody,
+  ApiOrderPaginationResponse,
+  ApiOrderResultListResponse,
+} from '@audiophile/shared';
 import { http, HttpResponse } from 'msw';
 
 import { orders } from '@/libs/mocks/orders';
-import type {
-  CreateOrderPayload,
-  Order,
-  OrderListResponse,
-  OrderResponse,
-} from '@/libs/types';
 import {
   cart,
   getGrandTotal,
@@ -17,12 +17,14 @@ import {
 
 import { withAuth } from '../middlewares/with-auth';
 import { withDelay, withInfiniteDelay } from '../middlewares/with-delay';
+
 import {
   makeGetInfiniteHandler,
   makeGetStatusHandler,
   makeInfiniteHandler,
   makeNotFoundHandler,
 } from '.';
+import type { AuthenticatedRequest } from '../types';
 
 export const makeGetOrderHandler = (
   options: { type?: 'error' | 'infinite' | 'default' } = {},
@@ -51,8 +53,8 @@ export const makeGetOrderHandler = (
           return HttpResponse.json(undefined, { status: 404 });
         }
 
-        const response: OrderResponse = {
-          order: foundOrder,
+        const response: ApiOrderResultListResponse = {
+          results: [foundOrder],
         };
 
         return HttpResponse.json(response);
@@ -81,8 +83,14 @@ export const makeGetOrdersHandler = (
 
     withDelay(
       withAuth(async () => {
-        const response: OrderListResponse = {
-          orders: orders.slice(0, limit),
+        const response: ApiOrderPaginationResponse = {
+          results: orders.slice(0, limit),
+          pagination: {
+            hasNext: false,
+            hasPrev: false,
+            page: 1,
+            totalPages: 1,
+          },
         };
 
         return HttpResponse.json(response);
@@ -128,18 +136,28 @@ export const makeCreateOrderHandler = (
 
     withDelay(
       withAuth(async ({ request }) => {
-        const payload = (await request.json()) as CreateOrderPayload;
+        const { authUser } = request as AuthenticatedRequest;
+
+        const payload = (await request.json()) as ApiOrderCreateBody;
 
         const orderId = orders.length + 1;
-        const createdOrder: Order = {
+        const createdOrder: ApiOrder = {
           ...payload,
           id: orderId,
+          userId: authUser.id,
           status: 'pending',
-          items: cart.items.map((item) => ({
-            ...item,
-            orderId,
-            image: item.image.mobile,
-          })),
+          items: cart.items.map(
+            ({ id, productId, name, slug, image, price, quantity }) => ({
+              id,
+              productId,
+              orderId,
+              name,
+              slug,
+              image,
+              price,
+              quantity,
+            }),
+          ),
           vat: getVAT(cart.items),
           shipping: getShipping(),
           subtotal: getSubtotal(cart.items),
@@ -149,8 +167,8 @@ export const makeCreateOrderHandler = (
 
         orders.push(createdOrder);
 
-        const response: OrderResponse = {
-          order: createdOrder,
+        const response: ApiOrderResultListResponse = {
+          results: [createdOrder],
         };
 
         return HttpResponse.json(response, { status: 201 });

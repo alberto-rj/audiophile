@@ -1,3 +1,5 @@
+import type { ApiOrder } from '@audiophile/shared';
+
 import { Card } from '@/components/ui';
 import { OrderStatusBadge } from '@/components/widgets';
 import { cn } from '@/libs/cn';
@@ -7,10 +9,9 @@ import {
   toPaymentMethodText,
   toTimeAgo,
 } from '@/libs/helpers';
-import type { Order } from '@/libs/types';
 
 interface BaseOrderDetailsProps {
-  order: Order;
+  order: ApiOrder;
 }
 
 const BasicOrderDetails = ({ order }: BaseOrderDetailsProps) => {
@@ -140,7 +141,7 @@ const OrderDeliveryDetails = ({ order }: BaseOrderDetailsProps) => {
 };
 
 interface BasicOrderCardProps {
-  order: Order;
+  order: ApiOrder;
 }
 
 export const BasicOrderCard = ({ order }: BasicOrderCardProps) => {

@@ -25,7 +25,11 @@
         "name": "YX1 Wireless Earphones",
         "price": 599,
         "slug": "yx1-earphones",
-        "image": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 2,
@@ -35,7 +39,11 @@
         "name": "XX59 Headphones",
         "price": 899,
         "slug": "xx59-headphones",
-        "image": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 3,
@@ -45,7 +53,11 @@
         "name": "XX99 Mark II Headphones",
         "price": 2999,
         "slug": "xx99-mark-two-headphones",
-        "image": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 4,
@@ -55,7 +67,11 @@
         "name": "ZX9 Speaker",
         "price": 4500,
         "slug": "zx9-speaker",
-        "image": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "tablet": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "desktop": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        }
       }
     ]
   },
@@ -85,7 +101,11 @@
         "name": "YX1 Wireless Earphones",
         "price": 599,
         "slug": "yx1-earphones",
-        "image": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 2,
@@ -95,7 +115,11 @@
         "name": "XX59 Headphones",
         "price": 899,
         "slug": "xx59-headphones",
-        "image": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 3,
@@ -105,7 +129,11 @@
         "name": "XX99 Mark II Headphones",
         "price": 2999,
         "slug": "xx99-mark-two-headphones",
-        "image": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 4,
@@ -115,7 +143,11 @@
         "name": "ZX9 Speaker",
         "price": 4500,
         "slug": "zx9-speaker",
-        "image": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "tablet": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "desktop": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        }
       }
     ]
   },
@@ -145,7 +177,11 @@
         "name": "YX1 Wireless Earphones",
         "price": 599,
         "slug": "yx1-earphones",
-        "image": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 2,
@@ -155,7 +191,11 @@
         "name": "XX59 Headphones",
         "price": 899,
         "slug": "xx59-headphones",
-        "image": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 3,
@@ -165,7 +205,11 @@
         "name": "XX99 Mark II Headphones",
         "price": 2999,
         "slug": "xx99-mark-two-headphones",
-        "image": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 4,
@@ -175,7 +219,11 @@
         "name": "ZX9 Speaker",
         "price": 4500,
         "slug": "zx9-speaker",
-        "image": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "tablet": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "desktop": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        }
       }
     ]
   },
@@ -205,7 +253,11 @@
         "name": "YX1 Wireless Earphones",
         "price": 599,
         "slug": "yx1-earphones",
-        "image": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 2,
@@ -215,7 +267,11 @@
         "name": "XX59 Headphones",
         "price": 899,
         "slug": "xx59-headphones",
-        "image": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 3,
@@ -225,7 +281,11 @@
         "name": "XX99 Mark II Headphones",
         "price": 2999,
         "slug": "xx99-mark-two-headphones",
-        "image": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 4,
@@ -235,7 +295,11 @@
         "name": "ZX9 Speaker",
         "price": 4500,
         "slug": "zx9-speaker",
-        "image": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "tablet": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "desktop": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        }
       }
     ]
   },
@@ -265,7 +329,11 @@
         "name": "YX1 Wireless Earphones",
         "price": 599,
         "slug": "yx1-earphones",
-        "image": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-yx1-earphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-yx1-earphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 2,
@@ -275,7 +343,11 @@
         "name": "XX59 Headphones",
         "price": 899,
         "slug": "xx59-headphones",
-        "image": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx59-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx59-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 3,
@@ -285,7 +357,11 @@
         "name": "XX99 Mark II Headphones",
         "price": 2999,
         "slug": "xx99-mark-two-headphones",
-        "image": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "tablet": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg",
+          "desktop": "/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg"
+        }
       },
       {
         "id": 4,
@@ -295,7 +371,11 @@
         "name": "ZX9 Speaker",
         "price": 4500,
         "slug": "zx9-speaker",
-        "image": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        "image": {
+          "mobile": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "tablet": "/assets/product-zx9-speaker/mobile/image-product.jpg",
+          "desktop": "/assets/product-zx9-speaker/mobile/image-product.jpg"
+        }
       }
     ]
   }

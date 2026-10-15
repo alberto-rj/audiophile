@@ -1,10 +1,12 @@
+import type { ApiOrder, ApiOrderItem } from '@audiophile/shared';
+
 import { Card } from '@/components/ui';
+import { ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
-import type { Order, OrderItem } from '@/libs/types';
 
 interface OrderItemsListProps {
-  items: OrderItem[];
+  items: ApiOrderItem[];
 }
 
 const OrderItemsList = ({ items }: OrderItemsListProps) => {
@@ -27,9 +29,9 @@ const OrderItemsList = ({ items }: OrderItemsListProps) => {
           className={cn('flex', 'justify-between', 'items-start', 'gap-8')}
         >
           <div className={cn('flex', 'items-center', 'gap-4')}>
-            <img
+            <ResponsiveImage
               alt={`${name}`}
-              src={image}
+              image={image}
               width={64}
               height={64}
               loading="lazy"
@@ -85,7 +87,7 @@ const OrderItemsList = ({ items }: OrderItemsListProps) => {
 };
 
 interface OrderSummaryCardProps {
-  order: Order;
+  order: ApiOrder;
 }
 
 export const OrderSummaryCard = ({ order }: OrderSummaryCardProps) => {

@@ -1,9 +1,10 @@
+import type { ApiOrder } from '@audiophile/shared';
+
 import { cn } from '@/libs/cn';
 import { toOrderStatusText } from '@/libs/helpers';
-import type { OrderStatus } from '@/libs/types';
 
 interface OrderStatusBadgeProps {
-  status: OrderStatus;
+  status: ApiOrder['status'];
 }
 
 const OrderStatusBadge = ({ status }: OrderStatusBadgeProps) => {

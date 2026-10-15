@@ -1,54 +1,5 @@
-export type OrderStatus =
-  'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+import type { ApiOrder } from '@audiophile/shared';
 
-export type PaymentMethod = 'e-money' | 'cash-on-delivery';
+export type OrderStatus = ApiOrder['status'];
 
-export interface OrderItem {
-  id: number;
-  orderId: number;
-  productId: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-export interface Order {
-  id: number;
-  userId: number;
-  status: OrderStatus;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  zip: string;
-  city: string;
-  country: string;
-  paymentMethod: PaymentMethod;
-  subtotal: number;
-  shipping: number;
-  vat: number;
-  grandTotal: number;
-  createdAt: string;
-  items?: OrderItem[];
-}
-
-export interface CreateOrderPayload {
-  userId: number;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  zip: string;
-  city: string;
-  country: string;
-  paymentMethod: PaymentMethod;
-}
-
-export interface OrderResponse {
-  order: Order;
-}
-
-export interface OrderListResponse {
-  orders: Order[];
-}
+export type PaymentMethod = ApiOrder['paymentMethod'];

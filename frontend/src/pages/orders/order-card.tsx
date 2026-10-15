@@ -1,3 +1,4 @@
+import type { ApiOrder } from '@audiophile/shared';
 import { useId } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -13,10 +14,9 @@ import {
   toOrderNumber,
   toPaymentMethodText,
 } from '@/libs/helpers';
-import type { Order } from '@/libs/types';
 
 interface OrderCardMenuProps {
-  order: Order;
+  order: ApiOrder;
 }
 
 const OrderCardMenu = ({ order: { id, status } }: OrderCardMenuProps) => {
@@ -66,7 +66,7 @@ const OrderCardMenu = ({ order: { id, status } }: OrderCardMenuProps) => {
 };
 
 interface OrderCardProps {
-  order: Order;
+  order: ApiOrder;
 }
 
 const OrderCard = ({ order }: OrderCardProps) => {
