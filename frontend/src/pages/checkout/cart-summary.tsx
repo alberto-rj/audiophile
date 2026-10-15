@@ -1,3 +1,4 @@
+import type { ApiCart } from '@audiophile/shared';
 import { useId } from 'react';
 
 import { useGetCartQuery } from '@/app/services/cart-api';
@@ -5,10 +6,9 @@ import { Spinner } from '@/components/ui';
 import { ErrorMessage, ResponsiveImage } from '@/components/widgets';
 import { cn } from '@/libs/cn';
 import { toMoney } from '@/libs/helpers';
-import type { Cart } from '@/libs/types';
 
 interface CartSummaryProps {
-  cart: Cart;
+  cart: ApiCart;
 }
 
 export const CartSummary = ({ cart }: CartSummaryProps) => {
@@ -141,7 +141,7 @@ export const CartSummaryQuery = () => {
     return <Spinner className={cn('mx-auto')} />;
   }
 
-  if (isError) {
+  if (isError || !data?.results?.[0]) {
     return (
       <ErrorMessage>
         <ErrorMessage.Description>
@@ -158,7 +158,7 @@ export const CartSummaryQuery = () => {
     );
   }
 
-  const { cart } = data!;
+  const [cart] = data.results;
 
   return <CartSummary cart={cart} />;
 };

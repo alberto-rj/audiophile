@@ -9,9 +9,11 @@ export const useItemsCount = () => {
 
   const { data } = useGetCartQuery(undefined, { skip: !isAuthenticated });
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || !data?.results?.[0]) {
     return 0;
   }
 
-  return getItemsCount(data?.cart.items ?? []);
+  const [cart] = data.results;
+
+  return getItemsCount(cart.items);
 };

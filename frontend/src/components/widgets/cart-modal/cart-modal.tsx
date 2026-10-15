@@ -1,3 +1,4 @@
+import type { ApiCart, ApiCartItem } from '@audiophile/shared';
 import { type ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -20,7 +21,6 @@ import { APP_ROUTES } from '@/config/app-routes';
 import { useToast } from '@/hooks';
 import { cn } from '@/libs/cn';
 import { getItemsCount, toMoney } from '@/libs/helpers';
-import type { Cart, CartItem } from '@/libs/types';
 
 interface BaseCartModalProps {
   children?: ReactNode;
@@ -99,7 +99,7 @@ const CartModalLoading = () => {
 };
 
 interface SingleCartItemProps {
-  item: CartItem;
+  item: ApiCartItem;
 }
 
 const SingleCartItem = ({
@@ -191,7 +191,7 @@ const SingleCartItem = ({
 };
 
 interface CartItemListProps {
-  items: CartItem[];
+  items: ApiCartItem[];
 }
 
 const CartItemList = ({ items }: CartItemListProps) => {
@@ -221,7 +221,7 @@ const CartItemList = ({ items }: CartItemListProps) => {
 };
 
 interface CartModalFilledProps {
-  cart: Cart;
+  cart: ApiCart;
 }
 
 const CartModalFilled = ({ cart }: CartModalFilledProps) => {
@@ -338,11 +338,11 @@ const CartModal = () => {
     return <CartModalLoading />;
   }
 
-  if (isError) {
+  if (isError || !data?.results?.[0]) {
     return <CartModalError />;
   }
 
-  return <CartModalFilled cart={data!.cart} />;
+  return <CartModalFilled cart={data.results[0]} />;
 };
 
 export default CartModal;
