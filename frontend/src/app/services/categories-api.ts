@@ -1,12 +1,12 @@
+import type {
+  ApiCategoryPaginationResponse,
+  ApiCategoryResultListResponse,
+} from '@audiophile/shared';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { API_ENDPOINTS } from '@/config/api-endpoints';
 
 import { baseQuery } from './base-query';
-import type {
-  ApiCategoryPaginationResponse,
-  ApiCategoryResultListResponse,
-} from '@audiophile/shared';
 
 export const categoriesApi = createApi({
   reducerPath: 'categoriesApi',
