@@ -1,6 +1,10 @@
 import { z } from '@/config';
 
-import { ResponsiveImageSchema } from '../common/common.schema';
+import {
+  makeApiPaginationResponseSchema,
+  makeApiResultListResponseSchema,
+  ResponsiveImageSchema,
+} from '../common/common.schema';
 
 import {
   OrderCreateParamsSchema,
@@ -17,6 +21,7 @@ export const ApiOrderCreateBodySchema = OrderCreateParamsSchema.omit({
   shipping: true,
   vat: true,
   grandTotal: true,
+  items: true,
 });
 
 export const ApiOrderListingQuerySchema = OrderFindManyParamsSchema.omit({
@@ -30,3 +35,9 @@ export const ApiOrderItemSchema = OrderItemSchema.extend({
 export const ApiOrderSchema = OrderSchema.extend({
   items: z.array(ApiOrderItemSchema),
 });
+
+export const ApiOrderResultListResponseSchema =
+  makeApiResultListResponseSchema(ApiOrderSchema);
+
+export const ApiOrderPaginationResponseSchema =
+  makeApiPaginationResponseSchema(ApiOrderSchema);
