@@ -2,14 +2,16 @@ import type { z } from '@/config';
 
 import {
   CartAddItemInputSchema,
+  CartCreateInputSchema,
   CartFindManyItemsInputSchema,
-  CartFindOrCreateByUserIdInputSchema,
-  CartFindInputSchema,
+  CartIdInputSchema,
   CartRemoveAllInputSchema,
   CartRemoveItemInputSchema,
   CartUpdateItemInputSchema,
-  CartGetInputSchema,
+  CartUserIdInputSchema,
 } from './cart.input.schema';
+
+export type CartCreateInput = z.infer<typeof CartCreateInputSchema>;
 
 export type CartAddItemInput = z.infer<typeof CartAddItemInputSchema>;
 
@@ -19,13 +21,9 @@ export type CartRemoveItemInput = z.infer<typeof CartRemoveItemInputSchema>;
 
 export type CartRemoveAllInput = z.infer<typeof CartRemoveAllInputSchema>;
 
-export type CartGetInput = z.infer<typeof CartGetInputSchema>;
+export type CartIdInput = z.infer<typeof CartIdInputSchema>;
 
-export type CartFindInput = z.infer<typeof CartFindInputSchema>;
-
-export type CartFindOrCreateByUserIdInput = z.infer<
-  typeof CartFindOrCreateByUserIdInputSchema
->;
+export type CartUserIdInput = z.infer<typeof CartUserIdInputSchema>;
 
 export type CartFindManyItemsInput = z.infer<
   typeof CartFindManyItemsInputSchema
