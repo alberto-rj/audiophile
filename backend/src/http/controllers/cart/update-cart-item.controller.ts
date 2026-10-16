@@ -13,13 +13,11 @@ export async function updateCartItemController(
     const { itemId } = req.params;
     const { quantity } = req.body;
 
-    const { item } = await updateCartItemUseCase({
+    const { output } = await updateCartItemUseCase({
       input: { itemId, quantity },
     });
 
-    const apiItem = toApiCart(item);
-
-    res.json(StatusCodes.OK).json(makeResBodyResult(apiItem));
+    res.json(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));
   } catch (error) {
     next(error);
   }

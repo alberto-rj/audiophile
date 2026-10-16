@@ -1,17 +1,18 @@
+import type { CartDetailed } from '@audiophile/shared';
+
 import { cartRepository, productRepository } from '@/config';
 import {
   InternalServerError,
   ResourceNotFoundError,
   toCartAddItemInput,
 } from '@/helpers';
-import type { CartDetailed } from '@audiophile/shared';
 
 type AddCartItemUseCaseParams = {
   input: unknown;
 };
 
 type AddCartItemUseCaseResult = {
-  item: CartDetailed;
+  output: CartDetailed;
 };
 
 export async function addCartItemUseCase({
@@ -38,6 +39,6 @@ export async function addCartItemUseCase({
   }
 
   return {
-    item: updatedCart,
+    output: updatedCart,
   };
 }

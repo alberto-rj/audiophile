@@ -12,13 +12,11 @@ export async function removeCartItemsController(
   try {
     const { userId } = req.payload!;
 
-    const { item } = await removeCartItemsUseCase({
+    const { output } = await removeCartItemsUseCase({
       input: { userId },
     });
 
-    const apiItem = toApiCart(item);
-
-    res.json(StatusCodes.OK).json(makeResBodyResult(apiItem));
+    res.json(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));
   } catch (error) {
     next(error);
   }
