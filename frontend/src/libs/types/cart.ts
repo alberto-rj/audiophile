@@ -1,4 +1,4 @@
-import type { ApiProduct } from '@audiophile/shared';
+import type { ApiCartItem, ApiProduct } from '@audiophile/shared';
 
 export interface AddCartItemPayload {
   productId: ApiProduct['id'];
@@ -6,10 +6,10 @@ export interface AddCartItemPayload {
 }
 
 export interface UpdateCartItemQuantityPayload {
-  productId: ApiProduct['id'];
+  itemId: ApiCartItem['id'];
   quantity: number;
 }
 
 export interface RemoveCartItemPayload {
-  productId: ApiProduct['id'];
+  itemId: ApiCartItem['id'];
 }
