@@ -129,7 +129,7 @@ export const makeClearCartHandler = (
 export function makeAddCartItemHandler(
   options: { type?: 'error' | 'infinite' | 'default' } = {},
 ) {
-  const endpoint = `/api${API_ENDPOINTS.cartItems}`;
+  const endpoint = `/api${API_ENDPOINTS.cart}`;
 
   const { type = 'default' } = options;
 
@@ -197,7 +197,7 @@ export function makeAddCartItemHandler(
 export function makeUpdateCartItemQuantityHandler(
   options: { type?: 'error' | 'infinite' | 'default' } = {},
 ) {
-  const endpoint = `/api${API_ENDPOINTS.cartItems}/:slug`;
+  const endpoint = `/api${API_ENDPOINTS.cart}/:itemId`;
 
   const { type = 'default' } = options;
 
@@ -271,7 +271,7 @@ export function makeUpdateCartItemQuantityHandler(
 export function makeDeleteCartItemHandler(
   options: { type?: 'error' | 'infinite' | 'default' } = {},
 ) {
-  const endpoint = `/api${API_ENDPOINTS.cartItems}/:slug`;
+  const endpoint = `/api${API_ENDPOINTS.cart}/:itemId`;
 
   const { type = 'default' } = options;
 
