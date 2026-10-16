@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { makeResBodyResult, toApiCart, type AuthRequest } from '@/helpers';
 import { getCartUseCase } from '@/use-cases';
 
-export async function getCartItemController(
+export async function getCartController(
   req: AuthRequest,
   res: Response,
   next: NextFunction,
@@ -12,13 +12,11 @@ export async function getCartItemController(
   try {
     const { userId } = req.payload!;
 
-    const { item } = await getCartUseCase({
+    const { output } = await getCartUseCase({
       input: { userId },
     });
 
-    const apiItem = toApiCart(item);
-
-    res.json(StatusCodes.OK).json(makeResBodyResult(apiItem));
+    res.json(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));
   } catch (error) {
     next(error);
   }

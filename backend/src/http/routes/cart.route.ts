@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
 import {
+  getCartController,
   addCartItemController,
-  getCartItemController,
   removeCartItemController,
   removeCartItemsController,
   updateCartItemController,
@@ -11,14 +11,12 @@ import { requireAuth } from '../middlewares';
 
 export const cartRoute = Router();
 
-cartRoute.use('/', requireAuth);
+cartRoute.get('/', requireAuth, getCartController);
 
-cartRoute.get('/', getCartItemController);
+cartRoute.post('/', requireAuth, addCartItemController);
 
-cartRoute.post('/', addCartItemController);
+cartRoute.patch('/:itemId', requireAuth, updateCartItemController);
 
-cartRoute.patch('/:itemId', updateCartItemController);
+cartRoute.delete('/:itemId', requireAuth, removeCartItemController);
 
-cartRoute.delete('/:itemId', removeCartItemController);
-
-cartRoute.delete('/', removeCartItemsController);
+cartRoute.delete('/', requireAuth, removeCartItemsController);
