@@ -6,8 +6,10 @@ import {
   suggestionRepository,
   productRepository,
   userRepository,
+  cartRepository,
 } from '@/config';
 import {
+  carts,
   categories,
   galleries,
   includes,
@@ -23,11 +25,13 @@ import { seedOrders } from './order/seed-orders';
 import { seedProducts } from './product/seed-products';
 import { seedSuggestions } from './product/seed-suggestions';
 import { seedUsers } from './user/seed-users';
+import { seedCarts } from './cart/seed-carts';
 
 async function main() {
   try {
     await Promise.all([
       orderRepository.clear(),
+      cartRepository.clear(),
       galleryRepository.clear(),
       includeRepository.clear(),
       suggestionRepository.clear(),
@@ -51,6 +55,11 @@ async function main() {
     });
 
     const createdUsers = await seedUsers({ users });
+
+    await seedCarts({
+      carts,
+      users: createdUsers,
+    });
 
     await seedOrders({
       orders,
