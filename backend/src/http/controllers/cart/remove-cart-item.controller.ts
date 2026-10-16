@@ -16,7 +16,7 @@ export async function removeCartItemController(
       input: { itemId },
     });
 
-    res.json(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));
+    res.status(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));
   } catch (error) {
     next(error);
   }
