@@ -5,6 +5,9 @@ import orders from './orders.mock.json' with { type: 'json' };
 import suggestions from './suggestions.mock.json' with { type: 'json' };
 import products from './products.mock.json' with { type: 'json' };
 import users from './users.mock.json' with { type: 'json' };
+import carts from './cart.mock.json' with { type: 'json' };
+
+export type Cart = (typeof carts)[number];
 
 export type Categories = typeof categories;
 
@@ -22,6 +25,7 @@ export type Users = typeof users;
 
 export {
   categories,
+  carts,
   galleries,
   includes,
   orders,

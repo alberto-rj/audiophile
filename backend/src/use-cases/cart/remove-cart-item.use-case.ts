@@ -1,13 +1,14 @@
+import type { CartDetailed } from '@audiophile/shared';
+
 import { cartRepository } from '@/config';
 import { InternalServerError, toCartRemoveItemInput } from '@/helpers';
-import type { CartDetailed } from '@audiophile/shared';
 
 type RemoveCartItemUseCaseParams = {
   input: unknown;
 };
 
 type RemoveCartItemUseCaseResult = {
-  item: CartDetailed;
+  output: CartDetailed;
 };
 
 export async function removeCartItemUseCase({
@@ -24,6 +25,6 @@ export async function removeCartItemUseCase({
   }
 
   return {
-    item: updatedCart,
+    output: updatedCart,
   };
 }

@@ -1,21 +1,26 @@
 import type {
   CartAddItemParams,
+  CartCreateParams,
   CartDetailed,
-  CartFindOrCreateByUserIdParams,
-  CartFindParams,
+  CartIdParams,
   CartRemoveAllParams,
   CartRemoveItemParams,
   CartUpdateItemParams,
+  CartUserIdParams,
 } from '@audiophile/shared';
 
 export interface CartRepository {
+  create: (params: CartCreateParams) => Promise<CartDetailed>;
+
+  createMany: (paramsList: CartCreateParams[]) => Promise<CartDetailed[]>;
+
   add: (params: CartAddItemParams) => Promise<CartDetailed | null>;
 
-  find: (params: CartFindParams) => Promise<CartDetailed | null>;
+  find: (params: CartIdParams) => Promise<CartDetailed | null>;
 
-  findOrCreateByUserId: (
-    params: CartFindOrCreateByUserIdParams,
-  ) => Promise<CartDetailed>;
+  findByUserId: (params: CartUserIdParams) => Promise<CartDetailed | null>;
+
+  findOrCreateByUserId: (params: CartUserIdParams) => Promise<CartDetailed>;
 
   update: (params: CartUpdateItemParams) => Promise<CartDetailed | null>;
 

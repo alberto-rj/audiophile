@@ -1,21 +1,25 @@
 import {
   CartAddItemInputSchema,
-  CartFindOrCreateByUserIdInputSchema,
-  CartFindInputSchema,
-  CartGetInputSchema,
+  CartIdInputSchema,
   CartRemoveAllInputSchema,
   CartRemoveItemInputSchema,
   CartUpdateItemInputSchema,
   type CartAddItemInput,
-  type CartFindOrCreateByUserIdInput,
-  type CartFindInput,
+  type CartIdInput,
   type CartRemoveAllInput,
   type CartRemoveItemInput,
   type CartUpdateItemInput,
-  type CartGetInput,
+  type CartUserIdInput,
+  CartUserIdInputSchema,
+  CartCreateInputSchema,
+  type CartCreateInput,
 } from '@audiophile/shared';
 
 import { parseSchema } from '../parse-schema';
+
+export function toCartCreateInput(data: unknown) {
+  return parseSchema<CartCreateInput>(CartCreateInputSchema, data);
+}
 
 export function toCartAddItemInput(data: unknown) {
   return parseSchema<CartAddItemInput>(CartAddItemInputSchema, data);
@@ -25,25 +29,18 @@ export function toCartUpdateItemInput(data: unknown) {
   return parseSchema<CartUpdateItemInput>(CartUpdateItemInputSchema, data);
 }
 
-export function toCartFindInput(data: unknown) {
-  return parseSchema<CartFindInput>(CartFindInputSchema, data);
-}
-
-export function toCartFindOrCreateByUserIdInput(data: unknown) {
-  return parseSchema<CartFindOrCreateByUserIdInput>(
-    CartFindOrCreateByUserIdInputSchema,
-    data,
-  );
-}
-
 export function toCartRemoveItemInput(data: unknown) {
   return parseSchema<CartRemoveItemInput>(CartRemoveItemInputSchema, data);
 }
 
-export function toCartGetInput(data: unknown) {
-  return parseSchema<CartGetInput>(CartGetInputSchema, data);
-}
-
 export function toCartRemoveAllInput(data: unknown) {
   return parseSchema<CartRemoveAllInput>(CartRemoveAllInputSchema, data);
+}
+
+export function toCartIdInput(data: unknown) {
+  return parseSchema<CartIdInput>(CartIdInputSchema, data);
+}
+
+export function toCartUserIdInput(data: unknown) {
+  return parseSchema<CartUserIdInput>(CartUserIdInputSchema, data);
 }

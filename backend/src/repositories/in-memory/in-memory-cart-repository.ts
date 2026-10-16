@@ -3,11 +3,12 @@ import type {
   CartUpdateItemParams,
   CartRemoveItemParams,
   CartRemoveAllParams,
-  CartFindParams,
+  CartIdParams,
   CartDetailed,
   Cart,
   CartItemDetailed,
-  CartFindOrCreateByUserIdParams,
+  CartUserIdParams,
+  CartCreateParams,
 } from '@audiophile/shared';
 
 import { getProductItemSummary, makeCart, makeCartItem } from '@/helpers';
@@ -55,6 +56,22 @@ function createCartItem(params: CartAddItemParams): CartItemDetailed {
 }
 
 export class InMemoryCartRepository implements CartRepository {
+  async create({ userId }: CartCreateParams): Promise<CartDetailed> {
+    const createdCart = makeCart({ userId });
+
+    db.carts.set(createdCart.id, createdCart);
+
+    return toCartDetailed(createdCart);
+  }
+
+  async createMany(paramsList: CartCreateParams[]): Promise<CartDetailed[]> {
+    const createdCarts = paramsList.map(makeCart);
+
+    createdCarts.forEach((cart) => db.carts.set(cart.id, cart));
+
+    return createdCarts.map(toCartDetailed);
+  }
+
   async add(params: CartAddItemParams): Promise<CartDetailed | null> {
     const cart = db.carts.get(params.cartId);
 
@@ -81,8 +98,22 @@ export class InMemoryCartRepository implements CartRepository {
     return this.find({ cartId: params.cartId });
   }
 
-  async find({ cartId }: CartFindParams): Promise<CartDetailed | null> {
+  async find({ cartId }: CartIdParams): Promise<CartDetailed | null> {
     const foundCart = db.carts.get(cartId);
+
+    if (!foundCart) {
+      return null;
+    }
+
+    return toCartDetailed(foundCart);
+  }
+
+  async findByUserId({
+    userId,
+  }: CartUserIdParams): Promise<CartDetailed | null> {
+    const foundCart = Array.from(db.carts.values()).find(
+      (cart) => cart.userId === userId,
+    );
 
     if (!foundCart) {
       return null;
@@ -93,7 +124,7 @@ export class InMemoryCartRepository implements CartRepository {
 
   async findOrCreateByUserId({
     userId,
-  }: CartFindOrCreateByUserIdParams): Promise<CartDetailed> {
+  }: CartUserIdParams): Promise<CartDetailed> {
     const foundCart = Array.from(db.carts.values()).find(
       (c) => c.userId === userId,
     );

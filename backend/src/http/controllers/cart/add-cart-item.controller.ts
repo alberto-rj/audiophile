@@ -13,13 +13,11 @@ export async function addCartItemController(
     const { userId } = req.payload!;
     const { quantity, productId } = req.body;
 
-    const { item } = await addCartItemUseCase({
+    const { output } = await addCartItemUseCase({
       input: { userId, productId, quantity },
     });
 
-    const apiItem = toApiCart(item);
-
-    res.json(StatusCodes.OK).json(makeResBodyResult(apiItem));
+    res.status(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));
   } catch (error) {
     next(error);
   }

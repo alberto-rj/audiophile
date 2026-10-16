@@ -1,38 +1,34 @@
-import { z } from '@/config';
-
 import { UserIdSchema } from '../user/user.base.schema';
 import {
   CartAddItemParamsSchema,
+  CartCreateParamsSchema,
   CartFindManyItemsParamsSchema,
-  CartFindOrCreateByUserIdParamsSchema,
-  CartFindParamsSchema,
+  CartIdParamsSchema,
   CartRemoveAllParamsSchema,
   CartRemoveItemParamsSchema,
   CartUpdateItemParamsSchema,
+  CartUserIdParamsSchema,
 } from './cart.params.schema';
 
-export const CartFindManyItemsInputSchema =
-  CartFindManyItemsParamsSchema.extend({});
+export const CartCreateInputSchema = CartCreateParamsSchema.extend({});
 
 export const CartAddItemInputSchema = CartAddItemParamsSchema.extend({
   userId: UserIdSchema,
 });
 
-export const CartFindInputSchema = CartFindParamsSchema.extend({});
+export const CartIdInputSchema = CartIdParamsSchema.extend({});
 
-export const CartFindOrCreateByUserIdInputSchema =
-  CartFindOrCreateByUserIdParamsSchema.extend({});
+export const CartUserIdInputSchema = CartUserIdParamsSchema.extend({});
 
 export const CartUpdateItemInputSchema = CartUpdateItemParamsSchema.extend({
   userId: UserIdSchema,
 });
 
+export const CartFindManyItemsInputSchema =
+  CartFindManyItemsParamsSchema.extend({});
+
 export const CartRemoveItemInputSchema = CartRemoveItemParamsSchema.extend({});
 
 export const CartRemoveAllInputSchema = CartRemoveAllParamsSchema.extend({
-  userId: UserIdSchema,
-});
-
-export const CartGetInputSchema = z.object({
   userId: UserIdSchema,
 });
