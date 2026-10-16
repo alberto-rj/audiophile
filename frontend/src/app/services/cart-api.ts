@@ -27,7 +27,7 @@ export const cartApi = createApi({
       ApiCartAddItemBody
     >({
       query: (payload) => ({
-        url: API_ENDPOINTS.cartItems,
+        url: API_ENDPOINTS.cart,
         method: 'POST',
         body: payload,
       }),
@@ -38,8 +38,8 @@ export const cartApi = createApi({
       ApiCartResultListResponse,
       UpdateCartItemQuantityPayload
     >({
-      query: ({ productId, quantity }) => ({
-        url: `${API_ENDPOINTS.cartItems}/${productId}`,
+      query: ({ itemId, quantity }) => ({
+        url: `${API_ENDPOINTS.cart}/${itemId}`,
         method: 'PATCH',
         body: { quantity },
       }),
@@ -50,8 +50,8 @@ export const cartApi = createApi({
       ApiCartResultListResponse,
       RemoveCartItemPayload
     >({
-      query: ({ productId }) => ({
-        url: `${API_ENDPOINTS.cartItems}/${productId}`,
+      query: ({ itemId }) => ({
+        url: `${API_ENDPOINTS.cart}/${itemId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Cart'],
