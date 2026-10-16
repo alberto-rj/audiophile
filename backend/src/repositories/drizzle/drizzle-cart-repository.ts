@@ -3,11 +3,12 @@ import type {
   CartUpdateItemParams,
   CartRemoveItemParams,
   CartRemoveAllParams,
-  CartFindParams,
+  CartIdParams,
   CartDetailed,
   CartItemDetailed,
-  CartFindOrCreateByUserIdParams,
   Product,
+  CartUserIdParams,
+  CartCreateParams,
 } from '@audiophile/shared';
 import { eq, sql } from 'drizzle-orm';
 
@@ -26,6 +27,34 @@ type DrizzleCartItemDetailed = Pick<
 type DrizzleCartDetailed = Pick<CartDetailed, 'id' | 'userId'> & {
   items: DrizzleCartItemDetailed[];
 };
+
+type DrizzleCart = Pick<CartDetailed, 'id' | 'userId'>;
+
+const CART_COLUMNS = {
+  id: true,
+  userId: true,
+} as const;
+
+const CART_WITH = {
+  items: {
+    columns: {
+      id: true,
+      cartId: true,
+      quantity: true,
+    },
+    with: {
+      product: {
+        columns: {
+          id: true,
+          name: true,
+          price: true,
+          slug: true,
+          image: true,
+        },
+      },
+    },
+  },
+} as const;
 
 function toCartItemDetailed(
   rawItem: DrizzleCartItemDetailed,
@@ -52,16 +81,43 @@ function toCartItemDetailed(
 function toCartDetailed(rawCart: DrizzleCartDetailed): CartDetailed {
   const { id, items, userId } = rawCart;
   const detailedItems = items.map(toCartItemDetailed);
+  const { subtotal, shipping, vat, grandTotal } =
+    getProductItemSummary(detailedItems);
 
   return {
     id,
     userId,
+    subtotal,
+    shipping,
+    vat,
+    grandTotal,
     items: detailedItems,
-    ...getProductItemSummary(detailedItems),
   };
 }
 
+function parseDrizzleCart({ id, userId }: DrizzleCart): CartDetailed {
+  return toCartDetailed({ id, userId, items: [] });
+}
+
 export class DrizzleCartRepository implements CartRepository {
+  async create({ userId }: CartCreateParams): Promise<CartDetailed> {
+    const [createdCart] = await db.insert(carts).values({ userId }).returning();
+
+    const { id } = createdCart!;
+
+    return parseDrizzleCart({ id, userId });
+  }
+
+  async createMany(paramsList: CartCreateParams[]): Promise<CartDetailed[]> {
+    const createdCarts = await db.insert(carts).values(paramsList).returning();
+
+    const detailedCarts = createdCarts.map(({ id, userId }) =>
+      parseDrizzleCart({ id, userId }),
+    );
+
+    return detailedCarts;
+  }
+
   async add({
     cartId,
     productId,
@@ -80,33 +136,27 @@ export class DrizzleCartRepository implements CartRepository {
     return this.find({ cartId });
   }
 
-  async find({ cartId }: CartFindParams): Promise<CartDetailed | null> {
+  async find({ cartId }: CartIdParams): Promise<CartDetailed | null> {
     const foundCart = await db.query.carts.findFirst({
       where: eq(carts.id, cartId),
-      columns: {
-        id: true,
-        userId: true,
-      },
-      with: {
-        items: {
-          columns: {
-            id: true,
-            cartId: true,
-            quantity: true,
-          },
-          with: {
-            product: {
-              columns: {
-                id: true,
-                name: true,
-                price: true,
-                slug: true,
-                image: true,
-              },
-            },
-          },
-        },
-      },
+      columns: CART_COLUMNS,
+      with: CART_WITH,
+    });
+
+    if (!foundCart) {
+      return null;
+    }
+
+    return toCartDetailed(foundCart);
+  }
+
+  async findByUserId({
+    userId,
+  }: CartUserIdParams): Promise<CartDetailed | null> {
+    const foundCart = await db.query.carts.findFirst({
+      where: eq(carts.userId, userId),
+      columns: CART_COLUMNS,
+      with: CART_WITH,
     });
 
     if (!foundCart) {
@@ -118,7 +168,7 @@ export class DrizzleCartRepository implements CartRepository {
 
   async findOrCreateByUserId({
     userId,
-  }: CartFindOrCreateByUserIdParams): Promise<CartDetailed> {
+  }: CartUserIdParams): Promise<CartDetailed> {
     const [foundBaseCart] = await db
       .select({ id: carts.id })
       .from(carts)
