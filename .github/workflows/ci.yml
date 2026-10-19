@@ -54,7 +54,7 @@ jobs:
         run: npm ci
 
       - name: Copy CI env
-        working-directory: frontend
+        working-directory: packages/frontend
         run: cp .env.ci .env
 
       - name: Check formatting

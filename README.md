@@ -26,15 +26,15 @@ An npm workspaces monorepo:
 
 ```text
 audiophile/
-├── backend/           # Express API
-├── frontend/          # React client and Storybook
-├── packages/
-│   └── shared/        # @audiophile/shared: Zod schemas and inferred types
-└── .github/workflows/ # CI and Chromatic
+├── packages
+│   ├── backend/        # Express API
+│   ├── frontend/       # React client and Storybook
+│   └── shared          # @audiophile/shared: Zod schemas and inferred types
+└── .github/workflows/  # CI and Chromatic
 ```
 
 - `@audiophile/shared` is a private workspace package, not published to npm and must be built before the apps.
-- **Status:** the backend uses it. In the frontend, the auth, users, products, and categories services are migrated; the rest still use local schemas.
+- **Status:** Frontend is migrating to use only schemas from `@audiophile/shared`, the auth, users, products, categories and cart services are migrated; the rest still use local schemas.
 
 ## Architecture Overview
 
@@ -67,8 +67,6 @@ audiophile/
 - **Frontend:** React, TypeScript, Redux Toolkit, RTK Query, React Router, Tailwind CSS, Radix UI, React Hook Form, Zod, Storybook, MSW
 
 - **Backend:** Node.js, Express.js, TypeScript, Zod, JWT Authentication, Cloudinary, OpenAPI/Swagger, PostgreSQL & Drizzle ORM
-
-- **Shared:** `@audiophile/shared` (Zod schemas and types), npm workspaces
 
 - **Tooling:** ESLint, Prettier, Vite
 
@@ -123,21 +121,21 @@ npm run build:shared   # Required before running the apps; repeat after changing
 ### Backend setup
 
 ```bash
-cp backend/.env.example backend/.env   # Fill in the required variables (see Environment Variables below)
-npm run dev:backend                    # API runs at http://localhost:4224 | Documentation at /api-docs
+cp packages/backend/.env.example packages/backend/.env   # Fill in the required variables (see Environment Variables below)
+npm run dev:backend                                      # API runs at http://localhost:4224 | Documentation at /api-docs
 ```
 
 **Uploading images (first time only):** requires local images in `public/assets/`. This is only necessary if you are using your own Cloudinary account - the public IDs in `@/db/mocks/categories.mock.json`, `@/db/mocks/products.mock.json`, and `@/db/mocks/galleries.mock.json` are deterministic and derived from the filenames, so they do not need to be updated.
 
 ```bash
-npm run upload -w backend
+npm run upload -w @audiophile/backend
 ```
 
 **Run migrations and seed the database:**
 
 ```bash
-npm run db:migrate -w backend   # Apply schema migrations
-npm run db:seed -w backend      # Seed categories and products
+npm run db:migrate -w @audiophile/backend   # Apply schema migrations
+npm run db:seed -w @audiophile/backend      # Seed categories and products
 ```
 
 ### Frontend setup
@@ -145,9 +143,9 @@ npm run db:seed -w backend      # Seed categories and products
 Open a second terminal:
 
 ```bash
-cp frontend/.env.example frontend/.env   # Fill in the required variables (see Environment Variables below)
-npm run dev:frontend                     # Vite server runs at http://localhost:5173
-npm run storybook -w frontend            # Optional: Visual component testing workspace at http://localhost:6006
+cp packages/frontend/.env.example packages/frontend/.env               # Fill in the required variables (see Environment Variables below)
+npm run dev:frontend                                                   # Vite server runs at http://localhost:5173
+npm run storybook -w @audiophile/frontend                              # Optional: Visual component testing workspace at http://localhost:6006
 ```
 
 ## Environment Variables

@@ -3,7 +3,7 @@ name: 'Chromatic'
 on:
   push:
     paths:
-      - 'frontend/**'
+      - 'packages/frontend/**'
       - 'packages/shared/**'
       - 'package-lock.json'
       - '.github/workflows/chromatic.yml'
@@ -32,12 +32,12 @@ jobs:
         run: npm run build:shared
 
       - name: Copy CI env
-        working-directory: frontend
+        working-directory: packages/frontend
         run: cp .env.ci .env
 
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
-          workingDir: frontend
+          workingDir: packages/frontend
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitOnceUploaded: true
