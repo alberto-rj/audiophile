@@ -6,6 +6,7 @@ export * from './cart/cart.api';
 export * from './cart/cart.input';
 export * from './cart/make-cart-repository';
 export * from './cart/make-cart';
+export * from './cart/cart.errors';
 
 export * from './category/make-category-repository';
 export * from './category/make-category';

@@ -1,7 +1,11 @@
 import type { CartDetailed } from '@audiophile/shared';
 
 import { cartRepository } from '@/config';
-import { InternalServerError, toCartRemoveItemInput } from '@/helpers';
+import {
+  InternalServerError,
+  InvalidCartError,
+  toCartRemoveItemInput,
+} from '@/helpers';
 
 type RemoveCartItemUseCaseParams = {
   input: unknown;
@@ -14,10 +18,17 @@ type RemoveCartItemUseCaseResult = {
 export async function removeCartItemUseCase({
   input,
 }: RemoveCartItemUseCaseParams): Promise<RemoveCartItemUseCaseResult> {
-  const { itemId } = toCartRemoveItemInput(input);
+  const { itemId, userId } = toCartRemoveItemInput(input);
+
+  const foundCart = await cartRepository.findByUserId({ userId });
+
+  if (!foundCart) {
+    throw new InvalidCartError('Cart is required to delete an item.');
+  }
 
   const updatedCart = await cartRepository.remove({
     itemId,
+    cartId: foundCart.id,
   });
 
   if (!updatedCart) {
