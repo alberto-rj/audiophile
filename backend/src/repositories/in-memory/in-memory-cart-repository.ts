@@ -122,39 +122,15 @@ export class InMemoryCartRepository implements CartRepository {
     return toCartDetailed(foundCart);
   }
 
-  async findOrCreateByUserId({
-    userId,
-  }: CartUserIdParams): Promise<CartDetailed> {
-    const foundCart = Array.from(db.carts.values()).find(
-      (c) => c.userId === userId,
-    );
-
-    if (foundCart) {
-      return toCartDetailed(foundCart);
-    }
-
-    const foundProduct = Array.from(db.products.values()).find(
-      (_, index) => index === 0,
-    );
-
-    if (!foundProduct) {
-      throw new Error('Cannot create cart without a product');
-    }
-
-    const newCart = makeCart({
-      userId,
-    });
-    db.carts.set(newCart.id, newCart);
-
-    return toCartDetailed(newCart);
-  }
-
   async update({
     itemId,
+    cartId,
     ...changes
   }: CartUpdateItemParams): Promise<CartDetailed | null> {
     const cartItems = Array.from(db.cartItems.values());
-    const foundCartItem = cartItems.find((item) => item.id === itemId);
+    const foundCartItem = cartItems.find(
+      (item) => item.id === itemId && item.cartId == cartId,
+    );
 
     if (!foundCartItem) {
       return null;
@@ -170,9 +146,14 @@ export class InMemoryCartRepository implements CartRepository {
     return this.find({ cartId: updatedItem.cartId });
   }
 
-  async remove({ itemId }: CartRemoveItemParams): Promise<CartDetailed | null> {
+  async remove({
+    itemId,
+    cartId,
+  }: CartRemoveItemParams): Promise<CartDetailed | null> {
     const cartItems = Array.from(db.cartItems.values());
-    const foundCartItem = cartItems.find((item) => item.id === itemId);
+    const foundCartItem = cartItems.find(
+      (item) => item.id === itemId && item.cartId == cartId,
+    );
 
     if (!foundCartItem) {
       return null;
@@ -186,9 +167,11 @@ export class InMemoryCartRepository implements CartRepository {
   async removeAll({
     cartId,
   }: CartRemoveAllParams): Promise<CartDetailed | null> {
-    const cartItems = Array.from(db.cartItems.values());
+    const cartItemsToDelete = Array.from(db.cartItems.values()).filter(
+      (item) => item.cartId == cartId,
+    );
 
-    cartItems.forEach((item) => db.cartItems.delete(item.id));
+    cartItemsToDelete.forEach((item) => db.cartItems.delete(item.id));
 
     return this.find({ cartId });
   }

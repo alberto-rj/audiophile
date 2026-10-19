@@ -20,8 +20,6 @@ export interface CartRepository {
 
   findByUserId: (params: CartUserIdParams) => Promise<CartDetailed | null>;
 
-  findOrCreateByUserId: (params: CartUserIdParams) => Promise<CartDetailed>;
-
   update: (params: CartUpdateItemParams) => Promise<CartDetailed | null>;
 
   remove: (params: CartRemoveItemParams) => Promise<CartDetailed | null>;

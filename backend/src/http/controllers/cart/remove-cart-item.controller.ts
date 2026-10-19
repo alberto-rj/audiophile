@@ -10,10 +10,11 @@ export async function removeCartItemController(
   next: NextFunction,
 ) {
   try {
+    const { userId } = req.payload!;
     const { itemId } = req.params;
 
     const { output } = await removeCartItemUseCase({
-      input: { itemId },
+      input: { itemId, userId },
     });
 
     res.status(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));

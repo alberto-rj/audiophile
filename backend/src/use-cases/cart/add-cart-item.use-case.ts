@@ -3,6 +3,7 @@ import type { CartDetailed } from '@audiophile/shared';
 import { cartRepository, productRepository } from '@/config';
 import {
   InternalServerError,
+  InvalidCartError,
   ResourceNotFoundError,
   toCartAddItemInput,
 } from '@/helpers';
@@ -20,13 +21,17 @@ export async function addCartItemUseCase({
 }: AddCartItemUseCaseParams): Promise<AddCartItemUseCaseResult> {
   const { userId, productId, quantity } = toCartAddItemInput(input);
 
+  const foundCart = await cartRepository.findByUserId({ userId });
+
+  if (!foundCart) {
+    throw new InvalidCartError('Cart is required to add an item.');
+  }
+
   const foundProduct = await productRepository.findById({ id: productId });
 
   if (!foundProduct) {
-    throw new ResourceNotFoundError('Product not found.');
+    throw new ResourceNotFoundError('Product is required to add a cart item.');
   }
-
-  const foundCart = await cartRepository.findOrCreateByUserId({ userId });
 
   const updatedCart = await cartRepository.add({
     cartId: foundCart.id,

@@ -10,7 +10,7 @@ import type {
   CartUserIdParams,
   CartCreateParams,
 } from '@audiophile/shared';
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 
 import { getProductItemSummary } from '@/helpers';
 import { cartItems, carts, db } from '@/db/drizzle';
@@ -166,41 +166,15 @@ export class DrizzleCartRepository implements CartRepository {
     return toCartDetailed(foundCart);
   }
 
-  async findOrCreateByUserId({
-    userId,
-  }: CartUserIdParams): Promise<CartDetailed> {
-    const [foundBaseCart] = await db
-      .select({ id: carts.id })
-      .from(carts)
-      .where(eq(carts.userId, userId));
-
-    if (foundBaseCart) {
-      const foundCart = await this.find({ cartId: foundBaseCart.id });
-      return foundCart!;
-    }
-
-    const [createdCart] = await db
-      .insert(carts)
-      .values({ userId })
-      .onConflictDoUpdate({
-        target: carts.userId,
-        set: { userId: sql`excluded.user_id` },
-      })
-      .returning({ id: carts.id, userId: carts.userId });
-
-    const foundCart = await this.find({ cartId: createdCart!.id });
-
-    return foundCart!;
-  }
-
   async update({
     itemId,
+    cartId,
     ...changes
   }: CartUpdateItemParams): Promise<CartDetailed | null> {
     const [updatedItem] = await db
       .update(cartItems)
       .set(changes)
-      .where(eq(cartItems.id, itemId))
+      .where(and(eq(cartItems.id, itemId), eq(cartItems.cartId, cartId)))
       .returning({ cartId: cartItems.cartId });
 
     if (!updatedItem) {
@@ -210,10 +184,13 @@ export class DrizzleCartRepository implements CartRepository {
     return this.find({ cartId: updatedItem.cartId });
   }
 
-  async remove({ itemId }: CartRemoveItemParams): Promise<CartDetailed | null> {
+  async remove({
+    itemId,
+    cartId,
+  }: CartRemoveItemParams): Promise<CartDetailed | null> {
     const [deletedItem] = await db
       .delete(cartItems)
-      .where(eq(cartItems.id, itemId))
+      .where(and(eq(cartItems.id, itemId), eq(cartItems.cartId, cartId)))
       .returning({ cartId: cartItems.cartId });
 
     if (!deletedItem) {

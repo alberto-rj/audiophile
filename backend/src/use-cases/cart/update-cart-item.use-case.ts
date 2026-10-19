@@ -1,7 +1,11 @@
 import type { CartDetailed } from '@audiophile/shared';
 
 import { cartRepository } from '@/config';
-import { InternalServerError, toCartUpdateItemInput } from '@/helpers';
+import {
+  InternalServerError,
+  InvalidCartError,
+  toCartUpdateItemInput,
+} from '@/helpers';
 
 type UpdateCartItemUseCaseParams = {
   input: unknown;
@@ -14,10 +18,17 @@ type UpdateCartItemUseCaseResult = {
 export async function updateCartItemUseCase({
   input,
 }: UpdateCartItemUseCaseParams): Promise<UpdateCartItemUseCaseResult> {
-  const { itemId, quantity } = toCartUpdateItemInput(input);
+  const { itemId, userId, quantity } = toCartUpdateItemInput(input);
+
+  const foundCart = await cartRepository.findByUserId({ userId });
+
+  if (!foundCart) {
+    throw new InvalidCartError('Cart is required to update an item.');
+  }
 
   const updatedCart = await cartRepository.update({
     itemId,
+    cartId: foundCart.id,
     quantity,
   });
 

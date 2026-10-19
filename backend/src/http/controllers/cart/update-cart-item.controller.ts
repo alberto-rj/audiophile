@@ -10,11 +10,12 @@ export async function updateCartItemController(
   next: NextFunction,
 ) {
   try {
+    const { userId } = req.payload!;
     const { itemId } = req.params;
     const { quantity } = req.body;
 
     const { output } = await updateCartItemUseCase({
-      input: { itemId, quantity },
+      input: { itemId, quantity, userId },
     });
 
     res.status(StatusCodes.OK).json(makeResBodyResult(toApiCart(output)));
