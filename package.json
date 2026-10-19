@@ -2,24 +2,22 @@
   "name": "audiophile",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "backend",
-    "frontend"
+    "packages/*"
   ],
   "scripts": {
     "build:shared": "npm run build -w @audiophile/shared",
-    "build:frontend": "npm run build:shared && npm run build -w frontend",
-    "build:backend": "npm run build:shared && npm run build -w backend",
+    "build:frontend": "npm run build:shared && npm run build -w @audiophile/frontend",
+    "build:backend": "npm run build:shared && npm run build -w @audiophile/backend",
     "dev:shared": "npm run dev -w @audiophile/shared",
-    "dev:frontend": "npm run dev -w frontend",
-    "dev:backend": "npm run dev -w backend",
-    "lint:backend": "npm run lint -w backend -- --max-warnings=0",
-    "lint:frontend": "npm run lint -w frontend -- --max-warnings=0",
-    "format:backend": "npm run format -w backend",
-    "format:frontend": "npm run format -w frontend",
-    "format:check:backend": "npm run format:check -w backend",
-    "format:check:frontend": "npm run format:check -w frontend",
-    "start:frontend": "npm run start -w frontend",
-    "start:backend": "npm run start -w backend"
+    "dev:frontend": "npm run dev -w @audiophile/frontend",
+    "dev:backend": "npm run dev -w @audiophile/backend",
+    "lint:backend": "npm run lint -w @audiophile/backend -- --max-warnings=0",
+    "lint:frontend": "npm run lint -w @audiophile/frontend -- --max-warnings=0",
+    "format:backend": "npm run format -w @audiophile/backend",
+    "format:frontend": "npm run format -w @audiophile/frontend",
+    "format:check:backend": "npm run format:check -w @audiophile/backend",
+    "format:check:frontend": "npm run format:check -w @audiophile/frontend",
+    "start:frontend": "npm run start -w @audiophile/frontend",
+    "start:backend": "npm run start -w @audiophile/backend"
   }
 }
