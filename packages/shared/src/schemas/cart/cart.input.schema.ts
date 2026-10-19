@@ -12,7 +12,9 @@ import {
 
 export const CartCreateInputSchema = CartCreateParamsSchema.extend({});
 
-export const CartAddItemInputSchema = CartAddItemParamsSchema.extend({
+export const CartAddItemInputSchema = CartAddItemParamsSchema.omit({
+  cartId: true,
+}).extend({
   userId: UserIdSchema,
 });
 
@@ -20,15 +22,21 @@ export const CartIdInputSchema = CartIdParamsSchema.extend({});
 
 export const CartUserIdInputSchema = CartUserIdParamsSchema.extend({});
 
-export const CartUpdateItemInputSchema = CartUpdateItemParamsSchema.extend({
+export const CartUpdateItemInputSchema = CartUpdateItemParamsSchema.omit({
+  cartId: true,
+}).extend({
+  userId: UserIdSchema,
+});
+
+export const CartRemoveItemInputSchema = CartRemoveItemParamsSchema.omit({
+  cartId: true,
+}).extend({
+  userId: UserIdSchema,
+});
+
+export const CartRemoveAllInputSchema = CartRemoveAllParamsSchema.extend({
   userId: UserIdSchema,
 });
 
 export const CartFindManyItemsInputSchema =
   CartFindManyItemsParamsSchema.extend({});
-
-export const CartRemoveItemInputSchema = CartRemoveItemParamsSchema.extend({});
-
-export const CartRemoveAllInputSchema = CartRemoveAllParamsSchema.extend({
-  userId: UserIdSchema,
-});

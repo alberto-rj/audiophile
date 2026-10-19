@@ -37,11 +37,13 @@ export const CartFindOrCreateByUserIdParamsSchema = z.object({
 
 export const CartUpdateItemParamsSchema = z.object({
   itemId: CartItemIdSchema,
+  cartId: CartIdSchema,
   quantity: CartItemQuantitySchema,
 });
 
 export const CartRemoveItemParamsSchema = z.object({
   itemId: CartItemIdSchema,
+  cartId: CartIdSchema,
 });
 
 export const CartRemoveAllParamsSchema = z.object({
