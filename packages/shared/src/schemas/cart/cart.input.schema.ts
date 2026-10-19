@@ -34,9 +34,14 @@ export const CartRemoveItemInputSchema = CartRemoveItemParamsSchema.omit({
   userId: UserIdSchema,
 });
 
-export const CartRemoveAllInputSchema = CartRemoveAllParamsSchema.extend({
+export const CartRemoveAllInputSchema = CartRemoveAllParamsSchema.omit({
+  cartId: true,
+}).extend({
   userId: UserIdSchema,
 });
 
-export const CartFindManyItemsInputSchema =
-  CartFindManyItemsParamsSchema.extend({});
+export const CartFindManyItemsInputSchema = CartFindManyItemsParamsSchema.omit({
+  cartId: true,
+}).extend({
+  userId: UserIdSchema,
+});
