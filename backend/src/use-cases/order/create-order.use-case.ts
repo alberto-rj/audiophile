@@ -21,9 +21,9 @@ export async function createOrderUseCase({
   const { userId, name, email, address, zip, city, country, paymentMethod } =
     toOrderCreateInput(input);
 
-  const userCart = await cartRepository.findOrCreateByUserId({ userId });
+  const userCart = await cartRepository.findByUserId({ userId });
 
-  if (userCart.items.length === 0) {
+  if (!userCart) {
     throw new EmptyOrderError('Cannot create order with no item.');
   }
 
