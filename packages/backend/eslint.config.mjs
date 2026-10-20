@@ -15,6 +15,7 @@ export default defineConfig([
       'logs',
       'eslint.config.mjs',
       'drizzle.config.ts',
+      'vitest.config.ts',
     ],
   },
 
