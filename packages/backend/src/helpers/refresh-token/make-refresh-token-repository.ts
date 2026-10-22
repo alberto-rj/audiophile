@@ -4,17 +4,12 @@ import {
   type RefreshTokenRepository,
 } from '@/repositories';
 
-type RefreshTokenRepositoryType = 'pg' | 'in-memory';
+import type { RepositoryType } from '../common/types';
 
-export function makeRefreshTokenRepository(
-  type: RefreshTokenRepositoryType = 'pg',
-) {
-  const repositories: Record<
-    RefreshTokenRepositoryType,
-    RefreshTokenRepository
-  > = {
+export function makeRefreshTokenRepository(type: RepositoryType = 'drizzle') {
+  const repositories: Record<RepositoryType, RefreshTokenRepository> = {
     'in-memory': new InMemoryRefreshTokenRepository(),
-    pg: new DrizzleRefreshTokenRepository(),
+    drizzle: new DrizzleRefreshTokenRepository(),
   };
 
   return repositories[type];

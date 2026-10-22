@@ -1,17 +1,23 @@
 /// <reference types="vitest" />
 
 import path from 'node:path';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, configDefaults } from 'vitest/config';
+import circleDependency from 'vite-plugin-circular-dependency';
 
 const dirname = import.meta.dirname;
 
 export default defineConfig({
+  plugins: [
+    circleDependency({
+      outputFilePath: './circleDep',
+    }),
+  ],
   test: {
     globals: true,
 
     include: ['src/**/*.{spec,test}.ts'],
 
-    testTimeout: 10000,
+    /* testTimeout: 10000, */
 
     coverage: {
       reportsDirectory: './coverage',
@@ -19,6 +25,8 @@ export default defineConfig({
       include: ['src/**/*.ts'],
 
       exclude: [
+        ...configDefaults.exclude,
+
         '**/node_modules/**',
         '**/dist/**',
 
