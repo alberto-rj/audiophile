@@ -1,6 +1,5 @@
 import type { User } from '@audiophile/shared';
 
-import { refreshTokenRepository, userRepository } from '@/config';
 import {
   ConflictError,
   getAccessToken,
@@ -9,54 +8,70 @@ import {
   toAuthRegisterInput,
   refreshTokenExpiresAt,
 } from '@/helpers';
+import type { RefreshTokenRepository, UserRepository } from '@/repositories';
 
-interface RegisterUseCaseParams {
+type RegisterUseCaseParams = {
   input: unknown;
-}
+};
 
-interface RegisterUseCaseResult {
+type RegisterUseCaseResult = {
   user: User;
   accessToken: string;
   refreshToken: string;
-}
+};
 
-export async function registerUseCase({
-  input,
-}: RegisterUseCaseParams): Promise<RegisterUseCaseResult> {
-  const { name, email, password } = toAuthRegisterInput(input);
+export class RegisterUseCase {
+  constructor(
+    private userRepository: UserRepository,
+    private refreshTokenRepository: RefreshTokenRepository,
+  ) {}
 
-  const foundUserWithEmail = await userRepository.findByEmail({
-    email,
-  });
+  async execute({
+    input,
+  }: RegisterUseCaseParams): Promise<RegisterUseCaseResult> {
+    const { name, email, password } = toAuthRegisterInput(input);
 
-  if (foundUserWithEmail) {
-    throw new ConflictError();
+    const foundUserWithEmail = await this.userRepository.findByEmail({
+      email,
+    });
+
+    if (foundUserWithEmail) {
+      throw new ConflictError();
+    }
+
+    const passwordHash = await getHash(password);
+
+    const createdUser = await this.userRepository.create({
+      name,
+      email,
+      password: passwordHash,
+    });
+
+    const accessToken = getAccessToken({
+      userId: createdUser.id,
+      userEmail: email,
+    });
+
+    const refreshToken = getRefreshToken();
+
+    await this.refreshTokenRepository.create({
+      token: refreshToken,
+      userId: createdUser.id,
+      expiresAt: refreshTokenExpiresAt(),
+    });
+
+    return {
+      user: createdUser,
+      accessToken,
+      refreshToken,
+    };
   }
 
-  const passwordHash = await getHash(password);
+  getUserRepository() {
+    return this.userRepository;
+  }
 
-  const createdUser = await userRepository.create({
-    name,
-    email,
-    password: passwordHash,
-  });
-
-  const accessToken = getAccessToken({
-    userId: createdUser.id,
-    userEmail: email,
-  });
-
-  const refreshToken = getRefreshToken();
-
-  await refreshTokenRepository.create({
-    token: refreshToken,
-    userId: createdUser.id,
-    expiresAt: refreshTokenExpiresAt(),
-  });
-
-  return {
-    user: createdUser,
-    accessToken,
-    refreshToken,
-  };
+  getRefreshTokenRepository() {
+    return this.refreshTokenRepository;
+  }
 }

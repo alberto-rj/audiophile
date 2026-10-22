@@ -1,6 +1,7 @@
 export * from './auth/to-auth-login-input';
 export * from './auth/to-auth-register-input';
 export * from './auth/to-refresh-token-token-input';
+export * from './auth/auth.use-cases';
 
 export * from './cart/cart.api';
 export * from './cart/cart.input';

@@ -1,6 +1,6 @@
 export { loginUseCase } from './auth/login-use-case';
 export { refreshUseCase } from './auth/refresh-use-case';
-export { registerUseCase } from './auth/register-use-case';
+export { RegisterUseCase } from './auth/register-use-case';
 
 export { addCartItemUseCase } from './cart/add-cart-item.use-case';
 export { getCartUseCase } from './cart/get-cart.use-case';

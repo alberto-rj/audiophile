@@ -4,12 +4,12 @@ import {
   type UserRepository,
 } from '@/repositories';
 
-type UserRepositoryType = 'pg' | 'in-memory';
+import type { RepositoryType } from '../common/types';
 
-export function makeUserRepository(type: UserRepositoryType = 'pg') {
-  const repositories: Record<UserRepositoryType, UserRepository> = {
+export function makeUserRepository(type: RepositoryType = 'drizzle') {
+  const repositories: Record<RepositoryType, UserRepository> = {
     'in-memory': new InMemoryUserRepository(),
-    pg: new DrizzleUserRepository(),
+    drizzle: new DrizzleUserRepository(),
   };
 
   return repositories[type];
