@@ -5,6 +5,8 @@ export * from './auth/auth.api.schema';
 export type * from './auth/auth.api.types';
 export * from './auth/auth.input.schema';
 export type * from './auth/auth.input.types';
+export * from './auth/auth.params.schema';
+export type * from './auth/auth.params.types';
 
 export * from './cart/cart-item.api.schema';
 export type * from './cart/cart-item.api.types';

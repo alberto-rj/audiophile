@@ -1,16 +1,42 @@
 import type { AuthLoginInput, AuthRegisterInput } from '@/schemas';
 
-export function makeAuthLoginInput(): AuthLoginInput {
+import type { MakeFieldInputOptions } from '../common/types';
+import {
+  makeEmailInput,
+  makeNameInput,
+  makePasswordInput,
+} from '../user/user.test-helpers';
+
+type MakeAuthLoginInputOptions = {
+  email?: MakeFieldInputOptions;
+  password?: MakeFieldInputOptions;
+};
+
+export function makeAuthLoginInput(
+  options: MakeAuthLoginInputOptions = {},
+): AuthLoginInput {
+  const { email, password } = options;
+
   return {
-    email: 'johndoe@example.com',
-    password: 'JohnDoe12',
+    email: makeEmailInput(email),
+    password: makePasswordInput(password),
   };
 }
 
-export function makeAuthRegisterInput(): AuthRegisterInput {
+type MakeAuthRegisterInputOptions = {
+  name?: MakeFieldInputOptions;
+  email?: MakeFieldInputOptions;
+  password?: MakeFieldInputOptions;
+};
+
+export function makeAuthRegisterInput(
+  options: MakeAuthRegisterInputOptions = {},
+): AuthRegisterInput {
+  const { name, email, password } = options;
+
   return {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    password: 'JohnDoe12',
+    name: makeNameInput(name),
+    email: makeEmailInput(email),
+    password: makePasswordInput(password),
   };
 }
