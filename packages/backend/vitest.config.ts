@@ -2,16 +2,10 @@
 
 import path from 'node:path';
 import { defineConfig, configDefaults } from 'vitest/config';
-import circleDependency from 'vite-plugin-circular-dependency';
 
 const dirname = import.meta.dirname;
 
 export default defineConfig({
-  plugins: [
-    circleDependency({
-      outputFilePath: './circleDep',
-    }),
-  ],
   test: {
     globals: true,
 
