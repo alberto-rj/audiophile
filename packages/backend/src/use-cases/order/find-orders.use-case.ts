@@ -1,6 +1,8 @@
-import { orderRepository } from '@/config';
-import { toOrderFindManyInput, type PaginateResult } from '@/helpers';
 import type { Order } from '@audiophile/shared';
+
+import { orderRepository } from '@/config/repositories';
+import { toOrderFindManyInput } from '@/helpers/order';
+import type { PaginateResult } from '@/helpers/paginate';
 
 type FindOrdersUseCaseParams = {
   input: unknown;

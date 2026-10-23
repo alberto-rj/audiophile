@@ -1,6 +1,8 @@
-import { userRepository } from '@/config';
-import { toUserFindByIdInput, UnauthorizedError } from '@/helpers';
 import type { User } from '@audiophile/shared';
+
+import { userRepository } from '@/config/repositories';
+import { UnauthorizedError } from '@/helpers/app-error';
+import { toUserFindByIdInput } from '@/helpers/user';
 
 interface GetProfileUseCaseParams {
   input: unknown;

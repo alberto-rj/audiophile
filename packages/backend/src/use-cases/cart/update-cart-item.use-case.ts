@@ -1,11 +1,8 @@
 import type { CartDetailed } from '@audiophile/shared';
 
-import { cartRepository } from '@/config';
-import {
-  InternalServerError,
-  InvalidCartError,
-  toCartUpdateItemInput,
-} from '@/helpers';
+import { cartRepository } from '@/config/repositories';
+import { InternalServerError } from '@/helpers/app-error';
+import { toCartUpdateItemInput, InvalidCartError } from '@/helpers/cart';
 
 type UpdateCartItemUseCaseParams = {
   input: unknown;

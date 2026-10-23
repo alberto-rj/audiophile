@@ -1,7 +1,8 @@
 import type { Category } from '@audiophile/shared';
 
-import { categoryRepository } from '@/config';
-import { ResourceNotFoundError, toCategorySlugInput } from '@/helpers';
+import { categoryRepository } from '@/config/repositories';
+import { ResourceNotFoundError } from '@/helpers/app-error';
+import { toCategorySlugInput } from '@/helpers/category';
 
 interface FindCategoryBySlugUseCaseParams {
   input: unknown;

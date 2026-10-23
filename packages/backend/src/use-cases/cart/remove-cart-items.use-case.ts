@@ -1,11 +1,8 @@
 import type { CartDetailed } from '@audiophile/shared';
 
-import { cartRepository } from '@/config';
-import {
-  InternalServerError,
-  InvalidCartError,
-  toCartRemoveAllInput,
-} from '@/helpers';
+import { cartRepository } from '@/config/repositories';
+import { InternalServerError } from '@/helpers/app-error';
+import { InvalidCartError, toCartRemoveAllInput } from '@/helpers/cart';
 
 type RemoveCartItemsUseCaseParams = {
   input: unknown;

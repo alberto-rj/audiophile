@@ -1,7 +1,8 @@
 import type { CartDetailed } from '@audiophile/shared';
 
-import { cartRepository } from '@/config';
-import { ResourceNotFoundError, toCartUserIdInput } from '@/helpers';
+import { cartRepository } from '@/config/repositories';
+import { ResourceNotFoundError } from '@/helpers/app-error';
+import { toCartUserIdInput } from '@/helpers/cart';
 
 type GetCartUseCaseParams = {
   input: unknown;

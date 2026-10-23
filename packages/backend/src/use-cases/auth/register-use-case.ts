@@ -1,14 +1,17 @@
 import type { User } from '@audiophile/shared';
 
+import { ConflictError } from '@/helpers/app-error';
+import { toAuthRegisterInput } from '@/helpers/auth';
+import { getHash } from '@/helpers/password';
 import {
-  ConflictError,
   getAccessToken,
-  getHash,
   getRefreshToken,
-  toAuthRegisterInput,
   refreshTokenExpiresAt,
-} from '@/helpers';
-import type { RefreshTokenRepository, UserRepository } from '@/repositories';
+} from '@/helpers/tokens';
+import type {
+  UserRepository,
+  RefreshTokenRepository,
+} from '@/repositories/types';
 
 type RegisterUseCaseParams = {
   input: unknown;

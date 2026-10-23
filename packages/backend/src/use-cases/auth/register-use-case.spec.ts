@@ -1,12 +1,9 @@
 import { makeAuthRegisterInput } from '@audiophile/shared';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
-import {
-  ConflictError,
-  hasCorrectHash,
-  makeRegisterUseCase,
-  ValidationError,
-} from '@/helpers';
+import { ConflictError, ValidationError } from '@/helpers/app-error';
+import { makeRegisterUseCase } from '@/helpers/auth';
+import { hasCorrectHash } from '@/helpers/password';
 
 import { RegisterUseCase } from './register-use-case';
 
@@ -17,6 +14,11 @@ describe('[use case] auth / register', () => {
   beforeEach(() => {
     sut = makeRegisterUseCase('in-memory');
     input = makeAuthRegisterInput();
+  });
+
+  afterEach(async () => {
+    await sut.getRefreshTokenRepository().clear();
+    await sut.getUserRepository().clear();
   });
 
   it('should persist an user successfully after registration', async () => {
@@ -47,7 +49,9 @@ describe('[use case] auth / register', () => {
 
     expect(persistedUser).not.toBeNull();
     expect(persistedUser).toHaveProperty('password');
-    expect(hasCorrectHash(input.password, persistedUser!.password)).toBe(true);
+    await expect(
+      hasCorrectHash(input.password, persistedUser!.password),
+    ).resolves.toBe(true);
   });
 
   it('should return an user with access token and refresh token after registration', async () => {

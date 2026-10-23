@@ -1,12 +1,11 @@
 import type { CartDetailed } from '@audiophile/shared';
 
-import { cartRepository, productRepository } from '@/config';
+import { cartRepository, productRepository } from '@/config/repositories';
 import {
-  InternalServerError,
-  InvalidCartError,
   ResourceNotFoundError,
-  toCartAddItemInput,
-} from '@/helpers';
+  InternalServerError,
+} from '@/helpers/app-error';
+import { toCartAddItemInput, InvalidCartError } from '@/helpers/cart';
 
 type AddCartItemUseCaseParams = {
   input: unknown;
