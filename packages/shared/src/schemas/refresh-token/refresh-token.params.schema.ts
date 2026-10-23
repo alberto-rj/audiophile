@@ -6,6 +6,7 @@ import {
   RefreshTokenTokenSchema,
 } from './refresh-token.base.schema';
 import { UserIdSchema } from '../user/user.base.schema';
+import { LimitSchema, PageSchema } from '../common/common.schema';
 
 export const RefreshTokenCreateParamsSchema = z.object({
   userId: UserIdSchema,
@@ -19,4 +20,10 @@ export const RefreshTokenIdParamsSchema = z.object({
 
 export const RefreshTokenTokenParamsSchema = z.object({
   token: RefreshTokenTokenSchema,
+});
+
+export const RefreshTokenFindManyParamsSchema = z.object({
+  limit: LimitSchema,
+  page: PageSchema,
+  userId: UserIdSchema,
 });

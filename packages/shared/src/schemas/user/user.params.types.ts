@@ -4,6 +4,7 @@ import type {
   UserCreateParamsSchema,
   UserFindByEmailParamsSchema,
   UserFindByIdParamsSchema,
+  UserFindManyParamsSchema,
   UserIdParamsSchema,
   UserUpdateParamsSchema,
 } from './user.params.schema';
@@ -17,3 +18,5 @@ export type UserUpdateParams = z.infer<typeof UserUpdateParamsSchema>;
 export type UserFindByIdParams = z.infer<typeof UserFindByIdParamsSchema>;
 
 export type UserFindByEmailParams = z.infer<typeof UserFindByEmailParamsSchema>;
+
+export type UserFindManyParams = z.infer<typeof UserFindManyParamsSchema>;
