@@ -1,8 +1,9 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { findProductBySlugUseCase } from '@/use-cases';
-import { makeResBodyResult, toApiProduct } from '@/helpers';
+import { makeResBodyResult } from '@/helpers/make-res-body';
+import { toApiProduct } from '@/helpers/product';
+import { findProductBySlugUseCase } from '@/use-cases/product';
 
 export async function getProductBySlugController(
   req: Request,
