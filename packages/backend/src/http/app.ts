@@ -3,8 +3,9 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 
-import { env } from '@/config';
-import { logger, scheduleTasks } from '@/helpers';
+import { env } from '@/config/env';
+import { scheduleTasks } from '@/helpers/cron';
+import { logger } from '@/helpers/logger';
 
 import { generateOpenAPISpec } from './openapi';
 import './openapi/paths';
