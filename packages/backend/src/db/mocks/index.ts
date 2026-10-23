@@ -9,19 +9,19 @@ import carts from './cart.mock.json' with { type: 'json' };
 
 export type Cart = (typeof carts)[number];
 
-export type Categories = typeof categories;
+export type Category = (typeof categories)[number];
 
-export type Galleries = typeof galleries;
+export type Gallery = (typeof galleries)[number];
 
-export type Includes = typeof includes;
+export type Include = (typeof includes)[number];
 
-export type Orders = typeof orders;
+export type Order = (typeof orders)[number];
 
-export type Suggestions = typeof suggestions;
+export type Suggestion = (typeof suggestions)[number];
 
-export type Products = typeof products;
+export type Product = (typeof products)[number];
 
-export type Users = typeof users;
+export type User = (typeof users)[number];
 
 export {
   categories,

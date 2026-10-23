@@ -1,9 +1,11 @@
-import { categoryRepository } from '@/config';
-import { type Categories } from '@/db/mocks';
-import { logger, toSlug } from '@/helpers';
+import { toSlug } from '@audiophile/shared';
+
+import { categoryRepository } from '@/config/repositories';
+import { type Category } from '@/db/mocks';
+import { logger } from '@/helpers/logger';
 
 type CreateCategoriesParams = {
-  categories: Categories;
+  categories: Category[];
 };
 
 export async function createCategories({ categories }: CreateCategoriesParams) {
