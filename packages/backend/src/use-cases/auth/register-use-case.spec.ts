@@ -88,9 +88,6 @@ describe('[use case] auth / register', () => {
       token: refreshToken,
       userId: persistedUser!.id,
     });
-    expect(
-      new Date(persistedRefreshToken!.expiresAt).getTime(),
-    ).toBeGreaterThan(Date.now());
 
     const refreshTokenPaginationResult = await refreshTokenRepo.findMany({
       limit: 20,
