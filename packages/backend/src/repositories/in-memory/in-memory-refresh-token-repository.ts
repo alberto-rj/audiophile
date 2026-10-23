@@ -1,11 +1,13 @@
 import type {
   RefreshToken,
   RefreshTokenCreateParams,
+  RefreshTokenFindManyParams,
   RefreshTokenIdParams,
   RefreshTokenTokenParams,
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
+import { paginate, type PaginateResult } from '@/helpers/paginate';
 import { makeRefreshToken } from '@/helpers/refresh-token';
 
 import type { RefreshTokenRepository } from '../types/refresh-token-repository.types';
@@ -41,6 +43,24 @@ export class InMemoryRefreshTokenRepository implements RefreshTokenRepository {
     }
 
     return foundRefreshToken;
+  }
+
+  async findMany({
+    limit,
+    page,
+    userId,
+  }: RefreshTokenFindManyParams): Promise<PaginateResult<RefreshToken>> {
+    const refreshTokenItems = Array.from(db.refreshTokens.values()).filter(
+      (item) => item.userId == userId,
+    );
+
+    const foundRefreshTokens = paginate({
+      items: refreshTokenItems,
+      limit,
+      page,
+    });
+
+    return foundRefreshTokens;
   }
 
   async delete({

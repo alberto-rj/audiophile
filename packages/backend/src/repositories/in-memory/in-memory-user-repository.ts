@@ -3,64 +3,76 @@ import type {
   UserCreateParams,
   UserFindByEmailParams,
   UserFindByIdParams,
+  UserFindManyParams,
   UserUpdateParams,
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
 import { makeUser } from '@/helpers/user';
+import { paginate, type PaginateResult } from '@/helpers/paginate';
 
 import type { UserRepository } from '../types/user-repository.types';
 
 export class InMemoryUserRepository implements UserRepository {
   async create(params: UserCreateParams): Promise<User> {
-    const newItem = makeUser(params);
+    const createdUser = makeUser(params);
 
-    db.users.set(newItem.id, newItem);
+    db.users.set(createdUser.id, createdUser);
 
-    return newItem;
+    return createdUser;
   }
 
   async createMany(params: UserCreateParams[]): Promise<User[]> {
-    const newItems = params.map(makeUser);
+    const createdUsers = params.map(makeUser);
 
-    for (const newItem of newItems) {
-      db.users.set(newItem.id, newItem);
+    for (const createdUser of createdUsers) {
+      db.users.set(createdUser.id, createdUser);
     }
 
-    return newItems;
+    return createdUsers;
   }
 
   async findById({ id }: UserFindByIdParams): Promise<User | null> {
-    const foundItem = db.users.get(id);
+    const foundUsers = db.users.get(id);
 
-    if (!foundItem) {
+    if (!foundUsers) {
       return null;
     }
 
-    return foundItem;
+    return foundUsers;
   }
 
   async findByEmail({ email }: UserFindByEmailParams): Promise<User | null> {
-    const foundItem = Array.from(db.users.values()).find(
+    const foundUsers = Array.from(db.users.values()).find(
       (item) => item.email === email,
     );
 
-    if (!foundItem) {
+    if (!foundUsers) {
       return null;
     }
 
-    return foundItem;
+    return foundUsers;
+  }
+
+  async findMany({
+    limit,
+    page,
+  }: UserFindManyParams): Promise<PaginateResult<User>> {
+    const userItems = Array.from(db.users.values());
+    const foundUsers = paginate({ items: userItems, limit, page });
+
+    return foundUsers;
   }
 
   async update({ id, ...changes }: UserUpdateParams): Promise<User | null> {
-    const foundItem = db.users.get(id);
+    const foundUsers = db.users.get(id);
 
-    if (!foundItem) {
+    if (!foundUsers) {
       return null;
     }
 
     const updateItem = {
-      ...foundItem,
+      ...foundUsers,
       ...changes,
     };
 
