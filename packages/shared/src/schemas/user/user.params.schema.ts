@@ -1,5 +1,7 @@
 import { z } from '@/config';
 
+import { LimitSchema, PageSchema } from '../common/common.schema';
+
 import {
   UserEmailSchema,
   UserIdSchema,
@@ -25,5 +27,10 @@ export const UserUpdateParamsSchema = z.object({
 });
 
 export const UserFindByIdParamsSchema = UserIdParamsSchema.extend({});
+
+export const UserFindManyParamsSchema = z.object({
+  limit: LimitSchema,
+  page: PageSchema,
+});
 
 export const UserFindByEmailParamsSchema = UserSchema.pick({ email: true });

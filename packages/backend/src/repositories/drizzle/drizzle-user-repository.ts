@@ -3,11 +3,17 @@ import type {
   UserCreateParams,
   UserFindByEmailParams,
   UserFindByIdParams,
+  UserFindManyParams,
   UserUpdateParams,
 } from '@audiophile/shared';
-import { eq } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 
 import { db, users, type User as DrizzleUser } from '@/db/drizzle';
+import {
+  getBaseResult,
+  getOffset,
+  type PaginateResult,
+} from '@/helpers/paginate';
 
 import type { UserRepository } from '../types/user-repository.types';
 
@@ -60,6 +66,28 @@ export class DrizzleUserRepository implements UserRepository {
     }
 
     return toUser(foundUser);
+  }
+
+  async findMany({
+    page,
+    limit,
+  }: UserFindManyParams): Promise<PaginateResult<User>> {
+    const [foundUsers, [countResult]] = await Promise.all([
+      db.select().from(users).limit(limit).offset(getOffset({ limit, page })),
+      db.select({ totalCount: count() }).from(users),
+    ]);
+
+    const totalItems = countResult!.totalCount;
+    const result = getBaseResult({
+      page: page,
+      limit: limit,
+      totalItems,
+    });
+
+    return {
+      ...result,
+      items: foundUsers.map(toUser),
+    };
   }
 
   async update({ id, ...changes }: UserUpdateParams): Promise<User | null> {

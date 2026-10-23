@@ -1,10 +1,11 @@
 import type {
   RefreshToken,
   RefreshTokenCreateParams,
+  RefreshTokenFindManyParams,
   RefreshTokenIdParams,
   RefreshTokenTokenParams,
 } from '@audiophile/shared';
-import { eq, lt } from 'drizzle-orm';
+import { count, eq, lt } from 'drizzle-orm';
 
 import {
   db,
@@ -13,6 +14,11 @@ import {
 } from '@/db/drizzle';
 
 import type { RefreshTokenRepository } from '../types/refresh-token-repository.types';
+import {
+  getBaseResult,
+  getOffset,
+  type PaginateResult,
+} from '@/helpers/paginate';
 
 function toRefreshToken(rawItem: DrizzleRefreshToken): RefreshToken {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -61,6 +67,37 @@ export class DrizzleRefreshTokenRepository implements RefreshTokenRepository {
     }
 
     return toRefreshToken(foundRefreshToken);
+  }
+
+  async findMany({
+    page,
+    limit,
+    userId,
+  }: RefreshTokenFindManyParams): Promise<PaginateResult<RefreshToken>> {
+    const [foundRefreshTokens, [countResult]] = await Promise.all([
+      db
+        .select()
+        .from(refreshTokens)
+        .where(eq(refreshTokens.userId, userId))
+        .limit(limit)
+        .offset(getOffset({ limit, page })),
+      db
+        .select({ totalCount: count() })
+        .from(refreshTokens)
+        .where(eq(refreshTokens.userId, userId)),
+    ]);
+
+    const totalItems = countResult!.totalCount;
+    const result = getBaseResult({
+      page: page,
+      limit: limit,
+      totalItems,
+    });
+
+    return {
+      ...result,
+      items: foundRefreshTokens.map(toRefreshToken),
+    };
   }
 
   async delete({
