@@ -2,6 +2,7 @@ import {
   IncludeCreateInputSchema,
   IncludeFindManyInputSchema,
   IncludeIdInputSchema,
+  makeId,
 } from '@audiophile/shared';
 import type {
   Include,
@@ -11,7 +12,7 @@ import type {
   IncludeIdInput,
 } from '@audiophile/shared';
 
-import { makeId, parseSchema } from '@/helpers';
+import { parseSchema } from '../parse-schema';
 
 export function makeInclude({ ...rest }: IncludeCreateParams): Include {
   return {

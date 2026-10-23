@@ -1,8 +1,6 @@
-import {
-  DrizzleProductRepository,
-  InMemoryProductRepository,
-  type ProductRepository,
-} from '@/repositories';
+import { DrizzleProductRepository } from '@/repositories/drizzle';
+import { InMemoryProductRepository } from '@/repositories/in-memory';
+import type { ProductRepository } from '@/repositories/types';
 
 type ProductRepositoryType = 'drizzle' | 'in-memory';
 

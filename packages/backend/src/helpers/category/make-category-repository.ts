@@ -1,8 +1,6 @@
-import {
-  DrizzleCategoryRepository,
-  InMemoryCategoryRepository,
-  type CategoryRepository,
-} from '@/repositories';
+import { DrizzleCategoryRepository } from '@/repositories/drizzle';
+import { InMemoryCategoryRepository } from '@/repositories/in-memory';
+import type { CategoryRepository } from '@/repositories/types';
 
 type CategoryRepositoryType = 'drizzle' | 'in-memory';
 

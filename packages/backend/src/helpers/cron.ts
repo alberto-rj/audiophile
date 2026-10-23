@@ -1,7 +1,8 @@
 import cron from 'node-cron';
 
-import { refreshTokenRepository } from '@/config';
-import { logger } from '@/helpers';
+import { refreshTokenRepository } from '@/config/repositories';
+
+import { logger } from './logger';
 
 const SCHEDULE_EXPRESSION = '0 3 * * *';
 

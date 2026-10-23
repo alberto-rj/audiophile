@@ -1,10 +1,10 @@
-import { isNewProduct, makeId, parseSchema, toSlug } from '@/helpers';
-
 import {
   ProductCreateInputSchema,
   ProductIdInputSchema,
   ProductFindManyInputSchema,
   ProductSlugInputSchema,
+  makeId,
+  toSlug,
 } from '@audiophile/shared';
 import type {
   Product,
@@ -14,6 +14,10 @@ import type {
   ProductIdInput,
   ProductSlugInput,
 } from '@audiophile/shared';
+
+import { isNewProduct } from './is-new-product';
+
+import { parseSchema } from '../parse-schema';
 
 export function makeProduct({ name, ...rest }: ProductCreateParams): Product {
   return {

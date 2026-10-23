@@ -1,6 +1,6 @@
 import type { ZodObject } from 'zod';
 
-import { ValidationError } from '@/helpers';
+import { ValidationError } from './app-error';
 
 export function parseSchema<T>(schema: ZodObject, data: unknown) {
   const result = schema.safeParse(data);

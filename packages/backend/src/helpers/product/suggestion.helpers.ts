@@ -5,7 +5,7 @@ import type {
 } from '@audiophile/shared';
 import { SuggestionCreateInputSchema } from '@audiophile/shared';
 
-import { parseSchema } from '@/helpers';
+import { parseSchema } from '../parse-schema';
 
 export function makeSuggestion({
   ...rest

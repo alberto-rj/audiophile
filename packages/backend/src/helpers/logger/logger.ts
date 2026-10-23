@@ -1,7 +1,7 @@
 import { createLogger, transports } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
-import { env } from '@/config';
+import { env } from '@/config/env';
 
 import { devFormat, prodFormat } from './formats';
 
