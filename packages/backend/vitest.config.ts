@@ -9,7 +9,7 @@ export default defineConfig({
   test: {
     include: ['src/**/*.{spec,test}.ts'],
 
-    /* testTimeout: 10000, */
+    testTimeout: 10000,
 
     coverage: {
       reportsDirectory: './coverage',
@@ -19,12 +19,14 @@ export default defineConfig({
       exclude: [
         ...configDefaults.exclude,
 
-        '**/node_modules/**',
-        '**/dist/**',
+        // Ignore dist and logs directories
+        'dist',
+        'logs',
 
-        // Ignore openapi and seed files
+        // Ignore db, openapi and scripts directories
+        '**/db/**',
         '**/openapi/**',
-        '**/seeds/**',
+        '**/scripts/**',
 
         // Ignore test files
         '**/*.spec.ts',
