@@ -1,13 +1,15 @@
-import { userRepository } from '@/config';
-import { type Users } from '@/db/mocks';
-import { getHash, logger } from '@/helpers';
+import { userRepository } from '@/config/repositories';
+import { type User } from '@/db/mocks';
+
+import { logger } from '@/helpers/logger';
+import { getHash } from '@/helpers/password';
 
 type CreateUsersParams = {
-  users: Users;
+  users: User[];
 };
 
 export async function createUsers({ users }: CreateUsersParams) {
-  const newParamsList: Users = [];
+  const newParamsList: User[] = [];
 
   for (const { name, email, password } of users) {
     newParamsList.push({

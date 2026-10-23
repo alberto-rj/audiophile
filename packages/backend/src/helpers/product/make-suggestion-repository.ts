@@ -1,8 +1,6 @@
-import {
-  DrizzleSuggestionRepository,
-  InMemorySuggestionRepository,
-  type SuggestionRepository,
-} from '@/repositories';
+import { DrizzleSuggestionRepository } from '@/repositories/drizzle';
+import { InMemorySuggestionRepository } from '@/repositories/in-memory';
+import type { SuggestionRepository } from '@/repositories/types';
 
 type SuggestionRepositoryType = 'drizzle' | 'in-memory';
 

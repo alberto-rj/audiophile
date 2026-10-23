@@ -1,4 +1,3 @@
-import type { PaginateResult } from '@/helpers';
 import type {
   Category,
   CategoryCreateParams,
@@ -7,6 +6,8 @@ import type {
   CategorySlugParams,
   CategoryUpdateParams,
 } from '@audiophile/shared';
+
+import type { PaginateResult } from '@/helpers/paginate';
 
 export interface CategoryRepository {
   create: (params: CategoryCreateParams) => Promise<Category>;

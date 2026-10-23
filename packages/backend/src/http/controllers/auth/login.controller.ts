@@ -1,8 +1,9 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { setRefreshTokenCookie, toApiUser } from '@/helpers';
-import { loginUseCase } from '@/use-cases';
+import { setRefreshTokenCookie } from '@/helpers/tokens';
+import { toApiUser } from '@/helpers/user';
+import { loginUseCase } from '@/use-cases/auth';
 
 export async function loginController(
   req: Request,

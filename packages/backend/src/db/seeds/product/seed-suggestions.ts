@@ -1,12 +1,16 @@
-import type { Product, SuggestionCreateParams } from '@audiophile/shared';
+import {
+  toSlug,
+  type Product,
+  type SuggestionCreateParams,
+} from '@audiophile/shared';
 
-import { suggestionRepository } from '@/config';
-import type { Suggestions } from '@/db/mocks';
-import { logger, toSlug } from '@/helpers';
+import { suggestionRepository } from '@/config/repositories';
+import type { Suggestion as SuggestionMock } from '@/db/mocks';
+import { logger } from '@/helpers/logger';
 
 type CreateSuggestionsParams = {
   products: Product[];
-  suggestions: Suggestions;
+  suggestions: SuggestionMock[];
 };
 
 export function toSuggestionCreateParamsParamsList({

@@ -1,4 +1,3 @@
-import type { PaginateResult } from '@/helpers';
 import type {
   Product,
   ProductCreateParams,
@@ -7,6 +6,8 @@ import type {
   ProductIdParams,
   ProductSlugParams,
 } from '@audiophile/shared';
+
+import type { PaginateResult } from '@/helpers/paginate';
 
 export interface ProductRepository {
   create: (params: ProductCreateParams) => Promise<Product>;

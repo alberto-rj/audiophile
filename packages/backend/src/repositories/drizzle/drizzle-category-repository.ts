@@ -9,8 +9,13 @@ import type {
 import { count, eq } from 'drizzle-orm';
 
 import { db, categories, type Category as DrizzleCategory } from '@/db/drizzle';
-import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
-import type { CategoryRepository } from '@/repositories';
+import {
+  getBaseResult,
+  getOffset,
+  type PaginateResult,
+} from '@/helpers/paginate';
+
+import type { CategoryRepository } from '../types/category-repository.types';
 
 function toCategory(category: DrizzleCategory): Category {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

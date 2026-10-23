@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 
-import { ResourceNotFoundError } from '@/helpers';
+import { ResourceNotFoundError } from '@/helpers/app-error';
 
 export function notFoundHandler(
   req: Request,

@@ -1,6 +1,8 @@
-import { categoryRepository } from '@/config';
-import { toCategoryFindManyInput, type PaginateResult } from '@/helpers';
 import { type Category } from '@audiophile/shared';
+
+import { categoryRepository } from '@/config/repositories';
+import { toCategoryFindManyInput } from '@/helpers/category';
+import type { PaginateResult } from '@/helpers/paginate';
 
 type FindCategoriesUseCaseParams = {
   input: unknown;

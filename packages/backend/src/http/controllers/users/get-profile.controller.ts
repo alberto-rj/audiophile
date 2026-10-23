@@ -1,13 +1,10 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import {
-  makeResBodyResultList,
-  toApiUser,
-  type AuthPayload,
-  type AuthRequest,
-} from '@/helpers';
-import { getProfileUseCase } from '@/use-cases';
+import { makeResBodyResultList } from '@/helpers/make-res-body';
+import type { AuthRequest, AuthPayload } from '@/helpers/tokens';
+import { toApiUser } from '@/helpers/user';
+import { getProfileUseCase } from '@/use-cases/user';
 
 export async function getProfileController(
   req: AuthRequest,

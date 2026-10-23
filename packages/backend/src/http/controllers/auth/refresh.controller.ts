@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { setRefreshTokenCookie } from '@/helpers';
-import { refreshUseCase } from '@/use-cases';
+import { setRefreshTokenCookie } from '@/helpers/tokens';
+import { refreshUseCase } from '@/use-cases/auth';
 
 export async function refreshController(
   req: Request,

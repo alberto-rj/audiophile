@@ -1,11 +1,9 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import {
-  makeRegisterUseCase,
-  setRefreshTokenCookie,
-  toApiUser,
-} from '@/helpers';
+import { setRefreshTokenCookie } from '@/helpers/tokens';
+import { makeRegisterUseCase } from '@/helpers/auth';
+import { toApiUser } from '@/helpers/user';
 
 export async function registerController(
   req: Request,

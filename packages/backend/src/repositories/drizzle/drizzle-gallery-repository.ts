@@ -7,8 +7,13 @@ import type {
 import { count, eq } from 'drizzle-orm';
 
 import { db, galleries, type Gallery as DrizzleGallery } from '@/db/drizzle';
-import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
-import type { GalleryRepository } from '@/repositories';
+import {
+  getBaseResult,
+  getOffset,
+  type PaginateResult,
+} from '@/helpers/paginate';
+
+import type { GalleryRepository } from '../types/gallery-repository.types';
 
 function toGallery(gallery: DrizzleGallery): Gallery {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

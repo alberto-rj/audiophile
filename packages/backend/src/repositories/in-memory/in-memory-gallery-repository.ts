@@ -6,7 +6,8 @@ import type {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeGallery, paginate, type PaginateResult } from '@/helpers';
+import { paginate, type PaginateResult } from '@/helpers/paginate';
+import { makeGallery } from '@/helpers/product';
 
 import type { GalleryRepository } from '../types/gallery-repository.types';
 

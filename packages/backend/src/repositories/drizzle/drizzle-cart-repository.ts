@@ -12,8 +12,8 @@ import type {
 } from '@audiophile/shared';
 import { and, eq, sql } from 'drizzle-orm';
 
-import { getProductItemSummary } from '@/helpers';
 import { cartItems, carts, db } from '@/db/drizzle';
+import { getProductItemSummary } from '@/helpers/product';
 
 import type { CartRepository } from '../types/cart-repository.types';
 

@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
-import { env } from '@/config';
+import { env } from '@/config/env';
 
 const { NODE_ENV, ACCESS_EXPIRES_MS, ACCESS_SECRET, REFRESH_EXPIRES_MS } = env;
 

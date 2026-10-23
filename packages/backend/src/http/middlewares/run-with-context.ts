@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 
-import { asyncLocalStorage, type RequestContext } from '@/helpers';
+import { asyncLocalStorage, type RequestContext } from '@/helpers/logger';
 
 /**
  * Creates a new store for each request.

@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-import { z } from '@/config';
+import { z } from '@/config/zod';
 
 const instructionsURL =
   'https://github.com/alberto-rj/audiophile/README.md#backend-backendenv';

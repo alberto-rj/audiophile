@@ -1,25 +1,25 @@
+import { makeCartRepository } from '@/helpers/cart';
+import { makeCategoryRepository } from '@/helpers/category';
+import { makeOrderRepository } from '@/helpers/order';
 import {
-  makeCartRepository,
-  makeCategoryRepository,
-  makeGalleryRepository,
   makeIncludeRepository,
-  makeOrderRepository,
+  makeGalleryRepository,
   makeSuggestionRepository,
   makeProductRepository,
-  makeRefreshTokenRepository,
-  makeUserRepository,
-} from '@/helpers';
+} from '@/helpers/product';
+import { makeRefreshTokenRepository } from '@/helpers/refresh-token';
+import { makeUserRepository } from '@/helpers/user';
 import type {
+  UserRepository,
+  RefreshTokenRepository,
   CartRepository,
   CategoryRepository,
-  GalleryRepository,
   IncludeRepository,
-  OrderRepository,
+  GalleryRepository,
   SuggestionRepository,
   ProductRepository,
-  RefreshTokenRepository,
-  UserRepository,
-} from '@/repositories';
+  OrderRepository,
+} from '@/repositories/types';
 
 export const userRepository: UserRepository = makeUserRepository();
 

@@ -5,7 +5,7 @@ import type {
   GalleryIdParams,
 } from '@audiophile/shared';
 
-import type { PaginateResult } from '@/helpers';
+import type { PaginateResult } from '@/helpers/paginate';
 
 export interface GalleryRepository {
   create: (params: GalleryCreateParams) => Promise<Gallery>;

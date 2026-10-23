@@ -1,8 +1,10 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { makeResBodyResult, toApiCart, type AuthRequest } from '@/helpers';
-import { removeCartItemUseCase } from '@/use-cases';
+import type { AuthRequest } from '@/helpers/tokens';
+import { toApiCart } from '@/helpers/cart';
+import { makeResBodyResult } from '@/helpers/make-res-body';
+import { removeCartItemUseCase } from '@/use-cases/cart';
 
 export async function removeCartItemController(
   req: AuthRequest,

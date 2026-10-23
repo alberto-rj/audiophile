@@ -1,7 +1,8 @@
 import { type ProductDetailed } from '@audiophile/shared';
 
-import { productRepository } from '@/config';
-import { toProductFindManyInput, type PaginateResult } from '@/helpers';
+import { productRepository } from '@/config/repositories';
+import type { PaginateResult } from '@/helpers/paginate';
+import { toProductFindManyInput } from '@/helpers/product';
 
 type FindCategoriesUseCaseParams = {
   input: unknown;

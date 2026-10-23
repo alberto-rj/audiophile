@@ -1,8 +1,9 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { findCategoryBySlugUseCase } from '@/use-cases';
-import { makeResBodyResult, toApiCategory } from '@/helpers';
+import { toApiCategory } from '@/helpers/category';
+import { makeResBodyResult } from '@/helpers/make-res-body';
+import { findCategoryBySlugUseCase } from '@/use-cases/category';
 
 export async function getCategoryBySlugController(
   req: Request,

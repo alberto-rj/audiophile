@@ -1,6 +1,8 @@
-import { orderRepository } from '@/config';
-import { ResourceNotFoundError, toOrderFindInput } from '@/helpers';
 import type { Order } from '@audiophile/shared';
+
+import { orderRepository } from '@/config/repositories';
+import { ResourceNotFoundError } from '@/helpers/app-error';
+import { toOrderFindInput } from '@/helpers/order';
 
 type FindOrderUseCaseParams = {
   input: unknown;

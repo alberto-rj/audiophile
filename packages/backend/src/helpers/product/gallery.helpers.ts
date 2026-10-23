@@ -1,15 +1,16 @@
-import { makeId, parseSchema } from '@/helpers';
-
 import {
   GalleryCreateInputSchema,
   GalleryFindManyInputSchema,
   GalleryIdInputSchema,
+  makeId,
   type Gallery,
   type GalleryCreateInput,
   type GalleryCreateParams,
   type GalleryFindManyInput,
   type GalleryIdInput,
 } from '@audiophile/shared';
+
+import { parseSchema } from '../parse-schema';
 
 export function makeGallery({ ...rest }: GalleryCreateParams): Gallery {
   return {

@@ -1,8 +1,9 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { findCategoriesUseCase } from '@/use-cases';
-import { makeResBodyPaginationResult, toApiCategory } from '@/helpers';
+import { toApiCategory } from '@/helpers/category';
+import { makeResBodyPaginationResult } from '@/helpers/make-res-body';
+import { findCategoriesUseCase } from '@/use-cases/category';
 
 export async function getCategoriesController(
   req: Request,

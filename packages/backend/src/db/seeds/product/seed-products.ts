@@ -1,38 +1,43 @@
-import type {
-  Category,
-  GalleryCreateParams,
-  IncludeCreateParams,
-  Product,
-  ProductCreateParams,
+import {
+  toSlug,
+  type Category,
+  type GalleryCreateParams,
+  type IncludeCreateParams,
+  type Product,
+  type ProductCreateParams,
 } from '@audiophile/shared';
 
 import {
+  productRepository,
   galleryRepository,
   includeRepository,
-  productRepository,
-} from '@/config';
-import { type Galleries, type Includes, type Products } from '@/db/mocks';
-import { logger, toSlug } from '@/helpers';
+} from '@/config/repositories';
+import {
+  type Gallery as GalleryMock,
+  type Include as IncludeMock,
+  type Product as ProductMock,
+} from '@/db/mocks';
+import { logger } from '@/helpers/logger';
 
 type CreateProductsParams = {
-  products: Products;
+  products: ProductMock[];
   categories: Category[];
 };
 
 type CreateGalleriesParams = {
   products: Product[];
-  galleries: Galleries;
+  galleries: GalleryMock[];
 };
 
 type CreateIncludesParams = {
   products: Product[];
-  includes: Includes;
+  includes: IncludeMock[];
 };
 
 type SeedProductsParams = {
-  galleries: Galleries;
-  includes: Includes;
-  products: Products;
+  galleries: GalleryMock[];
+  includes: IncludeMock[];
+  products: ProductMock[];
   categories: Category[];
 };
 

@@ -5,7 +5,7 @@ import {
   makeResBodyValidationError,
   type ResBodyError,
   type ResBodyValidationError,
-} from '@/helpers';
+} from './make-res-body';
 
 export abstract class AppError<T> extends Error {
   public statusCode: number;

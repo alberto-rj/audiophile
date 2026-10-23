@@ -1,6 +1,8 @@
-import { userRepository } from '@/config';
-import { toUserUpdateProfileInput, UnauthorizedError } from '@/helpers';
 import type { User } from '@audiophile/shared';
+
+import { userRepository } from '@/config/repositories';
+import { UnauthorizedError } from '@/helpers/app-error';
+import { toUserUpdateProfileInput } from '@/helpers/user';
 
 interface UpdateProfileUseCaseParams {
   input: unknown;

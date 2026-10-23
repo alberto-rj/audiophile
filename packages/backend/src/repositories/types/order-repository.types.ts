@@ -1,10 +1,11 @@
-import type { PaginateResult } from '@/helpers';
 import type {
   Order,
   OrderCreateParams,
   OrderFindByIdParams,
   OrderFindManyParams,
 } from '@audiophile/shared';
+
+import type { PaginateResult } from '@/helpers/paginate';
 
 export interface OrderRepository {
   create: (params: OrderCreateParams) => Promise<Order>;

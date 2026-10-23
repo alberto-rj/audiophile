@@ -9,13 +9,9 @@ import type {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import {
-  makeCategory,
-  makeGallery,
-  makeProduct,
-  paginate,
-  type PaginateResult,
-} from '@/helpers';
+import { makeCategory } from '@/helpers/category';
+import { paginate, type PaginateResult } from '@/helpers/paginate';
+import { makeGallery, makeProduct } from '@/helpers/product';
 
 import type { ProductRepository } from '../types/product-repository.types';
 

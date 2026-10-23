@@ -1,8 +1,10 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { makeResBodyResult, toApiCart, type AuthRequest } from '@/helpers';
-import { addCartItemUseCase } from '@/use-cases';
+import { toApiCart } from '@/helpers/cart';
+import type { AuthRequest } from '@/helpers/tokens';
+import { makeResBodyResult } from '@/helpers/make-res-body';
+import { addCartItemUseCase } from '@/use-cases/cart';
 
 export async function addCartItemController(
   req: AuthRequest,

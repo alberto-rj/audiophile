@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { refreshTokenRepository } from '@/config';
-import { clearRefreshTokenCookie } from '@/helpers';
+import { refreshTokenRepository } from '@/config/repositories';
+import { clearRefreshTokenCookie } from '@/helpers/tokens';
 
 export async function logoutController(
   req: Request,

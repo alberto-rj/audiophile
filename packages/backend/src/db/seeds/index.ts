@@ -1,13 +1,13 @@
 import {
-  categoryRepository,
+  orderRepository,
+  cartRepository,
   galleryRepository,
   includeRepository,
-  orderRepository,
   suggestionRepository,
   productRepository,
+  categoryRepository,
   userRepository,
-  cartRepository,
-} from '@/config';
+} from '@/config/repositories';
 import {
   carts,
   categories,
@@ -18,7 +18,7 @@ import {
   products,
   users,
 } from '@/db/mocks';
-import { logger } from '@/helpers';
+import { logger } from '@/helpers/logger';
 
 import { seedCategories } from './category/seed-categories';
 import { seedOrders } from './order/seed-orders';

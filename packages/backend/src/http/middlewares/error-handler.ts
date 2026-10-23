@@ -1,7 +1,9 @@
 import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { AppError, logger, makeResBodyError } from '@/helpers';
+import { AppError } from '@/helpers/app-error';
+import { logger } from '@/helpers/logger';
+import { makeResBodyError } from '@/helpers/make-res-body';
 
 export function errorHandler(
   err: Error,

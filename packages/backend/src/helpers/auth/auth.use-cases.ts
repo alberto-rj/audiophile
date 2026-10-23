@@ -1,4 +1,4 @@
-import { RegisterUseCase } from '@/use-cases';
+import { RegisterUseCase } from '@/use-cases/auth';
 
 import type { RepositoryType } from '../common/types';
 import { makeRefreshTokenRepository } from '../refresh-token/make-refresh-token-repository';

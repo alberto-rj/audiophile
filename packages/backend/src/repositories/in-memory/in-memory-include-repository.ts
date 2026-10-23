@@ -6,7 +6,8 @@ import type {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeInclude, paginate, type PaginateResult } from '@/helpers';
+import { paginate, type PaginateResult } from '@/helpers/paginate';
+import { makeInclude } from '@/helpers/product';
 
 import type { IncludeRepository } from '../types/include-repository.types';
 

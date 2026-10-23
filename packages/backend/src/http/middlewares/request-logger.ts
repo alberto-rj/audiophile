@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
-import { env } from '@/config';
-import { logger, setRequestContext } from '@/helpers';
+import { env } from '@/config/env';
+import { logger, setRequestContext } from '@/helpers/logger';
 
 const { LOG_REQUEST_BODY, LOG_REQUEST_HEADERS } = env;
 

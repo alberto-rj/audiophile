@@ -1,13 +1,13 @@
 import type { User } from '@audiophile/shared';
 
-import { refreshTokenRepository, userRepository } from '@/config';
+import { refreshTokenRepository, userRepository } from '@/config/repositories';
+import { UnauthorizedError } from '@/helpers/app-error';
+import { toRefreshTokenTokenInput } from '@/helpers/auth';
 import {
   getAccessToken,
   getRefreshToken,
   refreshTokenExpiresAt,
-  toRefreshTokenTokenInput,
-  UnauthorizedError,
-} from '@/helpers';
+} from '@/helpers/tokens';
 
 interface RefreshUseCaseParams {
   input: unknown;

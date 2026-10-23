@@ -7,8 +7,6 @@ const dirname = import.meta.dirname;
 
 export default defineConfig({
   test: {
-    globals: true,
-
     include: ['src/**/*.{spec,test}.ts'],
 
     /* testTimeout: 10000, */

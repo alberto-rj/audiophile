@@ -1,8 +1,8 @@
 import type { CartCreateParams, User } from '@audiophile/shared';
 
-import { cartRepository } from '@/config';
+import { cartRepository } from '@/config/repositories';
 import { type Cart } from '@/db/mocks';
-import { logger } from '@/helpers';
+import { logger } from '@/helpers/logger';
 
 type CreateCartsParams = {
   carts: Cart[];

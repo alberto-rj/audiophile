@@ -1,13 +1,10 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import {
-  makeResBodyResult,
-  toApiOrder,
-  type AuthPayload,
-  type AuthRequest,
-} from '@/helpers';
-import { findOrderUseCase } from '@/use-cases';
+import { makeResBodyResult } from '@/helpers/make-res-body';
+import { toApiOrder } from '@/helpers/order';
+import type { AuthRequest, AuthPayload } from '@/helpers/tokens';
+import { findOrderUseCase } from '@/use-cases/order';
 
 export async function getOrderController(
   req: AuthRequest,
