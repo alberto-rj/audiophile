@@ -69,12 +69,4 @@ export class RegisterUseCase {
       refreshToken,
     };
   }
-
-  getUserRepository() {
-    return this.userRepository;
-  }
-
-  getRefreshTokenRepository() {
-    return this.refreshTokenRepository;
-  }
 }
