@@ -9,7 +9,7 @@ export default defineConfig({
   test: {
     include: ['src/**/*.{spec,test}.ts'],
 
-    /* testTimeout: 10000, */
+    testTimeout: 10000,
 
     coverage: {
       reportsDirectory: './coverage',
