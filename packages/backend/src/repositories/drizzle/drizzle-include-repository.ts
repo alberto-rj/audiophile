@@ -7,8 +7,13 @@ import type {
 import { count, eq } from 'drizzle-orm';
 
 import { db, includes, type Include as DrizzleInclude } from '@/db/drizzle';
-import { getBaseResult, getOffset, type PaginateResult } from '@/helpers';
-import type { IncludeRepository } from '@/repositories';
+import {
+  getBaseResult,
+  getOffset,
+  type PaginateResult,
+} from '@/helpers/paginate';
+
+import type { IncludeRepository } from '../types/include-repository.types';
 
 function toInclude(item: DrizzleInclude): Include {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

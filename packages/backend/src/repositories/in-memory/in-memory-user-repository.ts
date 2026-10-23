@@ -7,7 +7,7 @@ import type {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeUser } from '@/helpers';
+import { makeUser } from '@/helpers/user';
 
 import type { UserRepository } from '../types/user-repository.types';
 

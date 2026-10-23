@@ -11,7 +11,8 @@ import type {
   CartCreateParams,
 } from '@audiophile/shared';
 
-import { getProductItemSummary, makeCart, makeCartItem } from '@/helpers';
+import { makeCart, makeCartItem } from '@/helpers/cart';
+import { getProductItemSummary } from '@/helpers/product';
 import { db } from '@/db/in-memory';
 
 import type { CartRepository } from '../types/cart-repository.types';

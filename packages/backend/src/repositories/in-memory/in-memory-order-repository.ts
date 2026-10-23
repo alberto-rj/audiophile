@@ -6,7 +6,8 @@ import type {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeOrder, paginate, type PaginateResult } from '@/helpers';
+import { paginate, type PaginateResult } from '@/helpers/paginate';
+import { makeOrder } from '@/helpers/order';
 
 import type { OrderRepository } from '../types/order-repository.types';
 

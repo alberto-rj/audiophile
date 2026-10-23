@@ -5,7 +5,7 @@ import type {
   IncludeIdParams,
 } from '@audiophile/shared';
 
-import type { PaginateResult } from '@/helpers';
+import type { PaginateResult } from '@/helpers/paginate';
 
 export interface IncludeRepository {
   create: (params: IncludeCreateParams) => Promise<Include>;

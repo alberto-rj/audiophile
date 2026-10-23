@@ -8,7 +8,8 @@ import type {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeCategory, paginate, type PaginateResult } from '@/helpers';
+import { makeCategory } from '@/helpers/category';
+import { paginate, type PaginateResult } from '@/helpers/paginate';
 
 import type { CategoryRepository } from '../types/category-repository.types';
 

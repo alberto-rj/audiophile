@@ -6,7 +6,7 @@ import type {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeRefreshToken } from '@/helpers';
+import { makeRefreshToken } from '@/helpers/refresh-token';
 
 import type { RefreshTokenRepository } from '../types/refresh-token-repository.types';
 

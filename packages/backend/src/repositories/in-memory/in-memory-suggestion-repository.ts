@@ -4,7 +4,7 @@ import {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeSuggestion } from '@/helpers';
+import { makeSuggestion } from '@/helpers/product';
 
 import type { SuggestionRepository } from '../types/suggestion-repository.types';
 

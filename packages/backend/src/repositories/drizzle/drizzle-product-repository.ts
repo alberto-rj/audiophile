@@ -16,13 +16,15 @@ import {
   type Product as DrizzleProduct,
   type Category as DrizzleCategory,
 } from '@/db/drizzle';
+
 import {
   getBaseResult,
   getOffset,
-  isNewProduct,
   type PaginateResult,
-} from '@/helpers';
-import type { ProductRepository } from '@/repositories';
+} from '@/helpers/paginate';
+import { isNewProduct } from '@/helpers/product';
+
+import type { ProductRepository } from '../types/product-repository.types';
 
 const PRODUCT_WITH = {
   category: {
