@@ -1,11 +1,8 @@
 import type { Response, NextFunction } from 'express';
 
-import {
-  getAccessTokenPayload,
-  UnauthorizedError,
-  updateRequestContext,
-  type AuthRequest,
-} from '@/helpers';
+import { UnauthorizedError } from '@/helpers/app-error';
+import { updateRequestContext } from '@/helpers/logger';
+import { type AuthRequest, getAccessTokenPayload } from '@/helpers/tokens';
 
 export async function requireAuth(
   req: AuthRequest,
