@@ -96,27 +96,6 @@ describe('[use case] auth / register', () => {
     expect(refreshTokenPaginationResult.items).toHaveLength(1);
   });
 
-  it('should persist a refresh token after registration', async () => {
-    const { refreshToken } = await sut.execute({ input });
-
-    const persistedUser = await userRepo.findByEmail({
-      email: input.email,
-    });
-    expect(persistedUser).not.toBeNull();
-
-    const persistedRefreshToken = await refreshTokenRepo.find({
-      token: refreshToken,
-    });
-    expect(persistedRefreshToken).not.toBeNull();
-
-    const refreshTokenPaginationResult = await refreshTokenRepo.findMany({
-      limit: 20,
-      page: 1,
-      userId: persistedUser!.id,
-    });
-    expect(refreshTokenPaginationResult.items).toHaveLength(1);
-  });
-
   it('should reject registration with an existing email', async () => {
     await sut.execute({ input });
 
