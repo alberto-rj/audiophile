@@ -13,7 +13,7 @@ export async function registerController(
   try {
     const { name, email, password } = req.body;
 
-    const useCase = makeRegisterUseCase();
+    const { useCase } = makeRegisterUseCase();
     const { user, accessToken, refreshToken } = await useCase.execute({
       input: { name, email, password },
     });

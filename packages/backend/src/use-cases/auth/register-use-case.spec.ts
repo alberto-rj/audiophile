@@ -2,16 +2,13 @@ import { makeAuthRegisterInput } from '@audiophile/shared';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { ConflictError, ValidationError } from '@/helpers/app-error';
+import { makeRegisterUseCase } from '@/helpers/auth';
 import { hasCorrectHash } from '@/helpers/password';
 import { getAccessTokenPayload } from '@/helpers/tokens';
 import type {
   RefreshTokenRepository,
   UserRepository,
 } from '@/repositories/types';
-import {
-  InMemoryRefreshTokenRepository,
-  InMemoryUserRepository,
-} from '@/repositories/in-memory';
 
 import { RegisterUseCase } from './register-use-case';
 
@@ -22,9 +19,11 @@ describe('[use case] auth / register', () => {
   let input: ReturnType<typeof makeAuthRegisterInput>;
 
   beforeEach(() => {
-    userRepo = new InMemoryUserRepository();
-    refreshTokenRepo = new InMemoryRefreshTokenRepository();
-    sut = new RegisterUseCase(userRepo, refreshTokenRepo);
+    const { useCase, userRepository, refreshTokenRepository } =
+      makeRegisterUseCase('in-memory');
+    userRepo = userRepository;
+    refreshTokenRepo = refreshTokenRepository;
+    sut = useCase;
     input = makeAuthRegisterInput();
   });
 
