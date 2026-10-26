@@ -1,9 +1,9 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { makeLoginUseCase } from '@/helpers/auth';
 import { setRefreshTokenCookie } from '@/helpers/tokens';
 import { toApiUser } from '@/helpers/user';
-import { loginUseCase } from '@/use-cases/auth';
 
 export async function loginController(
   req: Request,
@@ -13,7 +13,8 @@ export async function loginController(
   try {
     const { email, password } = req.body;
 
-    const { accessToken, refreshToken, user } = await loginUseCase({
+    const { useCase } = makeLoginUseCase();
+    const { accessToken, refreshToken, user } = await useCase.execute({
       input: { email, password },
     });
 
