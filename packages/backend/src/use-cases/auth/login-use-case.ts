@@ -1,6 +1,5 @@
 import type { User } from '@audiophile/shared';
 
-import { refreshTokenRepository, userRepository } from '@/config/repositories';
 import { UnauthorizedError } from '@/helpers/app-error';
 import { toAuthLoginInput } from '@/helpers/auth';
 import { hasCorrectHash } from '@/helpers/password';
@@ -9,6 +8,10 @@ import {
   getRefreshToken,
   refreshTokenExpiresAt,
 } from '@/helpers/tokens';
+import type {
+  RefreshTokenRepository,
+  UserRepository,
+} from '@/repositories/types';
 
 interface LoginUseCaseParams {
   input: unknown;
@@ -20,44 +23,49 @@ interface LoginUseCaseResult {
   refreshToken: string;
 }
 
-export async function loginUseCase({
-  input,
-}: LoginUseCaseParams): Promise<LoginUseCaseResult> {
-  const { email, password } = toAuthLoginInput(input);
+export class LoginUseCase {
+  constructor(
+    private userRepository: UserRepository,
+    private refreshTokenRepository: RefreshTokenRepository,
+  ) {}
 
-  const foundUserWithEmail = await userRepository.findByEmail({
-    email,
-  });
+  async execute({ input }: LoginUseCaseParams): Promise<LoginUseCaseResult> {
+    const { email, password } = toAuthLoginInput(input);
 
-  if (!foundUserWithEmail) {
-    throw new UnauthorizedError('Invalid credentials.');
+    const foundUserWithEmail = await this.userRepository.findByEmail({
+      email,
+    });
+
+    if (!foundUserWithEmail) {
+      throw new UnauthorizedError('Invalid credentials.');
+    }
+
+    const hasCorrectPassword = await hasCorrectHash(
+      password,
+      foundUserWithEmail.password,
+    );
+
+    if (!hasCorrectPassword) {
+      throw new UnauthorizedError('Invalid credentials.');
+    }
+
+    const accessToken = getAccessToken({
+      userId: foundUserWithEmail.id,
+      userEmail: email,
+    });
+
+    const refreshToken = getRefreshToken();
+
+    await this.refreshTokenRepository.create({
+      token: refreshToken,
+      userId: foundUserWithEmail.id,
+      expiresAt: refreshTokenExpiresAt(),
+    });
+
+    return {
+      user: foundUserWithEmail,
+      accessToken,
+      refreshToken,
+    };
   }
-
-  const hasCorrectPassword = await hasCorrectHash(
-    password,
-    foundUserWithEmail.password,
-  );
-
-  if (!hasCorrectPassword) {
-    throw new UnauthorizedError('Invalid credentials.');
-  }
-
-  const accessToken = getAccessToken({
-    userId: foundUserWithEmail.id,
-    userEmail: email,
-  });
-
-  const refreshToken = getRefreshToken();
-
-  await refreshTokenRepository.create({
-    token: refreshToken,
-    userId: foundUserWithEmail.id,
-    expiresAt: refreshTokenExpiresAt(),
-  });
-
-  return {
-    user: foundUserWithEmail,
-    accessToken,
-    refreshToken,
-  };
 }
