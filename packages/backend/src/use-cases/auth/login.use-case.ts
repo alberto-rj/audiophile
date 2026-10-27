@@ -4,9 +4,9 @@ import { UnauthorizedError } from '@/helpers/app-error';
 import { toAuthLoginInput } from '@/helpers/auth';
 import { hasCorrectHash } from '@/helpers/password';
 import {
-  getAccessToken,
-  getRefreshToken,
-  refreshTokenExpiresAt,
+  createAccessToken,
+  createRefreshToken,
+  getRefreshTokenExpirationDate,
 } from '@/helpers/tokens';
 import type {
   RefreshTokenRepository,
@@ -49,17 +49,17 @@ export class LoginUseCase {
       throw new UnauthorizedError('Invalid credentials.');
     }
 
-    const accessToken = getAccessToken({
+    const accessToken = createAccessToken({
       userId: foundUserWithEmail.id,
       userEmail: email,
     });
 
-    const refreshToken = getRefreshToken();
+    const refreshToken = createRefreshToken();
 
     await this.refreshTokenRepository.create({
       token: refreshToken,
       userId: foundUserWithEmail.id,
-      expiresAt: refreshTokenExpiresAt(),
+      expiresAt: getRefreshTokenExpirationDate(),
     });
 
     return {

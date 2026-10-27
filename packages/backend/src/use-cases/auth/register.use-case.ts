@@ -4,9 +4,9 @@ import { ConflictError } from '@/helpers/app-error';
 import { toAuthRegisterInput } from '@/helpers/auth';
 import { getHash } from '@/helpers/password';
 import {
-  getAccessToken,
-  getRefreshToken,
-  refreshTokenExpiresAt,
+  createAccessToken,
+  createRefreshToken,
+  getRefreshTokenExpirationDate,
 } from '@/helpers/tokens';
 import type {
   UserRepository,
@@ -50,17 +50,17 @@ export class RegisterUseCase {
       password: passwordHash,
     });
 
-    const accessToken = getAccessToken({
+    const accessToken = createAccessToken({
       userId: createdUser.id,
       userEmail: email,
     });
 
-    const refreshToken = getRefreshToken();
+    const refreshToken = createRefreshToken();
 
     await this.refreshTokenRepository.create({
       token: refreshToken,
       userId: createdUser.id,
-      expiresAt: refreshTokenExpiresAt(),
+      expiresAt: getRefreshTokenExpirationDate(),
     });
 
     return {
