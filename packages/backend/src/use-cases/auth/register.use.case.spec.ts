@@ -10,7 +10,7 @@ import type {
   UserRepository,
 } from '@/repositories/types';
 
-import { RegisterUseCase } from './register-use-case';
+import { RegisterUseCase } from './register.use-case';
 
 describe('[use case] auth / register', () => {
   let sut: RegisterUseCase;

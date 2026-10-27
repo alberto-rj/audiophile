@@ -10,7 +10,7 @@ import type {
   UserRepository,
 } from '@/repositories/types';
 
-import { LoginUseCase } from './login-use-case';
+import { LoginUseCase } from './login.use-case';
 
 async function makePreLogin(userRepo: UserRepository) {
   const { name, email, password } = makeAuthRegisterInput();

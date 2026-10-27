@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { makeRefreshUseCase } from '@/helpers/auth';
 import { setRefreshTokenCookie } from '@/helpers/tokens';
-import { refreshUseCase } from '@/use-cases/auth';
 
 export async function refreshController(
   req: Request,
@@ -18,11 +18,13 @@ export async function refreshController(
       return res.sendStatus(StatusCodes.UNAUTHORIZED);
     }
 
+    const { useCase } = makeRefreshUseCase();
+
     const {
       accessToken,
       refreshToken: newRefreshToken,
       user,
-    } = await refreshUseCase({
+    } = await useCase.execute({
       input: {
         token: refreshToken,
       },

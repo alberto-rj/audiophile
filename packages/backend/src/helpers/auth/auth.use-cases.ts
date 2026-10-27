@@ -1,4 +1,8 @@
-import { LoginUseCase, RegisterUseCase } from '@/use-cases/auth';
+import {
+  LoginUseCase,
+  RefreshUseCase,
+  RegisterUseCase,
+} from '@/use-cases/auth';
 
 import type { RepositoryType } from '../common/types';
 import { makeRefreshTokenRepository } from '../refresh-token/make-refresh-token-repository';
@@ -23,5 +27,16 @@ export function makeLoginUseCase(type: RepositoryType = 'drizzle') {
     userRepository,
     refreshTokenRepository,
     useCase: new LoginUseCase(userRepository, refreshTokenRepository),
+  };
+}
+
+export function makeRefreshUseCase(type: RepositoryType = 'drizzle') {
+  const userRepository = makeUserRepository(type);
+  const refreshTokenRepository = makeRefreshTokenRepository(type);
+
+  return {
+    userRepository,
+    refreshTokenRepository,
+    useCase: new RefreshUseCase(userRepository, refreshTokenRepository),
   };
 }
