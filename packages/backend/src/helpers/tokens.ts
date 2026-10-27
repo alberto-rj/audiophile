@@ -17,7 +17,7 @@ export interface AuthRequest extends Request {
   payload?: AuthPayload;
 }
 
-export function getAccessToken({ userId, userEmail }: AuthPayload) {
+export function createAccessToken({ userId, userEmail }: AuthPayload) {
   const accessToken = jwt.sign(
     {
       userId,
@@ -32,7 +32,7 @@ export function getAccessToken({ userId, userEmail }: AuthPayload) {
   return accessToken;
 }
 
-export function getRefreshToken() {
+export function createRefreshToken() {
   const refreshToken = uuidv4();
 
   return refreshToken;
@@ -81,8 +81,6 @@ export function clearRefreshTokenCookie(res: Response) {
   res.clearCookie(REFRESH_TOKEN_COOKIE_KEY, restOptions);
 }
 
-export function refreshTokenExpiresAt() {
-  const expiresAt = new Date(Date.now() + REFRESH_EXPIRES_MS);
-
-  return expiresAt;
+export function getRefreshTokenExpirationDate() {
+  return new Date(Date.now() + REFRESH_EXPIRES_MS);
 }
