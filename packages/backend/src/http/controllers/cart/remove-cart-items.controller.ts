@@ -1,10 +1,9 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { toApiCart } from '@/helpers/cart';
+import { makeRemoveCartItemsUseCase, toApiCart } from '@/helpers/cart';
 import { makeResBodyResult } from '@/helpers/make-res-body';
 import type { AuthRequest } from '@/helpers/tokens';
-import { removeCartItemsUseCase } from '@/use-cases/cart';
 
 export async function removeCartItemsController(
   req: AuthRequest,
@@ -14,7 +13,8 @@ export async function removeCartItemsController(
   try {
     const { userId } = req.payload!;
 
-    const { output } = await removeCartItemsUseCase({
+    const { useCase } = makeRemoveCartItemsUseCase();
+    const { output } = await useCase.execute({
       input: { userId },
     });
 
