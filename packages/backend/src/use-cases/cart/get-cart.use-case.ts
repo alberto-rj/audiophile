@@ -1,8 +1,8 @@
 import type { CartDetailed } from '@audiophile/shared';
 
-import { cartRepository } from '@/config/repositories';
 import { ResourceNotFoundError } from '@/helpers/app-error';
 import { toCartUserIdInput } from '@/helpers/cart';
+import type { CartRepository } from '@/repositories/types';
 
 type GetCartUseCaseParams = {
   input: unknown;
@@ -12,20 +12,24 @@ type RemoveCartUseCaseResult = {
   output: CartDetailed;
 };
 
-export async function getCartUseCase({
-  input,
-}: GetCartUseCaseParams): Promise<RemoveCartUseCaseResult> {
-  const { userId } = toCartUserIdInput(input);
+export class GetCartUseCase {
+  constructor(private cartRepository: CartRepository) {}
 
-  const foundCart = await cartRepository.findByUserId({
-    userId,
-  });
+  async execute({
+    input,
+  }: GetCartUseCaseParams): Promise<RemoveCartUseCaseResult> {
+    const { userId } = toCartUserIdInput(input);
 
-  if (!foundCart) {
-    throw new ResourceNotFoundError('Cart not found.');
+    const foundCart = await this.cartRepository.findByUserId({
+      userId,
+    });
+
+    if (!foundCart) {
+      throw new ResourceNotFoundError('Cart not found.');
+    }
+
+    return {
+      output: foundCart,
+    };
   }
-
-  return {
-    output: foundCart,
-  };
 }

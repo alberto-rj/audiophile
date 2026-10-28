@@ -1,8 +1,8 @@
 import type { CartDetailed } from '@audiophile/shared';
 
-import { cartRepository } from '@/config/repositories';
 import { InternalServerError } from '@/helpers/app-error';
 import { toCartRemoveItemInput, InvalidCartError } from '@/helpers/cart';
+import type { CartRepository } from '@/repositories/types';
 
 type RemoveCartItemUseCaseParams = {
   input: unknown;
@@ -12,27 +12,31 @@ type RemoveCartItemUseCaseResult = {
   output: CartDetailed;
 };
 
-export async function removeCartItemUseCase({
-  input,
-}: RemoveCartItemUseCaseParams): Promise<RemoveCartItemUseCaseResult> {
-  const { itemId, userId } = toCartRemoveItemInput(input);
+export class RemoveCartItemUseCase {
+  constructor(private cartRepository: CartRepository) {}
 
-  const foundCart = await cartRepository.findByUserId({ userId });
+  async execute({
+    input,
+  }: RemoveCartItemUseCaseParams): Promise<RemoveCartItemUseCaseResult> {
+    const { itemId, userId } = toCartRemoveItemInput(input);
 
-  if (!foundCart) {
-    throw new InvalidCartError('Cart is required to delete an item.');
+    const foundCart = await this.cartRepository.findByUserId({ userId });
+
+    if (!foundCart) {
+      throw new InvalidCartError('Cart is required to delete an item.');
+    }
+
+    const updatedCart = await this.cartRepository.remove({
+      itemId,
+      cartId: foundCart.id,
+    });
+
+    if (!updatedCart) {
+      throw new InternalServerError('Failed to delete cart item.');
+    }
+
+    return {
+      output: updatedCart,
+    };
   }
-
-  const updatedCart = await cartRepository.remove({
-    itemId,
-    cartId: foundCart.id,
-  });
-
-  if (!updatedCart) {
-    throw new InternalServerError('Failed to delete cart item.');
-  }
-
-  return {
-    output: updatedCart,
-  };
 }
