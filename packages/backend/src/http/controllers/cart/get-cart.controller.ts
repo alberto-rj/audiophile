@@ -1,10 +1,9 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { toApiCart } from '@/helpers/cart';
+import { makeGetCartUseCase, toApiCart } from '@/helpers/cart';
 import { makeResBodyResult } from '@/helpers/make-res-body';
 import type { AuthRequest } from '@/helpers/tokens';
-import { getCartUseCase } from '@/use-cases/cart';
 
 export async function getCartController(
   req: AuthRequest,
@@ -14,7 +13,8 @@ export async function getCartController(
   try {
     const { userId } = req.payload!;
 
-    const { output } = await getCartUseCase({
+    const { useCase } = makeGetCartUseCase();
+    const { output } = await useCase.execute({
       input: { userId },
     });
 

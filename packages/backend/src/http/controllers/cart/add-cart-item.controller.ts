@@ -1,10 +1,9 @@
 import type { Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { toApiCart } from '@/helpers/cart';
+import { makeAddCartItemUseCase, toApiCart } from '@/helpers/cart';
 import type { AuthRequest } from '@/helpers/tokens';
 import { makeResBodyResult } from '@/helpers/make-res-body';
-import { addCartItemUseCase } from '@/use-cases/cart';
 
 export async function addCartItemController(
   req: AuthRequest,
@@ -15,7 +14,8 @@ export async function addCartItemController(
     const { userId } = req.payload!;
     const { quantity, productId } = req.body;
 
-    const { output } = await addCartItemUseCase({
+    const { useCase } = makeAddCartItemUseCase();
+    const { output } = await useCase.execute({
       input: { userId, productId, quantity },
     });
 

@@ -1,11 +1,11 @@
 import type { CartDetailed } from '@audiophile/shared';
 
-import { cartRepository, productRepository } from '@/config/repositories';
 import {
   ResourceNotFoundError,
   InternalServerError,
 } from '@/helpers/app-error';
 import { toCartAddItemInput, InvalidCartError } from '@/helpers/cart';
+import type { CartRepository, ProductRepository } from '@/repositories/types';
 
 type AddCartItemUseCaseParams = {
   input: unknown;
@@ -15,34 +15,45 @@ type AddCartItemUseCaseResult = {
   output: CartDetailed;
 };
 
-export async function addCartItemUseCase({
-  input,
-}: AddCartItemUseCaseParams): Promise<AddCartItemUseCaseResult> {
-  const { userId, productId, quantity } = toCartAddItemInput(input);
+export class AddCartItemUseCase {
+  constructor(
+    private cartRepository: CartRepository,
+    private productRepository: ProductRepository,
+  ) {}
 
-  const foundCart = await cartRepository.findByUserId({ userId });
+  async execute({
+    input,
+  }: AddCartItemUseCaseParams): Promise<AddCartItemUseCaseResult> {
+    const { userId, productId, quantity } = toCartAddItemInput(input);
 
-  if (!foundCart) {
-    throw new InvalidCartError('Cart is required to add an item.');
+    const foundCart = await this.cartRepository.findByUserId({ userId });
+
+    if (!foundCart) {
+      throw new InvalidCartError('Cart is required to add an item.');
+    }
+
+    const foundProduct = await this.productRepository.findById({
+      id: productId,
+    });
+
+    if (!foundProduct) {
+      throw new ResourceNotFoundError(
+        'Product is required to add a cart item.',
+      );
+    }
+
+    const updatedCart = await this.cartRepository.add({
+      cartId: foundCart.id,
+      productId,
+      quantity,
+    });
+
+    if (!updatedCart) {
+      throw new InternalServerError('Failed to add item to cart.');
+    }
+
+    return {
+      output: updatedCart,
+    };
   }
-
-  const foundProduct = await productRepository.findById({ id: productId });
-
-  if (!foundProduct) {
-    throw new ResourceNotFoundError('Product is required to add a cart item.');
-  }
-
-  const updatedCart = await cartRepository.add({
-    cartId: foundCart.id,
-    productId,
-    quantity,
-  });
-
-  if (!updatedCart) {
-    throw new InternalServerError('Failed to add item to cart.');
-  }
-
-  return {
-    output: updatedCart,
-  };
 }
