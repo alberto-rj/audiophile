@@ -1,14 +1,14 @@
-import type {
-  Order,
-  OrderCreateParams,
-  Product,
-  User,
+import {
+  getProductItemSummary,
+  type Order,
+  type OrderCreateParams,
+  type Product,
+  type User,
 } from '@audiophile/shared';
 
 import { orderRepository } from '@/config/repositories';
 import { type Order as OrderMock } from '@/db/mocks';
 import { logger } from '@/helpers/logger';
-import { getProductItemSummary } from '@/helpers/product';
 
 type CreateOrdersParams = {
   orders: OrderMock[];

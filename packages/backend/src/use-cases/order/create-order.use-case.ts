@@ -1,8 +1,7 @@
-import type { Order } from '@audiophile/shared';
+import { getProductItemSummary, type Order } from '@audiophile/shared';
 
 import { cartRepository, orderRepository } from '@/config/repositories';
 import { toOrderCreateInput, EmptyOrderError } from '@/helpers/order';
-import { getProductItemSummary } from '@/helpers/product';
 
 type CreateOrderUseCaseParams = {
   input: unknown;

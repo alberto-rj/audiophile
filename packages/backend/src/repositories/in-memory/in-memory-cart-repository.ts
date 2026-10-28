@@ -1,18 +1,18 @@
-import type {
-  CartAddItemParams,
-  CartUpdateItemParams,
-  CartRemoveItemParams,
-  CartRemoveAllParams,
-  CartIdParams,
-  CartDetailed,
-  Cart,
-  CartItemDetailed,
-  CartUserIdParams,
-  CartCreateParams,
+import {
+  type CartAddItemParams,
+  type CartUpdateItemParams,
+  type CartRemoveItemParams,
+  type CartRemoveAllParams,
+  type CartIdParams,
+  type CartDetailed,
+  type Cart,
+  type CartItemDetailed,
+  type CartUserIdParams,
+  type CartCreateParams,
+  getProductItemSummary,
 } from '@audiophile/shared';
 
 import { makeCart, makeCartItem } from '@/helpers/cart';
-import { getProductItemSummary } from '@/helpers/product';
 import { db } from '@/db/in-memory';
 
 import type { CartRepository } from '../types/cart-repository.types';

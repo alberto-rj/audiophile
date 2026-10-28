@@ -1,12 +1,13 @@
-import type {
-  GalleryDetailed,
-  IncludeDetailed,
-  Product,
-  ProductCreateParams,
-  ProductDetailed,
-  ProductFindManyParams,
-  ProductIdParams,
-  ProductSlugParams,
+import {
+  isNewProduct,
+  type GalleryDetailed,
+  type IncludeDetailed,
+  type Product,
+  type ProductCreateParams,
+  type ProductDetailed,
+  type ProductFindManyParams,
+  type ProductIdParams,
+  type ProductSlugParams,
 } from '@audiophile/shared';
 import { count, eq } from 'drizzle-orm';
 
@@ -22,7 +23,6 @@ import {
   getOffset,
   type PaginateResult,
 } from '@/helpers/paginate';
-import { isNewProduct } from '@/helpers/product';
 
 import type { ProductRepository } from '../types/product-repository.types';
 

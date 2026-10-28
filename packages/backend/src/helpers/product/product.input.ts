@@ -3,31 +3,15 @@ import {
   ProductIdInputSchema,
   ProductFindManyInputSchema,
   ProductSlugInputSchema,
-  makeId,
-  toSlug,
 } from '@audiophile/shared';
 import type {
-  Product,
   ProductCreateInput,
-  ProductCreateParams,
   ProductFindManyInput,
   ProductIdInput,
   ProductSlugInput,
 } from '@audiophile/shared';
 
-import { isNewProduct } from './is-new-product';
-
 import { parseSchema } from '../parse-schema';
-
-export function makeProduct({ name, ...rest }: ProductCreateParams): Product {
-  return {
-    ...rest,
-    name,
-    id: makeId(),
-    slug: toSlug(name),
-    isNew: isNewProduct(new Date()),
-  };
-}
 
 export function toProductCreateInput(data: unknown): ProductCreateInput {
   return parseSchema(ProductCreateInputSchema, data);

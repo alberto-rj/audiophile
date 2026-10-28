@@ -1,13 +1,13 @@
-import type {
-  Gallery,
-  GalleryCreateParams,
-  GalleryFindManyParams,
-  GalleryIdParams,
+import {
+  makeGallery,
+  type Gallery,
+  type GalleryCreateParams,
+  type GalleryFindManyParams,
+  type GalleryIdParams,
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers/paginate';
-import { makeGallery } from '@/helpers/product';
 
 import type { GalleryRepository } from '../types/gallery-repository.types';
 
