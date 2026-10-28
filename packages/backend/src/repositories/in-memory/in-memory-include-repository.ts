@@ -1,13 +1,13 @@
-import type {
-  Include,
-  IncludeCreateParams,
-  IncludeFindManyParams,
-  IncludeIdParams,
+import {
+  makeInclude,
+  type Include,
+  type IncludeCreateParams,
+  type IncludeFindManyParams,
+  type IncludeIdParams,
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
 import { paginate, type PaginateResult } from '@/helpers/paginate';
-import { makeInclude } from '@/helpers/product';
 
 import type { IncludeRepository } from '../types/include-repository.types';
 

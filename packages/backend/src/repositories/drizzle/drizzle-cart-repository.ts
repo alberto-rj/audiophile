@@ -1,19 +1,19 @@
-import type {
-  CartAddItemParams,
-  CartUpdateItemParams,
-  CartRemoveItemParams,
-  CartRemoveAllParams,
-  CartIdParams,
-  CartDetailed,
-  CartItemDetailed,
-  Product,
-  CartUserIdParams,
-  CartCreateParams,
+import {
+  type CartAddItemParams,
+  type CartUpdateItemParams,
+  type CartRemoveItemParams,
+  type CartRemoveAllParams,
+  type CartIdParams,
+  type CartDetailed,
+  type CartItemDetailed,
+  type Product,
+  type CartUserIdParams,
+  type CartCreateParams,
+  getProductItemSummary,
 } from '@audiophile/shared';
 import { and, eq, sql } from 'drizzle-orm';
 
 import { cartItems, carts, db } from '@/db/drizzle';
-import { getProductItemSummary } from '@/helpers/product';
 
 import type { CartRepository } from '../types/cart-repository.types';
 

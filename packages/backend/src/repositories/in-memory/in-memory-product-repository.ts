@@ -1,17 +1,18 @@
-import type {
-  Category,
-  Product,
-  ProductCreateParams,
-  ProductDetailed,
-  ProductFindManyParams,
-  ProductIdParams,
-  ProductSlugParams,
+import {
+  makeGallery,
+  makeProduct,
+  type Category,
+  type Product,
+  type ProductCreateParams,
+  type ProductDetailed,
+  type ProductFindManyParams,
+  type ProductIdParams,
+  type ProductSlugParams,
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
 import { makeCategory } from '@/helpers/category';
 import { paginate, type PaginateResult } from '@/helpers/paginate';
-import { makeGallery, makeProduct } from '@/helpers/product';
 
 import type { ProductRepository } from '../types/product-repository.types';
 
