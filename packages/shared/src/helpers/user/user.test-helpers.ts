@@ -1,6 +1,6 @@
 import type { UserCreateInput } from '@/schemas';
 
-import type { MakeFieldInputOptions } from '../common/types';
+import type { MakeFieldInputOptions } from '../types';
 
 export function makeNameInput(options: MakeFieldInputOptions = {}): string {
   const { isEmpty = false, isInvalid = false } = options;

@@ -1,6 +1,6 @@
 import type { AuthLoginInput, AuthRegisterInput } from '@/schemas';
 
-import type { MakeFieldInputOptions } from '../common/types';
+import type { MakeFieldInputOptions } from '../types';
 import {
   makeEmailInput,
   makeNameInput,
