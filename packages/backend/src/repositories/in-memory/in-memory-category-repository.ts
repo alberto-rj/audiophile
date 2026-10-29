@@ -1,116 +1,120 @@
-import type {
-  Category,
-  CategoryCreateParams,
-  CategoryFindManyParams,
-  CategoryIdParams,
-  CategorySlugParams,
-  CategoryUpdateParams,
+import {
+  makeCategory,
+  type Category,
+  type CategoryCreateParams,
+  type CategoryFindManyParams,
+  type CategoryIdParams,
+  type CategorySlugParams,
+  type CategoryUpdateParams,
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeCategory } from '@/helpers/category';
 import { paginate, type PaginateResult } from '@/helpers/paginate';
 
 import type { CategoryRepository } from '../types/category-repository.types';
 
 export class InMemoryCategoryRepository implements CategoryRepository {
   async create(params: CategoryCreateParams): Promise<Category> {
-    const newItem = makeCategory(params);
+    const createdCategory = makeCategory(params);
 
-    db.categories.set(newItem.id, newItem);
+    db.categories.set(createdCategory.id, createdCategory);
 
-    return newItem;
+    return createdCategory;
   }
 
   async createMany(params: CategoryCreateParams[]): Promise<Category[]> {
-    const newItems = params.map(makeCategory);
+    const createdCategories = params.map(makeCategory);
 
-    for (const newItem of newItems) {
-      db.categories.set(newItem.id, newItem);
+    for (const newCategory of createdCategories) {
+      db.categories.set(newCategory.id, newCategory);
     }
 
-    return newItems;
+    return createdCategories;
   }
 
   async update({
     id,
     ...changes
   }: CategoryUpdateParams): Promise<Category | null> {
-    const foundItem = db.categories.get(id);
+    const foundCategory = db.categories.get(id);
 
-    if (!foundItem) {
+    if (!foundCategory) {
       return null;
     }
 
-    const newItem = {
-      ...foundItem,
+    const newCategory = {
+      ...foundCategory,
       ...changes,
     };
 
-    db.categories.set(id, newItem);
+    db.categories.set(id, newCategory);
 
-    return newItem;
+    return newCategory;
   }
 
   async findById({ id }: CategoryIdParams): Promise<Category | null> {
-    const foundItem = db.categories.get(id);
+    const foundCategory = db.categories.get(id);
 
-    if (!foundItem) {
+    if (!foundCategory) {
       return null;
     }
 
-    return foundItem;
+    return foundCategory;
   }
 
   async findBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
-    const foundItem = Array.from(db.categories.values()).find(
+    const foundCategory = Array.from(db.categories.values()).find(
       (item) => item.slug === slug,
     );
 
-    if (!foundItem) {
+    if (!foundCategory) {
       return null;
     }
 
-    return foundItem;
+    return foundCategory;
   }
 
   async findMany({
     page,
     limit,
   }: CategoryFindManyParams): Promise<PaginateResult<Category>> {
-    const items = Array.from(db.categories.values());
+    const categoryItems = Array.from(db.categories.values());
 
-    const foundItems = paginate({ items, page, limit });
+    const categoryPaginationResult = paginate({
+      items: categoryItems,
+      page,
+      limit,
+    });
 
-    return foundItems;
+    return categoryPaginationResult;
   }
 
   async deleteById({ id }: CategoryIdParams): Promise<Category | null> {
-    const foundItem = Array.from(db.categories.values()).find(
+    const foundCategory = Array.from(db.categories.values()).find(
       (item) => item.id === id,
     );
 
-    if (!foundItem) {
+    if (!foundCategory) {
       return null;
     }
 
-    db.categories.delete(foundItem.id);
+    db.categories.delete(foundCategory.id);
 
-    return foundItem;
+    return foundCategory;
   }
 
   async deleteBySlug({ slug }: CategorySlugParams): Promise<Category | null> {
-    const foundItem = Array.from(db.categories.values()).find(
-      (item) => item.slug === slug,
+    const foundCategory = Array.from(db.categories.values()).find(
+      (category) => category.slug === slug,
     );
 
-    if (!foundItem) {
+    if (!foundCategory) {
       return null;
     }
 
-    db.categories.delete(foundItem.id);
+    db.categories.delete(foundCategory.id);
 
-    return foundItem;
+    return foundCategory;
   }
 
   async clear(): Promise<void> {

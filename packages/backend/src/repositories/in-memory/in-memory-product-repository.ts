@@ -1,4 +1,5 @@
 import {
+  makeCategory,
   makeGallery,
   makeProduct,
   type Category,
@@ -11,7 +12,6 @@ import {
 } from '@audiophile/shared';
 
 import { db } from '@/db/in-memory';
-import { makeCategory } from '@/helpers/category';
 import { paginate, type PaginateResult } from '@/helpers/paginate';
 
 import type { ProductRepository } from '../types/product-repository.types';
@@ -49,7 +49,7 @@ export class InMemoryProductRepository implements ProductRepository {
     slug,
   }: ProductSlugParams): Promise<ProductDetailed | null> {
     const foundProduct = Array.from(db.products.values()).find(
-      (p) => p.slug === slug,
+      (product) => product.slug === slug,
     );
 
     if (!foundProduct) {
@@ -108,10 +108,12 @@ export class InMemoryProductRepository implements ProductRepository {
 }
 
 function getProductGallery(productId: Product['id']) {
-  for (const [, gallery] of db.galleries.entries()) {
-    if (gallery.productId === productId) {
-      return gallery;
-    }
+  const foundGallery = Array.from(db.galleries.values()).find(
+    (gallery) => gallery.productId === productId,
+  );
+
+  if (foundGallery) {
+    return foundGallery;
   }
 
   return makeGallery({
@@ -123,10 +125,12 @@ function getProductGallery(productId: Product['id']) {
 }
 
 function getProductCategory(categoryId: Category['id']) {
-  for (const [, category] of db.categories.entries()) {
-    if (category.id === categoryId) {
-      return category;
-    }
+  const foundCategory = Array.from(db.categories.values()).find(
+    (category) => category.id === categoryId,
+  );
+
+  if (foundCategory) {
+    return foundCategory;
   }
 
   return makeCategory({
