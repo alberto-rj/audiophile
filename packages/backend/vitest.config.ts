@@ -28,6 +28,10 @@ export default defineConfig({
         '**/openapi/**',
         '**/scripts/**',
 
+        // Ignore files
+        '**/index.ts',
+        '**/*.route.ts',
+
         // Ignore test files
         '**/*.spec.ts',
         '**/*.test.ts',
