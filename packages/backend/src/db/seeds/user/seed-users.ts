@@ -4,10 +4,16 @@ import { type User } from '@/db/mocks';
 import { logger } from '@/helpers/logger';
 import { getHash } from '@/helpers/password';
 
+/**
+ * @deprecated
+ */
 type CreateUsersParams = {
   users: User[];
 };
 
+/**
+ * @deprecated
+ */
 export async function createUsers({ users }: CreateUsersParams) {
   const newParamsList: User[] = [];
 
@@ -24,6 +30,9 @@ export async function createUsers({ users }: CreateUsersParams) {
   return createdUsers;
 }
 
+/**
+ * @deprecated
+ */
 export async function seedUsers({ users }: CreateUsersParams) {
   try {
     logger.info('Seeding "users"...');
