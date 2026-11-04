@@ -20,12 +20,12 @@ import {
 } from '@/db/mocks';
 import { logger } from '@/helpers/logger';
 
-import { seedCategories } from './category/seed-categories';
+import { seedCategories } from './category/category.seeder';
 import { seedOrders } from './order/seed-orders';
 import { seedProducts } from './product/seed-products';
 import { seedSuggestions } from './product/seed-suggestions';
 import { seedUsers } from './user/seed-users';
-import { seedCarts } from './cart/seed-carts';
+import { seedCarts } from './cart/cart-seeds';
 
 async function main() {
   try {

@@ -34,4 +34,6 @@ describe('[use case] cart / add item', () => {
     'should reject adding an item when the product does not exist',
     async () => {},
   );
+
+  it.todo('should reject adding item when field is invalid', async () => {});
 });

@@ -4,20 +4,20 @@ import { cartRepository } from '@/config/repositories';
 import { type Cart } from '@/db/mocks';
 import { logger } from '@/helpers/logger';
 
-type CreateCartsParams = {
+type RunParams = {
   carts: Cart[];
   users: User[];
 };
 
-type ToCreateCartParams = {
+type ToCreateParams = {
   cart: Cart;
   users: User[];
 };
 
-function toCartCreateParams({
-  cart,
-  users,
-}: ToCreateCartParams): CartCreateParams {
+/**
+ * @deprecated
+ */
+function toCreateParams({ cart, users }: ToCreateParams): CartCreateParams {
   const foundUser = users.find((user) => user.email === cart.user);
 
   if (!foundUser) {
@@ -29,15 +29,21 @@ function toCartCreateParams({
   };
 }
 
-export async function createCarts({ carts, users }: CreateCartsParams) {
-  const paramsList = carts.map((cart) => toCartCreateParams({ cart, users }));
+/**
+ * @deprecated
+ */
+export async function createCarts({ carts, users }: RunParams) {
+  const paramsList = carts.map((cart) => toCreateParams({ cart, users }));
 
   const createdCarts = await cartRepository.createMany(paramsList);
 
   return createdCarts;
 }
 
-export async function seedCarts({ carts, users }: CreateCartsParams) {
+/**
+ * @deprecated
+ */
+export async function seedCarts({ carts, users }: RunParams) {
   try {
     logger.info('Seeding "carts"...');
     const createdCarts = await createCarts({ carts, users });

@@ -10,12 +10,18 @@ import { orderRepository } from '@/config/repositories';
 import { type Order as OrderMock } from '@/db/mocks';
 import { logger } from '@/helpers/logger';
 
+/**
+ * @deprecated
+ */
 type CreateOrdersParams = {
   orders: OrderMock[];
   products: Product[];
   users: User[];
 };
 
+/**
+ * @deprecated
+ */
 function toOrderCreateParamsList({
   orders,
   products,
@@ -65,6 +71,9 @@ function toOrderCreateParamsList({
   );
 }
 
+/**
+ * @deprecated
+ */
 export async function createOrders({
   orders,
   products,
@@ -82,6 +91,9 @@ export async function createOrders({
   return createdOrders;
 }
 
+/**
+ * @deprecated
+ */
 export async function seedOrders({
   orders,
   products,
