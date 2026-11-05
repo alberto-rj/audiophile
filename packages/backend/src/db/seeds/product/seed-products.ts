@@ -19,21 +19,33 @@ import {
 } from '@/db/mocks';
 import { logger } from '@/helpers/logger';
 
+/**
+ * @deprecated
+ */
 type CreateProductsParams = {
   products: ProductMock[];
   categories: Category[];
 };
 
+/**
+ * @deprecated
+ */
 type CreateGalleriesParams = {
   products: Product[];
   galleries: GalleryMock[];
 };
 
+/**
+ * @deprecated
+ */
 type CreateIncludesParams = {
   products: Product[];
   includes: IncludeMock[];
 };
 
+/**
+ * @deprecated
+ */
 type SeedProductsParams = {
   galleries: GalleryMock[];
   includes: IncludeMock[];
@@ -41,6 +53,9 @@ type SeedProductsParams = {
   categories: Category[];
 };
 
+/**
+ * @deprecated
+ */
 function toProductCreateParamsList({
   categories,
   products,
@@ -70,6 +85,9 @@ function toProductCreateParamsList({
   return paramsList;
 }
 
+/**
+ * @deprecated
+ */
 function toGalleryCreateParamsList({
   products,
   galleries,
@@ -91,6 +109,9 @@ function toGalleryCreateParamsList({
   return paramsList;
 }
 
+/**
+ * @deprecated
+ */
 function toIncludeCreateParamsList({
   includes,
   products,
@@ -113,6 +134,9 @@ function toIncludeCreateParamsList({
   });
 }
 
+/**
+ * @deprecated
+ */
 export async function createProducts({
   categories,
   products,
@@ -125,6 +149,9 @@ export async function createProducts({
   return createdProducts;
 }
 
+/**
+ * @deprecated
+ */
 async function createGalleries({ galleries, products }: CreateGalleriesParams) {
   const paramsList = toGalleryCreateParamsList({ galleries, products });
 
@@ -133,6 +160,9 @@ async function createGalleries({ galleries, products }: CreateGalleriesParams) {
   return createdGalleries;
 }
 
+/**
+ * @deprecated
+ */
 async function createIncludes({ includes, products }: CreateIncludesParams) {
   const paramsList = toIncludeCreateParamsList({ includes, products });
 
@@ -141,6 +171,9 @@ async function createIncludes({ includes, products }: CreateIncludesParams) {
   return createdIncludes;
 }
 
+/**
+ * @deprecated
+ */
 export async function seedProducts({
   galleries,
   categories,
