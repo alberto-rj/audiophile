@@ -8,11 +8,17 @@ import { suggestionRepository } from '@/config/repositories';
 import type { Suggestion as SuggestionMock } from '@/db/mocks';
 import { logger } from '@/helpers/logger';
 
+/**
+ * @deprecated
+ */
 type CreateSuggestionsParams = {
   products: Product[];
   suggestions: SuggestionMock[];
 };
 
+/**
+ * @deprecated
+ */
 export function toSuggestionCreateParamsParamsList({
   products,
   suggestions,
@@ -41,6 +47,9 @@ export function toSuggestionCreateParamsParamsList({
   return paramsList;
 }
 
+/**
+ * @deprecated
+ */
 export async function createSuggestions({
   products,
   suggestions,
@@ -55,6 +64,9 @@ export async function createSuggestions({
   return createdSuggestions;
 }
 
+/**
+ * @deprecated
+ */
 export async function seedSuggestions({
   products,
   suggestions,
