@@ -10,7 +10,6 @@ import {
 } from '@/helpers/product';
 import { makeUserSeeder } from '@/helpers/user';
 
-import { categorySeeds } from './category/category.seeds';
 import {
   gallerySeeds,
   includeSeeds,
@@ -20,6 +19,7 @@ import {
 import { orderSeeds } from './order';
 import { userSeeds } from './user';
 import { cartSeeds } from './cart';
+import { categorySeeds } from './category';
 
 async function main() {
   const { seeder: orderSeeder, orderRepository } = makeOrderSeeder();
