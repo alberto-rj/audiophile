@@ -4,11 +4,16 @@ import {
   RegisterUseCase,
 } from '@/use-cases/auth';
 
-import type { RepositoryType } from '../common/types';
-import { makeRefreshTokenRepository } from '../refresh-token/make-refresh-token-repository';
-import { makeUserRepository } from '../user/make-user-repository';
+import {
+  DEFAULT_REPOSITORY_TYPE,
+  type RepositoryType,
+} from '../common/repository';
+import { makeRefreshTokenRepository } from '../refresh-token/refresh-token.repository.helper';
+import { makeUserRepository } from '../user/user.repository.helper';
 
-export function makeRegisterUseCase(type: RepositoryType = 'drizzle') {
+export function makeRegisterUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const userRepository = makeUserRepository(type);
   const refreshTokenRepository = makeRefreshTokenRepository(type);
 
@@ -19,7 +24,9 @@ export function makeRegisterUseCase(type: RepositoryType = 'drizzle') {
   };
 }
 
-export function makeLoginUseCase(type: RepositoryType = 'drizzle') {
+export function makeLoginUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const userRepository = makeUserRepository(type);
   const refreshTokenRepository = makeRefreshTokenRepository(type);
 
@@ -30,7 +37,9 @@ export function makeLoginUseCase(type: RepositoryType = 'drizzle') {
   };
 }
 
-export function makeRefreshUseCase(type: RepositoryType = 'drizzle') {
+export function makeRefreshUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const userRepository = makeUserRepository(type);
   const refreshTokenRepository = makeRefreshTokenRepository(type);
 

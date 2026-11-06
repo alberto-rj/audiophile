@@ -2,12 +2,12 @@ import { DrizzleSuggestionRepository } from '@/repositories/drizzle';
 import { InMemorySuggestionRepository } from '@/repositories/in-memory';
 import type { SuggestionRepository } from '@/repositories/types';
 
-type SuggestionRepositoryType = 'drizzle' | 'in-memory';
+import { DEFAULT_REPOSITORY_TYPE, type RepositoryType } from '../common';
 
 export function makeSuggestionRepository(
-  type: SuggestionRepositoryType = 'drizzle',
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
 ) {
-  const repositories: Record<SuggestionRepositoryType, SuggestionRepository> = {
+  const repositories: Record<RepositoryType, SuggestionRepository> = {
     'in-memory': new InMemorySuggestionRepository(),
     drizzle: new DrizzleSuggestionRepository(),
   };

@@ -1,5 +1,7 @@
 import {
+  UserFindByIdInputSchema,
   UserUpdateProfileInputSchema,
+  type UserFindByIdInput,
   type UserUpdateProfileInput,
 } from '@audiophile/shared';
 
@@ -12,4 +14,8 @@ export function toUserUpdateProfileInput(
     UserUpdateProfileInputSchema,
     data,
   );
+}
+
+export function toUserFindByIdInput(data: unknown): UserFindByIdInput {
+  return parseSchema<UserFindByIdInput>(UserFindByIdInputSchema, data);
 }

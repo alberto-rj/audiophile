@@ -6,12 +6,14 @@ import {
   UpdateCartItemUseCase,
 } from '@/use-cases/cart';
 
-import type { RepositoryType } from '../common';
+import { DEFAULT_REPOSITORY_TYPE, type RepositoryType } from '../common';
 import { makeProductRepository } from '../product';
 
-import { makeCartRepository } from './make-cart-repository';
+import { makeCartRepository } from './cart.repository.helper';
 
-export function makeAddCartItemUseCase(type: RepositoryType = 'drizzle') {
+export function makeAddCartItemUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const cartRepository = makeCartRepository(type);
   const productRepository = makeProductRepository(type);
 
@@ -22,7 +24,9 @@ export function makeAddCartItemUseCase(type: RepositoryType = 'drizzle') {
   };
 }
 
-export function makeUpdateCartItemUseCase(type: RepositoryType = 'drizzle') {
+export function makeUpdateCartItemUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const cartRepository = makeCartRepository(type);
 
   return {
@@ -31,7 +35,9 @@ export function makeUpdateCartItemUseCase(type: RepositoryType = 'drizzle') {
   };
 }
 
-export function makeRemoveCartItemUseCase(type: RepositoryType = 'drizzle') {
+export function makeRemoveCartItemUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const cartRepository = makeCartRepository(type);
 
   return {
@@ -40,7 +46,9 @@ export function makeRemoveCartItemUseCase(type: RepositoryType = 'drizzle') {
   };
 }
 
-export function makeRemoveCartItemsUseCase(type: RepositoryType = 'drizzle') {
+export function makeRemoveCartItemsUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const cartRepository = makeCartRepository(type);
 
   return {
@@ -49,7 +57,9 @@ export function makeRemoveCartItemsUseCase(type: RepositoryType = 'drizzle') {
   };
 }
 
-export function makeGetCartUseCase(type: RepositoryType = 'drizzle') {
+export function makeGetCartUseCase(
+  type: RepositoryType = DEFAULT_REPOSITORY_TYPE,
+) {
   const cartRepository = makeCartRepository(type);
 
   return {
