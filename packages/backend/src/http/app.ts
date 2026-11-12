@@ -118,35 +118,46 @@ app.use(notFoundHandler);
 // Global error handler
 app.use(errorHandler);
 
-if (NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
-    logger.info(`Server is running at http://localhost:${PORT}`, {
-      mode: NODE_ENV,
+async function main(): Promise<void> {
+  if (NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+      logger.info(`Server is running at http://localhost:${PORT}`, {
+        mode: NODE_ENV,
+      });
+
+      logger.info(
+        `Swagger UI is available at http://localhost:${PORT}/api-docs`,
+      );
     });
 
-    logger.info(`Swagger UI is available at http://localhost:${PORT}/api-docs`);
-  });
+    // Uncaught synchronous errors
+    process.on('uncaughtException', (err) => {
+      const { message: error, stack } = err;
 
-  // Uncaught synchronous errors
-  process.on('uncaughtException', (err) => {
-    const { message: error, stack } = err;
+      logger.error('uncaughtException', { error, stack });
+      process.exit(1);
+    });
 
-    logger.error('uncaughtException', { error, stack });
-    process.exit(1);
-  });
+    // Rejected promises not fulfilled
+    process.on('unhandledRejection', (reason) => {
+      logger.error('unhandledRejection', { reason });
+      process.exit(1);
+    });
 
-  // Rejected promises not fulfilled
-  process.on('unhandledRejection', (reason) => {
-    logger.error('unhandledRejection', { reason });
-    process.exit(1);
-  });
+    // Graceful shutdown
+    process.on('SIGTERM', () => {
+      logger.info('SIGTERM received - closing server');
+      process.exit(0);
+    });
 
-  // Graceful shutdown
-  process.on('SIGTERM', () => {
-    logger.info('SIGTERM received - closing server');
-    process.exit(0);
-  });
+    process.on('SIGINT', () => {
+      logger.info('SIGINT received - closing server');
+      process.exit(0);
+    });
 
-  // Cron tasks
-  scheduleTasks();
+    // Cron tasks
+    scheduleTasks();
+  }
 }
+
+void main();
