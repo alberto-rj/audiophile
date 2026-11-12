@@ -12,4 +12,4 @@ async function main() {
   await uploadSharedImages();
 }
 
-main();
+void main();
